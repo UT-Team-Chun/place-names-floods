@@ -1,8 +1,9 @@
 # Provenance of the frozen protocol
 
-This repository is a curated copy of the development repository of the project, prepared for
-publication. Its history starts at the copy; the development repository, which contains the full commit
-history including the freeze, is available to editors and reviewers on request.
+This repository is a curated copy of the project's development repository, prepared for publication.
+Its history starts at the copy; the development repository is not public. The freeze is documented by
+the commit identifiers below, by the content checksums that let anyone verify that the files here are
+the frozen files, and by the job records of the computing cluster described in the paper.
 
 ## Freeze
 

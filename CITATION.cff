@@ -1,12 +1,9 @@
 cff-version: 1.2.0
 message: "If you use this code or the derived data, please cite the article and the archived release."
-title: "toponym-semantics: analysis code for a pre-specified global test of whether place names remember floods"
+title: "place-names-floods: analysis code, frozen protocol and lexicon for a pre-specified global test of whether place names remember floods"
 authors:
   - family-names: Okauchi
     given-names: Ryota
-    affiliation: The University of Tokyo
-  - family-names: Chun
-    given-names: Pang-jo
     affiliation: The University of Tokyo
 license: MIT
 repository-code: "https://github.com/UT-Team-Chun/place-names-floods"
