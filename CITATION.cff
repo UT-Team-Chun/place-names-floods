@@ -9,6 +9,7 @@ authors:
     given-names: Pang-jo
     affiliation: The University of Tokyo
 license: MIT
+repository-code: "https://github.com/UT-Team-Chun/place-names-floods"
 keywords:
   - place names
   - toponymy
