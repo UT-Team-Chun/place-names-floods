@@ -25,7 +25,9 @@ from topsem.world.dataset import (
     include,
     location_groups,
     merge_by_activation,
+    riverine_labels,
 )
+from topsem.world.lexicon import Lexicon
 from topsem.world.nread import NREAD_CATEGORIES, parse, prompt_sha256, user_prompt
 
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
@@ -501,3 +503,53 @@ def test_run_fold_all_arms_on_random_table(monkeypatch: pytest.MonkeyPatch) -> N
     for v in r["preds"].values():
         assert v.shape == (int((df["fold"] == 0).sum()),)
         assert np.all((v > 0) & (v < 1))
+
+
+def test_lexicon_country_keys_are_iso_codes_and_norway_is_read() -> None:
+    """B-4: 引用符なしの NO（ノルウェー）が YAML 1.1 の false にならず、意図した言語に対応。"""
+    repo = Path(__file__).resolve().parents[4]
+    path = repo / "docs" / "protocol" / "v2" / "lexicon_hydro_v1.yaml"
+    lex = Lexicon(path)
+    assert all(len(cc) == 2 and cc.isalpha() and cc.isupper() for cc in lex.country_langs)
+    assert "FALSE" not in lex.country_langs
+    assert lex.country_langs["NO"] == ("no",)
+    assert lex.coverage("NO")
+    assert sum(lex.match("Kloftefoss", "NO").values()) > 0
+
+
+def test_label_variants_default_unchanged_and_variants_shift_labels() -> None:
+    """B-5 の 7: 既定は凍結時と同じ。notrace は痕跡を除き、nonwater は水域を除いた面積で測る。"""
+    df = pd.DataFrame({"f_riverine": np.array([0.6, 0.6, 0.3, 0.0], dtype=np.float32),
+                       "f_flood_any": np.array([0.6, 0.6, 0.3, 0.6], dtype=np.float32),
+                       "f_other": np.zeros(4, dtype=np.float32),
+                       "f_trace": np.array([0.2, 0.0, 0.0, 0.0], dtype=np.float32),
+                       "f_perm_water": np.array([0.0, 0.0, 0.45, 0.0], dtype=np.float32)})
+    y, keep = riverine_labels(df)
+    assert y.tolist() == [1, 1, 0, 0]
+    assert keep.tolist() == [True, True, True, False]  # 河川以外の浸水だけのセルは除外
+    y, _ = riverine_labels(df, variant="notrace")
+    assert y.tolist() == [0, 1, 0, 0]  # 痕跡 0.2 を除くと 0.4 < 0.5
+    y, _ = riverine_labels(df, variant="nonwater")
+    assert y.tolist() == [1, 1, 1, 0]  # 0.3 / (1 − 0.45) ≈ 0.55 ≥ 0.5
+    with pytest.raises(ValueError, match="unknown label variant"):
+        riverine_labels(df, variant="x")
+
+
+def test_attach_oracle_maps_site_hand_and_fills_missing() -> None:
+    ev = _load("world_eval")
+    df = pd.DataFrame({"aoi": ["A", "A", "A", "B"], "P_gid1": [1, 2, 3, 4]})
+    ev.attach_oracle(df, {1: 0.5, 2: 1.5})
+    assert df["o_site_hand"].tolist() == [0.5, 1.5, 1.0, 1.0]  # 3 は A の中央値、4 は全体の中央値
+
+
+def test_stage2_returns_standardised_coefficients() -> None:
+    ev = _load("world_eval")
+    rng = np.random.default_rng(0)
+    z = rng.normal(size=400)
+    x = rng.normal(size=(400, 2))
+    y = (rng.random(400) < 1 / (1 + np.exp(-(z + 0.8 * x[:, 0])))).astype(int)
+    cf: list = []
+    p = ev.stage2(z, z, x, x, y, coefs=cf)
+    assert p.shape == (400,)
+    assert len(cf) == 4  # 切片、基礎予測のロジット、名前特徴 2 つ
+    assert cf[2] > abs(cf[3])  # 効果を入れた特徴の係数が大きい

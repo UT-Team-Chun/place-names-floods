@@ -16,4 +16,5 @@ and records the rules the analysis follows. Notes on the development computing i
   protocol version, models, seeds, git revision), metrics with per-split breakdowns, cell-level held-out
   predictions, and diagnostics.
 - **Traceability.** Every number in the paper is generated from run artefacts by
-  `docs/paper/paper_2_global/figures/make_figures.py`; none is typed by hand.
+  `docs/paper/paper_2_nhess/figures/make_figures.py` (which reuses the functions of
+  `docs/paper/paper_2_global/figures/make_figures.py`); none is typed by hand.

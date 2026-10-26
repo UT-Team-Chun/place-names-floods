@@ -15,7 +15,7 @@ the frozen files, and by the job records of the computing cluster described in t
   and the power analysis were calibrated. Through the latter, the pilots showed that the regional
   composition of names (AOI means of the name features) tracks AOI-level flood rates; this association
   between real flood rates and real names, seen before the freeze, is why the primary estimand holds the
-  composition fixed (see the paper's Methods and Supplementary Note 3).
+  composition fixed (see the paper's Sect. 2 and Appendix A).
 - The freeze was recorded in version control and in the job records of the computing cluster, which ran
   the confirmatory analysis from a container image built after the freeze. **The protocol was not deposited
   with a third-party registry before the analysis**; the paper therefore describes it as pre-specified.
@@ -51,6 +51,27 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   translation, power for the secondary splits). Most were registered, with their computations and reporting rules,
   before they were run; the paper marks those that were not. All are labelled post hoc and change no pre-specified
   verdict. Scripts: `backend/verification/r_okauchi/v36`–`v40`; outputs: `docs/verification/`.
+- `docs/protocol/amendments/B-3_gfm_independent_labels.md` and its two addenda: independent flood labels from
+  Copernicus Global Flood Monitoring (Sentinel-1), with the rules for making them, the comparisons (agreement of the
+  label sets near settlements, flooding near water-side names, rescoring and refitting the primary comparison) and
+  their interpretation fixed before the labels were made. Addendum 1 records that images with an unreadable layer
+  were left out; addendum 2 is a check added after one result was seen and is reported as such. Scripts: `v41`,
+  `v45`; label builder: `backend/packages/topsem/scripts/world_gfm.py`.
+- `docs/protocol/amendments/B-4_lexicon_norway_yaml_fix.md`: an implementation defect found by a reader of the
+  manuscript. The YAML parser read the country code of Norway, `NO`, as the Boolean false, so the lexicon was not
+  applied to Norwegian names in the confirmatory analysis. The frozen lexicon was left unchanged, the parser was
+  corrected and the confirmatory analysis was run again; the amendment fixed in advance that both runs are reported
+  and that the frozen-code run stays primary if both reach the same verdict. Size of the defect: `v46`.
+- `docs/protocol/amendments/B-5_blind_review_analyses.md` and its four addenda: post hoc analyses in response to
+  readers given only the manuscript (the distribution of the increment over 200 reassignments of names,
+  second-stage coefficients, thirteen assignments of places to folds, bounds on missed effects by test inversion, an
+  oracle control, within-area metrics, two variants of the labels, element groups of the lexicon, exclusion of the
+  Americas and Oceania, and checks of the name readings against etymologies recorded on Wikidata and Wikipedia).
+  Each was fixed before it was computed; the Wikipedia sample was enlarged before any excerpt was coded (addendum 4).
+  Scripts: `v42`–`v44`, `v47`; the coded excerpts with sources and quotations: `docs/verification/v44_etym_codes.csv`.
+
+English translations of the protocol and of amendments B-1 to B-5 are in `docs/protocol/en/`; the Japanese files are
+the record and govern where the two differ.
 
 The confirmatory run records label the protocol "DRAFT until frozen" because the code wrote a fixed string
 there; the status string is now read from the protocol's status line. The power-analysis runs record the

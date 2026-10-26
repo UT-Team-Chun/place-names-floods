@@ -37,6 +37,23 @@ MIN_REST = 2
 MIN_INFIX = 4
 
 
+class _Yaml12Loader(yaml.SafeLoader):
+    """YAML 1.2 と同じく true / false だけを真偽値にする（yes / no / on / off は文字列のまま）。
+
+    PyYAML の既定（YAML 1.1）では引用符なしの国コード ``NO``（ノルウェー）が false になり、
+    ノルウェーの地名に辞書が当たらなかった（amendment B-4）。凍結した辞書のファイルは変えず、
+    読み方を直す。
+    """
+
+
+_Yaml12Loader.yaml_implicit_resolvers = {
+    k: [(tag, rx) for tag, rx in v if tag != "tag:yaml.org,2002:bool"]
+    for k, v in yaml.SafeLoader.yaml_implicit_resolvers.items()
+}
+_Yaml12Loader.add_implicit_resolver(
+    "tag:yaml.org,2002:bool", re.compile(r"^(?:true|True|TRUE|false|False|FALSE)$"), list("tTfF"))
+
+
 @dataclass(frozen=True)
 class Entry:
     form: str
@@ -51,7 +68,7 @@ class Lexicon:
     def __init__(self, path: Path) -> None:
         raw = path.read_bytes()
         self.sha256 = hashlib.sha256(raw).hexdigest()
-        doc = yaml.safe_load(raw)
+        doc = yaml.load(raw, Loader=_Yaml12Loader)  # noqa: S506 — SafeLoader の派生（真偽値の解釈だけ変える）
         self.version = str(doc.get("version", ""))
         self.by_lang: dict[str, tuple[Entry, ...]] = {}
         for lang, spec in (doc.get("languages") or {}).items():

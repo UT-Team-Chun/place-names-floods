@@ -1,0 +1,11 @@
+{
+ "n_cells": 1507486,
+ "n_cells_norway": 33813,
+ "n_aoi_norway": 11,
+ "n_cells_norway_matched": 5197,
+ "share_matched_of_norway": 0.1536982817259634,
+ "share_matched_of_all": 0.00344746153529784,
+ "lexicon_covers_norway_after_fix": true,
+ "n_countries_nearest": 70,
+ "uncovered_countries_after_fix": []
+}

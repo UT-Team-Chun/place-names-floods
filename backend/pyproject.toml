@@ -12,3 +12,8 @@ members = [
 # packages/topsem の設定と揃える（topsem/gateways は first-party ブロック別）
 [tool.ruff.lint.isort]
 known-first-party = ["topsem", "gateways"]
+
+[dependency-groups]
+dev = [
+    "openpyxl>=3.1.5",
+]

@@ -31,6 +31,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import numpy as np
 import pandas as pd
+import pyarrow.parquet as pq
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
 
@@ -137,6 +138,13 @@ STACK: dict[str, tuple[str, list[str]]] = {
     "M3rs": ("M1", NREAD_FEATURES), "M3rps": ("M1", NREAD_P),
 }
 NREAD_STACK = ("M1rc", "M3rn", "M3rnp", "M3rs", "M3rps")
+# 事後 B-5 の 5（オラクル対照）: 名前の代わりに最寄りの集落の地点の地形（集落の点から 177 m 以内のセルの最小 HAND の
+# 平均）を、名前と同じく最寄りの集落からセルに割り当てる。--oracle のときだけ計算
+ORACLE = ["o_site_hand"]
+STACK |= {"M1co": ("M1", [f"c_{f}" for f in ORACLE]), "M3o": ("M1", [*(f"c_{f}" for f in ORACLE), *ORACLE])}
+ORACLE_STACK = ("M1co", "M3o")
+SITE_RADIUS_M = 177.0
+PERM_STACK = ("M1c", "M3n", "M3np")  # 置換の分布（B-5 の 1）で一緒に出す実の比較
 # §8: 主判定（M1c → M3n、placebo M3np）と副の全体増分（M1s → M3s、M3ps）、分母（M0 → M1）
 SIM_ARMS = ["M0", "M1"]
 SIM_STACK = ["M1c", "M3n", "M3np", "M1s", "M3s", "M3ps"]
@@ -184,6 +192,7 @@ class Sensitivity:
     exclude_no_footprint: bool = False  # §7-4
     buffer_km: float = GROUP_BUFFER_KM  # §7-6（以前の注記は §7-7 と誤記）
     min_event_year: int = 0  # §7-7（以前の注記は §7-8 と誤記）
+    label_variant: str = "none"  # 事後 B-5 の 7（none = 凍結時のラベル）
 
 
 def quotas_for(dirs: list[Path], infos: dict, sens: Sensitivity) -> dict[str, int]:
@@ -198,18 +207,22 @@ def quotas_for(dirs: list[Path], infos: dict, sens: Sensitivity) -> dict[str, in
 
 
 def build_table(dirs: list[Path], seed: int, infos: dict,
-                sens: Sensitivity | None = None) -> pd.DataFrame:
-    """採用 AOI の評価セル表（§2.4-4 の上限・§7 の感度設定つき）。"""
+                sens: Sensitivity | None = None, extra_cols: tuple[str, ...] = ()) -> pd.DataFrame:
+    """採用 AOI の評価セル表（§2.4-4 の上限・§7 の感度設定つき）。
+
+    extra_cols はセル表の列をそのまま足す（事後 B-3 で GFM のラベルを格子の ix, iy で結ぶため）。
+    """
     sens = sens or Sensitivity()
     name_cols = [f"{c}{j}" for c in ("P_gid", "P_d") for j in (1, 2, 3)]
     plts_cols = [c.replace("P_", "PLTS_") for c in name_cols] if sens.name_class == "PLTS" else []
     cols = ["y", "aoi", "lon", "lat", "elev_1km", "elev_mean", "depress", "elev_min",
             "elev_std", "slope_mean", "hand_mean", "hand_min", "dist_river_all",
             "dist_river_major", *LC, *name_cols, *plts_cols,
-            "P_n1km", "P_n3km", "f_riverine", "f_other", "f_flood_any"]
+            "P_n1km", "P_n3km", "f_riverine", "f_other", "f_flood_any", *extra_cols]
     quota = quotas_for(dirs, infos, sens)
     parts = [load_aoi_table(d, cap=quota[d.name], seed=seed, all_types=sens.all_types,
-                            unspecified_as_riverine=infos[d.name].unspecified_as_riverine)[cols]
+                            unspecified_as_riverine=infos[d.name].unspecified_as_riverine,
+                            label_variant=sens.label_variant)[cols]
              for d in dirs]
     df = pd.concat(parts, ignore_index=True)
     df["ldr_all"] = np.log1p(df["dist_river_all"]).astype(np.float32)
@@ -219,6 +232,25 @@ def build_table(dirs: list[Path], seed: int, infos: dict,
         for c, pc in zip(name_cols, plts_cols, strict=True):
             df[c] = df[pc]
     return df
+
+
+def apply_gfm_labels(df: pd.DataFrame, summary: dict, tables: dict[str, pd.DataFrame],
+                     ) -> tuple[pd.DataFrame, dict]:
+    """事後 B-3: 採用した AOI の、GFM で評価可能なセルに絞り、y を GFM のラベルに置き換える。
+
+    表・fold・場所グループは確証解析と同じものを作った後で呼ぶ（セルを減らすだけで並べ替えない）。
+    tables は AOI → gfm.parquet（ix, iy, gfm_eval, gfm_y）。
+    """
+    keep = sorted(a for a, s in summary["aois"].items() if s.get("include") and a in tables)
+    g = pd.concat([tables[a][["ix", "iy", "gfm_eval", "gfm_y"]].assign(aoi=a) for a in keep],
+                  ignore_index=True)
+    m = df.merge(g, on=["aoi", "ix", "iy"], how="left", validate="many_to_one")
+    ok = m["gfm_eval"].astype("boolean").fillna(value=False).to_numpy(dtype=bool)
+    out = df.loc[ok].reset_index(drop=True)
+    out["y"] = m.loc[ok, "gfm_y"].to_numpy(dtype=np.int8)
+    info = {"labels": "gfm", "n_aoi": int(out["aoi"].nunique()), "n_cells": len(out),
+            "n_cells_before": len(df), "wet_rate": float(out["y"].mean()) if len(out) else 0.0}
+    return out, info
 
 
 def add_channels(df: pd.DataFrame, gn: pd.DataFrame, nread: pd.DataFrame | None = None,
@@ -322,8 +354,8 @@ def crossfit_base(tr: pd.DataFrame, te: pd.DataFrame, feats: list[str], seeds: l
     return oof, fit_arm(tr, te, feats, seeds)
 
 
-def stage2(z_tr: np.ndarray, z_te: np.ndarray, x_tr: np.ndarray, x_te: np.ndarray,
-           y_tr: np.ndarray) -> np.ndarray:
+def stage2(z_tr: np.ndarray, z_te: np.ndarray, x_tr: np.ndarray, x_te: np.ndarray,  # noqa: PLR0913
+           y_tr: np.ndarray, *, coefs: list | None = None) -> np.ndarray:
     """二段目のロジスティック回帰（L2、C = 1）。
 
     入力は [基礎予測のロジット, 名前特徴] を学習側の平均・標準偏差で標準化したもの。
@@ -336,6 +368,8 @@ def stage2(z_tr: np.ndarray, z_te: np.ndarray, x_tr: np.ndarray, x_te: np.ndarra
     sd[sd == 0] = 1.0
     m = LogisticRegression(C=1.0, max_iter=1000)
     m.fit((a - mu) / sd, y_tr)
+    if coefs is not None:  # 事後 B-5 の 2: 標準化した尺度の係数（[基礎予測のロジット, 名前特徴...]）
+        coefs.extend([float(m.intercept_[0]), *(float(c) for c in m.coef_[0])])
     return m.predict_proba((b - mu) / sd)[:, 1].astype(np.float32)
 
 
@@ -344,7 +378,7 @@ def add_composition(tr: pd.DataFrame, te: pd.DataFrame) -> None:
 
     あわせて名前特徴（と placebo）の AOI 内で中心化した d_* を作る（事後、B-2 追記 2）。
     """
-    feats = [f for f in (*NAMES, *NREAD_FEATURES) if f in tr.columns]
+    feats = [f for f in (*NAMES, *NREAD_FEATURES, *ORACLE) if f in tr.columns]
     for frame in (tr, te):
         means = frame.groupby("aoi")[feats].transform("mean")
         for f in feats:
@@ -357,8 +391,9 @@ def add_composition(tr: pd.DataFrame, te: pd.DataFrame) -> None:
                                - means[f].to_numpy(dtype=np.float64)).astype(np.float32)
 
 
-def run_fold(df: pd.DataFrame, fold: int, arms: list[str], seeds: list[int],
-             stacks: tuple[str, ...] | list[str] = ()) -> dict:
+def run_fold(df: pd.DataFrame, fold: int, arms: list[str], seeds: list[int],  # noqa: PLR0913
+             stacks: tuple[str, ...] | list[str] = (), *, save_coefs: bool = False,
+             keep_state: bool = False) -> dict:
     tr = df[(df["fold"] != fold) & (df["fold"] >= 0)].copy()
     te = df[df["fold"] == fold].copy()
     if split_is_temporal(df):
@@ -382,12 +417,69 @@ def run_fold(df: pd.DataFrame, fold: int, arms: list[str], seeds: list[int],
         if a not in preds:
             preds[a] = fit_arm(tr, te, ARMS[a], seeds)
     y_tr = tr["y"].to_numpy()
+    coefs: dict[str, dict] = {}
     for s in stacks:
         b, extra = STACK[s]
         x_tr = tr[extra].to_numpy(dtype=np.float64) if extra else np.empty((len(tr), 0))
         x_te = te[extra].to_numpy(dtype=np.float64) if extra else np.empty((len(te), 0))
-        preds[s] = stage2(z[b][0], z[b][1], x_tr, x_te, y_tr)
-    return {"te": te, "preds": preds, "n_train": len(tr)}
+        cf: list | None = [] if save_coefs else None
+        preds[s] = stage2(z[b][0], z[b][1], x_tr, x_te, y_tr, coefs=cf)
+        if cf is not None:
+            coefs[s] = {"names": ["intercept", f"logit_{b}", *extra], "coef": cf}
+    out = {"te": te, "preds": preds, "n_train": len(tr)}
+    if save_coefs:
+        out["coefs"] = coefs
+    if keep_state:  # 置換の分布（B-5 の 1）で基礎予測と学習側の表を使い回す
+        out |= {"z": z, "tr": tr}
+    return out
+
+
+def oracle_site_hand(dirs: list[Path], radius_m: float = SITE_RADIUS_M) -> dict[int, float]:
+    """B-5 の 5: 集落（gid）ごとに、最寄りの集落がその集落で、中心が集落の点から radius_m 以内のセルの最小 HAND の平均。
+
+    標本ではなく AOI の全セルで計算する（地点の地形は標本の取り方に依らない）。
+    """
+    acc: dict[int, list[float]] = {}
+    for d in dirs:
+        f = pq.read_table(d / "features.parquet", columns=["P_gid1", "P_d1", "hand_min"]).to_pandas()
+        m = (f["P_d1"] <= radius_m) & np.isfinite(f["hand_min"]) & (f["P_gid1"] >= 0)
+        for g, v in f.loc[m].groupby("P_gid1")["hand_min"]:
+            acc.setdefault(int(g), []).extend(v.tolist())
+    return {g: float(np.mean(v)) for g, v in acc.items()}
+
+
+def attach_oracle(df: pd.DataFrame, site: dict[int, float]) -> None:
+    """最寄りの集落の地点の地形をセルに割り当てる。地点のセルが無い集落は AOI の中央値、それも無ければ全体の中央値。"""
+    v = df["P_gid1"].map(site).astype(np.float64)
+    v = v.fillna(v.groupby(df["aoi"]).transform("median"))
+    df["o_site_hand"] = v.fillna(float(np.nanmedian(v))).astype(np.float32)
+
+
+def run_perms(df: pd.DataFrame, fold: int, seeds: list[int], n_perms: int,
+              gn: pd.DataFrame) -> dict:
+    """B-5 の 1: 名前を AOI 内で置換した placebo の分布（シード 1..n_perms）。
+
+    基礎モデルは 1 回だけ当て、二段目（基準 M1c と同じ地域構成 + 置換した名前の特徴）を置換ごとに当て直す。
+    """
+    r = run_fold(df, fold, [], seeds, list(PERM_STACK), keep_state=True)
+    tr, te, z = r["tr"], r["te"], r["z"]["M1"]
+    look, lex = gid_lookup(gn), Lexicon(LEXICON)
+    groups_tr = tr["unit"].to_numpy() if "unit" in tr else tr["aoi"].to_numpy()
+    y_tr = tr["y"].to_numpy()
+    comp = [f"c_{f}" for f in NAMES]
+    out = np.zeros((n_perms, len(te)), dtype=np.float32)
+    for j in range(1, n_perms + 1):
+        per_aoi = placebo_lookups(df, look, j)
+        q_tr = lexicon_block(tr, look, lex, per_aoi=per_aoi, prefix="q_")
+        q_te = lexicon_block(te, look, lex, per_aoi=per_aoi, prefix="q_")
+        nl_tr, nl_te = nlearn_scores(nearest_names(tr, look, per_aoi), y_tr, groups_tr,
+                                     nearest_names(te, look, per_aoi))
+        x_tr = np.column_stack([tr[comp].to_numpy(dtype=np.float64), q_tr[[f"q_{c}" for c in LEX]].to_numpy(
+            dtype=np.float64), nl_tr.astype(np.float64)])
+        x_te = np.column_stack([te[comp].to_numpy(dtype=np.float64), q_te[[f"q_{c}" for c in LEX]].to_numpy(
+            dtype=np.float64), nl_te.astype(np.float64)])
+        out[j - 1] = stage2(z[0], z[1], x_tr, x_te, y_tr)
+    return {"te": te, "preds": r["preds"], "perms": out}
 
 
 def strata_columns(te: pd.DataFrame) -> dict[str, np.ndarray]:
@@ -462,7 +554,7 @@ def synth_labels(df: pd.DataFrame, delta: float, rep: int, local_m: float | None
     return y
 
 
-def main() -> None:  # noqa: PLR0915
+def main() -> None:  # noqa: C901, PLR0912, PLR0915
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--tag", required=True)
     ap.add_argument("--split", default="primary",
@@ -490,6 +582,15 @@ def main() -> None:  # noqa: PLR0915
     ap.add_argument("--delta", type=float, default=0.0, help="sesoi 時の名前効果（logit）")
     ap.add_argument("--reps", default="0:1")
     ap.add_argument("--nread", default="", help="N-read 推論結果 parquet（与えると M3r/M3rp も回す）")
+    ap.add_argument("--labels", default="ems", choices=["ems", "gfm"],
+                    help="事後 B-3: 独立のラベル（GFM）で学習・評価（同じ表・同じ fold の後で差し替え）")
+    ap.add_argument("--label-variant", default="none", choices=["none", "notrace", "nonwater"],
+                    help="事後 B-5 の 7: 浸水痕跡を除く / 恒常水域を除いた面積で浸水率を測る")
+    ap.add_argument("--save-coefs", action="store_true", help="事後 B-5 の 2: 二段目の係数を fold の記録に")
+    ap.add_argument("--oracle", action="store_true",
+                    help="事後 B-5 の 5: 集落の地点の地形を名前と同じ割り当てで入れたオラクル対照（M1co → M3o）")
+    ap.add_argument("--perms", type=int, default=0,
+                    help="事後 B-5 の 1: placebo の置換をシード 1..N で繰り返し、二段目だけ当て直す")
     args = ap.parse_args()
     if args.synthetic == "none" and not protocol_frozen():
         msg = ("preregistration_v2.md is not FROZEN: real-label evaluation is allowed only after "
@@ -502,17 +603,29 @@ def main() -> None:  # noqa: PLR0915
     sens = Sensitivity(all_types=args.flood_types == "all", group_cap=args.group_cap,
                        aoi_cap=args.aoi_cap, name_class=args.name_class,
                        exclude_no_footprint=args.exclude_no_footprint,
-                       buffer_km=args.group_buffer_km, min_event_year=args.min_event_year)
+                       buffer_km=args.group_buffer_km, min_event_year=args.min_event_year,
+                       label_variant=args.label_variant)
     dirs, reasons, infos = select_aois(gn, sens)
     print(f"AOIs included {len(dirs)} / reasons {reasons}", flush=True)
-    df = build_table(dirs, seed=20261025, infos=infos, sens=sens)
+    df = build_table(dirs, seed=20261025, infos=infos, sens=sens,
+                     extra_cols=("ix", "iy") if args.labels == "gfm" else ())
     nread = pd.read_parquet(args.nread) if args.nread else None
     df, lexinfo, _ = add_channels(df, gn, nread)
+    if args.oracle:
+        attach_oracle(df, oracle_site_hand(dirs))
     cont = continent_map(ROOT / "geonames" / "countryInfo.txt")
     df.attrs["split"] = args.split
     df["fold"] = folds_for(args.split, df, infos, cont, buffer_km=sens.buffer_km,
                            group_by_activation=args.group_by_activation,
                            fold_seed=args.fold_seed).to_numpy()
+    gfm_info = None
+    if args.labels == "gfm":  # fold と場所グループを確証解析と同じに決めた後で差し替える
+        summ = json.loads((ROOT / "gfm_summary.json").read_text(encoding="utf-8"))
+        tables = {a: pd.read_parquet(ROOT / "labels" / a / "gfm.parquet")
+                  for a in summ["aois"] if summ["aois"][a].get("include")}
+        df, gfm_info = apply_gfm_labels(df, summ, tables)
+        df.attrs["split"] = args.split
+        print(f"GFM labels: {gfm_info}", flush=True)
     seeds = [int(s) for s in args.seeds.split(",")]
     print(f"table {len(df):,} cells / {df['aoi'].nunique()} AOIs ({time.time() - t0:.0f}s)",
           flush=True)
@@ -527,6 +640,7 @@ def main() -> None:  # noqa: PLR0915
               "sensitivity": dataclasses.asdict(sens),
               "aoi_inclusion": reasons, "n_aoi": len(dirs), "split": args.split,
               "nread": {"path": args.nread, "sha256": _sha256(args.nread)} if args.nread else None,
+              "labels": args.labels, "gfm": gfm_info,
               "n_aoi_by_fold": {int(k): int(v) for k, v in
                                 df.groupby("fold")["aoi"].nunique().items()}}
 
@@ -559,11 +673,27 @@ def main() -> None:  # noqa: PLR0915
 
     arms = [x for x in args.arms.split(",") if x and (nread is not None or x not in NREAD_ARMS)]
     stacks = [x for x in args.stacks.split(",")
-              if x and (nread is not None or x not in NREAD_STACK)]
+              if x and (nread is not None or x not in NREAD_STACK) and (args.oracle or x not in ORACLE_STACK)]
+    if args.perms > 0:  # B-5 の 1: 置換の分布（実の M1c・M3n・M3np も一緒に）
+        for k in folds:
+            if not (df["fold"] == k).any():
+                continue
+            r = run_perms(df, k, seeds, args.perms, gn)
+            te = r["te"]
+            dst = run.path("predictions") / args.split / f"fold{k}_perms.npz"
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            np.savez_compressed(dst, y=te["y"].to_numpy(), aoi=te["aoi"].to_numpy(dtype=str),
+                                unit=te["unit"].to_numpy(dtype=str),
+                                **{f"p_{a}": v for a, v in r["preds"].items()}, p_perms=r["perms"])
+            write_json(run.path("predictions") / args.split / f"fold{k}_perms.json",
+                       {**common, "fold": k, "n_test": len(te), "n_perms": args.perms,
+                        "perm_seeds": [1, args.perms]})
+            print(f"fold {k}: perms {args.perms} ({time.time() - t0:.0f}s)", flush=True)
+        return
     for k in folds:
         if not (df["fold"] == k).any():
             continue
-        r = run_fold(df, k, arms, seeds, stacks)
+        r = run_fold(df, k, arms, seeds, stacks, save_coefs=args.save_coefs)
         te = r["te"]
         dst = run.path("predictions") / args.split / f"fold{k}.npz"
         dst.parent.mkdir(parents=True, exist_ok=True)
@@ -577,7 +707,8 @@ def main() -> None:  # noqa: PLR0915
         write_json(run.path("predictions") / args.split / f"fold{k}.json",
                    {**common, "fold": k, "n_test": len(te), "n_train": r["n_train"],
                     "arms": {a: ARMS[a] for a in arms},
-                    "stacks": {s: {"base": STACK[s][0], "extra": STACK[s][1]} for s in stacks}})
+                    "stacks": {s: {"base": STACK[s][0], "extra": STACK[s][1]} for s in stacks},
+                    **({"stage2_coefs": r["coefs"]} if args.save_coefs else {})})
         print(f"fold {k}: test {len(te):,} ({time.time() - t0:.0f}s)", flush=True)
     # 配分 0 件の AOI（巨大な場所グループ内の小さな AOI）は表に行が無いので、行のある AOI だけ書く
     fold_of = df.groupby("aoi")["fold"].first()

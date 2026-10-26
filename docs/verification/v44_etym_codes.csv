@@ -1,0 +1,463 @@
+id,status,cats,quote,url,note
+1,coded,water;low,"Kendal takes its name from the River Kent ... and the Old Norse word dalr (""valley"")",https://en.wikipedia.org/wiki/Kendal,
+2,coded,other,"the first part of the name referred to a resting-place (or ""lair"") used by deer ... ""thorpe"" is a placename suffix ... small settlements",https://en.wikipedia.org/wiki/Layerthorpe,
+3,no-derivation,,"The name of the settlement was changed from Mlaka to Mlaka pri Kočevski Reki (literally, 'Mlaka near Kočevska Reka') in 1953",https://en.wikipedia.org/wiki/Mlaka_pri_Ko%C4%8Devski_Reki,meaning of Mlaka not stated
+4,unclear,,"issu du mot breton gwern, lui-même issu du mot gaulois verno signifiant « aulnes ». En breton, gwern peut également signifier « marais »",https://fr.wikipedia.org/wiki/Guer,alder (other) or marsh (wet)
+5,no-derivation,,"Le origini di Marcorengo sono certamente longobarde, come dimostra il suffisso -engo",https://it.wikipedia.org/wiki/Marcorengo,only origin of suffix and a legend
+6,coded,other,El nombre «Villa San Martín» hace referencia al santo patrono de la localidad: Martín de Tours,https://es.wikipedia.org/wiki/Villa_San_Mart%C3%ADn_%28Veracruz%29,
+7,coded,other,"The first element is a personal name, Gippe, and the second is the word tūn ('village, estate, farm')",https://en.wikipedia.org/wiki/Gipton,
+8,coded,other,L'origine du nom de la commune vient très certainement de campus bonus qui signifie terre fertile,https://fr.wikipedia.org/wiki/Le_Cher,alternative 'cambo (méandre)' called doubtful by the source
+9,coded,other,un nom de personne gallo-romain Asius ou Atius auquel est apposé le suffixe -acum ... « domaine d'Asius »,https://fr.wikipedia.org/wiki/Aizecq,
+10,coded,water;other,"""Windermere"" is thought to translate as ""Winand or Vinand's lake"" ... 'mere', meaning 'lake' or 'pool'",https://en.wikipedia.org/wiki/Windermere%2C_Cumbria_%28town%29,
+11,coded,crossing,Ortens namn syftar på båtbärarna som bar båtar fram och tillbaka mellan sjöarna Hindsen och Flåren,https://sv.wikipedia.org/wiki/Bor%2C_V%C3%A4rnamo_kommun,portage between lakes coded crossing
+12,coded,water,Voda (reka Pivka) pa naj bi odtekala v Postojnsko jamo ... odtok se imenuje Veliki odtok ... dali vasi ime Veliki Otok,https://sl.wikipedia.org/wiki/Veliki_Otok%2C_Postojna,"from 'odtok' (outflow of the river), not 'otok' (island)"
+13,coded,other,Ittae Villa signifiant la « ferme d'Itte » en référence à Itta de Nivelles,https://fr.wikipedia.org/wiki/Itteville,
+14,coded,low,The name is derived from the Slovene common noun dol 'small valley',https://en.wikipedia.org/wiki/Dol_pri_Ljubljani,
+15,coded,crossing;other,le toponyme Pont-Péan peut donc signifier « pont paysan » ou « pont construit ou possédé par un dénommé Péan »,https://fr.wikipedia.org/wiki/Pont-P%C3%A9an,all readings: bridge + peasant/person
+16,coded,other,"Du latin germinare, « germer », du latin germinius, « rejet (botanique) » ou « rejeton, progéniture ». Coulombs fait référence à Coulombs-en-Valois",https://fr.wikipedia.org/wiki/Germigny-sous-Coulombs,
+17,no-derivation,,"Au cours de la Révolution française, la commune porte temporairement le nom de Brienne-le-Bourg",https://fr.wikipedia.org/wiki/Brienne-le-Ch%C3%A2teau,only renamings
+18,coded,water;other,Ce toponyme est issu d'un hydronyme ... Medante fluminis ... Medonta Villa signifie « Mantes le Domaine »,https://fr.wikipedia.org/wiki/Mantes-la-Ville,named after a river
+19,coded,other,The village was named after the Magyar tribe Keszi,https://en.wikipedia.org/wiki/B%C3%A1torove_Kosihy,
+20,coded,other,formed from the Slavic personal name Myšota from myš-ъ meaning 'mouse',https://en.wikipedia.org/wiki/Mousiotitsa,"Greek article lists folk theories (Muses, a queen)"
+21,coded,low,The name Spodnji Velovlek literally means 'lower Velovlek',https://en.wikipedia.org/wiki/Spodnji_Velovlek,only 'lower' explained
+22,coded,other,It is believed to be derived from a personal name of German origin,https://en.wikipedia.org/wiki/Butajnova,
+23,coded,other;high,The name Jerinov Grič literally means 'Jerina's hill',https://en.wikipedia.org/wiki/Jerinov_Gri%C4%8D,
+24,coded,other,"Naumiestis – tai žodis, sudarytas iš dviejų sandų: būdvardžio naujas ir daiktavardžio miestas",https://lt.wikipedia.org/wiki/%C5%BDemai%C4%8Di%C5%B3_Naumiestis,new town; Samogitia
+25,coded,other,"derived from the personal name Vojek, meaning ""the village of Vojek's people""",https://en.wikipedia.org/wiki/Vojkovice_%28M%C4%9Bln%C3%ADk_District%29,
+26,coded,other,"l'anthroponyme germanique Wasco, suivi d'un deuxième élément -hal ... halla ... une bâtisse",https://fr.wikipedia.org/wiki/Wasquehal,etymology not assured
+27,coded,other;water,"The name means ""Odolen's water"" ... named after Knight Odolen ... refers to the sufficient water in the area",https://en.wikipedia.org/wiki/Odolena_Voda,
+28,coded,high,lone cliffs or rock formations are often named Baba 'old woman' ... it is from this that the toponym Babna Gora ... derived,https://en.wikipedia.org/wiki/Babna_Gora%2C_Dobrova%E2%80%93Polhov_Gradec,folk 'women's mountain' rejected; gora = mountain
+29,coded,water;other,Le nom de la commune vient du latin Fontana qui signifie « source »,https://fr.wikipedia.org/wiki/Fontaine-sur-Ay,-sur-Ay: neighbouring place
+30,coded,wet,"Dit komt vermoedelijk van het Latijn: palus, dat moeras betekent",https://nl.wikipedia.org/wiki/Paal_%28Belgi%C3%AB%29,
+31,coded,other,Il s'agit ... d'un nom de personne ... Gening ... Genesius ... -ville ... « domaine rural de Gening ou de Genesius »,https://fr.wikipedia.org/wiki/Genainville,clerical etymology from genista rejected by the source
+32,unclear,,L'étymologie de Douvrin se rattacherait au gaulois dubro qui signifie « eau » ... Ernest Nègre pense qu'il s'agit d'un nom de personne germanique,https://fr.wikipedia.org/wiki/Douvrin,water vs personal name
+33,coded,other,Le nom d'Audrix se réfère à un personnage d'origine germanique : Audricus ou Aldrik,https://fr.wikipedia.org/wiki/Audrix,
+34,no-derivation,,The royal court of the honschaft Rath was in Unterrath,https://en.wikipedia.org/wiki/Unterrath,section does not explain the name
+35,coded,high;other,remonterait au latin mons signifiant « colline » ou « montagne » et à un nom de personne germanique Bovo,https://fr.wikipedia.org/wiki/Montemb%C5%93uf,
+36,coded,riverine;high,Il toponimo Mezzano era utilizzato ... per designare isole fluviali ... Mezzano Superiore nasce come isola del fiume Po ... di sopra poi trasformato in Superiore,https://it.wikipedia.org/wiki/Mezzano_Superiore,river island + 'upper'
+37,coded,low,this village became known as Dolní ('lower') Břežany ... Břežany is derived from the word břeh ('[river] bank' ... also 'hillside') or from ... březí ('birch forest'),https://en.wikipedia.org/wiki/Doln%C3%AD_B%C5%99e%C5%BEany,only 'lower' certain; Břežany: bank/hillside/birch alternatives
+38,coded,water,Silver Lake was named after the nearby lake of the same name,https://en.wikipedia.org/wiki/Silver_Lake%2C_Missouri,
+39,coded,other,"Some think the name comes from the Roman patronym Saturus ... Others believe ... exsartum (""cleared for cultivation"")",https://en.wikipedia.org/wiki/Sartrouville,both readings other
+40,no-derivation,,"Dawna, niemiecka nazwa Sichtigfür ... tłumaczona jest ... 2 kwietnia 1949 r. nadano ... polską nazwę Trzebieszów",https://pl.wikipedia.org/wiki/Trzebiesz%C3%B3w_%28Moszczanka%29,explains the former German name only
+41,no-derivation,,Setnica is known as Snica in the local dialect,https://en.wikipedia.org/wiki/Setnica%2C_Dobrova%E2%80%93Polhov_Gradec,
+42,coded,other,"one is that ""resa"" is a reference to the town people's folk costumes; another is that it is named from a native plant",https://en.wikipedia.org/wiki/Duga_Resa,both readings other
+43,coded,crossing;riverine,"The name Corofin means ""the white or foam-flecked ford"" ... A different translation is ""Finne's weir""",https://en.wikipedia.org/wiki/Corofin%2C_County_Clare,ford or weir (both water-side)
+44,coded,crossing;other,Saint-Fargeau est une déformation du nom de saint Ferréol ... Ponthierry trouverait son origine dans un pont sur l'École franchi par Thierry,https://fr.wikipedia.org/wiki/Saint-Fargeau-Ponthierry,
+45,coded,other,"most likely derived from the name of a Catholic priest, Father Blume",https://en.wikipedia.org/wiki/Bloomsdale%2C_Missouri,
+46,coded,other,"dont l'origine provient du seigneur du lieu appelé Gibbosus, Gibbe ou Guibbe",https://fr.wikipedia.org/wiki/Guibeville,
+47,no-derivation,,"Le nom de la localité est attesté sous les formes Ouderwich vers 1129 ... En flamand, elle porte le nom de Ouderwijk",https://fr.wikipedia.org/wiki/Audruicq,attestations only
+48,coded,other,"Velika Ligojna (literally, 'Big Ligojna') ... means 'Ljudigoj's village'",https://en.wikipedia.org/wiki/Velika_Ligojna,
+49,coded,wet,"ίσως παράγεται από την λέξη göl ... που σημαίνει λίμνη, λάκκος, έλος ... Κιλελέρ που σημαίνει ελώδης τόπος",https://el.wikipedia.org/wiki/%CE%9A%CE%B9%CE%BB%CE%B5%CE%BB%CE%AD%CF%81,marshy place
+50,coded,other,"derived from the Serbian word for ""river stone"", krušac which was largely used for a building",https://en.wikipedia.org/wiki/Kru%C5%A1evac,"a building stone, not a water feature"
+51,coded,other,hace referencia al santo patrono de la localidad: Benito de Nursia,https://es.wikipedia.org/wiki/San_Benito_Encinal,
+52,coded,riverine;other,L'Île-Saint-Denis doit son nom à l'abbaye de Saint-Denis ... qui eut seigneurie sur l'île centrale,https://fr.wikipedia.org/wiki/L%27%C3%8Ele-Saint-Denis,island in the Seine + abbey
+53,coded,wet,назва Заболотів «… утворена від кореня болот- за допомогою префікса за-» ... за розташування ... за болотом,https://uk.wikipedia.org/wiki/%D0%97%D0%B0%D0%B1%D0%BE%D0%BB%D0%BE%D1%82%D1%96%D0%B2,beyond the swamp
+54,coded,crossing;other,"the modern English name would mean ""ford at the old fortification"" ... ""Ford of the Welsh people""",https://en.wikipedia.org/wiki/Wallingford%2C_Oxfordshire,all readings include ford
+55,coded,other,Une sablonnière désigne un lieu d'où l'on extrayait du sablon ... un gisement de sable,https://fr.wikipedia.org/wiki/Sablonni%C3%A8res,sand pit
+56,coded,other,"dalla parola latina reductum, ovvero ""guarnigione di soldati""",https://it.wikipedia.org/wiki/Red%C3%B9,
+57,no-derivation,,Do 1936 używana była niemiecka nazwa Kotzem ... nadano ... polską nazwę Chocim,https://pl.wikipedia.org/wiki/Chocim_%28wojew%C3%B3dztwo_opolskie%29,renamings only
+58,coded,other,"Du latin Buxaria ... buissière « ensemble de buis », « lieu couvert de buis »",https://fr.wikipedia.org/wiki/Labuissi%C3%A8re_%28Pas-de-Calais%29,
+59,no-derivation,,12 listopada 1946 nadano miejscowości polską nazwę Struga,https://pl.wikipedia.org/wiki/Struga_%28wojew%C3%B3dztwo_dolno%C5%9Bl%C4%85skie%29,no meaning stated
+60,coded,high;other,The name Zgornje Negonje means 'upper Negonje' ... Negonje is probably a possessive form of the personal name,https://en.wikipedia.org/wiki/Zgornje_Negonje,
+61,coded,other,"Jméno osady bylo odvozeno od osobního jména Lut ... ""Lutova ves"" ... po druhé světové válce přívlastek změněn na Dolní",https://cs.wikipedia.org/wiki/Doln%C3%AD_Lutyn%C4%9B,'Dolní' not glossed (corrected for consistency: only glossed elements are coded)
+62,coded,other,The first originated from ... the Aromanian word călár 'horseman' ... The second arose from the Aromanian toponym Călár,https://en.wikipedia.org/wiki/Kalarrytes,spelling with 'flowing' called false etymology
+63,coded,other,"Lussas ... du nom d'un personnage, Lucius ou Luccaeus ... Nontronneau correspond à un diminutif de Nontron",https://fr.wikipedia.org/wiki/Lussas-et-Nontronneau,
+64,coded,other,"le latin pratura, croisement de pratum « prés » et pastura « action de paître »",https://fr.wikipedia.org/wiki/Preures,meadow/pasture
+65,coded,water;other,"The name derives from the area's position to the north side of the River Parrett, and from the Old English nor tun",https://en.wikipedia.org/wiki/Shearston,explains the Domesday name Nortperet
+66,unclear,,Ernest Nègre voit ... Wido suivi de -ingen « gens (de) » + heim « demeure » ... Gysseling ... hamma « langue de terre se projetant dans un terrain pouvant être inondé »,https://fr.wikipedia.org/wiki/Widehem,home vs land spur in floodable ground
+67,coded,other;high,The name Trčkov Grič literally means 'Trček's hill',https://en.wikipedia.org/wiki/Tr%C4%8Dkov_Gri%C4%8D,
+68,coded,high;other,The name is derived from Slavic *komъ poľa 'raised part of a field',https://en.wikipedia.org/wiki/Kompolje%2C_Dobrepolje,less likely alternatives: small field
+69,coded,low;other,L'origine du nom de la commune provient du mot latin vallis et du saint éponyme,https://fr.wikipedia.org/wiki/Le_Val-Saint-Germain,
+70,coded,other,Jméno vesnice vzniklo z osobního jména Chotěmír (Chotimír) ve významu Chotěmírův dvůr,https://cs.wikipedia.org/wiki/Chotim%C4%9B%C5%99,
+71,no-derivation,,"Schreibersdorf (1301 Villa Scriptoris, 1383 Schreibersdorf, polnisch Pisarcowice)",https://pl.wikipedia.org/wiki/Pisarzowice_%28powiat_krapkowicki%29,historical forms only
+72,coded,crossing;other,Namnet kommer av orden gena och vad. Vattendraget som det genas över är Vessingeån,https://sv.wikipedia.org/wiki/Genevad,shortcut + ford
+73,coded,other;crossing,The name meant 'Eadburg's ford',https://en.wikipedia.org/wiki/Aberford,
+74,no-derivation,,miejscowość wymieniona jest w zlatynizowanej formie Chmelow,https://pl.wikipedia.org/wiki/Chmiel%C3%B3w_%28wojew%C3%B3dztwo_dolno%C5%9Bl%C4%85skie%29,
+75,coded,other,Ce toponyme composé provient de la famille La Chapelle. Caro ... signifiant le cerf ... pourrait aussi venir du mot Carrofum ... (carrefour),https://fr.wikipedia.org/wiki/La_Chapelle-Caro,family; deer or crossroads
+76,coded,riverine,"""Ostrovo"" means ""island"" in Serbian. This name originates from the fact that Ostrovo is located on former Danube island",https://en.wikipedia.org/wiki/Ostrovo%2C_Po%C5%BEarevac,
+77,no-derivation,,miejscowość wymieniona jest w zlatynizowanej formie Ylyanovitz,https://pl.wikipedia.org/wiki/Ulanowice,
+78,coded,other,l'expression latine malus campus signifiant « mauvais champs »,https://fr.wikipedia.org/wiki/Mauchamps,
+79,coded,other,Nazwa miejscowości wywodzi się od soli ... „Salzlager”,https://pl.wikipedia.org/wiki/Solarnia_%28wojew%C3%B3dztwo_opolskie%29,salt
+80,unclear,,"means ""stream where sheep were washed"". The other supposed origin is ... 'lack of ships'",https://en.wikipedia.org/wiki/Lower_Shiplake,stream vs ships; 'Lower' not discussed
+81,coded,other,composé du nom de personne germanique Sarchinus suivi du suffixe,https://fr.wikipedia.org/wiki/Serquigny,
+82,coded,other,"Le nom vient du bas latin nova « neuve, nouvelle » et villa « domaine, ferme »",https://fr.wikipedia.org/wiki/Neuville-sous-Montreuil,
+83,coded,other,"ferté ... signifie généralement « place forte » ou « château fort » ... son bâtisseur, un chef franc dénommé Anculfus",https://fr.wikipedia.org/wiki/La_Fert%C3%A9-sous-Jouarre,
+84,coded,riverine;other,La notion d'île vient d'un ruisseau qui entourait un monastère avant de se jeter dans l'Aube,https://fr.wikipedia.org/wiki/Montier-en-l%27Isle,island formed by a stream + monastery
+85,no-derivation,,wieś występuje pod polską nazwą Wielki Pietrowice oraz niemiecką – Groß Peterwitz,https://pl.wikipedia.org/wiki/Pietrowice_Wielkie,
+86,coded,crossing,"""Duodecim Pontes"" : la ville aux douze ponts ; c'est le point de passage de la grande voie romaine",https://fr.wikipedia.org/wiki/Pont-sur-Seine,'sur-Seine' not discussed
+87,coded,high,"Nazwa miejscowości wywodzi się od polskiego słowa góra ... ""Hochdorf""",https://pl.wikipedia.org/wiki/G%C3%B3rzyce,
+88,coded,other,Jméno vesnice bylo odvozeno od osobního jména Chlebič,https://cs.wikipedia.org/wiki/Chlebi%C4%8Dov,
+89,coded,riverine;other,Enez manac'h ... « Île-aux-Moines » n'est que la traduction imprécise du toponyme breton qui ne parle que d'un moine,https://fr.wikipedia.org/wiki/%C3%8Ele-aux-Moines,island of the monk (island coded riverine; river or sea not stated)
+90,coded,other;wet,Vermutlicher Namensgeber ist der Faulbaum ... Bruch ist eine alte Bezeichnung für ein Moor oder Feuchtgebiet,https://de.wikipedia.org/wiki/Sp%C3%B6rkelnbruch,
+91,coded,crossing,"Le nom du lieu se réfère soit à un pont (origine latine pons), soit à un bac (origine occitane pontons)",https://fr.wikipedia.org/wiki/Pontours,bridge or ferry
+92,no-derivation,,Le village apparaît en 865 sous le nom de Villa Gelonis,https://fr.wikipedia.org/wiki/J%C3%A2lons,forms only
+93,coded,other,"Austrian settlers referred to the community as Neu Wels, after the city in Austria, which was later Americanized to New Wells",https://en.wikipedia.org/wiki/New_Wells%2C_Missouri,transfer from Wels (Austria)
+94,coded,other,The name is derived from the ethnonym Székelys,https://en.wikipedia.org/wiki/Sekule,
+95,coded,other,the name Paombong was taken from the Tagalog word bumbóng ... a long bamboo tube used for collecting nipa sap,https://en.wikipedia.org/wiki/Paombong,
+96,coded,high,"The name Hell derives from the Old Norse word hellir, meaning ""cliff cave"" or ""shelter under an overhanging rock""",https://en.wikipedia.org/wiki/Hell%2C_Norway,
+97,coded,other,le « domaine de Minutus » ... Nortbécourt est formé du flamand beukehout signifiant « bois de hêtres » ... le préfixe Nort « nord »,https://fr.wikipedia.org/wiki/Nortb%C3%A9court,
+98,coded,other,"Soisy est dérivé du latin Sosiacus, adjectif s'appliquant à une villa qui aurait appartenu à un homme appelé Sosius",https://fr.wikipedia.org/wiki/Soisy-sous-Montmorency,
+99,coded,other,formation toponymique médiévale en -ville ... précédé d'un nom de personne,https://fr.wikipedia.org/wiki/H%C3%A9nouville,
+100,coded,other,nom du propriétaire Manius ... ou Magnus ... Issu de Mansionile ... une ferme ... l'essart désignant une terre défrichée,https://fr.wikipedia.org/wiki/Magny-les-Hameaux,all readings other
+101,no-derivation,,L'origine du nom de la commune provient de l'expression latine Ionis Villa transformé en Hiemivilla,https://fr.wikipedia.org/wiki/Janville-sur-Juine,meaning not stated
+102,coded,other,Du bas latin villare « domaine rural » ... Balliolum qui signifie cour ou enclos,https://fr.wikipedia.org/wiki/Villez-sous-Bailleul,
+103,coded,other,pochodzi od słowiańskiego imienia założyciela ... Drożka,https://pl.wikipedia.org/wiki/Droszk%C3%B3w_%28wojew%C3%B3dztwo_dolno%C5%9Bl%C4%85skie%29,
+104,coded,other,derived from Proto-Slavic stǫpa ... a wooden bowl carved from a tree trunk,https://en.wikipedia.org/wiki/Stupava%2C_Slovakia,
+105,coded,other,"Nazwa pochodzi od polskiej nazwy borek, zdrobnienia od staropolskiej nazwy lasu iglastego",https://pl.wikipedia.org/wiki/Borki_%28Opole%29,small forest
+106,unclear,,"the Irish name Cluain Meala meaning ""honey meadow"" or ""honey valley""",https://en.wikipedia.org/wiki/Clonmel,meadow (other) vs valley (low)
+107,coded,other,"changed from Nemška vas (literally, 'German village') to Slovenska vas (literally, 'Slovene village')",https://en.wikipedia.org/wiki/Slovenska_Vas%2C_Pivka,
+108,coded,other,"derived from the Slovene adjective bukov, from the common noun bukev 'beech'",https://en.wikipedia.org/wiki/Bukovje%2C_Postojna,
+109,coded,other,"an Old English personal name, Sunna, + ingas ... 'homestead/village of Sunna's people'",https://en.wikipedia.org/wiki/Sonning,
+110,coded,other,Część miasta nosi imię Karola Miarki – polskiego działacza społecznego,https://pl.wikipedia.org/wiki/Kolonia_Karola_Miarki,
+111,coded,low,"literally means 'lower Draga' ... derived from the Slovene common noun draga 'small, narrow valley'",https://en.wikipedia.org/wiki/Spodnja_Draga,
+112,coded,other,dérive des gentilices Clepius ou Cleppius ... « propriété (ou villa) de Cleppius »,https://fr.wikipedia.org/wiki/Clichy-sous-Bois,
+113,coded,high,*na Vršce 'on the small peak' ... *na Vrhe 'on the peak' ... Vrhe Hill,https://en.wikipedia.org/wiki/Neverke,
+114,coded,low,'Dean' is from the Old English 'denu' meaning 'valley',https://en.wikipedia.org/wiki/Dean%2C_Cumbria,
+115,no-derivation,,Le nom de la localité est attesté sous les formes Tedboldivilla ... Thibouville la Campaigne en 1433,https://fr.wikipedia.org/wiki/La_Cambe_%28Eure%29,forms only
+116,coded,other,"μορφή οθωμανικού τίτλου ... Το νέο όνομα, οφείλεται σε λείψανα τειχών και θέσης ενός κάστρου",https://el.wikipedia.org/wiki/%CE%9A%CE%B1%CF%83%CF%84%CF%81%CE%AC%CE%BA%CE%B9_%CE%9B%CE%AC%CF%81%CE%B9%CF%83%CE%B1%CF%82,Ottoman title; castle ruins
+117,no-derivation,,miejscowość wymieniona jest w formie Kamena,https://pl.wikipedia.org/wiki/Kamieniec_Wroc%C5%82awski,
+118,coded,other,formée du nom de personne romaine Marus plus le suffixe gallo-romain -acum,https://fr.wikipedia.org/wiki/Mary-sur-Marne,
+119,coded,water;other,"Prestegården og prestenærværet i bygda har på sin side gitt navn til både fossen i Simoa, Prestfoss",https://no.wikipedia.org/wiki/Prestfoss,priest + waterfall
+120,coded,other,Ennek a türk szónak az eredeti értelme: őrölni ... Más álláspont szerint ... arɨm (üröm),https://hu.wikipedia.org/wiki/%C3%9Cr%C3%B6m_%28telep%C3%BCl%C3%A9s%29,grinding (millstone) or wormwood
+121,coded,other,Der Name Haunersdorf ist aus den beiden Namen „Hunold“ und „Dorf“ entstanden,https://de.wikipedia.org/wiki/Haunersdorf,
+122,coded,water,"Nazwa miejscowości wywodzi się od bystrego, szybkiego nurtu rzeki Bystrzycy, nad którą leży wieś",https://pl.wikipedia.org/wiki/Bystrzyca_Dolna,'Dolna' not discussed
+123,no-derivation,,Aparece escrito como Arangiz en 1025 en la Reja de San Millán,https://es.wikipedia.org/wiki/Ar%C3%A1nguiz,forms only
+124,coded,other,"Ruisseauville viendrait d'un anthroponyme germanique Rotseldis (devenu Roussel, Rousseau, puis attraction du mot ruisseau) suivi du latin villa",https://fr.wikipedia.org/wiki/Ruisseauville,'ruisseau' (stream) is a later attraction
+125,no-derivation,,Der Ortsname durchlebte Wandel Gillessem (1152) ...,https://de.wikipedia.org/wiki/Gilzum,forms only
+126,unclear,,Der Ursprung dieses Namens ist nicht sicher ... Eine Furt bezeichnet eine Untiefe im Fluss ... Eine flache Stelle in der Oder gab ... es ... nicht ... eine Namensübertragung von Frankfurt am Main angenommen,https://de.wikipedia.org/wiki/Frankfurt_%28Oder%29,ford vs transfer of name
+127,no-derivation,,"The name of the settlement was changed from Log to Log pri Brezovici (literally, 'Log near Brezovica') in 1953",https://en.wikipedia.org/wiki/Log_pri_Brezovici,
+128,coded,other,from za 'behind' + dvor 'manor'. The name thus literally means 'behind the manor',https://en.wikipedia.org/wiki/Zadvor,
+129,coded,other,"derived from the hypocorism *Dobrunъ, based on the adjective *dobrъ 'good' ... 'Dobrunъ's village'",https://en.wikipedia.org/wiki/Dobrunje,
+130,coded,other,"kommer av ”ek” (trädslaget), och ”by” (gård; by)",https://sv.wikipedia.org/wiki/Eggby,
+131,coded,other,pochodzi od polskiego nazwiska założyciela oraz pierwszego właściciela Ciężkowskiego,https://pl.wikipedia.org/wiki/Ci%C4%99%C5%BCkowice_%28wojew%C3%B3dztwo_opolskie%29,
+132,coded,other,"Nazwa wsi wskazuje na położenie osady za zaroślami, krzakami – ""za krzem""",https://pl.wikipedia.org/wiki/Zakrz%C3%B3w_%28Opole%29,
+133,no-derivation,,Do 1945 miejscowość nosiła niemiecką nazwę Kröschendorf ... nadano miejscowości nazwę Krzyżkowice,https://pl.wikipedia.org/wiki/Krzy%C5%BCkowice,
+134,coded,high;other,« colline couverte de noisetiers ». Une autre hypothèse ... l'anthroponyme germanique Godila suivi de -berg ... « colline de Godila »,https://fr.wikipedia.org/wiki/Colembert,both readings: hill
+135,unclear,,"founded by the Greek legendary hero Ajax ... agghiacciu meaning ""sheep pens"" ... agathè could mean ""good luck"" or ""good mooring""",https://en.wikipedia.org/wiki/Ajaccio,one reading is a mooring (landing place)
+136,coded,other,Il se peut que des Lusitaniens ... se soient installés à Luisetaines,https://fr.wikipedia.org/wiki/Luisetaines,
+137,no-derivation,,The village is also called Eleftherai (in Katharevousa),https://en.wikipedia.org/wiki/Eleftheres%2C_Larissa,
+138,coded,other;wet,"Saint-Sauveur ... l'attribut de « sauveur du monde » ... Bray serait gauloise ; elle signifierait : lieu marécageux, boueux",https://fr.wikipedia.org/wiki/Saint-Sauveur-l%C3%A8s-Bray,
+139,no-derivation,,"Inne formy nazewnicze wsi: Steblowitz, od 1845 również Steblów, Steblow",https://pl.wikipedia.org/wiki/Stebl%C3%B3w_%28powiat_k%C4%99dzierzy%C5%84sko-kozielski%29,
+140,unclear,,"hoh « escarpement rocheux, déclivité, rivage » ... et ... topt ... signifiant « maison sur la pente » ou « sur le rivage escarpé »",https://fr.wikipedia.org/wiki/Hautot-sur-Seine,slope (high) vs steep shore (bank)
+141,coded,low;other,The name Spodnje Negonje means 'lower Negonje' ... a possessive form of the personal name,https://en.wikipedia.org/wiki/Spodnje_Negonje,
+142,no-derivation,,le seigneur obtenait que la communauté d'habitants pris le nom de Charmont. L'addition de sous-Barbuise a été autorisé,https://fr.wikipedia.org/wiki/Charmont-sous-Barbuise,
+143,coded,water;other,"It derives from Old Norse fúll ... ""dirty"", ""stinking"" ... and bekkr ""stream""",https://en.wikipedia.org/wiki/Fulbeck,
+144,no-derivation,,Ščit was attested in written sources as Schilt in 1404 and Schiltt in 1499,https://en.wikipedia.org/wiki/%C5%A0%C4%8Dit%2C_%C5%A0martno_pri_Litiji,
+145,unclear,,remonterait au gaulois ritum signifiant gué ... « long gué ». Un nom de personne gaulois est aussi avancé ... Longorectus,https://fr.wikipedia.org/wiki/Longr%C3%A9,ford vs personal name
+146,coded,other,"derived from the Slavic common noun *bъzъ 'elder', thus originally referring to the vegetation",https://en.wikipedia.org/wiki/Bezuljak,other vague suggestions mentioned
+147,coded,other,ime Fokovcev izhaja iz starega slovanskega osebnega imena *Hvalimirъ,https://sl.wikipedia.org/wiki/Fokovci,
+148,coded,high,"It arose through ellipsis of Gorenje selo (literally, 'upper village'), denoting the elevation of the place",https://en.wikipedia.org/wiki/Gorenje%2C_Postojna,
+149,coded,other,The name means 'maiden's castle' in Czech,https://en.wikipedia.org/wiki/D%C3%ADv%C4%8D%C3%AD_Hrad,
+150,coded,other,originates from the Polish word for elm (wiąz); the other states ... the word for snakes,https://en.wikipedia.org/wiki/Wi%C4%85z%C3%B3w,both other
+151,coded,high;other,"The gled- element could plausibly come from ... 'kite' ... or ... 'embers' ... The second element could be from Old English hōh ('ridge, escarpment') or Old Norse haugr ('hill')",https://en.wikipedia.org/wiki/Gledhow,all readings: hill/ridge
+152,coded,crossing;other,"Blackford means what it says, a black ford or river-crossing",https://en.wikipedia.org/wiki/Blackford%2C_Cumbria,
+153,coded,other,The name was derived from the personal name Libich,https://en.wikipedia.org/wiki/Libi%C5%A1,
+154,coded,low;other,"l'anthroponyme francique Baudegisil suivi de l'ancien français val « val, vallée » ... Une autre hypothèse ... bog (... un lieu creux)",https://fr.wikipedia.org/wiki/Bougival,both readings include valley
+155,coded,other,"Ime Šanac, selo je dobilo po šančevima (rovovima) koji se nalaze na brdu iznad sela",https://sh.wikipedia.org/wiki/%C5%A0anac_%28Kru%C5%A1evac%29,trenches
+156,coded,other,"Villa colon ... issu du latin columba, « colombe » ... « le domaine rural aux colombes »",https://fr.wikipedia.org/wiki/Vaux-sous-Coulombs,'Vaux' not discussed
+157,coded,other,renamed it to Rodriguez ... in honor of Eulogio Rodriguez,https://en.wikipedia.org/wiki/Rodriguez%2C_Rizal,former name Montalban from 'monte' (mountain)
+158,coded,crossing;other,"Neely's Landing was named after Jacob Neely, who owned and operated a store and ferry at the landing",https://en.wikipedia.org/wiki/Neely%27s_Landing%2C_Missouri,
+159,coded,water,"The name of the settlement literally means 'creek, stream'",https://en.wikipedia.org/wiki/Potok%2C_Idrija,
+160,coded,wet,l'oïl clair + maresc : le « marais aux eaux claires »,https://fr.wikipedia.org/wiki/Clairmarais,
+161,coded,low,Spodnje Blato (literally 'lower Blato'),https://en.wikipedia.org/wiki/Spodnje_Blato,'Blato' not explained
+162,unclear,,"Pransina (wieś wydłużona, kręta) ... Adamy ... podając jej znaczenie „Flussschnelle”, czyli „szybki prąd rzeki”",https://pl.wikipedia.org/wiki/Pr%C4%99%C5%BCyna,winding village vs rapid current
+163,coded,other,"derives from the ancient Cumbric Peartoc (as in the modern Welsh word perth, meaning ""bush or thicket"")",https://en.wikipedia.org/wiki/Partick,
+164,coded,other,Saint-Marcel est un hagiotoponyme ... Longueville évoquait la structure d'un terroir en longueur au bord de la Seine,https://fr.wikipedia.org/wiki/Saint-Marcel_%28Eure%29,
+165,coded,low;other;water,"The name Ennerdale means 'Anund's valley' ... cross-influenced by 'Ehen', the name of the local river",https://en.wikipedia.org/wiki/Ennerdale_Bridge,'Bridge' not discussed
+166,coded,other,le nom du premier seigneur ayant fait construire le château ... avait pour nom de famille Renard,https://fr.wikipedia.org/wiki/Ch%C3%A2teau-Renard,
+167,no-derivation,,"Le nom de la commune est Sent Martin deu Potz en gascon, littéralement Saint-Martin-du-Puy",https://fr.wikipedia.org/wiki/Saint-Martin-du-Puy_%28Gironde%29,meaning not stated
+168,coded,other,"Shawneetown sits on the site of a former Shawnee community, hence the name",https://en.wikipedia.org/wiki/Shawneetown%2C_Missouri,
+169,no-derivation,,wieś występuje pod polską nazwą Raczanki oraz niemiecką nazwą Ratsch,https://pl.wikipedia.org/wiki/Gr%C3%B3dczanki,
+170,coded,other,Der Ortsname rührt von einer gleichnamigen Gerichtsstätte (Malstätte) her,https://de.wikipedia.org/wiki/Malstatt-Burbach,
+171,coded,other,from the word of faith (Serbian: vera) the name of Vera was coined,https://en.wikipedia.org/wiki/Vera%2C_Croatia,legend
+172,no-derivation,,miejscowość wymieniona jest w zlatynizownej formie Maczeiowitz,https://pl.wikipedia.org/wiki/Maciejowice_%28wojew%C3%B3dztwo_opolskie%29,
+173,coded,water,"'The cold stream'; ON 'kaldr', 'bekkr'. The village and parish are named from the 'Cald Beck'",https://en.wikipedia.org/wiki/Caldbeck,
+174,no-derivation,,le nom de la localité est attesté sous les formes Gosnacum vers 1000 ...,https://fr.wikipedia.org/wiki/Gosnay,forms only
+175,no-derivation,,Le nom de la localité est attesté sous les formes Jauniacus (IXe siècle) ...,https://fr.wikipedia.org/wiki/Joigny,forms only
+176,coded,other,"derived from the Slovene common noun stopa 'stamp mill', referring to agricultural or other activity",https://en.wikipedia.org/wiki/Stopno%2C_Makole,
+177,coded,water;other,The name of the town refers to a holy well which is traditionally associated with Saint Patrick,https://en.wikipedia.org/wiki/Patrickswell,
+178,coded,wet,Laç means swampy land in Albanian,https://en.wikipedia.org/wiki/La%C3%A7,
+179,coded,riverine,derived from the prepositional phrase *ob(ь) lǫky ... 'next to the flood-meadow(s)',https://en.wikipedia.org/wiki/Blo%C4%8Dice,
+180,coded,other,"nazwa wywodzi się od polskiego określenia ""goły"" ... od gołego terenu pozbawionego drzew",https://pl.wikipedia.org/wiki/Go%C5%82ostowice,bare land
+181,coded,high;low,from pod 'below' + kogel 'rounded peak' ... the settlement's location below Kogelj Hill,https://en.wikipedia.org/wiki/Podkogelj,below the peak
+182,coded,other,"Dérive du gaulois Noviios nouveau ... et ialon lieu défriché, clairière, village",https://fr.wikipedia.org/wiki/Noyal-Pontivy,'Pontivy' not discussed
+183,coded,water,Bílá Voda is named after the eponymous stream in the village. The name literally means 'white water',https://en.wikipedia.org/wiki/B%C3%ADl%C3%A1_Voda,
+184,no-derivation,,The name of the settlement was changed from Osredek to Osredek nad Stično in 1955,https://en.wikipedia.org/wiki/Osredek_nad_Sti%C4%8Dno,
+185,coded,other,Terra doada ... aos cruzados francos ... deve o nome precisamente a esse facto,https://pt.wikipedia.org/wiki/A_dos_Francos_%28vila%29,
+186,coded,water;other,"ceorla ... 'peasant') and wella ('well, spring, stream'). Thus the name once meant 'spring of the peasants'",https://en.wikipedia.org/wiki/Churwell,
+187,coded,water;low,Le toponyme provient de l'occitan clòta ... Le terme peut désigner une mare comme une dépression quelconque,https://fr.wikipedia.org/wiki/La_Clotte,pond or depression
+188,coded,other,"The name is believed to derive from *Beriťь, a patronymic of the hypocorism *Berъ",https://en.wikipedia.org/wiki/Beri%C4%8Devo,
+189,coded,other,"Stasjonen fikk navnet «Lier» ettersom den lå på Liergårdenes grunn, men dette ble seinere endret til «Lierfos»",https://no.wikipedia.org/wiki/Lierfoss,'foss' not explained
+190,coded,other,"l'anthroponyme germanique Henno, suivi du suffixe -inum. On ajouta Liétard en souvenir du seigneur",https://fr.wikipedia.org/wiki/H%C3%A9nin-Beaumont,Beaumont: forms only
+191,coded,other,"Nazwa pochodzi od polskiego określenia oznaczającego najciemniejszą barwę – ""czerń""",https://pl.wikipedia.org/wiki/Czernica_%28powiat_%C5%9Bwidnicki%29,
+192,coded,other,Naselje je dobilo ime po zavetniku domače cerkve – svetem Miklavžu,https://sl.wikipedia.org/wiki/Miklav%C5%BE_pri_Ormo%C5%BEu,
+193,no-derivation,,The name of the settlement was changed from Cerovec to Cerovec pod Bočem in 1955,https://en.wikipedia.org/wiki/Cerovec_pod_Bo%C4%8Dem,
+194,coded,low,derived from the accusative plural of the common noun *ǫdolъ 'small side valley',https://en.wikipedia.org/wiki/Vodole,
+195,no-derivation,,The name of the settlement was changed from Potok to Potok pri Muljavi in 1953,https://en.wikipedia.org/wiki/Potok_pri_Muljavi,
+196,no-derivation,,Ses habitants sont appelés les Malesherbois(es),https://fr.wikipedia.org/wiki/Rouville_%28Loiret%29,
+197,coded,water;other,"The name means 'stretch of river belonging to the family or followers of a man called Styfel' ... fleot (stream, inlet or creek)",https://en.wikipedia.org/wiki/Stillingfleet,
+198,coded,other,"derived from the hypocorism Bogoj(e), meaning 'property/settlement belonging to Bogoj'",https://en.wikipedia.org/wiki/Bogojina,
+199,no-derivation,,The name of the settlement was changed from Breg to Breg pri Ribnici na Dolenjskem in 1953,https://en.wikipedia.org/wiki/Breg_pri_Ribnici_na_Dolenjskem,
+200,coded,other,"derived from the common noun lipa 'linden', referring to the local vegetation",https://en.wikipedia.org/wiki/Liplje%2C_Postojna,
+201,no-derivation,,L'origine du nom du lieu est peu connue,https://fr.wikipedia.org/wiki/Quincy-sous-S%C3%A9nart,
+202,coded,water;other,"apan: río ... río de las comadrejas (zarigüeyas) en cautiverio ... literalmente dice ""en el río del arco iris""",https://es.wikipedia.org/wiki/Cosamaloapan,all readings include river
+203,coded,other,"wnioskować można, że zasadźcą wsi był mężczyzna o imieniu Hermann",https://pl.wikipedia.org/wiki/Jerzmanice-Zdr%C3%B3j,'Zdrój' not explained
+204,coded,other,"vient du latin curtis, le domaine et de l'anthroponyme Prothasius",https://fr.wikipedia.org/wiki/Coupvray,
+205,coded,other,"westchnął: ""O nędzo, nędzo"". Stąd miała się wziąć nazwa wsi",https://pl.wikipedia.org/wiki/N%C4%99dza_%28wojew%C3%B3dztwo_%C5%9Bl%C4%85skie%29,legend
+206,coded,other,"ves Habrovanů, tj. lidí, kteří žijí v blízkosti habrového lesa",https://cs.wikipedia.org/wiki/Habrovany_%28okres_%C3%9Ast%C3%AD_nad_Labem%29,
+207,coded,water,"tatahuic, quemado; apan, río. Su significado es «río quemado»",https://es.wikipedia.org/wiki/Tatahuicapan,
+208,coded,other,"jest pochodzenia czeskiego i oznacza wyrąb, karczowanie, wycinanie",https://pl.wikipedia.org/wiki/Osiek_%28powiat_%C5%9Bredzki%29,clearing
+209,coded,other,its meaning is unclear. It may be derived from ... 'suddenly' ... 'hope' ... the grass species ... 'to shout loudly',https://en.wikipedia.org/wiki/Z%C3%A1py,all candidate readings other
+210,coded,wet;other,molen: de boerderij Meulder omvatte een watermolen ... beers(t): dit duidt op een moerasland ... -sel: ... woonplaats,https://nl.wikipedia.org/wiki/Molenbeersel,
+211,no-derivation,,Η παλιά ονομασία του χωριού ήταν Βαλτσώρα ... μετονομάστηκε σε Πηγάδια το 1927,https://el.wikipedia.org/wiki/%CE%A0%CE%B7%CE%B3%CE%AC%CE%B4%CE%B9%CE%B1_%CE%99%CF%89%CE%B1%CE%BD%CE%BD%CE%AF%CE%BD%CF%89%CE%BD,meaning not stated
+212,no-derivation,,"En occitan, la commune porte le nom de Pompòrt",https://fr.wikipedia.org/wiki/Pomport,
+213,no-derivation,,Le nom de la localité est attesté sous les formes « ... villam quoe vocatur Siria fontana » (918) ...,https://fr.wikipedia.org/wiki/S%C3%A9rifontaine,forms only
+214,no-derivation,,12 lutego 1948 r. ustalono urzędową polską nazwę miejscowości – Uszczonów,https://pl.wikipedia.org/wiki/Uszczon%C3%B3w,
+215,no-derivation,,La commune se nomme Tranç en provençal de norme classique,https://fr.wikipedia.org/wiki/Trans-en-Provence,
+216,coded,other,Pierwotna nazwa miejscowości wywodzi się od dwóch polskich słów „nowy” oraz „wieś”,https://pl.wikipedia.org/wiki/Nowa_Wie%C5%9B_%28powiat_k%C5%82odzki%29,
+217,coded,other;high,« mongia » qui représente un couvent de moniales ... indiquent la position surélevée du lieu (en occitan mont ...),https://fr.wikipedia.org/wiki/Lamonzie-Montastruc,
+218,coded,water;other,"l'anthroponyme germanique Bero suivi du germanique brunno / brunna « source », d'où le sens global de « source de Bero »",https://fr.wikipedia.org/wiki/Bellebrune,
+219,coded,wet;other,"Moson comes from Slavic *mъšьnъ 'mossy' ... 'moss-covered mud, marsh' ... 'castle in the marsh' ... 'ancient Hungarian castle'",https://en.wikipedia.org/wiki/Mosonmagyar%C3%B3v%C3%A1r,
+220,coded,low;other,"l'appellation Valpetit, contraction de l'expression Vers-le-petit-val. Vert représente une corruption du mot gaulois verno (aulne)",https://fr.wikipedia.org/wiki/Vert-le-Petit,
+221,no-derivation,,"En français comme en occitan, la commune porte le même nom",https://fr.wikipedia.org/wiki/Tursac,
+222,coded,high;water,"«Lugar rodeado de peñascos» ... tzotl, suciedad; apan, río. Su significado es «Río sucio»",https://es.wikipedia.org/wiki/Texcaltit%C3%A1n_Xoteapan,
+223,coded,high,Le nom de la ville vient du néerlandais groene berg qui signifie « colline verte »,https://fr.wikipedia.org/wiki/Bergues,
+224,coded,crossing;water,"formed from the Old English words sliow and ford, together meaning ""ford over a muddy or slimy river""",https://en.wikipedia.org/wiki/Sleaford,
+225,coded,other,"Largs was named in honour of Largs Ayrshire, Scotland",https://en.wikipedia.org/wiki/Largs%2C_New_South_Wales,transfer
+226,no-derivation,,"notuje wieś pod polską nazwą Chrzowic, a także niemiecką Chrzowitz",https://pl.wikipedia.org/wiki/Chrzowice,
+227,coded,other,"Civiliacum, probably meaning ""estate of Civilis"" ... originally called La Ruelle (meaning ""the lane"")",https://en.wikipedia.org/wiki/Chevilly-Larue,alternative: digging (pottery)
+228,coded,other,nazwa miejscowości wywodzi się od staropolskiej nazwy zabudowań strażniczych - stróży,https://pl.wikipedia.org/wiki/Str%C3%B3%C5%BCa_%28wojew%C3%B3dztwo_dolno%C5%9Bl%C4%85skie%29,
+229,coded,other,du latin castellum qui désigne un « château » et du bas latin moronis qui signifie « sombre »,https://fr.wikipedia.org/wiki/Castelmoron-d%27Albret,
+230,coded,other,wywodzi bezpośrednio od nazwy określającej w językach słowiańskich istotę wyższą – Boga,https://pl.wikipedia.org/wiki/Bogun%C3%B3w,
+231,no-derivation,,The name of the settlement was changed from Studenec to Studenec na Blokah in 1953,https://en.wikipedia.org/wiki/Studenec_na_Blokah,
+232,coded,other;water,"Breuvery provient de l'oïl *breuverei ... « champ de bruyères ». Le village se trouve sur la rive gauche de la Coole, rivière",https://fr.wikipedia.org/wiki/Breuvery-sur-Coole,heath + on the river Coole
+233,coded,other,The name is borrowed from that of the French island Belle Île ... the event inspired the naming,https://en.wikipedia.org/wiki/Belle_Isle%2C_Leeds,transfer; speculation about Bell Hill
+234,coded,other,Niemiecka nazwa miejscowości pochodzi od jej dawnego właściciela ... von Wallisa,https://pl.wikipedia.org/wiki/Wolany_%28wojew%C3%B3dztwo_dolno%C5%9Bl%C4%85skie%29,Polish name not explained
+235,coded,other,"derived from *Smьrďane, a plural demonym from ... 'simple man'. However, it may also be derived from ... 'juniper'",https://en.wikipedia.org/wiki/Smrje,
+236,coded,high;other,"'Op (= hoog)-bicht', wat wil zeggen 'het Bicht dat hoger (stroomopwaarts) is gelegen (bij de Maas)'",https://nl.wikipedia.org/wiki/Obbicht,higher/upstream + Bicht
+237,coded,other,un nom de personne latin Rufegius ... un second nom de personne latin Ratius,https://fr.wikipedia.org/wiki/Raix,
+238,coded,other,μετονομάστηκε σε Επισκοπείον ... επειδή στην περιοχή ... υπήρχε ... η έδρα Επισκοπής,https://el.wikipedia.org/wiki/%CE%95%CF%80%CE%B9%CF%83%CE%BA%CE%BF%CF%80%CE%B9%CE%BA%CF%8C_%CE%99%CF%89%CE%B1%CE%BD%CE%BD%CE%AF%CE%BD%CF%89%CE%BD,
+239,coded,low;other,nantos signifiant « vallée » suivi du suffixe ... « clairière » ... tire son nom de la vallée de l'Argentor,https://fr.wikipedia.org/wiki/Nanteuil-en-Vall%C3%A9e,
+240,coded,water,"It was originally called Fuarán Mór, meaning ""great spring"" in Irish",https://en.wikipedia.org/wiki/Oranmore,
+241,coded,other,the name ... Kostajnica originates from the old Slavic word for sweet chestnut (kostanj),https://en.wikipedia.org/wiki/Kostajnica%2C_Bosnia_and_Herzegovina,
+242,coded,other,The name Gabrje means 'hornbeam forest',https://en.wikipedia.org/wiki/Gabrje%2C_Dobrova%E2%80%93Polhov_Gradec,
+243,no-derivation,,Anciennement mentionné : Villa que dicitur Fontes au XIIIe siècle ...,https://fr.wikipedia.org/wiki/Fontaine-sur-Coole,forms only
+244,coded,crossing,il s'agit bien de la juxtaposition de deux éléments Pont et Authou,https://fr.wikipedia.org/wiki/Pont-Authou,"Authou: Gaulish, meaning cut off in the excerpt"
+245,coded,other,un nom de personne gallo-romain Jurinius ou Jornius ... « domaine de Jurinius »,https://fr.wikipedia.org/wiki/Jurignac,
+246,coded,other,nazwą patronimiczną i wywodzi się od staropolskiego imienia męskiego „Długomiła”,https://pl.wikipedia.org/wiki/D%C5%82ugomi%C5%82owice,
+247,no-derivation,,The name of the settlement was changed from Dol to Dol pri Borovnici in 1953,https://en.wikipedia.org/wiki/Dol_pri_Borovnici,
+248,coded,other;high,"""Farmstead where moss or lichen grows"", with the later addition of hēafod, meaning ""hill""",https://en.wikipedia.org/wiki/Raughton_Head,
+249,coded,other,"ritiene di riscontrare in ""Mugnus"" un nome o cognome di epoca romana",https://it.wikipedia.org/wiki/San_Martino_di_Mugnano,
+250,coded,other,Vrbanja is named after the Croatian word for willows (vrbe),https://en.wikipedia.org/wiki/Vrbanja%2C_Croatia,
+251,coded,other,"Nazwa miejscowości wywodzi się od polskiej nazwy na proces cięcia lub ""żeńca""",https://pl.wikipedia.org/wiki/Sienice,
+252,coded,water;other,"Du latin « fons », fontaine, et « furca », bifurcation",https://fr.wikipedia.org/wiki/Fontaine-Fourches,
+253,coded,riverine,"""kempa"" oznaczającej ""kępę"" czyli niewielką wyspę na jeziorze lub rzece",https://pl.wikipedia.org/wiki/K%C4%99pa_%28wojew%C3%B3dztwo_opolskie%29,
+254,coded,other,El nombre «San Isidro» hace referencia al santo patrono de la localidad,https://es.wikipedia.org/wiki/Arroyo_San_Isidro,'Arroyo' not discussed
+255,no-derivation,,Es gibt mehrere Ortschaften mit dem Namen Kolmberg,https://de.wikipedia.org/wiki/Kolmberg_%28Waffenbrunn%29,
+256,coded,other,le breton Plou- ... désigne une « paroisse » ... L'élément qui suit Plou- est l'hagionyme Meleuc,https://fr.wikipedia.org/wiki/Pleumeleuc,
+257,coded,crossing,l'abbé Suger fait établir un bac au gué près du village ... Port-Villez doit son nom à cet ancien bac,https://fr.wikipedia.org/wiki/Port-Villez,ferry at a ford
+258,coded,other,l'anthroponyme germanique Sondo suivi de -ingen « gens de » + -veld « champ »,https://fr.wikipedia.org/wiki/Saint-Inglevert,'saint' is a later attraction
+259,coded,water;other,"Fontanetum, meaning ""the springs"" ... Fontenay-sous-Bois (meaning ""Fontenay under wood"")",https://en.wikipedia.org/wiki/Fontenay-sous-Bois,
+260,coded,other,derived from the personal name Přílep ... The prefix velké ('great') was added,https://en.wikipedia.org/wiki/Velk%C3%A9_P%C5%99%C3%ADlepy,
+261,coded,other,nazwą patronimiczną i wywodzi się od imienia Dobek,https://pl.wikipedia.org/wiki/Dobkowice_%28wojew%C3%B3dztwo_dolno%C5%9Bl%C4%85skie%29,
+262,coded,other,"Du vieux français verdier, un nom désignant un intendant des forêts royales",https://fr.wikipedia.org/wiki/Verdey,
+263,coded,high,"mendi ('monte' o 'cerro'), gorri ('rojo', 'pelado') ... 'el monte rojo' o 'el monte pelado'",https://es.wikipedia.org/wiki/Mendigorr%C3%ADa,
+264,no-derivation,,"Före 1905 och 1978–2007 hette orten Floda, men fick namnet Dala-Floda ... för att undvika förväxling",https://sv.wikipedia.org/wiki/Dala-Floda,
+265,coded,water;high;other,"a portmanteau of ""Cam"" (the name of a local stream), ""Amber Hill"" (an area of high ground) and ""—ley"" (... shelter ... pasture or meadow)",https://en.wikipedia.org/wiki/Camberley,
+266,coded,high;other,"moel (""bare"") and bryn (""hill""); thus it once meant ""bare hill""",https://en.wikipedia.org/wiki/Great_Malvern,'Great' distinguishes it from Little Malvern
+267,coded,other,"The name ""Waha"" comes from the Germanic proper name ""Wachart""",https://en.wikipedia.org/wiki/Waha,
+268,coded,other,"means ""outlying or secondary hamlet or farmstead with a church""",https://en.wikipedia.org/wiki/Kirkthorpe,
+269,coded,other,The name Błażejowice Dolne was derived from the name Błażej,https://en.wikipedia.org/wiki/B%C5%82a%C5%BCejowice_Dolne,'Dolne' not glossed
+270,unclear,,"Kourenta was the name of a župan ... Without excluding a proper name derivation ... likely stemmed from the Albanian noun kurent ... 'river current, torrent'",https://en.wikipedia.org/wiki/Kourenta,torrent vs personal name
+271,no-derivation,,"En 1307 lors du procès des Templiers, Montbouy est appelé « Monte Boini »",https://fr.wikipedia.org/wiki/Montbouy,
+272,no-derivation,,"En el año 1025 en la Reja de San Millán, consta como Luuiano",https://es.wikipedia.org/wiki/Lubiano,
+273,coded,other,Slovak/Slavic brť from Proto-Slavic bъrtь - a hive of forest bees,https://en.wikipedia.org/wiki/Bruty,
+274,coded,other,"thought to come from Margaritos, a pirate of the Emirate of Sicily",https://en.wikipedia.org/wiki/Margariti,origin uncertain
+275,coded,other,a settlement where several people with the surname Tomažin lived,https://en.wikipedia.org/wiki/Toma%C5%BEini,
+276,coded,other,Název vesnice je odvozen z příjmení Travka,https://cs.wikipedia.org/wiki/Trav%C4%8Dice,
+277,no-derivation,,le nom de la localité est attesté sous les formes Wenebercis (1105-13) ...,https://fr.wikipedia.org/wiki/Wambrechies,forms only
+278,no-derivation,,Pierwsza wzmianka o miejscowości w formie Demano pochodzi z 1193 roku,https://pl.wikipedia.org/wiki/Domanice_%28powiat_wroc%C5%82awski%29,forms only
+279,unclear,,Břežany is derived either from the word břeh ('bank' ... also meaning 'hillside') or from ... březí ('birch forest'),https://en.wikipedia.org/wiki/Panensk%C3%A9_B%C5%99e%C5%BEany,bank vs hillside/birch
+280,coded,other,Nazwa wsi związana jest z poszukiwaniem złota w osadach rzecznych metodą płukania,https://pl.wikipedia.org/wiki/P%C5%82%C3%B3czki_Dolne,gold washing (an activity)
+281,coded,crossing;low,ponceau « petit pont ». Il s'agissait sans doute d'un petit pont sur le ru de Morbras ... cumba « vallée encaissée »,https://fr.wikipedia.org/wiki/Pontault_%28Seine-et-Marne%29,Pontault + Combault
+282,coded,other,"Du latin colombarium, se traduisant par colombier",https://fr.wikipedia.org/wiki/Colombiers_%28Charente-Maritime%29,
+283,coded,other,un nom de personne latin Caprius ... « domaine de Caprius »,https://fr.wikipedia.org/wiki/Chebrac,
+284,unclear,,One theory derives it from ... 'wet (village/field)' ... Another theory ... 'rapids' ... Yet another theory ... 'Groslupъ's village',https://en.wikipedia.org/wiki/Grosuplje,wet vs personal name
+285,coded,other,"derived from the surname Krabka, meaning ""the village of Krabka's people""",https://en.wikipedia.org/wiki/Krab%C4%8Dice,
+286,coded,other,"Det het seg at veien «kløyvet» seg her, derav navnet Kløften",https://no.wikipedia.org/wiki/Kl%C3%B8fta,road junction
+287,coded,other,ferté ... signifie généralement « place forte » ... un seigneur nommé Milon,https://fr.wikipedia.org/wiki/La_Fert%C3%A9-Milon,
+288,no-derivation,,Do 1945 r. miejscowość nosiła nazwę Kreuzendorf,https://pl.wikipedia.org/wiki/Go%C5%82uszowice,
+289,coded,other,"« Leunhan », équivalent gascon de « domaine de Léonius »",https://fr.wikipedia.org/wiki/L%C3%A9ognan,
+290,coded,high;other,"'An Creagán', meaning 'the stoney hill' ... Cnoc an Chrochaire ('Hangman's Hill')",https://en.wikipedia.org/wiki/Knockcroghery,
+291,no-derivation,,La dénomination Varennes-Changy a été officialisée en 1974,https://fr.wikipedia.org/wiki/Varennes-Changy,
+292,coded,other,"from the Anglo-Saxon words ake ... oak, and uurt ... an enclosure or homestead. The other possibility is ... Acca's enclosure",https://en.wikipedia.org/wiki/Low_Ackworth,'Low' not glossed
+293,coded,high,"based on the Slovene common noun drsten 'broken stone, rubble, scree'",https://en.wikipedia.org/wiki/Destrnik,stone/scree coded high (rock)
+294,coded,other;high,"Le nom d'Athis provient du mot gaulois attegia signifiant « cabane, hutte » et du terme français mont signifiant « colline, mont »",https://fr.wikipedia.org/wiki/Athis-Mons,
+295,coded,water,"derived from Ae-whylme, Old English for ""waters whelming"". It refers to the spring just north of the village",https://en.wikipedia.org/wiki/Ewelme,
+296,no-derivation,,"Autrefois, la commune se nommait Nibelle - Saint-Sauveur",https://fr.wikipedia.org/wiki/Nibelle,
+297,coded,other,"basée sur le nom de personne germanique Tunno, suivi du suffixe germanique -ing",https://fr.wikipedia.org/wiki/Tonneins,
+298,coded,other,Nazwa wsi została utworzona od imienia Toma – Tomasz,https://pl.wikipedia.org/wiki/Tomice_%28wojew%C3%B3dztwo_opolskie%29,
+299,coded,other,nazwa miejscowości wywodzi się od polskiej nazwy suchy określającej wysuszony grunt ... „Trockenfeld”,https://pl.wikipedia.org/wiki/Sukowice,dry field
+300,coded,water;other,"Pegingaburnan ... which means ""the stream of the people of [a man called] Pǣga""",https://en.wikipedia.org/wiki/Pangbourne,
+301,coded,other,une formation toponymique médiévale en Bourg- au sens de « village » ... Le second élément est l'anthroponyme Turoldus,https://fr.wikipedia.org/wiki/Bourgtheroulde-Infreville,
+302,coded,high;other,"creach (meaning ""plunder"") and maoil (a hill) ... crag, referring to a rock or the crest of a hill ... Creamhchoill, meaning 'garlic wood'",https://en.wikipedia.org/wiki/Craughwell,all readings without water-side
+303,coded,riverine;other,Sziget – island: Szigetszentmiklós is a town on Csepel Island; Szent Miklós – Saint Nicholas,https://en.wikipedia.org/wiki/Szigetszentmikl%C3%B3s,
+304,coded,other,"pourrait provenir de l'anthroponyme latin Martilius ou de Martius, le dieu Mars",https://fr.wikipedia.org/wiki/Martillac,
+305,no-derivation,,"En el año 1025 en la Reja de San Millán, consta como Haztegieta",https://es.wikipedia.org/wiki/Asteguieta,forms only
+306,coded,high,"La terminaison -nesse, issue du vieux saxon ness, næss, signifie « promontoire »",https://fr.wikipedia.org/wiki/Longuenesse,promontory coded high
+307,no-derivation,,the name of the village often appears without the v as Dorska vas,https://en.wikipedia.org/wiki/Dvorska_Vas%2C_Velike_La%C5%A1%C4%8De,
+308,no-derivation,,Étymologie: Voir Vattetot-sur-Mer,https://fr.wikipedia.org/wiki/Vattetot-sous-Beaumont,
+309,no-derivation,,Název Devínská Nová Ves se stal oficiálním kolem roku 1848,https://cs.wikipedia.org/wiki/Dev%C3%ADnska_Nov%C3%A1_Ves,naming history only
+310,coded,water;other,"Förleden är Svartån, 'den svarta (ån); ån med mörkt vatten' ... Efterleden kan varar rå, 'råmärke; gräns' eller a 'å'",https://sv.wikipedia.org/wiki/Svartr%C3%A5_socken,
+311,coded,low;other,derived from the Czech adjective zalezlý ('tucked away') ... the prefix dolní ('lower') was added,https://en.wikipedia.org/wiki/Doln%C3%AD_Z%C3%A1lezly,
+312,coded,other,nazwa miejscowości pochodzi od polskiej nazwy na uczucie miłości,https://pl.wikipedia.org/wiki/Mion%C3%B3w,
+313,coded,other,La paroisse était dédiée à Paterne d'Avranches ... L'Aulnay ... indiquant un lieu plantés d'aulnes,https://fr.wikipedia.org/wiki/Saint-Pa%C3%ABr,
+314,no-derivation,,"Πριν την απελευθέρωση αναφέρεται με το όνομα ''Χαλβατζί"". Ως Χελιδών αναφέρεται επίσημα το 1924",https://el.wikipedia.org/wiki/%CE%A7%CE%B5%CE%BB%CE%B9%CE%B4%CF%8E%CE%BD%CE%B1_%CE%88%CE%B2%CF%81%CE%BF%CF%85,
+315,coded,wet;low,du mot gaulois bracu signifiant « boue » ... a d'abord désigné un « fond de vallée humide » puis un « marais »,https://fr.wikipedia.org/wiki/Briis-sous-Forges,
+316,coded,other,"Il s'agirait donc du « domaine de Gaudius », nom de personne chrétien",https://fr.wikipedia.org/wiki/Jouy-sur-Morin,'sur-Morin' not discussed
+317,coded,other,the Cherokee word for grain or rice ... Others interpret ... 'plains' ... Local legend ... 'two is enough',https://en.wikipedia.org/wiki/Tahlequah%2C_Oklahoma,all readings non-water
+318,coded,other,´Schoot´ betekent: Zoom van akkers langs de rand van de heide,https://nl.wikipedia.org/wiki/Budel-Schoot,
+319,coded,low;other,The name Spodnje Hoče literally means 'lower Hoče' ... a plural demonym ... derived from the nickname *Xotъ,https://en.wikipedia.org/wiki/Spodnje_Ho%C4%8De,
+320,coded,other,Erzsébetváros was named ... after Queen Elisabeth,https://en.wikipedia.org/wiki/Erzs%C3%A9betv%C3%A1ros,
+321,coded,water,"A falu közelében található tó vize feltűnően fehér volt, innen a név: Fehértó",https://hu.wikipedia.org/wiki/Feh%C3%A9rt%C3%B3,white lake
+322,coded,other,"Saint-Jacques de la Forêt, en l'honneur du premier évêque de Rennes ... devient Saint-Jacques de la Lande",https://fr.wikipedia.org/wiki/Saint-Jacques-de-la-Lande,
+323,coded,other,"Quintinus était un apôtre chrétien ... Saint-Quentin-de-Sèche, à cause de la sécheresse et de l'aridité du sol des collines",https://fr.wikipedia.org/wiki/Saint-Quentin-de-Chalais,
+324,no-derivation,,The name Gárdony is believed to have originated in the early 13th century,https://en.wikipedia.org/wiki/G%C3%A1rdony,
+325,no-derivation,,le nom de la localité est attesté sous les formes Guimilla en 1119 ...,https://fr.wikipedia.org/wiki/Wimille,forms and pronunciation only
+326,no-derivation,,"Leinseele en flamand. Lentsales (890), Lincelis (1156)",https://fr.wikipedia.org/wiki/Linselles,
+327,coded,high,Nazwa miejscowości wywodzi się od polskiej nazwy kamień,https://pl.wikipedia.org/wiki/Kamieniec_%28wojew%C3%B3dztwo_dolno%C5%9Bl%C4%85skie%29,stone coded high (rock)
+328,coded,other;water,Pluriel de l'oïl grange ... L'Aube est une rivière française,https://fr.wikipedia.org/wiki/Granges-sur-Aube,barns + river Aube
+329,coded,high;other,"Mons Maurentiacus, literally ""Mount Maurentiacus"" ... the promontory ... ""estate of Maurentius""",https://en.wikipedia.org/wiki/Montmorency%2C_Val-d%27Oise,
+330,coded,water,"tzotl, suciedad; apan, río. Su significado es «Río sucio»",https://es.wikipedia.org/wiki/Xoteapan,
+331,no-derivation,,The name of the settlement was changed from Krkovo to Krkovo pri Karlovici in 1953,https://en.wikipedia.org/wiki/Krkovo_pri_Karlovici,
+332,coded,other,derived from *Apaťe (selo) 'abbot's village',https://en.wikipedia.org/wiki/Apa%C4%8De%2C_Kidri%C4%8Devo,
+333,unclear,,"« Pont Carré », qui indique la forme d'un pont en pierre de taille, ou plus vraisemblablement ... nom du constructeur de ce pont",https://fr.wikipedia.org/wiki/Pontcarr%C3%A9,bridge vs builder's name
+334,coded,other,"The name Maisons comes from Medieval Latin Mansiones, meaning ""the houses"" ... The name Alfort comes from the manor",https://en.wikipedia.org/wiki/Maisons-Alfort,
+335,coded,high;other,"derived from *Gričar 'hill dweller', based on the Slovene common noun grič 'hill'",https://en.wikipedia.org/wiki/Gr%C4%8Darevec,
+336,coded,other,une formation toponymique gallo-romaine en -(i)acum ... précédé d'un nom d'homme ... *Spurilius,https://fr.wikipedia.org/wiki/%C3%89perlecques,
+337,coded,other,"Une fère, ou ferté désignait une forteresse médiévale ... Une autre hypothèse ... germanique fara (colonie, famille)",https://fr.wikipedia.org/wiki/F%C3%A8re-en-Tardenois,
+338,coded,other,The name means 'Street-Field of the Saye family',https://en.wikipedia.org/wiki/Stratfield_Saye,
+339,no-derivation,,Sheldi is also a rare name,https://en.wikipedia.org/wiki/Sheldi,
+340,coded,other,"*novio ... « neuf, nouveau » ... et *ialo- (« clairière, lieu défriché, essart »)",https://fr.wikipedia.org/wiki/Noyelles-sous-Lens,
+341,coded,other;water,derived from the old personal Slavic name Lubek ... The suffix nad Vltavou ('upon the Vltava') refers to its location near this river,https://en.wikipedia.org/wiki/Lib%C4%8Dice_nad_Vltavou,
+342,coded,riverine,Nazwa wsi pochodziła prawdopodobnie od mielizny,https://pl.wikipedia.org/wiki/Miedonia,shoal
+343,coded,other,"nazwa dzierżawcza, która została utworzona od nazwy osobowej Wilksza",https://pl.wikipedia.org/wiki/Wilkszyn,
+344,coded,water;other,deriva de una fuente ubicada en el mismo ... que abastecía de agua a los carreteros,https://es.wikipedia.org/wiki/Fuente_Carreteros,
+345,coded,other,la presenza delle piante della robbia ... Secondo altre interpretazioni ... alberi di rovere,https://it.wikipedia.org/wiki/Rubbiara,
+346,coded,other;water,it originally meant 'farmstead of the alder trees' ... 'by water' ... refers to the village's proximity to the River Aire,https://en.wikipedia.org/wiki/Allerton_Bywater,
+347,coded,other,quizá proviene de la primitiva tribu de los guarangas ... Guarango es también el nombre de un frondoso árbol,https://es.wikipedia.org/wiki/Guaranda,
+348,coded,other,-tuit « essart » ... l'élément Blique- ... « brame (du cerf) » ... « clairière du brame (du cerf) »,https://fr.wikipedia.org/wiki/Notre-Dame-de-Bliquetuit,
+349,coded,other,"Nazwa miejscowości wywodzi się od polskiej nazwy ""krzyż""",https://pl.wikipedia.org/wiki/Krzy%C5%BCowice_%28powiat_brzeski%29,
+350,no-derivation,,The name of the settlement was changed from Črni Potok to Črni Potok pri Dragi in 1953,https://en.wikipedia.org/wiki/%C4%8Crni_Potok_pri_Dragi,
+351,no-derivation,,The name of the settlement was changed from Mala Loka to Mala Loka pri Višnji Gori in 1953,https://en.wikipedia.org/wiki/Mala_Loka_pri_Vi%C5%A1nji_Gori,
+352,coded,crossing,A település nevét a település melletti Völgységi-patakon átívelő hídjáról kapta,https://hu.wikipedia.org/wiki/Hidas,bridge over a stream
+353,no-derivation,,Le nom de la localité est attesté sous les formes Culleium ...,https://fr.wikipedia.org/wiki/Chouilly,forms only
+354,no-derivation,,miejscowość wymieniona jest w zlatynizownej formie villa Ossek,https://pl.wikipedia.org/wiki/Osiek_Grodkowski,
+355,coded,high;other,"'the headland where the bull grazes', from OE 'bula', 'bull' and OE 'næss', 'headland'",https://en.wikipedia.org/wiki/Bowness-on-Windermere,"'on-Windermere' added later, not glossed"
+356,unclear,,"Saint-Pierre est un hagiotoponyme ... Salerne ... Du radical Sal, fréquent dans les noms de cours d'eau ou « piton rocheux »",https://fr.wikipedia.org/wiki/Saint-Pierre-de-Salerne,watercourse vs rocky peak
+357,coded,water,"The name comes from the Anger rivulet, flowing into the river Rhine near Angermund",https://en.wikipedia.org/wiki/Angermund,
+358,no-derivation,,miejscowość występuje pod polską nazwą Rinskawieś oraz niemiecką Reinschdorf,https://pl.wikipedia.org/wiki/Re%C5%84ska_Wie%C5%9B_%28powiat_k%C4%99dzierzy%C5%84sko-kozielski%29,
+359,coded,other;low,"formed from *lani 'hind, female red deer' + dol 'valley', thus 'red deer valley'",https://en.wikipedia.org/wiki/Landol,
+360,coded,other,the Mon language name for the danone palm ... is the most likely origin for the town's name,https://en.wikipedia.org/wiki/Hinthada,"folk etymologies: a bird, food"
+361,coded,other;low,dérive du nom d'un personnage germanique Uro suivi du nom latin vallis correspondant à la « vallée d'Uro »,https://fr.wikipedia.org/wiki/Urval,
+362,coded,low,Il toponimo ha significato di vallone,https://it.wikipedia.org/wiki/Vallonto,the valley bottom is described as marshy with streams
+363,no-derivation,,Nazwa pochodzi od germańskiego imienia Manfred ... Oficjalną nazwę Mąkolno nadano w 1947 roku,https://pl.wikipedia.org/wiki/M%C4%85kolno_%28wojew%C3%B3dztwo_dolno%C5%9Bl%C4%85skie%29,explains the former name only
+364,coded,other,"The name is an Aboriginal word for ""yarran wooden spears""",https://en.wikipedia.org/wiki/Tullibigeal,
+365,no-derivation,,notuje wieś pod niemiecką nazwą Mochau ... 15 marca 1947 r. nadano miejscowości polską nazwę Mochów,https://pl.wikipedia.org/wiki/Moch%C3%B3w,
+366,coded,other,"Ipinagsigawan ng nakakita ang ""Olo nin apo!"" ... tinawag nilang ""Ulo ng Apo""",https://tl.wikipedia.org/wiki/Olongapo,legend
+367,no-derivation,,La parroquia también es conocida por el nombre de San Pedro Félix de Villar de Barrio,https://es.wikipedia.org/wiki/Villar_de_Barrio_%28parroquia%29,
+368,coded,low;water,"Loški potok je ime suhe doline, ki je ime prevzela od potoka Loški potok",https://sl.wikipedia.org/wiki/Hrib_-_Lo%C5%A1ki_Potok,valley named after a stream; 'Hrib' not glossed
+369,coded,other,"być może od występowania popielicowatych, gryzoni dawniej zwanych pilchami",https://pl.wikipedia.org/wiki/Pilczyce,
+370,coded,water,The name Jezero means 'lake' in Slovene,https://en.wikipedia.org/wiki/Jezero%2C_Brezovica,
+371,coded,water,"tlictic, color negro; apan, río. Su significado es «río negro»",https://es.wikipedia.org/wiki/Tilapan,
+372,coded,water;wet,"named after the nearby creek River aux Vases. Aux vases is French for ""swamps"" or ""morasses""",https://en.wikipedia.org/wiki/River_aux_Vases%2C_Missouri,
+373,coded,low;other,"*nanto-ialon, de nanto-, « vallée » et ialon, « lieu défriché », « clairière »",https://fr.wikipedia.org/wiki/Nanteuil-l%C3%A8s-Meaux,
+374,no-derivation,,"Grocholub (1228 Grocholuba, 1534 Grocholouw)",https://pl.wikipedia.org/wiki/Grocholub,
+375,coded,other;crossing,alnus « aulne » ... « bois d'au[l]nes » ... Les planches ... « petits ponts de bois ou passerelles »,https://fr.wikipedia.org/wiki/Aulnay-aux-Planches,
+376,no-derivation,,le nom de la localité est attesté sous les formes Fevrent en 1158 ...,https://fr.wikipedia.org/wiki/Fr%C3%A9vent,forms only
+377,coded,wet;other,Sancti Petri Brocho signifiant « le marais de Saint-Pierre »,https://fr.wikipedia.org/wiki/Saint-Pierre-Brouck,
+378,coded,other,"Le nom serait issu de Hucbolda villa, domaine d'Hucbold, nom franc",https://fr.wikipedia.org/wiki/Aubeville,
+379,coded,other,derived from a Gallo-Roman villa: villa Fabriciana (from the name of the owner Fabricius ...),https://en.wikipedia.org/wiki/Fabrezan,
+380,coded,low,The name Dolenja vas literally means 'lower village',https://en.wikipedia.org/wiki/Dolenja_Vas%2C_Cerknica,
+381,coded,other;high,"« clôture, enclos pour les chiens > élevage de chiens » ou celui de « hauteur, colline (sur la propriété de) Hundo »",https://fr.wikipedia.org/wiki/Hautec%C3%B4te,Hautecôte; Nuncq forms only
+382,coded,other;low,"Les Istres tirerait son nom d'une formation gauloise *Istero, ayant désigné une « Forteresse du Bas [du territoire] »",https://fr.wikipedia.org/wiki/Les_Istres-et-Bury,Bury: forms only
+383,coded,other,"probably derived from the Slovene common noun otava 'second crop (of hay)', referring to a meadow",https://en.wikipedia.org/wiki/Otavice%2C_Ribnica,
+384,coded,high,"Ce nom d'Ensérune ... avec le sens de «lieu élevé», « montagne »",https://fr.wikipedia.org/wiki/Nissan-lez-Enserune,Nissan: forms only
+385,no-derivation,,W sierpniu 1939 r. nazwę miejscowości zmieniono na Großgiesmannsdorf,https://pl.wikipedia.org/wiki/Go%C5%9Bwinowice,
+386,coded,other,"Namnet Vä kommer av forndanskans wæ som betecknar en helig plats, kultplats",https://sv.wikipedia.org/wiki/V%C3%A4,
+387,coded,water;other,"matataca, excavar con las manos; apan, río. Su significado es «río donde se excava con las manos»",https://es.wikipedia.org/wiki/Matacapan,
+388,coded,other,"formed from the words 'Dydda', a man's name, and 'Worth', a Saxon word for enclosure",https://en.wikipedia.org/wiki/Dedworth,
+389,coded,water;wet,"The name Stung Treng literally means ""reed river""",https://en.wikipedia.org/wiki/Stung_Treng,reed coded wet
+390,coded,crossing,Zubillaga es un neotopónimo creado en 1989 que significa ... lugar de puentes. El pueblo tiene varios puentes sobre arroyos,https://es.wikipedia.org/wiki/Zubillaga_%28%C3%81lava%29,
+391,coded,other,"bajo el nombre de «Villa de Trujillo», en honor al Trujillo de Extremadura",https://es.wikipedia.org/wiki/Trujillo_%28Per%C3%BA%29,transfer
+392,coded,crossing,expliquer ce toponyme par le latin trajectum « passage d'eau »,https://fr.wikipedia.org/wiki/Le_Trait,water crossing
+393,coded,low;other,Le village est situé dans la vallée de la Seine ... le mot haye ayant eu jadis le sens de « lisière de bois »,https://fr.wikipedia.org/wiki/Val-de-la-Haye,
+394,coded,other;wet,"l'anthroponyme germanique Launo ... « demeure du peuple de Launo » ... Bernes ... du gaulois *berna, « marécage »",https://fr.wikipedia.org/wiki/Leulinghen-Bernes,
+395,no-derivation,,L'origine du nom du lieu est peu connue,https://fr.wikipedia.org/wiki/Saint-Cyr-sous-Dourdan,
+396,unclear,,Według legend nazwa wioski wywodzi się od rożkowatego zakola Odry ... kroniki historyczne notują również nazwisko hrabiego Roszkowskiego,https://pl.wikipedia.org/wiki/Roszk%C3%B3w_%28wojew%C3%B3dztwo_%C5%9Bl%C4%85skie%29,river bend vs surname
+397,coded,low,"a plural form of the Slovene common noun rupa 'cave, sinkhole, depression'",https://en.wikipedia.org/wiki/Rupe%2C_Velike_La%C5%A1%C4%8De,
+398,coded,crossing;other,"Pont-du-casse, qui signifie littéralement ""pont près du chêne""",https://fr.wikipedia.org/wiki/Pont-du-Casse,
+399,coded,water;high;crossing,"The name Saar stems from the Celtic word sara (streaming water) ... briga (hill, or rock ...) ... Brucca ... bridge ... used in fords",https://en.wikipedia.org/wiki/Saarbr%C3%BCcken,second element: rock or bridge; all readings include the river
+400,coded,other,Majątek Hablów nazywany był w języku niemieckim Olberg ... od pobliskiej przydrożnej kaplicy Góry Oliwnej,https://pl.wikipedia.org/wiki/G%C3%B3rka_%28Prudnik%29,'Górka' not glossed
+401,coded,other;low,"literally 'table valley' ... miza 'table', and ... dol, refers to a depression or (dry) valley",https://en.wikipedia.org/wiki/Mizni_Dol,
+402,coded,water,Bervilla super Secanam ... Berville est située dans un méandre de la Seine,https://fr.wikipedia.org/wiki/Berville-sur-Seine,'Berville' not explained; '-sur-Seine'
+403,coded,other,"probablement issu du latin nugarum signifiant « noiseraie, lieu planté de noyers »",https://fr.wikipedia.org/wiki/Nocario,
+404,coded,low,"Belval : la « belle vallée », le « beau vallon »",https://fr.wikipedia.org/wiki/Belval-sous-Ch%C3%A2tillon,
+405,coded,water;high,The name Gorenje Jezero means 'upper lake' ... the name refers to ... Lake Cerknica,https://en.wikipedia.org/wiki/Gorenje_Jezero,
+406,no-derivation,,Το όνομα Μάνδρα δεν είναι γνωστό πώς προέκυψε,https://el.wikipedia.org/wiki/%CE%9C%CE%AC%CE%BD%CE%B4%CF%81%CE%B1_%CE%88%CE%B2%CF%81%CE%BF%CF%85,origin of the current name unknown; Ottoman name 'stream with willows'
+407,coded,other,"The name is derived from the personal name Velen, meaning ""Velen's (court)""",https://en.wikipedia.org/wiki/Vele%C5%88,
+408,coded,water;other,"The meaning may be ""stream, of the wedge place""",https://en.wikipedia.org/wiki/Queenzieburn,
+409,no-derivation,,Polską nazwę Kopernik oraz niemiecką Köppernig wymienia w 1896 roku,https://pl.wikipedia.org/wiki/Koperniki,forms only
+410,no-derivation,,Gorenje Blato was attested in historical sources as Mos in 1267 and Moss in 1424,https://en.wikipedia.org/wiki/Gorenje_Blato,
+411,coded,water,"tonalli, calor o rayo de sol; apan, río. Su significado es «río de agua caliente»",https://es.wikipedia.org/wiki/Tonalapan,
+412,coded,water;other,a Bogárdnak a magyar bogár főnév az alapszava. A „Sár-” előtag a Sárvíz folyóra utal,https://hu.wikipedia.org/wiki/S%C3%A1rbog%C3%A1rd,
+413,coded,other,Villers ... procède du gallo-roman villare ... « grand domaine rural » ... Le Vexin normand est une région naturelle,https://fr.wikipedia.org/wiki/Villers-en-Vexin,
+414,coded,other;high,"l'anthroponyme gallo-romain Carantius ... ou de la racine pré-celtique *kar ... buttes rocheuses, de lieux pierreux",https://fr.wikipedia.org/wiki/Ch%C3%A9rence,both readings non-water
+415,coded,other,"De l'oïl faisse « bande de terre ... » ... ""Mesnil"" ... une habitation entourée de terres. ""Thu"" ... ""ferme""",https://fr.wikipedia.org/wiki/Faches-Thumesnil,
+416,no-derivation,,le nom de la localité est attesté sous les formes Le Venties vers 1000 ...,https://fr.wikipedia.org/wiki/Laventie,forms only
+417,coded,other,La première mention est Abbatia sub Planciaco,https://fr.wikipedia.org/wiki/L%27Abbaye-sous-Plancy,abbey below Plancy
+418,coded,other,"nazwa miejscowości pochodzi od polskiego słowa - ""krzyż""",https://pl.wikipedia.org/wiki/Krzy%C5%BCkowice_%28Psz%C3%B3w%29,
+419,coded,other,"Rum-ing-hem, traduisible par «demeure du peuple de Rumo »",https://fr.wikipedia.org/wiki/Ruminghem,
+420,no-derivation,,Na polskojęzycznej mapie wydanej w 1772 miejscowość została podpisana nazwą Pol. Racławice,https://pl.wikipedia.org/wiki/Rac%C5%82awiczki,forms and renamings only
+421,coded,other,Le nom de la ville signifie « Domaine d'Albius »,https://fr.wikipedia.org/wiki/Auby,
+422,coded,riverine;water,"derived from the common noun breg '(river) bank, slope', but may also refer to creeks ... in this case, Borovniščica Creek runs through",https://en.wikipedia.org/wiki/Breg_pri_Borovnici,source points to the creek in this case
+423,coded,water;low,The name Dolenje Jezero means 'lower lake' ... the name refers to ... Lake Cerknica,https://en.wikipedia.org/wiki/Dolenje_Jezero,
+424,unclear,,"means ""stream where sheep were washed"". The other supposed origin is ... 'lack of ships'",https://en.wikipedia.org/wiki/Shiplake,stream vs ships
+425,coded,high,derived from the Slovene common noun ježa 'small grassy slope between two flat areas in a valley',https://en.wikipedia.org/wiki/Je%C5%BEa,slope coded high
+426,unclear,,"l'étymologie du nom Allennes viendrait de al (bord) et len (rivière), ou de a la vetum (aulnaie)",https://fr.wikipedia.org/wiki/Allennes-les-Marais,river bank vs alder grove; 'les-Marais' not glossed
+427,coded,other,se je naselje imenovalo »Sveti Križ« po zavetniku domače cerkve – Svetem križu,https://sl.wikipedia.org/wiki/Kri%C5%BEevska_vas%2C_Dol_pri_Ljubljani,
+428,coded,high,"Authou correspond à un type toponymique gaulois *Altavo ... alt-, du latin altus « haut »",https://fr.wikipedia.org/wiki/Authou,
+429,coded,other;riverine,saint Jaoua ... et d'un château du nom de l'Isle ... dans une petite île formée par la Rance,https://fr.wikipedia.org/wiki/Saint-Jouan-de-l%27Isle,
+430,coded,low;other,"Spodnja Hrušica (literally, 'lower Hrušica') ... derived from the common noun *hruša 'pear'",https://en.wikipedia.org/wiki/Spodnja_Hru%C5%A1ica,
+431,coded,other,A falu neve a honfoglaláskori török eredetű Bod személynévből alakulhatott,https://hu.wikipedia.org/wiki/Botpuszta,
+432,coded,other,"issu du néerlandais hoeve, hof (ferme ...) ... kerk (église) ... « église de la ferme »",https://fr.wikipedia.org/wiki/Offekerque,
+433,coded,riverine,"Ohé zou afkomstig zijn van oë, wat een vruchtbaar stuk grond aan een rivier betekent",https://nl.wikipedia.org/wiki/Oh%C3%A9_en_Laak,fertile land by a river
+434,coded,other,"ake or aken, meaning oak, and uurt ... an enclosure or homestead ... Acca's enclosure",https://en.wikipedia.org/wiki/High_Ackworth,'High' not glossed
+435,coded,other;high,"-iacas ... précédé d'un anthroponyme ... skauti « hauteur, pente » ou *skot « bosquet »",https://fr.wikipedia.org/wiki/Villerest_%28Eure%29,excerpt discusses the forms Escoyes/Écouy; readings non-water
+436,coded,other,"derived from German Kassel ... from Latin castellum 'castle' ... it is also possible that the name is derived from Latin casale 'peasant house, peasant settlement'",https://en.wikipedia.org/wiki/Spodnji_Ka%C5%A1elj,'Spodnji' not glossed
+437,coded,other,"gāra ... ""spear"" ... graf ... wood ... ""triangular piece of land"" ... ""grave of the Scandinavian Giermundr"" ... ""the camp or city of the reeve/governor""",https://en.wikipedia.org/wiki/Gargrave,all readings non-water
+438,coded,low;other,derived from the surname Beřek ... The prefix dolní means 'lower',https://en.wikipedia.org/wiki/Doln%C3%AD_Be%C5%99kovice,
+439,unclear,,derived from the Slovene word log 'a partially forested (marshy) meadow near water' or 'woods near a settlement',https://en.wikipedia.org/wiki/Log_pri_Polhovem_Gradcu,two senses: marshy meadow near water vs woods
+440,coded,water;other,"l'occitan font signifiant « source » ... « Galard », un nom de personne",https://fr.wikipedia.org/wiki/Fongalop,
+441,no-derivation,,The origin of the name Pako is unknown,https://en.wikipedia.org/wiki/Pako,
+442,coded,high;other,"Du gaulois medlo-, mello-, « colline », ou metlo-, « moisson » ... dūnum ... « citadelle, enceinte fortifiée » ... « colline, mont »",https://fr.wikipedia.org/wiki/Melun,"island in the Seine is a description, not the derivation"
+443,coded,other,"le nom provient peut-être du Gaulois attegia, (cabane)",https://fr.wikipedia.org/wiki/Haute-Isle,"tentative, [réf. nécessaire]; 'Isle' not glossed"
+444,no-derivation,,Weisack ... vzniklo hláskovou úpravou původního českého Vysoká,https://cs.wikipedia.org/wiki/Vysok%C3%A1_%28okres_Brunt%C3%A1l%29,Vysoká not glossed
+445,coded,other,derived from the personal name Ľuba,https://en.wikipedia.org/wiki/Liblice,
+446,coded,other,Du latin buxus : le buis,https://fr.wikipedia.org/wiki/La_Chapelle-Bou%C3%ABxic,
+447,no-derivation,,"Sebyneyche ... Siebeneichen ... nazwę Dębice, którą zmieniono w 1947 r. na Dębowy Gaj",https://pl.wikipedia.org/wiki/D%C4%99bowy_Gaj,forms and renames only
+448,coded,other,"hagionyme ... saint Aubin. Ecrosville signifie le domaine de Krókr, nom d'homme scandinave",https://fr.wikipedia.org/wiki/Saint-Aubin-d%27%C3%89crosville,
+449,coded,water;other,named after the nearby stream called Apple Creek ... named from the apple trees,https://en.wikipedia.org/wiki/Apple_Creek%2C_Missouri,as River aux Vases (id 372): stream name plus its own origin
+450,no-derivation,,wymieniona jest w zlatynizowanej formie Mocre,https://pl.wikipedia.org/wiki/Mokra_%28Wroc%C5%82aw%29,forms only
+451,no-derivation,,"Trois toponymes sont liés à l'histoire du Mas-d'Agenais : Ussubium, Pompeiacum et Le Mas",https://fr.wikipedia.org/wiki/Le_Mas-d%27Agenais,"readings given only for the former names (Ussubium: 'good' or 'water', debated; Pompeiacum: personal name); 'Le Mas' not glossed in the excerpt"
+452,no-derivation,,"attested in historical sources as Zilowiz in 1230, Syloycz in 1335",https://en.wikipedia.org/wiki/Mala_Slevica,forms only
+453,no-derivation,,The name of the settlement was changed from Srednja vas to Srednja vas - Loški potok in 1953,https://en.wikipedia.org/wiki/Srednja_Vas%E2%80%93Lo%C5%A1ki_Potok,rename only
+454,coded,water,"originally called Reka (literally, 'river'), after the Reka River south of the settlement",https://en.wikipedia.org/wiki/Ko%C4%8Devska_Reka,
+455,coded,other,"Du latin prunus, était planté de pruniers. Belleville : ... Bella Villa, un « beau domaine »",https://fr.wikipedia.org/wiki/Prunay-Belleville,
+456,coded,other,Nazwa pochodzi od polskich nazw – krzyża lub kresu,https://pl.wikipedia.org/wiki/Krzy%C5%BCowa_%28powiat_%C5%9Bwidnicki%29,cross or border
+457,unclear,,"« fif », signifiant « cinq » et de « es », signifiant « eau, fontaine ou source ». Une autre hypothèse ... latin ""Finis"" signifiant ""limite""",https://fr.wikipedia.org/wiki/Fives,water vs boundary
+458,coded,water;wet;other,"Sár előtagja a falu mellett folyó Öreg-patak egykori Sár nevéből származik. A sár: nedves, sáros, agyagos föld ... A Sáp szó a Bár-Kalán nemzetség ősi birtokának neve",https://hu.wikipedia.org/wiki/S%C3%A1ris%C3%A1p,"stream name from 'wet, muddy ground' plus estate name"
+459,coded,other,probably comes from the Slavic personal name Radša/Radoslav or the Slavic stem vorč-/vrača (a fence),https://en.wikipedia.org/wiki/Ra%C4%8Da%2C_Bratislava,
+460,coded,other,derived from the personal name Ticha,https://en.wikipedia.org/wiki/Ti%C5%A1ice,
+461,coded,other,derived from the Slavic nickname Sěkyra,https://en.wikipedia.org/wiki/Sekiri%C5%A1%C4%8De,
+462,coded,other,ultimately derived from the patronymic Radiťь ... originally means 'Rado's village',https://en.wikipedia.org/wiki/Mala_Ra%C4%8Dna,'duck' connection called popular imagination

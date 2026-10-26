@@ -64,21 +64,39 @@ def evaluable(df: pd.DataFrame) -> np.ndarray:
     )
 
 
+LABEL_VARIANTS = ("none", "notrace", "nonwater")
+
+
 def riverine_labels(df: pd.DataFrame, *, unspecified_as_riverine: bool = False,
-                    all_types: bool = False) -> tuple[np.ndarray, np.ndarray]:
+                    all_types: bool = False, variant: str = "none",
+                    ) -> tuple[np.ndarray, np.ndarray]:
     """主ラベル: y=1 河川浸水被覆 ≥ 0.5、y=0 全種別の浸水被覆 < 0.5、それ以外は除外。
 
     unspecified_as_riverine（内陸の種別未記載製品）では未記載の浸水も河川に数える。
     all_types（感度 §7-1）では種別を問わず y=1 ⇔ 浸水被覆 ≥ 0.5（除外なし）。
+    variant（事後 B-5 の 7）: notrace は浸水痕跡（notation に trace）の被覆を差し引く
+    （EMS の多角形は重ならないので差で足りる）、nonwater は浸水の割合を恒常水域を除いた
+    面積で測る。既定 none は凍結時と同じ計算（型も変えない）。
     """
-    if all_types:
-        y1 = df["f_flood_any"].to_numpy() >= WET_TH
-        return y1.astype(np.int8), np.ones(len(df), dtype=bool)
+    if variant not in LABEL_VARIANTS:
+        msg = f"unknown label variant {variant!r}"
+        raise ValueError(msg)
     riv = df["f_riverine"].to_numpy()
+    anyf = df["f_flood_any"].to_numpy()
+    oth = df["f_other"].to_numpy()
+    if variant == "notrace":
+        tr = df["f_trace"].to_numpy()
+        riv, anyf = np.clip(riv - tr, 0.0, None), np.clip(anyf - tr, 0.0, None)
+    elif variant == "nonwater":
+        land = np.clip(1.0 - df["f_perm_water"].to_numpy(), 1e-6, None)
+        riv, anyf, oth = riv / land, anyf / land, oth / land
+    if all_types:
+        y1 = anyf >= WET_TH
+        return y1.astype(np.int8), np.ones(len(df), dtype=bool)
     if unspecified_as_riverine:
-        riv = riv + df["f_other"].to_numpy()
+        riv = riv + oth
     y1 = riv >= WET_TH
-    y0 = df["f_flood_any"].to_numpy() < WET_TH
+    y0 = anyf < WET_TH
     return y1.astype(np.int8), (y1 | y0)
 
 
@@ -247,8 +265,9 @@ def group_quotas(n_eval: dict[str, int], group: dict[str, int],
     return out
 
 
-def load_aoi_table(d: Path, *, cap: int, seed: int, unspecified_as_riverine: bool = False,
-                   all_types: bool = False) -> pd.DataFrame:
+def load_aoi_table(d: Path, *, cap: int, seed: int,  # noqa: PLR0913
+                   unspecified_as_riverine: bool = False, all_types: bool = False,
+                   label_variant: str = "none") -> pd.DataFrame:
     """1 AOI の評価セル（主ラベル付き）+ 特徴。cap を超えれば固定シードで抽出。"""
     cells = pq.read_table(d / "cells.parquet").to_pandas()
     feats = pq.read_table(d / "features.parquet").to_pandas()
@@ -256,7 +275,7 @@ def load_aoi_table(d: Path, *, cap: int, seed: int, unspecified_as_riverine: boo
     df = pd.concat([cells.reset_index(drop=True), feats.reset_index(drop=True),
                     lc.reset_index(drop=True)], axis=1)
     y, keep = riverine_labels(df, unspecified_as_riverine=unspecified_as_riverine,
-                              all_types=all_types)
+                              all_types=all_types, variant=label_variant)
     df["y"] = y
     df = df.loc[evaluable(df) & keep]
     if len(df) > cap:

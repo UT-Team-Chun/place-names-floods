@@ -314,7 +314,7 @@ def fig_design(n_langs: str) -> None:
             ha="center", va="top", color=grey)
     ax.text(74.5, 27.5, "names increment $\\Delta_N$\n$R=\\Delta_N/\\Delta_T$", fontsize=6.2,
             ha="center", va="top", color=blue)
-    box(78, 16.5, 21, 7, "placebo (M3np): the same\nnames permuted among the\narea's settlements; real "
+    box(78, 16.5, 21, 7, "placebo (M3np): the same\nnames reassigned among the\narea's settlements; real "
         "names\nmust do better", ec=grey, ls="--", size=6.0)
     ax.text(1, 13.5, "b", fontsize=9, weight="bold")
     ax.text(4, 13.5, "Terrain-information ladder (H3)", fontsize=7.2, weight="bold")
@@ -328,7 +328,7 @@ def fig_design(n_langs: str) -> None:
     ax.text(40, 13.5, "Three readings of names", fontsize=7.2, weight="bold")
     reads = [(("lexicon (N-lex)\nwater, wetland, riverine,\ncrossing, lowland and\nhighland words\nin "
                f"{n_langs} languages; knows\nno places"), 37.5),
-             ("learned score (N-learn)\ncharacter model fitted\non training regions only", 54),
+             ("character model (N-learn)\nlearned on training\nregions only", 54),
              (("language model (N-read)\nreads name elements;\ntested on floods after\nits "
                "training cut-off"), 70.5)]
     for txt, x in reads:
@@ -598,6 +598,11 @@ def detail_macros(m: dict, v36: dict | None = None) -> dict[str, str]:
     bc = [v["R"] for v in m.get("by_continent", {}).values() if v.get("R") is not None]
     if bc:
         out |= {"RContMin": rv(min(bc)), "RContMax": rv(max(bc))}
+    # B-2 追記 1: 辞書の被覆の層（辞書に項目の無い言語の国 = ノルウェーだけ）。言語別の層の「no」と同じセル
+    sno = ((v36 or {}).get("splits", {}).get("primary", {}).get("strata") or {}).get("language_no")
+    if sno and sno.get("ci90_R"):
+        out |= {"RStratNorway": rv(sno["R"]), "RStratNorwayLo": rv(sno["ci90_R"][0]),
+                "RStratNorwayHi": rv(sno["ci90_R"][1]), "NCellsStratNorway": _n(int(sno["n_cells"]))}
     return out
 
 
@@ -937,12 +942,20 @@ def odds_macros(v: dict | None) -> dict[str, str]:
     put("ORRiverNearAdj", t["riverine:le500m"])
     # B-2 追記 3: 区分別の値（集落から 500 m 以内は登録外、全セルは登録）
     ta = (v.get("categories_allcells_adjusted_M1") or {}).get("terms", {})
+    near = []
     for c, nm in (("water", "Water"), ("wet", "Wetland"), ("riverine", "Riverine"), ("crossing", "Crossing"),
                   ("low", "Lowland"), ("high", "Highland")):
         if f"{c}:le500m" in t:
             put(f"ORClass{nm}NearAdj", t[f"{c}:le500m"])
+            near.append(t[f"{c}:le500m"])
         if f"{c}:all" in ta:
             put(f"ORClass{nm}AllAdj", ta[f"{c}:all"])
+    if near:  # 6 区分の幅（片側の区分だけを挙げないため）と、区間が 1 を含む区分の数
+        out["ORClassNearAdjMin"] = _or(min(x["odds_ratio"] for x in near))
+        out["ORClassNearAdjMax"] = _or(max(x["odds_ratio"] for x in near))
+        out["NClassNearIncludeOne"] = _word(sum(x["ci95_odds_ratio"][0] <= 1 <= x["ci95_odds_ratio"][1]
+                                                for x in near))
+        out["NClassNear"] = _word(len(near))
     cb = v.get("cells_by_class_and_band") or {}
     for c, nm in (("water", "Water"), ("wet", "Wetland"), ("riverine", "Riverine"), ("crossing", "Crossing"),
                   ("low", "Lowland")):
@@ -1202,6 +1215,7 @@ def power_split_macros(runs: Path) -> dict[str, str]:
         if nul:
             out[f"PowerNReps{name}"] = str(nul["n_reps"])
             out[f"PowerUndefNull{name}"] = str(nul["decision_counts"].get("undefined-denominator", 0))
+            out[f"PowerNullLabelNull{name}"] = str(nul["decision_counts"].get("equivalent-null", 0))
         if ses:  # δ = 1.2 は主分割で R ≈ 0.05 に合わせた値。他の分割での平均 R（余白との対応がずれる量）
             out[f"PowerMeanR{name}"] = rv(ses["mean_R"])
             out[f"PowerNRepsSesoi{name}"] = str(ses["n_reps"])
@@ -1220,19 +1234,30 @@ def power_split_macros(runs: Path) -> dict[str, str]:
     # B-2 追記 3: 各分割の余白（0.05 × 物差し）と名前の ΔBS の 95% 上限を、δ = 1.2 の平均 ΔBS と比べる
     for k, split, name in (("", "primary", "Primary"), ("c", "country", "Country"), ("t", "temporal", "Temporal"),
                            ("l", "llmcut", "Llm")):
-        ses = _json(runs / f"power_v3{k}_sesoi" / "power_summary.json")
-        met = _json(runs / "world_v2" / f"metrics_{split}.json")
-        reps = (ses or {}).get("reps") or []
-        if not (reps and met and "delta_bs" in reps[0]):
+        r = split_ratios(runs, k, split)
+        if not r:
             continue
-        sim = float(np.mean([r["delta_bs"] for r in reps]))
-        pm = met["primary"]
-        out[f"PowerSimDBS{name}"] = sci(sim, 2)
-        out[f"PowerUpperRatio{name}"] = f"{pm['ci95_delta'][1] / sim:.2f}"
-        if pm["decision"] != "undefined-denominator":
-            out[f"PowerMarginRatio{name}"] = f"{pm['margin_delta_bs'] / sim:.1f}"
-            out[f"MarginDBS{name}"] = sci(pm["margin_delta_bs"], 2)
+        out[f"PowerSimDBS{name}"] = sci(r["sim"], 2)
+        out[f"PowerUpperRatio{name}"] = f"{r['upper']:.2f}"
+        if r["margin"] is not None:
+            out[f"PowerMarginRatio{name}"] = f"{r['margin']:.1f}"
+            out[f"MarginDBS{name}"] = sci(r["margin_dbs"], 2)
     return out
+
+
+def split_ratios(runs: Path, k: str, split: str) -> dict | None:
+    """B-2 追記 3: 実データの余白と観測の ΔBS の 95% 上限を、δ = 1.2 の合成ラベルの平均 ΔBS で割った比。"""
+    ses = _json(runs / f"power_v3{k}_sesoi" / "power_summary.json")
+    met = _json(runs / "world_v2" / f"metrics_{split}.json")
+    reps = (ses or {}).get("reps") or []
+    if not (reps and met and "delta_bs" in reps[0]):
+        return None
+    sim = float(np.mean([r["delta_bs"] for r in reps]))
+    pm = met["primary"]
+    defined = pm["decision"] != "undefined-denominator"
+    return {"sim": sim, "upper": pm["ci95_delta"][1] / sim,
+            "margin": pm["margin_delta_bs"] / sim if defined else None,
+            "margin_dbs": pm["margin_delta_bs"] if defined else None}
 
 
 def _fig4_source(v37: dict, v39: dict | None, classes: list[str]) -> None:
@@ -1396,65 +1421,79 @@ def fig_names(v37: dict, v39: dict | None) -> None:
 
 
 def si_yardsticks(v: dict) -> str:
-    """補足表: 物差し 5 通り × bootstrap 2 通りの固定マージン TOST（事後、v36）。崩れた組も全て載せる。"""
+    """補足表: 物差し 5 通り × bootstrap 2 通りの固定マージン TOST（事後、v36）。崩れた組も全て載せる。
+
+    行が多く横置きの 1 頁に収まらないので、確証の比較（H2・H4）と、地域内で中心化した比較（M3d）の 2 枚に分ける。
+    """
     sp = v["splits"]
     names = {"Y0": "pre-specified", "Y1": "lower 95\\% bound", "Y2": "recalibrated",
              "Y3": "from a constant", "Y4": "stacked"}
     ys = list(names)
     head = "Split, comparison & Bootstrap & " + " & ".join(f"{k}: {n}" for k, n in names.items())
-    spec = [("primary", "primary", "Location groups, H2"),
-            ("primary_actgrp", "primary", "Flood events grouped, H2$^{e}$"),
-            ("country", "primary", "Countries, H2"),
-            ("temporal", "primary", "Time, H2$^{u}$"),
-            ("llmcut", "primary", "LM cut-off, H2"),
-            ("llmcut", "H4", "LM cut-off, H4"),
-            ("llmcut", "H4_total", "LM cut-off, H4 total$^{s}$"),
-            ("primary_dm", "demeaned", "Location groups, demeaned$^{d}$"),
-            ("primary_dm_actgrp", "demeaned", "Flood events grouped, demeaned$^{d,e}$"),
-            ("country_dm", "demeaned", "Countries, demeaned$^{d}$"),
-            ("temporal_dm", "demeaned", "Time, demeaned$^{d,u}$"),
-            ("llmcut_dm", "demeaned", "LM cut-off, demeaned$^{d}$")]
-    rows = []
-    for key, comp, lab in spec:
-        r = sp.get(key)
-        if not r or comp not in r["cluster"]:
-            continue
-        for kind, kname in (("cluster", "cluster"), ("two_way", "two-way")):
-            row = r[kind].get(comp)
-            ysv = r[kind]["yardsticks"]
-            cells = []
-            for y in ys:
-                e = (row or {}).get(y)
-                if e is None or y not in ysv:
-                    cells.append("---")
-                elif not e["ci90_R"]:
-                    cells.append("undefined")
-                else:
-                    mark = "" if e["equivalent"] else "$^{\\dagger}$"
-                    cells.append(f"{_ci(e['ci90_R'])}{mark}")
-            rows.append(f"{lab if kind == 'cluster' else ''} & {kname} & " + " & ".join(cells) + " \\\\")
-        for kind, kname in (("cluster", "cluster"), ("two_way", "two-way")):  # Y1 は bootstrap ごとに違う
-            yv = r[kind]["yardsticks"]
-            rows.append(f"\\quad yardstick $\\Delta$BS & {kname} & " + " & ".join(
-                sci(yv[y], 2) if y in yv else "---" for y in ys) + " \\\\")
-    return _table("p{3.3cm}l" + "c" * len(ys), head, rows,
-                  "Equivalence of the within-area increment under alternative yardsticks (post hoc, amendment "
-                  "B-2). Each cell is the 90\\% interval of $\\Delta\\mathrm{BS}$ divided by the yardstick; "
-                  "equivalence holds when it lies within $\\pm0.05$ ($^{\\dagger}$: does not hold). Y0: the "
-                  "pre-specified $\\widehat{\\Delta\\mathrm{BS}}(\\mathrm{M0}\\to\\mathrm{M1})$; Y1: the lower end "
-                  "of its 95\\% interval under the same bootstrap; Y2: $\\widehat{\\Delta\\mathrm{BS}}(\\mathrm{M0s}"
-                  "\\to\\mathrm{M1s})$, both base models recalibrated; Y3: $\\widehat{\\Delta\\mathrm{BS}}$ from a "
-                  "constant prediction (the training-side flood rate; for the single-fold time splits the "
-                  "evaluation-side rate, which favours the constant) to M1s; Y4: $\\widehat{\\Delta\\mathrm{BS}}"
-                  "(\\mathrm{M0c}\\to\\mathrm{M1c})$. Cluster: location groups (countries for the country hold-out), "
-                  "4,000 replicates; two-way: activations $\\times$ countries (each AOI counted in the country of "
-                  "most of its nearest settlements), 4,000 replicates. Undefined: the yardstick is not positive. "
-                  "$^{u}$The pre-specified rule leaves $R$ undefined on this split because the 95\\% interval of the "
-                  "terrain increment includes zero. $^{e}$All areas of each flood event on the same side of every "
-                  "split. $^{s}$Secondary comparison (total increment of the language-model reading over M1s). "
-                  "$^{d}$Name features centred within each AOI (M1s$\\to$M3d), without the regional composition. "
-                  "The pre-specified two-way bootstrap of the ratio is in Supplementary Table~\\ref{tab:si-registered}.",
-                  "tab:si-yardsticks")
+    spec_a = [("primary", "primary", "Location groups, H2"),
+              ("primary_actgrp", "primary", "Flood events grouped, H2$^{e}$"),
+              ("country", "primary", "Countries, H2"),
+              ("temporal", "primary", "Time, H2$^{u}$"),
+              ("llmcut", "primary", "LM cut-off, H2"),
+              ("llmcut", "H4", "LM cut-off, H4"),
+              ("llmcut", "H4_total", "LM cut-off, H4 total$^{s}$")]
+    spec_b = [("primary_dm", "demeaned", "Location groups, demeaned"),
+              ("primary_dm_actgrp", "demeaned", "Flood events grouped, demeaned$^{e}$"),
+              ("country_dm", "demeaned", "Countries, demeaned"),
+              ("temporal_dm", "demeaned", "Time, demeaned$^{u}$"),
+              ("llmcut_dm", "demeaned", "LM cut-off, demeaned")]
+
+    def rows_for(spec: list[tuple[str, str, str]]) -> list[str]:
+        rows = []
+        for key, comp, lab in spec:
+            r = sp.get(key)
+            if not r or comp not in r["cluster"]:
+                continue
+            for kind, kname in (("cluster", "cluster"), ("two_way", "two-way")):
+                row = r[kind].get(comp)
+                ysv = r[kind]["yardsticks"]
+                cells = []
+                for y in ys:
+                    e = (row or {}).get(y)
+                    if e is None or y not in ysv:
+                        cells.append("---")
+                    elif not e["ci90_R"]:
+                        cells.append("undefined")
+                    else:
+                        mark = "" if e["equivalent"] else "$^{\\dagger}$"
+                        cells.append(f"{_ci(e['ci90_R'])}{mark}")
+                rows.append(f"{lab if kind == 'cluster' else ''} & {kname} & " + " & ".join(cells) + " \\\\")
+            for kind, kname in (("cluster", "cluster"), ("two_way", "two-way")):  # Y1 は bootstrap ごとに違う
+                yv = r[kind]["yardsticks"]
+                rows.append(f"\\quad yardstick $\\Delta$BS & {kname} & " + " & ".join(
+                    sci(yv[y], 2) if y in yv else "---" for y in ys) + " \\\\")
+        return rows
+
+    defs = ("Each cell is the 90\\% interval of $\\Delta\\mathrm{BS}$ divided by the yardstick; "
+            "equivalence holds when it lies within $\\pm0.05$ ($^{\\dagger}$: does not hold). Y0: the "
+            "pre-specified $\\widehat{\\Delta\\mathrm{BS}}(\\mathrm{M0}\\to\\mathrm{M1})$; Y1: the lower end "
+            "of its 95\\% interval under the same bootstrap; Y2: $\\widehat{\\Delta\\mathrm{BS}}(\\mathrm{M0s}"
+            "\\to\\mathrm{M1s})$, both base models recalibrated; Y3: $\\widehat{\\Delta\\mathrm{BS}}$ from a "
+            "constant prediction (the training-side flood rate; for the single-fold time splits the "
+            "evaluation-side rate, which favours the constant) to M1s; Y4: $\\widehat{\\Delta\\mathrm{BS}}"
+            "(\\mathrm{M0c}\\to\\mathrm{M1c})$. Cluster: location groups (countries for the country hold-out), "
+            "4,000 replicates; two-way: activations $\\times$ countries (each AOI counted in the country of "
+            "most of its nearest settlements), 4,000 replicates. Undefined: the yardstick is not positive. "
+            "$^{u}$The pre-specified rule leaves $R$ undefined on this split because the 95\\% interval of the "
+            "terrain increment includes zero. $^{e}$All areas of each flood event on the same side of every split.")
+    a = _table("p{3.3cm}l" + "c" * len(ys), head, rows_for(spec_a),
+               "Equivalence of the within-area increment under alternative yardsticks (post hoc, amendment "
+               "B-2): the pre-specified comparisons. " + defs + " $^{s}$Secondary comparison (total increment of "
+               "the language-model reading over M1s). The pre-specified two-way bootstrap of the ratio is in "
+               "Supplementary Table~\\ref{tab:si-registered}; the comparison with name features centred within "
+               "each AOI is in Supplementary Table~\\ref{tab:si-yardsticks-b}.",
+               "tab:si-yardsticks", landscape=True)
+    b = _table("p{3.3cm}l" + "c" * len(ys), head, rows_for(spec_b),
+               "As Supplementary Table~\\ref{tab:si-yardsticks}, for the name features centred within each AOI "
+               "and added to the recalibrated terrain model (M1s$\\to$M3d), without the regional composition "
+               "(post hoc, amendment B-2). " + defs,
+               "tab:si-yardsticks-b", landscape=True)
+    return a + "\n" + b
 
 
 def si_registered(v: dict) -> str:
@@ -1648,7 +1687,7 @@ def si_class(primary: dict | None, v: dict) -> str:
 
 
 def si_positive_control(v: dict) -> str:
-    """補足表: 正の対照（ラベル非依存、v37）。セル単位は B-2 で登録、集落の点は登録外。"""
+    """補足表: 正の対照（ラベル非依存、v37）。全セルの水系側の群と高地は B-2 で登録、区分の分割と集落の点は登録外。"""
     pc = v["positive_control"]
 
     def num(v: float, nd: int) -> str:
@@ -1683,7 +1722,9 @@ def si_positive_control(v: dict) -> str:
                       f"{f(r.get('low_half'))} & {(r.get('low_hand') or {}).get('n_aoi', '---')} \\\\")
         rows_b.append(f"{CLASS_LABELS[c]} & {slab} & {f(r.get('log_river'), 1.0, 2)} & "
                       f"{f(r.get('hand_mean'), 1.0, 1)} & {f(r.get('hand_pct'))} \\\\")
-    notes = ("The all-cell rows are the analysis registered in amendment B-2. $^{a}$Not registered: cells within "
+    notes = ("The all-cell rows for water-side names as a group and for highland names are the analysis registered "
+             "in amendment B-2; the other all-cell rows (the split by class) were computed with it and are not "
+             "registered. $^{a}$Not registered: cells within "
              "177\\,m of the settlement point (the one to four cells around it), averaged per settlement "
              f"({_n(pc['n_settlement_points'])} settlements; AOIs need at least two settlements of each kind). "
              "$^{b}$Excluding settlements whose GeoNames coordinates fall on whole arc-minutes (rounding of up "
@@ -1705,6 +1746,37 @@ def si_positive_control(v: dict) -> str:
                "in the cell's mean height above nearest drainage and in its HAND percentile within the AOI. " + notes,
                "tab:si-positive-control-b")
     return a + "\n" + b
+
+
+def si_band_contrast(v: dict) -> str:
+    """補足表: 距離帯ごとの浸水の対比（v37）。対比そのものは登録外、重み 2 通りと AOI・場所の数での報告は B-2 追記 2。"""
+    fc = v["flood_contrast"]["by_band"]
+    labels = {"le250m": "$\\leq250$\\,m", "250_500m": "250--500\\,m", "500m_1km": "0.5--1\\,km",
+              "gt1km": "$>1$\\,km"}
+
+    def c(r: dict | None) -> str:
+        return "---" if not r else f"{_pp(r['estimate'])} [{_pp(r['ci95'][0])}, {_pp(r['ci95'][1])}]"
+
+    rows = []
+    for b, lab in labels.items():
+        cap, unc = fc["capped"].get(b) or {}, fc["uncapped"].get(b) or {}
+        n = cap.get("y") or {}
+        rows.append(f"{lab} & {n.get('n_aoi', '---')} & {n.get('n_units', '---')} & {c(cap.get('y'))} & "
+                    f"{c(cap.get('resid_M1c'))} & {c(unc.get('y'))} & {c(unc.get('resid_M1c'))} \\\\")
+    head = ("Distance to the nearest settlement & AOIs & Places & \\multicolumn{2}{c}{Weights: smaller group} & "
+            "\\multicolumn{2}{c}{Weights: uncapped AOI size} \\\\\n"
+            " & & & observed & net of terrain & observed & net of terrain")
+    return _table("lrrcccc", head, rows,
+                  "Within-AOI flood contrasts by distance from the cell to its nearest settlement (not registered; "
+                  "added while the registered analyses were written, with their full reporting registered in "
+                  "amendment B-2, addendum 2): the share of cells labelled flooded nearest a water-side name minus "
+                  "the share nearest other names, in percentage points, observed and net of the held-out "
+                  "predictions of the terrain model with the regional composition of names (M1c), with 95\\% "
+                  "cluster-bootstrap intervals over location groups. AOIs enter a band when both groups have at "
+                  "least 20 cells in it; they are averaged with weights equal to the size of the smaller group, or "
+                  "scaled to the uncapped number of evaluable cells of each AOI, which lets a few large AOIs "
+                  "dominate.",
+                  "tab:si-band-contrast")
 
 
 def si_odds(v: dict) -> str:
@@ -1754,7 +1826,7 @@ def si_odds(v: dict) -> str:
                   "flood label 0.5--1\\,km and more than 1\\,km from the nearest settlement relative to within "
                   "500\\,m. Built-up and tree cover removed: cells with ESA CCI built-up cover above 10\\% or tree "
                   "cover above 50\\% excluded." + check,
-                  "tab:si-odds")
+                  "tab:si-odds", landscape=True)
 
 
 def si_composition(v: dict) -> str:
@@ -1773,6 +1845,25 @@ def si_composition(v: dict) -> str:
             c = comp.get(ck)
             cells.append("---" if not c else f"{_r(c['relative_to_Y0'])} {_ci([x / y0 for x in c['ci95_delta']])}")
         rows.append(f"{lab} & " + " & ".join(cells) + " \\\\")
+    r = sp.get("llmcut")
+    if r:  # B-2 追記 2 の 3: 言語モデルの読みの地域構成を全ての物差しで（クラスタと二方向）
+        rows += ["\\midrule",
+                 "\\multicolumn{6}{l}{\\emph{Composition of the language-model readings (M1s$\\to$M1rc, LM "
+                 "cut-off), by yardstick}} \\\\",
+                 " & Y0 & Y1 & Y2 & Y3 & Y4 \\\\"]
+        for kind, kname in (("cluster", "cluster"), ("two_way", "two-way")):
+            c = r[kind]["composition"].get("M1s->M1rc")
+            yv = r[kind]["yardsticks"]
+            cells = []
+            for y in ("Y0", "Y1", "Y2", "Y3", "Y4"):
+                yy = yv.get(y)
+                if not c or yy is None:
+                    cells.append("---")
+                elif yy <= 0:
+                    cells.append("undefined")
+                else:
+                    cells.append(f"{_r(c['delta_bs'] / yy)} {_ci([x / yy for x in c['ci95_delta']])}")
+            rows.append(f"\\quad {kname} & " + " & ".join(cells) + " \\\\")
     return _table("lccccc", "Split & M0$\\to$M0c & M0s$\\to$M0c & T0s$\\to$T0c & M1s$\\to$M1c & "
                   "M1s$\\to$M1rc (LM)", rows,
                   "Increment from the regional composition of names (AOI means of the name features; for the "
@@ -1783,7 +1874,11 @@ def si_composition(v: dict) -> str:
                   "(post hoc, amendment B-2), so M0s$\\to$M0c and T0s$\\to$T0c isolate the composition. "
                   "$^{e}$All areas of each flood event on the same side of every split (no T0 arm in this run). "
                   "$^{u}$The pre-specified rule leaves the terrain increment undefined on this split (its 95\\% "
-                  "interval includes zero), so these fractions are only indicative.", "tab:si-composition")
+                  "interval includes zero), so these fractions are only indicative. The lower block gives the "
+                  "composition of the language-model readings against each yardstick of Supplementary "
+                  "Table~\\ref{tab:si-yardsticks} (amendment B-2, addendum 2): point estimate and 95\\% interval "
+                  "under the bootstrap over places and under the two-way bootstrap over activations and countries; "
+                  "undefined where the yardstick is not positive.", "tab:si-composition")
 
 
 def real_margin_rate(runs: Path, k: str, split: str) -> tuple[int, int, int] | None:
@@ -1812,7 +1907,7 @@ def si_power_splits(runs: Path) -> str:
         nul = _json(runs / f"power_v3{k}_null" / "power_summary.json")
         ses = _json(runs / f"power_v3{k}_sesoi" / "power_summary.json")
         if not nul or not ses:
-            rows.append(f"{lab} & \\missing{{pending}} & & & & & & \\\\")
+            rows.append(f"{lab} & \\missing{{pending}} & & & & & & & & \\\\")
             continue
 
         def rate(x: float, n: int) -> str:
@@ -1821,13 +1916,18 @@ def si_power_splits(runs: Path) -> str:
 
         rm = real_margin_rate(runs, k, split)
         real = rate(rm[0] / rm[1], rm[1]) if rm else "---"
+        if rm and rm[2]:  # 合成の物差しが負の回（R の区間が裏返る）を数えた注
+            real += f"$^{{n}}$"
+        sr = split_ratios(runs, k, split)
+        ratios = ("---" if not sr or sr["margin"] is None else f"{sr['margin']:.1f}",
+                  "---" if not sr else f"{sr['upper']:.2f}")
         for d, s, first in (("0", nul, True), ("1.2", ses, False)):
             labels = ", ".join(f"{kk} {vv}" for kk, vv in sorted(s["decision_counts"].items()))
-            tail = " & ---" if first else f" & {real}"
+            tail = " & --- & --- & ---" if first else f" & {real} & {ratios[0]} & {ratios[1]}"
             rows.append(f"{lab if first else ''} & {d} & {s['n_reps']} & {rate(s['rate_equivalent_TOST'], s['n_reps'])} & "
                         f"{rate(s['rate_positive'], s['n_reps'])} & {_r(s['mean_R'])} & {labels}{tail} \\\\")
-    return _table("p{3.6cm}cccccp{4.6cm}c", "Split & $\\delta$ & Replicates & Equivalent (\\%) & Positive (\\%) & "
-                  "Mean $R$ & Labels & Equivalent against the real margin (\\%)", rows,
+    return _table("p{3.4cm}cccccp{4.6cm}ccc", "Split & $\\delta$ & Replicates & Equivalent (\\%) & Positive (\\%) & "
+                  "Mean $R$ & Labels & Equivalent, real margin (\\%) & Margin ratio & Upper ratio", rows,
                   "Operating characteristics of the decision rule on synthetic labels for each split (the "
                   "primary split before the freeze; the others post hoc, amendment B-2), with 95\\% Wilson "
                   "intervals for the Monte-Carlo error. The simulated effect is $\\delta$ times the indicator that "
@@ -1838,10 +1938,15 @@ def si_power_splits(runs: Path) -> str:
                   "$\\delta=1.2$, the share of replicates whose 90\\% interval of $\\Delta$BS lies within the "
                   "equivalence margin of the real labels on the same split (post hoc, amendment B-2): how often an "
                   "effect of this size would have been called equivalent in our data (---: margin undefined on the "
-                  "time split). $^{a}$The effect is injected through the lexicon, so this row is the "
-                  "lexicon test on the language-model split; there is no power analysis for the language-model "
-                  "reading (H4).",
-                  "tab:si-power-splits")
+                  "time split). Margin ratio and upper ratio (amendment B-2, addendum 3): the real-label "
+                  "equivalence margin and the upper end of the observed 95\\% interval of $\\Delta$BS on the same "
+                  "split, each divided by the mean $\\Delta$BS that $\\delta=1.2$ produced there; these ratios "
+                  "ignore that intervals widen under the alternative, so the column before them is the better guide. "
+                  "$^{n}$Includes replicates whose simulated terrain increment was negative (the interval of $R$ is "
+                  "then reversed; Supplementary Note~10). $^{a}$The effect is injected through the lexicon, so this "
+                  "row is the lexicon test on the language-model split; there is no power analysis for the "
+                  "language-model reading (H4).",
+                  "tab:si-power-splits", landscape=True)
 
 
 def _wilson(p: float, n: int) -> list[float]:
@@ -2183,6 +2288,7 @@ def write_si_tables(primary: dict | None, extra: dict[str, dict], post: dict[str
               "class": lambda: si_class(primary, v37) if v37 else "\\missing{v37}",
               "positive_control": lambda: si_positive_control(v37) if v37 else "\\missing{v37}",
               "odds": lambda: si_odds(v39) if v39 else "\\missing{v39}",
+              "band_contrast": lambda: si_band_contrast(v37) if v37 else "\\missing{v37}",
               "composition": lambda: si_composition(v36) if v36 else "\\missing{v36}",
               "power_splits": lambda: si_power_splits(DATA / "runs"),
               "registered": lambda: si_registered(v36) if v36 else "\\missing{v36}",
