@@ -18,7 +18,14 @@ from topsem.world.channels import (
     placebo_lookups,
     placebo_perms,
 )
-from topsem.world.dataset import AoiInfo, assign_folds, group_quotas, include, location_groups
+from topsem.world.dataset import (
+    AoiInfo,
+    assign_folds,
+    group_quotas,
+    include,
+    location_groups,
+    merge_by_activation,
+)
 from topsem.world.nread import NREAD_CATEGORIES, parse, prompt_sha256, user_prompt
 
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
@@ -172,6 +179,34 @@ def test_folds_for_uses_the_given_group_buffer() -> None:
     ev.folds_for("primary", df, infos, {"IT": "EU"}, buffer_km=5.0)
     u = df.groupby("aoi")["unit"].first()
     assert len({u["A"], u["B"], u["C"]}) == 3
+
+
+def test_assign_folds_seed_keeps_balance_and_changes_partition() -> None:
+    units = {f"g{k:02d}": f"g{k:02d}" for k in range(23)}
+    sort = {u: (u,) for u in units}
+    base = assign_folds(units, sort)
+    a = assign_folds(units, sort, seed=1)
+    b = assign_folds(units, sort, seed=1)
+    assert a == b  # 固定シードで決定的
+    assert a != base  # 分け方は変わる
+    for start in range(0, 23, 10):  # 各区画（大きさの帯）から各 fold へ高々 1 つ
+        block = [f"g{k:02d}" for k in range(start, min(start + 10, 23))]
+        assert len({a[u] for u in block}) == len(block)
+
+
+def test_merge_by_activation_joins_groups_of_the_same_event() -> None:
+    grp = {"E1_A": 0, "E1_B": 3, "E2_A": 1, "E3_A": 2, "E3_B": 2}
+    act = {"E1_A": "E1", "E1_B": "E1", "E2_A": "E2", "E3_A": "E3", "E3_B": "E3"}
+    m = merge_by_activation(grp, act)
+    assert m["E1_A"] == m["E1_B"]  # 同じ洪水の別の場所は同じグループに
+    assert len({m["E1_A"], m["E2_A"], m["E3_A"]}) == 3
+    assert m["E3_A"] == m["E3_B"]
+
+
+def test_recalibration_only_stacks_exist() -> None:
+    ev = _load("world_eval")
+    assert ev.STACK["M0s"] == ("M0", [])
+    assert ev.STACK["T0s"] == ("T0", [])
 
 
 def test_country_units_keep_cross_border_places_together() -> None:
@@ -363,6 +398,38 @@ def test_composition_is_aoi_mean_of_name_features() -> None:
     assert tr["c_nlearn"].tolist() == [0.5, 0.5, 0.5, 0.5]
     assert te["c_lex_water_n1"].tolist() == [1.0, 1.0]
     assert set(ev.COMP) <= set(tr.columns)
+
+
+def test_demeaned_name_features_have_zero_aoi_mean_and_no_composition() -> None:
+    ev = _load("world_eval")
+    feats = {f: [0.0, 1.0, 3.0, 1.0] for f in (*ev.NAMES, *ev.NAMES_P)}
+    tr = pd.DataFrame({"aoi": ["A", "A", "B", "B"], **feats, "y": [1, 0, 0, 0]})
+    te = pd.DataFrame({"aoi": ["C", "C"], **{f: [2.0, 2.0] for f in (*ev.NAMES, *ev.NAMES_P)}})
+    ev.add_composition(tr, te)
+    assert tr["d_nlearn"].tolist() == [-0.5, 0.5, 1.0, -1.0]
+    assert te["d_lex_water_n1"].tolist() == [0.0, 0.0]  # AOI 内で一定なら情報は残らない
+    assert set(ev.DEMEANED) | set(ev.DEMEANED_P) <= set(tr.columns)
+    assert ev.STACK["M3d"] == ("M1", ev.DEMEANED)
+    assert not set(ev.STACK["M3d"][1]) & set(ev.COMP)
+
+
+def test_local_synthetic_effect_only_near_settlements() -> None:
+    ev = _load("world_eval")
+    rng = np.random.default_rng(0)
+    n = 4000
+    df = pd.DataFrame({"aoi": np.repeat(["A", "B"], n // 2), "y": rng.integers(0, 2, n),
+                       "hand_min": rng.random(n), "slope_mean": rng.random(n),
+                       "ldr_all": rng.random(n), "cci_crop": rng.random(n),
+                       "lon": rng.random(n), "lat": rng.random(n),
+                       "lex_wetside_n1": rng.integers(0, 2, n).astype(float),
+                       "P_d1": np.where(np.arange(n) % 2 == 0, 100.0, 5000.0)})
+    base = ev.synth_labels(df, 0.0, 0)
+    near = ev.synth_labels(df, 3.0, 0, local_m=500.0)
+    far = df["P_d1"].to_numpy() > 500
+    wet = df["lex_wetside_n1"].to_numpy() > 0
+    # 近い水系側のセルだけが浸水しやすくなり、遠いセルでは名前による差が出ない
+    assert near[~far & wet].mean() > base[~far & wet].mean() + 0.05
+    assert abs(near[far & wet].mean() - near[far & ~wet].mean()) < 0.1
 
 
 def test_all_types_labels_and_inclusion() -> None:

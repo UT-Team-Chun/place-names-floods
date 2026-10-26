@@ -1,7 +1,7 @@
 # place-names-floods
 
 Analysis code, frozen protocol and lexicon for the study
-**"Do place names remember floods? A pre-specified global test against satellite-observed inundation"**
+**"Do place names help predict where floods go? A pre-specified global test against satellite-observed inundation"**
 (R. Okauchi and P.-J. Chun, The University of Tokyo).
 
 The study tests whether settlement names improve the prediction of satellite-observed river flooding
@@ -16,11 +16,11 @@ never seen. The protocol was frozen before any model was fitted to the observed 
 |---|---|
 | `docs/protocol/preregistration_v2.md` | Frozen analysis protocol (hypotheses, estimand, splits, decision rules, smallest effect size of interest, sensitivity analyses, power analysis); in Japanese |
 | `docs/protocol/v2/lexicon_hydro_v1.yaml` | Frozen multilingual lexicon of water, wetland, riverine, crossing, lowland and highland morphemes |
-| `docs/protocol/amendments/B-1_*.md` | The single post-freeze amendment (correction of an implementation defect in one sensitivity analysis) |
+| `docs/protocol/amendments/B-1_*.md`, `B-2_*.md` | Post-freeze amendments: correction of an implementation defect in one sensitivity analysis (B-1); post hoc analyses registered before they were run (B-2) |
 | `docs/research/2026-10-26_v2_interpretation_plan.md` | Interpretation plan written after the freeze and before any confirmatory result |
 | `docs/data/` | Copernicus EMS product inventory (frozen snapshot) and the point-in-time register of all inputs |
-| `backend/packages/topsem/` | Analysis package (`topsem.world`: EMS parsing, rasterisation, terrain, hydrology, land cover, names, lexicon and language-model channels) and scripts (`scripts/world_*.py`, `nread_*.py`, `sim_power_v3.py`) with unit tests |
-| `backend/verification/r_okauchi/v31`–`v35` | One-off verification scripts (label identity, cell cap choice, freeze record, channel agreement, exploratory name-class contrast) |
+| `backend/packages/topsem/` | Analysis package (`topsem.world`: EMS parsing, rasterisation, terrain, hydrology, land cover, names, lexicon and language-model channels) and scripts (`scripts/world_*.py`, `nread_*.py`) with unit tests |
+| `backend/verification/r_okauchi/v31`–`v40` | One-off verification scripts: label identity, cell cap choice, freeze record, channel agreement, exploratory name-class contrast (v31–v35); post hoc analyses of amendment B-2 — yardsticks and inference (v36), positive control, distance bands and effect-size translation (v37), mapping sensors (v38), within-area odds ratios (v39), boosting iterations (v40) |
 | `docs/verification/` | Their outputs |
 | `docs/paper/paper_2_global/figures/` | `make_figures.py`, which generates every number, table and figure of the paper from the run artefacts, and its outputs |
 | `docs/paper/paper_2_global/submission/` | Manifest (with sha256) of the derived data archived on Zenodo |
@@ -47,11 +47,14 @@ Inputs are public (see Data availability in the paper). The pipeline stages are 
    (ESA CCI / C3S, year before each event), rivers (HydroRIVERS), place names (GeoNames)
 3. `world_incidence.py` — label-only incidence table and inclusion (the only label use before the freeze)
 4. `nread_names.py`, `nread_infer.py` — language-model reading of names (Gemma-4-31B-it, pinned revision, vLLM)
-5. `sim_power_v3.py` — power analysis on synthetic labels
+5. `world_eval.py --synthetic {null,sesoi} --delta <δ> --reps a:b` — power analysis on synthetic labels
+   (aggregated by `world_aggregate.py --tag <run> --power`)
 6. `world_eval.py --tag <run> --split {primary,country,temporal,llmcut} --fold <k>` — one held-out fold per
    call (10 folds; one for the time and language-model splits); sensitivity options are command-line flags
 7. `world_aggregate.py --tag <run> --split <split>` — cluster bootstrap, decision table, diagnostics
-8. `docs/paper/paper_2_global/figures/make_figures.py` — all numbers, tables and figures
+8. `backend/verification/r_okauchi/v36`–`v40` — post hoc analyses (amendment B-2); `world_eval.py` options
+   `--group-by-activation` and `--fold-seed` and the recalibration-only arms `M0s`, `T0s` serve them
+9. `docs/paper/paper_2_global/figures/make_figures.py` — all numbers, tables and figures
 
 The derived data (cell tables, name readings, held-out predictions and run summaries) are archived on
 Zenodo; `docs/paper/paper_2_global/submission/zenodo_data_manifest.json` lists every file with its sha256.

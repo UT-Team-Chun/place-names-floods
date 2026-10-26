@@ -380,6 +380,8 @@ def power(run_dir: Path) -> dict:
         v, pl = verdict(delta, "M1c", "M3n", "M3np", d01=d01, b01=b01)
         vt, _ = verdict(delta, "M1s", "M3s", "M3ps", d01=d01, b01=b01)
         res.append({"rep": p.stem, "R": v["R"], "ci95": v["ci95_R"], "ci90": v["ci90_R"],
+                    # 回ごとの名前の増分と物差し（効果量の翻訳に使う。予測ファイルを運ばずに済むように）
+                    "delta_bs": v["delta_bs_M1c_M3n"], "delta_bs_M0_M1": d01,
                     "decision": v["decision"], "equivalent": v["equivalent_TOST"],
                     "ci90_halfwidth": (v["ci90_R"][1] - v["ci90_R"][0]) / 2,
                     "R_minus_Rp": pl["R_minus_Rp"], "ci95_R_minus_Rp": pl["ci95_R_minus_Rp"],

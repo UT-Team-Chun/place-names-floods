@@ -60,6 +60,7 @@ from topsem.world.dataset import (
     include,
     load_aoi_table,
     location_groups,
+    merge_by_activation,
 )
 from topsem.world.lexicon import CATEGORIES, Lexicon
 
@@ -111,6 +112,10 @@ NREAD_ARMS = ("M3r", "M3rp")  # --nread を与えたときだけ計算（H4）
 # 地域ごとの浸水率を拾う）で、置換 placebo でも同じだけ出ると分かった。主比較は名前の地域構成
 # （AOI 平均、c_*）を基準側にも入れ、名前が場所ごとに持つ情報（主張の中身）を測る。
 COMP = [f"c_{f}" for f in NAMES]
+# 事後（B-2 追記 2）: 名前の特徴を AOI 内で中心化したもの（特徴 − AOI 平均）。AOI 平均を含まないので、地域構成の
+# 係数（AOI ごとの浸水率を拾い得る）に依らずに場所内の増分を測る（基準は再較正だけの M1s）
+DEMEANED = [f"d_{f}" for f in NAMES]
+DEMEANED_P = [f"d_{f}" for f in NAMES_P]
 COMP_NR = [f"c_{f}" for f in NREAD_FEATURES]
 STACK: dict[str, tuple[str, list[str]]] = {
     # 主: 場所内の増分（基準 = 基礎予測 + 名前の地域構成）
@@ -125,6 +130,10 @@ STACK: dict[str, tuple[str, list[str]]] = {
     "M3rnp": ("M1", [*COMP_NR, *NREAD_P]),
     # 副: 地域構成込みの全体の増分（基準 = 基礎予測の再較正だけ）
     "M1s": ("M1", []), "M3s": ("M1", NAMES), "M3ps": ("M1", NAMES_P),
+    # 事後（査読対応）: 位置だけ・標高なしの再較正だけの基準。地域構成の効果を、柔軟モデルではなく
+    # 再較正した基礎予測と比べるため（M0 → M0c には再較正の改善が混ざる）
+    "M0s": ("M0", []), "T0s": ("T0", []),
+    "M3d": ("M1", DEMEANED), "M3dp": ("M1", DEMEANED_P),
     "M3rs": ("M1", NREAD_FEATURES), "M3rps": ("M1", NREAD_P),
 }
 NREAD_STACK = ("M1rc", "M3rn", "M3rnp", "M3rs", "M3rps")
@@ -173,8 +182,8 @@ class Sensitivity:
     aoi_cap: int = 0  # §7-2 AOI あたり上限（> 0 ならグループ上限の代わり）
     name_class: str = "P"  # §7-3 名前チャネルの地名クラス（P / PLTS）
     exclude_no_footprint: bool = False  # §7-4
-    buffer_km: float = GROUP_BUFFER_KM  # §7-7
-    min_event_year: int = 0  # §7-8
+    buffer_km: float = GROUP_BUFFER_KM  # §7-6（以前の注記は §7-7 と誤記）
+    min_event_year: int = 0  # §7-7（以前の注記は §7-8 と誤記）
 
 
 def quotas_for(dirs: list[Path], infos: dict, sens: Sensitivity) -> dict[str, int]:
@@ -252,8 +261,9 @@ def country_units(aois: list[str], grp: dict[str, int], aoi_cc: dict[str, str],
     return {a: votes[grp[a]].most_common(1)[0][0] for a in aois}
 
 
-def folds_for(split: str, df: pd.DataFrame, infos: dict, cont: dict[str, str],
-              buffer_km: float = GROUP_BUFFER_KM) -> pd.Series:
+def folds_for(split: str, df: pd.DataFrame, infos: dict, cont: dict[str, str],  # noqa: PLR0913
+              buffer_km: float = GROUP_BUFFER_KM, *, group_by_activation: bool = False,
+              fold_seed: int | None = None) -> pd.Series:
     """AOI → fold（§5）。fold −1 はどちらの側にも使わない（時間外し系の同一場所）。
 
     buffer_km は場所グループの緩衝幅（§7-6 の感度では 10 km）。引数で明示的に渡す: 以前は
@@ -265,6 +275,8 @@ def folds_for(split: str, df: pd.DataFrame, infos: dict, cont: dict[str, str],
     aoi_cc = df.groupby("aoi")["cc"].agg(lambda s: Counter(s[s != ""]).most_common(1)[0][0]
                                          if (s != "").any() else "??").to_dict()
     grp = location_groups({a: infos[a].bounds for a in aois}, buffer_km)
+    if group_by_activation:  # 事後の感度: 同じ洪水イベントを分割の片側にまとめる
+        grp = merge_by_activation(grp, {a: infos[a].activation for a in aois})
     if split == "country":
         unit = country_units(aois, grp, aoi_cc, n_cells)
     else:
@@ -278,7 +290,7 @@ def folds_for(split: str, df: pd.DataFrame, infos: dict, cont: dict[str, str],
         size[unit[a]] += n_cells[a]
         ucont.setdefault(unit[a], Counter())[cont.get(aoi_cc[a], "??")] += n_cells[a]
     sort = {u: (ucont[u].most_common(1)[0][0], -size[u], u) for u in size}
-    f = assign_folds(unit, sort)
+    f = assign_folds(unit, sort, seed=fold_seed)
     df["unit"] = df["aoi"].map(unit)
     return df["aoi"].map(f)
 
@@ -328,12 +340,21 @@ def stage2(z_tr: np.ndarray, z_te: np.ndarray, x_tr: np.ndarray, x_te: np.ndarra
 
 
 def add_composition(tr: pd.DataFrame, te: pd.DataFrame) -> None:
-    """名前の地域構成: 名前特徴（N-learn 得点を含む）の AOI 平均 c_*（ラベルは使わない）。"""
+    """名前の地域構成: 名前特徴（N-learn 得点を含む）の AOI 平均 c_*（ラベルは使わない）。
+
+    あわせて名前特徴（と placebo）の AOI 内で中心化した d_* を作る（事後、B-2 追記 2）。
+    """
     feats = [f for f in (*NAMES, *NREAD_FEATURES) if f in tr.columns]
     for frame in (tr, te):
         means = frame.groupby("aoi")[feats].transform("mean")
         for f in feats:
             frame[f"c_{f}"] = means[f].to_numpy(dtype=np.float32)
+    dfeats = [f for f in (*NAMES, *NAMES_P) if f in tr.columns]
+    for frame in (tr, te):
+        means = frame.groupby("aoi")[dfeats].transform("mean")
+        for f in dfeats:
+            frame[f"d_{f}"] = (frame[f].to_numpy(dtype=np.float64)
+                               - means[f].to_numpy(dtype=np.float64)).astype(np.float32)
 
 
 def run_fold(df: pd.DataFrame, fold: int, arms: list[str], seeds: list[int],
@@ -399,8 +420,12 @@ def split_is_temporal(df: pd.DataFrame) -> bool:
     return bool(df.attrs.get("split") in CUTS)
 
 
-def synth_labels(df: pd.DataFrame, delta: float, rep: int) -> np.ndarray:
-    """§8: 実特徴 + AOI 実浸水率で合成ラベル（名前効果 delta は N-lex wetside に載せる）。"""
+def synth_labels(df: pd.DataFrame, delta: float, rep: int, local_m: float | None = None) -> np.ndarray:
+    """§8: 実特徴 + AOI 実浸水率で合成ラベル（名前効果 delta は N-lex wetside に載せる）。
+
+    local_m を与えると、名前の効果を最寄りの集落から local_m 以内のセルだけに入れる（事後、B-2 追記 2:
+    名前の記述が集落の近くに限られる場合に、プールした増分がどれだけ反応するか）。
+    """
     rng = np.random.default_rng([20261025, rep])
 
     def z(x: pd.Series) -> np.ndarray:
@@ -419,6 +444,8 @@ def synth_labels(df: pd.DataFrame, delta: float, rep: int) -> np.ndarray:
         codes, uniq = pd.factorize(keys)
         field[idx] = rng.normal(0, 0.8, len(uniq))[codes]
     nm = df["lex_wetside_n1"].to_numpy(dtype=float)
+    if local_m is not None:
+        nm = nm * (df["P_d1"].to_numpy(dtype=float) <= local_m)
     lin = lin + field + delta * (nm - nm.mean())
     y = np.zeros(len(df), dtype=np.int8)
     for idx in df.groupby("aoi", sort=False).indices.values():
@@ -451,9 +478,15 @@ def main() -> None:  # noqa: PLR0915
                     help="§7-1: 全浸水種別のラベル")
     ap.add_argument("--name-class", default="P", choices=["P", "PLTS"], help="§7-3")
     ap.add_argument("--exclude-no-footprint", action="store_true", help="§7-4")
-    ap.add_argument("--group-buffer-km", type=float, default=GROUP_BUFFER_KM, help="§7-7")
-    ap.add_argument("--min-event-year", type=int, default=0, help="§7-8: これより前の事象を除外")
-    ap.add_argument("--synthetic", default="none", choices=["none", "null", "sesoi"])
+    ap.add_argument("--group-buffer-km", type=float, default=GROUP_BUFFER_KM, help="§7-6")
+    ap.add_argument("--min-event-year", type=int, default=0, help="§7-7: これより前の事象を除外")
+    ap.add_argument("--group-by-activation", action="store_true",
+                    help="事後の感度: 同じ activation の AOI を同じ場所グループに束ねる")
+    ap.add_argument("--fold-seed", type=int, default=None,
+                    help="事後の感度: fold の割当を固定シードで並べ替える（既定は凍結時の割当）")
+    ap.add_argument("--synthetic", default="none", choices=["none", "null", "sesoi", "sesoi_local"])
+    ap.add_argument("--local-m", type=float, default=500.0,
+                    help="sesoi_local: 名前の効果を入れる集落からの距離（m、事後 B-2 追記 2）")
     ap.add_argument("--delta", type=float, default=0.0, help="sesoi 時の名前効果（logit）")
     ap.add_argument("--reps", default="0:1")
     ap.add_argument("--nread", default="", help="N-read 推論結果 parquet（与えると M3r/M3rp も回す）")
@@ -477,14 +510,19 @@ def main() -> None:  # noqa: PLR0915
     df, lexinfo, _ = add_channels(df, gn, nread)
     cont = continent_map(ROOT / "geonames" / "countryInfo.txt")
     df.attrs["split"] = args.split
-    df["fold"] = folds_for(args.split, df, infos, cont, buffer_km=sens.buffer_km).to_numpy()
+    df["fold"] = folds_for(args.split, df, infos, cont, buffer_km=sens.buffer_km,
+                           group_by_activation=args.group_by_activation,
+                           fold_seed=args.fold_seed).to_numpy()
     seeds = [int(s) for s in args.seeds.split(",")]
     print(f"table {len(df):,} cells / {df['aoi'].nunique()} AOIs ({time.time() - t0:.0f}s)",
           flush=True)
 
     folds = [0] if args.split in CUTS else (
         list(range(int(df["fold"].max()) + 1)) if args.fold < 0 else [args.fold])
-    common = {**run.provenance(), "protocol": "preregistration_v2 (DRAFT until frozen)",
+    status = FROZEN_LINE.search(PROTOCOL.read_text(encoding="utf-8")) if PROTOCOL.is_file() else None
+    common = {**run.provenance(),
+              "protocol": f"preregistration_v2: {status.group(0)}" if status else "preregistration_v2 (DRAFT)",
+              "group_by_activation": args.group_by_activation, "fold_seed": args.fold_seed,
               "lexicon": lexinfo, "group_cap": args.group_cap, "seeds": seeds,
               "sensitivity": dataclasses.asdict(sens),
               "aoi_inclusion": reasons, "n_aoi": len(dirs), "split": args.split,
@@ -496,7 +534,8 @@ def main() -> None:  # noqa: PLR0915
         a, b = (int(v) for v in args.reps.split(":"))
         out = []
         for rep in range(a, b):
-            df["y"] = synth_labels(df, args.delta if args.synthetic == "sesoi" else 0.0, rep)
+            df["y"] = synth_labels(df, args.delta if args.synthetic.startswith("sesoi") else 0.0, rep,
+                                   local_m=args.local_m if args.synthetic == "sesoi_local" else None)
             ys, ps, us = [], {k: [] for k in (*SIM_ARMS, *SIM_STACK)}, []
             for k in folds:
                 if not (df["fold"] == k).any():
@@ -514,7 +553,8 @@ def main() -> None:  # noqa: PLR0915
             out.append(rep)
             print(f"rep {rep} done ({time.time() - t0:.0f}s)", flush=True)
         write_json(run.path(f"sim_meta_{a}_{b}.json"),
-                   {**common, "synthetic": args.synthetic, "delta": args.delta, "reps": out})
+                   {**common, "synthetic": args.synthetic, "delta": args.delta,
+                    "local_m": args.local_m if args.synthetic == "sesoi_local" else None, "reps": out})
         return
 
     arms = [x for x in args.arms.split(",") if x and (nread is not None or x not in NREAD_ARMS)]

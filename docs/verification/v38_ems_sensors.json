@@ -1,0 +1,3811 @@
+{
+ "aoi_class_counts": {
+  "sar": 292,
+  "optical": 56,
+  "mixed": 0,
+  "unknown": 152
+ },
+ "by_schema_generation": {
+  "0": {
+   "unknown": 31
+  },
+  "1": {
+   "unknown": 119
+  },
+  "2": {
+   "sar": 59,
+   "optical": 2
+  },
+  "3": {
+   "sar": 233,
+   "optical": 54,
+   "unknown": 2
+  }
+ },
+ "post_event_sensor_counts": {
+  "Sentinel-1": 160,
+  "COSMO-SkyMed": 71,
+  "Sentinel-2": 28,
+  "RADARSAT-2": 22,
+  "PAZ-1": 10,
+  "COSMO-SkyMed Second Generation": 10,
+  "ICEYE": 10,
+  "TERRASAR-X": 7,
+  "WorldView-2": 7,
+  "GeoEye-1": 6,
+  "SPOT-6-7": 5,
+  "PlanetScope": 5,
+  "Pleiades-1A-1B": 3,
+  "TerraSAR-X": 2,
+  "Landsat-8": 1,
+  "WorldView-3": 1,
+  "RCM": 1,
+  "Legion": 1
+ },
+ "increments": {
+  "all": {
+   "n_cells": 1507486,
+   "n_units": 195,
+   "wet_rate": 0.05531129310653631,
+   "delta_bs_names": -2.6419622346597615e-05,
+   "ci90_delta": [
+    -8.226190698932337e-05,
+    2.0542714688613968e-05
+   ],
+   "delta_bs_M0_M1": 0.007553634045688096,
+   "R": -0.003497604224244746,
+   "ci90_R": [
+    -0.010890374949562406,
+    0.0027195803456139815
+   ]
+  },
+  "sar": {
+   "n_cells": 839258,
+   "n_units": 122,
+   "wet_rate": 0.04149022112389754,
+   "delta_bs_names": -3.440909183319296e-05,
+   "ci90_delta": [
+    -0.00012856384873627028,
+    4.3970612573466325e-05
+   ],
+   "delta_bs_M0_M1": 0.005410256432531443,
+   "R": -0.006359974293694069,
+   "ci90_R": [
+    -0.02376298616147398,
+    0.00812726958912234
+   ]
+  },
+  "optical": {
+   "n_cells": 174932,
+   "n_units": 37,
+   "wet_rate": 0.11515331671735303,
+   "delta_bs_names": 6.6023849401297685e-06,
+   "ci90_delta": [
+    -7.383883307997205e-05,
+    9.075194244950595e-05
+   ],
+   "delta_bs_M0_M1": 0.02193548712583583,
+   "R": 0.0003009910334908138,
+   "ci90_R": [
+    -0.0033661815968063892,
+    0.004137220291890278
+   ]
+  },
+  "unknown": {
+   "n_cells": 493296,
+   "n_units": 65,
+   "wet_rate": 0.05760435924880802,
+   "delta_bs_names": -2.4537141232454374e-05,
+   "ci90_delta": [
+    -7.594823893139931e-05,
+    2.518233793559195e-05
+   ],
+   "delta_bs_M0_M1": 0.006100146658492879,
+   "R": -0.0040223854615516075,
+   "ci90_R": [
+    -0.012450231639211657,
+    0.004128152869985846
+   ]
+  }
+ },
+ "aoi_classes": {
+  "EMSR017_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR017_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR017_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR018_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR019_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR020_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR026_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR028_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR033_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR035_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR044_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR044_AOI06": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR044_AOI07": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR044_AOI08": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR045_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR045_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR045_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR045_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR045_AOI05": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR045_AOI06": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR046_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR046_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR046_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR046_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR046_AOI06": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR046_AOI07": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR046_AOI08": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR046_AOI09": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR047_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR047_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR048_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 0
+  },
+  "EMSR052_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR052_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR052_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR055_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR062_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR062_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR065_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR065_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR067_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR068_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR069_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR069_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR069_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR070_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR072_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR073_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR078_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR078_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR086_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR086_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR086_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR086_AOI05": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR086_AOI07": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR087_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR087_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR087_AOI05": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR087_AOI06": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR087_AOI07": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR088_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR089_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR092_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR097_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR097_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR101_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR101_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR107_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR107_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR116_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR116_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR117_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR118_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR118_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR120_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR122_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR122_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR122_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR130_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR130_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR130_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR130_AOI06": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR130_AOI07": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR130_AOI08": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR130_AOI09": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR130_AOI10": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR130_AOI11": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR130_AOI12": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR130_AOI16": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR139_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR142_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR142_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR142_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR147_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR147_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR147_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR149_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR149_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR149_AOI06": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR149_AOI09": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR149_AOI10": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR149_AOI12": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR149_AOI13": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR150_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR150_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR150_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR150_AOI08": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR151_AOI06": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR154_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR154_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR156_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR165_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR165_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR166_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR167_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR167_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR167_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR174_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR176_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR176_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR176_AOI05": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR176_AOI08": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR176_AOI09": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR184_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR184_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR184_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR184_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR184_AOI05": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR184_AOI06": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR184_AOI08": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR187_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR192_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR192_AOI08": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR192_AOI14": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR199_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR199_AOI09": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR199_AOI10": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR199_AOI11": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR199_AOI12": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR199_AOI13": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR199_AOI14": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR203_AOI01": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR203_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR203_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR203_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR203_AOI05": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR203_AOI06": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR203_AOI07": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR205_AOI04": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR205_AOI05": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR235_AOI02": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 1
+  },
+  "EMSR258_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 8.0,
+   "schema_generation": 2
+  },
+  "EMSR258_AOI14": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 12.0,
+   "schema_generation": 2
+  },
+  "EMSR260_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR261_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 2.5,
+   "schema_generation": 2
+  },
+  "EMSR265_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR265_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR265_AOI12": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR265_AOI14": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR265_AOI15": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR265_AOI16": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR265_AOI17": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR265_AOI18": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR265_AOI19": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR265_AOI20": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR265_AOI21": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR265_AOI24": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 2
+  },
+  "EMSR265_AOI25": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 2
+  },
+  "EMSR265_AOI26": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": null,
+   "schema_generation": 2
+  },
+  "EMSR267_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR268_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR271_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 2
+  },
+  "EMSR271_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "TERRASAR-X"
+   ],
+   "min_gsd_m": 22.0,
+   "schema_generation": 2
+  },
+  "EMSR273_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR273_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR273_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR273_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR273_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR275_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR275_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR275_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR277_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR277_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR277_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR279_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 2
+  },
+  "EMSR279_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 2
+  },
+  "EMSR279_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 2
+  },
+  "EMSR279_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 2
+  },
+  "EMSR280_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR280_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR280_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 2
+  },
+  "EMSR280_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR283_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 0.5,
+   "schema_generation": 2
+  },
+  "EMSR283_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 0.5,
+   "schema_generation": 2
+  },
+  "EMSR284_AOI01": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR284_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR293_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 2
+  },
+  "EMSR293_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 2
+  },
+  "EMSR293_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 2
+  },
+  "EMSR314_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 2
+  },
+  "EMSR314_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR314_AOI04": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR314_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR324_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR324_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR324_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR326_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 8.0,
+   "schema_generation": 2
+  },
+  "EMSR332_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR332_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR332_AOI08": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR342_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 2
+  },
+  "EMSR352_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 2
+  },
+  "EMSR358_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR358_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR388_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR404_AOI01": {
+   "class": "optical",
+   "post_sensors": [
+    "Pleiades-1A-1B"
+   ],
+   "min_gsd_m": 0.5,
+   "schema_generation": 3
+  },
+  "EMSR407_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 3.12,
+   "schema_generation": 3
+  },
+  "EMSR411_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR416_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR417_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR419_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR419_AOI06": {
+   "class": "optical",
+   "post_sensors": [
+    "Landsat-8"
+   ],
+   "min_gsd_m": 15.0,
+   "schema_generation": 3
+  },
+  "EMSR421_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR422_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 15.0,
+   "schema_generation": 3
+  },
+  "EMSR424_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR424_AOI02": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR424_AOI03": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR424_AOI04": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR424_AOI05": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR427_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR427_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR427_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR427_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR427_AOI07": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 25.0,
+   "schema_generation": 3
+  },
+  "EMSR427_AOI08": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR427_AOI09": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR429_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR429_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR429_AOI07": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR429_AOI08": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR437_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 30.0,
+   "schema_generation": 3
+  },
+  "EMSR437_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 30.0,
+   "schema_generation": 3
+  },
+  "EMSR437_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 30.0,
+   "schema_generation": 3
+  },
+  "EMSR437_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 30.0,
+   "schema_generation": 3
+  },
+  "EMSR437_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 15.0,
+   "schema_generation": 3
+  },
+  "EMSR437_AOI07": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR437_AOI08": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 30.0,
+   "schema_generation": 3
+  },
+  "EMSR438_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR438_AOI03": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR438_AOI04": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR441_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR441_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR442_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR444_AOI01": {
+   "class": "optical",
+   "post_sensors": [
+    "WorldView-2"
+   ],
+   "min_gsd_m": 2.0,
+   "schema_generation": 3
+  },
+  "EMSR444_AOI02": {
+   "class": "optical",
+   "post_sensors": [
+    "SPOT-6-7"
+   ],
+   "min_gsd_m": 6.0,
+   "schema_generation": 3
+  },
+  "EMSR444_AOI04": {
+   "class": "optical",
+   "post_sensors": [
+    "WorldView-2"
+   ],
+   "min_gsd_m": 2.0,
+   "schema_generation": 3
+  },
+  "EMSR445_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR445_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 30.0,
+   "schema_generation": 3
+  },
+  "EMSR446_AOI02": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR446_AOI03": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR456_AOI03": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR466_AOI01": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR468_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR471_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR487_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR492_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR497_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR498_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR502_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR502_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR502_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR502_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR504_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR504_AOI07": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR507_AOI02": {
+   "class": "optical",
+   "post_sensors": [
+    "PlanetScope"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR507_AOI03": {
+   "class": "optical",
+   "post_sensors": [
+    "PlanetScope"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR511_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR514_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR514_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR517_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR517_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR517_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR518_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR518_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR520_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR548_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR550_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR554_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR554_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 6.25,
+   "schema_generation": 3
+  },
+  "EMSR554_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 3
+  },
+  "EMSR555_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR557_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR557_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR557_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR557_AOI08": {
+   "class": "sar",
+   "post_sensors": [
+    "TERRASAR-X"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR561_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR561_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR562_AOI13": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR567_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR567_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR567_AOI07": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR567_AOI09": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR567_AOI13": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR567_AOI14": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR567_AOI15": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR567_AOI16": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR569_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR570_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR570_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR574_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 25.0,
+   "schema_generation": 3
+  },
+  "EMSR574_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "TERRASAR-X"
+   ],
+   "min_gsd_m": 16.5,
+   "schema_generation": 3
+  },
+  "EMSR586_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "TERRASAR-X"
+   ],
+   "min_gsd_m": 22.0,
+   "schema_generation": 3
+  },
+  "EMSR586_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "TERRASAR-X"
+   ],
+   "min_gsd_m": 22.0,
+   "schema_generation": 3
+  },
+  "EMSR586_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "TERRASAR-X"
+   ],
+   "min_gsd_m": 22.0,
+   "schema_generation": 3
+  },
+  "EMSR586_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR586_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR586_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR629_AOI01": {
+   "class": "optical",
+   "post_sensors": [
+    "SPOT-6-7"
+   ],
+   "min_gsd_m": 6.0,
+   "schema_generation": 3
+  },
+  "EMSR629_AOI02": {
+   "class": "optical",
+   "post_sensors": [
+    "SPOT-6-7"
+   ],
+   "min_gsd_m": 6.0,
+   "schema_generation": 3
+  },
+  "EMSR629_AOI03": {
+   "class": "unknown",
+   "post_sensors": [],
+   "min_gsd_m": null,
+   "schema_generation": 3
+  },
+  "EMSR631_AOI01": {
+   "class": "optical",
+   "post_sensors": [
+    "PlanetScope"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR631_AOI02": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR634_AOI09": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 30.0,
+   "schema_generation": 3
+  },
+  "EMSR637_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR637_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR637_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR637_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "TERRASAR-X"
+   ],
+   "min_gsd_m": 3.3,
+   "schema_generation": 3
+  },
+  "EMSR637_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR637_AOI07": {
+   "class": "sar",
+   "post_sensors": [
+    "PAZ-1"
+   ],
+   "min_gsd_m": 1.0,
+   "schema_generation": 3
+  },
+  "EMSR637_AOI12": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR637_AOI14": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR637_AOI16": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR637_AOI17": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR640_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR640_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR649_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "PAZ-1"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR650_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 30.0,
+   "schema_generation": 3
+  },
+  "EMSR650_AOI02": {
+   "class": "optical",
+   "post_sensors": [
+    "SPOT-6-7"
+   ],
+   "min_gsd_m": 1.5,
+   "schema_generation": 3
+  },
+  "EMSR657_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR659_AOI01": {
+   "class": "optical",
+   "post_sensors": [
+    "Pleiades-1A-1B"
+   ],
+   "min_gsd_m": 0.5,
+   "schema_generation": 3
+  },
+  "EMSR659_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "PAZ-1"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR659_AOI04": {
+   "class": "optical",
+   "post_sensors": [
+    "Pleiades-1A-1B"
+   ],
+   "min_gsd_m": 0.5,
+   "schema_generation": 3
+  },
+  "EMSR662_AOI01": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR664_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR668_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR668_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR683_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR684_AOI07": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR692_AOI02": {
+   "class": "optical",
+   "post_sensors": [
+    "GeoEye-1"
+   ],
+   "min_gsd_m": 2.0,
+   "schema_generation": 3
+  },
+  "EMSR692_AOI03": {
+   "class": "optical",
+   "post_sensors": [
+    "GeoEye-1"
+   ],
+   "min_gsd_m": 2.0,
+   "schema_generation": 3
+  },
+  "EMSR692_AOI04": {
+   "class": "optical",
+   "post_sensors": [
+    "GeoEye-1"
+   ],
+   "min_gsd_m": 2.0,
+   "schema_generation": 3
+  },
+  "EMSR692_AOI05": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR698_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR698_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR705_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR705_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR705_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR705_AOI08": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR706_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR706_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR708_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR711_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR711_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR711_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR712_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR712_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR712_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR712_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR712_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR712_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR712_AOI07": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR712_AOI08": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR712_AOI09": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR712_AOI10": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR722_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR722_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR728_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR728_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR728_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR728_AOI08": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR754_AOI01": {
+   "class": "optical",
+   "post_sensors": [
+    "GeoEye-1"
+   ],
+   "min_gsd_m": 2.0,
+   "schema_generation": 3
+  },
+  "EMSR754_AOI02": {
+   "class": "optical",
+   "post_sensors": [
+    "WorldView-3"
+   ],
+   "min_gsd_m": 2.0,
+   "schema_generation": 3
+  },
+  "EMSR754_AOI07": {
+   "class": "optical",
+   "post_sensors": [
+    "WorldView-2"
+   ],
+   "min_gsd_m": 2.0,
+   "schema_generation": 3
+  },
+  "EMSR754_AOI10": {
+   "class": "optical",
+   "post_sensors": [
+    "WorldView-2"
+   ],
+   "min_gsd_m": 2.0,
+   "schema_generation": 3
+  },
+  "EMSR754_AOI11": {
+   "class": "optical",
+   "post_sensors": [
+    "WorldView-2"
+   ],
+   "min_gsd_m": 2.0,
+   "schema_generation": 3
+  },
+  "EMSR756_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR756_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR756_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "PAZ-1"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR756_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "PAZ-1"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR756_AOI06": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR756_AOI07": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR756_AOI08": {
+   "class": "optical",
+   "post_sensors": [
+    "PlanetScope"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR756_AOI09": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR756_AOI10": {
+   "class": "sar",
+   "post_sensors": [
+    "PAZ-1"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR757_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR758_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "PAZ-1"
+   ],
+   "min_gsd_m": 3.01,
+   "schema_generation": 3
+  },
+  "EMSR759_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR759_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR761_AOI01": {
+   "class": "optical",
+   "post_sensors": [
+    "WorldView-2"
+   ],
+   "min_gsd_m": 0.5,
+   "schema_generation": 3
+  },
+  "EMSR762_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR762_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR763_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR766_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR768_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 30.0,
+   "schema_generation": 3
+  },
+  "EMSR768_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 30.0,
+   "schema_generation": 3
+  },
+  "EMSR771_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR771_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed Second Generation"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR771_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR771_AOI07": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR771_AOI08": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR772_AOI01": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR772_AOI02": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR772_AOI03": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR773_AOI03": {
+   "class": "optical",
+   "post_sensors": [
+    "GeoEye-1",
+    "WorldView-2"
+   ],
+   "min_gsd_m": 0.5,
+   "schema_generation": 3
+  },
+  "EMSR774_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR774_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR779_AOI01": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR779_AOI02": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR779_AOI03": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR783_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "RCM"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR788_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR788_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "PAZ-1"
+   ],
+   "min_gsd_m": 3.01,
+   "schema_generation": 3
+  },
+  "EMSR788_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "PAZ-1"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR788_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed Second Generation"
+   ],
+   "min_gsd_m": 2.5,
+   "schema_generation": 3
+  },
+  "EMSR795_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR799_AOI02": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR799_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "ICEYE"
+   ],
+   "min_gsd_m": 2.5,
+   "schema_generation": 3
+  },
+  "EMSR799_AOI04": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR802_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR802_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR802_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR838_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR838_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR838_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR838_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR838_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR838_AOI07": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR838_AOI08": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed Second Generation"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR844_AOI01": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR845_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR848_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR848_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR848_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR848_AOI05": {
+   "class": "optical",
+   "post_sensors": [
+    "Legion"
+   ],
+   "min_gsd_m": 2.0,
+   "schema_generation": 3
+  },
+  "EMSR848_AOI06": {
+   "class": "optical",
+   "post_sensors": [
+    "GeoEye-1"
+   ],
+   "min_gsd_m": 2.0,
+   "schema_generation": 3
+  },
+  "EMSR848_AOI16": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR848_AOI18": {
+   "class": "sar",
+   "post_sensors": [
+    "TerraSAR-X"
+   ],
+   "min_gsd_m": 11.0,
+   "schema_generation": 3
+  },
+  "EMSR848_AOI19": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR850_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "ICEYE"
+   ],
+   "min_gsd_m": 2.0,
+   "schema_generation": 3
+  },
+  "EMSR850_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "ICEYE"
+   ],
+   "min_gsd_m": 2.5,
+   "schema_generation": 3
+  },
+  "EMSR850_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "ICEYE"
+   ],
+   "min_gsd_m": 4.4,
+   "schema_generation": 3
+  },
+  "EMSR850_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR851_AOI02": {
+   "class": "optical",
+   "post_sensors": [
+    "PlanetScope"
+   ],
+   "min_gsd_m": 3.9,
+   "schema_generation": 3
+  },
+  "EMSR851_AOI05": {
+   "class": "optical",
+   "post_sensors": [
+    "Sentinel-2"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR853_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 15.0,
+   "schema_generation": 3
+  },
+  "EMSR853_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed",
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR854_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed"
+   ],
+   "min_gsd_m": 15.0,
+   "schema_generation": 3
+  },
+  "EMSR856_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed Second Generation"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR856_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR856_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR856_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR856_AOI07": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR856_AOI08": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR857_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed Second Generation"
+   ],
+   "min_gsd_m": 15.0,
+   "schema_generation": 3
+  },
+  "EMSR857_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "ICEYE"
+   ],
+   "min_gsd_m": 6.0,
+   "schema_generation": 3
+  },
+  "EMSR857_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "ICEYE"
+   ],
+   "min_gsd_m": 8.0,
+   "schema_generation": 3
+  },
+  "EMSR857_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR857_AOI07": {
+   "class": "sar",
+   "post_sensors": [
+    "TerraSAR-X"
+   ],
+   "min_gsd_m": 8.2,
+   "schema_generation": 3
+  },
+  "EMSR857_AOI08": {
+   "class": "sar",
+   "post_sensors": [
+    "PAZ-1"
+   ],
+   "min_gsd_m": 8.2,
+   "schema_generation": 3
+  },
+  "EMSR857_AOI09": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed Second Generation"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR861_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR861_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR861_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR861_AOI12": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed Second Generation"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR861_AOI13": {
+   "class": "sar",
+   "post_sensors": [
+    "ICEYE"
+   ],
+   "min_gsd_m": 4.0,
+   "schema_generation": 3
+  },
+  "EMSR861_AOI14": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed Second Generation"
+   ],
+   "min_gsd_m": 5.0,
+   "schema_generation": 3
+  },
+  "EMSR861_AOI15": {
+   "class": "sar",
+   "post_sensors": [
+    "ICEYE"
+   ],
+   "min_gsd_m": 6.0,
+   "schema_generation": 3
+  },
+  "EMSR861_AOI17": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR861_AOI18": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR861_AOI19": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR861_AOI20": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 10.0,
+   "schema_generation": 3
+  },
+  "EMSR861_AOI30": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR861_AOI31": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR861_AOI33": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR864_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed Second Generation"
+   ],
+   "min_gsd_m": 15.0,
+   "schema_generation": 3
+  },
+  "EMSR864_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "COSMO-SkyMed Second Generation"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR864_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "ICEYE"
+   ],
+   "min_gsd_m": 6.0,
+   "schema_generation": 3
+  },
+  "EMSR864_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "ICEYE"
+   ],
+   "min_gsd_m": 1.8,
+   "schema_generation": 3
+  },
+  "EMSR864_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "RADARSAT-2"
+   ],
+   "min_gsd_m": 3.0,
+   "schema_generation": 3
+  },
+  "EMSR865_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR866_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR866_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR866_AOI03": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR866_AOI05": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR866_AOI06": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR868_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR868_AOI02": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR870_AOI08": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR871_AOI01": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR871_AOI04": {
+   "class": "sar",
+   "post_sensors": [
+    "Sentinel-1"
+   ],
+   "min_gsd_m": 20.0,
+   "schema_generation": 3
+  },
+  "EMSR935_AOI01": {
+   "class": "optical",
+   "post_sensors": [
+    "SPOT-6-7"
+   ],
+   "min_gsd_m": 6.0,
+   "schema_generation": 3
+  }
+ }
+}

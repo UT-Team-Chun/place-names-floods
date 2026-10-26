@@ -167,14 +167,52 @@ def location_groups(bounds: dict[str, tuple[float, float, float, float]],
 
 
 def assign_folds(unit_key: dict[str, str], unit_sort: dict[str, tuple],
-                 n_folds: int = N_FOLDS) -> dict[str, int]:
+                 n_folds: int = N_FOLDS, seed: int | None = None) -> dict[str, int]:
     """単位（場所グループ・国）を並べ替えて n_folds へ巡回割当（決定的）。
 
-    unit_sort[u] は並べ替えキー（例: (大陸, −セル数, 単位 ID)）。
+    unit_sort[u] は並べ替えキー（例: (大陸, −セル数, 単位 ID)）。seed を与えると、並べた単位を
+    n_folds 個ずつの区画に切り、区画内の fold 番号を固定シードで並べ替える（各 fold が同じ大きさの
+    帯から 1 つずつ取る釣り合いはそのまま、分け方だけが変わる。事後の感度用、既定は None）。
     """
     units = sorted(set(unit_key.values()), key=lambda u: unit_sort[u])
-    fold_of_unit = {u: k % n_folds for k, u in enumerate(units)}
+    if seed is None:
+        fold_of_unit = {u: k % n_folds for k, u in enumerate(units)}
+    else:
+        rng = np.random.default_rng(seed)
+        fold_of_unit = {}
+        for start in range(0, len(units), n_folds):
+            block = units[start:start + n_folds]
+            perm = rng.permutation(n_folds)[:len(block)]
+            fold_of_unit |= {u: int(f) for u, f in zip(block, perm, strict=True)}
     return {t: fold_of_unit[u] for t, u in unit_key.items()}
+
+
+def merge_by_activation(grp: dict[str, int], activation: dict[str, str]) -> dict[str, int]:
+    """同じ activation（洪水イベント）の AOI を含む場所グループを束ねる（union-find）。
+
+    主分割の場所グループは位置だけで作るので、同じ洪水の別の場所が訓練と評価の両側に入り得る。
+    事後の感度（イベントごと伏せる）で使う。戻り値は AOI → 束ねた後のグループ番号。
+    """
+    parent = {g: g for g in set(grp.values())}
+
+    def find(g: int) -> int:
+        while parent[g] != g:
+            parent[g] = parent[parent[g]]
+            g = parent[g]
+        return g
+
+    first: dict[str, int] = {}
+    for a, g in sorted(grp.items()):
+        act = activation[a]
+        if act in first:
+            ra, rb = find(first[act]), find(g)
+            if ra != rb:
+                parent[max(ra, rb)] = min(ra, rb)
+        else:
+            first[act] = g
+    roots = sorted({find(g) for g in parent})
+    new_id = {r: k for k, r in enumerate(roots)}
+    return {a: new_id[find(g)] for a, g in grp.items()}
 
 
 def continent_map(country_info: Path) -> dict[str, str]:

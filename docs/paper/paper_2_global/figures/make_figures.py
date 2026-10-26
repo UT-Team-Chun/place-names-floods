@@ -30,11 +30,51 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.ticker import FixedFormatter, FixedLocator, NullLocator
 
 REPO = Path(__file__).resolve().parents[4]
 OUTDIR = Path(__file__).resolve().parent
 DATA = REPO / "data"
 MISSING: list[str] = []
+# 図の元データ（Source Data、B-2 追記 3）: シート名 → 行（列名 → 値）。図を描く関数が描いた値をそのまま入れる
+SOURCE: dict[str, list[dict]] = {}
+
+
+def write_source_data() -> None:
+    """submission/source_data.xlsx: 図・パネルごとに 1 シート。値は図に描いたものと同じ（丸めない）。"""
+    if not SOURCE:
+        return
+    import datetime as _dt
+
+    from openpyxl import Workbook
+
+    wb = Workbook()
+    wb.remove(wb.active)
+    # 中身が同じなら同じファイルになるように、作成・更新日時を固定する（再生成のたびの差分を避ける）
+    wb.properties.created = wb.properties.modified = _dt.datetime(2026, 1, 1, tzinfo=_dt.UTC).replace(tzinfo=None)
+    for sheet, rows in sorted(SOURCE.items()):
+        ws = wb.create_sheet(sheet)
+        cols = list(dict.fromkeys(k for r in rows for k in r))
+        ws.append(cols)
+        for r in rows:
+            ws.append([r.get(c) for c in cols])
+    # xlsx は zip。中のファイルの時刻も固定して書き直す
+    import io
+    import zipfile
+
+    buf = io.BytesIO()
+    wb.save(buf)
+    src = zipfile.ZipFile(io.BytesIO(buf.getvalue()))
+    out = io.BytesIO()
+    with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
+        for info in src.infolist():
+            zi = zipfile.ZipInfo(info.filename, date_time=(2026, 1, 1, 0, 0, 0))
+            zi.compress_type = zipfile.ZIP_DEFLATED
+            data = src.read(info.filename)
+            if info.filename == "docProps/core.xml":  # 保存時に書き込まれる更新日時も固定
+                data = re.sub(rb"(<dcterms:modified[^>]*>)[^<]*", rb"\g<1>2026-01-01T00:00:00Z", data)
+            z.writestr(zi, data)
+    (OUTDIR.parent / "submission" / "source_data.xlsx").write_bytes(out.getvalue())
 
 
 def _json(path: Path) -> dict | None:
@@ -43,7 +83,8 @@ def _json(path: Path) -> dict | None:
 
 def missing(what: str) -> str:
     MISSING.append(what)
-    return f"\\missing{{{what}}}"
+    safe = what.replace("_", "\\_").replace("->", "$\\to$")  # 本文中でも組めるように
+    return f"\\missing{{{safe}}}"
 
 
 def pct(x: float) -> str:
@@ -160,7 +201,8 @@ def power_macros(null: dict | None, sesoi: dict | None) -> dict[str, str]:
                 "PowerEquivRate": pct(null["rate_equivalent_TOST"]),
                 "PowerFalsePos": pct(null["rate_positive"]),
                 "PowerHalfWidth": sci(null["median_ci90_halfwidth"], 2),
-                "PowerNullNegative": str(null["decision_counts"].get("negative", 0))}
+                "PowerNullNegative": str(null["decision_counts"].get("negative", 0)),
+                "PowerNullLabelList": ", ".join(f"{k} {v}" for k, v in sorted(null["decision_counts"].items()))}
     else:
         out |= {k: missing(f"power null {k}") for k in
                 ("PowerNReps", "PowerEquivRate", "PowerFalsePos", "PowerHalfWidth")}
@@ -258,12 +300,12 @@ def fig_design(n_langs: str) -> None:
                                      lw=0.9, color=col))
 
     ax.text(1, 44, "a", fontsize=9, weight="bold")
-    ax.text(4, 44, "Nested comparison within places (primary, H2)", fontsize=7.2, weight="bold")
+    ax.text(4, 44, "Nested comparison within areas (primary, H2)", fontsize=7.2, weight="bold")
     y, h = 30, 9
     xs = [(1, 15, "Position\n(M0)"),
           (21, 22, "+ terrain, hydrology,\nland cover and\nsettlement layout (M1)"),
           (50, 21, "+ regional composition\nof names: which names\noccur in the area (M1c)"),
-          (78, 21, "+ the name of each\nplace's nearest\nsettlements (M3n)")]
+          (78, 21, "+ the name of each\ncell's nearest\nsettlements (M3n)")]
     for x, w, txt in xs:
         box(x, y, w, h, txt, fc=light if x == 78 else "white", ec=blue if x == 78 else "0.3")
     for (x0, w0, _), (x1, _, _) in pairwise(xs):
@@ -280,11 +322,11 @@ def fig_design(n_langs: str) -> None:
              "T4 = M1\n+ HAND"]
     for k, r in enumerate(rungs):
         box(1 + k * 6.8, 2, 5.8, 7.5, r, size=5.4)
-    ax.text(18, 11.2, "names added at every rung, within places", fontsize=6.0, ha="center",
+    ax.text(18, 11.2, "names added at every rung, within areas", fontsize=6.0, ha="center",
             color=grey)
     ax.text(37, 13.5, "c", fontsize=9, weight="bold")
     ax.text(40, 13.5, "Three readings of names", fontsize=7.2, weight="bold")
-    reads = [(("lexicon (N-lex)\nwater, wetland, crossing,\nlowland and upland words\nin "
+    reads = [(("lexicon (N-lex)\nwater, wetland, riverine,\ncrossing, lowland and\nhighland words\nin "
                f"{n_langs} languages; knows\nno places"), 37.5),
              ("learned score (N-learn)\ncharacter model fitted\non training regions only", 54),
              (("language model (N-read)\nreads name elements;\ntested on floods after\nits "
@@ -352,6 +394,10 @@ def fig_map(inc: dict) -> None:
     fig.text(0.005, 0.22, "b", fontsize=9, fontweight="bold")
     yrs = Counter(r["event_time"][:4] for r in inc_rows)
     ks = sorted(yrs)
+    SOURCE["Fig2a"] = [{"aoi": r["tag"], "activation": r["activation"], "lon_centre": centre(r)[0],
+                        "lat_centre": centre(r)[1], "evaluable_cells": r["n_eval"], "included": bool(r["included"])}
+                       for r in inc["aois"]]
+    SOURCE["Fig2b"] = [{"event_year": k, "analysed_aois": yrs[k]} for k in ks]
     ax2.bar(ks, [yrs[k] for k in ks], color="#1f6fb4")
     ax2.set_ylabel("AOIs", fontsize=7)
     ax2.tick_params(labelsize=6)
@@ -369,18 +415,25 @@ def _row(blk: dict | None, r_key: str, ci_key: str) -> tuple[float, list] | None
     return blk[r_key], blk.get(ci_key)
 
 
-def _forest_rows(primary: dict, extra: dict[str, dict]) -> list[tuple[str, float, list, str]]:
+def _forest_rows(primary: dict, extra: dict[str, dict],
+                 v36: dict | None = None) -> list[tuple[str, float, list, str]]:
     """(表示名, R̂, 95% CI, 様式) の列。様式 = main（確証）/ secondary（副次）/ undefined（物差しが
-    不確か: 地形の増分の 95% CI が 0 を含み、プロトコル上 R は定義されない）。"""
+    不確か: 地形の増分の 95% CI が 0 を含み、プロトコル上 R は定義されない）。区間は全て固定マージン
+    （チャネルと H1 は v36、world_aggregate の比の bootstrap ではなく）。"""
     ch = primary.get("channels", {})
+
+    def fm_row(comp: str, blk: dict | None, rk: str, ck: str) -> tuple[float, list] | None:
+        f = fixed_margin(v36, "primary", comp)
+        return (f["R"], f["ci95_R"]) if f else _row(blk, rk, ck)
+
     spec = [
-        ("Names within places (primary, H2)", _row(primary.get("primary"), "R", "ci95_R"), "main"),
-        ("   lexicon only (N-lex)", _row(ch.get("M3nx"), "R", "ci95_R"), "main"),
-        ("   learned only (N-learn)", _row(ch.get("M3nl"), "R", "ci95_R"), "main"),
+        ("Names within areas (primary, H2)", _row(primary.get("primary"), "R", "ci95_R"), "main"),
+        ("   lexicon only (N-lex)", fm_row("channel_lexicon", ch.get("M3nx"), "R", "ci95_R"), "main"),
+        ("   learned only (N-learn)", fm_row("channel_learned", ch.get("M3nl"), "R", "ci95_R"), "main"),
         ("   placebo: names permuted", _row(primary.get("placebo"), "R_placebo",
                                              "ci95_R_placebo"), "main"),
-        ("Position only, within places (H1)", _row(primary.get("H1"), "ratio_to_terrain",
-                                                   "ci95_ratio"), "main"),
+        ("Position only, within areas (H1)", fm_row("H1", primary.get("H1"), "ratio_to_terrain",
+                                                     "ci95_ratio"), "main"),
     ]
     if (met := extra.get("country")) and met.get("primary"):
         spec.append(("Countries held out", _row(met["primary"], "R", "ci95_R"),
@@ -394,6 +447,9 @@ def _forest_rows(primary: dict, extra: dict[str, dict]) -> list[tuple[str, float
                      "main"))
         spec.append(("   lexicon and learned score, same floods", _row(met.get("primary"), "R",
                                                                        "ci95_R"), "main"))
+        if met.get("H4_total"):  # 副次の判定で唯一の正（positive-small）も同じ図に（B-2 追記 3）
+            spec.append(("   language model incl. its composition (secondary)",
+                         _row(met["H4_total"], "R", "ci95_R"), "secondary"))
     spec += [
         ("Total incl. regional composition (secondary)", _row(primary.get("total"), "R",
                                                                "ci95_R"), "secondary"),
@@ -404,6 +460,8 @@ def _forest_rows(primary: dict, extra: dict[str, dict]) -> list[tuple[str, float
 
 
 def fig_main(rows: list[tuple[str, float, list, str]], decision: str) -> None:
+    SOURCE["Fig3"] = [{"comparison": n.strip(), "R": r, "ci95_low": c[0] if c else None,
+                       "ci95_high": c[1] if c else None, "style": s} for n, r, c, s in rows]
     fig, ax = plt.subplots(figsize=(6.4, 0.36 * len(rows) + 1.0))
     ax.axvspan(-SESOI, SESOI, color="0.92", lw=0)
     ax.axvline(0, color="0.4", lw=0.8)
@@ -439,6 +497,8 @@ def fig_ladder(ladder: dict, terrain: float) -> None:
     x = np.arange(len(ladder["rungs"]))
     d = np.array(ladder["delta_names"]) / terrain
     c = np.array(ladder["ci95_delta_names"]) / terrain
+    SOURCE["Fig5"] = [{"rung": rg, "R": float(d[k]), "ci95_low": float(c[k, 0]), "ci95_high": float(c[k, 1])}
+                      for k, rg in enumerate(ladder["rungs"])]
     ax.axhspan(-SESOI, SESOI, color="0.92", lw=0)
     ax.axhline(0, color="0.4", lw=0.8)
     ax.errorbar(x, d, yerr=[d - c[:, 0], c[:, 1] - d], fmt="o-", color="#1f6fb4", ms=4,
@@ -446,7 +506,7 @@ def fig_ladder(ladder: dict, terrain: float) -> None:
     ax.set_xticks(x)
     ax.set_xticklabels(["T0\nno elevation", "T1\n1 km", "T2\n250 m", "T3\n30 m stats",
                         "T4\n+HAND"], fontsize=7)
-    ax.set_ylabel("names within places\n(fraction of terrain increment)", fontsize=8)
+    ax.set_ylabel("names within areas\n(fraction of terrain increment)", fontsize=8)
     ax.set_ylim(-0.08, 0.08)
     ax.tick_params(axis="y", labelsize=7)
     for s in ("top", "right"):
@@ -459,6 +519,9 @@ def fig_ladder(ladder: dict, terrain: float) -> None:
 def rv(x: float) -> str:
     """比 R の表記（小数 3 桁、数式モード）。0 でない値が 0.000 に丸まる場合だけ 4 桁にする
     （区間の端が 0 を挟むか挟まないかが読めるように）。"""
+    if 0 < abs(x) < 5e-5:  # 4 桁でも 0.0000 に丸まる値は指数表記で（0 を挟むかが読めるように）
+        e = int(np.floor(np.log10(abs(x))))
+        return f"\\ensuremath{{{x / 10**e:.0f}\\times10^{{{e}}}}}"
     return f"\\ensuremath{{{x:.4f}}}" if 0 < abs(x) < 0.0005 else f"\\ensuremath{{{x:.3f}}}"
 
 
@@ -469,7 +532,19 @@ def _ci_macros(prefix: str, val: float, ci95: list | None) -> dict[str, str]:
     return out
 
 
-def detail_macros(m: dict) -> dict[str, str]:
+def fixed_margin(v36: dict | None, split: str, comp: str) -> dict | None:
+    """v36（物差しの頑健性）から、登録どおりの物差し Y0 での固定マージンの R と区間・比の bootstrap 区間。
+    world_aggregate はチャネル・H1 の区間を比の bootstrap で出しているので、判定の比較とそろえるために使う。"""
+    sp = ((v36 or {}).get("splits") or {}).get(split, {}).get("cluster", {})
+    row = sp.get(comp)
+    if not row:
+        return None
+    y0 = sp["yardsticks"]["Y0"]
+    return {"R": row["delta_bs"] / y0, "ci95_R": [x / y0 for x in row["ci95_delta"]],
+            "ci90_R": row["Y0"]["ci90_R"], "ratio95": row["ci95_R_ratio_bootstrap"]}
+
+
+def detail_macros(m: dict, v36: dict | None = None) -> dict[str, str]:
     """主分割の詳細（記述と副次、§6）。全て metrics_primary.json から。"""
     p = m["primary"]
     d01 = p["delta_bs_M0_M1"]
@@ -482,11 +557,14 @@ def detail_macros(m: dict) -> dict[str, str]:
     out |= _ci_macros("RPlacebo", pl["R_placebo"], pl.get("ci95_R_placebo"))
     out |= _ci_macros("RMinusRp", pl["R_minus_Rp"], pl.get("ci95_R_minus_Rp"))
     ch = m.get("channels", {})
-    out |= _ci_macros("RLex", ch["M3nx"]["R"], ch["M3nx"]["ci95_R"])
-    out |= _ci_macros("RLearn", ch["M3nl"]["R"], ch["M3nl"]["ci95_R"])
-    out |= _ci_macros("RHOne", m["H1"]["ratio_to_terrain"], m["H1"]["ci95_ratio"])
-    out |= _ci_macros("RHOneFlex", m["H1_flexible"]["ratio_to_terrain"],
-                      m["H1_flexible"]["ci95_ratio"])
+    # チャネルと H1 は固定マージンの区間（v36）。無ければ world_aggregate の比の bootstrap
+    for name, comp, blk, rk, ck in (("RLex", "channel_lexicon", ch["M3nx"], "R", "ci95_R"),
+                                    ("RLearn", "channel_learned", ch["M3nl"], "R", "ci95_R"),
+                                    ("RHOne", "H1", m["H1"], "ratio_to_terrain", "ci95_ratio"),
+                                    ("RHOneFlex", "H1_flexible", m["H1_flexible"], "ratio_to_terrain",
+                                     "ci95_ratio")):
+        f = fixed_margin(v36, "primary", comp)
+        out |= _ci_macros(name, f["R"], f["ci95_R"]) if f else _ci_macros(name, blk[rk], blk[ck])
     out |= _ci_macros("RTotal", m["total"]["R"], m["total"]["ci95_R"])
     out["VerdictTotal"] = m["total"]["decision"]
     out |= _ci_macros("RFlex", m["flexible"]["R"], m["flexible"]["ci95_R"])
@@ -556,6 +634,10 @@ def split_macros(extra: dict[str, dict]) -> dict[str, str]:
         out |= {"RCompPosSplitMin": rv(min(comp_pos.values())),
                 "RCompPosSplitMax": rv(max(comp_pos.values()))}
         out |= {f"RCompTerrain{s.capitalize()}": rv(v) for s, v in comp_ter.items()}
+    # 副次比較で判定 label のついたもの（全体の増分・柔軟モデル、llmcut は N-read 版も）の数と positive の数
+    sec = [blk for met_ in [extra.get(s) for s in ("country", "temporal", "llmcut")] if met_
+           for k in ("total", "flexible", "H4_total", "H4_flexible") if (blk := met_.get(k))]
+    out["NSecondaryVerdicts"] = str(len(sec))
     met = extra.get("llmcut")
     if met and met.get("H4"):
         d01 = met["H4"]["delta_bs_M0_M1"]
@@ -603,63 +685,1171 @@ def contrast_macros(v: dict | None) -> dict[str, str]:
     return out
 
 
-def fig_names(v: dict, m: dict) -> None:
-    """a: AOI 内の対比（地形の物差しと水辺名）、b: AOI 間の散布、c: 地域構成と場所内の増分。"""
-    fig = plt.figure(figsize=(7.2, 2.9), layout="constrained")
-    axs = fig.subplots(1, 3, width_ratios=[1.1, 0.85, 1.05])
-    ax = axs[0]
-    rows = [("terrain: low vs high HAND", v["low_hand"]["raw"], "0.35"),
-            ("names: water-side vs other", v["wetside"]["raw"], "#1f6fb4"),
-            ("names, net of position\nand regional composition", v["wetside"]["M0c"], "#1f6fb4"),
-            ("names, net of terrain model", v["wetside"]["M1c"], "#1f6fb4")]
-    ys = np.arange(len(rows))[::-1]
-    for y, (_, r, col) in zip(ys, rows, strict=True):
-        c = 100 * np.array(r["ci95"])
-        ax.plot(c, [y, y], color=col, lw=1.6)
-        ax.plot([100 * r["estimate"]], [y], "o", ms=4, color=col)
-    ax.axvline(0, color="0.4", lw=0.8)
-    ax.set_yticks(ys)
-    ax.set_yticklabels([n for n, *_ in rows], fontsize=6.5)
-    ax.set_xlabel("within-AOI difference in\nflooded cells (pct. points)", fontsize=7)
-    ax.tick_params(axis="x", labelsize=6.5)
-    ax = axs[1]
-    b = v["between_aoi"]
-    ax.scatter(100 * np.array(b["share"]), 100 * np.array(b["obs"]), s=5, c="#1f6fb4",
-               alpha=0.45, lw=0)
-    ax.set_yscale("log")
-    ax.set_xlabel("water-side names among\nnearest settlements (%)", fontsize=7)
-    ax.set_ylabel("flooded cells in the AOI (%)", fontsize=7)
-    ax.tick_params(labelsize=6.5)
-    r = b["rho_obs"]
-    txt = (f"Spearman ρ = {r['estimate']:.3f}\n[{r['ci95'][0]:.3f}, {r['ci95'][1]:.3f}]"
-           ).replace("-", "\u2212")
-    ax.text(0.98, 0.98, txt, transform=ax.transAxes, fontsize=6.5, ha="right", va="top")
-    ax = axs[2]
-    d01 = m["primary"]["delta_bs_M0_M1"]
-    br = m["brier"]
-    bars = [("regional composition\ngiven position", (br["M0"] - br["M0c"]) / d01, None),
-            ("names, flexible model,\ngiven position", m["H1_flexible"]["ratio_to_terrain"],
-             m["H1_flexible"]["ci95_ratio"]),
-            ("names within places\ngiven position", m["H1"]["ratio_to_terrain"],
-             m["H1"]["ci95_ratio"]),
-            ("regional composition\ngiven terrain", (br["M1s"] - br["M1c"]) / d01, None),
-            ("names within places\ngiven terrain", m["primary"]["R"], m["primary"]["ci95_R"])]
-    ys = np.arange(len(bars))[::-1]
-    for y, (_, val, c) in zip(ys, bars, strict=True):
-        ax.barh(y, val, color="#9cc3e4", height=0.6)
+# %% 事後の解析（amendment B-2: v36–v39 と追加の実行）— 頑健性の段落・図 5・補足表。確証判定は変えない
+CLASS_LABELS = {"wetside": "water-side (any)", "water": "water", "wet": "wetland",
+                "riverine": "riverine", "crossing": "crossing", "low": "lowland", "high": "highland"}
+BAND_LABELS = {"le250m": "\\leq250\\,m", "250_500m": "250--500\\,m", "500m_1km": "0.5--1\\,km",
+               "gt1km": ">1\\,km"}
+
+
+WORDS = ("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+         "eleven", "twelve")
+
+
+def _word(n: int | str) -> str:
+    n = int(n)
+    return WORDS[n] if 0 <= n < len(WORDS) else str(n)
+
+
+def _sgn(x: float, nd: int = 1) -> str:
+    """符号つきの数（数式モード、マイナス記号で）。"""
+    return f"\\ensuremath{{{x:+.{nd}f}}}".replace("+", "{+}")
+
+
+def _pp(x: float, nd: int = 1) -> str:
+    """百分率ポイント（符号つき）。0 でない値が ±0.0 に丸まるときは桁を足す（区間が 0 を挟むかが読めるように）。"""
+    v = 100 * x
+    while nd < 3 and v != 0 and round(abs(v), nd) == 0:
+        nd += 1
+    return f"\\ensuremath{{{v:+.{nd}f}}}".replace("+", "{+}").replace("-", "{-}")
+
+
+def _pp_ci(prefix: str, r: dict | None, nd: int = 1) -> dict[str, str]:
+    if not r:
+        return {prefix: missing(prefix)}
+    return {prefix: _pp(r["estimate"], nd), f"{prefix}Lo": _pp(r["ci95"][0], nd),
+            f"{prefix}Hi": _pp(r["ci95"][1], nd)}
+
+
+def _or(x: float) -> str:
+    return f"{x:.2f}"
+
+
+def _closer(x: float) -> str:
+    """log(1 + 距離) の差 → 何 % 近いか（正 = 近い）。"""
+    return f"{100 * (1 - np.exp(x)):.0f}\\%"
+
+
+def positive_control_macros(v: dict | None) -> dict[str, str]:
+    """v37: 正の対照（ラベル非依存）・集落からの距離・距離帯別の主比較・上位 10% の重なり・効果量の翻訳。
+    セル単位は B-2 で登録した尺度、集落の点と距離帯は登録外（v37 を書く段階で追加）。"""
+    if not v:
+        return {"PCWetHand": missing("v37")}
+    pc = v["positive_control"]
+    st, ce, bands = pc["settlements"], pc["cells"], pc["bands"]
+    out = {"NSettlementPoints": _n(pc["n_settlement_points"]),
+           "NPCAoi": str(st["wetside"]["low_hand"]["n_aoi"])}
+
+    def mean_pct(r: dict, key: str) -> str:
+        return f"{100 * r[key]:.1f}\\%"
+
+    # 集落の点（登録外）
+    out |= _pp_ci("PCWetHand", st["wetside"]["low_hand"])
+    out |= {"PCWetHandGroupPct": mean_pct(st["wetside"]["low_hand"], "mean_group"),
+            "PCWetHandOtherPct": mean_pct(st["wetside"]["low_hand"], "mean_other")}
+    out |= _pp_ci("PCWetHalf", st["wetside"]["low_half"])
+    out |= _pp_ci("PCHighHand", st["high"]["low_hand"])
+    out |= _pp_ci("PCHighHalf", st["high"]["low_half"])
+    r = st["wetside"]["hand_mean"]
+    out |= {"PCWetHandMean": _sgn(r['estimate'], 1),
+            "PCWetHandMeanLo": _sgn(r['ci95'][0], 1),
+            "PCWetHandMeanHi": _sgn(r['ci95'][1], 1),
+            "PCWetHandMeanGroup": f"{r['mean_group']:.1f}", "PCWetHandMeanOther": f"{r['mean_other']:.1f}"}
+    r = st["high"]["hand_mean"]
+    out |= {"PCHighHandMean": _sgn(r['estimate'], 1),
+            "PCHighHandMeanLo": _sgn(r['ci95'][0], 1),
+            "PCHighHandMeanHi": _sgn(r['ci95'][1], 1)}
+    r = st["wetside"]["log_river"]
+    out |= {"PCWetRiverCloser": _closer(r["estimate"]), "PCWetRiverCloserLo": _closer(r["ci95"][1]),
+            "PCWetRiverCloserHi": _closer(r["ci95"][0])}
+    out["PCCrossRiverCloser"] = _closer(st["crossing"]["log_river"]["estimate"])
+    nr = pc.get("settlements_not_rounded", {}).get("wetside", {}).get("hand_mean")
+    if nr:
+        out |= {"PCWetHandMeanNR": _sgn(nr['estimate'], 1),
+                "PCWetHandMeanNRLo": _sgn(nr['ci95'][0], 1),
+                "PCWetHandMeanNRHi": _sgn(nr['ci95'][1], 1)}
+    out |= {"ShareCellsRounded": pct(pc["share_cells_minute_rounded"]),
+            "ShareSettlementsRounded": pct(pc["share_settlement_points_minute_rounded"])}
+    # 全セル（B-2 で登録した尺度）
+    out |= _pp_ci("PCWetHandCells", ce["wetside"]["low_hand"])
+    out |= {"PCWetHandCellsGroupPct": mean_pct(ce["wetside"]["low_hand"], "mean_group"),
+            "PCWetHandCellsOtherPct": mean_pct(ce["wetside"]["low_hand"], "mean_other")}
+    out |= _pp_ci("PCWetHalfCells", ce["wetside"]["low_half"])
+    r = ce["wetside"]["log_river"]
+    out |= {"PCWetRiverCells": _sgn(r['estimate'], 2),
+            "PCWetRiverCellsLo": _sgn(r['ci95'][0], 2),
+            "PCWetRiverCellsHi": _sgn(r['ci95'][1], 2)}
+    r = ce["wetside"]["hand_mean"]
+    out |= {"PCWetHandMeanCells": _sgn(r['estimate'], 1),
+            "PCWetHandMeanCellsLo": _sgn(r['ci95'][0], 1),
+            "PCWetHandMeanCellsHi": _sgn(r['ci95'][1], 1)}
+    out |= _pp_ci("PCHighHalfCells", ce["high"]["low_half"])
+    # B-2 追記 3: 全セルでの区分別（河川・渡しの名は低い土地を示す。まとめた null は水・低地の名による）
+    for c, nm in (("riverine", "River"), ("crossing", "Cross"), ("water", "Water"), ("low", "Low")):
+        if ce.get(c) and ce[c].get("low_half"):
+            out |= _pp_ci(f"PC{nm}HalfCells", ce[c]["low_half"])
+    r = ce["high"]["hand_mean"]
+    out |= {"PCHighHandMeanCells": _sgn(r['estimate'], 1),
+            "PCHighHandMeanCellsLo": _sgn(r['ci95'][0], 1),
+            "PCHighHandMeanCellsHi": _sgn(r['ci95'][1], 1)}
+    out |= _pp_ci("PCWetHandNear", bands["le250m"]["low_hand"])
+    out |= _pp_ci("PCWetHandFar", bands["gt1km"]["low_hand"])
+    d = v["nearest_settlement_distance_m"]
+    out |= {"DistQOne": f"{d['0.25'] / 1000:.1f}", "DistMedian": f"{d['0.5'] / 1000:.1f}",
+            "DistQThree": f"{d['0.75'] / 1000:.1f}", "ShareWithinKm": pct(v["share_within_1km"]),
+            "ShareWetside": pct(v["share_by_group"]["wetside"])}
+    pd_ = v.get("primary_by_distance", {})
+    for key, name in (("le250m", "Near"), ("le500m", "NearFive"), ("gt1km", "Far")):
+        b = pd_.get(key)
+        if b:
+            out |= {f"R{name}": rv(b["R"]), f"R{name}LoNinety": rv(b["ci90_R"][0]),
+                    f"R{name}HiNinety": rv(b["ci90_R"][1]), f"NCells{name}": _n(b["n_cells"])}
+    b = v.get("primary_by_distance_wetside", {}).get("le500m")
+    if b:
+        out |= {"RWetNear": rv(b["R"]), "RWetNearLoNinety": rv(b["ci90_R"][0]),
+                "RWetNearHiNinety": rv(b["ci90_R"][1]), "NCellsWetNear": _n(b["n_cells"]),
+                "NUnitsWetNear": str(b["n_units"])}
+    fc = v["flood_contrast"]
+    near = fc["by_band"]["capped"]["le250m"]["y"]
+    out |= _pp_ci("ContrastNear", near)
+    out |= {"NContrastNearAoi": str(near["n_aoi"]), "NContrastNearPlaces": str(near["n_units"])}
+    out |= _pp_ci("ContrastNearResid", fc["by_band"]["capped"]["le250m"]["resid_M1c"])
+    out |= _pp_ci("ContrastNearUncapped", fc["by_band"]["uncapped"]["le250m"]["y"])
+    out |= _pp_ci("ContrastFarUncapped", fc["by_band"]["uncapped"]["gt1km"]["y"])
+    out |= _pp_ci("ContrastFarUncappedResid", fc["by_band"]["uncapped"]["gt1km"]["resid_M1c"])
+    out |= _pp_ci("ContrastUncapped", fc["by_group"]["uncapped"]["wetside"]["y"])
+    out |= _pp_ci("ContrastUncappedResid", fc["by_group"]["uncapped"]["wetside"]["resid_M1c"])
+    out |= _pp_ci("ContrastHandUncapped", fc["hand_yardstick"]["uncapped"])
+    out |= _pp_ci("ContrastRiverine", fc["by_group"]["capped"]["riverine"]["y"])
+    td = v["top_decile_overlap_M1c_M3n"]
+    out |= {"TopDecileOverlap": pct(td["pooled"]), "TopDecileWithin": pct(td["within_aoi_median"])}
+    cls = v.get("primary_by_class", {})
+    for key, name in (("water", "Water"), ("high", "High"), ("wetside", "Wetside"), ("wet", "Wetland"),
+                      ("riverine", "Riverine"), ("crossing", "Crossing"), ("low", "Lowland")):
+        b = cls.get(key)
+        if b and b.get("ci90_R"):
+            out |= {f"RClass{name}": rv(b["R"]), f"RClass{name}LoNinety": rv(b["ci90_R"][0]),
+                    f"RClass{name}HiNinety": rv(b["ci90_R"][1]),
+                    f"DeltaBSClass{name}": sci(b["delta_bs_names"], 2),
+                    f"DeltaBSClass{name}Lo": sci(b["ci90_delta"][0], 2),
+                    f"DeltaBSClass{name}Hi": sci(b["ci90_delta"][1], 2),
+                    f"NCellsClass{name}": _n(int(b["n_cells"])),
+                    f"DeltaBSClass{name}LoNinetyFive": sci(b.get("ci95_delta", [np.nan])[0], 2) if b.get("ci95_delta") else "---",
+                    f"DeltaBSClass{name}HiNinetyFive": sci(b.get("ci95_delta", [np.nan, np.nan])[1], 2) if b.get("ci95_delta") else "---",
+                    f"RealMinusPermClass{name}": sci(b["real_minus_permuted_delta_bs"], 2) if "real_minus_permuted_delta_bs" in b else "---",
+                    f"RealMinusPermClass{name}Lo": sci(b["ci95_real_minus_permuted"][0], 2) if "ci95_real_minus_permuted" in b else "---",
+                    f"RealMinusPermClass{name}Hi": sci(b["ci95_real_minus_permuted"][1], 2) if "ci95_real_minus_permuted" in b else "---",
+                    f"EqClass{name}": "equivalent" if b["equivalent"] else "not equivalent"}
+    eqs = [b["equivalent"] for k, b in cls.items() if k != "wetside" and b.get("ci90_R")]
+    if eqs:
+        out["NClassEq"] = _word(sum(eqs))
+        out["NClassTotal"] = _word(len(eqs))
+    nc = v.get("near_settlement_clean")
+    if nc:
+        out["ShareNearRemoved"] = pct(nc["share_cells_removed_within_500m"])
+        for key, name in (("primary", "NearClean"), ("primary_wetside", "WetNearClean")):
+            b = nc[key]
+            out |= {f"R{name}": rv(b["R"]), f"R{name}LoNinety": rv(b["ci90_R"][0]),
+                    f"R{name}HiNinety": rv(b["ci90_R"][1])}
+        out |= _pp_ci("ContrastNearClean", nc["flood_contrast"]["capped"]["y"])
+    cov = v.get("null_coverage")
+    if cov:
+        out |= {"NullCoverNinety": pct(cov["coverage90"]), "NullCoverNinetyFive": pct(cov["coverage95"]),
+                "NullSdRatio": f"{cov['sd_R_between_reps'] / cov['median_bootstrap_se_R']:.1f}"}
+        if "coverage90_zero" in cov:  # B-2 追記 3
+            out |= {"NullCoverZeroNinety": pct(cov["coverage90_zero"]),
+                    "NullCoverZeroNinetyFive": pct(cov["coverage95_zero"]),
+                    "NullRobustSd": f"{cov['robust_sd_R']:.4f}", "NullMedianSe": f"{cov['median_bootstrap_se_R']:.4f}",
+                    "NullSdBetween": f"{cov['sd_R_between_reps']:.4f}",
+                    "NullStdSd": f"{cov['sd_standardised_deviation']:.2f}", "NullMeanR": rv(cov["mean_R"])}
+    e = v.get("effect_size_translation", {})
+    if "share_wetside_cells_within_500m" in e:
+        out["ShareWetsideWithinFiveHundred"] = pct(e["share_wetside_cells_within_500m"])
+    br = e.get("by_run") or {}
+    names_run = {"world_v2": "Reg", "world_v2_fs1": "FsOne", "world_v2_fs2": "FsTwo",
+                 "world_v2_s6_buffer_b1": "BufferB", "world_v2_actgrp": "ActGrp"}
+    fold_or = []
+    for run, nm in names_run.items():
+        h = (br.get(run) or {}).get("homogeneous") or {}
+        if h.get("odds_ratio"):
+            out[f"ORUpperRun{nm}"] = f"{h['odds_ratio']:.1f}"
+            if run in ("world_v2", "world_v2_fs1", "world_v2_fs2"):
+                fold_or.append(h["odds_ratio"])
+    if len(fold_or) == 3:  # 確証の fold と付け替え 2 回
+        out["ORUpperFoldMin"] = f"{min(fold_or):.1f}"
+        out["ORUpperFoldMax"] = f"{max(fold_or):.1f}"
+    # 集落の近くだけの効果（B-2 追記 3 の 1）: 格子の外は「e^{δmax} を超える」
+    loc_vals = []
+    for run, nm in names_run.items():
+        lo = (br.get(run) or {}).get("local_500m") or {}
+        if lo.get("odds_ratio"):
+            out[f"ORLocalUpperRun{nm}"] = f"{lo['odds_ratio']:.1f}"
+            loc_vals.append(lo["odds_ratio"])
+        elif lo.get("beyond_grid"):
+            out[f"ORLocalUpperRun{nm}"] = f"$>${np.exp(lo['delta_max']):.0f}"
+            loc_vals.append(float("inf"))
+    if loc_vals:
+        out["ORLocalUpperRunMin"] = f"{min(loc_vals):.1f}"
+        mx = max(loc_vals)
+        out["ORLocalUpperRunMax"] = "more than 20" if mx == float("inf") else f"{mx:.1f}"
+    c0 = (e.get("curve") or {}).get("0.0")
+    if c0:  # 合成ラベルでの地形の増分（δ = 0 の回の平均）。実データの物差しより小さいので翻訳は ΔBS の尺度で
+        out["SimYZero"] = sci(c0["mean_yardstick"], 2)
+    # δ の格子がそろってから（一様な効果は 7 点、集落の近くだけの効果は 4 点。粗い格子の補間は使わない）
+    for kind, prefix, curve, n_grid in (("homogeneous", "", "curve", 7), ("local_500m", "Local", "curve_local", 4)):
+        tr = e.get(kind) or {}
+        grid_ok = len(e.get(curve, {})) >= n_grid
+        for key, name in (("margin", "Margin"), ("achieved_upper90", "Upper"), ("two_way_upper90", "TwUpper")):
+            r = tr.get(key)
+            if not (r and grid_ok):
+                out[f"ORAt{prefix}{name}"] = missing(f"odds ratio {kind} {key}")
+                continue
+            if r["beyond_grid"]:  # 最大の δ でも届かない: e^{δmax} を超える、とだけ書く
+                out[f"ORAt{prefix}{name}"] = f"$>${np.exp(r['delta_max']):.0f}"
+                continue
+            lo, hi = r["odds_ratio_mc_range"]
+            out[f"ORAt{prefix}{name}"] = f"{r['odds_ratio']:.1f}"
+            out[f"ORAt{prefix}{name}Lo"] = f"{lo:.1f}" if lo is not None else missing("mc range")
+            out[f"ORAt{prefix}{name}Hi"] = f"{hi:.1f}" if hi is not None else missing("mc range")
+            out[f"DeltaAt{prefix}{name}"] = f"{r['delta']:.2f}"
+    return out
+
+
+def odds_macros(v: dict | None) -> dict[str, str]:
+    """v39: AOI の固定効果つきロジスティック回帰のオッズ比。全セル（距離帯なし）は B-2 で登録、区分 × 距離帯は登録外。"""
+    if not v:
+        return {"ORWetNearAdj": missing("v39")}
+    out = {"NOddsAoi": str(v["wetside_adjusted_M1"]["n_aoi"]), "NOddsGroups": str(v["wetside_adjusted_M1"]["n_groups"]),
+           "NOddsDropped": str(len(v["aoi_dropped_no_variation"]))}
+
+    def put(name: str, t: dict) -> None:
+        out[name] = _or(t["odds_ratio"])
+        out[f"{name}Lo"] = _or(t["ci95_odds_ratio"][0])
+        out[f"{name}Hi"] = _or(t["ci95_odds_ratio"][1])
+
+    for key, name in (("wetside_adjusted_M1", "Adj"), ("wetside_raw", "Raw")):
+        for band, bname in (("le500m", "Near"), ("500m_1km", "Mid"), ("gt1km", "Far")):
+            put(f"ORWet{bname}{name}", v[key]["terms"][f"wetside:{band}"])
+        for band, bname in (("500m_1km", "Mid"), ("gt1km", "Far")):
+            put(f"ORBand{bname}{name}", v[key]["terms"][f"band_{band}"])
+    t = v["categories_adjusted_M1"]["terms"]
+    out["NOddsComparisons"] = str(sum(1 for k in t if ":" in k))
+    put("ORRiverNearAdj", t["riverine:le500m"])
+    # B-2 追記 3: 区分別の値（集落から 500 m 以内は登録外、全セルは登録）
+    ta = (v.get("categories_allcells_adjusted_M1") or {}).get("terms", {})
+    for c, nm in (("water", "Water"), ("wet", "Wetland"), ("riverine", "Riverine"), ("crossing", "Crossing"),
+                  ("low", "Lowland"), ("high", "Highland")):
+        if f"{c}:le500m" in t:
+            put(f"ORClass{nm}NearAdj", t[f"{c}:le500m"])
+        if f"{c}:all" in ta:
+            put(f"ORClass{nm}AllAdj", ta[f"{c}:all"])
+    cb = v.get("cells_by_class_and_band") or {}
+    for c, nm in (("water", "Water"), ("wet", "Wetland"), ("riverine", "Riverine"), ("crossing", "Crossing"),
+                  ("low", "Lowland")):
+        n = (cb.get(c) or {}).get("le500m")
+        if n is not None:
+            out[f"NCellsClass{nm}Near"] = _n(int(n))
+    out["ORTerrainLogit"] = _or(v["wetside_adjusted_M1"]["terms"]["logit_M1"]["odds_ratio"])
+    for key, name in (("wetside_allcells_adjusted_M1", "ORWetAllAdj"), ("wetside_allcells_raw", "ORWetAllRaw")):
+        if key in v:
+            put(name, v[key]["terms"]["wetside:all"])
+    if "wetside_clean_adjusted_M1" in v:
+        put("ORWetNearCleanAdj", v["wetside_clean_adjusted_M1"]["terms"]["wetside:le500m"])
+        out["ShareCleanKept"] = pct(v["clean_share_cells_kept"])
+    bc = v.get("bootstrap_check_wetside")
+    if bc:
+        b = bc["adjusted_M1"]["wetside:le500m"]["odds_ratio_ci95_bootstrap"]
+        out |= {"ORWetNearAdjBootLo": _or(b[0]), "ORWetNearAdjBootHi": _or(b[1])}
+    return out
+
+
+def sensor_macros(v: dict | None) -> dict[str, str]:
+    """v38: 洪水後の画像のセンサー（レーダー・光学）と、群ごとの主比較。"""
+    if not v:
+        return {"NAoiSar": missing("v38")}
+    c, inc = v["aoi_class_counts"], v["increments"]
+    out = {"NAoiSar": str(c["sar"]), "NAoiOptical": str(c["optical"]),
+           "NAoiSensorUnknown": str(c["unknown"])}
+    gens = v.get("by_schema_generation") or {}
+    for g, nm in (("0", "Zero"), ("1", "One"), ("2", "Two"), ("3", "Three")):
+        if g in gens:  # 解析した AOI のスキーマ世代ごとの数（B-2 追記 1、v38）
+            out[f"NAoiGen{nm}"] = str(sum(gens[g].values()))
+    for key, name in (("sar", "Sar"), ("optical", "Optical")):
+        b = inc[key]
+        out |= {f"R{name}": rv(b["R"]), f"R{name}LoNinety": rv(b["ci90_R"][0]),
+                f"R{name}HiNinety": rv(b["ci90_R"][1]), f"NUnits{name}": str(b["n_units"])}
+    return out
+
+
+def robustness_macros(v: dict | None) -> dict[str, str]:
+    """v36: 物差し 5 通り × bootstrap 2 通りの同等性、地域構成の増分、Holm、決着しなかった比較、
+    activation で束ねた分割・中心化した名前の特徴・N-read の全体の増分と地域構成（B-2 追記 2）。"""
+    if not v:
+        return {"NYardEqPrimary": missing("v36")}
+    sp = v["splits"]
+    out: dict[str, str] = {}
+
+    def eq_count(key: str, comp: str) -> tuple[int, int]:
+        n = k = 0
+        r = sp.get(key)
+        if not r:
+            return 0, 0
+        for kind in ("cluster", "two_way"):
+            row = r[kind].get(comp)
+            if not row:
+                continue
+            for y in r[kind]["yardsticks"]:
+                n += 1
+                k += bool(row[y]["equivalent"])
+        return k, n
+
+    def def_count(key: str, comp: str) -> int:
+        """物差しが定義された（物差しが正で R の区間がある）組の数。"""
+        r = sp.get(key) or {}
+        return sum(bool((r.get(kind, {}).get(comp) or {}).get(y, {}).get("ci90_R"))
+                   for kind in ("cluster", "two_way") for y in (r.get(kind) or {}).get("yardsticks", {}))
+
+    k, n = eq_count("primary", "primary")
+    out |= {"NYardEqPrimary": str(k), "NYardTotal": str(n), "NYardTotalWord": _word(n),
+            "NYardEqPrimaryWord": _word(k)}
+    for key, comp, name in (("country", "primary", "Country"), ("llmcut", "H4", "HFour"),
+                            ("primary_actgrp", "primary", "ActGrp"), ("primary_dm", "demeaned", "Dm"),
+                            ("primary_dm_actgrp", "demeaned", "DmActGrp"), ("country_dm", "demeaned", "DmCountry"),
+                            ("temporal_dm", "demeaned", "DmTemporal"), ("llmcut_dm", "demeaned", "DmLlm")):
+        kk, nn = eq_count(key, comp)
+        if nn:
+            out[f"NYardEq{name}"] = str(kk)
+            out[f"NYardEq{name}Word"] = _word(kk)
+            nd = def_count(key, comp)
+            out[f"NYardDef{name}"] = str(nd)
+            out[f"NYardDef{name}Word"] = _word(nd)
+        else:
+            out[f"NYardEq{name}"] = missing(f"yardsticks {key}")
+            out[f"NYardEq{name}Word"] = missing(f"yardsticks {key}")
+
+    def r90(key: str, kind: str, comp: str, y: str, name: str) -> dict[str, str]:
+        r = sp.get(key)
+        e = ((r or {}).get(kind, {}).get(comp) or {}).get(y)
+        if not e or not e["ci90_R"]:
+            return {f"{name}Lo": "---", f"{name}Hi": "---"}
+        return {f"{name}": rv(e["R"]), f"{name}Lo": rv(e["ci90_R"][0]), f"{name}Hi": rv(e["ci90_R"][1])}
+
+    out |= r90("primary", "two_way", "primary", "Y1", "RPrimTwoWayYOne")
+    out |= r90("primary", "two_way", "primary", "Y0", "RPrimTwoWay")
+    out |= r90("country", "cluster", "primary", "Y1", "RCountryYOne")
+    out |= r90("llmcut", "cluster", "H4", "Y1", "RHFourYOne")
+    out |= r90("llmcut", "cluster", "H4", "Y3", "RHFourYThree")
+    out |= r90("primary_actgrp", "cluster", "primary", "Y3", "RActGrpYThree")
+    out |= r90("primary_actgrp", "cluster", "primary", "Y2", "RActGrpYTwo")
+    for y in ("Y2", "Y3", "Y4"):
+        nm = {"Y2": "YTwo", "Y3": "YThree", "Y4": "YFour"}[y]
+        out |= r90("llmcut", "cluster", "H4_total", y, f"RHFourTotal{nm}")
+    tw = (sp.get("llmcut", {}).get("two_way", {}).get("H4_total") or {})
+    if tw:
+        out |= {"DeltaHFourTotalTwLo": sci(tw["ci90_delta"][0], 2), "DeltaHFourTotalTwHi": sci(tw["ci90_delta"][1], 2)}
+    out |= {"YOnePrimary": sci(sp["primary"]["cluster"]["yardsticks"]["Y1"], 2),
+            "YThreePrimary": sci(sp["primary"]["cluster"]["yardsticks"]["Y3"], 2),
+            "YFourPrimary": sci(sp["primary"]["cluster"]["yardsticks"]["Y4"], 2)}
+    out["YTwoPrimary"] = (sci(sp["primary"]["cluster"]["yardsticks"]["Y2"], 2)
+                          if "Y2" in sp["primary"]["cluster"]["yardsticks"] else missing("Y2 (recal)"))
+    tw = sp["primary"]["two_way_axes"]
+    out |= {"NTwoWayActivations": str(tw["n_activations"]), "NTwoWayCountries": str(tw["n_countries"]),
+            "NTwoWayActivationsLlm": str(sp["llmcut"]["two_way_axes"]["n_activations"])}
+    # 地域構成の増分（再較正だけの基準から）。区間は ΔBS の 95% を登録の物差しで割ったもの
+    for key in (*SPLITS_ALL, "primary_actgrp"):
+        r = sp.get(key)
+        if not r:
+            continue
+        comp = r["cluster"]["composition"]
+        y0 = r["cluster"]["yardsticks"]["Y0"]
+        name = "ActGrp" if key == "primary_actgrp" else key.capitalize()
+        for ck, mname in (("M0s->M0c", "CompPosRecal"), ("M1s->M1c", "CompTerrain"),
+                          ("M1s->M1rc", "CompLlm")):
+            c = comp.get(ck)
+            if c:
+                out[f"R{mname}{name}"] = rv(c["relative_to_Y0"])
+                out[f"R{mname}{name}Lo"] = rv(c["ci95_delta"][0] / y0)
+                out[f"R{mname}{name}Hi"] = rv(c["ci95_delta"][1] / y0)
+                if ck == "M1s->M1rc":  # 定数からの物差しでも（指摘 B4）
+                    y3 = r["cluster"]["yardsticks"]["Y3"]
+                    out["RCompLlmYThree"] = rv(c["delta_bs"] / y3)
+                    out["DeltaCompLlm"] = sci(c["delta_bs"], 2)
+                    out["DeltaCompLlmLo"] = sci(c["ci95_delta"][0], 2)
+                    out["DeltaCompLlmHi"] = sci(c["ci95_delta"][1], 2)
+                    tw = (r.get("two_way", {}).get("composition") or {}).get("M1s->M1rc")
+                    if tw:
+                        out["DeltaCompLlmTwLo"] = sci(tw["ci95_delta"][0], 2)
+                        out["DeltaCompLlmTwHi"] = sci(tw["ci95_delta"][1], 2)
+            elif ck == "M0s->M0c":  # 再較正の基準は全分割にあるはず
+                out.setdefault(f"R{mname}{name}", missing(f"{ck} {key}"))
+    ag = sp.get("primary_actgrp")
+    if ag:  # 束ねた分割で地域構成が基準を悪くした大きさ（ΔBS とその区間）
+        c = ag["cluster"]["composition"].get("M1s->M1c")
         if c:
-            ax.plot(c, [y, y], color="0.2", lw=1)
+            out |= {"DeltaCompActGrp": sci(c["delta_bs"], 2), "DeltaCompActGrpLo": sci(c["ci95_delta"][0], 2),
+                    "DeltaCompActGrpHi": sci(c["ci95_delta"][1], 2)}
+    h = v["holm_H3_H4"]["adjusted"]
+    out["HolmHFour"] = "<0.001" if h.get("H4_TOST", 1) < 0.001 else f"{h['H4_TOST']:.3f}"
+    out["HolmHThree"] = f"{h['H3_delta0_gt_delta4']:.2f}"
+    for k, name in (("primary/total", "Total"), ("primary/flexible", "Flex")):
+        inc = v["inconclusive"].get(k)
+        if inc and inc["units_needed_to_exclude_SESOI"]:
+            out[f"NPlacesNeeded{name}"] = _n(int(round(inc["units_needed_to_exclude_SESOI"], -2)))
+    sp_runs = v.get("spread_primary", {})
+    # B-2 追記 3: 国外し分割の real − permuted（下限が 0 を僅かに上回る）、fold の付け替えによる R の幅と SE の比
+    cp = ((sp.get("country") or {}).get("cluster") or {}).get("primary") or {}
+    if "R_minus_Rp_Y0" in cp:
+        out |= {"RCountryRealMinusPlacebo": rv(cp["R_minus_Rp_Y0"]),
+                "RCountryRealMinusPlaceboLo": rv(cp["ci95_R_minus_Rp_Y0"][0]),
+                "RCountryRealMinusPlaceboHi": rv(cp["ci95_R_minus_Rp_Y0"][1])}
+    draws = [sp_runs.get(r) for r in ("world_v2", "world_v2_fs1", "world_v2_fs2")]
+    if all(draws):
+        se = (draws[0]["ci90_R"][1] - draws[0]["ci90_R"][0]) / (2 * 1.645)
+        rs = [d["R"] for d in draws]
+        out["FoldRangeOverSe"] = f"{(max(rs) - min(rs)) / se:.1f}"
+        sd = float(np.std(rs, ddof=1))
+        half = 1.645 * float(np.sqrt(se ** 2 + sd ** 2))
+        out |= {"RCombinedLoNinety": rv(draws[0]["R"] - half), "RCombinedHiNinety": rv(draws[0]["R"] + half),
+                "RFoldSd": f"{sd:.4f}", "RBootSe": f"{se:.4f}"}
+    for run, name in (("world_v2_fs1", "FoldSeedOne"), ("world_v2_fs2", "FoldSeedTwo"),
+                      ("world_v2_actgrp", "ActGrp")):
+        r = sp_runs.get(run)
+        out |= ({f"R{name}": rv(r["R"]), f"R{name}LoNinety": rv(r["ci90_R"][0]),
+                 f"R{name}HiNinety": rv(r["ci90_R"][1]), f"Verdict{name}": r["decision"],
+                 f"YZero{name}": sci(r["delta_bs_M0_M1"], 2)}
+                if r else {f"{k}{name}{s}": missing(run) for k, s in
+                           (("R", ""), ("R", "LoNinety"), ("R", "HiNinety"), ("Verdict", ""), ("YZero", ""))})
+    ag = sp_runs.get("world_v2_actgrp")
+    if ag:
+        out |= {"NUnitsActGrp": str(ag["n_units"]),
+                "BrierActGrpMOnes": f"{ag['brier']['M1s']:.4f}", "BrierActGrpMOnec": f"{ag['brier']['M1c']:.4f}",
+                "BrierActGrpMThreen": f"{ag['brier']['M3n']:.4f}", "BrierActGrpMZero": f"{ag['brier']['M0']:.4f}",
+                "RCompTerrainActGrp": rv((ag["brier"]["M1s"] - ag["brier"]["M1c"]) / ag["delta_bs_M0_M1"])}
+        c = ag.get("ci95_R_minus_Rp")
+        if c:
+            out |= {"RActGrpRealMinusPlaceboLo": rv(c[0]), "RActGrpRealMinusPlaceboHi": rv(c[1]),
+                    "RActGrpRealMinusPlacebo": rv(ag["R_minus_Rp"])}
+    agc = (sp.get("primary_actgrp") or {}).get("brier", {})
+    if "const" in agc:
+        out["BrierActGrpConst"] = f"{agc['const']:.4f}"
+    for key, name in (("primary", "Primary"), ("primary_actgrp", "ActGrp"), ("country", "Country"),
+                      ("temporal", "Temporal"), ("llmcut", "Llm")):
+        pt = (sp.get(key) or {}).get("prespecified_two_way") or {}
+        if pt.get("ci95_R"):
+            out[f"RPreTwoWay{name}Lo"] = rv(pt["ci95_R"][0])
+            out[f"RPreTwoWay{name}Hi"] = rv(pt["ci95_R"][1])
+    for key, name in (("country", "Country"), ("llmcut", "Llm"), ("primary", "Primary")):
+        ys = ((sp.get(key) or {}).get("two_way") or {}).get("yardsticks") or {}
+        if "Y1" in ys:  # 二方向 bootstrap での地形の増分の 95% 下限（負なら、その bootstrap では R が未定義）
+            out[f"YOneTwoWay{name}"] = sci(ys["Y1"], 2)
+    pt = (sp.get("primary") or {}).get("prespecified_two_way") or {}
+    if pt.get("n_countries"):  # 登録どおりの二方向 bootstrap はセルの最寄り集落の国で数える
+        out["NCellCountriesPreTwoWay"] = str(pt["n_countries"])
+    # AOI 内で中心化した名前の特徴（M1s → M3d）
+    for key, name in (("primary_dm", "Dm"), ("primary_dm_actgrp", "DmActGrp"), ("country_dm", "DmCountry"),
+                      ("llmcut_dm", "DmLlm"), ("temporal_dm", "DmTemporal")):
+        r = sp.get(key)
+        row = (r or {}).get("cluster", {}).get("demeaned")
+        if row:
+            e = row["Y0"]
+            out |= {f"R{name}": rv(e["R"]), f"R{name}LoNinety": rv(e["ci90_R"][0]),
+                    f"R{name}HiNinety": rv(e["ci90_R"][1]),
+                    # Brier の尺度（時間外しは登録の規則で R が未定義なので、こちらで書く）
+                    f"DeltaBS{name}": sci(row["delta_bs"], 2), f"DeltaBS{name}Lo": sci(row["ci95_delta"][0], 2),
+                    f"DeltaBS{name}Hi": sci(row["ci95_delta"][1], 2)}
+            pl = r["cluster"].get("demeaned_placebo")
+            if pl:
+                out[f"R{name}Placebo"] = rv(pl["Y0"]["R"])
+            if row.get("decision_Y0"):  # 凍結した判定表の label（B-2 追記 3）
+                out[f"Verdict{name}"] = row["decision_Y0"]
+                out[f"R{name}MinusRp"] = rv(row["R_minus_Rp_Y0"])
+                out[f"R{name}MinusRpLo"] = rv(row["ci95_R_minus_Rp_Y0"][0])
+                out[f"R{name}MinusRpHi"] = rv(row["ci95_R_minus_Rp_Y0"][1])
+        else:
+            out[f"R{name}"] = missing(f"demeaned {key}")
+    cl = v.get("country_leakage")
+    if cl:
+        n = cl["test_cells_nearest_settlement_in_training_country"]
+        out |= {"NCountryCrossCells": _n(n), "ShareCountryCross": pct(n / cl["n_cells"]),
+                "NCountryActSpan": str(cl["activations_spanning_folds"])}
+    return out
+
+
+SPLITS_ALL = ("primary", "country", "temporal", "llmcut")
+
+
+def hgb_macros(v: dict | None) -> dict[str, str]:
+    """v40: 早期終了の反復回数（主分割 fold 0、5 シード）。"""
+    if not v:
+        return {"HGBItersMZero": missing("v40")}
+    m0, m1 = v["arms"]["M0"]["n_iter"], v["arms"]["M1"]["n_iter"]
+    out = {"HGBItersMOneMin": str(min(m1)), "HGBItersMOneMax": str(max(m1)),
+           "HGBTrainCells": _n(v["n_train"])}
+    out["HGBItersMZero"] = (f"all {max(m0)}" if min(m0) == max(m0) else f"{min(m0)}--{max(m0)}")
+    return out
+
+
+def power_split_macros(runs: Path) -> dict[str, str]:
+    """副分割の検出力（事後、B-2）: δ = 0 で同等と判定された割合、δ = 1.2 で正と判定された割合（Wilson 区間）。"""
+    out: dict[str, str] = {}
+    for k, name in (("c", "Country"), ("t", "Temporal"), ("l", "Llm")):
+        nul = _json(runs / f"power_v3{k}_null" / "power_summary.json")
+        ses = _json(runs / f"power_v3{k}_sesoi" / "power_summary.json")
+        # 20 回なので整数の百分率で
+        out[f"PowerEquiv{name}"] = (f"{100 * nul['rate_equivalent_TOST']:.0f}\\%" if nul
+                                    else missing(f"power {k} null"))
+        out[f"PowerPos{name}"] = f"{100 * ses['rate_positive']:.0f}\\%" if ses else missing(f"power {k} sesoi")
+        if nul:
+            out[f"PowerNReps{name}"] = str(nul["n_reps"])
+            out[f"PowerUndefNull{name}"] = str(nul["decision_counts"].get("undefined-denominator", 0))
+        if ses:  # δ = 1.2 は主分割で R ≈ 0.05 に合わせた値。他の分割での平均 R（余白との対応がずれる量）
+            out[f"PowerMeanR{name}"] = rv(ses["mean_R"])
+            out[f"PowerNRepsSesoi{name}"] = str(ses["n_reps"])
+            # δ = 1.2 でも同等と判定された割合と equivalent-null の数（B-2 追記 2 の 7、判定の分布）
+            out[f"PowerEquivSesoi{name}"] = f"{100 * ses['rate_equivalent_TOST']:.0f}\\%"
+            out[f"PowerNullLabelSesoi{name}"] = str(ses["decision_counts"].get("equivalent-null", 0))
+    # B-2 追記 4: 実データの余白で δ = 1.2 の回が同等と判定される割合
+    for k, split, name in (("", "primary", "Primary"), ("c", "country", "Country"), ("l", "llmcut", "Llm")):
+        rm = real_margin_rate(runs, k, split)
+        if rm:
+            lo, hi = _wilson(rm[0] / rm[1], rm[1])
+            out |= {f"PowerRealEq{name}": f"{rm[0]}", f"PowerRealN{name}": f"{rm[1]}",
+                    f"PowerRealEqPct{name}": f"{100 * rm[0] / rm[1]:.0f}\\%",
+                    f"PowerRealEqHi{name}": f"{100 * hi:.0f}\\%", f"PowerRealEqLo{name}": f"{100 * max(lo, 0):.0f}\\%",
+                    f"PowerRealNonpos{name}": str(rm[2])}
+    # B-2 追記 3: 各分割の余白（0.05 × 物差し）と名前の ΔBS の 95% 上限を、δ = 1.2 の平均 ΔBS と比べる
+    for k, split, name in (("", "primary", "Primary"), ("c", "country", "Country"), ("t", "temporal", "Temporal"),
+                           ("l", "llmcut", "Llm")):
+        ses = _json(runs / f"power_v3{k}_sesoi" / "power_summary.json")
+        met = _json(runs / "world_v2" / f"metrics_{split}.json")
+        reps = (ses or {}).get("reps") or []
+        if not (reps and met and "delta_bs" in reps[0]):
+            continue
+        sim = float(np.mean([r["delta_bs"] for r in reps]))
+        pm = met["primary"]
+        out[f"PowerSimDBS{name}"] = sci(sim, 2)
+        out[f"PowerUpperRatio{name}"] = f"{pm['ci95_delta'][1] / sim:.2f}"
+        if pm["decision"] != "undefined-denominator":
+            out[f"PowerMarginRatio{name}"] = f"{pm['margin_delta_bs'] / sim:.1f}"
+            out[f"MarginDBS{name}"] = sci(pm["margin_delta_bs"], 2)
+    return out
+
+
+def _fig4_source(v37: dict, v39: dict | None, classes: list[str]) -> None:
+    """図 4 の元データ（Source Data）。a: 正の対照、b: 距離帯、c: オッズ比、d: 合成ラベルの曲線と目標。"""
+    pc = v37["positive_control"]
+    rows = []
+    for c in classes:
+        for scale in ("settlements", "cells"):
+            r = (pc.get(scale, {}).get(c) or {}).get("low_hand")
+            if r:
+                rows.append({"class": c, "scale": scale, "difference_pp": 100 * r["estimate"],
+                             "ci95_low_pp": 100 * r["ci95"][0], "ci95_high_pp": 100 * r["ci95"][1]})
+    SOURCE["Fig4a"] = rows
+    rows = []
+    for b in BAND_LABELS:
+        for series, r in (("HAND<=2m (no labels)", pc["bands"][b]["low_hand"]),
+                          ("flooded, observed", v37["flood_contrast"]["by_band"]["capped"][b]["y"]),
+                          ("flooded, net of terrain model", v37["flood_contrast"]["by_band"]["capped"][b]["resid_M1c"])):
+            rows.append({"distance_band": b, "series": series, "difference_pp": 100 * r["estimate"],
+                         "ci95_low_pp": 100 * r["ci95"][0], "ci95_high_pp": 100 * r["ci95"][1]})
+    SOURCE["Fig4b"] = rows
+    rows = []
+    if v39:
+        for c in classes:
+            key = "wetside" if c == "wetside" else "categories"
+            for adj in ("adjusted_M1", "raw"):
+                tt = v39[f"{key}_{adj}"]["terms"].get(f"{c}:le500m")
+                if tt:
+                    rows.append({"class": c, "model": "given terrain model" if adj == "adjusted_M1" else "unadjusted",
+                                 "odds_ratio": tt["odds_ratio"], "ci95_low": tt["ci95_odds_ratio"][0],
+                                 "ci95_high": tt["ci95_odds_ratio"][1]})
+    SOURCE["Fig4c"] = rows
+    e = v37.get("effect_size_translation", {})
+    rows = []
+    for key, lab in (("curve", "effect at every distance"), ("curve_local", "effect within 500 m only")):
+        for d, cv in sorted((float(k), v) for k, v in e.get(key, {}).items()):
+            rows.append({"simulation": lab, "delta": d, "odds_ratio": float(np.exp(d)), "replicates": cv["n_reps"],
+                         "mean_delta_bs": cv["mean_delta_bs"], "mc95_low": cv["mc_ci95_mean"][0],
+                         "mc95_high": cv["mc_ci95_mean"][1]})
+    for k, v in e.get("targets", {}).items():
+        rows.append({"simulation": f"target: {k}", "mean_delta_bs": v})
+    SOURCE["Fig4d"] = rows
+
+
+def fig_names(v37: dict, v39: dict | None) -> None:
+    """図 5: 名前が記録しているもの。a 集落の点での地形（ラベル非依存）、b 集落からの距離による減衰、
+    c 集落から 500 m 以内の浸水のオッズ比（AOI 固定効果）、d 効果量の翻訳（合成ラベル）。"""
+    fig = plt.figure(figsize=(7.2, 5.4), layout="constrained")
+    axs = fig.subplots(2, 2).ravel()
+    classes = list(CLASS_LABELS)
+    ys = np.arange(len(classes))[::-1]
+    blue, brown, grey = "#1f6fb4", "#8c5a2b", "0.45"
+    # a: 集落の点（集落を含むセル）と全セルでの HAND ≤ 2 m の割合の差
+    ax = axs[0]
+    pc = v37["positive_control"]
+    _fig4_source(v37, v39, classes)
+    for y, c in zip(ys, classes, strict=True):
+        col = brown if c == "high" else blue
+        for scale, dy, filled in (("settlements", 0.15, True), ("cells", -0.15, False)):
+            r = pc[scale][c]["low_hand"]
+            if not r:
+                continue
+            ax.plot(100 * np.array(r["ci95"]), [y + dy, y + dy], color=col if filled else grey, lw=1.4)
+            ax.plot([100 * r["estimate"]], [y + dy], "o", ms=4, color=col if filled else grey,
+                    mfc=(col if filled else "white"))
     ax.axvline(0, color="0.4", lw=0.8)
     ax.set_yticks(ys)
-    ax.set_yticklabels([n for n, *_ in bars], fontsize=6.5)
-    ax.set_xlabel("Brier-score improvement\n(× terrain increment)", fontsize=7)
-    ax.tick_params(axis="x", labelsize=6.5)
-    for a, lab in zip(axs, "abc", strict=True):
+    ax.set_yticklabels([CLASS_LABELS[c] for c in classes], fontsize=7)
+    ax.set_xlabel("difference in share of cells containing ground\nwith HAND ≤ 2 m (pct. points; filled: at the "
+                  "settlement, open: all cells)", fontsize=7)
+    # b: 水系側の名と他の名の差を、最寄りの集落までの距離帯ごとに
+    ax = axs[1]
+    bands = list(BAND_LABELS)
+    x = np.arange(len(bands))
+    series = [("HAND ≤ 2 m (no labels)", [pc["bands"][b]["low_hand"] for b in bands], grey, "s", True),
+              ("flooded, observed", [v37["flood_contrast"]["by_band"]["capped"][b]["y"] for b in bands],
+               blue, "o", True),
+              ("flooded, net of terrain model",
+               [v37["flood_contrast"]["by_band"]["capped"][b]["resid_M1c"] for b in bands], blue, "o", False)]
+    for k, (lab, rs, col, mk, filled) in enumerate(series):
+        dx = (k - 1) * 0.18
+        est = np.array([100 * r["estimate"] for r in rs])
+        lo = np.array([100 * r["ci95"][0] for r in rs])
+        hi = np.array([100 * r["ci95"][1] for r in rs])
+        ax.errorbar(x + dx, est, yerr=[est - lo, hi - est], fmt=mk, ms=4, color=col, lw=1.2,
+                    mfc=col if filled else "white", capsize=0, label=lab)
+    ax.axhline(0, color="0.4", lw=0.8)
+    ax.set_xticks(x)
+    ax.set_xticklabels(["≤250 m", "250–500 m", "0.5–1 km", ">1 km"], fontsize=7)
+    ax.set_xlabel("distance to the nearest settlement", fontsize=7)
+    ax.set_ylabel("water-side − other names\n(pct. points)", fontsize=7)
+    ax.legend(fontsize=6, frameon=False, loc="upper right")
+    # c: 集落から 500 m 以内の浸水のオッズ比（AOI 固定効果、地形モデルで調整 / 調整なし）
+    ax = axs[2]
+    if v39:
+        for y, c in zip(ys, classes, strict=True):
+            col = brown if c == "high" else blue
+            key = "wetside" if c == "wetside" else "categories"
+            for adj, dy, filled in (("adjusted_M1", 0.15, True), ("raw", -0.15, False)):
+                t = v39[f"{key}_{adj}"]["terms"][f"{c}:le500m"]
+                ax.plot(t["ci95_odds_ratio"], [y + dy, y + dy], color=col if filled else grey, lw=1.4)
+                ax.plot([t["odds_ratio"]], [y + dy], "o", ms=4, color=col if filled else grey,
+                        mfc=col if filled else "white")
+        ax.set_xscale("log")
+        ax.axvline(1, color="0.4", lw=0.8)
+        ax.set_xlim(0.3, 4.5)
+        ax.xaxis.set_major_locator(FixedLocator([0.5, 1, 2, 4]))
+        ax.xaxis.set_major_formatter(FixedFormatter(["0.5", "1", "2", "4"]))
+        ax.xaxis.set_minor_locator(NullLocator())
+        ax.set_yticks(ys)
+        ax.set_yticklabels([CLASS_LABELS[c] for c in classes], fontsize=7)
+        ax.set_xlabel("odds ratio of flooding within 500 m of the settlement\n(filled: given the "
+                      "terrain model, open: unadjusted)", fontsize=7)
+    # d: 合成ラベルでの名前効果 δ と平均 ΔBS(M1c → M3n)。一様な効果と、集落から 500 m 以内だけの効果
+    ax = axs[3]
+    e = v37.get("effect_size_translation", {})
+    xmax = 0.0
+    for key, lab, col, mk in (("curve", "effect at every distance", blue, "o"),
+                              ("curve_local", "effect within 500 m only", brown, "s")):
+        curve = sorted((float(k), c) for k, c in e.get(key, {}).items())
+        if not curve:
+            continue
+        dx = np.array([k for k, _ in curve])
+        mu = 1e4 * np.array([c["mean_delta_bs"] for _, c in curve])
+        lo = 1e4 * np.array([c["mc_ci95_mean"][0] for _, c in curve])
+        hi = 1e4 * np.array([c["mc_ci95_mean"][1] for _, c in curve])
+        ax.errorbar(dx, mu, yerr=[mu - lo, hi - mu], fmt=mk, ms=3.5, color=col, lw=1.2, capsize=0,
+                    label=lab)
+        # 点の間は、δ の逆算（v37 の invert）と同じくデータの尺度で線形補間した線を描く
+        xs = np.linspace(dx.min(), dx.max(), 400)
+        ax.plot(xs, np.interp(xs, dx, mu), color=col, lw=1.0)
+        xmax = max(xmax, float(dx.max()))
+    tg = e.get("targets", {})
+    if tg:
+        # 線の説明は曲線の通らない帯（一様な効果の曲線の右、局所的な効果の曲線の上）に置く
+        for key, lab, ls, va, x0 in (("margin", "equivalence margin", "--", "bottom", 1.75),
+                                     ("two_way_upper90", "90% bound (two-way)", "-.", "bottom", 0.66),
+                                     ("achieved_upper90", "90% bound (places)", ":", "top", 0.66)):
+            if key in tg:
+                ax.axhline(1e4 * tg[key], color="0.3", ls=ls, lw=0.9)
+                ax.text(x0, 1e4 * tg[key], lab, fontsize=5.5, va=va, ha="left", color="0.25")
+        # 観測された上限（0.2–0.4×10^-4）と余裕幅（3.8×10^-4）の両方で曲線との交点が読めるように、0 の近くは線形・上は対数
+        ax.set_yscale("symlog", linthresh=0.1, linscale=0.6)
+        ax.yaxis.set_major_locator(FixedLocator([0, 0.1, 0.3, 1, 3, 10]))
+        ax.yaxis.set_major_formatter(FixedFormatter(["0", "0.1", "0.3", "1", "3", "10"]))
+        ax.yaxis.set_minor_locator(NullLocator())
+        ax.set_ylim(-0.05, 1e4 * 4 * tg.get("margin", 1e-4))
+        ax.set_xlabel("simulated name effect δ (log-odds; odds ratio e$^δ$ on top)", fontsize=7)
+        ax.set_ylabel("ΔBS from names within areas\n(×10$^{-4}$, mean, 95% MC interval)", fontsize=7)
+        ax.legend(fontsize=6, frameon=False, loc="upper left")
+        top = ax.secondary_xaxis("top", functions=(np.exp, lambda v: np.log(np.clip(v, 1e-9, None))))
+        top.set_xticks([t for t in (1, 2, 4, 8, 16) if np.log(t) <= xmax + 1e-9])
+        top.tick_params(labelsize=6.5)
+    for a, lab in zip(axs, "abcd", strict=True):
+        a.tick_params(labelsize=6.5)
         for s in ("top", "right"):
             a.spines[s].set_visible(False)
         a.set_title(lab, fontsize=9, fontweight="bold", loc="left")
     fig.savefig(OUTDIR / "fig_names.pdf")
     plt.close(fig)
+
+
+def si_yardsticks(v: dict) -> str:
+    """補足表: 物差し 5 通り × bootstrap 2 通りの固定マージン TOST（事後、v36）。崩れた組も全て載せる。"""
+    sp = v["splits"]
+    names = {"Y0": "pre-specified", "Y1": "lower 95\\% bound", "Y2": "recalibrated",
+             "Y3": "from a constant", "Y4": "stacked"}
+    ys = list(names)
+    head = "Split, comparison & Bootstrap & " + " & ".join(f"{k}: {n}" for k, n in names.items())
+    spec = [("primary", "primary", "Location groups, H2"),
+            ("primary_actgrp", "primary", "Flood events grouped, H2$^{e}$"),
+            ("country", "primary", "Countries, H2"),
+            ("temporal", "primary", "Time, H2$^{u}$"),
+            ("llmcut", "primary", "LM cut-off, H2"),
+            ("llmcut", "H4", "LM cut-off, H4"),
+            ("llmcut", "H4_total", "LM cut-off, H4 total$^{s}$"),
+            ("primary_dm", "demeaned", "Location groups, demeaned$^{d}$"),
+            ("primary_dm_actgrp", "demeaned", "Flood events grouped, demeaned$^{d,e}$"),
+            ("country_dm", "demeaned", "Countries, demeaned$^{d}$"),
+            ("temporal_dm", "demeaned", "Time, demeaned$^{d,u}$"),
+            ("llmcut_dm", "demeaned", "LM cut-off, demeaned$^{d}$")]
+    rows = []
+    for key, comp, lab in spec:
+        r = sp.get(key)
+        if not r or comp not in r["cluster"]:
+            continue
+        for kind, kname in (("cluster", "cluster"), ("two_way", "two-way")):
+            row = r[kind].get(comp)
+            ysv = r[kind]["yardsticks"]
+            cells = []
+            for y in ys:
+                e = (row or {}).get(y)
+                if e is None or y not in ysv:
+                    cells.append("---")
+                elif not e["ci90_R"]:
+                    cells.append("undefined")
+                else:
+                    mark = "" if e["equivalent"] else "$^{\\dagger}$"
+                    cells.append(f"{_ci(e['ci90_R'])}{mark}")
+            rows.append(f"{lab if kind == 'cluster' else ''} & {kname} & " + " & ".join(cells) + " \\\\")
+        for kind, kname in (("cluster", "cluster"), ("two_way", "two-way")):  # Y1 は bootstrap ごとに違う
+            yv = r[kind]["yardsticks"]
+            rows.append(f"\\quad yardstick $\\Delta$BS & {kname} & " + " & ".join(
+                sci(yv[y], 2) if y in yv else "---" for y in ys) + " \\\\")
+    return _table("p{3.3cm}l" + "c" * len(ys), head, rows,
+                  "Equivalence of the within-area increment under alternative yardsticks (post hoc, amendment "
+                  "B-2). Each cell is the 90\\% interval of $\\Delta\\mathrm{BS}$ divided by the yardstick; "
+                  "equivalence holds when it lies within $\\pm0.05$ ($^{\\dagger}$: does not hold). Y0: the "
+                  "pre-specified $\\widehat{\\Delta\\mathrm{BS}}(\\mathrm{M0}\\to\\mathrm{M1})$; Y1: the lower end "
+                  "of its 95\\% interval under the same bootstrap; Y2: $\\widehat{\\Delta\\mathrm{BS}}(\\mathrm{M0s}"
+                  "\\to\\mathrm{M1s})$, both base models recalibrated; Y3: $\\widehat{\\Delta\\mathrm{BS}}$ from a "
+                  "constant prediction (the training-side flood rate; for the single-fold time splits the "
+                  "evaluation-side rate, which favours the constant) to M1s; Y4: $\\widehat{\\Delta\\mathrm{BS}}"
+                  "(\\mathrm{M0c}\\to\\mathrm{M1c})$. Cluster: location groups (countries for the country hold-out), "
+                  "4,000 replicates; two-way: activations $\\times$ countries (each AOI counted in the country of "
+                  "most of its nearest settlements), 4,000 replicates. Undefined: the yardstick is not positive. "
+                  "$^{u}$The pre-specified rule leaves $R$ undefined on this split because the 95\\% interval of the "
+                  "terrain increment includes zero. $^{e}$All areas of each flood event on the same side of every "
+                  "split. $^{s}$Secondary comparison (total increment of the language-model reading over M1s). "
+                  "$^{d}$Name features centred within each AOI (M1s$\\to$M3d), without the regional composition. "
+                  "The pre-specified two-way bootstrap of the ratio is in Supplementary Table~\\ref{tab:si-registered}.",
+                  "tab:si-yardsticks")
+
+
+def si_registered(v: dict) -> str:
+    """補足表: 登録した量のうち他の表に無いもの（B-2 追記 3）。凍結した判定表の label（物差し Y0）、比の bootstrap、
+    登録どおりの二方向 bootstrap（比・セルの最寄り集落の国・1,000 回）、同等性が成り立つ最小の物差し、real − permuted。"""
+    sp = v["splits"]
+    spec = [("primary", "primary", "Location groups, H2"),
+            ("country", "primary", "Countries, H2"),
+            ("temporal", "primary", "Time, H2$^{u}$"),
+            ("llmcut", "primary", "LM cut-off, H2"),
+            ("llmcut", "H4", "LM cut-off, H4"),
+            ("primary_actgrp", "primary", "Flood events grouped, H2$^{e}$"),
+            ("primary_dm", "demeaned", "Location groups, centred$^{d}$"),
+            ("primary_dm_actgrp", "demeaned", "Flood events grouped, centred$^{d,e}$"),
+            ("country_dm", "demeaned", "Countries, centred$^{d}$"),
+            ("temporal_dm", "demeaned", "Time, centred$^{d,u}$"),
+            ("llmcut_dm", "demeaned", "LM cut-off, centred$^{d}$")]
+    rows = []
+    for key, comp, lab in spec:
+        r = sp.get(key)
+        row = ((r or {}).get("cluster") or {}).get(comp)
+        if not row:
+            continue
+        pt = (r.get("prespecified_two_way") or {}).get("ci95_R") if comp == "primary" else None
+        rmp = (_r(row["R_minus_Rp_Y0"]) + " " + _ci(row["ci95_R_minus_Rp_Y0"])) if "R_minus_Rp_Y0" in row else "---"
+        rows.append(f"{lab} & {row.get('decision_Y0', '---')} & {_ci(row['ci95_R_ratio_bootstrap'])} & "
+                    f"{_ci(pt) if pt else '---'} & {sci(row['smallest_yardstick_for_equivalence'], 2)} / "
+                    f"{sci(r['cluster']['yardsticks']['Y0'], 2)} & {rmp} \\\\")
+    return _table("p{4.2cm}lcccc", "Split, comparison & Label (Y0) & Ratio bootstrap, 95\\% & Pre-specified two-way, "
+                  "95\\% & Smallest yardstick / Y0 & Real $-$ permuted, 95\\%", rows,
+                  "Registered quantities not shown elsewhere (post hoc, amendment B-2). Label: the pre-specified "
+                  "decision table applied with the pre-specified yardstick (Y0), with the placebo condition on the "
+                  "difference between real and permuted names; it reproduces the confirmatory labels. Ratio bootstrap: "
+                  "95\\% interval of $R$ from resampling the ratio of the two increments (cluster bootstrap over "
+                  "location groups, countries for the country hold-out). Pre-specified two-way: the protocol's "
+                  "robustness check, resampling activations and the country of each cell's nearest settlement "
+                  "(1,000 replicates, ratio). Smallest yardstick: the smallest terrain increment against which the "
+                  "90\\% interval of $\\Delta\\mathrm{BS}$ would lie within $\\pm0.05$ of it, beside Y0. "
+                  "$^{u}$The pre-specified rule leaves $R$ undefined on this split. $^{e}$All areas of each flood "
+                  "event on the same side of every split. $^{d}$Name features centred within each AOI "
+                  "(M1s$\\to$M3d). ---: the protocol's two-way bootstrap is defined for the primary comparison "
+                  "of each split only.",
+                  "tab:si-registered")
+
+
+def si_ratio(v: dict) -> str:
+    """補足表: 比の bootstrap による R の 95% 区間を、v36 の全ての比較 × 分割について（B-2 追記 1・3、登録）。"""
+    sp = v["splits"]
+    comps = [("primary", "Names within areas, M1c$\\to$M3n (H2)"), ("placebo", "Names permuted, M1c$\\to$M3np"),
+             ("channel_lexicon", "Lexicon only, M1c$\\to$M3nx"), ("channel_learned", "Learned score only, M1c$\\to$M3nl"),
+             ("H1", "Position only, M0c$\\to$M0n (H1)"), ("H1_flexible", "Position only, flexible, M0$\\to$M0N"),
+             ("total", "Total, M1s$\\to$M3s"), ("flexible", "Flexible, M1$\\to$M3"),
+             ("H4", "Language model, M1rc$\\to$M3rn (H4)"), ("H4_placebo", "Language model, permuted"),
+             ("H4_total", "Language model, total, M1s$\\to$M3rs"), ("H4_flexible", "Language model, flexible"),
+             ("demeaned", "Names centred within AOIs, M1s$\\to$M3d")]
+    splits = [("primary", "Location groups"), ("country", "Countries"), ("temporal", "Time$^{u}$"),
+              ("llmcut", "LM cut-off"), ("primary_actgrp", "Events grouped")]
+    rows = []
+    for key, lab in comps:
+        cells = []
+        for s, _ in splits:
+            src = sp.get(f"{s}_dm" if key == "demeaned" and s != "primary_actgrp" else
+                         ("primary_dm_actgrp" if key == "demeaned" else s)) or {}
+            row = (src.get("cluster") or {}).get(key) or {}
+            cells.append(_ci(row.get("ci95_R_ratio_bootstrap")) if row else "---")
+        if any(c != "---" for c in cells):
+            rows.append(f"{lab} & " + " & ".join(cells) + " \\\\")
+    return _table("p{5.2cm}ccccc", "Comparison & " + " & ".join(n for _, n in splits), rows,
+                  "Ratio-bootstrap 95\\% intervals of $R$ for every comparison and split (post hoc, registered in "
+                  "amendment B-2): the two increments are resampled together (cluster bootstrap over location "
+                  "groups, countries for the country hold-out, 4,000 replicates) and their ratio taken in each "
+                  "replicate. The decision table uses fixed-margin intervals instead (Methods), because the ratio "
+                  "mixes the uncertainty of the denominator into $R$. $^{u}$The pre-specified rule leaves $R$ "
+                  "undefined on this split. ---: comparison not run on this split.",
+                  "tab:si-ratio")
+
+
+def si_posthoc(v36: dict | None, v37: dict | None, v38: dict | None) -> str:
+    """補足表: 主比較の事後の層・部分集合・分け方（v36–v38）。登録外の行に印。"""
+    rows = []
+
+    def row(lab: str, b: dict | None, y0: str = "---") -> None:
+        if not b or b.get("R") is None:
+            rows.append(f"{lab} & \\missing{{pending}} & & & & & \\\\")
+            return
+        eq = b.get("equivalent")
+        if eq is None and b.get("ci90_R"):
+            eq = -SESOI < b["ci90_R"][0] and b["ci90_R"][1] < SESOI
+        rows.append(f"{lab} & {_n(b['n_cells'])} & {b['n_units']} & {y0} & {_r(b['R'])} & "
+                    f"{_ci(b.get('ci90_R'))} & {'equivalent' if eq else 'not equivalent'} \\\\")
+
+    if v37:
+        rows.append("\\multicolumn{7}{l}{\\emph{Distance from the cell to its nearest settlement}} \\\\")
+        for k, lab in (("le500m", "\\quad up to 500\\,m"), ("le250m", "\\quad up to 250\\,m$^{a}$"),
+                       ("250_500m", "\\quad 250--500\\,m$^{a}$"),
+                       ("500m_1km", "\\quad 0.5--1\\,km"), ("gt1km", "\\quad more than 1\\,km")):
+            b = v37["primary_by_distance"].get(k)
+            row(lab, b, sci(b["yardstick_M0_M1"], 2) if b else "---")
+        b = v37["primary_by_distance_wetside"].get("le500m")
+        row("\\quad up to 500\\,m, nearest name water-side$^{a}$", b, sci(b["yardstick_M0_M1"], 2) if b else "---")
+        nc = v37.get("near_settlement_clean")
+        if nc:
+            b = nc["primary"]
+            row("\\quad up to 500\\,m, built-up and tree cover removed$^{a}$", b, sci(b["yardstick_M0_M1"], 2))
+            b = nc["primary_wetside"]
+            row("\\quad up to 500\\,m, water-side, built-up and tree cover removed$^{a}$", b,
+                sci(b["yardstick_M0_M1"], 2))
+        rows.append("\\multicolumn{7}{l}{\\emph{Class of the nearest name}} \\\\")
+        for c, lab in CLASS_LABELS.items():
+            b = v37.get("primary_by_class", {}).get(c)
+            row(f"\\quad {lab}", b, sci(b["yardstick_M0_M1"], 2) if b else "---")
+    if v38:
+        rows.append("\\multicolumn{7}{l}{\\emph{Post-event imagery of the delineation}} \\\\")
+        for k, lab in (("sar", "\\quad radar only"), ("optical", "\\quad optical only"),
+                       ("unknown", "\\quad not recorded (mostly schema generations 0--1)")):
+            b = v38["increments"].get(k)
+            row(lab, b, sci(b["delta_bs_M0_M1"], 2) if b else "---")
+    if v36:
+        rows.append("\\multicolumn{7}{l}{\\emph{Fold assignment, grouping and seeds (verdict of the decision table)}} \\\\")
+        for run, lab in (("world_v2", "\\quad pre-specified folds"),
+                         ("world_v2_fs1", "\\quad folds reassigned (seed 1)"),
+                         ("world_v2_fs2", "\\quad folds reassigned (seed 2)"),
+                         ("world_v2_actgrp", "\\quad AOIs of the same activation grouped"),
+                         ("world_v2_s5_k1", "\\quad one seed instead of five")):
+            r = v36.get("spread_primary", {}).get(run)
+            met = _json(DATA / "runs" / run / "metrics_primary.json")
+            if r and met:
+                tost = "TOST holds" if r.get("equivalent_TOST") else "TOST fails"
+                rows.append(f"{lab} & {_n(met['n_cells'])} & {met['n_units']} & {sci(r['delta_bs_M0_M1'], 2)} & "
+                            f"{_r(r['R'])} & {_ci(r['ci90_R'])} & {r['decision']} ({tost}) \\\\")
+            else:
+                rows.append(f"{lab} & \\missing{{pending}} & & & & & \\\\")
+    return _table("p{5.4cm}rrcrcl", "Subset or variant & Cells & Units & Terrain $\\Delta$BS & $R$ & "
+                  "90\\% interval & Verdict", rows,
+                  "The primary comparison in subsets of cells and under variants of the fold assignment (post "
+                  "hoc). For subsets, $R$ is the names increment in the subset divided by the terrain increment "
+                  "in the same subset (as for the H5 strata); the 90\\% interval comes from the cluster bootstrap "
+                  "over location groups restricted to the subset, and the last column gives the equivalence test "
+                  "alone. For variants, the last column gives the label of the pre-specified decision table and "
+                  "the equivalence test; the run with one seed instead of five is the pre-specified sensitivity "
+                  "analysis 5 (protocol \\S7-5). Built-up and tree cover removed: cells with ESA CCI built-up cover above "
+                  "10\\% or tree cover above 50\\%. Distance bands up to 500\\,m, 0.5--1\\,km and beyond 1\\,km, "
+                  "the classes, the sensors, the fold reassignments and the activation grouping were registered in "
+                  "amendment B-2 before they were run. The terrain increment within a class differs between classes "
+                  "by up to about seventeen-fold, so the verdicts by class depend strongly on their own denominators; "
+                  "Supplementary Table~\\ref{tab:si-class} compares classes on the Brier scale. "
+                  "$^{a}$Not registered (added while the analysis was written, or a subset of such an analysis).",
+                  "tab:si-posthoc")
+
+
+def si_class(primary: dict | None, v: dict) -> str:
+    """補足表: 最寄り名の区分別の主比較の増分を Brier の尺度で（B-2 で登録した記述の量。95% 区間と
+    real − permuted は追記 4 で登録）。区分ごとの物差しが大きく違うので、R ではなく ΔBS で並べる。"""
+
+    def e4(x: float) -> str:  # 10^-4 単位、有効 3 桁
+        s = f"{x * 1e4:+#.3g}".rstrip(".")
+        return sci(x, 2) if "e" in s else "$" + s.replace("-", "{-}").replace("+", "{+}") + "$"
+
+    def ci(c: list | None) -> str:
+        return "---" if not c else f"[{e4(c[0])}, {e4(c[1])}]"
+
+    rows = []
+    p = (primary or {}).get("primary")
+    if p:
+        rows.append(f"all cells (primary) & {_n(primary['n_cells'])} & {primary['n_units']} & "
+                    f"{e4(p['delta_bs_M1c_M3n'])} & {ci(p['ci90_delta'])} & {ci(p['ci95_delta'])} & "
+                    f"---$^{{a}}$ & {p['delta_bs_M0_M1'] * 1e4:.3g} \\\\")
+    for c, lab in CLASS_LABELS.items():
+        b = v.get("primary_by_class", {}).get(c)
+        if not b or "ci95_delta" not in b:
+            rows.append(f"{lab} & \\missing{{v37 class {c}}} & & & & & & \\\\")
+            continue
+        rows.append(f"{lab} & {_n(int(b['n_cells']))} & {b['n_units']} & {e4(b['delta_bs_names'])} & "
+                    f"{ci(b['ci90_delta'])} & {ci(b['ci95_delta'])} & "
+                    f"{e4(b['real_minus_permuted_delta_bs'])} {ci(b['ci95_real_minus_permuted'])} & "
+                    f"{b['yardstick_M0_M1'] * 1e4:.3g} \\\\")
+    margin = f"{p['margin_delta_bs'] * 1e4:.2f}" if p else "\\missing{margin}"
+    return _table("lrrrccll", "Nearest name & Cells & Units & $\\Delta$BS & 90\\% interval & 95\\% interval & "
+                  "Real${}-{}$permuted (95\\%) & Terrain $\\Delta$BS", rows,
+                  "The names increment within areas (M1c$\\to$M3n) by class of the nearest name, on the Brier scale "
+                  "(post hoc; registered in amendment B-2 as descriptive quantities, the 95\\% intervals and the "
+                  "difference between real and permuted names in its fourth addendum). All Brier-score differences "
+                  "are in units of $10^{-4}$; positive values mean that names improved held-out predictions. "
+                  "Intervals come from the cluster bootstrap over location groups restricted to the cells of each "
+                  "class (classes overlap: a name can belong to several). Terrain $\\Delta$BS is the terrain "
+                  "increment (M0$\\to$M1) in the same cells, the denominator of the class verdicts in "
+                  f"Supplementary Table~\\ref{{tab:si-posthoc}}; the pooled equivalence margin is {margin}. "
+                  "$^{a}$For all cells, the difference between real and permuted names is given as a ratio in "
+                  "Supplementary Table~\\ref{tab:si-registered}.",
+                  "tab:si-class")
+
+
+def si_positive_control(v: dict) -> str:
+    """補足表: 正の対照（ラベル非依存、v37）。セル単位は B-2 で登録、集落の点は登録外。"""
+    pc = v["positive_control"]
+
+    def num(v: float, nd: int) -> str:
+        while nd < 3 and v != 0 and round(abs(v), nd) == 0:  # ±0.0 と書かない
+            nd += 1
+        return f"{v:+.{nd}f}"
+
+    def f(r: dict | None, scale: float = 100.0, nd: int = 1) -> str:
+        if not r:
+            return "---"
+        s = (f"{num(scale * r['estimate'], nd)} [{num(scale * r['ci95'][0], nd)}, "
+             f"{num(scale * r['ci95'][1], nd)}]")
+        return s.replace("+", "{+}").replace("-", "{-}")
+
+    def base(r: dict | None) -> str:
+        return "---" if not r else f"{100 * r['mean_group']:.0f}/{100 * r['mean_other']:.0f}"
+
+    rows_a, rows_b = [], []
+    for c, lab in CLASS_LABELS.items():
+        for scale, slab in (("cells", "all cells"), ("settlements", "at settlement$^{a}$")):
+            r = pc[scale].get(c) or {}
+            n = (r.get("low_hand") or {}).get("n_aoi", "---")
+            name = lab if scale == "cells" else ""
+            rows_a.append(f"{name} & {slab} & {f(r.get('low_hand'))} & {base(r.get('low_hand'))} & "
+                          f"{f(r.get('low_half'))} & {n} \\\\")
+            rows_b.append(f"{name} & {slab} & {f(r.get('log_river'), 1.0, 2)} & {f(r.get('hand_mean'), 1.0, 1)} & "
+                          f"{f(r.get('hand_pct'))} \\\\")
+    for c in ("wetside", "high"):
+        r = pc.get("settlements_not_rounded", {}).get(c) or {}
+        slab = "at settlement, coordinates not rounded$^{b}$"
+        rows_a.append(f"{CLASS_LABELS[c]} & {slab} & {f(r.get('low_hand'))} & {base(r.get('low_hand'))} & "
+                      f"{f(r.get('low_half'))} & {(r.get('low_hand') or {}).get('n_aoi', '---')} \\\\")
+        rows_b.append(f"{CLASS_LABELS[c]} & {slab} & {f(r.get('log_river'), 1.0, 2)} & "
+                      f"{f(r.get('hand_mean'), 1.0, 1)} & {f(r.get('hand_pct'))} \\\\")
+    notes = ("The all-cell rows are the analysis registered in amendment B-2. $^{a}$Not registered: cells within "
+             "177\\,m of the settlement point (the one to four cells around it), averaged per settlement "
+             f"({_n(pc['n_settlement_points'])} settlements; AOIs need at least two settlements of each kind). "
+             "$^{b}$Excluding settlements whose GeoNames coordinates fall on whole arc-minutes (rounding of up "
+             f"to about 0.9\\,km in each coordinate; {pct(pc['share_settlement_points_minute_rounded'])} of "
+             "settlement points).")
+    a = _table("llcccr", "Nearest name & Scale & HAND $\\leq2$\\,m in cell (pp) & "
+               "Class/other (\\%) & Lower half (pp) & AOIs", rows_a,
+               "Positive control without flood labels (binary measures): within-AOI differences between cells (or "
+               "settlements) whose nearest settlement name is in the class and other cells (or settlements) of the "
+               "same AOI, with 95\\% cluster-bootstrap intervals over location groups. ``HAND $\\leq2$\\,m'' is "
+               "whether any 25\\,m pixel of the 250\\,m cell lies within 2\\,m of the nearest drainage (the "
+               "cell's minimum HAND); it holds for most cells, so the shares in each group are given. Lower half: the "
+               "cell lies in the lower half of its AOI by mean elevation. Continuous measures are in Supplementary "
+               "Table~\\ref{tab:si-positive-control-b}. " + notes,
+               "tab:si-positive-control")
+    b = _table("llccc", "Nearest name & Scale & log(1 + river distance) & Mean HAND (m) & HAND percentile (pp)", rows_b,
+               "Positive control without flood labels (continuous measures), as in Supplementary "
+               "Table~\\ref{tab:si-positive-control}: differences in log(1 + distance to the nearest mapped river), "
+               "in the cell's mean height above nearest drainage and in its HAND percentile within the AOI. " + notes,
+               "tab:si-positive-control-b")
+    return a + "\n" + b
+
+
+def si_odds(v: dict) -> str:
+    """補足表: AOI 固定効果つきロジスティック回帰のオッズ比（v39）。"""
+    def cell(t: dict | None) -> str:
+        if not t:
+            return "---"
+        return f"{t['odds_ratio']:.2f} [{t['ci95_odds_ratio'][0]:.2f}, {t['ci95_odds_ratio'][1]:.2f}]"
+
+    rows = []
+    for c, lab in CLASS_LABELS.items():
+        key = "wetside" if c == "wetside" else "categories"
+        cells = [cell(v.get(f"{key}_allcells_{adj}", {}).get("terms", {}).get(f"{c}:all"))
+                 for adj in ("raw", "adjusted_M1")]
+        for adj in ("raw", "adjusted_M1"):
+            for band in ("le500m", "500m_1km", "gt1km"):
+                cells.append(cell(v[f"{key}_{adj}"]["terms"][f"{c}:{band}"]))
+        rows.append(f"{lab} & " + " & ".join(cells) + " \\\\")
+    rows.append("\\midrule")
+    band_cells = ["---", "---"]
+    for adj in ("raw", "adjusted_M1"):
+        band_cells += ["1 (reference)", cell(v[f"wetside_{adj}"]["terms"]["band_500m_1km"]),
+                       cell(v[f"wetside_{adj}"]["terms"]["band_gt1km"])]
+    rows.append("Distance band (all names) & " + " & ".join(band_cells) + " \\\\")
+    if "wetside_clean_adjusted_M1" in v:
+        clean = ["---", "---"] + [cell(v[f"wetside_clean_{adj}"]["terms"][f"wetside:{band}"])
+                                  for adj in ("raw", "adjusted_M1") for band in ("le500m", "500m_1km", "gt1km")]
+        rows.append("water-side, built-up and tree cover removed & " + " & ".join(clean) + " \\\\")
+    head = ("Nearest name & \\multicolumn{2}{c}{All cells$^{r}$} & \\multicolumn{3}{c}{Unadjusted, by distance} & "
+            "\\multicolumn{3}{c}{Given the terrain model, by distance} \\\\\n"
+            " & unadjusted & given terrain & $\\leq500$\\,m & 0.5--1\\,km & $>1$\\,km & $\\leq500$\\,m & 0.5--1\\,km & $>1$\\,km")
+    bc = v.get("bootstrap_check_wetside")
+    check = ""
+    if bc:
+        b = bc["adjusted_M1"]["wetside:le500m"]["odds_ratio_ci95_bootstrap"]
+        check = (f" A cluster bootstrap over location groups ({bc['reps']} replicates, AOIs re-entered with "
+                 "their own intercepts) gives similar intervals, e.g. "
+                 f"{b[0]:.2f}--{b[1]:.2f} for water-side names within 500\\,m given the terrain model.")
+    return _table("lcccccccc", head, rows,
+                  "Within-AOI odds ratios of flooding for cells whose nearest settlement name is in the class, "
+                  "from logistic regressions with AOI fixed effects, unadjusted or with the logit of the held-out "
+                  "terrain-model prediction (M1) as a covariate; 95\\% intervals from cluster-robust "
+                  f"(location-group) standard errors; {v['wetside_adjusted_M1']['n_aoi']} AOIs (AOIs whose sampled "
+                  "cells are all dry carry no information and are omitted). $^{r}$All cells, one indicator per "
+                  "class: the analysis registered in amendment B-2. The distance-banded models (class $\\times$ "
+                  "band, with band main effects) were not registered. The distance-band row gives the odds of a "
+                  "flood label 0.5--1\\,km and more than 1\\,km from the nearest settlement relative to within "
+                  "500\\,m. Built-up and tree cover removed: cells with ESA CCI built-up cover above 10\\% or tree "
+                  "cover above 50\\% excluded." + check,
+                  "tab:si-odds")
+
+
+def si_composition(v: dict) -> str:
+    """補足表: 名前の地域構成の増分（再較正だけの基準から、v36）。時間外しは物差しが定義されない。"""
+    sp = v["splits"]
+    rows = []
+    for key, lab in (("primary", "Location groups"), ("primary_actgrp", "Flood events grouped$^{e}$"),
+                     ("country", "Countries"), ("temporal", "Time$^{u}$"), ("llmcut", "LM cut-off")):
+        r = sp.get(key)
+        if not r:
+            continue
+        comp = r["cluster"]["composition"]
+        y0 = r["cluster"]["yardsticks"]["Y0"]
+        cells = []
+        for ck in ("M0->M0c", "M0s->M0c", "T0s->T0c", "M1s->M1c", "M1s->M1rc"):
+            c = comp.get(ck)
+            cells.append("---" if not c else f"{_r(c['relative_to_Y0'])} {_ci([x / y0 for x in c['ci95_delta']])}")
+        rows.append(f"{lab} & " + " & ".join(cells) + " \\\\")
+    return _table("lccccc", "Split & M0$\\to$M0c & M0s$\\to$M0c & T0s$\\to$T0c & M1s$\\to$M1c & "
+                  "M1s$\\to$M1rc (LM)", rows,
+                  "Increment from the regional composition of names (AOI means of the name features; for the "
+                  "last column, of the language-model readings), as a fraction of the pre-specified terrain "
+                  "increment, with 95\\% cluster-bootstrap intervals (descriptive). M0$\\to$M0c compares the "
+                  "flexible position model with a stacked model and therefore includes the gain from "
+                  "recalibration; M0s and T0s are the same base models recalibrated without the composition "
+                  "(post hoc, amendment B-2), so M0s$\\to$M0c and T0s$\\to$T0c isolate the composition. "
+                  "$^{e}$All areas of each flood event on the same side of every split (no T0 arm in this run). "
+                  "$^{u}$The pre-specified rule leaves the terrain increment undefined on this split (its 95\\% "
+                  "interval includes zero), so these fractions are only indicative.", "tab:si-composition")
+
+
+def real_margin_rate(runs: Path, k: str, split: str) -> tuple[int, int, int] | None:
+    """δ = 1.2 の各回の ΔBS の 90% 区間（R の区間 × その回の合成の物差し）が、実データの余白の内側に入った回の数・回数・
+    合成の物差しが 0 以下だった回の数（B-2 追記 4）。余白が未定義の分割は None。"""
+    ses = _json(runs / f"power_v3{k}_sesoi" / "power_summary.json")
+    met = (_json(runs / "world_v2" / f"metrics_{split}.json") or {}).get("primary")
+    if not ses or not met or met["decision"] == "undefined-denominator" or not ses.get("reps"):
+        return None
+    mg = met["margin_delta_bs"]
+    inside = nonpos = 0
+    for r in ses["reps"]:
+        y0 = r["delta_bs_M0_M1"]
+        lo, hi = sorted([r["ci90"][0] * y0, r["ci90"][1] * y0])
+        inside += -mg < lo and hi < mg
+        nonpos += y0 <= 0
+    return inside, len(ses["reps"]), nonpos
+
+
+def si_power_splits(runs: Path) -> str:
+    """補足表: 各分割の検出力（主分割は凍結前、他は事後 B-2）。δ = 0 と δ = 1.2 の判定の分布・Wilson 区間・平均 R、
+    余白と観測の ΔBS の 95% 上限を δ = 1.2 の平均 ΔBS と比べた比（B-2 追記 3）。"""
+    rows = []
+    for k, split, lab in (("", "primary", "Location groups (pre-specified)"), ("c", "country", "Countries"),
+                          ("t", "temporal", "Time"), ("l", "llmcut", "Language-model cut-off, lexicon effect$^{a}$")):
+        nul = _json(runs / f"power_v3{k}_null" / "power_summary.json")
+        ses = _json(runs / f"power_v3{k}_sesoi" / "power_summary.json")
+        if not nul or not ses:
+            rows.append(f"{lab} & \\missing{{pending}} & & & & & & \\\\")
+            continue
+
+        def rate(x: float, n: int) -> str:
+            lo, hi = _wilson(x, n)
+            return f"{100 * x:.0f} [{100 * lo:.0f}, {100 * hi:.0f}]"
+
+        rm = real_margin_rate(runs, k, split)
+        real = rate(rm[0] / rm[1], rm[1]) if rm else "---"
+        for d, s, first in (("0", nul, True), ("1.2", ses, False)):
+            labels = ", ".join(f"{kk} {vv}" for kk, vv in sorted(s["decision_counts"].items()))
+            tail = " & ---" if first else f" & {real}"
+            rows.append(f"{lab if first else ''} & {d} & {s['n_reps']} & {rate(s['rate_equivalent_TOST'], s['n_reps'])} & "
+                        f"{rate(s['rate_positive'], s['n_reps'])} & {_r(s['mean_R'])} & {labels}{tail} \\\\")
+    return _table("p{3.6cm}cccccp{4.6cm}c", "Split & $\\delta$ & Replicates & Equivalent (\\%) & Positive (\\%) & "
+                  "Mean $R$ & Labels & Equivalent against the real margin (\\%)", rows,
+                  "Operating characteristics of the decision rule on synthetic labels for each split (the "
+                  "primary split before the freeze; the others post hoc, amendment B-2), with 95\\% Wilson "
+                  "intervals for the Monte-Carlo error. The simulated effect is $\\delta$ times the indicator that "
+                  "the nearest name is water-side in the lexicon, calibrated so that $R\\approx0.05$ on the primary "
+                  "split ($\\delta=1.2$, an odds ratio of 3.3); on the other splits the same $\\delta$ gives the mean "
+                  "$R$ shown, not the smallest effect of interest. Equivalent counts the replicates whose 90\\% "
+                  "interval of $R$ lies within $\\pm0.05$, whatever their label. The last column gives, for "
+                  "$\\delta=1.2$, the share of replicates whose 90\\% interval of $\\Delta$BS lies within the "
+                  "equivalence margin of the real labels on the same split (post hoc, amendment B-2): how often an "
+                  "effect of this size would have been called equivalent in our data (---: margin undefined on the "
+                  "time split). $^{a}$The effect is injected through the lexicon, so this row is the "
+                  "lexicon test on the language-model split; there is no power analysis for the language-model "
+                  "reading (H4).",
+                  "tab:si-power-splits")
+
+
+def _wilson(p: float, n: int) -> list[float]:
+    z = 1.96
+    den = 1 + z ** 2 / n
+    c = (p + z ** 2 / (2 * n)) / den
+    h = z * np.sqrt(p * (1 - p) / n + z ** 2 / (4 * n ** 2)) / den
+    return [max(0.0, c - h), min(1.0, c + h)]
 
 
 # %% SI の表（凍結後）— 全比較・分割・感度・層別・大陸別。数値は全て metrics_*.json から
@@ -679,6 +1869,9 @@ CONTINENTS = {"AF": "Africa", "AS": "Asia", "EU": "Europe", "NA": "North America
 def _r(x: float | None) -> str:
     if x is None:
         return "---"
+    if 0 < abs(x) < 5e-5:  # 4 桁でも 0.0000 に丸まる値は指数表記で
+        e = int(np.floor(np.log10(abs(x))))
+        return f"${x / 10**e:+.0f}\\times10^{{{e}}}$".replace("+", "{+}").replace("-", "{-}")
     s = f"{x:+.4f}" if 0 < abs(x) < 0.0005 else f"{x:+.3f}"  # 非零が 0.000 に丸まらないように
     return f"${s}$".replace("+", "{+}").replace("-", "{-}")
 
@@ -691,18 +1884,23 @@ def _n(x: int) -> str:
     return f"{x:,}".replace(",", "{,}")
 
 
-def _table(cols: str, head: str, rows: list[str], caption: str, label: str) -> str:
+def _table(cols: str, head: str, rows: list[str], caption: str, label: str, *, landscape: bool = False) -> str:
+    """表の LaTeX。landscape=True は横置き（rotating の sidewaystable、列の多い表を縮めすぎないように）。"""
     body = "\n".join(rows)
-    return (f"\\begin{{table}}[h!]\n\\centering\\footnotesize\\setlength{{\\tabcolsep}}{{4pt}}\n"
+    env = "sidewaystable" if landscape else "table"
+    pos = "" if landscape else "[h!]"
+    return (f"\\begin{{{env}}}{pos}\n\\centering\\footnotesize\\setlength{{\\tabcolsep}}{{4pt}}\n"
             f"\\caption{{{caption}}}\\label{{{label}}}\n"
             f"\\begin{{adjustbox}}{{max width=\\linewidth}}\n"
             f"\\begin{{tabular}}{{{cols}}}\n\\toprule\n{head} \\\\\n\\midrule\n{body}\n"
-            f"\\bottomrule\n\\end{{tabular}}\n\\end{{adjustbox}}\n\\end{{table}}\n")
+            f"\\bottomrule\n\\end{{tabular}}\n\\end{{adjustbox}}\n\\end{{{env}}}\n")
 
 
 def _tost(blk: dict) -> str:
     """§6: TOST の成否を判定 label と独立に併記する。"""
-    return "---" if "equivalent_TOST" not in blk else ("yes" if blk["equivalent_TOST"] else "no")
+    if "equivalent_TOST" not in blk or blk.get("decision") == "undefined-denominator":
+        return "---"
+    return "yes" if blk["equivalent_TOST"] else "no"
 
 
 def _cmp_row(name: str, blk: dict | None, r: str = "R", c95: str = "ci95_R",
@@ -714,29 +1912,53 @@ def _cmp_row(name: str, blk: dict | None, r: str = "R", c95: str = "ci95_R",
             f"{blk.get('decision', '---')} & {_tost(blk)} \\\\")
 
 
-def si_comparisons(m: dict) -> str:
-    """補足表 1: 主分割の全比較（副次・チャネル・梯子を含む）。"""
+def _row7(name: str, r: float | None, c95: list | None, c90: list | None, ratio: list | None,
+          verdict: str = "---", tost: str = "---") -> str:
+    return (f"{name} & {_r(r)} & {_ci(c95)} & {_ci(c90)} & {_ci(ratio)} & {verdict} & {tost} \\\\")
+
+
+def si_comparisons(m: dict, v36: dict | None = None) -> str:
+    """補足表 1: 主分割の全比較（副次・チャネル・梯子を含む）。区間は固定マージン（物差し = 登録どおりの
+    点推定）と比の bootstrap（物差しの揺らぎも含む、記述）の両方。チャネル・H1 の固定マージンは v36。"""
     d01 = m["primary"]["delta_bs_M0_M1"]
-    ch, chf = m.get("channels", {}), m.get("channels_flexible", {})
+    chf = m.get("channels_flexible", {})
     pl, tpl, fpl = m.get("placebo", {}), m.get("total_placebo", {}), m.get("flexible_placebo", {})
+
+    def verdict_row(name: str, blk: dict | None) -> str:
+        if not blk:
+            return f"{name} & \\missing{{{name}}} & & & & & \\\\"
+        return _row7(name, blk["R"], blk["ci95_R"], blk["ci90_R"], blk.get("ci95_R_ratio_bootstrap"),
+                     blk["decision"], _tost(blk))
+
+    def fm_row(name: str, comp: str) -> str:
+        f = fixed_margin(v36, "primary", comp)
+        if not f:
+            return f"{name} & \\missing{{v36 {comp}}} & & & & & \\\\"
+        return _row7(name, f["R"], f["ci95_R"], f["ci90_R"], f["ratio95"])
+
+    def plac_row(name: str, blk: dict, comp: str | None = None) -> str:
+        f = fixed_margin(v36, "primary", comp) if comp else None
+        return _row7(name, blk.get("R_placebo"), blk.get("ci95_R_placebo"), f["ci90_R"] if f else None,
+                     f["ratio95"] if f else None)
+
     rows = [
-        _cmp_row("H2: names within places, M1c$\\to$M3n", m["primary"]),
-        _cmp_row("\\quad placebo, M1c$\\to$M3np", pl, "R_placebo", "ci95_R_placebo", None),
-        _cmp_row("\\quad real minus placebo", pl, "R_minus_Rp", "ci95_R_minus_Rp", None),
-        _cmp_row("\\quad lexicon only, M1c$\\to$M3nx", ch.get("M3nx"), c90=None),
-        _cmp_row("\\quad learned score only, M1c$\\to$M3nl", ch.get("M3nl"), c90=None),
-        _cmp_row("H1: position only, M0c$\\to$M0n", m.get("H1"), "ratio_to_terrain", "ci95_ratio",
-                 None),
-        _cmp_row("\\quad flexible, M0$\\to$M0N", m.get("H1_flexible"), "ratio_to_terrain",
-                 "ci95_ratio", None),
-        _cmp_row("H2t: total increment, M1s$\\to$M3s", m.get("total")),
-        _cmp_row("\\quad placebo, M1s$\\to$M3ps", tpl, "R_placebo", "ci95_R_placebo", None),
-        _cmp_row("Flexible refit, M1$\\to$M3", m.get("flexible")),
-        _cmp_row("\\quad placebo, M1$\\to$M3p", fpl, "R_placebo", "ci95_R_placebo", None),
-        _cmp_row("\\quad lexicon only, M1$\\to$M3x", chf.get("M3x"), c90=None),
-        _cmp_row("\\quad learned score only, M1$\\to$M3l", chf.get("M3l"), c90=None),
+        verdict_row("H2: names within areas, M1c$\\to$M3n", m["primary"]),
+        plac_row("\\quad placebo, M1c$\\to$M3np", pl, "placebo"),
+        _row7("\\quad real minus placebo", pl.get("R_minus_Rp"), pl.get("ci95_R_minus_Rp"), None, None),
+        fm_row("\\quad lexicon only, M1c$\\to$M3nx", "channel_lexicon"),
+        fm_row("\\quad learned score only, M1c$\\to$M3nl", "channel_learned"),
+        fm_row("H1: position only, M0c$\\to$M0n", "H1"),
+        fm_row("\\quad flexible, M0$\\to$M0N", "H1_flexible"),
+        verdict_row("H2t: total increment, M1s$\\to$M3s", m.get("total")),
+        plac_row("\\quad placebo, M1s$\\to$M3ps", tpl),
+        verdict_row("Flexible refit, M1$\\to$M3", m.get("flexible")),
+        plac_row("\\quad placebo, M1$\\to$M3p", fpl),
+        _row7("\\quad lexicon only, M1$\\to$M3x", (chf.get("M3x") or {}).get("R"), None, None,
+              (chf.get("M3x") or {}).get("ci95_R")),
+        _row7("\\quad learned score only, M1$\\to$M3l", (chf.get("M3l") or {}).get("R"), None, None,
+              (chf.get("M3l") or {}).get("ci95_R")),
     ]
-    for key, label in (("ladder", "H3 ladder, within places"), ("ladder_flexible",
+    for key, label in (("ladder", "H3 ladder, within areas"), ("ladder_flexible",
                                                                 "H3 ladder, flexible")):
         lad = m.get(key)
         if not lad:
@@ -745,25 +1967,19 @@ def si_comparisons(m: dict) -> str:
                                                lad["ci95_delta_names"], strict=True)):
             name = f"{label}, T{k}" if k < 4 else f"{label}, T4 = M1"
             arrow = rung.replace("->", "$" + TO + "$")
-            rows.append(f"{name} ({arrow}) & {_r(dlt / d01)} & "
-                        f"{_ci([x / d01 for x in c])} & --- & --- & --- \\\\")
-    lo01 = m["primary"]["ci95_delta_M0_M1"][0]
-    c90 = [x / lo01 for x in m["primary"]["ci90_delta"]]
-    rows.append(f"H2, conservative margin (lower 95\\% bound of the terrain increment; post hoc) & "
-                f"{_r(m['primary']['delta_bs_M1c_M3n'] / lo01)} & --- & {_ci(c90)} & --- & "
-                f"{'yes' if all(abs(x) < SESOI for x in c90) else 'no'} \\\\")
-    tw = m.get("two_way", {})
-    if tw.get("ci95_R"):
-        rows.append(f"H2, two-way bootstrap ({tw['n_activations']} activations $\\times$ "
-                    f"{tw['n_countries']} countries) & {_r(m['primary']['R'])} & "
-                    f"{_ci(tw['ci95_R'])} & --- & --- & --- \\\\")
-    return _table("p{5.9cm}rcclc", "Comparison & $R$ & 95\\% interval & 90\\% interval & Verdict & TOST",
+            rows.append(_row7(f"{name} ({arrow})", dlt / d01, [x / d01 for x in c], None, None))
+    return _table("p{5.4cm}rcccll", "Comparison & $R$ & 95\\% (fixed margin) & 90\\% (fixed margin) & "
+                  "95\\% (ratio bootstrap) & Verdict & TOST",
                   rows, "All pre-specified comparisons on the primary split (location groups held "
                   "out). $R$ is the change in held-out Brier score as a fraction of the terrain "
-                  "increment $\\Delta\\mathrm{BS}(\\mathrm{M0}\\to\\mathrm{M1})$; intervals are "
-                  "cluster-bootstrap percentile intervals over location groups (fixed-margin "
-                  "method; the two-way row resamples activations and countries instead). Verdicts are "
-                  "given for the comparisons to which the protocol attaches a decision rule.",
+                  "increment $\\Delta\\mathrm{BS}(\\mathrm{M0}\\to\\mathrm{M1})$. Fixed-margin intervals "
+                  "divide the cluster-bootstrap interval of the change in Brier score by the point estimate "
+                  "of the terrain increment (the form of the decision rule); ratio-bootstrap intervals "
+                  "resample the ratio and so also carry the uncertainty of the terrain increment "
+                  "(descriptive). Location groups are resampled 4,000 times. Verdicts are given for the "
+                  "comparisons to which the protocol attaches a decision rule; the same comparison under "
+                  "other yardsticks and a two-way bootstrap is in Supplementary "
+                  "Table~\\ref{tab:si-yardsticks}.",
                   "tab:si-comparisons")
 
 
@@ -792,33 +2008,37 @@ def si_splits(primary: dict, extra: dict[str, dict]) -> str:
                   "pre-training cut-off.", "tab:si-splits")
 
 
-def si_splits_secondary(primary: dict, extra: dict[str, dict]) -> str:
+def si_splits_secondary(primary: dict, extra: dict[str, dict], v36: dict | None = None) -> str:
     """補足表 3: 分割ごとの副次比較（全体の増分・柔軟モデル、llmcut は N-read 版も）と placebo との差。"""
-    spec = [("Location groups", primary), ("Countries", extra.get("country")),
-            ("Time", extra.get("temporal")), ("Language-model cut-off", extra.get("llmcut"))]
+    spec = [("Location groups", primary, "primary"), ("Countries", extra.get("country"), "country"),
+            ("Time", extra.get("temporal"), "temporal"), ("Language-model cut-off", extra.get("llmcut"), "llmcut")]
     comps = [("total", "total_placebo", "total, M1s$\\to$M3s"),
              ("flexible", "flexible_placebo", "flexible, M1$\\to$M3"),
              ("H4_total", "H4_total_placebo", "language model, total, M1s$\\to$M3rs"),
              ("H4_flexible", "H4_flexible_placebo", "language model, flexible, M1$\\to$M3r")]
     rows = []
-    for split, met in spec:
+    for split, met, skey in spec:
         if not met:
-            rows.append(f"{split} & \\missing{{pending}} & & & & \\\\")
+            rows.append(f"{split} & \\missing{{pending}} & & & & & \\\\")
             continue
         for key, pkey, lab in comps:
             blk, pl = met.get(key), met.get(pkey) or {}
             if not blk:
                 continue
-            rows.append(f"{split}: {lab} & {_r(blk['R'])} & {_ci(blk['ci95_R'])} & "
+            ratio = (((v36 or {}).get("splits", {}).get(skey, {}).get("cluster", {}).get(key) or {})
+                     .get("ci95_R_ratio_bootstrap"))
+            rows.append(f"{split}: {lab} & {_r(blk['R'])} & {_ci(blk['ci95_R'])} & {_ci(ratio)} & "
                         f"{_ci(pl.get('ci95_R_minus_Rp'))} & {blk['decision']} & {_tost(blk)} \\\\")
-    return _table("p{5.6cm}rcclc", "Split: comparison & $R$ & 95\\% interval & real $-$ placebo "
-                  "(95\\%) & Verdict & TOST", rows,
+    return _table("p{5.6cm}rccclc", "Split: comparison & $R$ & 95\\% interval & Ratio bootstrap, 95\\% & "
+                  "real $-$ placebo (95\\%) & Verdict & TOST", rows,
                   "Secondary comparisons under each split: the total increment of names over the "
                   "recalibrated terrain model (including the regional composition of names) and the "
                   "flexible model refitted with the name features, for the lexicon and learned score "
-                  "and, on the language-model split, for the language-model reading. The fourth column "
-                  "is the interval of $R$ minus the same comparison with names permuted among the "
-                  "settlements of each AOI.", "tab:si-splits-secondary")
+                  "and, on the language-model split, for the language-model reading. The 95\\% interval is the "
+                  "fixed-margin interval of the decision table (Methods); the fourth "
+                  "column gives the interval from resampling the ratio of the two increments, and the fifth the "
+                  "interval of $R$ minus the same comparison with names permuted among the settlements of each "
+                  "AOI.", "tab:si-splits-secondary")
 
 
 def si_sensitivity(runs: Path) -> str:
@@ -850,27 +2070,49 @@ def si_sensitivity(runs: Path) -> str:
                   "tab:si-sensitivity")
 
 
-def si_strata(m: dict) -> str:
-    """補足表 4: H5 の層（記述）と大陸別（記述）。"""
+def si_strata(m: dict, v36: dict | None = None) -> str:
+    """補足表: H5 の層（記述、登録）と、建物群・大陸・言語の層（v36、事後、90% 区間つき）。"""
     h5 = m.get("H5_strata", {})
     names = {"nearest_name_in_lexicon": "Nearest name in the lexicon",
              "not_nearest_name_in_lexicon": "Nearest name not in the lexicon",
              "nearest_name_wetside": "Nearest name water-side",
              "not_nearest_name_wetside": "Nearest name not water-side",
              "low_relief": "Slope at or below the median",
-             "not_low_relief": "Slope above the median",
-             "built_up_gt_10pct": "Built-up cover above 10\\%",
-             "not_built_up_gt_10pct": "Built-up cover at most 10\\%"}
-    rows = [f"{lab} & {_n(h5[k]['n'])} & {100 * h5[k]['wet_rate']:.1f} & {_r(h5[k]['R_within'])} \\\\"
+             "not_low_relief": "Slope above the median"}
+    rows = [f"{lab} & {_n(h5[k]['n'])} & {100 * h5[k]['wet_rate']:.1f} & {_r(h5[k]['R_within'])} & --- \\\\"
             for k, lab in names.items() if k in h5]
-    rows.append("\\midrule")
-    rows += [f"{CONTINENTS.get(k, k)} & {_n(v['n'])} & --- & {_r(v['R'])} \\\\"
-             for k, v in sorted(m.get("by_continent", {}).items())]
-    return _table("lrrr", "Stratum & Cells & Flooded (\\%) & $R$ within stratum", rows,
-                  "Descriptive strata (H5) and continents for the primary comparison. $R$ within a "
-                  "stratum is the names increment in the stratum divided by the terrain increment in "
-                  "the same stratum; continents are those of each cell's nearest settlement. No "
-                  "intervals are given because these breakdowns are descriptive.", "tab:si-strata")
+    if v36:
+        st = v36["splits"]["primary"]["strata"]
+        rows.append("\\midrule")
+        for k, lab in (("built_up_gt_10pct", "Built-up cover above 10\\%"),
+                       ("not_built_up_gt_10pct", "Built-up cover at most 10\\%")):
+            if k in st:
+                s = st[k]
+                rows.append(f"{lab} & {_n(s['n_cells'])} & {100 * s['wet_rate']:.1f} & {_r(s['R'])} & "
+                            f"{_ci(s['ci90_R'])} \\\\")
+        rows.append("\\midrule")
+        for k in sorted(k for k in st if k.startswith("continent_")):
+            s = st[k]
+            rows.append(f"{CONTINENTS.get(k[10:], k[10:])} & {_n(s['n_cells'])} & {100 * s['wet_rate']:.1f} & "
+                        f"{_r(s['R'])} & {_ci(s['ci90_R'])} \\\\")
+        rows.append("\\midrule")
+        langs = sorted((k for k in st if k.startswith("language_")), key=lambda k: -st[k]["n_cells"])
+        for k in langs:
+            s = st[k]
+            if s["n_cells"] < 20000:
+                continue
+            rows.append(f"Language: {k[9:]} & {_n(s['n_cells'])} & {100 * s['wet_rate']:.1f} & {_r(s['R'])} & "
+                        f"{_ci(s['ci90_R'])} \\\\")
+    return _table("lrrrc", "Stratum & Cells & Flooded (\\%) & $R$ within stratum & 90\\% interval", rows,
+                  "Descriptive strata for the primary comparison: the H5 strata of the protocol (first block, no "
+                  "intervals as pre-specified; built-up cover and continent are also strata of the protocol and are "
+                  "shown with post hoc intervals) and the post hoc strata by the first language of the country of "
+                  "the nearest settlement (languages with at least 20,000 cells), with 90\\% intervals from the "
+                  "cluster bootstrap over location groups within the stratum. ---: the terrain increment within the "
+                  "stratum is not positive, so $R$ is undefined. $R$ within a "
+                  "stratum is the names increment in the stratum divided by the terrain increment in the same "
+                  "stratum; small strata have small and unstable terrain increments, hence wide intervals.",
+                  "tab:si-strata")
 
 
 def si_metrics(m: dict) -> str:
@@ -878,7 +2120,7 @@ def si_metrics(m: dict) -> str:
     sm = m.get("secondary_metrics", {})
     names = {"M1": "M1 (terrain model)", "M3": "M3 (refitted with names)",
              "M1s": "M1s (recalibrated M1)", "M3s": "M3s (+ names)",
-             "M1c": "M1c (+ regional composition)", "M3n": "M3n (+ names within places)"}
+             "M1c": "M1c (+ regional composition)", "M3n": "M3n (+ names within areas)"}
     rows = [f"{lab} & {sm[k]['brier']:.5f} & {sm[k]['log_loss']:.5f} & {sm[k]['pr_auc']:.3f} & "
             f"{100 * sm[k]['capture10']:.1f} \\\\" for k, lab in names.items() if k in sm]
     return _table("lrrrr", "Model & Brier & Log loss & PR-AUC & Top-10\\% capture (\\%)", rows,
@@ -890,10 +2132,11 @@ def sens_macros(runs: Path) -> dict[str, str]:
     """§7 の感度の判定の要約（本文用）。全て metrics_primary.json から。"""
     got = {tag: (m or {}).get("primary") for tag, _ in SENS
            if (m := _json(runs / f"world_v2_{tag}" / "metrics_primary.json"))}
-    out = {"NSens": str(len(SENS)), "NSensDone": str(len(got))}
+    out = {"NSens": str(len(SENS)), "NSensDone": str(len(got)), "NSensWord": _word(len(SENS))}
     if len(got) < len(SENS):
         MISSING.append(f"sensitivity runs {len(got)}/{len(SENS)}")
     out["NSensEquiv"] = str(sum(1 for b in got.values() if b and b["decision"] == "equivalent-null"))
+    out["NSensEquivWord"] = _word(out["NSensEquiv"])
     post = got.get("s7_post2015")
     if post:
         out |= _ci_macros("RSensPost", post["R"], post["ci95_R"])
@@ -912,6 +2155,10 @@ def sens_macros(runs: Path) -> dict[str, str]:
                 "DeltaNamesNoCap": sci(nocap["delta_bs_M1c_M3n"], 2),
                 "DeltaNamesNoCapLo": sci(nocap["ci95_delta"][0], 2),
                 "DeltaNamesNoCapHi": sci(nocap["ci95_delta"][1], 2)}
+        nb = (_json(runs / "world_v2_s2a_nocap" / "metrics_primary.json") or {}).get("brier", {})
+        if "M1c" in nb and "M1" in nb:  # 地域構成で積み上げた基準が、自分の柔軟モデルより悪い（B-2 追記 4、記述）
+            out |= {"BrierNoCapMOnec": f"{nb['M1c']:.5f}", "BrierNoCapMOne": f"{nb['M1']:.5f}",
+                    "NoCapLossShare": pct((nb["M1c"] - nb["M1"]) / nocap["delta_bs_M0_M1"])}
         cells: Counter = Counter()
         for f in sorted((runs / "world_v2_s2a_nocap" / "predictions" / "primary").glob("fold*.npz")):
             u, c = np.unique(np.load(f)["unit"], return_counts=True)
@@ -923,13 +2170,23 @@ def sens_macros(runs: Path) -> dict[str, str]:
     return out
 
 
-def write_si_tables(primary: dict | None, extra: dict[str, dict]) -> None:
-    """補足表を表ごとの別ファイルに（si.tex が対応する Note の直後で読む）。"""
-    tables = {"comparisons": lambda: si_comparisons(primary),
+def write_si_tables(primary: dict | None, extra: dict[str, dict], post: dict[str, dict | None]) -> None:
+    """補足表を表ごとの別ファイルに（si.tex が対応する Note の直後で読む）。post = 事後の v36–v39。"""
+    v36, v37, v38, v39 = (post.get(k) for k in ("v36", "v37", "v38", "v39"))
+    tables = {"comparisons": lambda: si_comparisons(primary, v36),
               "splits": lambda: si_splits(primary, extra),
-              "splits_secondary": lambda: si_splits_secondary(primary, extra),
+              "splits_secondary": lambda: si_splits_secondary(primary, extra, v36),
               "sensitivity": lambda: si_sensitivity(DATA / "runs"),
-              "strata": lambda: si_strata(primary), "metrics": lambda: si_metrics(primary)}
+              "strata": lambda: si_strata(primary, v36), "metrics": lambda: si_metrics(primary),
+              "yardsticks": lambda: si_yardsticks(v36) if v36 else "\\missing{v36}",
+              "posthoc": lambda: si_posthoc(v36, v37, v38),
+              "class": lambda: si_class(primary, v37) if v37 else "\\missing{v37}",
+              "positive_control": lambda: si_positive_control(v37) if v37 else "\\missing{v37}",
+              "odds": lambda: si_odds(v39) if v39 else "\\missing{v39}",
+              "composition": lambda: si_composition(v36) if v36 else "\\missing{v36}",
+              "power_splits": lambda: si_power_splits(DATA / "runs"),
+              "registered": lambda: si_registered(v36) if v36 else "\\missing{v36}",
+              "ratio": lambda: si_ratio(v36) if v36 else "\\missing{v36}"}
     incomplete = False
     for name, make in tables.items():
         text = make() if primary else f"\\missing{{table {name}}}"
@@ -989,21 +2246,35 @@ def main() -> None:
     if primary:
         extra = {s: v for s in ("country", "temporal", "llmcut")
                  if (v := _json(run / f"metrics_{s}.json"))}
-        m |= detail_macros(primary)
+        ver = REPO / "docs" / "verification"
+        post = {k: _json(ver / f) for k, f in (("v36", "v36_yardstick_robustness.json"),
+                                               ("v37", "v37_positive_control.json"),
+                                               ("v38", "v38_ems_sensors.json"),
+                                               ("v39", "v39_within_aoi_odds.json"))}
+        m |= detail_macros(primary, post["v36"])
         m |= split_macros(extra)
-        fig_main(_forest_rows(primary, extra), primary["primary"]["decision"])
+        m["NSecondaryVerdicts"] = str(int(m["NSecondaryVerdicts"])
+                                      + sum(1 for k in ("total", "flexible") if primary.get(k)))
+        fig_main(_forest_rows(primary, extra, post["v36"]), primary["primary"]["decision"])
         if primary.get("ladder"):
             fig_ladder(primary["ladder"], primary["primary"]["delta_bs_M0_M1"])
-        write_si_tables(primary, extra)
+        write_si_tables(primary, extra, post)
+        m |= robustness_macros(post["v36"])
+        m |= positive_control_macros(post["v37"])
+        m |= sensor_macros(post["v38"])
+        m |= odds_macros(post["v39"])
+        m |= power_split_macros(DATA / "runs")
+        m |= hgb_macros(_json(ver / "v40_hgb_iterations.json"))
+        if post["v37"]:
+            fig_names(post["v37"], post["v39"])
         m |= sens_macros(DATA / "runs")
         diag = run / "diagnostics_primary.png"  # 補足図 1（集計 world_aggregate が描く診断図）
         if diag.is_file():
             shutil.copyfile(diag, OUTDIR / "si_fig_diagnostics.png")
         v35 = _json(REPO / "docs" / "verification" / "v35_name_class_contrast.json")
         m |= contrast_macros(v35)
-        if v35:
-            fig_names(v35, primary)
     write_macros(m)
+    write_source_data()
     digest = hashlib.sha256((OUTDIR / "summary_numbers.tex").read_bytes()).hexdigest()[:12]
     print(f"macros: {len(m)} (summary_numbers.tex {digest}); missing: {len(MISSING)}")
     for w in MISSING:
