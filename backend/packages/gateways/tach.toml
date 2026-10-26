@@ -1,0 +1,23 @@
+interfaces = []
+exclude = [
+    "**/*__pycache__",
+    "**/*egg-info",
+]
+source_roots = [
+    ".",
+]
+
+# rdb は外部から直接アクセスされない（backendのみ）
+[[modules]]
+path = "src.rdb"
+depends_on = []
+
+# llm は algからアクセス可能
+[[modules]]
+path = "src.llm"
+depends_on = []
+
+# aws は algからアクセス可能
+[[modules]]
+path = "src.aws"
+depends_on = []

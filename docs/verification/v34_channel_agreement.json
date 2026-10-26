@@ -1,0 +1,105 @@
+{
+ "n_names": 186638,
+ "lexicon_sha256": "4f9203535d6458ec893fd9dbf908c825480ccdf55f8053cd04b3a61fbc123a28",
+ "nread_parsed_ok": 0.9995231410538047,
+ "lexicon_to_nread": {
+  "water": {
+   "n_lexicon": 5194,
+   "nread_same_class": 0.7757027339237582,
+   "nread_class_counts": {
+    "water": 4029,
+    "riverine": 577,
+    "non_environmental": 217,
+    "wetland": 137
+   }
+  },
+  "wet": {
+   "n_lexicon": 814,
+   "nread_same_class": 0.8304668304668305,
+   "nread_class_counts": {
+    "wetland": 676,
+    "water": 42,
+    "non_environmental": 39,
+    "other_environmental": 24
+   }
+  },
+  "riverine": {
+   "n_lexicon": 1675,
+   "nread_same_class": 0.7456716417910447,
+   "nread_class_counts": {
+    "riverine": 1249,
+    "non_environmental": 111,
+    "other_environmental": 82,
+    "water": 63
+   }
+  },
+  "crossing": {
+   "n_lexicon": 1554,
+   "nread_same_class": 0.8674388674388674,
+   "nread_class_counts": {
+    "crossing": 1348,
+    "riverine": 50,
+    "non_environmental": 49,
+    "highland": 28
+   }
+  },
+  "low": {
+   "n_lexicon": 2983,
+   "nread_same_class": 0.6909151860543078,
+   "nread_class_counts": {
+    "lowland": 2061,
+    "non_environmental": 289,
+    "water": 173,
+    "other_environmental": 143
+   }
+  },
+  "high": {
+   "n_lexicon": 8474,
+   "nread_same_class": 0.7076941232003776,
+   "nread_class_counts": {
+    "highland": 5997,
+    "riverine": 785,
+    "non_environmental": 596,
+    "water": 356
+   }
+  }
+ },
+ "wetside": {
+  "lexicon_share": 0.06418307097161349,
+  "nread_share": 0.3500412563357944,
+  "nread_given_lexicon": 0.8890558477335336,
+  "lexicon_given_nread": 0.16301602608256419
+ },
+ "by_continent": {
+  "AF": {
+   "n": 10760,
+   "lexicon_wetside": 0.006226765799256505,
+   "nread_wetside": 0.4496282527881041
+  },
+  "AS": {
+   "n": 43764,
+   "lexicon_wetside": 0.07277671145233525,
+   "nread_wetside": 0.41122840690978885
+  },
+  "EU": {
+   "n": 114043,
+   "lexicon_wetside": 0.06464228405075279,
+   "nread_wetside": 0.33591715405592626
+  },
+  "NA": {
+   "n": 12533,
+   "lexicon_wetside": 0.07747546477299928,
+   "nread_wetside": 0.18343572967366154
+  },
+  "OC": {
+   "n": 2068,
+   "lexicon_wetside": 0.12088974854932302,
+   "nread_wetside": 0.468568665377176
+  },
+  "SA": {
+   "n": 3470,
+   "lexicon_wetside": 0.03861671469740634,
+   "nread_wetside": 0.2648414985590778
+  }
+ }
+}

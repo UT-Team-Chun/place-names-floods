@@ -1,0 +1,95 @@
+{
+ "lexicon": {
+  "version": "1.0",
+  "sha256": "6c9999921956ba13f929b18ef921afcd0e05334293ef0989d9357c6a8d59c58d"
+ },
+ "ems_inventory_sha256": "f5c55eff3e470bce1fee7ae228641d1d3b21361f30b6d5ac9b87eef438028699",
+ "geonames_allCountries_zip_sha256": "4bc2e106b57fbc34d21f6b66e04fa4d585c74c85f6e5677fd1ec2b14937c3f43",
+ "coastline_zip_sha256": "bfa04cdbcbef07ef90dfca1dabb48062eca29900a113df0f389303e255484017",
+ "incidence": {
+  "n_aoi_labelled": 999,
+  "n_aoi_included": 500,
+  "n_activations": 188,
+  "n_groups": 195,
+  "n_countries": 58,
+  "group_cap": 10000,
+  "n_cells": 1507486,
+  "kish_groups": 165.4,
+  "years": [
+   "2012",
+   "2026"
+  ],
+  "reasons": {
+   "ok": 500,
+   "wet<20": 452,
+   "eval<400": 47
+  }
+ },
+ "incidence_json_sha256": "dafe37008d971d6c10379814c3e4a8abbec8d275b2d13968922feaf1fd6af65d",
+ "nread": {
+  "model": "google/gemma-4-31B-it",
+  "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+  "prompt_sha256": "e9f55e3a65714df6f7412d96a2ac789eaa6f95436f77f77213db7fd08d2f4a8f",
+  "names_parquet_sha256": "42861f3d647af89959481a4d42332e1a1e54c81525f4b975dc32bdab8700d197",
+  "output_parquet_sha256": "fbd1dbcca2fc4711ab08087b1aefea5ccfd827e0955c3072a7f7ff2fdfc0b8dc",
+  "meta": {
+   "model": "google/gemma-4-31B-it",
+   "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+   "prompt_sha256": "e9f55e3a65714df6f7412d96a2ac789eaa6f95436f77f77213db7fd08d2f4a8f",
+   "n_names": 186638,
+   "parsed_ok_rate": 0.9995231410538047,
+   "category_counts": {
+    "non_environmental": 73166,
+    "water": 23951,
+    "other_environmental": 22563,
+    "highland": 19160,
+    "riverine": 15482,
+    "wetland": 14888,
+    "lowland": 7518,
+    "unknown": 6418,
+    "crossing": 3492
+   },
+   "load_sec": 170.9,
+   "infer_sec": 5671.1,
+   "sampling": {
+    "temperature": 0.0,
+    "max_tokens": 48,
+    "seed": 0
+   },
+   "versions": {
+    "vllm": "0.31.0",
+    "transformers": "5.16.1"
+   }
+  }
+ },
+ "power": {
+  "null": {
+   "tag": "power_v3_null",
+   "n_reps": 100,
+   "rate_positive": 0.0,
+   "rate_equivalent_TOST": 0.99,
+   "decision_counts": {
+    "equivalent-null": 91,
+    "inconclusive": 1,
+    "negative": 7,
+    "not-meaning": 1
+   },
+   "mean_R": -0.0007890544816151495,
+   "median_ci90_halfwidth": 0.0034542604222870888
+  },
+  "sesoi": {
+   "tag": "power_v3_sesoi",
+   "n_reps": 100,
+   "rate_positive": 0.98,
+   "rate_equivalent_TOST": 0.0,
+   "decision_counts": {
+    "inconclusive": 1,
+    "positive-meaningful": 69,
+    "positive-small": 29,
+    "undefined-denominator": 1
+   },
+   "mean_R": 0.056720440157305145,
+   "median_ci90_halfwidth": 0.03277748690170256
+  }
+ }
+}

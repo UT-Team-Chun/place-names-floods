@@ -1,0 +1,14 @@
+# Backend workspace configuration
+# This file defines the workspace members for uv.
+# Tool configurations (ruff, mypy, etc.) are defined in each package's pyproject.toml.
+
+[tool.uv.workspace]
+members = [
+    "packages/topsem",
+    "packages/gateways",
+]
+
+# packages/ 直下以外（verification/ 等）を lint したときの isort 判定を
+# packages/topsem の設定と揃える（topsem/gateways は first-party ブロック別）
+[tool.ruff.lint.isort]
+known-first-party = ["topsem", "gateways"]

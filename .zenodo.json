@@ -1,0 +1,11 @@
+{
+  "title": "toponym-semantics: analysis code for a pre-specified global test of whether place names remember floods",
+  "upload_type": "software",
+  "description": "Analysis code, frozen protocol (docs/protocol/preregistration_v2.md, tag prereg-v2-frozen), multilingual lexicon and manuscript sources for the study 'Do place names remember floods? A pre-specified global test against satellite-observed inundation'. Derived data (cell tables, name readings, predictions and run summaries) are archived in a separate record.",
+  "creators": [
+    {"name": "Okauchi, Ryota", "affiliation": "The University of Tokyo"},
+    {"name": "Chun, Pang-jo", "affiliation": "The University of Tokyo"}
+  ],
+  "license": "MIT",
+  "keywords": ["place names", "toponymy", "flood hazard", "Copernicus EMS", "equivalence test", "pre-specified protocol"]
+}
