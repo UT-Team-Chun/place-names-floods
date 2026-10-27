@@ -45,11 +45,12 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   (the location-group buffer did not reach the fold assignment) was found after its first result, corrected
   and re-run; the verdict did not change. Both runs are reported in the paper.
 - `docs/protocol/amendments/B-2_posthoc_review_analyses.md` and its four addenda: post hoc analyses added after
-  the confirmatory results in response to five rounds of internal review (alternative yardsticks and a two-way
+  the confirmatory results in response to five rounds of critiques by language-model agents with access to the
+  project records, which are not peer review (alternative yardsticks and a two-way
   bootstrap, recalibration-only reference models, grouping by flood event, reassigned folds, a label-free positive
   control, distance bands, results by class of name, within-area odds ratios, the mapping sensor, effect-size
-  translation, power for the secondary splits). Most were registered, with their computations and reporting rules,
-  before they were run; the paper marks those that were not. All are labelled post hoc and change no pre-specified
+  translation, power for the secondary splits). Most were planned, with their computations and reporting rules,
+  before they were run; the paper marks those that were not, and those that the agents had computed first. All are labelled post hoc and change no pre-specified
   verdict. Scripts: `backend/verification/r_okauchi/v36`–`v40`; outputs: `docs/verification/`.
 - `docs/protocol/amendments/B-3_gfm_independent_labels.md` and its two addenda: independent flood labels from
   Copernicus Global Flood Monitoring (Sentinel-1), with the rules for making them, the comparisons (agreement of the
@@ -87,8 +88,27 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   after the check was corrected. Scripts: `v48`–`v54`; the lexicon tables and the sample and guide for an independent
   coding of etymologies: `docs/verification/v51_*`.
 
-English translations of the protocol and of amendments B-1 to B-6 are in `docs/protocol/en/`; the Japanese files are
-the record and govern where the two differ.
+- `docs/protocol/amendments/B-7_blind_review3_analyses.md` and its three addenda: post hoc analyses in response to a
+  third round of such critiques: the permutation distribution rebuilt with the regional composition recomputed from
+  the reassigned names, the plasmode with every model refitted on the injected labels, the activation-grouped split
+  with the corrected code, a control for recurrent flooding from other EMS events (assigned to cells directly and
+  through the nearest settlement), a floodplain reading of the lexicon (riverine and wetland classes), partly flooded
+  cells, odds ratios by event magnitude and adjusted for built-up and tree cover, within-area discrimination on the
+  GFM labels, a pairs bootstrap and joint tests of the near-settlement odds ratios, and descriptions (excluded AOIs,
+  digraphs in ASCII names, recall by language, residual correlation between AOIs of one activation, Europe alone, the
+  slope of the terrain ladder, fixed-threshold CSI). Each was fixed before it was computed; addendum 1 records the
+  implementation choices of the analyses computed from existing artefacts after they were run, and addendum 2 the
+  splitting of the permutations into seed ranges and the resubmission of jobs that had not started with lower resource
+  requests; addendum 3 fixed, before it was computed, a joint test of the coefficients of the lexicon features in a
+  model of the held-out flood labels given the held-out terrain prediction. By the rule fixed in B-7, the reading that
+  real names cost less than reassigned ones (B-5) was withdrawn once the permutations were rebuilt. Scripts: `v55`,
+  `v56`.
+
+English translations of the protocol and of amendments B-1 to B-7 are in `docs/protocol/en/`; they were drafted with a
+language model after the analysis, and the Japanese files are the record and govern where the two differ. Dates written
+inside the repository files are local (Japan Standard Time, UTC+9) unless marked; the paper gives UTC. An interpretation
+plan, written after the freeze and before any confirmatory result, is in
+`docs/research/2026-10-26_v2_interpretation_plan.md`.
 
 The GFM labels are built from the images listed in the public STAC catalogue of EODC at the time of retrieval.
 Rebuilding them on 2026-10-27 for the variant of amendment B-6 reproduced the labels of amendment B-3 exactly in 189 of

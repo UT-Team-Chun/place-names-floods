@@ -85,7 +85,7 @@ def fit(
     g = len(ug)
     meat = (u.T @ u) * g / (g - 1)
     v = sinv @ meat @ sinv
-    return {"beta": beta, "se": np.sqrt(np.diag(v)), "n": n, "n_aoi": a, "n_groups": g}
+    return {"beta": beta, "se": np.sqrt(np.diag(v)), "cov": v, "n": n, "n_aoi": a, "n_groups": g}
 
 
 def design(

@@ -568,3 +568,34 @@ def test_b6_stacks_need_table_features_but_not_in_fold_nlearn() -> None:
     assert ev.b6_stack_available("M3nS", [*lex_cols, *ev.NAMES_S])
     assert not ev.b6_stack_available("M3oL", lex_cols)
     assert ev.b6_stack_available("M3oL", ["o_lab500"])
+
+
+def test_b7_floodplain_features_are_the_riverine_and_wetland_columns() -> None:
+    """B-7 の 5: 氾濫原の読みは凍結した辞書の河川・湿地の列（実と placebo）の部分集合。
+
+    新しい読みは作らない。
+    """
+    ev = _load("world_eval")
+    cats = ("water", "wet", "riverine", "crossing", "low", "high")
+    rng = np.random.default_rng(0)
+    df = pd.DataFrame({f"{src}_{c}_{k}": rng.integers(0, 2, 20).astype(np.float32)
+                       for src in ("lex", "p_lex") for c in cats for k in ("n1", "k")})
+    ev.floodplain_features(df)
+    for pre, src in (("", "lex"), ("p", "p_lex")):
+        np.testing.assert_array_equal(df[f"{pre}fp_riverine_n1"], df[f"{src}_riverine_n1"])
+        np.testing.assert_array_equal(df[f"{pre}fp_wet_k"], df[f"{src}_wet_k"])
+        either = ((df[f"{src}_riverine_n1"] > 0) | (df[f"{src}_wet_n1"] > 0)).astype(np.float32)
+        np.testing.assert_array_equal(df[f"{pre}fp_any_n1"], either)
+    assert set(ev.NAMES_F) <= set(df.columns)
+    assert set(ev.NAMES_F_P) <= set(df.columns)
+
+
+def test_b7_stacks_need_their_features() -> None:
+    """B-7 の腕: 氾濫原の読みは fp_*、繰り返しの対照は o_recur_* が表に要る。"""
+    ev = _load("world_eval")
+    assert not ev.b6_stack_available("M3nF", ev.NAMES)
+    assert ev.b6_stack_available("M3nF", ev.NAMES_F)
+    assert ev.b6_stack_available("M3nFp", [*ev.NAMES_F, *ev.NAMES_F_P])
+    assert not ev.b6_stack_available("M3oE", ev.ORACLE_EC)
+    assert ev.b6_stack_available("M3oE", ev.ORACLE_E)
+    assert ev.b6_stack_available("M3oEc", ev.ORACLE_EC)

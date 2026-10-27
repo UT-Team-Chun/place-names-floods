@@ -51,6 +51,17 @@ from topsem.world.b6 import (
     plasmode_salt,
     strict_lexicon,
 )
+from topsem.world.b7 import (
+    FLOODPLAIN_CATEGORIES,
+    PLASMODE_REFIT_DELTAS,
+    PLASMODE_REFIT_REPS,
+    RECUR_MIN_DAYS,
+    aoi_means,
+    days_apart,
+    partial_mask,
+    recurrence,
+    unit_sse,
+)
 from topsem.world.channels import (
     INNER_FOLDS,
     NREAD_FEATURES,
@@ -71,11 +82,13 @@ from topsem.world.dataset import (
     aoi_info,
     assign_folds,
     continent_map,
+    evaluable,
     group_quotas,
     include,
     load_aoi_table,
     location_groups,
     merge_by_activation,
+    riverine_labels,
 )
 from topsem.world.lexicon import CATEGORIES, Lexicon
 from topsem.world.names import assign_names
@@ -179,6 +192,18 @@ B6_STACK: dict[str, tuple[str, list[str]]] = {
 }
 DEFAULT_STACKS = list(STACK)
 STACK |= B6_STACK
+# 事後 B-7（初見の査読 第 3 回）: 5 氾濫原の地面を指す読み、4 別の事象の浸水の繰り返し（集落を通じて / セルに直接）
+NAMES_F = [*(f"fp_{c}_n1" for c in FLOODPLAIN_CATEGORIES), *(f"fp_{c}_k" for c in FLOODPLAIN_CATEGORIES), "fp_any_n1"]
+NAMES_F_P = [f"p{f}" for f in NAMES_F]
+ORACLE_E = ["o_recur_set", "o_recur_set_cov"]
+ORACLE_EC = ["o_recur_cell", "o_recur_cell_cov"]
+B7_STACK: dict[str, tuple[str, list[str]]] = {
+    "M1cF": ("M1", [f"c_{f}" for f in NAMES_F]), "M3nF": ("M1", [*(f"c_{f}" for f in NAMES_F), *NAMES_F]),
+    "M3nFp": ("M1", [*(f"c_{f}" for f in NAMES_F), *NAMES_F_P]),
+    **{f"M1c{k}": ("M1", [f"c_{f}" for f in feats]) for k, feats in (("E", ORACLE_E), ("Ec", ORACLE_EC))},
+    **{f"M3o{k}": ("M1", [*(f"c_{f}" for f in feats), *feats]) for k, feats in (("E", ORACLE_E), ("Ec", ORACLE_EC))},
+}
+STACK |= B7_STACK
 IN_FOLD = ("nlearn", "nlearn_p")  # fold の中で作る特徴（表には無い）
 
 
@@ -423,7 +448,8 @@ def add_composition(tr: pd.DataFrame, te: pd.DataFrame) -> None:
 
     あわせて名前特徴（と placebo）の AOI 内で中心化した d_* を作る（事後、B-2 追記 2）。
     """
-    feats = [f for f in (*NAMES, *NREAD_FEATURES, *ORACLE, *NAMES_S, *ORACLE_L, *ORACLE_G, *ORACLE_GN)
+    feats = [f for f in (*NAMES, *NREAD_FEATURES, *ORACLE, *NAMES_S, *ORACLE_L, *ORACLE_G, *ORACLE_GN,
+                         *NAMES_F, *ORACLE_E, *ORACLE_EC)
              if f in tr.columns]
     for frame in (tr, te):
         means = frame.groupby("aoi")[feats].transform("mean")
@@ -598,6 +624,182 @@ def attach_gsw(df: pd.DataFrame, path: Path) -> dict:
         df[col] = fill_by_aoi(df, t[src].reindex(g).to_numpy(np.float64))
     return {"path": str(path), "sha256": _sha256(str(path)), "n_settlements": len(t),
             "share_cells_with_value": float(np.isin(g, t.index.to_numpy()).mean())}
+
+
+# %% 事後 B-7（初見の査読 第 3 回）
+def floodplain_features(df: pd.DataFrame) -> None:
+    """5: 氾濫原の地面を指す読み（凍結した辞書の河川・湿地の区分だけ）。placebo（pfp_*）も既存の置換の特徴から。"""
+    for pre, src in (("", "lex"), ("p", "p_lex")):
+        for c in FLOODPLAIN_CATEGORIES:
+            df[f"{pre}fp_{c}_n1"] = df[f"{src}_{c}_n1"].to_numpy(dtype=np.float32)
+            df[f"{pre}fp_{c}_k"] = df[f"{src}_{c}_k"].to_numpy(dtype=np.float32)
+        n1 = df[[f"{src}_{c}_n1" for c in FLOODPLAIN_CATEGORIES]].to_numpy()
+        df[f"{pre}fp_any_n1"] = (n1 > 0).any(axis=1).astype(np.float32)
+
+
+def _labelled_cells(d: Path, infos: dict) -> pd.DataFrame:
+    """ある AOI の評価できてラベルのある全セル（確証と同じ規則）: ix・iy・経緯度・格子の座標・ラベル。"""
+    c = pq.read_table(d / "cells.parquet").to_pandas()
+    info = infos.get(d.name)
+    y, keep = riverine_labels(c, unspecified_as_riverine=bool(info and info.unspecified_as_riverine))
+    ok = evaluable(c) & keep
+    return c.loc[ok, ["ix", "iy", "lon", "lat", "x", "y"]].assign(lab=y[ok]).reset_index(drop=True)
+
+
+def _event_meta(m: dict) -> tuple[str, str]:
+    """AOI の記録から（activation の符号, 事象の日付）。"""
+    a = m.get("activation") or {}
+    return str(a.get("code", "")), str(a.get("event_time") or a.get("activation_time") or "")
+
+
+def _other_events(name: str, metas: dict, box: dict) -> list[str]:
+    """4: 対象の AOI と範囲が重なり、activation が違い、日付が 30 日を超えて離れたラベル付きの AOI。"""
+    code0, t0 = _event_meta(metas[name])
+    b0 = box[name]
+    out = []
+    for q, mq in metas.items():
+        bq = box[q]
+        code, t = _event_meta(mq)
+        if (q == name or bq is None or code == code0 or days_apart(t, t0) <= RECUR_MIN_DAYS
+                or bq[1] < b0[0] or bq[0] > b0[1] or bq[3] < b0[2] or bq[2] > b0[3]):
+            continue
+        out.append(q)
+    return out
+
+
+def _settlement_recurrence(full: pd.DataFrame, rate: np.ndarray, n: np.ndarray, gn: pd.DataFrame, *,  # noqa: PLR0913
+                           bounds: tuple, meta: dict, radius_m: float) -> dict[int, float]:
+    """4(b): 集落の点から radius_m 以内の、別の事象のあるセルの繰り返しの平均（集落 → 値）。"""
+    pts, sxy = _settlements(gn, bounds, meta)
+    ok = n > 0
+    if not len(pts) or not ok.any():
+        return {}
+    tab = label_share_by_settlement(full.loc[ok, ["x", "y"]].to_numpy(np.float64), rate[ok], sxy,
+                                    settle_gid=pts["gid"].to_numpy(np.int64), radius_m=radius_m)
+    tab = tab[tab["n"] > 0]
+    return dict(zip(tab["gid"].tolist(), (tab["sum"] / tab["n"]).tolist(), strict=True))
+
+
+def attach_recurrence(df: pd.DataFrame, dirs: list[Path], infos: dict, gn: pd.DataFrame, *,
+                      radius_m: float = PLASMODE_LOCAL_M) -> dict:
+    """4: 別の EMS の事象（日付の差 30 日超）で同じ場所が浸水していた割合（繰り返し）。
+
+    (a) セルに直接: o_recur_cell と、別の事象があるかの o_recur_cell_cov。(b) 集落を通じて: 集落の点から radius_m
+    以内の別の事象のあるセルの繰り返しの平均を最寄りの集落から割り当てた o_recur_set と o_recur_set_cov。無ければ 0。
+    """
+    lab_dirs = {q.name: q for q in sorted((ROOT / "labels").glob("EMSR*"))
+                if (q / "cells.parquet").is_file() and (q / "meta.json").is_file()}
+    metas = {k: json.loads((q / "meta.json").read_text(encoding="utf-8")) for k, q in lab_dirs.items()}
+    lab = {k: _labelled_cells(q, infos) for k, q in lab_dirs.items()}
+    box = {k: (t["lon"].min(), t["lon"].max(), t["lat"].min(), t["lat"].max()) if len(t) else None
+           for k, t in lab.items()}
+    cols = {k: np.zeros(len(df)) for k in ("o_recur_cell", "o_recur_cell_cov", "o_recur_set", "o_recur_set_cov")}
+    aois_cov: list[str] = []
+    for d in dirs:
+        m = (df["aoi"] == d.name).to_numpy()
+        others = [(metas[q]["crs_proj4"], metas[q]["grid"], lab[q]["ix"].to_numpy(), lab[q]["iy"].to_numpy(),
+                   lab[q]["lab"].to_numpy()) for q in _other_events(d.name, metas, box)] if m.any() else []
+        if not others:
+            continue
+        full = lab[d.name]
+        rate, n = recurrence(full[["lon", "lat"]].to_numpy(), others)
+        if (n > 0).any():
+            aois_cov.append(d.name)
+        pos = {(int(a), int(b)): i for i, (a, b) in enumerate(zip(full["ix"], full["iy"], strict=True))}
+        part = df.loc[m]
+        idx = np.array([pos.get((int(a), int(b)), -1) for a, b in zip(part["ix"], part["iy"], strict=True)])
+        cols["o_recur_cell"][m] = np.where(idx >= 0, np.nan_to_num(rate, nan=0.0)[np.maximum(idx, 0)], 0.0)
+        cols["o_recur_cell_cov"][m] = ((idx >= 0) & (n[np.maximum(idx, 0)] > 0)).astype(float)
+        mean = _settlement_recurrence(full, rate, n, gn, bounds=infos[d.name].bounds, meta=metas[d.name],
+                                      radius_m=radius_m)
+        v = np.array([mean.get(int(g), np.nan) for g in part["P_gid1"].to_numpy()])
+        cols["o_recur_set"][m] = np.nan_to_num(v, nan=0.0)
+        cols["o_recur_set_cov"][m] = (~np.isnan(v)).astype(float)
+    for k, v in cols.items():
+        df[k] = v.astype(np.float32)
+    return {"n_aoi_with_other_events": len(aois_cov), "aois_with_other_events": aois_cov,
+            "share_cells_cell_cov": float(cols["o_recur_cell_cov"].mean()),
+            "share_cells_set_cov": float(cols["o_recur_set_cov"].mean()), "min_days_apart": RECUR_MIN_DAYS,
+            "radius_m": radius_m}
+
+
+def run_perms_recomp(df: pd.DataFrame, fold: int, seeds: list[int], perm_ids: list[int], gn: pd.DataFrame) -> dict:
+    """1: 置換ごとに地域構成を置き換えた名前から計算し直す置換と、AOI 内で中心化した置換。
+
+    基準 M1 + c(q) と名前 M1 + c(q) + q、中心化は M1s に q − c(q) を足す。場所ごとの二乗誤差の和を返す
+    （実の M1c・M3n・M3np・M1s・M3d も）。perm_ids は置換の種（B-5 の 1 と同じ 1〜200 を範囲に分けて回せる）。
+    """
+    r = run_fold(df, fold, [], seeds, ["M1c", "M3n", "M3np", "M1s", "M3d"], keep_state=True)
+    tr, te, z = r["tr"], r["te"], r["z"]["M1"]
+    look, lex = gid_lookup(gn), Lexicon(LEXICON)
+    groups_tr = tr["unit"].to_numpy() if "unit" in tr else tr["aoi"].to_numpy()
+    y_tr, y_te = tr["y"].to_numpy(), te["y"].to_numpy(np.float64)
+    units, ucode = np.unique((te["unit"] if "unit" in te else te["aoi"]).to_numpy(dtype=str), return_inverse=True)
+    nu = len(units)
+    aoi_tr, aoi_te = tr["aoi"].to_numpy(), te["aoi"].to_numpy()
+    real = {a: unit_sse(y_te, r["preds"][a], ucode, nu) for a in ("M1c", "M3n", "M3np", "M1s", "M3d")}
+    sse = {k: np.zeros((len(perm_ids), nu)) for k in ("ref", "names", "cent")}
+    qcols = [f"q_{c}" for c in LEX]
+    for i, j in enumerate(perm_ids):
+        per_aoi = placebo_lookups(df, look, j)
+        q_tr = lexicon_block(tr, look, lex, per_aoi=per_aoi, prefix="q_")[qcols].to_numpy(dtype=np.float64)
+        q_te = lexicon_block(te, look, lex, per_aoi=per_aoi, prefix="q_")[qcols].to_numpy(dtype=np.float64)
+        nl_tr, nl_te = nlearn_scores(nearest_names(tr, look, per_aoi), y_tr, groups_tr,
+                                     nearest_names(te, look, per_aoi))
+        x_tr = np.column_stack([q_tr, nl_tr.astype(np.float64)])
+        x_te = np.column_stack([q_te, nl_te.astype(np.float64)])
+        c_tr, c_te = aoi_means(x_tr, aoi_tr), aoi_means(x_te, aoi_te)
+        sse["ref"][i] = unit_sse(y_te, stage2(z[0], z[1], c_tr, c_te, y_tr), ucode, nu)
+        sse["names"][i] = unit_sse(y_te, stage2(z[0], z[1], np.column_stack([c_tr, x_tr]),
+                                                np.column_stack([c_te, x_te]), y_tr), ucode, nu)
+        sse["cent"][i] = unit_sse(y_te, stage2(z[0], z[1], x_tr - c_tr, x_te - c_te, y_tr), ucode, nu)
+    return {"te": te, "units": units, "n_unit": np.bincount(ucode, minlength=nu), "real": real, "sse": sse}
+
+
+def run_plasmode_refit(df: pd.DataFrame, fold: int, seeds: list[int]) -> dict:
+    """2: plasmode の形 A を、注入したラベルで基礎モデル（N-learn・M0・M1 の cross-fit）から当て直す。
+
+    注入は B-6 の 2 と同じ（同じ塩・同じ注入確率）。同じラベルで基礎を固定した版（B-6 の 2 と同じ計算）も記録する。
+    """
+    r = run_fold(df, fold, ["M0"], seeds, ["M1c", "M3n"], keep_state=True)
+    tr, te, z = r["tr"], r["te"], r["z"]["M1"]
+    p_tr, p_te = 1 / (1 + np.exp(-z[0])), 1 / (1 + np.exp(-z[1]))
+    y_tr0, y_te0 = tr["y"].to_numpy(np.int8), te["y"].to_numpy(np.int8)
+    groups_tr = tr["unit"].to_numpy() if "unit" in tr else tr["aoi"].to_numpy()
+    k_tr = cell_keys(tr["aoi"], tr["ix"].to_numpy(), tr["iy"].to_numpy())
+    k_te = cell_keys(te["aoi"], te["ix"].to_numpy(), te["iy"].to_numpy())
+    wet_tr, wet_te = tr["lex_wetside_n1"].to_numpy() > 0, te["lex_wetside_n1"].to_numpy() > 0
+    comp_other = [c for c in COMP if c != "c_nlearn"]
+    lexf = [f for f in NAMES if f != "nlearn"]
+    models = ("M0", "M1", "M1c", "M3n")
+    base = np.array([float(((r["preds"][a] - y_te0) ** 2).sum()) for a in models])
+    nd, nr = len(PLASMODE_REFIT_DELTAS), PLASMODE_REFIT_REPS
+    refit, fixed, flips = np.zeros((nd, nr, len(models))), np.zeros((nd, nr, 2)), np.zeros((nd, nr))
+    y_orig = df["y"].to_numpy().copy()
+    try:
+        for i, delta in enumerate(PLASMODE_REFIT_DELTAS):
+            for rep in range(nr):
+                salt = plasmode_salt("A", delta, rep)
+                y_tr = inject_labels(y_tr0, p_tr, wet_tr, delta, hashed_uniform(k_tr, salt))
+                y_te = inject_labels(y_te0, p_te, wet_te, delta, hashed_uniform(k_te, salt))
+                oof, sc = nlearn_scores(tr["name_real"].to_numpy(), y_tr, groups_tr, te["name_real"].to_numpy())
+                c_tr = pd.Series(oof, index=tr.index).groupby(tr["aoi"]).transform("mean").to_numpy()
+                c_te = pd.Series(sc, index=te.index).groupby(te["aoi"]).transform("mean").to_numpy()
+                xc_tr = np.column_stack([tr[comp_other].to_numpy(np.float64), c_tr])
+                xc_te = np.column_stack([te[comp_other].to_numpy(np.float64), c_te])
+                xn_tr = np.column_stack([xc_tr, tr[lexf].to_numpy(np.float64), oof])
+                xn_te = np.column_stack([xc_te, te[lexf].to_numpy(np.float64), sc])
+                fixed[i, rep] = [float(((stage2(z[0], z[1], xc_tr, xc_te, y_tr) - y_te) ** 2).sum()),
+                                 float(((stage2(z[0], z[1], xn_tr, xn_te, y_tr) - y_te) ** 2).sum())]
+                df.loc[tr.index, "y"] = y_tr
+                df.loc[te.index, "y"] = y_te
+                rr = run_fold(df, fold, ["M0"], seeds, ["M1c", "M3n"])
+                df["y"] = y_orig
+                refit[i, rep] = [float(((rr["preds"][a] - y_te) ** 2).sum()) for a in models]
+                flips[i, rep] = float((y_te != y_te0).sum())
+    finally:
+        df["y"] = y_orig
+    return {"te": te, "models": models, "base": base, "refit": refit, "fixed": fixed, "flips": flips}
 
 
 def reassign_settlements(df: pd.DataFrame, dirs: list[Path], infos: dict, gn_f: pd.DataFrame) -> None:
@@ -782,6 +984,13 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     ap.add_argument("--gn-filter", action="store_true", help="B-6 の 6(a): PPLX/H/Q/W を除き重複を 1 つに")
     ap.add_argument("--exclude-untyped", action="store_true", help="B-6 の 6(d): 種別の無い AOI を除く")
     ap.add_argument("--exclude-no-hydro", action="store_true", help="B-6 の 6(c): 水系の層の無い製品の AOI を除く")
+    # 事後 B-7（初見の査読 第 3 回）
+    ap.add_argument("--perms-recomp", type=int, default=0, help="B-7 の 1: 地域構成を計算し直す置換の数 N")
+    ap.add_argument("--perm-first", type=int, default=1, help="B-7 の 1: 置換の種を F..F+N−1 にする（範囲で分けて回す）")
+    ap.add_argument("--plasmode-refit", action="store_true", help="B-7 の 2: plasmode で基礎モデルも当て直す（形 A）")
+    ap.add_argument("--recurrence", action="store_true", help="B-7 の 4: 別の事象の浸水の繰り返しの対照")
+    ap.add_argument("--floodplain", action="store_true", help="B-7 の 5: 氾濫原の地面を指す読み（M1cF → M3nF）")
+    ap.add_argument("--exclude-partial", action="store_true", help="B-7 の 6(b): 部分的に浸水した y = 0 のセルを除く")
     args = ap.parse_args()
     if args.synthetic == "none" and not protocol_frozen():
         msg = ("preregistration_v2.md is not FROZEN: real-label evaluation is allowed only after "
@@ -807,8 +1016,14 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
         dirs = [d for d in dirs if d.name not in set(drop)]
         b6["excluded_aois"] = sorted(drop)
         print(f"B-6: excluded {len(drop)} AOIs → {len(dirs)}", flush=True)
-    need_xy = args.labels == "gfm" or args.plasmode or args.oracle_label or args.gn_filter
+    need_xy = (args.labels == "gfm" or args.plasmode or args.oracle_label or args.gn_filter or args.recurrence
+               or args.plasmode_refit)
     df = build_table(dirs, seed=20261025, infos=infos, sens=sens, extra_cols=("ix", "iy") if need_xy else ())
+    if args.exclude_partial:  # B-7 の 6(b): y = 0 で浸水被覆が 0.05 を超えるセルを除く（場所グループの割当は変わらない）
+        pm = partial_mask(df["y"].to_numpy(), df["f_flood_any"].to_numpy())
+        b6["partial"] = {"n_dropped": int(pm.sum()), "share_dropped": float(pm.mean())}
+        df = df.loc[~pm].reset_index(drop=True)
+        print(f"B-7: dropped {int(pm.sum()):,} partially flooded cells", flush=True)
     if args.gn_filter:  # 名前の割り当てを作り直してから名前の特徴を作る
         gn_f, b6["gazetteer"] = filter_gazetteer(gn)
         reassign_settlements(df, dirs, infos, gn_f)
@@ -824,6 +1039,11 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
         b6["strict_lexicon"] = ls.sha256
     if args.oracle_label:
         attach_label_oracle(df, dirs, infos, gn, sens=sens)
+    if args.floodplain:  # B-7 の 5
+        floodplain_features(df)
+    if args.recurrence:  # B-7 の 4
+        b6["recurrence"] = attach_recurrence(df, dirs, infos, gn)
+        print(f"B-7 recurrence: {b6['recurrence']}", flush=True)
     if args.gsw:
         b6["gsw"] = attach_gsw(df, Path(args.gsw))
     cont = continent_map(ROOT / "geonames" / "countryInfo.txt")
@@ -887,7 +1107,7 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     arms = [x for x in args.arms.split(",") if x and (nread is not None or x not in NREAD_ARMS)]
     stacks = [x for x in args.stacks.split(",")
               if x and (nread is not None or x not in NREAD_STACK) and (args.oracle or x not in ORACLE_STACK)
-              and (x not in B6_STACK or b6_stack_available(x, df.columns))]
+              and ((x not in B6_STACK and x not in B7_STACK) or b6_stack_available(x, df.columns))]
     dropped = [x for x in args.stacks.split(",") if x and x not in stacks]
     if dropped:
         print(f"stacks not run (features missing): {dropped}", flush=True)
@@ -909,6 +1129,37 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
                         "deltas": list(PLASMODE_DELTAS), "forms": list(PLASMODE_FORMS),
                         "local_m": PLASMODE_LOCAL_M, "rule": "amendment B-6 item 2"})
             print(f"fold {k}: plasmode ({time.time() - t0:.0f}s)", flush=True)
+        return
+    if args.plasmode_refit:  # B-7 の 2
+        for k in folds:
+            if not (df["fold"] == k).any():
+                continue
+            r = run_plasmode_refit(df, k, seeds)
+            dst = run.path("predictions") / args.split / f"fold{k}_plasref.npz"
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            np.savez_compressed(dst, models=np.array(r["models"]), base=r["base"], refit=r["refit"], fixed=r["fixed"],
+                                flips=r["flips"], n_te=len(r["te"]), deltas=np.array(PLASMODE_REFIT_DELTAS),
+                                reps=PLASMODE_REFIT_REPS)
+            write_json(run.path("predictions") / args.split / f"fold{k}_plasref.json",
+                       {**common, "fold": k, "n_test": len(r["te"]), "deltas": list(PLASMODE_REFIT_DELTAS),
+                        "reps": PLASMODE_REFIT_REPS, "form": "A", "rule": "amendment B-7 item 2"})
+            print(f"fold {k}: plasmode refit ({time.time() - t0:.0f}s)", flush=True)
+        return
+    if args.perms_recomp > 0:  # B-7 の 1
+        for k in folds:
+            if not (df["fold"] == k).any():
+                continue
+            ids = list(range(args.perm_first, args.perm_first + args.perms_recomp))
+            r = run_perms_recomp(df, k, seeds, ids, gn)
+            dst = run.path("predictions") / args.split / f"fold{k}_permsrc_{ids[0]:03d}.npz"
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            np.savez_compressed(dst, units=r["units"], n_unit=r["n_unit"],
+                                **{f"real_{a}": v for a, v in r["real"].items()},
+                                **{f"sse_{k2}": v for k2, v in r["sse"].items()})
+            write_json(run.path("predictions") / args.split / f"fold{k}_permsrc_{ids[0]:03d}.json",
+                       {**common, "fold": k, "n_test": len(r["te"]), "n_perms": len(ids),
+                        "perm_seeds": [ids[0], ids[-1]], "rule": "amendment B-7 item 1"})
+            print(f"fold {k}: perms recomposed {args.perms_recomp} ({time.time() - t0:.0f}s)", flush=True)
         return
     if args.perms > 0:  # B-5 の 1: 置換の分布（実の M1c・M3n・M3np も一緒に）
         for k in folds:
