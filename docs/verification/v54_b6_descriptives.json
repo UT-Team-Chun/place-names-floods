@@ -1,0 +1,357 @@
+{
+ "rule": "amendment B-6 addendum 1, items 9-15",
+ "seed": 20261028,
+ "reference_points": {
+  "hand_threshold_map": {
+   "csi": 0.24740625490885426,
+   "median_csi_aoi": 0.08411214953271028,
+   "n_aoi": 479
+  },
+  "M1_map": {
+   "csi": 0.30471384422798575,
+   "median_csi_aoi": 0.12941176470588237,
+   "n_aoi": 479
+  },
+  "M3n_map": {
+   "csi": 0.30336780072998976,
+   "median_csi_aoi": 0.13170731707317074,
+   "n_aoi": 479
+  },
+  "brier": {
+   "const_train_rate": 0.05229735817938302,
+   "M0": 0.051293577246367815,
+   "M1": 0.043739943200679525
+  }
+ },
+ "residual_correlogram": {
+  "bins_km": [
+   "0-0.5",
+   "0.5-1",
+   "1-2",
+   "2-5",
+   "5-10",
+   "10-20"
+  ],
+  "corr": [
+   0.49541609847790624,
+   0.2881378966971023,
+   0.1529498862417489,
+   0.04060485299153147,
+   0.0022923754809662297,
+   -0.023432930852011747
+  ],
+  "n_pairs": [
+   219523,
+   925027,
+   3381185,
+   17805966,
+   35887110,
+   51644137
+  ],
+  "max_cells_per_aoi": 1000
+ },
+ "regional_languages": {
+  "n_cells": 1507486,
+  "regions": {
+   "GB-Wales": {
+    "n_cells": 0,
+    "share": 0.0,
+    "n_settlements": 0
+   },
+   "ES-Catalonia": {
+    "n_cells": 10000,
+    "share": 0.006633560776020474,
+    "n_settlements": 306
+   },
+   "ES-Basque Country": {
+    "n_cells": 174,
+    "share": 0.00011542395750275625,
+    "n_settlements": 98
+   },
+   "ES-Galicia": {
+    "n_cells": 1528,
+    "share": 0.0010136080865759283,
+    "n_settlements": 31
+   },
+   "ES-Valencia": {
+    "n_cells": 20346,
+    "share": 0.013496642754891257,
+    "n_settlements": 253
+   },
+   "ES-Balearic Islands": {
+    "n_cells": 0,
+    "share": 0.0,
+    "n_settlements": 0
+   },
+   "ES-Navarre": {
+    "n_cells": 1113,
+    "share": 0.0007383153143710788,
+    "n_settlements": 273
+   },
+   "FR-Brittany": {
+    "n_cells": 8229,
+    "share": 0.005458757162587248,
+    "n_settlements": 1161
+   },
+   "FR-Corsica": {
+    "n_cells": 9905,
+    "share": 0.006570541948648279,
+    "n_settlements": 964
+   }
+  },
+  "countries": {
+   "IE": {
+    "n_cells": 19576,
+    "share": 0.01298585857513768,
+    "n_settlements": 1447
+   },
+   "NZ": {
+    "n_cells": 0,
+    "share": 0.0,
+    "n_settlements": 0
+   },
+   "AU": {
+    "n_cells": 145844,
+    "share": 0.096746503781793,
+    "n_settlements": 1008
+   }
+  },
+  "total_share": 0.1437592123575277
+ },
+ "riverside": {
+  "share_cells": 0.0029174400292938042,
+  "n_settlements": 507,
+  "share_settlements": 0.005363717151199696,
+  "examples": [
+   "Aan 't Hoolven",
+   "Aan de Maas",
+   "Aan de Rijksweg",
+   "Aan de Vrenen",
+   "Aan de Wolfsberg",
+   "Aan het Broek",
+   "Abangan Sur",
+   "Aillant-sur-Milleron",
+   "Aillant-sur-Tholon",
+   "Aire-sur-la-Lys",
+   "Am Altamir",
+   "Am Bahnhof",
+   "Am Bahnhof",
+   "Am Buschberge",
+   "Am Chedire"
+  ]
+ },
+ "nread": {
+  "n_settlements": 94524,
+  "share_parse_failed_settlements": 0.0004866488934027337,
+  "category_share_settlements": {
+   "water": 0.12771359654690873,
+   "wetland": 0.08042401929668655,
+   "riverine": 0.08163006220642377,
+   "crossing": 0.018862934281240744,
+   "lowland": 0.03673141212813677,
+   "highland": 0.09343658753332487,
+   "other_environmental": 0.11570606406838475,
+   "non_environmental": 0.4043311751512843,
+   "unknown": 0.04067749989420676
+  },
+  "category_share_cells": {
+   "water": 0.1556186923128971,
+   "wetland": 0.08354638119358986,
+   "riverine": 0.07001259049835289,
+   "crossing": 0.019685754958918358,
+   "lowland": 0.04094764395821918,
+   "highland": 0.10690381204203554,
+   "other_environmental": 0.09872728502951271,
+   "non_environmental": 0.36500173135936254,
+   "unknown": 0.05884233750761201
+  },
+  "confidence_use": "feature nr_conf_n1 in the second stage; not used to threshold or filter readings",
+  "wetside_by_continent_cells": {
+   "AF": {
+    "n_cells": 144265,
+    "llm": 0.4399195924167331,
+    "lexicon": 0.005060132395244862,
+    "llm_unknown_or_failed": 0.25221640730599937
+   },
+   "AS": {
+    "n_cells": 196090,
+    "llm": 0.3078382375439849,
+    "lexicon": 0.06673976235402111,
+    "llm_unknown_or_failed": 0.034795247080422254
+   },
+   "EU": {
+    "n_cells": 824854,
+    "llm": 0.3720512963506269,
+    "lexicon": 0.06333120770463621,
+    "llm_unknown_or_failed": 0.015572452821953946
+   },
+   "NA": {
+    "n_cells": 85031,
+    "llm": 0.17287812680081382,
+    "lexicon": 0.06828097987792688,
+    "llm_unknown_or_failed": 0.028072114875751196
+   },
+   "OC": {
+    "n_cells": 150806,
+    "llm": 0.5344349694309245,
+    "lexicon": 0.11313873453310876,
+    "llm_unknown_or_failed": 0.10864952322851876
+   },
+   "SA": {
+    "n_cells": 106440,
+    "llm": 0.2956783164223976,
+    "lexicon": 0.03052423900789177,
+    "llm_unknown_or_failed": 0.14049229612927472
+   }
+  },
+  "wetside_all_cells": {
+   "llm": 0.3698110629219774,
+   "lexicon": 0.061143519740813515
+  }
+ },
+ "inclusion_flow": {
+  "n_aoi_with_labels": 999,
+  "reasons": {
+   "ok": 500,
+   "wet<20": 452,
+   "eval<400": 47
+  },
+  "included": {
+   "n_aoi": 500,
+   "n_activations": 188,
+   "type": {
+    "riverine": 346,
+    "unspecified-as-riverine": 154
+   },
+   "continent": {
+    "EU": 330,
+    "AS": 53,
+    "OC": 45,
+    "AF": 40,
+    "NA": 16,
+    "SA": 16
+   },
+   "median_n_eval": 11426.0,
+   "median_wet_frac": 0.021052984120104527
+  },
+  "excluded": {
+   "n_aoi": 499,
+   "n_activations": 173,
+   "type": {
+    "other": 220,
+    "riverine": 181,
+    "unspecified-as-riverine": 68,
+    "unspecified": 30
+   },
+   "continent": {
+    "EU": 359,
+    "AS": 35,
+    "OC": 34,
+    "SA": 31,
+    "AF": 26,
+    "NA": 14
+   },
+   "median_n_eval": 4395.0,
+   "median_wet_frac": 0.0
+  },
+  "excluded_by_reason": {
+   "wet<20": {
+    "n_aoi": 452,
+    "n_activations": 164,
+    "type": {
+     "other": 203,
+     "riverine": 162,
+     "unspecified-as-riverine": 58,
+     "unspecified": 29
+    },
+    "continent": {
+     "EU": 330,
+     "OC": 30,
+     "AS": 29,
+     "AF": 26,
+     "SA": 23,
+     "NA": 14
+    },
+    "median_n_eval": 5204.5,
+    "median_wet_frac": 0.0
+   },
+   "eval<400": {
+    "n_aoi": 47,
+    "n_activations": 26,
+    "type": {
+     "riverine": 19,
+     "other": 17,
+     "unspecified-as-riverine": 10,
+     "unspecified": 1
+    },
+    "continent": {
+     "EU": 29,
+     "SA": 8,
+     "AS": 6,
+     "OC": 4
+    },
+    "median_n_eval": 242.0,
+    "median_wet_frac": 0.0
+   }
+  },
+  "activations_only_in_excluded": 65
+ },
+ "p_values": {
+  "world_v2": {
+   "H2_tost": {
+    "delta_bs": -2.641962234663231e-05,
+    "margin": 0.00037768170228440586,
+    "p_upper": 0.0,
+    "p_lower": 0.0,
+    "p_tost": 0.0,
+    "resolution": 0.00025
+   },
+   "H3": {
+    "p_delta0_gt_delta4": 0.8555,
+    "spearman": -0.19999999999999998,
+    "p_spearman_exact": 0.39166666666666666
+   },
+   "H4_tost": {
+    "delta_bs": -3.818913241479538e-05,
+    "margin": 0.000561179221890009,
+    "p_upper": 0.0,
+    "p_lower": 0.0,
+    "p_tost": 0.0,
+    "resolution": 0.00025
+   },
+   "H4_improvement_p": 0.66325,
+   "holm": {
+    "H4": 1.0,
+    "H3": 1.0
+   }
+  },
+  "world_v2_lexfix": {
+   "H2_tost": {
+    "delta_bs": -3.0571860077190094e-05,
+    "margin": 0.00037768170228440586,
+    "p_upper": 0.0,
+    "p_lower": 0.0,
+    "p_tost": 0.0,
+    "resolution": 0.00025
+   },
+   "H3": {
+    "p_delta0_gt_delta4": 0.8275,
+    "spearman": 0.09999999999999999,
+    "p_spearman_exact": 0.6083333333333333
+   },
+   "H4_tost": {
+    "delta_bs": -3.818913241479538e-05,
+    "margin": 0.000561179221890009,
+    "p_upper": 0.0,
+    "p_lower": 0.0,
+    "p_tost": 0.0,
+    "resolution": 0.00025
+   },
+   "H4_improvement_p": 0.66325,
+   "holm": {
+    "H4": 1.0,
+    "H3": 1.0
+   }
+  }
+ }
+}

@@ -11,14 +11,17 @@ import numpy as np
 import pandas as pd
 
 from topsem.world.gfm import (
+    NODATA,
     cell_fractions,
     combine_scenes,
+    component_fractions,
     gfm_include,
     group_scenes,
     item_provenance,
     post_event_window,
     sensor_group,
     valid_and_wet,
+    valid_and_wet_v1,
 )
 
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
@@ -141,3 +144,28 @@ def test_apply_gfm_labels_filters_and_replaces_without_reordering() -> None:
     assert out["fold"].tolist() == [3, 3]
     assert info["n_cells"] == 2
     assert info["n_cells_before"] == 5
+
+
+def test_valid_and_wet_v1_keeps_seasonal_water() -> None:
+    """B-6 の 4: 季節水域（参照水域 2）は判定可能に戻し、水が観測されれば浸水。
+
+    恒常水域（1）・除外は判定不能。
+    """
+    water = np.array([1, 1, 0, 1, 1, NODATA], dtype=np.uint8)
+    excl = np.array([0, 0, 0, 1, 0, 0], dtype=np.uint8)
+    refw = np.array([2, 1, 2, 0, 0, 0], dtype=np.uint8)
+    valid, wet = valid_and_wet_v1(water, excl, refw)
+    assert valid.tolist() == [True, False, True, False, True, False]
+    assert wet.tolist() == [True, False, False, False, True, False]
+
+
+def test_component_fractions_partition_the_cell() -> None:
+    """B-6 の 4: 除外域・恒常水域・季節水域・データなしは重ならず、割合は副格子の画素数で割る。"""
+    sub, ny, nx = 2, 1, 1  # 1 セル = 2 × 2 画素
+    excl = np.array([[1, 0], [0, NODATA]], dtype=np.uint8)
+    refw = np.array([[1, 1], [2, 0]], dtype=np.uint8)
+    c = component_fractions(excl, refw, sub, ny, nx)
+    assert c["excl"].tolist() == [0.25]  # 除外域が恒常水域より優先
+    assert c["perm"].tolist() == [0.25]
+    assert c["seas"].tolist() == [0.25]
+    assert c["nodata"].tolist() == [0.25]

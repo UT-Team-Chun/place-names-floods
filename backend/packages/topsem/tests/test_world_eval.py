@@ -553,3 +553,18 @@ def test_stage2_returns_standardised_coefficients() -> None:
     assert p.shape == (400,)
     assert len(cf) == 4  # 切片、基礎予測のロジット、名前特徴 2 つ
     assert cf[2] > abs(cf[3])  # 効果を入れた特徴の係数が大きい
+
+
+def test_b6_stacks_need_table_features_but_not_in_fold_nlearn() -> None:
+    """B-6 の腕の可否: T0− の腕は名前の表の特徴だけで回る（N-learn は fold の中で作る）。
+
+    厳密な読みの腕は s_*、ラベルの割合の腕は o_lab500 が要る。
+    """
+    ev = _load("world_eval")
+    lex_cols = [f for f in ev.NAMES if f not in ev.IN_FOLD]
+    assert ev.b6_stack_available("T0xc", lex_cols)
+    assert ev.b6_stack_available("T0xn", lex_cols)
+    assert not ev.b6_stack_available("M1cS", lex_cols)
+    assert ev.b6_stack_available("M3nS", [*lex_cols, *ev.NAMES_S])
+    assert not ev.b6_stack_available("M3oL", lex_cols)
+    assert ev.b6_stack_available("M3oL", ["o_lab500"])

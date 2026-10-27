@@ -1,0 +1,16 @@
+lexicon_category,kind,id,name,country,reading,derivation_codes,quote,url
+water,agrees,10,Windermere,GB,water,water;other,"""Windermere"" is thought to translate as ""Winand or Vinand's lake"" ... 'mere', meaning 'lake' or 'pool'",https://en.wikipedia.org/wiki/Windermere%2C_Cumbria_%28town%29
+water,agrees,27,Odolena Voda,CZ,water,other;water,"The name means ""Odolen's water"" ... named after Knight Odolen ... refers to the sufficient water in the area",https://en.wikipedia.org/wiki/Odolena_Voda
+water,disagrees,93,New Wells,US,water,other,"Austrian settlers referred to the community as Neu Wels, after the city in Austria, which was later Americanized to New Wells",https://en.wikipedia.org/wiki/New_Wells%2C_Missouri
+wet,agrees,90,Spoerkelnbruch,DE,wet,other;wet,Vermutlicher Namensgeber ist der Faulbaum ... Bruch ist eine alte Bezeichnung für ein Moor oder Feuchtgebiet,https://de.wikipedia.org/wiki/Sp%C3%B6rkelnbruch
+wet,agrees,160,Clairmarais,FR,wet,wet,l'oïl clair + maresc : le « marais aux eaux claires »,https://fr.wikipedia.org/wiki/Clairmarais
+wet,disagrees,161,Spodnje Blato,SI,wet;low,low,Spodnje Blato (literally 'lower Blato'),https://en.wikipedia.org/wiki/Spodnje_Blato
+riverine,agrees,52,L'Ile-Saint-Denis,FR,riverine,riverine;other,L'Île-Saint-Denis doit son nom à l'abbaye de Saint-Denis ... qui eut seigneurie sur l'île centrale,https://fr.wikipedia.org/wiki/L%27%C3%8Ele-Saint-Denis
+riverine,agrees,76,Ostrvo,RS,riverine,riverine,"""Ostrovo"" means ""island"" in Serbian. This name originates from the fact that Ostrovo is located on former Danube island",https://en.wikipedia.org/wiki/Ostrovo%2C_Po%C5%BEarevac
+riverine,disagrees,12,Veliki Otok,SI,riverine,water,Voda (reka Pivka) pa naj bi odtekala v Postojnsko jamo ... odtok se imenuje Veliki odtok ... dali vasi ime Veliki Otok,https://sl.wikipedia.org/wiki/Veliki_Otok%2C_Postojna
+crossing,agrees,15,Pont-Pean,FR,crossing,crossing;other,le toponyme Pont-Péan peut donc signifier « pont paysan » ou « pont construit ou possédé par un dénommé Péan »,https://fr.wikipedia.org/wiki/Pont-P%C3%A9an
+crossing,agrees,44,Saint-Fargeau-Ponthierry,FR,crossing,crossing;other,Saint-Fargeau est une déformation du nom de saint Ferréol ... Ponthierry trouverait son origine dans un pont sur l'École franchi par Thierry,https://fr.wikipedia.org/wiki/Saint-Fargeau-Ponthierry
+crossing,disagrees,165,Ennerdale Bridge,GB,crossing;low,low;other;water,"The name Ennerdale means 'Anund's valley' ... cross-influenced by 'Ehen', the name of the local river",https://en.wikipedia.org/wiki/Ennerdale_Bridge
+low,agrees,14,Dol pri Ljubljani,SI,low,low,The name is derived from the Slovene common noun dol 'small valley',https://en.wikipedia.org/wiki/Dol_pri_Ljubljani
+low,agrees,21,Spodnji Velovlek,SI,low,low,The name Spodnji Velovlek literally means 'lower Velovlek',https://en.wikipedia.org/wiki/Spodnji_Velovlek
+low,disagrees,16,Germigny-sous-Coulombs,FR,low,other,"Du latin germinare, « germer », du latin germinius, « rejet (botanique) » ou « rejeton, progéniture ». Coulombs fait référence à Coulombs-en-Valois",https://fr.wikipedia.org/wiki/Germigny-sous-Coulombs

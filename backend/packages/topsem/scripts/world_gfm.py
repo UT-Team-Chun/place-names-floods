@@ -31,7 +31,13 @@ import pyarrow.parquet as pq
 
 from topsem.config import DATA_DIR
 from topsem.world.dataset import evaluable, riverine_labels
-from topsem.world.gfm import gfm_include, gfm_labels, post_event_window, sensor_group
+from topsem.world.gfm import (
+    gfm_include,
+    gfm_labels,
+    gfm_labels_v1,
+    post_event_window,
+    sensor_group,
+)
 
 ROOT = DATA_DIR / "global"
 SOURCES = DATA_DIR / "verification" / "v38_ems_sensors_raw.json"
@@ -59,6 +65,56 @@ def one(d: Path, sources: list[dict], *, force: bool = False) -> dict:
     except Exception as e:  # noqa: BLE001
         return {"tag": d.name, "status": "error", "error": f"{type(e).__name__}: {e}",
                 "trace": traceback.format_exc()[-1200:]}
+
+
+def one_v1(d: Path, sources: list[dict], *, force: bool = False) -> dict:
+    """事後 B-6 の 4: 層の成分と変種 V1 を ``gfm_v1.parquet`` に（B-3 のラベルも作り直して照合する）。"""
+    out = d / "gfm_v1.parquet"
+    if not force and out.is_file():
+        return {"tag": d.name, "status": "cached"}
+    t0 = time.time()
+    try:
+        meta = json.loads((d / "meta.json").read_text(encoding="utf-8"))
+        cells = pq.read_table(d / "cells.parquet", columns=["ix", "iy"]).to_pandas()
+        ix, iy = cells["ix"].to_numpy(), cells["iy"].to_numpy()
+        cols, prov = gfm_labels_v1(meta, sources, ix, iy)
+        old = pq.read_table(d / "gfm.parquet", columns=["gfm_eval", "gfm_y"]).to_pandas()
+        same = bool((old["gfm_eval"].to_numpy() == cols["gfm_eval"]).all()
+                    and (old["gfm_y"].to_numpy() == cols["gfm_y"]).all())
+        prov |= {"built_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "b3_labels_reproduced": same,
+                 "rule": "amendment B-6 item 4"}
+        (d / "gfm_v1_meta.json").write_text(json.dumps(prov, indent=1), encoding="utf-8")
+        tmp = out.with_suffix(".parquet.tmp")
+        pq.write_table(pa.table({"ix": ix, "iy": iy, **cols}), tmp, compression="zstd")
+        tmp.replace(out)
+        return {"tag": d.name, "status": "ok", "b3_reproduced": same, "n_v1_eval": int(cols["v1_eval"].sum()),
+                "n": len(cells), "sec": round(time.time() - t0, 1)}
+    except Exception as e:  # noqa: BLE001
+        return {"tag": d.name, "status": "error", "error": f"{type(e).__name__}: {e}",
+                "trace": traceback.format_exc()[-1200:]}
+
+
+def build_v1(args: argparse.Namespace) -> None:
+    """B-6 の 4: B-3 で採用した AOI だけ。"""
+    raw = json.loads(SOURCES.read_text(encoding="utf-8"))
+    summ = json.loads(SUMMARY.read_text(encoding="utf-8"))
+    dirs = sorted(ROOT / "labels" / t for t, v in summ["aois"].items() if v.get("include"))
+    i, n = (int(v) for v in args.shard.split("/"))
+    dirs = dirs[i::n]
+    print(f"B-3 included AOIs: {len(dirs)} (shard {args.shard}) workers={args.workers}", flush=True)
+    rows = []
+    with ThreadPoolExecutor(max_workers=max(1, args.workers)) as ex:
+        futs = {ex.submit(one_v1, d, raw[d.name]["sources"], force=args.force): d for d in dirs}
+        for f in as_completed(futs):
+            r = f.result()
+            rows.append(r)
+            print(json.dumps({k: v for k, v in r.items() if k != "trace"}), flush=True)
+            if r["status"] == "error":
+                print(r["trace"], flush=True)
+    stamp = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
+    (ROOT / "labels" / f"_gfm_v1_{stamp}_{i}of{n}.json").write_text(json.dumps(rows, indent=1), encoding="utf-8")
+    print(f"→ {sum(r['status'] in ('ok', 'cached') for r in rows)}/{len(rows)} ok; "
+          f"B-3 reproduced {sum(bool(r.get('b3_reproduced')) for r in rows)}")
 
 
 def build(args: argparse.Namespace) -> None:
@@ -122,9 +178,12 @@ def main() -> None:
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--shard", default="0/1", help="i/n: AOI を n 分割した i 番目だけ処理")
     ap.add_argument("--summary", action="store_true", help="全シャードの後: AOI の採用をまとめる")
+    ap.add_argument("--v1", action="store_true", help="事後 B-6 の 4: 層の成分と季節水域を戻した変種 V1")
     args = ap.parse_args()
     if args.summary:
         summary()
+    elif args.v1:
+        build_v1(args)
     else:
         build(args)
 

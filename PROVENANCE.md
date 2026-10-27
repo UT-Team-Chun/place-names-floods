@@ -57,21 +57,44 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   their interpretation fixed before the labels were made. Addendum 1 records that images with an unreadable layer
   were left out; addendum 2 is a check added after one result was seen and is reported as such. Scripts: `v41`,
   `v45`; label builder: `backend/packages/topsem/scripts/world_gfm.py`.
-- `docs/protocol/amendments/B-4_lexicon_norway_yaml_fix.md`: an implementation defect found by a reader of the
-  manuscript. The YAML parser read the country code of Norway, `NO`, as the Boolean false, so the lexicon was not
+- `docs/protocol/amendments/B-4_lexicon_norway_yaml_fix.md`: an implementation defect found by a language-model
+  agent that critiqued the manuscript and read this repository. The YAML parser read the country code of Norway, `NO`, as the Boolean false, so the lexicon was not
   applied to Norwegian names in the confirmatory analysis. The frozen lexicon was left unchanged, the parser was
   corrected and the confirmatory analysis was run again; the amendment fixed in advance that both runs are reported
   and that the frozen-code run stays primary if both reach the same verdict. Size of the defect: `v46`.
 - `docs/protocol/amendments/B-5_blind_review_analyses.md` and its four addenda: post hoc analyses in response to
-  readers given only the manuscript (the distribution of the increment over 200 reassignments of names,
+  critiques by language-model agents given only the manuscript, which could also read this repository; these
+  critiques are not peer review (the distribution of the increment over 200 reassignments of names,
   second-stage coefficients, thirteen assignments of places to folds, bounds on missed effects by test inversion, an
   oracle control, within-area metrics, two variants of the labels, element groups of the lexicon, exclusion of the
   Americas and Oceania, and checks of the name readings against etymologies recorded on Wikidata and Wikipedia).
   Each was fixed before it was computed; the Wikipedia sample was enlarged before any excerpt was coded (addendum 4).
   Scripts: `v42`–`v44`, `v47`; the coded excerpts with sources and quotations: `docs/verification/v44_etym_codes.csv`.
+- `docs/protocol/amendments/B-6_blind_review2_analyses.md` and its three addenda: post hoc analyses in response to a
+  second round of such critiques: the largest increase in the pooled measure that perfect predictions of the ground
+  around settlements could produce, bounds on missed effects recomputed by injecting effects into the observed labels
+  (plasmode) with the odds ratio detectable with 80 % power, controls that carry flood information (the flooded share
+  around each settlement in the same event, and surface water around each settlement from JRC Global Surface Water),
+  diagnostics of the GFM labels with a variant that makes seasonal water assessable, documentation of the lexicon and
+  a strict reading of it, further sensitivity runs (a cleaned gazetteer, a terrain ladder without river distances and
+  water fractions, AOIs without a hydrography layer or a flood type left out, the language-model reading on the
+  primary split, reassignments of names on the split grouped by activation), and the descriptions and p-values
+  requested in addendum 1. Each was fixed before it was computed. Addenda 1 to 3 record the implementation events,
+  none of which changed a computation: cluster jobs stopped before computing (an input file missing from the
+  container image, because the Dockerfile did not copy it, which took three attempts to diagnose and fix, and a
+  repository-root lookup), and the terrain-ladder arms without river
+  distances were first skipped by a check that also required a feature built inside each fold, and were run again
+  after the check was corrected. Scripts: `v48`–`v54`; the lexicon tables and the sample and guide for an independent
+  coding of etymologies: `docs/verification/v51_*`.
 
-English translations of the protocol and of amendments B-1 to B-5 are in `docs/protocol/en/`; the Japanese files are
+English translations of the protocol and of amendments B-1 to B-6 are in `docs/protocol/en/`; the Japanese files are
 the record and govern where the two differ.
+
+The GFM labels are built from the images listed in the public STAC catalogue of EODC at the time of retrieval.
+Rebuilding them on 2026-10-27 for the variant of amendment B-6 reproduced the labels of amendment B-3 exactly in 189 of
+192 AOIs; in the other three, 23 images could not be read on the rebuild, which changed 16 of 6.76 million cells.
+An earlier version of the example figure (Fig. 3) marked GeoNames features of every class within the AOI, not only the
+populated places that the analysis uses; the figure was corrected, and no analysis was affected.
 
 The confirmatory run records label the protocol "DRAFT until frozen" because the code wrote a fixed string
 there; the status string is now read from the protocol's status line. The power-analysis runs record the

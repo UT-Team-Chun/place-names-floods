@@ -24,6 +24,7 @@ import re
 import sys
 import time
 from collections import Counter
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -32,11 +33,24 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import numpy as np
 import pandas as pd
 import pyarrow.parquet as pq
+from pyproj import CRS, Transformer
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
 
 from topsem.config import DATA_DIR, REPO_ROOT
 from topsem.runs import start_run, write_json
+from topsem.world.b6 import (
+    STRICT_CATEGORIES,
+    cell_keys,
+    filter_gazetteer,
+    hashed_uniform,
+    inject_labels,
+    label_share_by_settlement,
+    latent_names,
+    loo_share,
+    plasmode_salt,
+    strict_lexicon,
+)
 from topsem.world.channels import (
     INNER_FOLDS,
     NREAD_FEATURES,
@@ -64,6 +78,7 @@ from topsem.world.dataset import (
     merge_by_activation,
 )
 from topsem.world.lexicon import CATEGORIES, Lexicon
+from topsem.world.names import assign_names
 
 ROOT = DATA_DIR / "global"
 LEXICON = REPO_ROOT / "docs" / "protocol" / "v2" / "lexicon_hydro_v1.yaml"
@@ -145,6 +160,36 @@ STACK |= {"M1co": ("M1", [f"c_{f}" for f in ORACLE]), "M3o": ("M1", [*(f"c_{f}" 
 ORACLE_STACK = ("M1co", "M3o")
 SITE_RADIUS_M = 177.0
 PERM_STACK = ("M1c", "M3n", "M3np")  # 置換の分布（B-5 の 1）で一緒に出す実の比較
+# 事後 B-6（初見の査読 第 2 回）: 既定の腕には入れず、選択肢を与えたときだけ回す
+LC_T0X = [c for c in LC if c not in ("cci_water", "cci_wetland")]
+ARMS["T0x"] = [*POS, *LC_T0X, *SETTLE]  # 6(b): T0 から HydroRIVERS の距離と CCI の水域・湿地を除く
+NAMES_S = [*(f"s_{c}_n1" for c in STRICT_CATEGORIES), *(f"s_{c}_k" for c in STRICT_CATEGORIES), "s_any_n1"]
+NAMES_S_P = [f"p{f}" for f in NAMES_S]  # 5: 厳密な読み（placebo は ps_*）
+ORACLE_L = ["o_lab500"]  # 3(a): 事象のラベルの割合（漏れを承知の上限）
+ORACLE_G = ["o_gsw_occ", "o_gsw_seas"]  # 3(b): JRC GSW の繰り返す水
+ORACLE_GN = ["o_gsw_occ_np", "o_gsw_seas_np"]  # 同、恒常水域を除いた平均
+B6_STACK: dict[str, tuple[str, list[str]]] = {
+    "T0xc": ("T0x", COMP), "T0xn": ("T0x", [*COMP, *NAMES]),
+    "M1cS": ("M1", [f"c_{f}" for f in NAMES_S]), "M3nS": ("M1", [*(f"c_{f}" for f in NAMES_S), *NAMES_S]),
+    "M3nSp": ("M1", [*(f"c_{f}" for f in NAMES_S), *NAMES_S_P]),
+    **{f"M1c{k}": ("M1", [f"c_{f}" for f in feats]) for k, feats in (("L", ORACLE_L), ("G", ORACLE_G),
+                                                                         ("Gn", ORACLE_GN))},
+    **{f"M3o{k}": ("M1", [*(f"c_{f}" for f in feats), *feats]) for k, feats in (("L", ORACLE_L), ("G", ORACLE_G),
+                                                                                 ("Gn", ORACLE_GN))},
+}
+DEFAULT_STACKS = list(STACK)
+STACK |= B6_STACK
+IN_FOLD = ("nlearn", "nlearn_p")  # fold の中で作る特徴（表には無い）
+
+
+def b6_stack_available(x: str, columns: Iterable[str]) -> bool:
+    """B-6 の腕は、表から読む特徴（地域構成の元を含む）が全てあるときだけ回す（fold の中で作る N-learn は除く）。"""
+    cols = set(columns)
+    return all(f.removeprefix("c_") in cols or f.removeprefix("c_") in IN_FOLD for f in STACK[x][1])
+PLASMODE_DELTAS = (0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0)
+PLASMODE_FORMS = ("A", "B", "CA", "CB")
+PLASMODE_LOCAL_M = 500.0
+V44 = REPO_ROOT / "docs" / "verification" / "v44_wikipedia_etymology.json"
 # §8: 主判定（M1c → M3n、placebo M3np）と副の全体増分（M1s → M3s、M3ps）、分母（M0 → M1）
 SIM_ARMS = ["M0", "M1"]
 SIM_STACK = ["M1c", "M3n", "M3np", "M1s", "M3s", "M3ps"]
@@ -378,7 +423,8 @@ def add_composition(tr: pd.DataFrame, te: pd.DataFrame) -> None:
 
     あわせて名前特徴（と placebo）の AOI 内で中心化した d_* を作る（事後、B-2 追記 2）。
     """
-    feats = [f for f in (*NAMES, *NREAD_FEATURES, *ORACLE) if f in tr.columns]
+    feats = [f for f in (*NAMES, *NREAD_FEATURES, *ORACLE, *NAMES_S, *ORACLE_L, *ORACLE_G, *ORACLE_GN)
+             if f in tr.columns]
     for frame in (tr, te):
         means = frame.groupby("aoi")[feats].transform("mean")
         for f in feats:
@@ -482,6 +528,142 @@ def run_perms(df: pd.DataFrame, fold: int, seeds: list[int], n_perms: int,
     return {"te": te, "preds": r["preds"], "perms": out}
 
 
+# %% 事後 B-6（初見の査読 第 2 回）
+def strict_block(df: pd.DataFrame, look: dict, lex: Lexicon, *, per_aoi: dict | None = None,
+                 prefix: str = "") -> pd.DataFrame:
+    """5: 厳密な読み（泉・井戸を除いた水域・湿地・河川）の特徴 s_*（placebo は ps_*）。"""
+    b = lexicon_block(df, look, lex, per_aoi=per_aoi, prefix="_")
+    out = pd.DataFrame(index=df.index)
+    for c in STRICT_CATEGORIES:
+        out[f"{prefix}s_{c}_n1"] = b[f"_lex_{c}_n1"].to_numpy(dtype=np.float32)
+        out[f"{prefix}s_{c}_k"] = b[f"_lex_{c}_k"].to_numpy(dtype=np.float32)
+    n1 = out[[f"{prefix}s_{c}_n1" for c in STRICT_CATEGORIES]].to_numpy()
+    out[f"{prefix}s_any_n1"] = (n1 > 0).any(axis=1).astype(np.float32)
+    return out
+
+
+def _cell_xy(sub: pd.DataFrame, meta: dict) -> np.ndarray:
+    """格子の位置（ix, iy）→ セル中心の座標（AOI の LAEA、m）。"""
+    g = meta["grid"]
+    return np.column_stack([g["x0"] + (sub["ix"].to_numpy(np.float64) + 0.5) * g["cell_m"],
+                            g["y1"] - (sub["iy"].to_numpy(np.float64) + 0.5) * g["cell_m"]])
+
+
+def _settlements(gn: pd.DataFrame, bounds: tuple[float, float, float, float], meta: dict,
+                 pad_deg: float = 0.05) -> tuple[pd.DataFrame, np.ndarray]:
+    w, so, e, n = bounds
+    pts = gn.loc[(gn["fclass"] == "P") & gn["lon"].between(w - pad_deg, e + pad_deg)
+                 & gn["lat"].between(so - pad_deg, n + pad_deg)]
+    tr = Transformer.from_crs(4326, CRS.from_proj4(meta["crs_proj4"]), always_xy=True)
+    x, y = tr.transform(pts["lon"].to_numpy(float), pts["lat"].to_numpy(float))
+    return pts, np.column_stack([x, y])
+
+
+def fill_by_aoi(df: pd.DataFrame, v: np.ndarray) -> np.ndarray:
+    """欠けた値を AOI の中央値で、それも無ければ全体の中央値で（B-5 の 5 のオラクルと同じ扱い）。"""
+    s = pd.Series(v, index=df.index, dtype=np.float64)
+    s = s.fillna(s.groupby(df["aoi"]).transform("median"))
+    return s.fillna(float(np.nanmedian(s)) if s.notna().any() else 0.0).to_numpy(np.float32)
+
+
+def attach_label_oracle(df: pd.DataFrame, dirs: list[Path], infos: dict,  # noqa: PLR0913
+                        gn: pd.DataFrame, *,
+                        sens: Sensitivity, radius_m: float = PLASMODE_LOCAL_M) -> None:
+    """3(a): 最寄りの集落の点から 500 m 以内の評価可能なセルの浸水の割合（その事象、leave-one-out）。"""
+    out = np.full(len(df), np.nan)
+    for d in dirs:
+        m = (df["aoi"] == d.name).to_numpy()
+        if not m.any():
+            continue
+        meta = json.loads((d / "meta.json").read_text(encoding="utf-8"))
+        full = load_aoi_table(d, cap=10**9, seed=0, all_types=sens.all_types,
+                              unspecified_as_riverine=infos[d.name].unspecified_as_riverine,
+                              label_variant=sens.label_variant)
+        pts, sxy = _settlements(gn, infos[d.name].bounds, meta)
+        tab = label_share_by_settlement(_cell_xy(full, meta), full["y"].to_numpy(np.float64), sxy,
+                                        settle_gid=pts["gid"].to_numpy(np.int64), radius_m=radius_m)
+        part = df.loc[m]
+        sdict = dict(zip(pts["gid"].to_numpy(np.int64).tolist(), map(tuple, sxy), strict=True))
+        out[m] = loo_share(part["y"].to_numpy(np.float64), _cell_xy(part, meta),
+                           part["P_gid1"].to_numpy(np.int64), tab, settle_xy=sdict, radius_m=radius_m)
+    df["o_lab500"] = fill_by_aoi(df, out)
+
+
+def attach_gsw(df: pd.DataFrame, path: Path) -> dict:
+    """3(b): 集落ごとの JRC GSW の occurrence・seasonality（点から 500 m 以内の平均）を最寄りの集落から割り当てる。"""
+    t = pd.read_parquet(path).set_index("gid")
+    g = df["P_gid1"].to_numpy(np.int64)
+    for col, src in (("o_gsw_occ", "occ"), ("o_gsw_seas", "seas"), ("o_gsw_occ_np", "occ_np"),
+                     ("o_gsw_seas_np", "seas_np")):
+        df[col] = fill_by_aoi(df, t[src].reindex(g).to_numpy(np.float64))
+    return {"path": str(path), "sha256": _sha256(str(path)), "n_settlements": len(t),
+            "share_cells_with_value": float(np.isin(g, t.index.to_numpy()).mean())}
+
+
+def reassign_settlements(df: pd.DataFrame, dirs: list[Path], infos: dict, gn_f: pd.DataFrame) -> None:
+    """6(a): 絞った地名辞典で、表のセルの最寄りの集落 3 つ・距離・1 km と 3 km の集落数を計算し直す。"""
+    cols = [f"P_gid{j}" for j in (1, 2, 3)] + [f"P_d{j}" for j in (1, 2, 3)] + ["P_n1km", "P_n3km"]
+    for d in dirs:
+        m = (df["aoi"] == d.name).to_numpy()
+        if not m.any():
+            continue
+        meta = json.loads((d / "meta.json").read_text(encoding="utf-8"))
+        xy = _cell_xy(df.loc[m], meta)
+        a = assign_names((xy[:, 0], xy[:, 1]), CRS.from_proj4(meta["crs_proj4"]), gn_f, infos[d.name].bounds)
+        for c in cols:
+            df.loc[m, c] = a[c]
+    df["lP_d1"] = np.log1p(np.minimum(df["P_d1"], 1e6)).astype(np.float32)
+
+
+def run_plasmode(df: pd.DataFrame, fold: int, seeds: list[int], reps: int, pi: tuple[float, float],
+                 ) -> dict:
+    """2: 実データのラベルに名前の効果を注入し、二段目（M1c・M3n）だけを当て直す。
+
+    基礎モデルは 1 回だけ当て（cross-fit の M1 の logit を固定）、注入は訓練側と評価側の両方に。N-learn は注入後の
+    訓練側のラベルで当て直し、その AOI 平均（地域構成の c_nlearn）も作り直す。形 A: 水系側の名の最寄りの全セル、
+    B: そのうち 500 m 以内、CA・CB: 読み違いを入れた潜在の印 L の集落について同じ。
+    """
+    r = run_fold(df, fold, [], seeds, ["M1c", "M3n"], keep_state=True)
+    tr, te, z = r["tr"], r["te"], r["z"]["M1"]
+    p_tr, p_te = 1 / (1 + np.exp(-z[0])), 1 / (1 + np.exp(-z[1]))
+    y_tr0, y_te0 = tr["y"].to_numpy(np.int8), te["y"].to_numpy(np.int8)
+    groups_tr = tr["unit"].to_numpy() if "unit" in tr else tr["aoi"].to_numpy()
+    k_tr, k_te = cell_keys(tr["aoi"], tr["ix"].to_numpy(), tr["iy"].to_numpy()), \
+        cell_keys(te["aoi"], te["ix"].to_numpy(), te["iy"].to_numpy())
+    wet = {"tr": tr["lex_wetside_n1"].to_numpy() > 0, "te": te["lex_wetside_n1"].to_numpy() > 0}
+    near = {"tr": tr["P_d1"].to_numpy() <= PLASMODE_LOCAL_M, "te": te["P_d1"].to_numpy() <= PLASMODE_LOCAL_M}
+    gid = {"tr": tr["P_gid1"].to_numpy(np.int64), "te": te["P_gid1"].to_numpy(np.int64)}
+    comp_other = [c for c in COMP if c != "c_nlearn"]
+    lexf = [f for f in NAMES if f != "nlearn"]
+    shape = (len(PLASMODE_FORMS), len(PLASMODE_DELTAS), reps)
+    sse_c, sse_n, flips = np.zeros(shape), np.zeros(shape), np.zeros(shape)
+    for i, form in enumerate(PLASMODE_FORMS):
+        for j, delta in enumerate(PLASMODE_DELTAS):
+            for rep in range(reps):
+                salt = plasmode_salt(form, delta, rep)
+                tgt = {}
+                for side in ("tr", "te"):
+                    t = latent_names(gid[side], wet[side], pi[0], pi[1], salt) if form.startswith("C") else wet[side]
+                    tgt[side] = t & near[side] if form.endswith("B") else t
+                y_tr = inject_labels(y_tr0, p_tr, tgt["tr"], delta, hashed_uniform(k_tr, salt))
+                y_te = inject_labels(y_te0, p_te, tgt["te"], delta, hashed_uniform(k_te, salt))
+                oof, sc = nlearn_scores(tr["name_real"].to_numpy(), y_tr, groups_tr, te["name_real"].to_numpy())
+                c_tr = pd.Series(oof, index=tr.index).groupby(tr["aoi"]).transform("mean").to_numpy()
+                c_te = pd.Series(sc, index=te.index).groupby(te["aoi"]).transform("mean").to_numpy()
+                xc_tr = np.column_stack([tr[comp_other].to_numpy(np.float64), c_tr])
+                xc_te = np.column_stack([te[comp_other].to_numpy(np.float64), c_te])
+                xn_tr = np.column_stack([xc_tr, tr[lexf].to_numpy(np.float64), oof])
+                xn_te = np.column_stack([xc_te, te[lexf].to_numpy(np.float64), sc])
+                pc = stage2(z[0], z[1], xc_tr, xc_te, y_tr)
+                pn = stage2(z[0], z[1], xn_tr, xn_te, y_tr)
+                sse_c[i, j, rep] = float(((pc - y_te) ** 2).sum())
+                sse_n[i, j, rep] = float(((pn - y_te) ** 2).sum())
+                flips[i, j, rep] = float((y_te != y_te0).sum())
+    base_c = float(((r["preds"]["M1c"] - y_te0) ** 2).sum())
+    base_n = float(((r["preds"]["M3n"] - y_te0) ** 2).sum())
+    return {"te": te, "sse_c": sse_c, "sse_n": sse_n, "flips_te": flips, "base_c": base_c, "base_n": base_n}
+
+
 def strata_columns(te: pd.DataFrame) -> dict[str, np.ndarray]:
     """H5（記述のみ）と診断図に使う評価セルの層別変数（ラベルを含まない共変量だけ）。"""
     lex_any = te[[f"lex_{c}_n1" for c in CATEGORIES]].to_numpy().max(axis=1)
@@ -562,7 +744,7 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     ap.add_argument("--fold", type=int, default=-1, help="-1 = 全 fold")
     ap.add_argument("--seeds", default="42,43,44,45,46")
     ap.add_argument("--arms", default=",".join(ARMS), help="柔軟モデル（HistGB）の腕（副）")
-    ap.add_argument("--stacks", default=",".join(STACK), help="入れ子の増分モデルの腕（主）")
+    ap.add_argument("--stacks", default=",".join(DEFAULT_STACKS), help="入れ子の増分モデルの腕（主）")
     ap.add_argument("--group-cap", type=int, default=GROUP_CAP,
                     help="場所グループあたりの評価セル上限（§2.4-4、0 = 上限なし §7-2）")
     ap.add_argument("--aoi-cap", type=int, default=0, help="§7-2: AOI あたり上限（> 0 で有効）")
@@ -591,6 +773,15 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
                     help="事後 B-5 の 5: 集落の地点の地形を名前と同じ割り当てで入れたオラクル対照（M1co → M3o）")
     ap.add_argument("--perms", type=int, default=0,
                     help="事後 B-5 の 1: placebo の置換をシード 1..N で繰り返し、二段目だけ当て直す")
+    # 事後 B-6（初見の査読 第 2 回）
+    ap.add_argument("--plasmode", action="store_true", help="B-6 の 2: 実データに名前の効果を注入（二段目だけ）")
+    ap.add_argument("--plasmode-reps", type=int, default=10)
+    ap.add_argument("--oracle-label", action="store_true", help="B-6 の 3(a): 事象のラベルの割合（500 m）")
+    ap.add_argument("--gsw", default="", help="B-6 の 3(b): 集落ごとの JRC GSW の parquet")
+    ap.add_argument("--strict-names", action="store_true", help="B-6 の 5: 厳密な読み（M1cS → M3nS）")
+    ap.add_argument("--gn-filter", action="store_true", help="B-6 の 6(a): PPLX/H/Q/W を除き重複を 1 つに")
+    ap.add_argument("--exclude-untyped", action="store_true", help="B-6 の 6(d): 種別の無い AOI を除く")
+    ap.add_argument("--exclude-no-hydro", action="store_true", help="B-6 の 6(c): 水系の層の無い製品の AOI を除く")
     args = ap.parse_args()
     if args.synthetic == "none" and not protocol_frozen():
         msg = ("preregistration_v2.md is not FROZEN: real-label evaluation is allowed only after "
@@ -607,12 +798,34 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
                        label_variant=args.label_variant)
     dirs, reasons, infos = select_aois(gn, sens)
     print(f"AOIs included {len(dirs)} / reasons {reasons}", flush=True)
-    df = build_table(dirs, seed=20261025, infos=infos, sens=sens,
-                     extra_cols=("ix", "iy") if args.labels == "gfm" else ())
+    b6: dict = {}
+    if args.exclude_untyped or args.exclude_no_hydro:  # B-6 の 6(c)(d): AOI を除いて分割から作り直す
+        def _no_hydro(d: Path) -> bool:
+            return not (json.loads((d / "meta.json").read_text(encoding="utf-8")).get("layers") or {}).get("hydro")
+        drop = [d.name for d in dirs if (args.exclude_untyped and infos[d.name].unspecified_as_riverine)
+                or (args.exclude_no_hydro and _no_hydro(d))]
+        dirs = [d for d in dirs if d.name not in set(drop)]
+        b6["excluded_aois"] = sorted(drop)
+        print(f"B-6: excluded {len(drop)} AOIs → {len(dirs)}", flush=True)
+    need_xy = args.labels == "gfm" or args.plasmode or args.oracle_label or args.gn_filter
+    df = build_table(dirs, seed=20261025, infos=infos, sens=sens, extra_cols=("ix", "iy") if need_xy else ())
+    if args.gn_filter:  # 名前の割り当てを作り直してから名前の特徴を作る
+        gn_f, b6["gazetteer"] = filter_gazetteer(gn)
+        reassign_settlements(df, dirs, infos, gn_f)
+        print(f"B-6 gazetteer: {b6['gazetteer']}", flush=True)
     nread = pd.read_parquet(args.nread) if args.nread else None
     df, lexinfo, _ = add_channels(df, gn, nread)
     if args.oracle:
         attach_oracle(df, oracle_site_hand(dirs))
+    if args.strict_names:
+        look, ls = gid_lookup(gn), strict_lexicon(Lexicon(LEXICON))
+        per = placebo_lookups(df, look, PLACEBO_SEED)
+        df = pd.concat([df, strict_block(df, look, ls), strict_block(df, look, ls, per_aoi=per, prefix="p")], axis=1)
+        b6["strict_lexicon"] = ls.sha256
+    if args.oracle_label:
+        attach_label_oracle(df, dirs, infos, gn, sens=sens)
+    if args.gsw:
+        b6["gsw"] = attach_gsw(df, Path(args.gsw))
     cont = continent_map(ROOT / "geonames" / "countryInfo.txt")
     df.attrs["split"] = args.split
     df["fold"] = folds_for(args.split, df, infos, cont, buffer_km=sens.buffer_km,
@@ -640,7 +853,7 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
               "sensitivity": dataclasses.asdict(sens),
               "aoi_inclusion": reasons, "n_aoi": len(dirs), "split": args.split,
               "nread": {"path": args.nread, "sha256": _sha256(args.nread)} if args.nread else None,
-              "labels": args.labels, "gfm": gfm_info,
+              "labels": args.labels, "gfm": gfm_info, "b6": b6 or None,
               "n_aoi_by_fold": {int(k): int(v) for k, v in
                                 df.groupby("fold")["aoi"].nunique().items()}}
 
@@ -673,7 +886,30 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
 
     arms = [x for x in args.arms.split(",") if x and (nread is not None or x not in NREAD_ARMS)]
     stacks = [x for x in args.stacks.split(",")
-              if x and (nread is not None or x not in NREAD_STACK) and (args.oracle or x not in ORACLE_STACK)]
+              if x and (nread is not None or x not in NREAD_STACK) and (args.oracle or x not in ORACLE_STACK)
+              and (x not in B6_STACK or b6_stack_available(x, df.columns))]
+    dropped = [x for x in args.stacks.split(",") if x and x not in stacks]
+    if dropped:
+        print(f"stacks not run (features missing): {dropped}", flush=True)
+    if args.plasmode:  # B-6 の 2
+        v44 = json.loads(V44.read_text(encoding="utf-8"))
+        pi = (float(v44["truth_rate_in_wet"]["rate"]), float(v44["truth_rate_in_not"]["rate"]))
+        for k in folds:
+            if not (df["fold"] == k).any():
+                continue
+            r = run_plasmode(df, k, seeds, args.plasmode_reps, pi)
+            te = r["te"]
+            dst = run.path("predictions") / args.split / f"fold{k}_plasmode.npz"
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            np.savez_compressed(dst, sse_c=r["sse_c"], sse_n=r["sse_n"], flips_te=r["flips_te"],
+                                base_c=r["base_c"], base_n=r["base_n"], n_te=len(te),
+                                deltas=np.array(PLASMODE_DELTAS), forms=np.array(PLASMODE_FORMS))
+            write_json(run.path("predictions") / args.split / f"fold{k}_plasmode.json",
+                       {**common, "fold": k, "n_test": len(te), "reps": args.plasmode_reps, "pi": pi,
+                        "deltas": list(PLASMODE_DELTAS), "forms": list(PLASMODE_FORMS),
+                        "local_m": PLASMODE_LOCAL_M, "rule": "amendment B-6 item 2"})
+            print(f"fold {k}: plasmode ({time.time() - t0:.0f}s)", flush=True)
+        return
     if args.perms > 0:  # B-5 の 1: 置換の分布（実の M1c・M3n・M3np も一緒に）
         for k in folds:
             if not (df["fold"] == k).any():

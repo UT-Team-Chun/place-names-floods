@@ -240,6 +240,116 @@ def gfm_labels(meta: dict, sources: list[dict], ix: np.ndarray, iy: np.ndarray,
     return cols, prov | {"reason": "ok", "n_scenes": len(scenes)}
 
 
+# %% 事後 B-6 の 4: 層の成分と、季節水域を判定可能に戻した変種 V1
+LAYERS_V1 = (*LAYERS, "ensemble_water_extent")
+REFW_PERMANENT, REFW_SEASONAL = 1, 2  # 参照水域の値
+COMPONENTS = ("excl", "perm", "seas", "nodata")
+
+
+def valid_and_wet_v1(water: np.ndarray, excl: np.ndarray, refw: np.ndarray,
+                     ) -> tuple[np.ndarray, np.ndarray]:
+    """変種 V1 の副格子の画素。
+
+    判定可能 = 観測水域 0/1・除外域 0・参照水域 ≠ 1（恒常水域でない。季節水域 2 は判定可能に）。
+    浸水 = 判定可能かつ観測水域 = 1（季節水域でも水が観測されれば浸水と数える）。
+    """
+    valid = (((water == 0) | (water == 1)) & (excl == 0) & (refw != REFW_PERMANENT)
+             & (refw != NODATA))
+    return valid, valid & (water == 1)
+
+
+def component_fractions(excl: np.ndarray, refw: np.ndarray, sub: int, ny: int, nx: int,
+                        ) -> dict[str, np.ndarray]:
+    """副格子 → セル: 除外域・恒常水域・季節水域・データなし（その撮像が覆わない）の画素の割合。
+
+    重なりは除外域を優先する。浸水域の層は恒常水域で値を持たない（255）ので、データなしは除外域の
+    層で決める。
+    """
+    nodata = excl == NODATA
+    ex = (excl != 0) & ~nodata
+    perm = (refw == REFW_PERMANENT) & ~ex & ~nodata
+    seas = (refw == REFW_SEASONAL) & ~ex & ~nodata
+    tot = float(sub * sub)
+    return {k: (_block(m, sub, ny, nx).sum(axis=2) / tot).astype(np.float32).ravel()
+            for k, m in zip(COMPONENTS, (ex, perm, seas, nodata), strict=True)}
+
+
+def scene_fractions_v1(items: list[dict], meta: dict) -> dict[str, Any]:
+    """1 撮像: B-3 の (v, f)、変種 V1 の (v1, f1)、層の成分の割合。
+
+    読めない項目は外す（B-3 追記 1 と同じ）。
+    """
+    g = meta["grid"]
+    ny, nx = g["ny"], g["nx"]
+    sub = round(g["cell_m"] / g["fine_res_m"])
+    shape = (ny * sub, nx * sub)
+    dst_tr = rasterio.transform.from_origin(g["x0"], g["y1"], g["fine_res_m"], g["fine_res_m"])
+    dst_crs = CRS.from_proj4(meta["crs_proj4"])
+    layers = {k: np.full(shape, NODATA, dtype=np.uint8) for k in LAYERS_V1}
+    skipped = []
+    with rasterio.Env(**GDAL_ENV):
+        for item in items:
+            try:
+                got = {}
+                for k in LAYERS_V1:
+                    with rasterio.open(f"/vsicurl/{item['assets'][k]['href']}") as src:
+                        tmp = np.full(shape, NODATA, dtype=np.uint8)
+                        reproject(source=rasterio.band(src, 1), destination=tmp,
+                                  dst_transform=dst_tr, dst_crs=dst_crs, src_nodata=NODATA,
+                                  dst_nodata=NODATA, resampling=Resampling.nearest)
+                        got[k] = tmp
+            except (RasterioIOError, KeyError):
+                skipped.append(item["id"])
+                continue
+            for k in LAYERS_V1:
+                fill = (layers[k] == NODATA) & (got[k] != NODATA)
+                layers[k][fill] = got[k][fill]
+    flood, excl, refw, water = (layers[k] for k in LAYERS_V1)
+    valid, wet = valid_and_wet(flood, excl, refw)
+    v, f = cell_fractions(valid, wet, sub, ny, nx)
+    valid1, wet1 = valid_and_wet_v1(water, excl, refw)
+    v1, f1 = cell_fractions(valid1, wet1, sub, ny, nx)
+    comp = component_fractions(excl, refw, sub, ny, nx)
+    return {"v": v, "f": f, "v1": v1, "f1": f1, "skipped": skipped,
+            **{f"c_{k}": a for k, a in comp.items()}}
+
+
+def gfm_labels_v1(meta: dict, sources: list[dict], ix: np.ndarray, iy: np.ndarray,
+                  ) -> tuple[dict[str, np.ndarray], dict[str, Any]]:
+    """1 AOI のセルの B-3 のラベル（作り直しの照合用）・変種 V1・層の成分。
+
+    層の成分は、B-3 の判定可能な割合 v が最大の撮像の値。
+    """
+    n = len(ix)
+    cols: dict[str, np.ndarray] = {
+        "gfm_eval": np.zeros(n, dtype=bool), "gfm_y": np.full(n, -1, dtype=np.int8),
+        "v1_v": np.zeros(n, dtype=np.float32), "v1_eval": np.zeros(n, dtype=bool),
+        "v1_y": np.full(n, -1, dtype=np.int8),
+        **{f"c_{k}": np.full(n, np.nan, dtype=np.float32) for k in COMPONENTS}}
+    win = post_event_window(sources)
+    if win is None:
+        return cols, {"reason": "no post-event date", "window": None, "scenes": []}
+    prov: dict[str, Any] = {"window": [win[0].isoformat(), win[1].isoformat()], "scenes": []}
+    scenes = group_scenes(search_items(grid_lonlat_bounds(meta), *win))
+    if not scenes:
+        return cols, prov | {"reason": "no GFM item in window"}
+    res = []
+    for when, items in scenes.items():
+        r = scene_fractions_v1(items, meta)
+        res.append(r)
+        prov["scenes"].append({"datetime": when, "skipped_unreadable": r["skipped"],
+                               "items": [item_provenance(it) for it in items]})
+    _, ev, y, _ = combine_scenes([r["v"] for r in res], [r["f"] for r in res])
+    v1max, ev1, y1, _ = combine_scenes([r["v1"] for r in res], [r["f1"] for r in res])
+    best = np.stack([r["v"] for r in res]).argmax(axis=0)
+    comp = {k: np.stack([r[f"c_{k}"] for r in res])[best, np.arange(best.size)]
+            for k in COMPONENTS}
+    idx = iy.astype(np.int64) * int(meta["grid"]["nx"]) + ix.astype(np.int64)
+    cols = {"gfm_eval": ev[idx], "gfm_y": y[idx], "v1_v": v1max[idx], "v1_eval": ev1[idx],
+            "v1_y": y1[idx], **{f"c_{k}": comp[k][idx] for k in COMPONENTS}}
+    return cols, prov | {"reason": "ok", "n_scenes": len(scenes)}
+
+
 def gfm_include(ems_eval: np.ndarray, gfm_eval: np.ndarray, gfm_y: np.ndarray,
                 ) -> tuple[bool, dict[str, Any]]:
     """AOI の採用（B-3）: EMS と GFM の両方で評価可能なセルが 400 以上、浸水 20 以上。

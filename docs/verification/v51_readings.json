@@ -1,0 +1,1039 @@
+{
+ "rule": "amendment B-6 item 5",
+ "seed": 20261028,
+ "lexicon_sha256": "6c9999921956ba13f929b18ef921afcd0e05334293ef0989d9357c6a8d59c58d",
+ "lexicon": {
+  "n_codes": 47,
+  "policy_note": [
+   "方針: 誤爆の多い短い形・人名や方角と衝突する形は入れない（再現率より精度を優先）。",
+   "例: 英 \"-ey\"（-ley と衝突）、越 \"ho\"/\"dong\"（姓・東と衝突）、中 \"he\"/\"hu\" は除外。"
+  ],
+  "n_forms_by_category": {
+   "water": 529,
+   "wet": 330,
+   "riverine": 284,
+   "crossing": 199,
+   "low": 267,
+   "high": 487
+  }
+ },
+ "match": {
+  "n_cells": 1507486,
+  "n_settlements": 94524,
+  "share_cells_covered": 1.0,
+  "share_cells_any": 0.09993658315898124,
+  "share_cells_wetside": 0.061143519740813515,
+  "by_code": {
+   "en": {
+    "n_cells": 424948,
+    "n_settlements": 13110,
+    "share_any": 0.10963459058520102,
+    "share_wetside": 0.08040748515112438
+   },
+   "de": {
+    "n_cells": 175901,
+    "n_settlements": 15436,
+    "share_any": 0.08749239629109556,
+    "share_wetside": 0.059556227650780835
+   },
+   "es": {
+    "n_cells": 169326,
+    "n_settlements": 7725,
+    "share_any": 0.06128415010098862,
+    "share_wetside": 0.028802428451625856
+   },
+   "fr": {
+    "n_cells": 138185,
+    "n_settlements": 15585,
+    "share_any": 0.03882476390346275,
+    "share_wetside": 0.016854217172630893
+   },
+   "it": {
+    "n_cells": 86262,
+    "n_settlements": 5401,
+    "share_any": 0.07516635366673623,
+    "share_wetside": 0.03619206603139273
+   },
+   "fa": {
+    "n_cells": 85209,
+    "n_settlements": 7732,
+    "share_any": 0.08548392775411048,
+    "share_wetside": 0.07420577638512364
+   },
+   "hi": {
+    "n_cells": 81262,
+    "n_settlements": 7226,
+    "share_any": 0.03403804976495779,
+    "share_wetside": 0.033127415027934336
+   },
+   "qu": {
+    "n_cells": 76440,
+    "n_settlements": 1173,
+    "share_any": 0.027341705913134486,
+    "share_wetside": 0.014835164835164835
+   },
+   "pt": {
+    "n_cells": 70849,
+    "n_settlements": 5139,
+    "share_any": 0.06758034693503084,
+    "share_wetside": 0.03647193326652458
+   },
+   "sh": {
+    "n_cells": 57060,
+    "n_settlements": 4330,
+    "share_any": 0.09495268138801262,
+    "share_wetside": 0.06056782334384858
+   },
+   "ro": {
+    "n_cells": 55634,
+    "n_settlements": 695,
+    "share_any": 0.0914908149692634,
+    "share_wetside": 0.06082611352769889
+   },
+   "sv": {
+    "n_cells": 54909,
+    "n_settlements": 3472,
+    "share_any": 0.2387950973428764,
+    "share_wetside": 0.0757070789852301
+   },
+   "bantu": {
+    "n_cells": 49365,
+    "n_settlements": 3002,
+    "share_any": 0.00010128633647320976,
+    "share_wetside": 0.00010128633647320976
+   },
+   "vi": {
+    "n_cells": 48556,
+    "n_settlements": 2800,
+    "share_any": 0.0447936403328116,
+    "share_wetside": 0.0420133454156026
+   },
+   "el": {
+    "n_cells": 35780,
+    "n_settlements": 1665,
+    "share_any": 0.05816098378982672,
+    "share_wetside": 0.0436836221352711
+   },
+   "ng": {
+    "n_cells": 35436,
+    "n_settlements": 1396,
+    "share_any": 0.014984761259735862,
+    "share_wetside": 0.0
+   },
+   "no": {
+    "n_cells": 33813,
+    "n_settlements": 369,
+    "share_any": 0.1536982817259634,
+    "share_wetside": 0.08189158016147635
+   },
+   "sq": {
+    "n_cells": 33522,
+    "n_settlements": 753,
+    "share_any": 0.03898932044627409,
+    "share_wetside": 0.013871487381421157
+   },
+   "sw": {
+    "n_cells": 25549,
+    "n_settlements": 825,
+    "share_any": 0.0,
+    "share_wetside": 0.0
+   },
+   "mg": {
+    "n_cells": 23568,
+    "n_settlements": 845,
+    "share_any": 0.1347589952477936,
+    "share_wetside": 0.017269178547182622
+   },
+   "lv": {
+    "n_cells": 20000,
+    "n_settlements": 445,
+    "share_any": 0.02065,
+    "share_wetside": 0.0
+   },
+   "uk": {
+    "n_cells": 18121,
+    "n_settlements": 244,
+    "share_any": 0.007670658352188069,
+    "share_wetside": 0.007670658352188069
+   },
+   "sl": {
+    "n_cells": 17424,
+    "n_settlements": 1686,
+    "share_any": 0.10738062442607897,
+    "share_wetside": 0.04952938475665748
+   },
+   "nah": {
+    "n_cells": 14143,
+    "n_settlements": 3793,
+    "share_any": 0.032949162129675455,
+    "share_wetside": 0.022767446793466734
+   },
+   "cs": {
+    "n_cells": 13046,
+    "n_settlements": 1213,
+    "share_any": 0.0577954928713782,
+    "share_wetside": 0.03204047217537943
+   },
+   "fi": {
+    "n_cells": 11735,
+    "n_settlements": 103,
+    "share_any": 0.1735832978270132,
+    "share_wetside": 0.09578184916915211
+   },
+   "tl": {
+    "n_cells": 10000,
+    "n_settlements": 1740,
+    "share_any": 0.018,
+    "share_wetside": 0.0108
+   },
+   "my": {
+    "n_cells": 10000,
+    "n_settlements": 4784,
+    "share_any": 0.1869,
+    "share_wetside": 0.0995
+   },
+   "pl": {
+    "n_cells": 9904,
+    "n_settlements": 2039,
+    "share_any": 0.048061389337641355,
+    "share_wetside": 0.03241114701130856
+   },
+   "km": {
+    "n_cells": 8668,
+    "n_settlements": 3668,
+    "share_any": 0.09425473004153208,
+    "share_wetside": 0.07291185971389016
+   },
+   "lt": {
+    "n_cells": 7930,
+    "n_settlements": 147,
+    "share_any": 0.0,
+    "share_wetside": 0.0
+   },
+   "hu": {
+    "n_cells": 7917,
+    "n_settlements": 1834,
+    "share_any": 0.12239484653277757,
+    "share_wetside": 0.05961854237716307
+   },
+   "bg": {
+    "n_cells": 6544,
+    "n_settlements": 112,
+    "share_any": 0.11766503667481662,
+    "share_wetside": 0.039119804400977995
+   },
+   "nl": {
+    "n_cells": 6128,
+    "n_settlements": 1948,
+    "share_any": 0.09954308093994778,
+    "share_wetside": 0.05075065274151436
+   },
+   "id": {
+    "n_cells": 4962,
+    "n_settlements": 84,
+    "share_any": 0.0,
+    "share_wetside": 0.0
+   },
+   "tr": {
+    "n_cells": 3965,
+    "n_settlements": 161,
+    "share_any": 0.08045397225725094,
+    "share_wetside": 0.05220680958385877
+   },
+   "ar": {
+    "n_cells": 976,
+    "n_settlements": 76,
+    "share_any": 0.0,
+    "share_wetside": 0.0
+   },
+   "so": {
+    "n_cells": 747,
+    "n_settlements": 8,
+    "share_any": 0.0,
+    "share_wetside": 0.0
+   },
+   "th": {
+    "n_cells": 531,
+    "n_settlements": 232,
+    "share_any": 0.17702448210922786,
+    "share_wetside": 0.11487758945386065
+   },
+   "af": {
+    "n_cells": 9,
+    "n_settlements": 2,
+    "share_any": 0.0,
+    "share_wetside": 0.0
+   }
+  },
+  "by_continent": {
+   "AF": {
+    "n_cells": 144265,
+    "share_covered": 1.0,
+    "share_any": 0.02796243024988736,
+    "share_wetside": 0.005060132395244862
+   },
+   "AS": {
+    "n_cells": 196090,
+    "share_covered": 1.0,
+    "share_any": 0.07930032128104442,
+    "share_wetside": 0.06673976235402111
+   },
+   "EU": {
+    "n_cells": 824854,
+    "share_covered": 1.0,
+    "share_any": 0.11168158243761926,
+    "share_wetside": 0.06333120770463621
+   },
+   "NA": {
+    "n_cells": 85031,
+    "share_covered": 1.0,
+    "share_any": 0.09792899060342698,
+    "share_wetside": 0.06828097987792688
+   },
+   "OC": {
+    "n_cells": 150806,
+    "share_covered": 1.0,
+    "share_any": 0.15018633210880203,
+    "share_wetside": 0.11313873453310876
+   },
+   "SA": {
+    "n_cells": 106440,
+    "share_covered": 1.0,
+    "share_any": 0.07489665539270951,
+    "share_wetside": 0.03052423900789177
+   }
+  },
+  "reproduces_lexfix_wetside": true
+ },
+ "top_forms": [
+  {
+   "lang": "en",
+   "form": "creek",
+   "pos": "word",
+   "cat": "water",
+   "n_cells": 4979,
+   "n_settlements": 62
+  },
+  {
+   "lang": "fa",
+   "form": "chah",
+   "pos": "word",
+   "cat": "water",
+   "n_cells": 4665,
+   "n_settlements": 110
+  },
+  {
+   "lang": "en",
+   "form": "bridge",
+   "pos": "word",
+   "cat": "crossing",
+   "n_cells": 4605,
+   "n_settlements": 142
+  },
+  {
+   "lang": "en",
+   "form": "lake",
+   "pos": "word",
+   "cat": "water",
+   "n_cells": 3002,
+   "n_settlements": 35
+  },
+  {
+   "lang": "de",
+   "form": "ach",
+   "pos": "suffix",
+   "cat": "water",
+   "n_cells": 2891,
+   "n_settlements": 404
+  },
+  {
+   "lang": "de",
+   "form": "au",
+   "pos": "suffix",
+   "cat": "riverine",
+   "n_cells": 2701,
+   "n_settlements": 182
+  },
+  {
+   "lang": "de",
+   "form": "bach",
+   "pos": "suffix",
+   "cat": "water",
+   "n_cells": 2541,
+   "n_settlements": 360
+  },
+  {
+   "lang": "en",
+   "form": "dale",
+   "pos": "suffix",
+   "cat": "low",
+   "n_cells": 2515,
+   "n_settlements": 56
+  },
+  {
+   "lang": "hi",
+   "form": "char",
+   "pos": "word",
+   "cat": "riverine",
+   "n_cells": 2303,
+   "n_settlements": 149
+  },
+  {
+   "lang": "en",
+   "form": "ford",
+   "pos": "suffix",
+   "cat": "crossing",
+   "n_cells": 2161,
+   "n_settlements": 74
+  },
+  {
+   "lang": "en",
+   "form": "lower",
+   "pos": "word",
+   "cat": "low",
+   "n_cells": 1679,
+   "n_settlements": 39
+  },
+  {
+   "lang": "de",
+   "form": "nieder",
+   "pos": "prefix",
+   "cat": "low",
+   "n_cells": 1260,
+   "n_settlements": 99
+  },
+  {
+   "lang": "en",
+   "form": "vale",
+   "pos": "word",
+   "cat": "low",
+   "n_cells": 1234,
+   "n_settlements": 15
+  },
+  {
+   "lang": "ro",
+   "form": "lunca",
+   "pos": "word",
+   "cat": "riverine",
+   "n_cells": 1211,
+   "n_settlements": 7
+  },
+  {
+   "lang": "en",
+   "form": "flat",
+   "pos": "word",
+   "cat": "riverine",
+   "n_cells": 1092,
+   "n_settlements": 7
+  },
+  {
+   "lang": "sv",
+   "form": "dalen",
+   "pos": "suffix",
+   "cat": "low",
+   "n_cells": 1067,
+   "n_settlements": 11
+  },
+  {
+   "lang": "en",
+   "form": "burn",
+   "pos": "suffix",
+   "cat": "water",
+   "n_cells": 1038,
+   "n_settlements": 30
+  },
+  {
+   "lang": "en",
+   "form": "well",
+   "pos": "suffix",
+   "cat": "water",
+   "n_cells": 996,
+   "n_settlements": 47
+  },
+  {
+   "lang": "pt",
+   "form": "vale",
+   "pos": "word",
+   "cat": "low",
+   "n_cells": 881,
+   "n_settlements": 95
+  },
+  {
+   "lang": "no",
+   "form": "foss",
+   "pos": "suffix",
+   "cat": "water",
+   "n_cells": 820,
+   "n_settlements": 8
+  }
+ ],
+ "precision_by_position": {
+  "word": {
+   "any": {
+    "k": 51,
+    "n": 71,
+    "rate": 0.7183098591549296,
+    "ci95": [
+     0.604577630038469,
+     0.8096305108885021
+    ]
+   },
+   "only_this_position": {
+    "k": 50,
+    "n": 70,
+    "rate": 0.7142857142857143,
+    "ci95": [
+     0.5994958195463383,
+     0.8067792340819687
+    ]
+   }
+  },
+  "prefix": {
+   "any": {
+    "k": 7,
+    "n": 8,
+    "rate": 0.875,
+    "ci95": [
+     0.5291051942301386,
+     0.9775830911367038
+    ]
+   },
+   "only_this_position": {
+    "k": 7,
+    "n": 8,
+    "rate": 0.875,
+    "ci95": [
+     0.5291051942301386,
+     0.9775830911367038
+    ]
+   }
+  },
+  "suffix": {
+   "any": {
+    "k": 25,
+    "n": 30,
+    "rate": 0.8333333333333334,
+    "ci95": [
+     0.6643529481431982,
+     0.9266356575964831
+    ]
+   },
+   "only_this_position": {
+    "k": 24,
+    "n": 29,
+    "rate": 0.8275862068965517,
+    "ci95": [
+     0.6545119942718488,
+     0.9240225472852007
+    ]
+   }
+  },
+  "infix": {
+   "any": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "only_this_position": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   }
+  },
+  "n_names": 108,
+  "n_multiple_positions": 1
+ },
+ "strict": {
+  "precision": {
+   "est": 0.8333333333333333,
+   "ci95": [
+    0.723404255319149,
+    0.934782608695652
+   ]
+  },
+  "recall": {
+   "est": 0.18533068147968634,
+   "ci95": [
+    0.1325449940634902,
+    0.2687028012884602
+   ]
+  },
+  "n_coded": 353,
+  "n_strict_flag": 48,
+  "n_strict_truth": 72,
+  "n_water_spring_only": 9,
+  "ids_water_spring_only": [
+   29,
+   177,
+   218,
+   240,
+   252,
+   259,
+   295,
+   344,
+   440
+  ],
+  "by_description_category": {
+   "water": {
+    "precision": {
+     "k": 31,
+     "n": 38,
+     "rate": 0.8157894736842105,
+     "ci95": [
+      0.6658083165848865,
+      0.907783515467425
+     ]
+    },
+    "recall_unweighted": {
+     "k": 31,
+     "n": 57,
+     "rate": 0.543859649122807,
+     "ci95": [
+      0.41590460831272247,
+      0.6662760049518861
+     ]
+    }
+   },
+   "wet": {
+    "precision": {
+     "k": 3,
+     "n": 6,
+     "rate": 0.5,
+     "ci95": [
+      0.18761280689940868,
+      0.8123871931005913
+     ]
+    },
+    "recall_unweighted": {
+     "k": 3,
+     "n": 15,
+     "rate": 0.2,
+     "ci95": [
+      0.07047420643610414,
+      0.4518593533465045
+     ]
+    }
+   },
+   "riverine": {
+    "precision": {
+     "k": 8,
+     "n": 11,
+     "rate": 0.7272727272727273,
+     "ci95": [
+      0.4343497069897537,
+      0.9025411942607853
+     ]
+    },
+    "recall_unweighted": {
+     "k": 8,
+     "n": 13,
+     "rate": 0.6153846153846154,
+     "ci95": [
+      0.35522480972268555,
+      0.8229055341876319
+     ]
+    }
+   },
+   "crossing": {
+    "precision": {
+     "k": 16,
+     "n": 18,
+     "rate": 0.8888888888888888,
+     "ci95": [
+      0.6719975513339578,
+      0.9689811315464172
+     ]
+    },
+    "recall_unweighted": {
+     "k": 16,
+     "n": 21,
+     "rate": 0.7619047619047619,
+     "ci95": [
+      0.5490841802765406,
+      0.8937214361088773
+     ]
+    }
+   },
+   "low": {
+    "precision": {
+     "k": 18,
+     "n": 37,
+     "rate": 0.4864864864864865,
+     "ci95": [
+      0.33446153327211037,
+      0.6410536277401908
+     ]
+    },
+    "recall_unweighted": {
+     "k": 18,
+     "n": 34,
+     "rate": 0.5294117647058824,
+     "ci95": [
+      0.3673644042005483,
+      0.6854874836688863
+     ]
+    }
+   },
+   "high": {
+    "precision": {
+     "k": 8,
+     "n": 15,
+     "rate": 0.5333333333333333,
+     "ci95": [
+      0.3011663015105079,
+      0.7519077474025355
+     ]
+    },
+    "recall_unweighted": {
+     "k": 8,
+     "n": 40,
+     "rate": 0.2,
+     "ci95": [
+      0.10499864973166874,
+      0.34757607381856676
+     ]
+    }
+   }
+  }
+ },
+ "examples": [
+  {
+   "lexicon_category": "water",
+   "kind": "agrees",
+   "id": 10,
+   "name": "Windermere",
+   "country": "GB",
+   "reading": "water",
+   "derivation_codes": "water;other",
+   "quote": "\"Windermere\" is thought to translate as \"Winand or Vinand's lake\" ... 'mere', meaning 'lake' or 'pool'",
+   "url": "https://en.wikipedia.org/wiki/Windermere%2C_Cumbria_%28town%29"
+  },
+  {
+   "lexicon_category": "water",
+   "kind": "agrees",
+   "id": 27,
+   "name": "Odolena Voda",
+   "country": "CZ",
+   "reading": "water",
+   "derivation_codes": "other;water",
+   "quote": "The name means \"Odolen's water\" ... named after Knight Odolen ... refers to the sufficient water in the area",
+   "url": "https://en.wikipedia.org/wiki/Odolena_Voda"
+  },
+  {
+   "lexicon_category": "water",
+   "kind": "disagrees",
+   "id": 93,
+   "name": "New Wells",
+   "country": "US",
+   "reading": "water",
+   "derivation_codes": "other",
+   "quote": "Austrian settlers referred to the community as Neu Wels, after the city in Austria, which was later Americanized to New Wells",
+   "url": "https://en.wikipedia.org/wiki/New_Wells%2C_Missouri"
+  },
+  {
+   "lexicon_category": "wet",
+   "kind": "agrees",
+   "id": 90,
+   "name": "Spoerkelnbruch",
+   "country": "DE",
+   "reading": "wet",
+   "derivation_codes": "other;wet",
+   "quote": "Vermutlicher Namensgeber ist der Faulbaum ... Bruch ist eine alte Bezeichnung für ein Moor oder Feuchtgebiet",
+   "url": "https://de.wikipedia.org/wiki/Sp%C3%B6rkelnbruch"
+  },
+  {
+   "lexicon_category": "wet",
+   "kind": "agrees",
+   "id": 160,
+   "name": "Clairmarais",
+   "country": "FR",
+   "reading": "wet",
+   "derivation_codes": "wet",
+   "quote": "l'oïl clair + maresc : le « marais aux eaux claires »",
+   "url": "https://fr.wikipedia.org/wiki/Clairmarais"
+  },
+  {
+   "lexicon_category": "wet",
+   "kind": "disagrees",
+   "id": 161,
+   "name": "Spodnje Blato",
+   "country": "SI",
+   "reading": "wet;low",
+   "derivation_codes": "low",
+   "quote": "Spodnje Blato (literally 'lower Blato')",
+   "url": "https://en.wikipedia.org/wiki/Spodnje_Blato"
+  },
+  {
+   "lexicon_category": "riverine",
+   "kind": "agrees",
+   "id": 52,
+   "name": "L'Ile-Saint-Denis",
+   "country": "FR",
+   "reading": "riverine",
+   "derivation_codes": "riverine;other",
+   "quote": "L'Île-Saint-Denis doit son nom à l'abbaye de Saint-Denis ... qui eut seigneurie sur l'île centrale",
+   "url": "https://fr.wikipedia.org/wiki/L%27%C3%8Ele-Saint-Denis"
+  },
+  {
+   "lexicon_category": "riverine",
+   "kind": "agrees",
+   "id": 76,
+   "name": "Ostrvo",
+   "country": "RS",
+   "reading": "riverine",
+   "derivation_codes": "riverine",
+   "quote": "\"Ostrovo\" means \"island\" in Serbian. This name originates from the fact that Ostrovo is located on former Danube island",
+   "url": "https://en.wikipedia.org/wiki/Ostrovo%2C_Po%C5%BEarevac"
+  },
+  {
+   "lexicon_category": "riverine",
+   "kind": "disagrees",
+   "id": 12,
+   "name": "Veliki Otok",
+   "country": "SI",
+   "reading": "riverine",
+   "derivation_codes": "water",
+   "quote": "Voda (reka Pivka) pa naj bi odtekala v Postojnsko jamo ... odtok se imenuje Veliki odtok ... dali vasi ime Veliki Otok",
+   "url": "https://sl.wikipedia.org/wiki/Veliki_Otok%2C_Postojna"
+  },
+  {
+   "lexicon_category": "crossing",
+   "kind": "agrees",
+   "id": 15,
+   "name": "Pont-Pean",
+   "country": "FR",
+   "reading": "crossing",
+   "derivation_codes": "crossing;other",
+   "quote": "le toponyme Pont-Péan peut donc signifier « pont paysan » ou « pont construit ou possédé par un dénommé Péan »",
+   "url": "https://fr.wikipedia.org/wiki/Pont-P%C3%A9an"
+  },
+  {
+   "lexicon_category": "crossing",
+   "kind": "agrees",
+   "id": 44,
+   "name": "Saint-Fargeau-Ponthierry",
+   "country": "FR",
+   "reading": "crossing",
+   "derivation_codes": "crossing;other",
+   "quote": "Saint-Fargeau est une déformation du nom de saint Ferréol ... Ponthierry trouverait son origine dans un pont sur l'École franchi par Thierry",
+   "url": "https://fr.wikipedia.org/wiki/Saint-Fargeau-Ponthierry"
+  },
+  {
+   "lexicon_category": "crossing",
+   "kind": "disagrees",
+   "id": 165,
+   "name": "Ennerdale Bridge",
+   "country": "GB",
+   "reading": "crossing;low",
+   "derivation_codes": "low;other;water",
+   "quote": "The name Ennerdale means 'Anund's valley' ... cross-influenced by 'Ehen', the name of the local river",
+   "url": "https://en.wikipedia.org/wiki/Ennerdale_Bridge"
+  },
+  {
+   "lexicon_category": "low",
+   "kind": "agrees",
+   "id": 14,
+   "name": "Dol pri Ljubljani",
+   "country": "SI",
+   "reading": "low",
+   "derivation_codes": "low",
+   "quote": "The name is derived from the Slovene common noun dol 'small valley'",
+   "url": "https://en.wikipedia.org/wiki/Dol_pri_Ljubljani"
+  },
+  {
+   "lexicon_category": "low",
+   "kind": "agrees",
+   "id": 21,
+   "name": "Spodnji Velovlek",
+   "country": "SI",
+   "reading": "low",
+   "derivation_codes": "low",
+   "quote": "The name Spodnji Velovlek literally means 'lower Velovlek'",
+   "url": "https://en.wikipedia.org/wiki/Spodnji_Velovlek"
+  },
+  {
+   "lexicon_category": "low",
+   "kind": "disagrees",
+   "id": 16,
+   "name": "Germigny-sous-Coulombs",
+   "country": "FR",
+   "reading": "low",
+   "derivation_codes": "other",
+   "quote": "Du latin germinare, « germer », du latin germinius, « rejet (botanique) » ou « rejeton, progéniture ». Coulombs fait référence à Coulombs-en-Valois",
+   "url": "https://fr.wikipedia.org/wiki/Germigny-sous-Coulombs"
+  }
+ ],
+ "example_aoi": {
+  "EMSR511_AOI01": [
+   {
+    "name": "Ala-Kittila",
+    "cc": "FI",
+    "reading": [
+     "low"
+    ],
+    "wetside": true,
+    "forms": [
+     "ala (word, low)"
+    ]
+   },
+   {
+    "name": "Hossa",
+    "cc": "FI",
+    "reading": [],
+    "wetside": false,
+    "forms": []
+   },
+   {
+    "name": "Kaetkae",
+    "cc": "FI",
+    "reading": [],
+    "wetside": false,
+    "forms": []
+   },
+   {
+    "name": "Kittilae",
+    "cc": "FI",
+    "reading": [],
+    "wetside": false,
+    "forms": []
+   },
+   {
+    "name": "Kotakumpu",
+    "cc": "FI",
+    "reading": [
+     "high"
+    ],
+    "wetside": false,
+    "forms": [
+     "kumpu (suffix, high)"
+    ]
+   },
+   {
+    "name": "Kuusajoki",
+    "cc": "FI",
+    "reading": [
+     "water"
+    ],
+    "wetside": true,
+    "forms": [
+     "joki (suffix, water)"
+    ]
+   },
+   {
+    "name": "Levi",
+    "cc": "FI",
+    "reading": [],
+    "wetside": false,
+    "forms": []
+   },
+   {
+    "name": "Lonnakko",
+    "cc": "FI",
+    "reading": [],
+    "wetside": false,
+    "forms": []
+   },
+   {
+    "name": "Narikka",
+    "cc": "FI",
+    "reading": [],
+    "wetside": false,
+    "forms": []
+   },
+   {
+    "name": "Pitkakumpu",
+    "cc": "FI",
+    "reading": [
+     "high"
+    ],
+    "wetside": false,
+    "forms": [
+     "kumpu (suffix, high)"
+    ]
+   },
+   {
+    "name": "Rautuskylae",
+    "cc": "FI",
+    "reading": [],
+    "wetside": false,
+    "forms": []
+   },
+   {
+    "name": "Riikonkumpu",
+    "cc": "FI",
+    "reading": [
+     "high"
+    ],
+    "wetside": false,
+    "forms": [
+     "kumpu (suffix, high)"
+    ]
+   },
+   {
+    "name": "Satkena",
+    "cc": "FI",
+    "reading": [],
+    "wetside": false,
+    "forms": []
+   },
+   {
+    "name": "Sirkka",
+    "cc": "FI",
+    "reading": [],
+    "wetside": false,
+    "forms": []
+   },
+   {
+    "name": "Vittakumpu",
+    "cc": "FI",
+    "reading": [
+     "high"
+    ],
+    "wetside": false,
+    "forms": [
+     "kumpu (suffix, high)"
+    ]
+   },
+   {
+    "name": "Yli-Kittila",
+    "cc": "FI",
+    "reading": [],
+    "wetside": false,
+    "forms": []
+   }
+  ]
+ },
+ "audit": {
+  "n": 100,
+  "allocation": {
+   "not/cs": 5,
+   "not/de": 1,
+   "not/el": 2,
+   "not/en": 5,
+   "not/es": 2,
+   "not/fr": 25,
+   "not/hu": 1,
+   "not/it": 1,
+   "not/nl": 1,
+   "not/no": 1,
+   "not/pl": 12,
+   "not/sh": 1,
+   "not/sl": 10,
+   "not/sq": 1,
+   "not/sv": 1,
+   "not/tl": 1,
+   "wet/cs": 1,
+   "wet/de": 1,
+   "wet/el": 1,
+   "wet/en": 6,
+   "wet/es": 2,
+   "wet/fr": 9,
+   "wet/hu": 1,
+   "wet/no": 1,
+   "wet/pl": 2,
+   "wet/sl": 6
+  }
+ }
+}
