@@ -28,6 +28,14 @@ def macros() -> dict[str, str]:
     return out
 
 
+COMMENT = re.compile(r"(?<!\\)%.*$")
+
+
+def strip_comment(line: str) -> str:
+    """行の中の注釈（著者向けの覚え書きなど）を消し、% だけを残す（行末の空白の扱いは変えない）。"""
+    return COMMENT.sub("%", line)
+
+
 def expand_inputs(text: str, depth: int = 0) -> str:
     if depth > 5:
         msg = "\\input nesting too deep"
@@ -39,8 +47,9 @@ def expand_inputs(text: str, depth: int = 0) -> str:
             return ""
         path = HERE / (name if name.endswith(".tex") else f"{name}.tex")
         body = path.read_text(encoding="utf-8")
-        body = "\n".join(line for line in body.splitlines() if not line.lstrip().startswith("%"))
-        return expand_inputs(body, depth + 1)
+        body = "\n".join(strip_comment(line) for line in body.splitlines() if not line.lstrip().startswith("%"))
+        # 行末の % が続く閉じ括弧を食わないよう、改行で終える（例: \authorcontribution{\input{...}}）
+        return expand_inputs(body, depth + 1) + "\n"
 
     return INPUT.sub(rep, text)
 
@@ -56,11 +65,18 @@ def substitute(text: str, m: dict[str, str]) -> str:
 
 def main() -> int:
     m = macros()
-    text = expand_inputs((HERE / "main.tex").read_text(encoding="utf-8"))
-    text = substitute(text, m)
+    main_tex = "\n".join(strip_comment(line) for line in (HERE / "main.tex").read_text(encoding="utf-8").splitlines())
+    text = expand_inputs(main_tex)
+    for _ in range(5):  # マクロの値が別のマクロを含むことがある（例: 規則の文の中の数値）ので、変わらなくなるまで
+        new = substitute(text, m)
+        if new == text:
+            break
+        text = new
     left = sorted(set(re.findall(r"\\missing\{[^}]*\}", text)))
     unknown = sorted({k for k in re.findall(r"\\([A-Z][A-Za-z]+)", text) if k in m})
-    if left or unknown:
+    notes = re.findall(r"AUTHOR-GATED|TODO|FIXME", text)
+    if left or unknown or notes:
+        print("notes left:", len(notes)) if notes else None
         print("unresolved:", left[:10], unknown[:10])
         return 1
     OUT.write_text(text, encoding="utf-8")

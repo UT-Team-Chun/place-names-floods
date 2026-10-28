@@ -1,0 +1,55 @@
+{
+ "n_items": 462,
+ "n_coder2": 462,
+ "status_kappa": 0.7600164035267581,
+ "status_agreement": 0.9177489177489178,
+ "n_both_coded": 350,
+ "category_kappa": {
+  "water": 0.9371332774518022,
+  "wet": 0.9662487945998067,
+  "riverine": 0.7926048826736202,
+  "crossing": 0.9728471683475559,
+  "low": 0.887459807073955,
+  "high": 0.9043342444357672,
+  "other": 0.692999830230321
+ },
+ "water_related_kappa": 0.912255569085309,
+ "water_related_agreement": 0.96,
+ "coder2_precision_recall": {
+  "broad": {
+   "lex_wetside": {
+    "precision": 0.736842105263158,
+    "recall": 0.1845670406021313
+   },
+   "nread_wetside": {
+    "precision": 0.4575295542709487,
+    "recall": 0.5962324047991533
+   }
+  },
+  "strict": {
+   "strict_flag": {
+    "precision": 0.7592592592592593,
+    "recall": 0.146769372386751
+   }
+  }
+ },
+ "coder1_precision_recall_same_rows": {
+  "lex_wetside": {
+   "precision": 0.7592592592592593,
+   "recall": 0.22197838473886958
+  },
+  "nread_wetside": {
+   "precision": 0.4117281138263815,
+   "recall": 0.6138691695758378
+  }
+ },
+ "transferred_among_lexicon_wetside_true": {
+  "yes": 10,
+  "n": 84
+ },
+ "at_site_no_among_lexicon_wetside_true": {
+  "no": 3,
+  "n": 84
+ },
+ "rule_depends_on_coder": false
+}

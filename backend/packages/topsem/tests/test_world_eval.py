@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
+from topsem.world.b8 import stage2_weighted
 from topsem.world.channels import (
     NREAD_FEATURES,
     nlearn_scores,
@@ -599,3 +600,15 @@ def test_b7_stacks_need_their_features() -> None:
     assert not ev.b6_stack_available("M3oE", ev.ORACLE_EC)
     assert ev.b6_stack_available("M3oE", ev.ORACLE_E)
     assert ev.b6_stack_available("M3oEc", ev.ORACLE_EC)
+
+
+def test_b8_stage2_weighted_matches_confirmatory_stage2() -> None:
+    """B-8 の C2: 重みの無い当て直しは確証の二段目と同じ予測。"""
+    ev = _load("world_eval")
+    rng = np.random.default_rng(3)
+    z = rng.normal(size=500)
+    x = rng.normal(size=(500, 4))
+    y = (rng.random(500) < 1 / (1 + np.exp(-z))).astype(int)
+    a = ev.stage2(z[:350], z[350:], x[:350], x[350:], y[:350])
+    b, _ = stage2_weighted(z[:350], z[350:], x[:350], x[350:], y[:350])
+    np.testing.assert_allclose(a, b, atol=1e-6)

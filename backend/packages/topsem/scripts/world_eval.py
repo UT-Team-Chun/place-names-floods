@@ -204,6 +204,12 @@ B7_STACK: dict[str, tuple[str, list[str]]] = {
     **{f"M3o{k}": ("M1", [*(f"c_{f}" for f in feats), *feats]) for k, feats in (("E", ORACLE_E), ("Ec", ORACLE_EC))},
 }
 STACK |= B7_STACK
+# 事後 B-8（初見の査読 第 4 回）: C4 セルに直接の繰り返す水域（JRC GSW、各 250 m のセルの平均）
+ORACLE_W = ["o_gswc_occ", "o_gswc_seas", "o_gswc_max"]
+B8_STACK: dict[str, tuple[str, list[str]]] = {
+    "M1cW": ("M1", [f"c_{f}" for f in ORACLE_W]), "M3oW": ("M1", [*(f"c_{f}" for f in ORACLE_W), *ORACLE_W]),
+}
+STACK |= B8_STACK
 IN_FOLD = ("nlearn", "nlearn_p")  # fold の中で作る特徴（表には無い）
 
 
@@ -449,7 +455,7 @@ def add_composition(tr: pd.DataFrame, te: pd.DataFrame) -> None:
     あわせて名前特徴（と placebo）の AOI 内で中心化した d_* を作る（事後、B-2 追記 2）。
     """
     feats = [f for f in (*NAMES, *NREAD_FEATURES, *ORACLE, *NAMES_S, *ORACLE_L, *ORACLE_G, *ORACLE_GN,
-                         *NAMES_F, *ORACLE_E, *ORACLE_EC)
+                         *NAMES_F, *ORACLE_E, *ORACLE_EC, *ORACLE_W)
              if f in tr.columns]
     for frame in (tr, te):
         means = frame.groupby("aoi")[feats].transform("mean")
@@ -626,6 +632,39 @@ def attach_gsw(df: pd.DataFrame, path: Path) -> dict:
             "share_cells_with_value": float(np.isin(g, t.index.to_numpy()).mean())}
 
 
+# %% 事後 B-8（初見の査読 第 4 回）
+def attach_gsw_cell(df: pd.DataFrame, path: Path) -> dict:
+    """C4: 各セルの JRC GSW（occurrence・seasonality・max extent のセルの平均）をセルに直接割り当てる。無ければ 0。"""
+    t = pd.read_parquet(path)
+    key = pd.MultiIndex.from_frame(t[["aoi", "ix", "iy"]].astype({"aoi": str, "ix": np.int64, "iy": np.int64}))
+    pos = pd.Series(np.arange(len(t)), index=key)
+    want = pd.MultiIndex.from_arrays([df["aoi"].astype(str).to_numpy(), df["ix"].to_numpy(np.int64),
+                                      df["iy"].to_numpy(np.int64)])
+    idx = pos.reindex(want).to_numpy()
+    ok = ~np.isnan(idx)
+    for col, src in (("o_gswc_occ", "occ"), ("o_gswc_seas", "seas"), ("o_gswc_max", "maxext")):
+        v = np.zeros(len(df))
+        v[ok] = t[src].to_numpy(np.float64)[idx[ok].astype(np.int64)]
+        df[col] = np.nan_to_num(v, nan=0.0).astype(np.float32)
+    return {"path": str(path), "sha256": _sha256(str(path)), "n_rows": len(t), "share_cells_with_value": float(ok.mean())}
+
+
+def dump_stage2(df: pd.DataFrame, fold: int, seeds: list[int]) -> dict:
+    """C2: 主比較の二段目の設計（基礎の logit・地域構成・名前の特徴・場所グループ）を保存する分。"""
+    r = run_fold(df, fold, ["M0"], seeds, ["M1c", "M3n"], keep_state=True)
+    tr, te, z = r["tr"], r["te"], r["z"]["M1"]
+    return {
+        "z_tr": z[0].astype(np.float32), "z_te": z[1].astype(np.float32),
+        "xc_tr": tr[COMP].to_numpy(np.float32), "xc_te": te[COMP].to_numpy(np.float32),
+        "xn_tr": tr[NAMES].to_numpy(np.float32), "xn_te": te[NAMES].to_numpy(np.float32),
+        "y_tr": tr["y"].to_numpy(np.int8), "y_te": te["y"].to_numpy(np.int8),
+        "unit_tr": tr["unit"].to_numpy(dtype=str), "unit_te": te["unit"].to_numpy(dtype=str),
+        "p_M0_te": r["preds"]["M0"], "p_M1_te": r["preds"]["M1"],
+        "p_M1c_te": r["preds"]["M1c"], "p_M3n_te": r["preds"]["M3n"],
+        "comp_cols": np.array(COMP), "name_cols": np.array(NAMES),
+    }
+
+
 # %% 事後 B-7（初見の査読 第 3 回）
 def floodplain_features(df: pd.DataFrame) -> None:
     """5: 氾濫原の地面を指す読み（凍結した辞書の河川・湿地の区分だけ）。placebo（pfp_*）も既存の置換の特徴から。"""
@@ -756,10 +795,13 @@ def run_perms_recomp(df: pd.DataFrame, fold: int, seeds: list[int], perm_ids: li
     return {"te": te, "units": units, "n_unit": np.bincount(ucode, minlength=nu), "real": real, "sse": sse}
 
 
-def run_plasmode_refit(df: pd.DataFrame, fold: int, seeds: list[int]) -> dict:
+def run_plasmode_refit(df: pd.DataFrame, fold: int, seeds: list[int],
+                       deltas: tuple[float, ...] = PLASMODE_REFIT_DELTAS,
+                       rep_ids: tuple[int, ...] = tuple(range(PLASMODE_REFIT_REPS))) -> dict:
     """2: plasmode の形 A を、注入したラベルで基礎モデル（N-learn・M0・M1 の cross-fit）から当て直す。
 
     注入は B-6 の 2 と同じ（同じ塩・同じ注入確率）。同じラベルで基礎を固定した版（B-6 の 2 と同じ計算）も記録する。
+    B-8 の C3: δ と回を指定でき、評価側の場所グループごとの二乗誤差の和（当て直したモデル）も返す。
     """
     r = run_fold(df, fold, ["M0"], seeds, ["M1c", "M3n"], keep_state=True)
     tr, te, z = r["tr"], r["te"], r["z"]["M1"]
@@ -773,12 +815,14 @@ def run_plasmode_refit(df: pd.DataFrame, fold: int, seeds: list[int]) -> dict:
     lexf = [f for f in NAMES if f != "nlearn"]
     models = ("M0", "M1", "M1c", "M3n")
     base = np.array([float(((r["preds"][a] - y_te0) ** 2).sum()) for a in models])
-    nd, nr = len(PLASMODE_REFIT_DELTAS), PLASMODE_REFIT_REPS
+    nd, nr = len(deltas), len(rep_ids)
     refit, fixed, flips = np.zeros((nd, nr, len(models))), np.zeros((nd, nr, 2)), np.zeros((nd, nr))
+    units, ucode = np.unique(te["unit"].to_numpy(dtype=str), return_inverse=True)
+    refit_unit = np.zeros((nd, nr, len(models), len(units)))
     y_orig = df["y"].to_numpy().copy()
     try:
-        for i, delta in enumerate(PLASMODE_REFIT_DELTAS):
-            for rep in range(nr):
+        for i, delta in enumerate(deltas):
+            for jr, rep in enumerate(rep_ids):
                 salt = plasmode_salt("A", delta, rep)
                 y_tr = inject_labels(y_tr0, p_tr, wet_tr, delta, hashed_uniform(k_tr, salt))
                 y_te = inject_labels(y_te0, p_te, wet_te, delta, hashed_uniform(k_te, salt))
@@ -789,17 +833,21 @@ def run_plasmode_refit(df: pd.DataFrame, fold: int, seeds: list[int]) -> dict:
                 xc_te = np.column_stack([te[comp_other].to_numpy(np.float64), c_te])
                 xn_tr = np.column_stack([xc_tr, tr[lexf].to_numpy(np.float64), oof])
                 xn_te = np.column_stack([xc_te, te[lexf].to_numpy(np.float64), sc])
-                fixed[i, rep] = [float(((stage2(z[0], z[1], xc_tr, xc_te, y_tr) - y_te) ** 2).sum()),
-                                 float(((stage2(z[0], z[1], xn_tr, xn_te, y_tr) - y_te) ** 2).sum())]
+                fixed[i, jr] = [float(((stage2(z[0], z[1], xc_tr, xc_te, y_tr) - y_te) ** 2).sum()),
+                                float(((stage2(z[0], z[1], xn_tr, xn_te, y_tr) - y_te) ** 2).sum())]
                 df.loc[tr.index, "y"] = y_tr
                 df.loc[te.index, "y"] = y_te
                 rr = run_fold(df, fold, ["M0"], seeds, ["M1c", "M3n"])
                 df["y"] = y_orig
-                refit[i, rep] = [float(((rr["preds"][a] - y_te) ** 2).sum()) for a in models]
-                flips[i, rep] = float((y_te != y_te0).sum())
+                refit[i, jr] = [float(((rr["preds"][a] - y_te) ** 2).sum()) for a in models]
+                refit_unit[i, jr] = [unit_sse(y_te.astype(np.float64), rr["preds"][a], ucode, len(units))
+                                     for a in models]
+                flips[i, jr] = float((y_te != y_te0).sum())
     finally:
         df["y"] = y_orig
-    return {"te": te, "models": models, "base": base, "refit": refit, "fixed": fixed, "flips": flips}
+    return {"te": te, "models": models, "base": base, "refit": refit, "fixed": fixed, "flips": flips,
+            "units": units, "refit_unit": refit_unit, "n_unit": np.bincount(ucode, minlength=len(units)),
+            "deltas": tuple(deltas), "rep_ids": tuple(rep_ids)}
 
 
 def reassign_settlements(df: pd.DataFrame, dirs: list[Path], infos: dict, gn_f: pd.DataFrame) -> None:
@@ -817,13 +865,15 @@ def reassign_settlements(df: pd.DataFrame, dirs: list[Path], infos: dict, gn_f: 
     df["lP_d1"] = np.log1p(np.minimum(df["P_d1"], 1e6)).astype(np.float32)
 
 
-def run_plasmode(df: pd.DataFrame, fold: int, seeds: list[int], reps: int, pi: tuple[float, float],
-                 ) -> dict:
+def run_plasmode(df: pd.DataFrame, fold: int, seeds: list[int], reps: int,  # noqa: PLR0913
+                 pi: tuple[float, float], *, rep_first: int = 0,
+                 forms: tuple[str, ...] = PLASMODE_FORMS) -> dict:
     """2: 実データのラベルに名前の効果を注入し、二段目（M1c・M3n）だけを当て直す。
 
     基礎モデルは 1 回だけ当て（cross-fit の M1 の logit を固定）、注入は訓練側と評価側の両方に。N-learn は注入後の
     訓練側のラベルで当て直し、その AOI 平均（地域構成の c_nlearn）も作り直す。形 A: 水系側の名の最寄りの全セル、
     B: そのうち 500 m 以内、CA・CB: 読み違いを入れた潜在の印 L の集落について同じ。
+    B-8 の C1: 回を rep_first から数える（回の塩は回の番号で決まるので、範囲に分けて回しても同じ値）。
     """
     r = run_fold(df, fold, [], seeds, ["M1c", "M3n"], keep_state=True)
     tr, te, z = r["tr"], r["te"], r["z"]["M1"]
@@ -837,11 +887,11 @@ def run_plasmode(df: pd.DataFrame, fold: int, seeds: list[int], reps: int, pi: t
     gid = {"tr": tr["P_gid1"].to_numpy(np.int64), "te": te["P_gid1"].to_numpy(np.int64)}
     comp_other = [c for c in COMP if c != "c_nlearn"]
     lexf = [f for f in NAMES if f != "nlearn"]
-    shape = (len(PLASMODE_FORMS), len(PLASMODE_DELTAS), reps)
+    shape = (len(forms), len(PLASMODE_DELTAS), reps)
     sse_c, sse_n, flips = np.zeros(shape), np.zeros(shape), np.zeros(shape)
-    for i, form in enumerate(PLASMODE_FORMS):
+    for i, form in enumerate(forms):
         for j, delta in enumerate(PLASMODE_DELTAS):
-            for rep in range(reps):
+            for jr, rep in enumerate(range(rep_first, rep_first + reps)):
                 salt = plasmode_salt(form, delta, rep)
                 tgt = {}
                 for side in ("tr", "te"):
@@ -858,9 +908,9 @@ def run_plasmode(df: pd.DataFrame, fold: int, seeds: list[int], reps: int, pi: t
                 xn_te = np.column_stack([xc_te, te[lexf].to_numpy(np.float64), sc])
                 pc = stage2(z[0], z[1], xc_tr, xc_te, y_tr)
                 pn = stage2(z[0], z[1], xn_tr, xn_te, y_tr)
-                sse_c[i, j, rep] = float(((pc - y_te) ** 2).sum())
-                sse_n[i, j, rep] = float(((pn - y_te) ** 2).sum())
-                flips[i, j, rep] = float((y_te != y_te0).sum())
+                sse_c[i, j, jr] = float(((pc - y_te) ** 2).sum())
+                sse_n[i, j, jr] = float(((pn - y_te) ** 2).sum())
+                flips[i, j, jr] = float((y_te != y_te0).sum())
     base_c = float(((r["preds"]["M1c"] - y_te0) ** 2).sum())
     base_n = float(((r["preds"]["M3n"] - y_te0) ** 2).sum())
     return {"te": te, "sse_c": sse_c, "sse_n": sse_n, "flips_te": flips, "base_c": base_c, "base_n": base_n}
@@ -939,6 +989,7 @@ def synth_labels(df: pd.DataFrame, delta: float, rep: int, local_m: float | None
 
 
 def main() -> None:  # noqa: C901, PLR0912, PLR0915
+    global LEXICON  # noqa: PLW0603 — B-8 の C5: 派生の辞書で読む実行だけ差し替える
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--tag", required=True)
     ap.add_argument("--split", default="primary",
@@ -978,6 +1029,8 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     # 事後 B-6（初見の査読 第 2 回）
     ap.add_argument("--plasmode", action="store_true", help="B-6 の 2: 実データに名前の効果を注入（二段目だけ）")
     ap.add_argument("--plasmode-reps", type=int, default=10)
+    ap.add_argument("--plasmode-rep-first", type=int, default=0, help="B-8 の C1: 回を範囲に分けて回すときの最初の回")
+    ap.add_argument("--plasmode-forms", default=",".join(PLASMODE_FORMS), help="B-8 追記 3: 回す形（既定は全て）")
     ap.add_argument("--oracle-label", action="store_true", help="B-6 の 3(a): 事象のラベルの割合（500 m）")
     ap.add_argument("--gsw", default="", help="B-6 の 3(b): 集落ごとの JRC GSW の parquet")
     ap.add_argument("--strict-names", action="store_true", help="B-6 の 5: 厳密な読み（M1cS → M3nS）")
@@ -991,7 +1044,15 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     ap.add_argument("--recurrence", action="store_true", help="B-7 の 4: 別の事象の浸水の繰り返しの対照")
     ap.add_argument("--floodplain", action="store_true", help="B-7 の 5: 氾濫原の地面を指す読み（M1cF → M3nF）")
     ap.add_argument("--exclude-partial", action="store_true", help="B-7 の 6(b): 部分的に浸水した y = 0 のセルを除く")
+    ap.add_argument("--lexicon", default="", help="B-8 の C5: 凍結した辞書の代わりに読む辞書（派生のファイル）")
+    ap.add_argument("--dump-stage2", action="store_true", help="B-8 の C2: 主比較の二段目の設計を fold ごとに保存")
+    ap.add_argument("--plasref-deltas", default="", help="B-8 の C3: 当て直す plasmode の δ（カンマ区切り）")
+    ap.add_argument("--plasref-reps", default="", help="B-8 の C3: 当て直す plasmode の回 a:b")
+    ap.add_argument("--gsw-cell", default="", help="B-8 の C4: セルごとの JRC GSW の parquet（aoi・ix・iy）")
     args = ap.parse_args()
+    if args.lexicon:
+        lp = Path(args.lexicon)
+        LEXICON = lp if lp.is_absolute() else REPO_ROOT / lp
     if args.synthetic == "none" and not protocol_frozen():
         msg = ("preregistration_v2.md is not FROZEN: real-label evaluation is allowed only after "
                "the freeze (synthetic labels only before it)")
@@ -1017,7 +1078,7 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
         b6["excluded_aois"] = sorted(drop)
         print(f"B-6: excluded {len(drop)} AOIs → {len(dirs)}", flush=True)
     need_xy = (args.labels == "gfm" or args.plasmode or args.oracle_label or args.gn_filter or args.recurrence
-               or args.plasmode_refit)
+               or args.plasmode_refit or bool(args.gsw_cell))
     df = build_table(dirs, seed=20261025, infos=infos, sens=sens, extra_cols=("ix", "iy") if need_xy else ())
     if args.exclude_partial:  # B-7 の 6(b): y = 0 で浸水被覆が 0.05 を超えるセルを除く（場所グループの割当は変わらない）
         pm = partial_mask(df["y"].to_numpy(), df["f_flood_any"].to_numpy())
@@ -1046,6 +1107,9 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
         print(f"B-7 recurrence: {b6['recurrence']}", flush=True)
     if args.gsw:
         b6["gsw"] = attach_gsw(df, Path(args.gsw))
+    if args.gsw_cell:  # B-8 の C4
+        b6["gsw_cell"] = attach_gsw_cell(df, Path(args.gsw_cell))
+        print(f"B-8 GSW cell: {b6['gsw_cell']}", flush=True)
     cont = continent_map(ROOT / "geonames" / "countryInfo.txt")
     df.attrs["split"] = args.split
     df["fold"] = folds_for(args.split, df, infos, cont, buffer_km=sens.buffer_km,
@@ -1107,7 +1171,8 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     arms = [x for x in args.arms.split(",") if x and (nread is not None or x not in NREAD_ARMS)]
     stacks = [x for x in args.stacks.split(",")
               if x and (nread is not None or x not in NREAD_STACK) and (args.oracle or x not in ORACLE_STACK)
-              and ((x not in B6_STACK and x not in B7_STACK) or b6_stack_available(x, df.columns))]
+              and ((x not in B6_STACK and x not in B7_STACK and x not in B8_STACK)
+                   or b6_stack_available(x, df.columns))]
     dropped = [x for x in args.stacks.split(",") if x and x not in stacks]
     if dropped:
         print(f"stacks not run (features missing): {dropped}", flush=True)
@@ -1117,32 +1182,58 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
         for k in folds:
             if not (df["fold"] == k).any():
                 continue
-            r = run_plasmode(df, k, seeds, args.plasmode_reps, pi)
+            forms = tuple(x for x in args.plasmode_forms.split(",") if x)
+            r = run_plasmode(df, k, seeds, args.plasmode_reps, pi, rep_first=args.plasmode_rep_first, forms=forms)
             te = r["te"]
-            dst = run.path("predictions") / args.split / f"fold{k}_plasmode.npz"
+            stem = f"fold{k}_plasmode" if args.plasmode_rep_first == 0 else \
+                f"fold{k}_plasmode_{args.plasmode_rep_first:03d}"
+            dst = run.path("predictions") / args.split / f"{stem}.npz"
             dst.parent.mkdir(parents=True, exist_ok=True)
             np.savez_compressed(dst, sse_c=r["sse_c"], sse_n=r["sse_n"], flips_te=r["flips_te"],
                                 base_c=r["base_c"], base_n=r["base_n"], n_te=len(te),
-                                deltas=np.array(PLASMODE_DELTAS), forms=np.array(PLASMODE_FORMS))
-            write_json(run.path("predictions") / args.split / f"fold{k}_plasmode.json",
-                       {**common, "fold": k, "n_test": len(te), "reps": args.plasmode_reps, "pi": pi,
-                        "deltas": list(PLASMODE_DELTAS), "forms": list(PLASMODE_FORMS),
+                                deltas=np.array(PLASMODE_DELTAS), forms=np.array(forms))
+            write_json(run.path("predictions") / args.split / f"{stem}.json",
+                       {**common, "fold": k, "n_test": len(te), "reps": args.plasmode_reps,
+                        "rep_first": args.plasmode_rep_first, "pi": pi,
+                        "deltas": list(PLASMODE_DELTAS), "forms": list(forms),
                         "local_m": PLASMODE_LOCAL_M, "rule": "amendment B-6 item 2"})
             print(f"fold {k}: plasmode ({time.time() - t0:.0f}s)", flush=True)
         return
-    if args.plasmode_refit:  # B-7 の 2
+    if args.dump_stage2:  # B-8 の C2
         for k in folds:
             if not (df["fold"] == k).any():
                 continue
-            r = run_plasmode_refit(df, k, seeds)
-            dst = run.path("predictions") / args.split / f"fold{k}_plasref.npz"
+            arrays = dump_stage2(df, k, seeds)
+            dst = run.path("predictions") / args.split / f"fold{k}_stage2.npz"
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            np.savez_compressed(dst, **arrays)
+            write_json(run.path("predictions") / args.split / f"fold{k}_stage2.json",
+                       {**common, "fold": k, "n_test": len(arrays["y_te"]), "n_train": len(arrays["y_tr"]),
+                        "rule": "amendment B-8 item C2"})
+            print(f"fold {k}: stage-2 design saved ({time.time() - t0:.0f}s)", flush=True)
+        return
+    if args.plasmode_refit:  # B-7 の 2（B-8 の C3: δ・回の指定）
+        dl = tuple(float(v) for v in args.plasref_deltas.split(",")) if args.plasref_deltas else PLASMODE_REFIT_DELTAS
+        if args.plasref_reps:
+            ra, rb = (int(v) for v in args.plasref_reps.split(":"))
+            rids = tuple(range(ra, rb))
+        else:
+            rids = tuple(range(PLASMODE_REFIT_REPS))
+        for k in folds:
+            if not (df["fold"] == k).any():
+                continue
+            r = run_plasmode_refit(df, k, seeds, dl, rids)
+            stem = f"fold{k}_plasref" if not args.plasref_reps else f"fold{k}_plasref_{rids[0]:03d}"
+            dst = run.path("predictions") / args.split / f"{stem}.npz"
             dst.parent.mkdir(parents=True, exist_ok=True)
             np.savez_compressed(dst, models=np.array(r["models"]), base=r["base"], refit=r["refit"], fixed=r["fixed"],
-                                flips=r["flips"], n_te=len(r["te"]), deltas=np.array(PLASMODE_REFIT_DELTAS),
-                                reps=PLASMODE_REFIT_REPS)
-            write_json(run.path("predictions") / args.split / f"fold{k}_plasref.json",
-                       {**common, "fold": k, "n_test": len(r["te"]), "deltas": list(PLASMODE_REFIT_DELTAS),
-                        "reps": PLASMODE_REFIT_REPS, "form": "A", "rule": "amendment B-7 item 2"})
+                                flips=r["flips"], n_te=len(r["te"]), deltas=np.array(dl), reps=len(rids),
+                                rep_ids=np.array(rids), units=r["units"], refit_unit=r["refit_unit"],
+                                n_unit=r["n_unit"])
+            write_json(run.path("predictions") / args.split / f"{stem}.json",
+                       {**common, "fold": k, "n_test": len(r["te"]), "deltas": list(dl), "reps": list(rids),
+                        "form": "A", "rule": "amendment B-7 item 2" if not args.plasref_reps
+                        else "amendment B-8 item C3"})
             print(f"fold {k}: plasmode refit ({time.time() - t0:.0f}s)", flush=True)
         return
     if args.perms_recomp > 0:  # B-7 の 1

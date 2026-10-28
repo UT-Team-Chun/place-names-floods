@@ -1,0 +1,509 @@
+{
+ "rule": "descriptive (editor, fourth round of LLM-agent critiques); same table and AOIs as the odds ratios",
+ "near_m": 500.0,
+ "flooded_near_total": 361,
+ "cells_near_total": 10048,
+ "n_countries_with_flooded_near": 27,
+ "n_activations_with_flooded_near": 48,
+ "share_top5_countries": 0.7645429362880887,
+ "by_country": [
+  {
+   "cc": "PK",
+   "flooded_near": 90,
+   "cells_near": 683,
+   "share_of_flooded_near": 0.24930747922437674,
+   "aois": 12
+  },
+  {
+   "cc": "BD",
+   "flooded_near": 87,
+   "cells_near": 453,
+   "share_of_flooded_near": 0.2409972299168975,
+   "aois": 2
+  },
+  {
+   "cc": "AU",
+   "flooded_near": 39,
+   "cells_near": 728,
+   "share_of_flooded_near": 0.10803324099722991,
+   "aois": 43
+  },
+  {
+   "cc": "DE",
+   "flooded_near": 37,
+   "cells_near": 1888,
+   "share_of_flooded_near": 0.10249307479224377,
+   "aois": 29
+  },
+  {
+   "cc": "PT",
+   "flooded_near": 23,
+   "cells_near": 315,
+   "share_of_flooded_near": 0.06371191135734072,
+   "aois": 9
+  },
+  {
+   "cc": "GB",
+   "flooded_near": 15,
+   "cells_near": 1807,
+   "share_of_flooded_near": 0.04155124653739612,
+   "aois": 18
+  },
+  {
+   "cc": "MX",
+   "flooded_near": 11,
+   "cells_near": 224,
+   "share_of_flooded_near": 0.030470914127423823,
+   "aois": 3
+  },
+  {
+   "cc": "SI",
+   "flooded_near": 8,
+   "cells_near": 180,
+   "share_of_flooded_near": 0.0221606648199446,
+   "aois": 6
+  },
+  {
+   "cc": "VN",
+   "flooded_near": 6,
+   "cells_near": 278,
+   "share_of_flooded_near": 0.01662049861495845,
+   "aois": 16
+  },
+  {
+   "cc": "ES",
+   "flooded_near": 6,
+   "cells_near": 142,
+   "share_of_flooded_near": 0.01662049861495845,
+   "aois": 25
+  },
+  {
+   "cc": "MM",
+   "flooded_near": 5,
+   "cells_near": 192,
+   "share_of_flooded_near": 0.013850415512465374,
+   "aois": 11
+  },
+  {
+   "cc": "IR",
+   "flooded_near": 4,
+   "cells_near": 152,
+   "share_of_flooded_near": 0.0110803324099723,
+   "aois": 3
+  },
+  {
+   "cc": "RO",
+   "flooded_near": 3,
+   "cells_near": 227,
+   "share_of_flooded_near": 0.008310249307479225,
+   "aois": 12
+  },
+  {
+   "cc": "HR",
+   "flooded_near": 3,
+   "cells_near": 101,
+   "share_of_flooded_near": 0.008310249307479225,
+   "aois": 27
+  },
+  {
+   "cc": "KH",
+   "flooded_near": 3,
+   "cells_near": 37,
+   "share_of_flooded_near": 0.008310249307479225,
+   "aois": 4
+  },
+  {
+   "cc": "MG",
+   "flooded_near": 3,
+   "cells_near": 15,
+   "share_of_flooded_near": 0.008310249307479225,
+   "aois": 5
+  },
+  {
+   "cc": "GY",
+   "flooded_near": 3,
+   "cells_near": 14,
+   "share_of_flooded_near": 0.008310249307479225,
+   "aois": 2
+  },
+  {
+   "cc": "IE",
+   "flooded_near": 2,
+   "cells_near": 210,
+   "share_of_flooded_near": 0.00554016620498615,
+   "aois": 17
+  },
+  {
+   "cc": "SE",
+   "flooded_near": 2,
+   "cells_near": 177,
+   "share_of_flooded_near": 0.00554016620498615,
+   "aois": 16
+  },
+  {
+   "cc": "US",
+   "flooded_near": 2,
+   "cells_near": 177,
+   "share_of_flooded_near": 0.00554016620498615,
+   "aois": 12
+  },
+  {
+   "cc": "BE",
+   "flooded_near": 2,
+   "cells_near": 98,
+   "share_of_flooded_near": 0.00554016620498615,
+   "aois": 7
+  },
+  {
+   "cc": "BO",
+   "flooded_near": 2,
+   "cells_near": 83,
+   "share_of_flooded_near": 0.00554016620498615,
+   "aois": 5
+  },
+  {
+   "cc": "IT",
+   "flooded_near": 1,
+   "cells_near": 598,
+   "share_of_flooded_near": 0.002770083102493075,
+   "aois": 33
+  },
+  {
+   "cc": "FR",
+   "flooded_near": 1,
+   "cells_near": 257,
+   "share_of_flooded_near": 0.002770083102493075,
+   "aois": 42
+  },
+  {
+   "cc": "AL",
+   "flooded_near": 1,
+   "cells_near": 84,
+   "share_of_flooded_near": 0.002770083102493075,
+   "aois": 18
+  },
+  {
+   "cc": "PE",
+   "flooded_near": 1,
+   "cells_near": 53,
+   "share_of_flooded_near": 0.002770083102493075,
+   "aois": 8
+  },
+  {
+   "cc": "MZ",
+   "flooded_near": 1,
+   "cells_near": 4,
+   "share_of_flooded_near": 0.002770083102493075,
+   "aois": 12
+  },
+  {
+   "cc": "BA",
+   "flooded_near": 0,
+   "cells_near": 262,
+   "share_of_flooded_near": 0.0,
+   "aois": 10
+  },
+  {
+   "cc": "RS",
+   "flooded_near": 0,
+   "cells_near": 114,
+   "share_of_flooded_near": 0.0,
+   "aois": 11
+  },
+  {
+   "cc": "GR",
+   "flooded_near": 0,
+   "cells_near": 107,
+   "share_of_flooded_near": 0.0,
+   "aois": 15
+  },
+  {
+   "cc": "CZ",
+   "flooded_near": 0,
+   "cells_near": 79,
+   "share_of_flooded_near": 0.0,
+   "aois": 11
+  },
+  {
+   "cc": "HU",
+   "flooded_near": 0,
+   "cells_near": 53,
+   "share_of_flooded_near": 0.0,
+   "aois": 11
+  },
+  {
+   "cc": "MK",
+   "flooded_near": 0,
+   "cells_near": 44,
+   "share_of_flooded_near": 0.0,
+   "aois": 1
+  },
+  {
+   "cc": "AT",
+   "flooded_near": 0,
+   "cells_near": 43,
+   "share_of_flooded_near": 0.0,
+   "aois": 4
+  },
+  {
+   "cc": "FI",
+   "flooded_near": 0,
+   "cells_near": 40,
+   "share_of_flooded_near": 0.0,
+   "aois": 5
+  },
+  {
+   "cc": "PH",
+   "flooded_near": 0,
+   "cells_near": 29,
+   "share_of_flooded_near": 0.0,
+   "aois": 3
+  },
+  {
+   "cc": "PL",
+   "flooded_near": 0,
+   "cells_near": 26,
+   "share_of_flooded_near": 0.0,
+   "aois": 9
+  },
+  {
+   "cc": "CO",
+   "flooded_near": 0,
+   "cells_near": 21,
+   "share_of_flooded_near": 0.0,
+   "aois": 1
+  },
+  {
+   "cc": "NL",
+   "flooded_near": 0,
+   "cells_near": 13,
+   "share_of_flooded_near": 0.0,
+   "aois": 5
+  },
+  {
+   "cc": "TR",
+   "flooded_near": 0,
+   "cells_near": 12,
+   "share_of_flooded_near": 0.0,
+   "aois": 4
+  },
+  {
+   "cc": "ME",
+   "flooded_near": 0,
+   "cells_near": 8,
+   "share_of_flooded_near": 0.0,
+   "aois": 4
+  },
+  {
+   "cc": "SK",
+   "flooded_near": 0,
+   "cells_near": 6,
+   "share_of_flooded_near": 0.0,
+   "aois": 7
+  },
+  {
+   "cc": "UA",
+   "flooded_near": 0,
+   "cells_near": 5,
+   "share_of_flooded_near": 0.0,
+   "aois": 4
+  },
+  {
+   "cc": "UG",
+   "flooded_near": 0,
+   "cells_near": 5,
+   "share_of_flooded_near": 0.0,
+   "aois": 5
+  },
+  {
+   "cc": "TH",
+   "flooded_near": 0,
+   "cells_near": 4,
+   "share_of_flooded_near": 0.0,
+   "aois": 3
+  }
+ ],
+ "by_activation": [
+  {
+   "activation": "EMSR097",
+   "flooded_near": 87,
+   "cells_near": 453,
+   "share_of_flooded_near": 0.2409972299168975,
+   "aois": 2,
+   "name": "Floods in Bangladesh",
+   "year": "2014",
+   "countries": [
+    "Bangladesh"
+   ]
+  },
+  {
+   "activation": "EMSR629",
+   "flooded_near": 73,
+   "cells_near": 149,
+   "share_of_flooded_near": 0.20221606648199447,
+   "aois": 3,
+   "name": "Floods in Pakistan",
+   "year": "2022",
+   "countries": [
+    "Pakistan"
+   ]
+  },
+  {
+   "activation": "EMSR047",
+   "flooded_near": 23,
+   "cells_near": 199,
+   "share_of_flooded_near": 0.06371191135734072,
+   "aois": 2,
+   "name": "Flood in Sachsen-Anhalt- Germany",
+   "year": "2013",
+   "countries": [
+    "Germany"
+   ]
+  },
+  {
+   "activation": "EMSR567",
+   "flooded_near": 22,
+   "cells_near": 159,
+   "share_of_flooded_near": 0.060941828254847646,
+   "aois": 8,
+   "name": "Floods in Queensland- Australia",
+   "year": "2022",
+   "countries": [
+    "Australia"
+   ]
+  },
+  {
+   "activation": "EMSR864",
+   "flooded_near": 22,
+   "cells_near": 124,
+   "share_of_flooded_near": 0.060941828254847646,
+   "aois": 5,
+   "name": "Flood in Portugal and Spain",
+   "year": "2026",
+   "countries": [
+    "Portugal"
+   ]
+  },
+  {
+   "activation": "EMSR838",
+   "flooded_near": 17,
+   "cells_near": 525,
+   "share_of_flooded_near": 0.04709141274238227,
+   "aois": 7,
+   "name": "Flood in Pakistan",
+   "year": "2025",
+   "countries": [
+    "Pakistan"
+   ]
+  },
+  {
+   "activation": "EMSR570",
+   "flooded_near": 14,
+   "cells_near": 47,
+   "share_of_flooded_near": 0.038781163434903045,
+   "aois": 2,
+   "name": "Flood in New South Wales- Australia",
+   "year": "2022",
+   "countries": [
+    "Australia"
+   ]
+  },
+  {
+   "activation": "EMSR845",
+   "flooded_near": 9,
+   "cells_near": 88,
+   "share_of_flooded_near": 0.024930747922437674,
+   "aois": 1,
+   "name": "Flood in Mexico",
+   "year": "2025",
+   "countries": [
+    "Mexico"
+   ]
+  },
+  {
+   "activation": "EMSR150",
+   "flooded_near": 6,
+   "cells_near": 470,
+   "share_of_flooded_near": 0.01662049861495845,
+   "aois": 4,
+   "name": "Flood in England",
+   "year": "2015",
+   "countries": [
+    "United Kingdom"
+   ]
+  },
+  {
+   "activation": "EMSR388",
+   "flooded_near": 6,
+   "cells_near": 62,
+   "share_of_flooded_near": 0.01662049861495845,
+   "aois": 1,
+   "name": "Flood in the Southeast of Spain",
+   "year": "2019",
+   "countries": [
+    "Spain"
+   ]
+  },
+  {
+   "activation": "EMSR722",
+   "flooded_near": 5,
+   "cells_near": 241,
+   "share_of_flooded_near": 0.013850415512465374,
+   "aois": 2,
+   "name": "Flood in Saarland region, Germany",
+   "year": "2024",
+   "countries": [
+    "Germany"
+   ]
+  },
+  {
+   "activation": "EMSR130",
+   "flooded_near": 5,
+   "cells_near": 192,
+   "share_of_flooded_near": 0.013850415512465374,
+   "aois": 11,
+   "name": "Flood in Myanmar",
+   "year": "2015",
+   "countries": [
+    "Myanmar/Burma"
+   ]
+  },
+  {
+   "activation": "EMSR069",
+   "flooded_near": 4,
+   "cells_near": 844,
+   "share_of_flooded_near": 0.0110803324099723,
+   "aois": 3,
+   "name": "Floods in Southern England",
+   "year": "2014",
+   "countries": [
+    "United Kingdom"
+   ]
+  },
+  {
+   "activation": "EMSR712",
+   "flooded_near": 4,
+   "cells_near": 146,
+   "share_of_flooded_near": 0.0110803324099723,
+   "aois": 9,
+   "name": "Flood in Lower Saxony region, Germany",
+   "year": "2023",
+   "countries": [
+    "Germany"
+   ]
+  },
+  {
+   "activation": "EMSR107",
+   "flooded_near": 4,
+   "cells_near": 116,
+   "share_of_flooded_near": 0.0110803324099723,
+   "aois": 2,
+   "name": "Flood in Slovenia",
+   "year": "2014",
+   "countries": [
+    "Slovenia"
+   ]
+  }
+ ],
+ "largest_activation_share": 0.2409972299168975
+}

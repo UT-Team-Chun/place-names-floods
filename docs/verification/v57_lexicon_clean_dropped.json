@@ -1,0 +1,84 @@
+{
+ "rule": "amendment B-8 items B6(d) and C5",
+ "src_sha256": "6c9999921956ba13f929b18ef921afcd0e05334293ef0989d9357c6a8d59c58d",
+ "dst_sha256": "9bbdbb5e9281da4df5f0e8c6ec7f75a180891af6a0c8af58771e87ebc970bdf5",
+ "entries_src": 2538,
+ "entries_dst": 2523,
+ "dropped": [
+  [
+   "en",
+   "bourne",
+   "suffix"
+  ],
+  [
+   "en",
+   "borne",
+   "suffix"
+  ],
+  [
+   "en",
+   "burn",
+   "suffix"
+  ],
+  [
+   "en",
+   "pool",
+   "suffix"
+  ],
+  [
+   "en",
+   "well",
+   "suffix"
+  ],
+  [
+   "en",
+   "wells",
+   "suffix"
+  ],
+  [
+   "de",
+   "au",
+   "suffix"
+  ],
+  [
+   "sv",
+   "as",
+   "suffix"
+  ],
+  [
+   "no",
+   "oy",
+   "suffix"
+  ],
+  [
+   "no",
+   "as",
+   "suffix"
+  ],
+  [
+   "da",
+   "aa",
+   "suffix"
+  ],
+  [
+   "tr",
+   "su",
+   "suffix"
+  ],
+  [
+   "fa",
+   "ab",
+   "suffix"
+  ],
+  [
+   "id",
+   "ci",
+   "prefix"
+  ],
+  [
+   "kk",
+   "su",
+   "suffix"
+  ]
+ ]
+}

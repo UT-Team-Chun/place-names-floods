@@ -103,8 +103,26 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   model of the held-out flood labels given the held-out terrain prediction. By the rule fixed in B-7, the reading that
   real names cost less than reassigned ones (B-5) was withdrawn once the permutations were rebuilt. Scripts: `v55`,
   `v56`.
+- Amendment B-8 followed the fourth round of critiques, made on the PDFs alone. It corrected the reporting (the abstract
+  and the conclusions were brought into line with the reporting rules of B-2, B-3 and B-6) and fixed, before they were
+  computed: the no-effect reference of the plasmode bounds (the rebuilt permutations of B-7), with Monte Carlo
+  intervals and 40 more replicates (C1); the achieved equivalence bound; the location groups needed to settle the
+  inconclusive comparisons; a permutation test; the second stage refitted inside the bootstrap (C2); the operating
+  characteristics of the decision rule at the margin (C3); recurrent surface water of each cell (C4); a cleaned lexicon
+  (C5); estimates near settlements by class and variant (the uncapped sample, a misclassification correction, river
+  size, the two label sets on the same cells); heights of settlements above the main rivers; calibration and skill; an
+  audit of matched forms; a reading by nearby river and lake names; and a second coder of the etymology excerpts (the
+  default model of OpenAI's Codex). Addenda 1 and 2 record implementation choices before the results; addendum 3 the
+  failure of the cluster's storage and the move of C1 to C5 to a local machine (runs marked `_local`); addendum 4 that
+  item B10 was not counted, the tolerance of the reproduction check of C1 and details of B1 and C2 to C4; addendum 5
+  the return of C1 and C3 to the cluster when the storage was back; addenda 6 and 7 two requests missing from the plan
+  (estimates near settlements without Pakistan and Bangladesh, and the precision of the strict reading by language);
+  addendum 8 the rerun on the cluster of one C1 job whose output failed to save; and addendum 9, written after the
+  values had been seen, the withdrawal of the odds ratios read from the B-7 simulation with every model refitted,
+  whose grid has no effect small enough to read them without bias (a straight line from zero across a convex gain
+  curve understated them). Scripts: `v57`, `v57b`, `v58`, `v59`, `v60`, `v61`, `v62`.
 
-English translations of the protocol and of amendments B-1 to B-7 are in `docs/protocol/en/`; they were drafted with a
+English translations of the protocol and of amendments B-1 to B-8 are in `docs/protocol/en/`; they were drafted with a
 language model after the analysis, and the Japanese files are the record and govern where the two differ. Dates written
 inside the repository files are local (Japan Standard Time, UTC+9) unless marked; the paper gives UTC. An interpretation
 plan, written after the freeze and before any confirmatory result, is in

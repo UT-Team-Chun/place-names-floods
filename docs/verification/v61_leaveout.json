@@ -1,0 +1,75 @@
+{
+ "rule": "amendment B-8 addendum 6 (descriptive, not planned in the protocol)",
+ "seed": 20261028,
+ "n_aoi_pakistan": 12,
+ "n_aoi_pakistan_bangladesh": 14,
+ "without_pakistan": {
+  "odds_ratio": 1.0910157755205223,
+  "ci95": [
+   0.7977173142546119,
+   1.4921519204417406
+  ],
+  "n_cells": 1428119,
+  "n_aoi": 467,
+  "n_units": 186,
+  "n_group_cells": 9365,
+  "n_group_flooded": 271.0,
+  "n_group_units": 127,
+  "pairs_ci95": [
+   0.7668399623982791,
+   1.4484316468222278
+  ],
+  "pairs_reps_ok": 2000
+ },
+ "without_pakistan_bangladesh": {
+  "odds_ratio": 0.9732252221657002,
+  "ci95": [
+   0.7393529666943204,
+   1.2810759890425587
+  ],
+  "n_cells": 1408119,
+  "n_aoi": 465,
+  "n_units": 184,
+  "n_group_cells": 8912,
+  "n_group_flooded": 184.0,
+  "n_group_units": 125,
+  "pairs_ci95": [
+   0.7220527943348196,
+   1.2399874348048532
+  ],
+  "pairs_reps_ok": 2000
+ },
+ "pakistan_by_activation": [
+  {
+   "activation": "EMSR838",
+   "name": "Flood in Pakistan",
+   "year": "2025",
+   "aois": 7,
+   "cells": 38140,
+   "flooded": 6047,
+   "cells_near": 525,
+   "flooded_near": 17
+  },
+  {
+   "activation": "EMSR629",
+   "name": "Floods in Pakistan",
+   "year": "2022",
+   "aois": 3,
+   "cells": 20000,
+   "flooded": 12068,
+   "cells_near": 149,
+   "flooded_near": 73
+  },
+  {
+   "activation": "EMSR631",
+   "name": "Flood in Pakistan",
+   "year": "2022",
+   "aois": 2,
+   "cells": 3122,
+   "flooded": 1165,
+   "cells_near": 9,
+   "flooded_near": 0
+  }
+ ],
+ "pakistan_flooded_share": 0.3147138519800202
+}

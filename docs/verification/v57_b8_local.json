@@ -1,0 +1,3410 @@
+{
+ "rule": "amendment B-8 part B (local)",
+ "seed": 20261028,
+ "B2": {
+  "world_v2": {
+   "R": -0.0034976042242493297,
+   "ci90_R": [
+    -0.010935442286429542,
+    0.0027836643499116387
+   ],
+   "achieved_bound_R": 0.010935442286429542,
+   "achieved_bound_brier": 8.260232915943169e-05
+  },
+  "world_v2_lexfix": {
+   "R": -0.004047304898844232,
+   "ci90_R": [
+    -0.012636348862178825,
+    0.002596119933940239
+   ],
+   "achieved_bound_R": 0.012636348862178825,
+   "achieved_bound_brier": 9.545035497854626e-05
+  },
+  "combos": {
+   "cluster/Y0": 0.01093544228642954,
+   "cluster/Y1": 0.02056309164883602,
+   "cluster/Y2": 0.01269766909368577,
+   "cluster/Y3": 0.00925494521658685,
+   "cluster/Y4": 0.016321060004943957,
+   "two_way/Y0": 0.015165903407258754,
+   "two_way/Y1": 0.045709353771064005,
+   "two_way/Y2": 0.017609861396383306,
+   "two_way/Y3": 0.012835292941777805,
+   "two_way/Y4": 0.02263498933611687
+  },
+  "max_over_combos": {
+   "which": "two_way/Y1",
+   "achieved_bound_R": 0.045709353771064005
+  }
+ },
+ "B3": {
+  "total_M1s_M3s": {
+   "R": 0.03066771399941611,
+   "ci90_R": [
+    -0.04142328983044636,
+    0.1324576329907001
+   ],
+   "ci95_R": [
+    -0.05111939752147119,
+    0.15466695860508492
+   ],
+   "ci95_how": "reported",
+   "n_units": 195,
+   "groups_equivalence": 3943.774458316525,
+   "ratio_equivalence": 20.224484401623204,
+   "groups_positive": 2195.052770435001,
+   "ratio_positive": 11.256680874025646
+  },
+  "flexible_M1_M3": {
+   "R": 0.037672889072189,
+   "ci90_R": [
+    -0.043758660265755346,
+    0.12283809345346976
+   ],
+   "ci95_R": [
+    -0.05759186693482044,
+    0.14150853130556418
+   ],
+   "ci95_how": "reported",
+   "n_units": 195,
+   "groups_equivalence": 8903.998557758227,
+   "ratio_equivalence": 45.6615310654268,
+   "groups_positive": 1361.6359959398073,
+   "ratio_positive": 6.982748697127217
+  },
+  "near_500m_wetside_not_planned": {
+   "R": 0.0604781514704848,
+   "ci90_R": [
+    -0.035552250797312356,
+    0.1620930784950768
+   ],
+   "ci95_R": [
+    -0.05727631639775879,
+    0.1782326193387284
+   ],
+   "ci95_how": "scaled from the 90% interval",
+   "n_units": 134,
+   "groups_equivalence": Infinity,
+   "ratio_equivalence": Infinity,
+   "groups_positive": 507.998663909776,
+   "ratio_positive": 3.7910348052968357
+  }
+ },
+ "B4": {
+  "n_perms": 200,
+  "R_real": -0.004047304205463898,
+  "R_perm_q95": 0.0036345013228468804,
+  "R_perm_mean": -0.0022159300219376805,
+  "p_one_sided": 0.7213930348258707,
+  "check_vs_v56_mean": -0.0022159300219377477,
+  "label_with_permutation_placebo": "unchanged (equivalent-null): the placebo condition applies only when the 95% interval of R lies above zero"
+ },
+ "B9": {
+  "M1": {
+   "csi": {
+    "median": 0.12941176470588237,
+    "q25_q75": [
+     0.033634821933295644,
+     0.2655055574670516
+    ]
+   },
+   "hit_rate": {
+    "median": 0.22916666666666666,
+    "q25_q75": [
+     0.06507936507936507,
+     0.4195927327074868
+    ]
+   },
+   "false_alarm_ratio": {
+    "median": 0.7708333333333334,
+    "q25_q75": [
+     0.5804072672925131,
+     0.9349206349206349
+    ]
+   },
+   "auc_within": {
+    "median": 0.9032424764948138,
+    "q25_q75": [
+     0.8027928268493557,
+     0.9561598858980357
+    ]
+   },
+   "n_aoi": 479
+  },
+  "HAND": {
+   "csi": {
+    "median": 0.02631578947368421,
+    "q25_q75": [
+     0.0,
+     0.07891171358578877
+    ]
+   },
+   "hit_rate": {
+    "median": 0.05128205128205128,
+    "q25_q75": [
+     0.0,
+     0.1462800978179082
+    ]
+   },
+   "false_alarm_ratio": {
+    "median": 0.9487179487179487,
+    "q25_q75": [
+     0.8537199021820918,
+     1.0
+    ]
+   },
+   "auc_within": {
+    "median": 0.7478991596638656,
+    "q25_q75": [
+     0.6543354496120641,
+     0.8275717258853671
+    ]
+   },
+   "n_aoi": 479
+  }
+ },
+ "sec": 23958,
+ "B8": {
+  "primary": {
+   "n_cells": 1507486,
+   "n_aoi": 500,
+   "M1": {
+    "intercept": -0.26537071380518745,
+    "slope": 0.8488765793817586,
+    "brier": 0.043739943200679525,
+    "reliability": 0.00033923415891655125,
+    "resolution": 0.0076760281242673105,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.9032424764948138
+   },
+   "M1s": {
+    "intercept": 0.08605094491525381,
+    "slope": 1.054734202441173,
+    "brier": 0.043372148226612096,
+    "reliability": 5.893203517255287e-05,
+    "resolution": 0.00765648005944498,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.9032424764948138
+   },
+   "M1c": {
+    "intercept": -0.2304458230507197,
+    "slope": 0.9331432489025958,
+    "brier": 0.043088969123358384,
+    "reliability": 0.00021394229200734737,
+    "resolution": 0.007982302812434033,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.9032424764948138
+   },
+   "M3n": {
+    "intercept": -0.23363973014046074,
+    "slope": 0.931108550407942,
+    "brier": 0.043115388745705,
+    "reliability": 0.00021908674305258076,
+    "resolution": 0.007970571102759918,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.9030191052190042
+   }
+  },
+  "country": {
+   "n_cells": 1507486,
+   "n_aoi": 500,
+   "M1": {
+    "intercept": -0.5672534325383677,
+    "slope": 0.6926619003550704,
+    "brier": 0.049443526522231954,
+    "reliability": 0.0016398515061654823,
+    "resolution": 0.00551039031433572,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.8994168291098116
+   },
+   "M1s": {
+    "intercept": -0.18107378961885498,
+    "slope": 0.9485923000964872,
+    "brier": 0.04789036374730194,
+    "reliability": 0.0006706013689260197,
+    "resolution": 0.00541705794631053,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.8994168291098116
+   },
+   "M1c": {
+    "intercept": -0.38501780566329147,
+    "slope": 0.8382480518127734,
+    "brier": 0.04849176682244954,
+    "reliability": 0.0008142676953955408,
+    "resolution": 0.005496425488467861,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.8994168291098116
+   },
+   "M3n": {
+    "intercept": -0.385004460853358,
+    "slope": 0.8377833878123638,
+    "brier": 0.04848197275225355,
+    "reliability": 0.0007939190232583254,
+    "resolution": 0.005488751118062524,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.8994127680311891
+   }
+  },
+  "temporal": {
+   "n_cells": 356983,
+   "n_aoi": 127,
+   "M1": {
+    "intercept": -0.8753412423092922,
+    "slope": 0.7490945471383766,
+    "brier": 0.047230219943015087,
+    "reliability": 0.002891816377598297,
+    "resolution": 0.0034476928655610426,
+    "uncertainty": 0.04726256619800571,
+    "auc_within_median": 0.9002486282578875
+   },
+   "M1s": {
+    "intercept": -0.5761835202316036,
+    "slope": 0.9471005921095745,
+    "brier": 0.046047939272034565,
+    "reliability": 0.0019678594957572835,
+    "resolution": 0.0034476928655610426,
+    "uncertainty": 0.04726256619800571,
+    "auc_within_median": 0.9002486282578875
+   },
+   "M1c": {
+    "intercept": -0.7033886589216993,
+    "slope": 0.9121124086166977,
+    "brier": 0.04676630874357509,
+    "reliability": 0.002626753926919445,
+    "resolution": 0.0035394040780289634,
+    "uncertainty": 0.04726256619800571,
+    "auc_within_median": 0.9002486282578875
+   },
+   "M3n": {
+    "intercept": -0.7056298608328272,
+    "slope": 0.9109430648335595,
+    "brier": 0.04676906003651999,
+    "reliability": 0.0026392138871557205,
+    "resolution": 0.00352674988352926,
+    "uncertainty": 0.04726256619800571,
+    "auc_within_median": 0.9024390243902439
+   }
+  },
+  "llmcut": {
+   "n_cells": 268762,
+   "n_aoi": 77,
+   "M1": {
+    "intercept": -0.6892404515314872,
+    "slope": 0.8006389185319353,
+    "brier": 0.04989492888592813,
+    "reliability": 0.0019005202332462309,
+    "resolution": 0.0042189945701245945,
+    "uncertainty": 0.05248493725001666,
+    "auc_within_median": 0.9026566249432518
+   },
+   "M1s": {
+    "intercept": -0.4383617360250919,
+    "slope": 0.9737046277006518,
+    "brier": 0.04940540233568582,
+    "reliability": 0.0014660102478114834,
+    "resolution": 0.0042189945701245945,
+    "uncertainty": 0.05248493725001666,
+    "auc_within_median": 0.9026566249432518
+   },
+   "M1c": {
+    "intercept": -0.529956791203143,
+    "slope": 0.9741535498204439,
+    "brier": 0.04973830729527439,
+    "reliability": 0.0019561727932506157,
+    "resolution": 0.0042958135394670595,
+    "uncertainty": 0.05248493725001666,
+    "auc_within_median": 0.9026566249432518
+   },
+   "M3n": {
+    "intercept": -0.5350273644371798,
+    "slope": 0.9724890109858306,
+    "brier": 0.04976485613254389,
+    "reliability": 0.00197480212070278,
+    "resolution": 0.004303038749811361,
+    "uncertainty": 0.05248493725001666,
+    "auc_within_median": 0.909416016894087
+   }
+  },
+  "activation_frozen": {
+   "n_cells": 1507486,
+   "n_aoi": 500,
+   "M1": {
+    "intercept": -0.5559731659154724,
+    "slope": 0.7033534513891679,
+    "brier": 0.04880810647807932,
+    "reliability": 0.0014225603266887585,
+    "resolution": 0.005343083090238917,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.899103139013453
+   },
+   "M1s": {
+    "intercept": -0.12836035354427014,
+    "slope": 0.9612955362358712,
+    "brier": 0.04767158077887897,
+    "reliability": 0.00036677114507415533,
+    "resolution": 0.005114345819438107,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.899103139013453
+   },
+   "M1c": {
+    "intercept": -0.6941848104132071,
+    "slope": 0.7410787067124325,
+    "brier": 0.05176487372663546,
+    "reliability": 0.0021497446220125065,
+    "resolution": 0.005374241094882294,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.899103139013453
+   },
+   "M3n": {
+    "intercept": -0.6842128957665089,
+    "slope": 0.7444663538531894,
+    "brier": 0.05159028266369102,
+    "reliability": 0.002102073871145256,
+    "resolution": 0.005367730799297968,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.8992152466367713
+   }
+  },
+  "activation_corrected": {
+   "n_cells": 1507486,
+   "n_aoi": 500,
+   "M1": {
+    "intercept": -0.5559731659154724,
+    "slope": 0.7033534513891679,
+    "brier": 0.04880810647807932,
+    "reliability": 0.0014225603266887585,
+    "resolution": 0.005343083090238917,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.899103139013453
+   },
+   "M1s": {
+    "intercept": -0.12836035354427014,
+    "slope": 0.9612955362358712,
+    "brier": 0.04767158077887897,
+    "reliability": 0.00036677114507415533,
+    "resolution": 0.005114345819438107,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.899103139013453
+   },
+   "M1c": {
+    "intercept": -0.6995271106555108,
+    "slope": 0.738447125161791,
+    "brier": 0.05187345644245475,
+    "reliability": 0.0021793218278646346,
+    "resolution": 0.0053952157111847145,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.899103139013453
+   },
+   "M3n": {
+    "intercept": -0.699151979481536,
+    "slope": 0.7382605825960079,
+    "brier": 0.05183751035321759,
+    "reliability": 0.0021739694037658944,
+    "resolution": 0.005376424207732586,
+    "uncertainty": 0.05225195396141914,
+    "auc_within_median": 0.8984526112185687
+   }
+  },
+  "gfm_refit": {
+   "n_cells": 234703,
+   "n_aoi": 192,
+   "M1": {
+    "intercept": -1.1323890627746336,
+    "slope": 0.38163241932567354,
+    "brier": 0.08577302490105891,
+    "reliability": 0.006576715311652551,
+    "resolution": 0.003519405684420408,
+    "uncertainty": 0.07909945433312074,
+    "auc_within_median": 0.8596600163434902
+   },
+   "M1s": {
+    "intercept": -0.484833868048147,
+    "slope": 0.7898102688727388,
+    "brier": 0.07783011571698059,
+    "reliability": 0.0008172151522580448,
+    "resolution": 0.0029350033619169732,
+    "uncertainty": 0.07909945433312074,
+    "auc_within_median": 0.8596600163434902
+   },
+   "M1c": {
+    "intercept": -1.9873082932507304,
+    "slope": 0.16178088890947726,
+    "brier": 0.11553030433952684,
+    "reliability": 0.025469708033626127,
+    "resolution": 0.0022184285420964976,
+    "uncertainty": 0.07909945433312074,
+    "auc_within_median": 0.8596600163434902
+   },
+   "M3n": {
+    "intercept": -1.9889506197846607,
+    "slope": 0.16073919950060686,
+    "brier": 0.11495569229214495,
+    "reliability": 0.025271238517191926,
+    "resolution": 0.0022166495243494512,
+    "uncertainty": 0.07909945433312074,
+    "auc_within_median": 0.8529545045840753
+   }
+  }
+ },
+ "B11": {
+  "watched_forms": {
+   "de:au:suffix": {
+    "settlements": 182,
+    "cells": 2701,
+    "by_country": {
+     "AT": 12,
+     "BE": 8,
+     "DE": 162
+    },
+    "examples": {
+     "choerau": 177,
+     "sandau": 150,
+     "obslau": 127,
+     "trebbichau": 119,
+     "dalchau": 109,
+     "wulkau": 102,
+     "ausbau": 100,
+     "warnau": 86,
+     "reppichau": 85,
+     "storkau": 83
+    }
+   },
+   "en:borne:suffix": {
+    "settlements": 1,
+    "cells": 30,
+    "by_country": {
+     "AU": 1
+    },
+    "examples": {
+     "tichborne": 30
+    }
+   },
+   "en:bourne:suffix": {
+    "settlements": 5,
+    "cells": 99,
+    "by_country": {
+     "GB": 4,
+     "IE": 1
+    },
+    "examples": {
+     "cranbourne": 37,
+     "pangbourne": 30,
+     "barbourne": 25,
+     "nailsbourne": 6,
+     "melbourne bridge": 1
+    }
+   },
+   "en:burn:suffix": {
+    "settlements": 30,
+    "cells": 1038,
+    "by_country": {
+     "AU": 2,
+     "GB": 22,
+     "US": 6
+    },
+    "examples": {
+     "heyburn": 190,
+     "woodburn": 179,
+     "wythburn": 89,
+     "blackburn": 74,
+     "naburn": 55,
+     "otterburn": 54,
+     "glusburn green": 50,
+     "eastburn": 48,
+     "sherburn in elmet": 40,
+     "winterburn": 31
+    }
+   },
+   "en:pool:suffix": {
+    "settlements": 5,
+    "cells": 107,
+    "by_country": {
+     "US": 1,
+     "GB": 4
+    },
+    "examples": {
+     "glenpool": 49,
+     "sampool": 32,
+     "bathpool": 9,
+     "firepool": 9,
+     "swanpool": 8
+    }
+   },
+   "en:well:suffix": {
+    "settlements": 47,
+    "cells": 996,
+    "by_country": {
+     "AU": 1,
+     "GB": 26,
+     "IE": 6,
+     "US": 14
+    },
+    "examples": {
+     "brauncewell": 139,
+     "howell": 94,
+     "greenwell point": 78,
+     "cranwell": 58,
+     "hopewell": 44,
+     "dowell": 40,
+     "north greetwell": 36,
+     "powell": 35,
+     "marywell": 32,
+     "stawell": 28
+    }
+   },
+   "en:wells:suffix": {
+    "settlements": 1,
+    "cells": 138,
+    "by_country": {
+     "GB": 1
+    },
+    "examples": {
+     "kingswells": 138
+    }
+   },
+   "fa:ab:suffix": {
+    "settlements": 73,
+    "cells": 589,
+    "by_country": {
+     "IR": 33,
+     "PK": 40
+    },
+    "examples": {
+     "arab": 54,
+     "goth qutab brahui": 46,
+     "haji tayyab": 27,
+     "haji gulab": 27,
+     "goth sohrab khan": 26,
+     "mehrab khosa": 23,
+     "kot shahab din": 20,
+     "basti bhab": 18,
+     "chhab": 17,
+     "goth qutab jatoi": 16
+    }
+   },
+   "fa:bela:word": {
+    "settlements": 9,
+    "cells": 200,
+    "by_country": {
+     "PK": 9
+    },
+    "examples": {
+     "bela ali khanana": 85,
+     "kot bela": 42,
+     "bela bhagwanpura": 28,
+     "makki bela": 27,
+     "bela munshipura": 15,
+     "bela": 2,
+     "joke bela": 1
+    }
+   },
+   "fa:kacha:word": {
+    "settlements": 1,
+    "cells": 11,
+    "by_country": {
+     "PK": 1
+    },
+    "examples": {
+     "kacha pakka mor": 11
+    }
+   },
+   "fa:pattan:prefix": {
+    "settlements": 1,
+    "cells": 10,
+    "by_country": {
+     "PK": 1
+    },
+    "examples": {
+     "chah pattanwala": 10
+    }
+   },
+   "fa:pattan:word": {
+    "settlements": 3,
+    "cells": 133,
+    "by_country": {
+     "PK": 3
+    },
+    "examples": {
+     "pattan khurd": 89,
+     "bahkan pattan": 30,
+     "sahuka pattan": 14
+    }
+   },
+   "fa:tibba:word": {
+    "settlements": 9,
+    "cells": 79,
+    "by_country": {
+     "PK": 9
+    },
+    "examples": {
+     "tibba": 17,
+     "tibba ghhale": 16,
+     "tibba hussain shah": 14,
+     "gharianwala tibba": 11,
+     "muradke tibba": 7,
+     "tibba bhattian": 6,
+     "tibba tughril": 4,
+     "tibba mochianwala": 3,
+     "tibba baba nur sahib": 1
+    }
+   },
+   "hi:char:word": {
+    "settlements": 149,
+    "cells": 2303,
+    "by_country": {
+     "BD": 149
+    },
+    "examples": {
+     "char kodalia": 153,
+     "char gobindapur": 124,
+     "char gazi para": 78,
+     "sonatani char": 67,
+     "char katari": 65,
+     "char sibalay": 52,
+     "digrir char": 51,
+     "madher char": 49,
+     "char durgapur": 46,
+     "paler char": 39
+    }
+   },
+   "no:as:suffix": {
+    "settlements": 3,
+    "cells": 127,
+    "by_country": {
+     "NO": 3
+    },
+    "examples": {
+     "kjonnas": 83,
+     "raipas": 43,
+     "gevingas": 1
+    }
+   },
+   "sv:as:suffix": {
+    "settlements": 158,
+    "cells": 3282,
+    "by_country": {
+     "SE": 156,
+     "FI": 2
+    },
+    "examples": {
+     "fryksas": 334,
+     "neistenkangas": 332,
+     "svartnas": 288,
+     "marnas": 245,
+     "stor-vasselnas": 204,
+     "kuivakangas": 161,
+     "vastra svartnas": 154,
+     "indnas": 139,
+     "klockarnas": 123,
+     "lindesnas": 116
+    }
+   }
+  },
+  "top_forms_by_country": {
+   "AU": [
+    {
+     "form": "creek",
+     "cat": "water",
+     "settlements": 33,
+     "cells": 4374
+    },
+    {
+     "form": "lake",
+     "cat": "water",
+     "settlements": 9,
+     "cells": 2573
+    },
+    {
+     "form": "hill",
+     "cat": "high",
+     "settlements": 30,
+     "cells": 2442
+    },
+    {
+     "form": "bridge",
+     "cat": "crossing",
+     "settlements": 8,
+     "cells": 1468
+    },
+    {
+     "form": "dale",
+     "cat": "low",
+     "settlements": 14,
+     "cells": 1377
+    },
+    {
+     "form": "vale",
+     "cat": "low",
+     "settlements": 14,
+     "cells": 1230
+    },
+    {
+     "form": "lower",
+     "cat": "low",
+     "settlements": 8,
+     "cells": 1065
+    },
+    {
+     "form": "flat",
+     "cat": "riverine",
+     "settlements": 6,
+     "cells": 1062
+    },
+    {
+     "form": "mount",
+     "cat": "high",
+     "settlements": 11,
+     "cells": 862
+    },
+    {
+     "form": "heights",
+     "cat": "high",
+     "settlements": 14,
+     "cells": 731
+    }
+   ],
+   "DE": [
+    {
+     "form": "ach",
+     "cat": "water",
+     "settlements": 392,
+     "cells": 2809
+    },
+    {
+     "form": "berg",
+     "cat": "high",
+     "settlements": 417,
+     "cells": 2715
+    },
+    {
+     "form": "au",
+     "cat": "riverine",
+     "settlements": 162,
+     "cells": 2642
+    },
+    {
+     "form": "bach",
+     "cat": "water",
+     "settlements": 354,
+     "cells": 2530
+    },
+    {
+     "form": "ober",
+     "cat": "high",
+     "settlements": 213,
+     "cells": 1419
+    },
+    {
+     "form": "nieder",
+     "cat": "low",
+     "settlements": 98,
+     "cells": 1256
+    },
+    {
+     "form": "thal",
+     "cat": "low",
+     "settlements": 53,
+     "cells": 775
+    },
+    {
+     "form": "born",
+     "cat": "water",
+     "settlements": 21,
+     "cells": 436
+    },
+    {
+     "form": "unter",
+     "cat": "low",
+     "settlements": 133,
+     "cells": 417
+    },
+    {
+     "form": "werder",
+     "cat": "riverine",
+     "settlements": 12,
+     "cells": 309
+    }
+   ],
+   "GB": [
+    {
+     "form": "hill",
+     "cat": "high",
+     "settlements": 142,
+     "cells": 3049
+    },
+    {
+     "form": "bridge",
+     "cat": "crossing",
+     "settlements": 47,
+     "cells": 1900
+    },
+    {
+     "form": "ford",
+     "cat": "crossing",
+     "settlements": 50,
+     "cells": 1219
+    },
+    {
+     "form": "dale",
+     "cat": "low",
+     "settlements": 28,
+     "cells": 997
+    },
+    {
+     "form": "ridge",
+     "cat": "high",
+     "settlements": 25,
+     "cells": 860
+    },
+    {
+     "form": "burn",
+     "cat": "water",
+     "settlements": 24,
+     "cells": 672
+    },
+    {
+     "form": "well",
+     "cat": "water",
+     "settlements": 29,
+     "cells": 636
+    },
+    {
+     "form": "lower",
+     "cat": "low",
+     "settlements": 24,
+     "cells": 555
+    },
+    {
+     "form": "beck",
+     "cat": "water",
+     "settlements": 18,
+     "cells": 525
+    },
+    {
+     "form": "holme",
+     "cat": "riverine",
+     "settlements": 20,
+     "cells": 494
+    }
+   ],
+   "SE": [
+    {
+     "form": "as",
+     "cat": "high",
+     "settlements": 158,
+     "cells": 3186
+    },
+    {
+     "form": "berg",
+     "cat": "high",
+     "settlements": 70,
+     "cells": 2198
+    },
+    {
+     "form": "asen",
+     "cat": "high",
+     "settlements": 19,
+     "cells": 1876
+    },
+    {
+     "form": "berget",
+     "cat": "high",
+     "settlements": 16,
+     "cells": 1409
+    },
+    {
+     "form": "dalen",
+     "cat": "low",
+     "settlements": 14,
+     "cells": 1080
+    },
+    {
+     "form": "sjo",
+     "cat": "water",
+     "settlements": 53,
+     "cells": 743
+    },
+    {
+     "form": "sjon",
+     "cat": "water",
+     "settlements": 5,
+     "cells": 529
+    },
+    {
+     "form": "fors",
+     "cat": "water",
+     "settlements": 20,
+     "cells": 389
+    },
+    {
+     "form": "dal",
+     "cat": "low",
+     "settlements": 15,
+     "cells": 349
+    },
+    {
+     "form": "back",
+     "cat": "water",
+     "settlements": 19,
+     "cells": 269
+    }
+   ],
+   "US": [
+    {
+     "form": "hill",
+     "cat": "high",
+     "settlements": 45,
+     "cells": 694
+    },
+    {
+     "form": "creek",
+     "cat": "water",
+     "settlements": 28,
+     "cells": 604
+    },
+    {
+     "form": "valley",
+     "cat": "low",
+     "settlements": 22,
+     "cells": 565
+    },
+    {
+     "form": "ford",
+     "cat": "crossing",
+     "settlements": 29,
+     "cells": 519
+    },
+    {
+     "form": "ridge",
+     "cat": "high",
+     "settlements": 31,
+     "cells": 443
+    },
+    {
+     "form": "lake",
+     "cat": "water",
+     "settlements": 22,
+     "cells": 385
+    },
+    {
+     "form": "springs",
+     "cat": "water",
+     "settlements": 31,
+     "cells": 371
+    },
+    {
+     "form": "bridge",
+     "cat": "crossing",
+     "settlements": 6,
+     "cells": 329
+    },
+    {
+     "form": "heights",
+     "cat": "high",
+     "settlements": 29,
+     "cells": 297
+    },
+    {
+     "form": "burn",
+     "cat": "water",
+     "settlements": 6,
+     "cells": 268
+    }
+   ],
+   "IT": [
+    {
+     "form": "monte",
+     "cat": "high",
+     "settlements": 65,
+     "cells": 1277
+    },
+    {
+     "form": "ponte",
+     "cat": "crossing",
+     "settlements": 80,
+     "cells": 755
+    },
+    {
+     "form": "piana",
+     "cat": "low",
+     "settlements": 3,
+     "cells": 629
+    },
+    {
+     "form": "poggio",
+     "cat": "high",
+     "settlements": 21,
+     "cells": 561
+    },
+    {
+     "form": "sotto",
+     "cat": "low",
+     "settlements": 19,
+     "cells": 423
+    },
+    {
+     "form": "serra",
+     "cat": "high",
+     "settlements": 11,
+     "cells": 413
+    },
+    {
+     "form": "motta",
+     "cat": "high",
+     "settlements": 13,
+     "cells": 350
+    },
+    {
+     "form": "valle",
+     "cat": "low",
+     "settlements": 20,
+     "cells": 282
+    },
+    {
+     "form": "sopra",
+     "cat": "high",
+     "settlements": 23,
+     "cells": 271
+    },
+    {
+     "form": "colle",
+     "cat": "high",
+     "settlements": 15,
+     "cells": 267
+    }
+   ],
+   "FR": [
+    {
+     "form": "mont",
+     "cat": "high",
+     "settlements": 206,
+     "cells": 1710
+    },
+    {
+     "form": "haut",
+     "cat": "high",
+     "settlements": 30,
+     "cells": 379
+    },
+    {
+     "form": "pont",
+     "cat": "crossing",
+     "settlements": 61,
+     "cells": 331
+    },
+    {
+     "form": "haute",
+     "cat": "high",
+     "settlements": 14,
+     "cells": 295
+    },
+    {
+     "form": "motte",
+     "cat": "high",
+     "settlements": 12,
+     "cells": 278
+    },
+    {
+     "form": "sous",
+     "cat": "low",
+     "settlements": 51,
+     "cells": 227
+    },
+    {
+     "form": "fontaine",
+     "cat": "water",
+     "settlements": 28,
+     "cells": 204
+    },
+    {
+     "form": "val",
+     "cat": "low",
+     "settlements": 27,
+     "cells": 200
+    },
+    {
+     "form": "bas",
+     "cat": "low",
+     "settlements": 23,
+     "cells": 198
+    },
+    {
+     "form": "vallee",
+     "cat": "low",
+     "settlements": 12,
+     "cells": 183
+    }
+   ],
+   "PT": [
+    {
+     "form": "monte",
+     "cat": "high",
+     "settlements": 46,
+     "cells": 1648
+    },
+    {
+     "form": "vale",
+     "cat": "low",
+     "settlements": 93,
+     "cells": 849
+    },
+    {
+     "form": "cima",
+     "cat": "high",
+     "settlements": 57,
+     "cells": 552
+    },
+    {
+     "form": "agua",
+     "cat": "water",
+     "settlements": 10,
+     "cells": 388
+    },
+    {
+     "form": "porto",
+     "cat": "crossing",
+     "settlements": 31,
+     "cells": 356
+    },
+    {
+     "form": "rio",
+     "cat": "water",
+     "settlements": 11,
+     "cells": 284
+    },
+    {
+     "form": "baixo",
+     "cat": "low",
+     "settlements": 51,
+     "cells": 273
+    },
+    {
+     "form": "alto",
+     "cat": "high",
+     "settlements": 2,
+     "cells": 251
+    },
+    {
+     "form": "serra",
+     "cat": "high",
+     "settlements": 20,
+     "cells": 103
+    },
+    {
+     "form": "ribeira",
+     "cat": "water",
+     "settlements": 20,
+     "cells": 72
+    }
+   ],
+   "NO": [
+    {
+     "form": "foss",
+     "cat": "water",
+     "settlements": 8,
+     "cells": 820
+    },
+    {
+     "form": "berget",
+     "cat": "high",
+     "settlements": 4,
+     "cells": 804
+    },
+    {
+     "form": "berg",
+     "cat": "high",
+     "settlements": 10,
+     "cells": 698
+    },
+    {
+     "form": "dal",
+     "cat": "low",
+     "settlements": 6,
+     "cells": 542
+    },
+    {
+     "form": "botn",
+     "cat": "low",
+     "settlements": 2,
+     "cells": 335
+    },
+    {
+     "form": "haugen",
+     "cat": "high",
+     "settlements": 3,
+     "cells": 290
+    },
+    {
+     "form": "asen",
+     "cat": "high",
+     "settlements": 5,
+     "cells": 271
+    },
+    {
+     "form": "sand",
+     "cat": "riverine",
+     "settlements": 2,
+     "cells": 162
+    },
+    {
+     "form": "oya",
+     "cat": "riverine",
+     "settlements": 1,
+     "cells": 152
+    },
+    {
+     "form": "voll",
+     "cat": "riverine",
+     "settlements": 2,
+     "cells": 130
+    }
+   ],
+   "RO": [
+    {
+     "form": "lunca",
+     "cat": "riverine",
+     "settlements": 7,
+     "cells": 1211
+    },
+    {
+     "form": "sus",
+     "cat": "high",
+     "settlements": 9,
+     "cells": 818
+    },
+    {
+     "form": "jos",
+     "cat": "low",
+     "settlements": 10,
+     "cells": 744
+    },
+    {
+     "form": "deal",
+     "cat": "high",
+     "settlements": 7,
+     "cells": 715
+    },
+    {
+     "form": "valea",
+     "cat": "low",
+     "settlements": 9,
+     "cells": 503
+    },
+    {
+     "form": "vale",
+     "cat": "low",
+     "settlements": 7,
+     "cells": 407
+    },
+    {
+     "form": "fantanele",
+     "cat": "water",
+     "settlements": 2,
+     "cells": 268
+    },
+    {
+     "form": "podu",
+     "cat": "crossing",
+     "settlements": 1,
+     "cells": 216
+    },
+    {
+     "form": "dealu",
+     "cat": "high",
+     "settlements": 1,
+     "cells": 125
+    },
+    {
+     "form": "rau",
+     "cat": "water",
+     "settlements": 3,
+     "cells": 89
+    }
+   ],
+   "IR": [
+    {
+     "form": "chah",
+     "cat": "water",
+     "settlements": 35,
+     "cells": 3421
+    },
+    {
+     "form": "bala",
+     "cat": "high",
+     "settlements": 15,
+     "cells": 396
+    },
+    {
+     "form": "nahr",
+     "cat": "water",
+     "settlements": 17,
+     "cells": 243
+    },
+    {
+     "form": "koh",
+     "cat": "high",
+     "settlements": 10,
+     "cells": 234
+    },
+    {
+     "form": "ab",
+     "cat": "water",
+     "settlements": 62,
+     "cells": 209
+    },
+    {
+     "form": "bandar",
+     "cat": "crossing",
+     "settlements": 3,
+     "cells": 192
+    },
+    {
+     "form": "chahi",
+     "cat": "water",
+     "settlements": 4,
+     "cells": 28
+    },
+    {
+     "form": "tappeh",
+     "cat": "high",
+     "settlements": 7,
+     "cells": 13
+    },
+    {
+     "form": "kul",
+     "cat": "water",
+     "settlements": 3,
+     "cells": 13
+    },
+    {
+     "form": "rud",
+     "cat": "water",
+     "settlements": 4,
+     "cells": 7
+    }
+   ],
+   "BO": [
+    {
+     "form": "loma",
+     "cat": "high",
+     "settlements": 5,
+     "cells": 821
+    },
+    {
+     "form": "pampa",
+     "cat": "low",
+     "settlements": 11,
+     "cells": 531
+    },
+    {
+     "form": "puentes",
+     "cat": "crossing",
+     "settlements": 1,
+     "cells": 528
+    },
+    {
+     "form": "pata",
+     "cat": "high",
+     "settlements": 8,
+     "cells": 414
+    },
+    {
+     "form": "baja",
+     "cat": "low",
+     "settlements": 14,
+     "cells": 397
+    },
+    {
+     "form": "collo",
+     "cat": "high",
+     "settlements": 9,
+     "cells": 368
+    },
+    {
+     "form": "alto",
+     "cat": "high",
+     "settlements": 5,
+     "cells": 221
+    },
+    {
+     "form": "monte",
+     "cat": "high",
+     "settlements": 3,
+     "cells": 203
+    },
+    {
+     "form": "kollu",
+     "cat": "high",
+     "settlements": 1,
+     "cells": 173
+    },
+    {
+     "form": "alta",
+     "cat": "high",
+     "settlements": 8,
+     "cells": 155
+    }
+   ],
+   "ES": [
+    {
+     "form": "arriba",
+     "cat": "high",
+     "settlements": 2,
+     "cells": 285
+    },
+    {
+     "form": "rio",
+     "cat": "water",
+     "settlements": 12,
+     "cells": 284
+    },
+    {
+     "form": "arroyo",
+     "cat": "water",
+     "settlements": 3,
+     "cells": 255
+    },
+    {
+     "form": "sierra",
+     "cat": "high",
+     "settlements": 5,
+     "cells": 246
+    },
+    {
+     "form": "cuesta",
+     "cat": "high",
+     "settlements": 4,
+     "cells": 205
+    },
+    {
+     "form": "monte",
+     "cat": "high",
+     "settlements": 5,
+     "cells": 190
+    },
+    {
+     "form": "alta",
+     "cat": "high",
+     "settlements": 5,
+     "cells": 176
+    },
+    {
+     "form": "ribera",
+     "cat": "riverine",
+     "settlements": 2,
+     "cells": 170
+    },
+    {
+     "form": "fuente",
+     "cat": "water",
+     "settlements": 11,
+     "cells": 129
+    },
+    {
+     "form": "fuentes",
+     "cat": "water",
+     "settlements": 4,
+     "cells": 122
+    }
+   ],
+   "MG": [
+    {
+     "form": "ambohi",
+     "cat": "high",
+     "settlements": 40,
+     "cells": 1879
+    },
+    {
+     "form": "ambato",
+     "cat": "high",
+     "settlements": 14,
+     "cells": 628
+    },
+    {
+     "form": "andrano",
+     "cat": "water",
+     "settlements": 20,
+     "cells": 407
+    },
+    {
+     "form": "vohi",
+     "cat": "high",
+     "settlements": 4,
+     "cells": 261
+    },
+    {
+     "form": "berge",
+     "cat": "riverine",
+     "settlements": 1,
+     "cells": 7
+    },
+    {
+     "form": "port",
+     "cat": "crossing",
+     "settlements": 1,
+     "cells": 7
+    },
+    {
+     "form": "ambony",
+     "cat": "high",
+     "settlements": 1,
+     "cells": 1
+    }
+   ],
+   "PE": [
+    {
+     "form": "cerro",
+     "cat": "high",
+     "settlements": 2,
+     "cells": 934
+    },
+    {
+     "form": "alto",
+     "cat": "high",
+     "settlements": 7,
+     "cells": 852
+    },
+    {
+     "form": "cocha",
+     "cat": "water",
+     "settlements": 3,
+     "cells": 336
+    },
+    {
+     "form": "pampa",
+     "cat": "low",
+     "settlements": 2,
+     "cells": 241
+    },
+    {
+     "form": "loma",
+     "cat": "high",
+     "settlements": 4,
+     "cells": 229
+    },
+    {
+     "form": "canal",
+     "cat": "water",
+     "settlements": 2,
+     "cells": 163
+    },
+    {
+     "form": "laguna",
+     "cat": "water",
+     "settlements": 3,
+     "cells": 93
+    },
+    {
+     "form": "puente",
+     "cat": "crossing",
+     "settlements": 1,
+     "cells": 80
+    },
+    {
+     "form": "pozo",
+     "cat": "water",
+     "settlements": 2,
+     "cells": 60
+    },
+    {
+     "form": "monte",
+     "cat": "high",
+     "settlements": 5,
+     "cells": 56
+    }
+   ]
+  },
+  "n_settlements": 94524
+ },
+ "B12": {
+  "n_settlements": 94524,
+  "share_hydronym": 0.015541026617578604,
+  "share_cells": 0.023044990135895126,
+  "overlap": {
+   "hydronym_and_wetside": 214,
+   "hydronym_only": 1255,
+   "wetside_only": 5874
+  },
+  "recall_wikidata_water_namesakes": {
+   "k": 10,
+   "n": 139
+  },
+  "wikipedia_sample": {
+   "weighted": {
+    "precision": 0.45053997819033514,
+    "recall": 0.03121757679987916
+   },
+   "n_hydronym_coded": 9,
+   "k_water_related_among_hydronym": 6
+  },
+  "near_500m": {
+   "odds_ratio": 0.8756748674075386,
+   "ci95": [
+    0.5759042272355018,
+    1.3314826270508409
+   ],
+   "n_cells": 1489381,
+   "n_aoi": 479,
+   "n_units": 194,
+   "n_group_cells": 2041,
+   "n_group_flooded": 66.0,
+   "n_group_units": 112
+  },
+  "positive_control_hand": {
+   "estimate": -2.4439656068995483,
+   "ci95": [
+    -4.353778407320581,
+    -0.5940122328227119
+   ],
+   "covariates": [],
+   "coef_covariates": [],
+   "n_aoi": 52,
+   "n_settlements": 3931,
+   "n_units": 41
+  }
+ },
+ "B7": {
+  "n_settlement_points": 18558,
+  "h_above_100": {
+   "wetside": {
+    "estimate": -5.019292232838706,
+    "ci95": [
+     -9.017304220855866,
+     -1.3085152820165802
+    ],
+    "covariates": [],
+    "coef_covariates": [],
+    "n_aoi": 151,
+    "n_settlements": 11120,
+    "n_units": 97
+   },
+   "floodplain": {
+    "estimate": -4.884135960594143,
+    "ci95": [
+     -10.597227299393067,
+     -0.1861118549307393
+    ],
+    "covariates": [],
+    "coef_covariates": [],
+    "n_aoi": 52,
+    "n_settlements": 5150,
+    "n_units": 36
+   },
+   "by_class": {
+    "water": {
+     "estimate": 0.8846753105436365,
+     "ci95": [
+      -4.544436239672059,
+      6.616666618117707
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 64,
+     "n_settlements": 6156,
+     "n_units": 51
+    },
+    "wet": {
+     "estimate": 0.1064454828707928,
+     "ci95": [
+      -17.26032371471469,
+      13.54344580963389
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 12,
+     "n_settlements": 1478,
+     "n_units": 9
+    },
+    "riverine": {
+     "estimate": -4.365326017271127,
+     "ci95": [
+      -11.975067559020683,
+      2.279854754185335
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 38,
+     "n_settlements": 4077,
+     "n_units": 30
+    },
+    "crossing": {
+     "estimate": -8.733566673421324,
+     "ci95": [
+      -13.923157306995122,
+      -3.909133250758443
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 34,
+     "n_settlements": 3121,
+     "n_units": 26
+    },
+    "low": {
+     "estimate": -5.951496314365847,
+     "ci95": [
+      -17.33710654627802,
+      4.708300341777624
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 60,
+     "n_settlements": 5565,
+     "n_units": 44
+    }
+   }
+  },
+  "h_above_1000": {
+   "wetside": {
+    "estimate": -4.815017951186818,
+    "ci95": [
+     -8.981881852423395,
+     -1.0115785859481874
+    ],
+    "covariates": [],
+    "coef_covariates": [],
+    "n_aoi": 142,
+    "n_settlements": 10005,
+    "n_units": 94
+   },
+   "floodplain": {
+    "estimate": -3.185616902386821,
+    "ci95": [
+     -9.563583670615316,
+     2.5655385987664814
+    ],
+    "covariates": [],
+    "coef_covariates": [],
+    "n_aoi": 49,
+    "n_settlements": 4752,
+    "n_units": 35
+   },
+   "by_class": {
+    "water": {
+     "estimate": -0.8859140417548631,
+     "ci95": [
+      -6.846304694405421,
+      5.07220371028647
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 59,
+     "n_settlements": 5597,
+     "n_units": 47
+    },
+    "wet": {
+     "estimate": 5.309538874225712,
+     "ci95": [
+      -17.36210700639063,
+      28.217249354126682
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 12,
+     "n_settlements": 1327,
+     "n_units": 9
+    },
+    "riverine": {
+     "estimate": -5.705160215032303,
+     "ci95": [
+      -13.079401210409374,
+      0.9169719660320054
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 36,
+     "n_settlements": 3864,
+     "n_units": 29
+    },
+    "crossing": {
+     "estimate": -7.475949125751627,
+     "ci95": [
+      -13.156518522964708,
+      -2.9541130200768966
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 31,
+     "n_settlements": 2847,
+     "n_units": 24
+    },
+    "low": {
+     "estimate": -4.270608699722451,
+     "ci95": [
+      -16.758472957419382,
+      7.350250459988562
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 56,
+     "n_settlements": 4682,
+     "n_units": 41
+    }
+   }
+  },
+  "log_upland": {
+   "wetside": {
+    "estimate": 0.11428069541772483,
+    "ci95": [
+     -0.02010778873699079,
+     0.24388691895091566
+    ],
+    "covariates": [],
+    "coef_covariates": [],
+    "n_aoi": 151,
+    "n_settlements": 12227,
+    "n_units": 97
+   },
+   "floodplain": {
+    "estimate": 0.27638336713056855,
+    "ci95": [
+     -0.0907490289684467,
+     0.6733001415160182
+    ],
+    "covariates": [],
+    "coef_covariates": [],
+    "n_aoi": 52,
+    "n_settlements": 5674,
+    "n_units": 36
+   },
+   "by_class": {
+    "water": {
+     "estimate": -0.21223168161885508,
+     "ci95": [
+      -0.48273170597053755,
+      0.04734862336131457
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 64,
+     "n_settlements": 6779,
+     "n_units": 51
+    },
+    "wet": {
+     "estimate": 0.1757363742217943,
+     "ci95": [
+      -0.8953033423801112,
+      1.3892327491537488
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 12,
+     "n_settlements": 1602,
+     "n_units": 9
+    },
+    "riverine": {
+     "estimate": 0.30896302734973996,
+     "ci95": [
+      -0.07237878272179486,
+      0.7093203247183927
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 38,
+     "n_settlements": 4518,
+     "n_units": 30
+    },
+    "crossing": {
+     "estimate": 0.6080427018468261,
+     "ci95": [
+      0.17509301698162863,
+      1.132185932452758
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 34,
+     "n_settlements": 3393,
+     "n_units": 26
+    },
+    "low": {
+     "estimate": 0.21053945993883325,
+     "ci95": [
+      -0.027358267787401275,
+      0.4340792257514302
+     ],
+     "covariates": [],
+     "coef_covariates": [],
+     "n_aoi": 60,
+     "n_settlements": 6056,
+     "n_units": 44
+    }
+   }
+  },
+  "odds_by_river_size": {
+   "lt100": {
+    "odds_ratio": 0.9099199152876404,
+    "ci95": [
+     0.5848027918805756,
+     1.415783685940654
+    ],
+    "n_cells": 889808,
+    "n_aoi": 431,
+    "n_units": 189,
+    "n_group_cells": 5942,
+    "n_group_flooded": 188.0,
+    "n_group_units": 117
+   },
+   "100_1000": {
+    "odds_ratio": 1.6099104975048577,
+    "ci95": [
+     0.9818065734490884,
+     2.639839536693362
+    ],
+    "n_cells": 265762,
+    "n_aoi": 351,
+    "n_units": 167,
+    "n_group_cells": 1763,
+    "n_group_flooded": 87.0,
+    "n_group_units": 93
+   },
+   "ge1000": {
+    "odds_ratio": 0.8397381699550711,
+    "ci95": [
+     0.5189180118250628,
+     1.3589048327680997
+    ],
+    "n_cells": 266400,
+    "n_aoi": 368,
+    "n_units": 164,
+    "n_group_cells": 1663,
+    "n_group_flooded": 86.0,
+    "n_group_units": 89
+   }
+  },
+  "odds_adjusted_h_main": {
+   "odds_ratio": 1.0012936078966401,
+   "ci95": [
+    0.7510918704743609,
+    1.33484188636135
+   ],
+   "n_cells": 1145418,
+   "n_aoi": 427,
+   "n_units": 176,
+   "n_group_cells": 8098,
+   "n_group_flooded": 331.0,
+   "n_group_units": 118,
+   "coef_h_main": -0.005280645766034588
+  },
+  "odds_same_cells_unadjusted": {
+   "odds_ratio": 0.99810370936885,
+   "ci95": [
+    0.7497929855191439,
+    1.3286480853993294
+   ],
+   "n_cells": 1145418,
+   "n_aoi": 427,
+   "n_units": 176,
+   "n_group_cells": 8098,
+   "n_group_flooded": 331.0,
+   "n_group_units": 118
+  }
+ },
+ "B5": {
+  "same_cells": {
+   "n_cells": 230149,
+   "n_aoi": 176,
+   "n_units": 80,
+   "reps_ok": 2000,
+   "ems": {
+    "odds_ratio": 0.7769377856569211,
+    "sandwich_ci95": [
+     0.5744534580396257,
+     1.0507941319413927
+    ],
+    "pairs_ci95": [
+     0.6029281783336768,
+     1.069089093663491
+    ],
+    "jackknife_se": 0.18146178412535613,
+    "jackknife_t_ci95": [
+     0.5414060927771851,
+     1.1149344841782263
+    ]
+   },
+   "gfm": {
+    "odds_ratio": 0.5504104470125808,
+    "sandwich_ci95": [
+     0.36758527428813426,
+     0.824167020203095
+    ],
+    "pairs_ci95": [
+     0.34395382202868796,
+     0.807993983683983
+    ],
+    "jackknife_se": 0.21966992087460593,
+    "jackknife_t_ci95": [
+     0.35546337748506607,
+     0.8522724966042858
+    ]
+   },
+   "log_or_difference_gfm_minus_ems": {
+    "estimate": -0.3446960100191281,
+    "ratio_of_odds_ratios": 0.7084356780861089,
+    "pairs_ci95": [
+     -0.7510717207431515,
+     -0.08088059410662901
+    ],
+    "pairs_ci95_ratio": [
+     0.47186057888783767,
+     0.9223038133806694
+    ]
+   }
+  },
+  "floodplain_same_cells": {
+   "ems": {
+    "odds_ratio": 0.834712512755683,
+    "ci95": [
+     0.3841379797045957,
+     1.8137883150390577
+    ],
+    "n_cells": 232435,
+    "n_aoi": 182,
+    "n_units": 80,
+    "n_group_cells": 359,
+    "n_group_flooded": 14.0,
+    "n_group_units": 31
+   },
+   "gfm": {
+    "odds_ratio": 0.30710343131824114,
+    "ci95": [
+     0.09412611192248965,
+     1.0019803814386972
+    ],
+    "n_cells": 232041,
+    "n_aoi": 182,
+    "n_units": 80,
+    "n_group_cells": 359,
+    "n_group_flooded": 5.0,
+    "n_group_units": 31
+   }
+  },
+  "non_s1": {
+   "n_aoi": 68,
+   "odds_gfm": {
+    "n_cells": 90091,
+    "n_aoi": 63,
+    "aoi_dropped_no_variation": 5,
+    "bands_adjusted_M1": {
+     "terms": {
+      "band_500m_1km": {
+       "coef": 0.1574523043901898,
+       "se": 0.04166280500125634,
+       "odds_ratio": 1.1705249277500487,
+       "ci95_odds_ratio": [
+        1.0787394748733856,
+        1.2701200228582277
+       ]
+      },
+      "band_gt1km": {
+       "coef": 0.5427345042626027,
+       "se": 0.08566399882628038,
+       "odds_ratio": 1.7207057118484,
+       "ci95_odds_ratio": [
+        1.4547485481725184,
+        2.0352851704214827
+       ]
+      },
+      "logit_M1": {
+       "coef": 1.0855958559927565,
+       "se": 0.1065324226754925,
+       "odds_ratio": 2.961203744161267,
+       "ci95_odds_ratio": [
+        2.403178671601191,
+        3.64880386051041
+       ]
+      }
+     },
+     "n_groups": 41
+    },
+    "wetside_adjusted_M1": {
+     "terms": {
+      "band_500m_1km": {
+       "coef": 0.14896331537971466,
+       "se": 0.041362986710730076,
+       "odds_ratio": 1.160630411142186,
+       "ci95_odds_ratio": [
+        1.0702495669595624,
+        1.2586437713727905
+       ]
+      },
+      "band_gt1km": {
+       "coef": 0.5151900914016948,
+       "se": 0.08576550466925238,
+       "odds_ratio": 1.6739566763264295,
+       "ci95_odds_ratio": [
+        1.4149436433063027,
+        1.9803834360993202
+       ]
+      },
+      "wetside:le500m": {
+       "coef": -0.7340025880757493,
+       "se": 0.3622537375208061,
+       "odds_ratio": 0.47998396203007637,
+       "ci95_odds_ratio": [
+        0.23597724133767597,
+        0.9763000978404385
+       ]
+      },
+      "wetside:500m_1km": {
+       "coef": -0.39186617372035837,
+       "se": 0.45043631906897647,
+       "odds_ratio": 0.6757945469793583,
+       "ci95_odds_ratio": [
+        0.27950883996774634,
+        1.6339313983047414
+       ]
+      },
+      "wetside:gt1km": {
+       "coef": 0.05663965697782995,
+       "se": 0.37934590202426904,
+       "odds_ratio": 1.0582743998847794,
+       "ci95_odds_ratio": [
+        0.5031442800286233,
+        2.2258917569087293
+       ]
+      },
+      "logit_M1": {
+       "coef": 1.0848785120363418,
+       "se": 0.1068398003592298,
+       "odds_ratio": 2.959080304261127,
+       "ci95_odds_ratio": [
+        2.4000090383650625,
+        3.6483846965138946
+       ]
+      }
+     },
+     "n_groups": 41
+    },
+    "wetside_raw": {
+     "terms": {
+      "band_500m_1km": {
+       "coef": 0.4266842926310831,
+       "se": 0.05847439860891306,
+       "odds_ratio": 1.5321688683573063,
+       "ci95_odds_ratio": [
+        1.3662564362126093,
+        1.7182290080703393
+       ]
+      },
+      "band_gt1km": {
+       "coef": 0.8835829649498954,
+       "se": 0.11000270092211974,
+       "odds_ratio": 2.4195533691905045,
+       "ci95_odds_ratio": [
+        1.9502892036491395,
+        3.001728407975287
+       ]
+      },
+      "wetside:le500m": {
+       "coef": -0.8216426796553493,
+       "se": 0.3944822690606559,
+       "odds_ratio": 0.43970876029193423,
+       "ci95_odds_ratio": [
+        0.2029434465830237,
+        0.9526978926041504
+       ]
+      },
+      "wetside:500m_1km": {
+       "coef": -0.44498622334481114,
+       "se": 0.4108124022528995,
+       "odds_ratio": 0.6408331045082196,
+       "ci95_odds_ratio": [
+        0.28645365122011307,
+        1.433624832793921
+       ]
+      },
+      "wetside:gt1km": {
+       "coef": 0.07146705238826612,
+       "se": 0.34184827557373304,
+       "odds_ratio": 1.0740827616565236,
+       "ci95_odds_ratio": [
+        0.5496049301197381,
+        2.099060098744688
+       ]
+      }
+     },
+     "n_groups": 41
+    },
+    "categories_adjusted_M1": {
+     "terms": {
+      "band_500m_1km": {
+       "coef": 0.15465987366078157,
+       "se": 0.0422210979681304,
+       "odds_ratio": 1.167260877410495,
+       "ci95_odds_ratio": [
+        1.0745548917433057,
+        1.2679649652170564
+       ]
+      },
+      "band_gt1km": {
+       "coef": 0.5298002511115427,
+       "se": 0.08224895970827006,
+       "odds_ratio": 1.6985929826694588,
+       "ci95_odds_ratio": [
+        1.4456980580663314,
+        1.9957266350852003
+       ]
+      },
+      "water:le500m": {
+       "coef": -0.6844959489721203,
+       "se": 0.2871564832586857,
+       "odds_ratio": 0.5043443808204041,
+       "ci95_odds_ratio": [
+        0.28727289648802085,
+        0.8854411870203135
+       ]
+      },
+      "water:500m_1km": {
+       "coef": -1.1348396308174855,
+       "se": 0.32567221748822384,
+       "odds_ratio": 0.321473671670664,
+       "ci95_odds_ratio": [
+        0.16979606544176643,
+        0.608643794592881
+       ]
+      },
+      "water:gt1km": {
+       "coef": 0.05503052184790085,
+       "se": 0.5489582756513879,
+       "odds_ratio": 1.0565728627395692,
+       "ci95_odds_ratio": [
+        0.36026057193406497,
+        3.098718819782484
+       ]
+      },
+      "wet:le500m": {
+       "coef": -49.44612446509885,
+       "se": 0.9749256772061928,
+       "odds_ratio": 3.355992590514583e-22,
+       "ci95_odds_ratio": [
+        4.9653229785062347e-23,
+        2.2682686134099263e-21
+       ]
+      },
+      "wet:500m_1km": {
+       "coef": -0.029271869546558145,
+       "se": 0.502952707883179,
+       "odds_ratio": 0.971152401809815,
+       "ci95_odds_ratio": [
+        0.362380984579313,
+        2.6026116923211555
+       ]
+      },
+      "wet:gt1km": {
+       "coef": 0.20184581833211837,
+       "se": 0.797462606357856,
+       "odds_ratio": 1.2236593277301355,
+       "ci95_odds_ratio": [
+        0.2563578676619751,
+        5.840827761585662
+       ]
+      },
+      "riverine:le500m": {
+       "coef": -49.75600463255496,
+       "se": 0.8169377044443168,
+       "odds_ratio": 2.4617375292203225e-22,
+       "ci95_odds_ratio": [
+        4.964212157230757e-23,
+        1.2207680636583392e-21
+       ]
+      },
+      "riverine:500m_1km": {
+       "coef": 0.6475803462927467,
+       "se": 1.0535956897946703,
+       "odds_ratio": 1.9109114865070838,
+       "ci95_odds_ratio": [
+        0.2423270047384599,
+        15.068822862750329
+       ]
+      },
+      "riverine:gt1km": {
+       "coef": 0.21238405913520506,
+       "se": 0.8054011440734227,
+       "odds_ratio": 1.2366227301446884,
+       "ci95_odds_ratio": [
+        0.2550738460871995,
+        5.9952668616119835
+       ]
+      },
+      "crossing:le500m": {
+       "coef": 0.4762468423875521,
+       "se": 0.8261258932903387,
+       "odds_ratio": 1.6100203881888921,
+       "ci95_odds_ratio": [
+        0.3188737863827615,
+        8.129127451299475
+       ]
+      },
+      "crossing:500m_1km": {
+       "coef": 0.04779456196938689,
+       "se": 0.969214743594329,
+       "odds_ratio": 1.0489551379097581,
+       "ci95_odds_ratio": [
+        0.15694398268667328,
+        7.010825534763947
+       ]
+      },
+      "crossing:gt1km": {
+       "coef": -0.8090559065244228,
+       "se": 0.5640781075569216,
+       "odds_ratio": 0.44527825213700034,
+       "ci95_odds_ratio": [
+        0.1473935590394503,
+        1.345192579094408
+       ]
+      },
+      "low:le500m": {
+       "coef": -48.543274489660185,
+       "se": 0.6047315324072932,
+       "odds_ratio": 8.277968236400452e-22,
+       "ci95_odds_ratio": [
+        2.530264272177649e-22,
+        2.708205576640404e-21
+       ]
+      },
+      "low:500m_1km": {
+       "coef": 0.4882321465846235,
+       "se": 0.33046246214127817,
+       "odds_ratio": 1.6294330733920988,
+       "ci95_odds_ratio": [
+        0.8525918964495848,
+        3.114094975240031
+       ]
+      },
+      "low:gt1km": {
+       "coef": 0.4832266041801473,
+       "se": 0.21358966943046492,
+       "odds_ratio": 1.6212972561243526,
+       "ci95_odds_ratio": [
+        1.066722487816697,
+        2.464188036474626
+       ]
+      },
+      "high:le500m": {
+       "coef": 0.89494588764679,
+       "se": 0.24791965787280068,
+       "odds_ratio": 2.4472033619466624,
+       "ci95_odds_ratio": [
+        1.5053468822926825,
+        3.978354999215824
+       ]
+      },
+      "high:500m_1km": {
+       "coef": 0.4952936058276231,
+       "se": 0.24435112650947508,
+       "odds_ratio": 1.6409799696162257,
+       "ci95_odds_ratio": [
+        1.0165000445052046,
+        2.649104911739019
+       ]
+      },
+      "high:gt1km": {
+       "coef": 0.396407347300612,
+       "se": 0.14306554803246876,
+       "odds_ratio": 1.4864747057001995,
+       "ci95_odds_ratio": [
+        1.1229946066939,
+        1.9676025490376887
+       ]
+      },
+      "logit_M1": {
+       "coef": 1.0876390719887337,
+       "se": 0.10795417244493874,
+       "odds_ratio": 2.9672603083460523,
+       "ci95_odds_ratio": [
+        2.4013927799188046,
+        3.666469646745423
+       ]
+      }
+     },
+     "n_groups": 41
+    },
+    "wetside_allcells_adjusted_M1": {
+     "terms": {
+      "wetside:all": {
+       "coef": -0.14685846586806536,
+       "se": 0.36744348037063845,
+       "odds_ratio": 0.8634161716271392,
+       "ci95_odds_ratio": [
+        0.4201902528079102,
+        1.7741665363381591
+       ]
+      },
+      "logit_M1": {
+       "coef": 1.1060079172243116,
+       "se": 0.10786572117718836,
+       "odds_ratio": 3.0222691312788603,
+       "ci95_odds_ratio": [
+        2.4463352875195046,
+        3.733793461787789
+       ]
+      }
+     },
+     "n_groups": 41
+    },
+    "categories_allcells_adjusted_M1": {
+     "terms": {
+      "water:all": {
+       "coef": -0.3057344348401193,
+       "se": 0.5004223034583293,
+       "odds_ratio": 0.7365822040555082,
+       "ci95_odds_ratio": [
+        0.27621875140939817,
+        1.9642161893894157
+       ]
+      },
+      "wet:all": {
+       "coef": -0.309437185275012,
+       "se": 0.5073682618571386,
+       "odds_ratio": 0.7338598671565268,
+       "ci95_odds_ratio": [
+        0.27147669573700894,
+        1.9837809767093668
+       ]
+      },
+      "riverine:all": {
+       "coef": 0.15523062487986145,
+       "se": 0.8702795457554703,
+       "odds_ratio": 1.167927283137111,
+       "ci95_odds_ratio": [
+        0.21213820956800802,
+        6.4300256963314295
+       ]
+      },
+      "crossing:all": {
+       "coef": -0.32676363025109867,
+       "se": 0.6438376897045879,
+       "odds_ratio": 0.7212542055551819,
+       "ci95_odds_ratio": [
+        0.20419384778752994,
+        2.547616564688711
+       ]
+      },
+      "low:all": {
+       "coef": 0.4258338440668333,
+       "se": 0.21839154043580383,
+       "odds_ratio": 1.5308663914663272,
+       "ci95_odds_ratio": [
+        0.997788872963491,
+        2.348745282717624
+       ]
+      },
+      "high:all": {
+       "coef": 0.4376719611961052,
+       "se": 0.12670062547970903,
+       "odds_ratio": 1.5490966602461245,
+       "ci95_odds_ratio": [
+        1.2084502278581353,
+        1.985766900006251
+       ]
+      },
+      "logit_M1": {
+       "coef": 1.1087042214279337,
+       "se": 0.10879236718831652,
+       "odds_ratio": 3.0304290841560175,
+       "ci95_odds_ratio": [
+        2.448489201107012,
+        3.750680390971965
+       ]
+      }
+     },
+     "n_groups": 41
+    }
+   },
+   "odds_ems": {
+    "n_cells": 92055,
+    "n_aoi": 66,
+    "aoi_dropped_no_variation": 2,
+    "bands_adjusted_M1": {
+     "terms": {
+      "band_500m_1km": {
+       "coef": 0.06643461130754794,
+       "se": 0.037987697174166564,
+       "odds_ratio": 1.0686910814779795,
+       "ci95_odds_ratio": [
+        0.9920108094299908,
+        1.151298571319827
+       ]
+      },
+      "band_gt1km": {
+       "coef": 0.3054681538115302,
+       "se": 0.09328281616440194,
+       "odds_ratio": 1.357260260859789,
+       "ci95_odds_ratio": [
+        1.130470405472629,
+        1.6295476704133718
+       ]
+      },
+      "logit_M1": {
+       "coef": 1.00383931196219,
+       "se": 0.1131177481317971,
+       "odds_ratio": 2.7287382202304493,
+       "ci95_odds_ratio": [
+        2.1861205303335143,
+        3.406039223926266
+       ]
+      }
+     },
+     "n_groups": 42
+    },
+    "wetside_adjusted_M1": {
+     "terms": {
+      "band_500m_1km": {
+       "coef": 0.05802611600726628,
+       "se": 0.03786408407446778,
+       "odds_ratio": 1.059742671596206,
+       "ci95_odds_ratio": [
+        0.9839428245219335,
+        1.1413818994488023
+       ]
+      },
+      "band_gt1km": {
+       "coef": 0.3039290873781801,
+       "se": 0.09297416463434917,
+       "odds_ratio": 1.3551729538151054,
+       "ci95_odds_ratio": [
+        1.1294149154498565,
+        1.6260576247308236
+       ]
+      },
+      "wetside:le500m": {
+       "coef": -0.26214719308802487,
+       "se": 0.2604212949461967,
+       "odds_ratio": 0.7693977653393561,
+       "ci95_odds_ratio": [
+        0.4618232988037191,
+        1.2818169261763275
+       ]
+      },
+      "wetside:500m_1km": {
+       "coef": -0.019362911773545863,
+       "se": 0.3607241517563809,
+       "odds_ratio": 0.9808233453055644,
+       "ci95_odds_ratio": [
+        0.48365557416488714,
+        1.9890485835038256
+       ]
+      },
+      "wetside:gt1km": {
+       "coef": -0.2628869301664091,
+       "se": 0.3706832759291242,
+       "odds_ratio": 0.7688288237438496,
+       "ci95_odds_ratio": [
+        0.3717899811315657,
+        1.5898700616415453
+       ]
+      },
+      "logit_M1": {
+       "coef": 1.0037633504793713,
+       "se": 0.11326479754856734,
+       "odds_ratio": 2.7285309491014273,
+       "ci95_odds_ratio": [
+        2.1853245375388837,
+        3.406762250786226
+       ]
+      }
+     },
+     "n_groups": 42
+    },
+    "wetside_raw": {
+     "terms": {
+      "band_500m_1km": {
+       "coef": 0.3694131111658093,
+       "se": 0.04213888671148926,
+       "odds_ratio": 1.4468852046621108,
+       "ci95_odds_ratio": [
+        1.3321855886239047,
+        1.5714603230564874
+       ]
+      },
+      "band_gt1km": {
+       "coef": 0.6922916538125271,
+       "se": 0.11049464201568225,
+       "odds_ratio": 1.9982896782224964,
+       "ci95_odds_ratio": [
+        1.6091758531186284,
+        2.4814948784818687
+       ]
+      },
+      "wetside:le500m": {
+       "coef": -0.3003889725354094,
+       "se": 0.19745603245513343,
+       "odds_ratio": 0.7405301187756387,
+       "ci95_odds_ratio": [
+        0.5028804575130944,
+        1.0904875077584066
+       ]
+      },
+      "wetside:500m_1km": {
+       "coef": -0.1339430770148822,
+       "se": 0.3208241112621581,
+       "odds_ratio": 0.8746398502975273,
+       "ci95_odds_ratio": [
+        0.46637822375935395,
+        1.6402885657097277
+       ]
+      },
+      "wetside:gt1km": {
+       "coef": -0.2274781988904519,
+       "se": 0.34473687799643116,
+       "odds_ratio": 0.7965397867593508,
+       "ci95_odds_ratio": [
+        0.40528592238585454,
+        1.5655012840208553
+       ]
+      }
+     },
+     "n_groups": 42
+    },
+    "categories_adjusted_M1": {
+     "terms": {
+      "band_500m_1km": {
+       "coef": 0.06707472958227106,
+       "se": 0.03937407966534466,
+       "odds_ratio": 1.0693753891648288,
+       "ci95_odds_ratio": [
+        0.9899523517454614,
+        1.1551704695030258
+       ]
+      },
+      "band_gt1km": {
+       "coef": 0.336173248910714,
+       "se": 0.09149261625120747,
+       "odds_ratio": 1.3995814797746213,
+       "ci95_odds_ratio": [
+        1.1698174617718435,
+        1.6744734820090763
+       ]
+      },
+      "water:le500m": {
+       "coef": -0.47293422290623666,
+       "se": 0.3092971010827751,
+       "odds_ratio": 0.6231710602108315,
+       "ci95_odds_ratio": [
+        0.3398820813697438,
+        1.1425791224981647
+       ]
+      },
+      "water:500m_1km": {
+       "coef": -0.7230525117503065,
+       "se": 0.19580561643919117,
+       "odds_ratio": 0.4852687044103906,
+       "ci95_odds_ratio": [
+        0.3306048180752332,
+        0.7122876092705684
+       ]
+      },
+      "water:gt1km": {
+       "coef": -1.1435011411444174,
+       "se": 0.48755611217174644,
+       "odds_ratio": 0.3187012481637227,
+       "ci95_odds_ratio": [
+        0.12256532559145215,
+        0.8287048974983376
+       ]
+      },
+      "wet:le500m": {
+       "coef": 0.306117031635636,
+       "se": 0.33629710163020154,
+       "odds_ratio": 1.3581412427384925,
+       "ci95_odds_ratio": [
+        0.7025594271392526,
+        2.625468485617023
+       ]
+      },
+      "wet:500m_1km": {
+       "coef": 0.46921862237202094,
+       "se": 0.5743263451345239,
+       "odds_ratio": 1.5987444818617156,
+       "ci95_odds_ratio": [
+        0.5186837045346123,
+        4.927827683687568
+       ]
+      },
+      "wet:gt1km": {
+       "coef": -0.04798783487899916,
+       "se": 0.4137567657457977,
+       "odds_ratio": 0.9531453821358821,
+       "ci95_odds_ratio": [
+        0.4236061716911417,
+        2.1446479777668324
+       ]
+      },
+      "riverine:le500m": {
+       "coef": -0.5024509638012111,
+       "se": 0.991136028623495,
+       "odds_ratio": 0.6050458953165231,
+       "ci95_odds_ratio": [
+        0.08671940695755523,
+        4.221437257043869
+       ]
+      },
+      "riverine:500m_1km": {
+       "coef": 0.9636262685973149,
+       "se": 0.7107449367165289,
+       "odds_ratio": 2.6211843787800135,
+       "ci95_odds_ratio": [
+        0.6508775124682595,
+        10.555914770362286
+       ]
+      },
+      "riverine:gt1km": {
+       "coef": 0.35392104621933235,
+       "se": 0.5860254853763033,
+       "odds_ratio": 1.4246427011120208,
+       "ci95_odds_ratio": [
+        0.45172174138777144,
+        4.49304658127907
+       ]
+      },
+      "crossing:le500m": {
+       "coef": 0.08022815582869931,
+       "se": 0.7435131187618124,
+       "odds_ratio": 1.0835342541310462,
+       "ci95_odds_ratio": [
+        0.25231989877502853,
+        4.653007890281839
+       ]
+      },
+      "crossing:500m_1km": {
+       "coef": 0.2630462710042873,
+       "se": 0.9153504944482685,
+       "odds_ratio": 1.3008869109029741,
+       "ci95_odds_ratio": [
+        0.2163104362744367,
+        7.823509508397572
+       ]
+      },
+      "crossing:gt1km": {
+       "coef": -1.0281179867405192,
+       "se": 0.6673128427948296,
+       "odds_ratio": 0.35767948505415914,
+       "ci95_odds_ratio": [
+        0.09670877281928532,
+        1.322885300878269
+       ]
+      },
+      "low:le500m": {
+       "coef": 0.7661932097637341,
+       "se": 0.9083789269212659,
+       "odds_ratio": 2.1515601061487897,
+       "ci95_odds_ratio": [
+        0.36268177322023754,
+        12.763836597765598
+       ]
+      },
+      "low:500m_1km": {
+       "coef": 0.48526037390264287,
+       "se": 0.36946703767626893,
+       "odds_ratio": 1.6245979566897584,
+       "ci95_odds_ratio": [
+        0.7874975495711724,
+        3.3515260108653853
+       ]
+      },
+      "low:gt1km": {
+       "coef": 0.6592821579356394,
+       "se": 0.23313863355954853,
+       "odds_ratio": 1.9334039574559008,
+       "ci95_odds_ratio": [
+        1.2242524785684175,
+        3.053333301866979
+       ]
+      },
+      "high:le500m": {
+       "coef": 0.6717866116625896,
+       "se": 0.23178954764504975,
+       "odds_ratio": 1.9577319046271588,
+       "ci95_odds_ratio": [
+        1.2429394496617436,
+        3.083588835673473
+       ]
+      },
+      "high:500m_1km": {
+       "coef": 0.27373755173953646,
+       "se": 0.22269716871562825,
+       "odds_ratio": 1.3148696716931778,
+       "ci95_odds_ratio": [
+        0.8498045484462821,
+        2.0344469286490425
+       ]
+      },
+      "high:gt1km": {
+       "coef": -0.059431762275713916,
+       "se": 0.21801568760149245,
+       "odds_ratio": 0.9422998317935404,
+       "ci95_odds_ratio": [
+        0.6146252724481998,
+        1.4446672026050942
+       ]
+      },
+      "logit_M1": {
+       "coef": 1.0059331376637748,
+       "se": 0.11321375206150325,
+       "odds_ratio": 2.734457708164713,
+       "ci95_odds_ratio": [
+        2.1902905004161854,
+        3.413820658182388
+       ]
+      }
+     },
+     "n_groups": 42
+    },
+    "wetside_allcells_adjusted_M1": {
+     "terms": {
+      "wetside:all": {
+       "coef": -0.20451896931764815,
+       "se": 0.29120327200223933,
+       "odds_ratio": 0.8150392810318504,
+       "ci95_odds_ratio": [
+        0.46057600758100714,
+        1.4423005512463194
+       ]
+      },
+      "logit_M1": {
+       "coef": 1.0129173504699882,
+       "se": 0.11250311500346741,
+       "odds_ratio": 2.753622590612886,
+       "ci95_odds_ratio": [
+        2.2087157655490413,
+        3.4329620360403346
+       ]
+      }
+     },
+     "n_groups": 42
+    },
+    "categories_allcells_adjusted_M1": {
+     "terms": {
+      "water:all": {
+       "coef": -0.8506860996012361,
+       "se": 0.2655151240665308,
+       "odds_ratio": 0.42712178331043577,
+       "ci95_odds_ratio": [
+        0.25382867617998833,
+        0.7187250098130153
+       ]
+      },
+      "wet:all": {
+       "coef": 0.20972613498100018,
+       "se": 0.3353501598879352,
+       "odds_ratio": 1.2333402449513813,
+       "ci95_odds_ratio": [
+        0.6391857499176011,
+        2.379790475636895
+       ]
+      },
+      "riverine:all": {
+       "coef": 0.4417176896575814,
+       "se": 0.6081441800826225,
+       "odds_ratio": 1.5553765795524315,
+       "ci95_odds_ratio": [
+        0.47225088277593635,
+        5.122693027062124
+       ]
+      },
+      "crossing:all": {
+       "coef": -0.3079988788594871,
+       "se": 0.6646207688885263,
+       "odds_ratio": 0.7349161419528671,
+       "ci95_odds_ratio": [
+        0.19975661352331833,
+        2.703799019099003
+       ]
+      },
+      "low:all": {
+       "coef": 0.6374998101800352,
+       "se": 0.23394930222214164,
+       "odds_ratio": 1.8917452395827208,
+       "ci95_odds_ratio": [
+        1.1959719209958688,
+        2.9922943746906308
+       ]
+      },
+      "high:all": {
+       "coef": 0.05737206452085259,
+       "se": 0.21867938616413668,
+       "odds_ratio": 1.059049771947356,
+       "ci95_odds_ratio": [
+        0.689878673498688,
+        1.6257734331366887
+       ]
+      },
+      "logit_M1": {
+       "coef": 1.0152082473308006,
+       "se": 0.11267488137170763,
+       "odds_ratio": 2.759938087275236,
+       "ci95_odds_ratio": [
+        2.2130363350436912,
+        3.441994207222134
+       ]
+      }
+     },
+     "n_groups": 42
+    }
+   },
+   "C1_gfm": {
+    "n_cells": 92089,
+    "n_units": 42,
+    "wet_rate": 0.09301871016082268,
+    "brier": {
+     "M0": 0.10394477508338584,
+     "M1": 0.07002958526698311,
+     "M1c": 0.07297939313953823,
+     "M3n": 0.0728205055936062,
+     "M3np": 0.07304353121037076
+    },
+    "delta_bs_names": 0.00015888754593203214,
+    "ci95_delta": [
+     -5.514358345452986e-05,
+     0.0005402787160093969
+    ],
+    "ci90_delta": [
+     -3.513246705569295e-05,
+     0.0004494246295750073
+    ],
+    "yardstick_M0_M1": 0.033915189816402735,
+    "ci95_yardstick": [
+     0.0023738459998254077,
+     0.07434460286320783
+    ],
+    "real_minus_permuted_delta_bs": 0.0002230256167645578,
+    "ci95_real_minus_permuted": [
+     -1.3960048085138663e-05,
+     0.0005354921172025321
+    ],
+    "R": 0.004684849083615855,
+    "ci95_R": [
+     -0.0016259258389248416,
+     0.015930287252825477
+    ],
+    "ci90_R": [
+     -0.0010358918008679843,
+     0.013251426042665037
+    ],
+    "margin_delta_bs": 0.001695759490820137,
+    "equivalent_TOST": true,
+    "decision": {
+     "label": "equivalent-null",
+     "positive": false,
+     "equivalent": true,
+     "placebo_ok": false
+    }
+   },
+   "C1_ems": {
+    "n_cells": 92089,
+    "n_units": 42,
+    "wet_rate": 0.16168054816536176,
+    "brier": {
+     "M0": 0.13528579618772454,
+     "M1": 0.10779115285311866,
+     "M1c": 0.09782937526154756,
+     "M3n": 0.09770127085197507,
+     "M3np": 0.09793213504371252
+    },
+    "delta_bs_names": 0.00012810440957249092,
+    "ci95_delta": [
+     -0.0001209910910987426,
+     0.0004841733878198092
+    ],
+    "ci90_delta": [
+     -9.070249914704467e-05,
+     0.00040658625809399313
+    ],
+    "yardstick_M0_M1": 0.027494643334605884,
+    "ci95_yardstick": [
+     -9.54951375892397e-05,
+     0.07149708234234467
+    ],
+    "real_minus_permuted_delta_bs": 0.00023086419173745654,
+    "ci95_real_minus_permuted": [
+     -0.0002602576316066304,
+     0.0007252364991363865
+    ],
+    "R": 0.00465924973142872,
+    "ci95_R": [
+     -0.00440053321028021,
+     0.017609735173775058
+    ],
+    "ci90_R": [
+     -0.003298915284814144,
+     0.014787835330173096
+    ],
+    "margin_delta_bs": 0.0013747321667302943,
+    "equivalent_TOST": true,
+    "decision": {
+     "label": "undefined-denominator",
+     "positive": false,
+     "equivalent": true,
+     "placebo_ok": false
+    }
+   },
+   "A0": {
+    "n_cells": 92089,
+    "n_aoi": 68,
+    "n_units": 42,
+    "rate_ems": 0.16168054816536176,
+    "rate_gfm": 0.09301871016082268,
+    "agreement": 0.905428444222437,
+    "kappa": 0.578972076762814,
+    "p_gfm1_given_ems0": 0.015453367875647668,
+    "p_ems1_given_gfm0": 0.08998718915747758,
+    "p_gfm1_given_ems1": 0.49519779703136546
+   }
+  },
+  "designated_c2": null,
+  "refit_diagnosis": {
+   "n_cells_refit": 234703,
+   "n_matched": 234703,
+   "labels_equal": true,
+   "p_M0": {
+    "brier": 0.08511672100983032,
+    "between_aoi": 0.01638965019166028,
+    "within_aoi": 0.06872707081817005,
+    "auc_within_median": 0.5,
+    "auc_within_q25_q75": [
+     0.460052858056468,
+     0.5606279937440009
+    ],
+    "n_aoi_auc": 182
+   },
+   "p_M1": {
+    "brier": 0.08577302490105891,
+    "between_aoi": 0.01870748587457659,
+    "within_aoi": 0.06706553902648232,
+    "auc_within_median": 0.8596600163434902,
+    "auc_within_q25_q75": [
+     0.7846361788832652,
+     0.9212285623110548
+    ],
+    "n_aoi_auc": 182
+   },
+   "p_M1s": {
+    "brier": 0.07783011571698059,
+    "between_aoi": 0.01338118721815314,
+    "within_aoi": 0.06444892849882745,
+    "auc_within_median": 0.8596600163434902,
+    "auc_within_q25_q75": [
+     0.7846361788832652,
+     0.9212285623110548
+    ],
+    "n_aoi_auc": 182
+   },
+   "p_M1c": {
+    "brier": 0.11553030433952684,
+    "between_aoi": 0.05142761545069886,
+    "within_aoi": 0.06410268888882797,
+    "auc_within_median": 0.8596600163434902,
+    "auc_within_q25_q75": [
+     0.7846361788832652,
+     0.9212285623110548
+    ],
+    "n_aoi_auc": 182
+   },
+   "p_EMS_M1": {
+    "brier": 0.07477301887359149,
+    "between_aoi": 0.010466125957187628,
+    "within_aoi": 0.06430689291640386,
+    "auc_within_median": 0.8394374330953365,
+    "auc_within_q25_q75": [
+     0.7659527548049858,
+     0.9078902225978862
+    ],
+    "n_aoi_auc": 182
+   },
+   "aoi_flooded_share": {
+    "gfm_quantiles": [
+     0.0043506493506493505,
+     0.017643354571047563,
+     0.04672212418076489,
+     0.10399159663865545,
+     0.21285591026747197
+    ],
+    "ems_quantiles": [
+     0.006610342133169616,
+     0.024017836983517723,
+     0.052915635271679584,
+     0.11050904624208048,
+     0.28670941930929
+    ],
+    "gfm_sd": 0.11680815819852522,
+    "ems_sd": 0.16057771957823844,
+    "n_aoi": 192
+   },
+   "rule": "learned the terrain ordering within AOIs; the AOI-level flooded share did not transfer",
+   "auc_difference_refit_minus_ems": 0.020222583248153736
+  }
+ },
+ "B6": {
+  "main": {
+   "odds_ratio": 1.0091652594745366,
+   "ci95": [
+    0.7721129381770176,
+    1.3189968339797762
+   ],
+   "n_cells": 1489381,
+   "n_aoi": 479,
+   "n_units": 194,
+   "n_group_cells": 10048,
+   "n_group_flooded": 361.0,
+   "n_group_units": 134,
+   "pairs_ci95": [
+    0.7730151556392948,
+    1.314934994410272
+   ],
+   "pairs_reps_ok": 2000
+  },
+  "typed_aois": {
+   "odds_ratio": 0.9961000769795715,
+   "ci95": [
+    0.7661183318517234,
+    1.295120247234528
+   ],
+   "n_cells": 1002686,
+   "n_aoi": 331,
+   "n_units": 147,
+   "n_group_cells": 5848,
+   "n_group_flooded": 214.0,
+   "n_group_units": 91,
+   "pairs_ci95": [
+    0.7727806531162279,
+    1.2985814903413158
+   ],
+   "pairs_reps_ok": 2000
+  },
+  "without_no_hydro": {
+   "odds_ratio": 0.853001328558005,
+   "ci95": [
+    0.6361900548195778,
+    1.143701101596237
+   ],
+   "n_cells": 866469,
+   "n_aoi": 269,
+   "n_units": 131,
+   "n_group_cells": 4813,
+   "n_group_flooded": 183.0,
+   "n_group_units": 84,
+   "pairs_ci95": [
+    0.6222242820464625,
+    1.1928275510008806
+   ],
+   "pairs_reps_ok": 2000,
+   "n_aoi_dropped": 215
+  },
+  "without_oceania_americas": {
+   "odds_ratio": 0.9641550282663568,
+   "ci95": [
+    0.7115563818309546,
+    1.306424820671687
+   ],
+   "n_cells": 1147104,
+   "n_aoi": 402,
+   "n_units": 147,
+   "n_group_cells": 8748,
+   "n_group_flooded": 303.0,
+   "n_group_units": 107,
+   "pairs_ci95": [
+    0.713980593135799,
+    1.2937116072564374
+   ],
+   "pairs_reps_ok": 2000
+  },
+  "without_australia": {
+   "odds_ratio": 0.9961849984673299,
+   "ci95": [
+    0.7503599358319102,
+    1.3225446932625948
+   ],
+   "n_cells": 1343537,
+   "n_aoi": 436,
+   "n_units": 172,
+   "n_group_cells": 9320,
+   "n_group_flooded": 322.0,
+   "n_group_units": 124,
+   "pairs_ci95": [
+    0.7350330002245713,
+    1.3025572013835633
+   ],
+   "pairs_reps_ok": 2000
+  },
+  "cleaned_reading": {
+   "odds_ratio": 1.0434152693515604,
+   "ci95": [
+    0.7744529644218594,
+    1.4057863735194447
+   ],
+   "n_cells": 1489381,
+   "n_aoi": 479,
+   "n_units": 194,
+   "n_group_cells": 9362,
+   "n_group_flooded": 271.0,
+   "n_group_units": 140,
+   "pairs_ci95": [
+    0.7622897508602353,
+    1.3781527642254923
+   ],
+   "pairs_reps_ok": 2000,
+   "share_cells_changed": 0.005574181120090004
+  },
+  "uncapped": {
+   "odds_ratio": 0.9113007324714353,
+   "ci95": [
+    0.7540892173153262,
+    1.1012874948133753
+   ],
+   "n_cells": 19265843,
+   "n_aoi": 500,
+   "n_units": 195,
+   "n_group_cells": 105137,
+   "n_group_flooded": 3749.0,
+   "n_group_units": 137,
+   "pairs_ci95": [
+    0.763488120877704,
+    1.1509667872663727
+   ],
+   "pairs_reps_ok": 2000,
+   "note": "frozen-code readings of the uncapped run"
+  },
+  "misclassification_corrected": {
+   "p1": {
+    "k": 82,
+    "n": 108,
+    "rate": 0.7592592592592593,
+    "ci95": [
+     0.670618917901196,
+     0.830089226474421
+    ]
+   },
+   "p0": {
+    "k": 44,
+    "n": 245,
+    "rate": 0.17959183673469387,
+    "ci95": [
+     0.13658964915158467,
+     0.2324869039649361
+    ]
+   },
+   "point_at_rates": 1.0011530898124945,
+   "median": 0.9996311514799398,
+   "ci95": [
+    0.6269525329325663,
+    1.6271167811173441
+   ],
+   "share_undefined": 0.0,
+   "draws": 20000,
+   "note": "p1 and p0 come from the codes of the model that compiled the lexicon"
+  },
+  "class_adjusted": {
+   "water": {
+    "odds_ratio": 0.7709755631236694,
+    "ci95": [
+     0.5669249520380985,
+     1.0484691435735467
+    ],
+    "bonferroni_ci95": [
+     0.5097095158666345,
+     1.166160921918877
+    ],
+    "p": 0.09726840325207749,
+    "p_holm": 0.583610419512465
+   },
+   "wet": {
+    "odds_ratio": 1.596993624591694,
+    "ci95": [
+     0.7097024438599019,
+     3.593602726116543
+    ],
+    "bonferroni_ci95": [
+     0.5360290401814803,
+     4.757929973575771
+    ],
+    "p": 0.2579288846664468,
+    "p_holm": 0.9424501218748218
+   },
+   "riverine": {
+    "odds_ratio": 1.4110828001371951,
+    "ci95": [
+     0.9218086045808427,
+     2.160052161531329
+    ],
+    "bonferroni_ci95": [
+     0.795521860735026,
+     2.502954057105723
+    ],
+    "p": 0.11291991116537572,
+    "p_holm": 0.583610419512465
+   },
+   "crossing": {
+    "odds_ratio": 0.7652972746297272,
+    "ci95": [
+     0.46311053752423226,
+     1.2646654979752914
+    ],
+    "bonferroni_ci95": [
+     0.3892203082283343,
+     1.5047516950531308
+    ],
+    "p": 0.2965936373993835,
+    "p_holm": 0.9424501218748218
+   },
+   "low": {
+    "odds_ratio": 0.8675473953477989,
+    "ci95": [
+     0.503171169650937,
+     1.4957901576453103
+    ],
+    "bonferroni_ci95": [
+     0.4167237058715414,
+     1.8060851172377443
+    ],
+    "p": 0.6091905689446413,
+    "p_holm": 0.9424501218748218
+   },
+   "high": {
+    "odds_ratio": 1.2146849041815881,
+    "ci95": [
+     0.8808070372006329,
+     1.6751221937734693
+    ],
+    "bonferroni_ci95": [
+     0.7880942871577313,
+     1.8721864128312502
+    ],
+    "p": 0.23561253046870545,
+    "p_holm": 0.9424501218748218
+   }
+  },
+  "fractional_all_bands": {
+   "le500m": {
+    "coef": -0.01879299438021086,
+    "se": 0.10640460158940969,
+    "odds_ratio": 0.9813824929086807,
+    "ci95_odds_ratio": [
+     0.7966450846449632,
+     1.2089594424810663
+    ]
+   },
+   "500m_1km": {
+    "coef": 0.04745028894031676,
+    "se": 0.09958331536957188,
+    "odds_ratio": 1.048594073103075,
+    "ci95_odds_ratio": [
+     0.8626614068706765,
+     1.2746015080650672
+    ]
+   },
+   "gt1km": {
+    "coef": 0.009692921189081601,
+    "se": 0.09913192709484961,
+    "odds_ratio": 1.009740049697568,
+    "ci95_odds_ratio": [
+     0.8314320895388337,
+     1.2262877278753694
+    ]
+   }
+  },
+  "rule": {
+   "uncapped_excludes_one": false,
+   "typed_and_cleaned_same_direction": false,
+   "conclusion_changes": false
+  }
+ }
+}
