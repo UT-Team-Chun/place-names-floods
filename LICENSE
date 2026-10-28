@@ -20,8 +20,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-NOTE ON DATA: this license covers the analysis code and versioned run
-provenance JSONs in this repository only. The place-name corpus lives in the
-separate application repository under CC BY 4.0 (record-level rights);
-third-party geospatial inputs (GSI, KSJ, census) are redistributable only
-under their own terms — see docs/data/data_manifest.md.
+NOTE ON DATA: this license covers the analysis code, the frozen protocol and
+lexicon, and the versioned run provenance and verification JSONs in this
+repository. The input data are not redistributed here and remain under their
+providers' terms: Copernicus EMS rapid-mapping products, the GeoNames gazetteer
+(CC BY 4.0), Copernicus GLO-30, ASF GLO-30 HAND, HydroRIVERS, ESA CCI / C3S
+land cover, JRC Global Surface Water, Global Flood Monitoring (GFM), FABDEM
+(CC BY-NC-SA 4.0) and Wikipedia / Wikidata. See PROVENANCE.md and the code and
+data availability statement of the article.

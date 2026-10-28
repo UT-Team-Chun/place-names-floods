@@ -1,0 +1,81 @@
+{
+ "rule": "descriptive (editor, fifth round of LLM-agent critiques, item 7)",
+ "runs": {
+  "frozen": "world_v2",
+  "corrected": "world_v2_lexfix"
+ },
+ "frozen": {
+  "delta_bs_T0": -4.970857107947582e-05,
+  "ci95_delta_bs_T0": [
+   -0.0001288579074993878,
+   8.715714077904561e-06
+  ],
+  "ci95_R_T0": [
+   -0.017059061468955396,
+   0.0011538438353231849
+  ],
+  "yardstick": 0.0075536340456881165,
+  "spread": 3.584062269961487e-05,
+  "n_units": 195
+ },
+ "corrected": {
+  "delta_bs_T0": -5.750771860578131e-05,
+  "ci95_delta_bs_T0": [
+   -0.00017890748963530212,
+   1.8247080863621934e-05
+  ],
+  "ci95_R_T0": [
+   -0.023684955950100454,
+   0.0024156691670862737
+  ],
+  "yardstick": 0.0075536340456881165,
+  "spread": 5.3099852444732865e-05,
+  "n_units": 195
+ },
+ "top_units": [
+  {
+   "unit": "g00024",
+   "aoi": "EMSR097_AOI01",
+   "country": "BD",
+   "contrib_frozen": -1.3060455773123876e-05,
+   "contrib_corrected": 1.110812592427452e-05,
+   "change": 2.41685816973984e-05
+  },
+  {
+   "unit": "g00175",
+   "aoi": "EMSR838_AOI05",
+   "country": "PK",
+   "contrib_frozen": -3.0438985363821457e-05,
+   "contrib_corrected": -5.0514550184244664e-05,
+   "change": -2.0075564820423203e-05
+  },
+  {
+   "unit": "g00047",
+   "aoi": "EMSR199_AOI10",
+   "country": "PE",
+   "contrib_frozen": -4.3661901918459135e-06,
+   "contrib_corrected": -7.221809820553712e-07,
+   "change": 3.6440092097905426e-06
+  },
+  {
+   "unit": "g00020",
+   "aoi": "EMSR086_AOI04",
+   "country": "RS",
+   "contrib_frozen": -2.9701945217889005e-06,
+   "contrib_corrected": 6.502430148123861e-07,
+   "change": 3.6204375366012866e-06
+  },
+  {
+   "unit": "g00102",
+   "aoi": "EMSR466_AOI01",
+   "country": "NE",
+   "contrib_frozen": 2.2183290954646545e-06,
+   "contrib_corrected": -1.2268896967343654e-06,
+   "change": -3.44521879219902e-06
+  }
+ ],
+ "spread_without_top2": {
+  "frozen": 1.394037716697694e-05,
+  "corrected": 1.2084837911471061e-05
+ }
+}

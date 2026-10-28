@@ -2157,18 +2157,19 @@ def si_sensitivity(runs: Path) -> str:
             continue
         rows.append(f"{name} & {_n(met['n_cells'])} & {met['n_units']} & "
                     f"{sci(blk['delta_bs_M0_M1'], 2)} & {_r(blk['R'])} & {_ci(blk['ci90_R'])} & "
-                    f"{blk['decision']} & {_tost(blk)} \\\\")
+                    f"{_ci(blk.get('ci95_R'))} & {blk['decision']} & {_tost(blk)} \\\\")
         first = _json(runs / "world_v2_s6_buffer" / "metrics_primary.json") if tag == "s6_buffer_b1" else None
         if first and first.get("primary"):
             b = first["primary"]
             rows.append(f"\\quad as first run, folds by 5\\,km places$^{{a}}$ & {_n(first['n_cells'])} & "
                         f"{first['n_units']} & {sci(b['delta_bs_M0_M1'], 2)} & {_r(b['R'])} & "
-                        f"{_ci(b['ci90_R'])} & {b['decision']} & {_tost(b)} \\\\")
-    return _table("p{4.0cm}rrcrclc", "Sensitivity analysis & Cells & Places & Terrain $\\Delta$BS "
-                  "& $R$ & 90\\% interval & Verdict & TOST", rows,
+                        f"{_ci(b['ci90_R'])} & {_ci(b.get('ci95_R'))} & {b['decision']} & {_tost(b)} \\\\")
+    return _table("p{4.0cm}rrcrcclc", "Sensitivity analysis & Cells & Places & Terrain $\\Delta$BS "
+                  "& $R$ & 90\\% interval & 95\\% interval & Verdict & TOST", rows,
                   "Pre-specified sensitivity analyses (protocol section 7), each re-running the "
                   "arms of the primary verdict on the primary split and applying the same decision "
-                  "table. $^{a}$The first run of this analysis drew cells by 10\\,km places but, "
+                  "table (equivalence on the 90\\% interval; \\emph{negative} and the positive labels on "
+                  "the 95\\% interval). $^{a}$The first run of this analysis drew cells by 10\\,km places but, "
                   "through an implementation defect, assigned folds and bootstrap units by the "
                   "5\\,km places of the primary analysis; it was corrected and re-run after the "
                   "first result was seen (amendment B-1), and both runs are shown.",

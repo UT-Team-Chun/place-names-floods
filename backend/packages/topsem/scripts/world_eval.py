@@ -62,6 +62,7 @@ from topsem.world.b7 import (
     recurrence,
     unit_sse,
 )
+from topsem.world.b9 import gsw_perm_mask, settlement_weights
 from topsem.world.channels import (
     INNER_FOLDS,
     NREAD_FEATURES,
@@ -865,15 +866,53 @@ def reassign_settlements(df: pd.DataFrame, dirs: list[Path], infos: dict, gn_f: 
     df["lP_d1"] = np.log1p(np.minimum(df["P_d1"], 1e6)).astype(np.float32)
 
 
+GSW_CELL_TABLE = ROOT / "gsw" / "cell_gsw.parquet"  # v58（B-8 の C4）のセルごとの GSW
+TABLE_SEED = 20261025  # 凍結した上限の中の抽出の種
+FABDEM_TERRAIN = ("elev_1km", "elev_mean", "depress", "elev_min", "elev_std", "slope_mean")
+
+
+def no_hydro(d: Path) -> bool:
+    """製品に水系の層（永久水域）が無い AOI か（B-6 の 6(c)）。"""
+    return not (json.loads((d / "meta.json").read_text(encoding="utf-8")).get("layers") or {}).get("hydro")
+
+
+def swap_fabdem_terrain(df: pd.DataFrame) -> dict:
+    """B-9 の C7: 標高の特徴を FABDEM の値に、hand_mean・hand_min を集水 100・1000 km² 以上の河道からの高さに置き換える。
+
+    セルは (aoi, ix, iy) で features_fabdem.parquet（cells.parquet と同じ行の順）と結ぶ。FABDEM の無いセルは NaN
+    （勾配ブースティングは欠測をそのまま扱う）。
+    """
+    cols = [*FABDEM_TERRAIN, "h_above_100", "h_above_1000"]
+    parts = []
+    for aoi in df["aoi"].unique():
+        d = ROOT / "labels" / aoi
+        cells = pq.read_table(d / "cells.parquet", columns=["ix", "iy"]).to_pandas()
+        fe = pq.read_table(d / "features_fabdem.parquet", columns=cols).to_pandas()
+        fe["aoi"], fe["ix"], fe["iy"] = aoi, cells["ix"].to_numpy(), cells["iy"].to_numpy()
+        parts.append(fe)
+    fe = pd.concat(parts, ignore_index=True)
+    m = df[["aoi", "ix", "iy"]].merge(fe, on=["aoi", "ix", "iy"], how="left")
+    for c in FABDEM_TERRAIN:
+        df[c] = m[c].to_numpy(np.float32)
+    df["hand_mean"] = m["h_above_100"].to_numpy(np.float32)
+    df["hand_min"] = m["h_above_1000"].to_numpy(np.float32)
+    return {"share_elev_valid": float(np.isfinite(df["elev_mean"].to_numpy(np.float64)).mean()),
+            "share_h100_valid": float(np.isfinite(df["hand_mean"].to_numpy(np.float64)).mean()),
+            "replaced": [*FABDEM_TERRAIN, "hand_mean <- h_above_100", "hand_min <- h_above_1000"]}
+
+
 def run_plasmode(df: pd.DataFrame, fold: int, seeds: list[int], reps: int,  # noqa: PLR0913
                  pi: tuple[float, float], *, rep_first: int = 0,
-                 forms: tuple[str, ...] = PLASMODE_FORMS) -> dict:
+                 forms: tuple[str, ...] = PLASMODE_FORMS,
+                 deltas: tuple[float, ...] = PLASMODE_DELTAS) -> dict:
     """2: 実データのラベルに名前の効果を注入し、二段目（M1c・M3n）だけを当て直す。
 
     基礎モデルは 1 回だけ当て（cross-fit の M1 の logit を固定）、注入は訓練側と評価側の両方に。N-learn は注入後の
     訓練側のラベルで当て直し、その AOI 平均（地域構成の c_nlearn）も作り直す。形 A: 水系側の名の最寄りの全セル、
     B: そのうち 500 m 以内、CA・CB: 読み違いを入れた潜在の印 L の集落について同じ。
     B-8 の C1: 回を rep_first から数える（回の塩は回の番号で決まるので、範囲に分けて回しても同じ値）。
+    B-9: δ の列を変えられる（C1 の低い δ、C2 の δ < 0 は浸水を減らす向き）。形 AH（C3）は形 A の対象に、集落ごとの
+    重み w_s（指数分布、平均 1、回ごとに固定）を掛けた δ_s = δ w_s を注入する。
     """
     r = run_fold(df, fold, [], seeds, ["M1c", "M3n"], keep_state=True)
     tr, te, z = r["tr"], r["te"], r["z"]["M1"]
@@ -887,18 +926,19 @@ def run_plasmode(df: pd.DataFrame, fold: int, seeds: list[int], reps: int,  # no
     gid = {"tr": tr["P_gid1"].to_numpy(np.int64), "te": te["P_gid1"].to_numpy(np.int64)}
     comp_other = [c for c in COMP if c != "c_nlearn"]
     lexf = [f for f in NAMES if f != "nlearn"]
-    shape = (len(forms), len(PLASMODE_DELTAS), reps)
+    shape = (len(forms), len(deltas), reps)
     sse_c, sse_n, flips = np.zeros(shape), np.zeros(shape), np.zeros(shape)
     for i, form in enumerate(forms):
-        for j, delta in enumerate(PLASMODE_DELTAS):
+        for j, delta in enumerate(deltas):
             for jr, rep in enumerate(range(rep_first, rep_first + reps)):
                 salt = plasmode_salt(form, delta, rep)
-                tgt = {}
+                tgt, dl = {}, {}
                 for side in ("tr", "te"):
                     t = latent_names(gid[side], wet[side], pi[0], pi[1], salt) if form.startswith("C") else wet[side]
                     tgt[side] = t & near[side] if form.endswith("B") else t
-                y_tr = inject_labels(y_tr0, p_tr, tgt["tr"], delta, hashed_uniform(k_tr, salt))
-                y_te = inject_labels(y_te0, p_te, tgt["te"], delta, hashed_uniform(k_te, salt))
+                    dl[side] = delta * settlement_weights(gid[side], rep) if form == "AH" else delta
+                y_tr = inject_labels(y_tr0, p_tr, tgt["tr"], dl["tr"], hashed_uniform(k_tr, salt))
+                y_te = inject_labels(y_te0, p_te, tgt["te"], dl["te"], hashed_uniform(k_te, salt))
                 oof, sc = nlearn_scores(tr["name_real"].to_numpy(), y_tr, groups_tr, te["name_real"].to_numpy())
                 c_tr = pd.Series(oof, index=tr.index).groupby(tr["aoi"]).transform("mean").to_numpy()
                 c_te = pd.Series(sc, index=te.index).groupby(te["aoi"]).transform("mean").to_numpy()
@@ -1031,6 +1071,12 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     ap.add_argument("--plasmode-reps", type=int, default=10)
     ap.add_argument("--plasmode-rep-first", type=int, default=0, help="B-8 の C1: 回を範囲に分けて回すときの最初の回")
     ap.add_argument("--plasmode-forms", default=",".join(PLASMODE_FORMS), help="B-8 追記 3: 回す形（既定は全て）")
+    ap.add_argument("--plasmode-deltas", default="", help="B-9 の C1〜C3: plasmode の δ（カンマ区切り、既定は B-6 の 7 点）")
+    ap.add_argument("--exclude-gsw-perm", type=float, default=0.0,
+                    help="B-9 の C5: セルの GSW の occurrence の平均（%%、v58 の表）がこの値以上のセルを除く（0 = 除かない）")
+    ap.add_argument("--table-seed", type=int, default=TABLE_SEED, help="B-9 の C6: 場所グループの上限の中の抽出の種")
+    ap.add_argument("--terrain", default="glo30", choices=["glo30", "fabdem"],
+                    help="B-9 の C7: fabdem なら標高の特徴を FABDEM から、HAND を河道からの高さに置き換える")
     ap.add_argument("--oracle-label", action="store_true", help="B-6 の 3(a): 事象のラベルの割合（500 m）")
     ap.add_argument("--gsw", default="", help="B-6 の 3(b): 集落ごとの JRC GSW の parquet")
     ap.add_argument("--strict-names", action="store_true", help="B-6 の 5: 厳密な読み（M1cS → M3nS）")
@@ -1070,16 +1116,30 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     print(f"AOIs included {len(dirs)} / reasons {reasons}", flush=True)
     b6: dict = {}
     if args.exclude_untyped or args.exclude_no_hydro:  # B-6 の 6(c)(d): AOI を除いて分割から作り直す
-        def _no_hydro(d: Path) -> bool:
-            return not (json.loads((d / "meta.json").read_text(encoding="utf-8")).get("layers") or {}).get("hydro")
         drop = [d.name for d in dirs if (args.exclude_untyped and infos[d.name].unspecified_as_riverine)
-                or (args.exclude_no_hydro and _no_hydro(d))]
+                or (args.exclude_no_hydro and no_hydro(d))]
         dirs = [d for d in dirs if d.name not in set(drop)]
         b6["excluded_aois"] = sorted(drop)
         print(f"B-6: excluded {len(drop)} AOIs → {len(dirs)}", flush=True)
     need_xy = (args.labels == "gfm" or args.plasmode or args.oracle_label or args.gn_filter or args.recurrence
-               or args.plasmode_refit or bool(args.gsw_cell))
-    df = build_table(dirs, seed=20261025, infos=infos, sens=sens, extra_cols=("ix", "iy") if need_xy else ())
+               or args.plasmode_refit or bool(args.gsw_cell) or args.terrain == "fabdem"
+               or args.exclude_gsw_perm > 0)
+    df = build_table(dirs, seed=args.table_seed, infos=infos, sens=sens, extra_cols=("ix", "iy") if need_xy else ())
+    if args.table_seed != TABLE_SEED:  # B-9 の C6
+        b6["table_seed"] = args.table_seed
+    if args.exclude_gsw_perm > 0:  # B-9 の C5: 全ての AOI で同じ永久水域の定義（場所グループの割当は変わらない）
+        gm = gsw_perm_mask(df, pd.read_parquet(GSW_CELL_TABLE), args.exclude_gsw_perm)
+        has_hydro = {a: not no_hydro(ROOT / "labels" / a) for a in df["aoi"].unique()}
+        hydro = df["aoi"].map(has_hydro).to_numpy(dtype=bool)
+        b6["gsw_perm"] = {"threshold": args.exclude_gsw_perm, "n_dropped": int(gm.sum()),
+                          "share_dropped": float(gm.mean()), "n_dropped_with_hydro": int((gm & hydro).sum()),
+                          "n_dropped_without_hydro": int((gm & ~hydro).sum()),
+                          "n_aoi_with_drop": int(df.loc[gm, "aoi"].nunique())}
+        df = df.loc[~gm].reset_index(drop=True)
+        print(f"B-9 C5: dropped {int(gm.sum()):,} permanent-water cells", flush=True)
+    if args.terrain == "fabdem":  # B-9 の C7
+        b6["fabdem"] = swap_fabdem_terrain(df)
+        print(f"B-9 C7: FABDEM terrain {b6['fabdem']}", flush=True)
     if args.exclude_partial:  # B-7 の 6(b): y = 0 で浸水被覆が 0.05 を超えるセルを除く（場所グループの割当は変わらない）
         pm = partial_mask(df["y"].to_numpy(), df["f_flood_any"].to_numpy())
         b6["partial"] = {"n_dropped": int(pm.sum()), "share_dropped": float(pm.mean())}
@@ -1183,7 +1243,10 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
             if not (df["fold"] == k).any():
                 continue
             forms = tuple(x for x in args.plasmode_forms.split(",") if x)
-            r = run_plasmode(df, k, seeds, args.plasmode_reps, pi, rep_first=args.plasmode_rep_first, forms=forms)
+            deltas = (tuple(float(x) for x in args.plasmode_deltas.split(",") if x) if args.plasmode_deltas
+                      else PLASMODE_DELTAS)
+            r = run_plasmode(df, k, seeds, args.plasmode_reps, pi, rep_first=args.plasmode_rep_first, forms=forms,
+                             deltas=deltas)
             te = r["te"]
             stem = f"fold{k}_plasmode" if args.plasmode_rep_first == 0 else \
                 f"fold{k}_plasmode_{args.plasmode_rep_first:03d}"
@@ -1191,11 +1254,11 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
             dst.parent.mkdir(parents=True, exist_ok=True)
             np.savez_compressed(dst, sse_c=r["sse_c"], sse_n=r["sse_n"], flips_te=r["flips_te"],
                                 base_c=r["base_c"], base_n=r["base_n"], n_te=len(te),
-                                deltas=np.array(PLASMODE_DELTAS), forms=np.array(forms))
+                                deltas=np.array(deltas), forms=np.array(forms))
             write_json(run.path("predictions") / args.split / f"{stem}.json",
                        {**common, "fold": k, "n_test": len(te), "reps": args.plasmode_reps,
                         "rep_first": args.plasmode_rep_first, "pi": pi,
-                        "deltas": list(PLASMODE_DELTAS), "forms": list(forms),
+                        "deltas": list(deltas), "forms": list(forms),
                         "local_m": PLASMODE_LOCAL_M, "rule": "amendment B-6 item 2"})
             print(f"fold {k}: plasmode ({time.time() - t0:.0f}s)", flush=True)
         return

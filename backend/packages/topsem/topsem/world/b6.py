@@ -107,19 +107,24 @@ def plasmode_salt(form: str, delta: float, rep: int) -> int:
     return zlib.crc32(f"B-6/plasmode/{form}/{delta:.4f}/{rep}".encode())
 
 
-def inject_labels(y: np.ndarray, p: np.ndarray, target: np.ndarray, delta: float,
+def inject_labels(y: np.ndarray, p: np.ndarray, target: np.ndarray, delta: float | np.ndarray,
                   u: np.ndarray) -> np.ndarray:
-    """対象のセルのうちラベル 0 のセルを確率 q = (p′ − p)/(1 − p) で 1 にする。
+    """対象のセルのラベルに、地形を条件にしたオッズを e^δ 倍にする効果を入れる。
 
-    p′ = p e^δ / (1 − p + p e^δ)。y が Bernoulli(p) なら、注入後は Bernoulli(p′)、つまり地形を
-    条件にしたオッズが e^δ 倍になる。
+    δ > 0 ならラベル 0 のセルを確率 q = (p′ − p)/(1 − p) で 1 に、δ < 0（B-9 の C2）なら
+    ラベル 1 のセルを確率 1 − p′/p で 0 にする。p′ = p e^δ / (1 − p + p e^δ)。
+    y が Bernoulli(p) なら、注入後は Bernoulli(p′)。δ はセルごとの配列でもよい
+    （B-9 の C3: 集落ごとに違う効果）。δ > 0 は B-6 の実装と同じ乱数・同じ式で、
+    同じラベルを返す。
     """
     p = np.clip(p.astype(np.float64), 1e-6, 1 - 1e-6)
-    e = np.exp(delta)
+    d = np.asarray(delta, dtype=np.float64)
+    e = np.exp(d)
     p2 = p * e / (1 - p + p * e)
     q = (p2 - p) / (1 - p)
-    flip = target & (y == 0) & (u < q)
-    return np.where(flip, 1, y).astype(np.int8)
+    up = target & (y == 0) & (d > 0) & (u < q)
+    down = target & (y == 1) & (d < 0) & (u < 1 - p2 / p)
+    return np.where(up, 1, np.where(down, 0, y)).astype(np.int8)
 
 
 def latent_names(gids: np.ndarray, wetside: np.ndarray, pi1: float, pi0: float,
