@@ -621,3 +621,54 @@ def test_b8_stage2_weighted_matches_confirmatory_stage2() -> None:
     a = ev.stage2(z[:350], z[350:], x[:350], x[350:], y[:350])
     b, _ = stage2_weighted(z[:350], z[350:], x[:350], x[350:], y[:350])
     np.testing.assert_allclose(a, b, atol=1e-6)
+
+
+def test_b13_recurrence_prior_only_and_jrc_stacks() -> None:
+    """B-13 の C1(b): 前の事象だけ。C1(c): JRC の腕は o_jrc_* が表に要る。"""
+    ev = _load("world_eval")
+
+    def meta(code: str, t: str) -> dict:
+        return {"activation": {"code": code, "event_time": t}}
+
+    metas = {"A_1": meta("A", "2021-06-01"), "B_1": meta("B", "2020-01-01"),
+             "C_1": meta("C", "2022-01-01"), "D_1": meta("D", "2021-05-20")}
+    box = dict.fromkeys(metas, (0.0, 1.0, 0.0, 1.0))
+    assert sorted(ev._other_events("A_1", metas, box)) == ["B_1", "C_1"]  # D は 30 日以内
+    assert ev._other_events("A_1", metas, box, prior_only=True) == ["B_1"]
+    assert not ev.b6_stack_available("M3oJ", ev.ORACLE_JC)
+    assert ev.b6_stack_available("M3oJ", ev.ORACLE_J)
+    assert ev.b6_stack_available("M3oJc", ev.ORACLE_JC)
+
+
+def test_b13_grouped_es_switch_uses_groups(monkeypatch: pytest.MonkeyPatch) -> None:
+    """B-13 の C3: 早期終了を場所グループで選ぶときも、予測の形は変わらない。"""
+    ev = _load("world_eval")
+    rng = np.random.default_rng(4)
+    n = 3000
+    tr = pd.DataFrame({"a": rng.normal(size=n), "b": rng.normal(size=n)})
+    tr["y"] = (tr["a"] + rng.normal(size=n) > 0).astype(int)
+    tr["unit"] = np.repeat(np.arange(30), n // 30).astype(str)
+    te = tr.iloc[:200].copy()
+    monkeypatch.setitem(ev.GROUPED_ES, "on", value=True)
+    monkeypatch.setitem(ev.GROUPED_ES, "log", [])
+    p = ev.fit_arm(tr, te, ["a", "b"], [1])
+    assert p.shape == (200,)
+    assert np.all((p > 0) & (p < 1))
+    assert len(ev.GROUPED_ES["log"]) == 1
+    assert ev.GROUPED_ES["log"][0]["n_val_groups"] == 3
+
+
+def test_b13_filter_event_year_keeps_cells_of_later_aois() -> None:
+    """B-13 の C1(a): 主の表の行のまま、事象の年で AOI を絞る。"""
+    ev = _load("world_eval")
+
+    class Info:
+        def __init__(self, t: str) -> None:
+            self.event_time = t
+
+    df = pd.DataFrame({"aoi": ["a", "a", "b", "c"], "x": [1, 2, 3, 4]})
+    infos = {"a": Info("2021-12-31"), "b": Info("2022-01-01"), "c": Info("2024-06-01T00:00:00")}
+    out, info = ev.filter_event_year(df, infos, 2022)
+    assert out["x"].tolist() == [3, 4]
+    assert info["n_aoi"] == 2
+    assert info["n_cells_before"] == 4

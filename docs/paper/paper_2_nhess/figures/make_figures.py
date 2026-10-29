@@ -395,7 +395,7 @@ def fig_design_nhess(n_blocks: str) -> None:
         size=7.0)
     ax.text(0.5, 14.2, "b", fontsize=10, weight="bold")
     ax.text(3.5, 14.2, "Terrain ladder (H3)", fontsize=8.4, weight="bold")
-    rungs = ["T0\nno elev.\nor HAND", "T1\n1 km", "T2\n250 m", "T3\n30 m\nstats", "T4 = M1\n+ HAND"]
+    rungs = ["T0\nno elev.\nor HAND", "T1\n1 km", "T2\n250 m", "T3\n30 m\nstats", "T4 (M1)\nT3 + HAND"]
     for k, r in enumerate(rungs):
         box(1 + k * 6.9, 1.5, 6.0, 9, r, size=6.6)
     ax.text(36.5, 14.2, "c", fontsize=10, weight="bold")
@@ -477,7 +477,7 @@ def _draw_rows(ax, rows: list, style: dict) -> None:
                 zorder=3)
         hi = max(r, *(c5[1:] if c5 else []), *(c9[1:] if c9 else []))
         if hi > XMAX_FIG4:  # 軸の外に出る区間は端に矢じりと、同じ行の軸の外に上限の値を（重ならないように）
-            txt = f"R {r:.2f}, to {hi:.2f}" if r > XMAX_FIG4 else f"to {hi:.2f}"
+            txt = f"R = {r:.2f}, upper limit {hi:.2f}" if r > XMAX_FIG4 else f"upper limit {hi:.2f}"
             ax.plot([XMAX_FIG4], [y], marker=">", ms=3.5, color=col, clip_on=False, zorder=4)
             ax.text(XMAX_FIG4 + 0.004, y, txt, fontsize=5.5, color=col, ha="left", va="center", clip_on=False)
     ax.set_yticks(ys)
@@ -656,7 +656,7 @@ def fig_names(v37: dict, v39: dict | None, v41: dict | None, v42: dict | None,
     ax.set_xticks(x)
     ax.set_xticklabels(["≤250 m", "250–500 m", "0.5–1 km", ">1 km"], fontsize=7)
     ax.set_xlabel("distance to the nearest settlement", fontsize=7)
-    ax.set_ylabel("water-side − other names\n(pct. points)", fontsize=7)
+    ax.set_ylabel("water-related − other names\n(pct. points)", fontsize=7)
     ax.legend(fontsize=6, frameon=False, loc="upper right")
     for a, lab in zip(axs, "ab", strict=True):
         a.tick_params(labelsize=6.5)
@@ -1032,7 +1032,7 @@ def fig_example(aois: list[str], t: pd.DataFrame) -> dict[str, str]:
     from matplotlib.lines import Line2D
     from matplotlib.patches import Patch
     handles = [Patch(color="#1f6fb4", label="flooded (GFM)"), Patch(color="0.82", label="not flooded (GFM)"),
-               Line2D([], [], marker="^", ls="", color="#e66101", label="settlement, water-side name"),
+               Line2D([], [], marker="^", ls="", color="#e66101", label="settlement, water-related name"),
                Line2D([], [], marker="^", ls="", color="k", mfc="white", label="other settlement")]
     fig.legend(handles=handles, loc="outside lower center", ncol=4, fontsize=7, frameon=False)
     fig.savefig(HERE / "fig_example.pdf", bbox_inches="tight", pad_inches=0.04)  # 枠の外の集落の印で題が欠けないように
@@ -1074,8 +1074,8 @@ def fig_example(aois: list[str], t: pd.DataFrame) -> dict[str, str]:
                 if len(pair) >= 2 else "")  # noqa: PLR2004
     (HERE / "app_table_b6_example.tex").write_text(_tbl(
         "tab:b6-example", f"Settlements of the example AOI of Fig.~3 ({tag}) and their readings by the lexicon "
-        "(populated places of the gazetteer within the AOI's grid; water-side: water, wetland, riverine, crossing or "
-        "lowland element)." + translit, "llcp{9cm}", "Name & Country & Water-side & Matched forms (position, class)",
+        "(populated places of the gazetteer within the AOI's grid; water-related: water, wetland, riverine, crossing or "
+        "lowland element)." + translit, "llcp{9cm}", "Name & Country & Water-related & Matched forms (position, class)",
         rows_ex), encoding="utf-8")
     out |= {"ExampleAoiName": f"{tag}: {where}, {act.get('activation_time', '')[:4]}",
             "ExampleNSettlements": str(len(st)), "ExampleNWetSettlements": str(int(st['wet'].sum())),
@@ -1241,7 +1241,8 @@ AMEND = {"BOne": "B-1_s6_group_buffer_fix.md", "BTwo": "B-2_posthoc_review_analy
          "BFive": "B-5_blind_review_analyses.md", "BSix": "B-6_blind_review2_analyses.md",
          "BSeven": "B-7_blind_review3_analyses.md", "BEight": "B-8_blind_review4_analyses.md",
          "BNine": "B-9_blind_review5_analyses.md", "BTen": "B-10_blind_review6_analyses.md",
-         "BEleven": "B-11_blind_review7_analyses.md", "BTwelve": "B-12_blind_review8_analyses.md"}
+         "BEleven": "B-11_blind_review7_analyses.md", "BTwelve": "B-12_blind_review8_analyses.md",
+         "BThirteen": "B-13_blind_review9_analyses.md"}
 # 改訂のファイルを変えた後のコミット（追記・記録）→ 年表の英語の記述（開発リポジトリのコミット）
 AMEND_UPDATES = {
     "3debd72": "Amendment 1: result of the corrected run recorded",
@@ -1279,6 +1280,14 @@ AMEND_UPDATES = {
                "numbering of the archived tables; before recomputing)",
     "1881566": "Addendum 3 to amendment 12 (the specification curve takes the estimator's versions flagged by keys; "
                "before recomputing)",
+    "a7b0f33": "Addendum 1 to amendment 13 (implementation record, before any quantity of parts B and C)",
+    "39f2082": "Addendum 2 to amendment 13 (cells of the main table kept for the controls from 2022, before computing)",
+    "03c120e": "Addendum 3 to amendment 13 (implementation of items B1 to B5, B7 and B13, before computing them)",
+    "c394b67": "Addendum 4 to amendment 13 (implementation of items B6, B8 to B12, B14 and B15, before computing them)",
+    "44fbbfc": "Addendum 5 to amendment 13 (aggregation of part C and the corrected lexicon near settlements, before "
+               "computing)",
+    "07c9788": "Addendum 6 to amendment 13 (countries drawn in item B1(c) corrected, an implementation error; before "
+               "computing items B1(b) to B1(d) and B2)",
 }
 
 
@@ -1337,6 +1346,8 @@ def timeline(m: dict[str, str]) -> dict[str, str]:
     blind5 = _first_commit_time("docs/research/reviews/2026-10-29_paper2_blind5_editor.md")
     blind6 = _first_commit_time("docs/research/reviews/2026-10-29_paper2_blind6_editor.md")
     blind7 = _first_commit_time("docs/research/reviews/2026-10-29_paper2_blind7_editor.md")
+    blind8 = _first_commit_time("docs/research/reviews/2026-10-29_paper2_blind8_editor.md")
+    blind9 = _first_commit_time("docs/research/reviews/2026-10-29_paper2_blind9_editor.md")
     # 初見の査読 第 7 回（編集者の 4 節）: 記録を見られた批評の回も年表に
     access = [("", "docs/research/reviews/2026-10-26_paper2_opus_referee.md")] + [
         (f" round {k}", f"docs/research/reviews/2026-10-26_paper2_opus_referee_round{k}.md") for k in (2, 3, 4, 5)]
@@ -1383,7 +1394,14 @@ def timeline(m: dict[str, str]) -> dict[str, str]:
             ("Amendment 10 (corrections and exploratory analyses after the sixth critiques)", out["AmendTimeBTen"]),
             ("Seventh LLM-agent critiques of the manuscript recorded", blind7 or ""),
             ("Amendment 11 (refocusing, corrections and exploratory analyses after the seventh critiques)",
-             out["AmendTimeBEleven"])]
+             out["AmendTimeBEleven"]),
+            ("Eighth LLM-agent critiques of the manuscript recorded", blind8 or ""),
+            ("Amendment 12 (restructuring, corrections and exploratory analyses after the eighth critiques)",
+             out["AmendTimeBTwelve"])]
+    if blind9:  # 第 9 回の批評（記録した後に年表に入る）と改訂 13
+        rows.append(("Ninth LLM-agent critiques of the manuscript recorded", blind9))
+        rows.append(("Amendment 13 (corrected test, controls known before each event, corrected lexicon and "
+                     "restructuring after the ninth critiques)", out["AmendTimeBThirteen"]))
     rows += [(f"LLM-agent critique with access to the records{lab or ' round 1'} recorded", _first_commit_time(f) or "")
              for lab, f in access]
     rows += _amend_updates()
@@ -1468,8 +1486,8 @@ def table_gfm(v41: dict | None, v45: dict | None, v47: dict | None) -> str:
                         f"--- & {_n(a['n_cells'])} cells, {a['n_aoi']} AOIs \\\\")
     a1 = v41["A1_A2"]
     for key, lab in (("A1_near_minus_far", "EMS $-$ GFM, $\\leq500$\\,m minus $>1$\\,km (pct. points)"),
-                     ("A2_wetside_le500m", "EMS $-$ GFM, water-side minus other names, $\\leq500$\\,m"),
-                     ("A2_wetside_all", "EMS $-$ GFM, water-side minus other names, all cells")):
+                     ("A2_wetside_le500m", "EMS $-$ GFM, water-related minus other names, $\\leq500$\\,m"),
+                     ("A2_wetside_all", "EMS $-$ GFM, water-related minus other names, all cells")):
         e, c = _ppc(a1[key])
         rows.append(f"{lab} & both & {e} & {c} & {a1[key]['n_aoi']} AOIs \\\\")
     for lab, src in (("GFM", v41["odds_gfm"]), ("EMS", v41["odds_ems"])):
@@ -1478,9 +1496,9 @@ def table_gfm(v41: dict | None, v45: dict | None, v47: dict | None) -> str:
                     f"{src['n_aoi']} AOIs \\\\")
     rows.append("\\middlehline")
     for lab, src in (("GFM", v41["odds_gfm"]), ("EMS", v41["odds_ems"])):
-        for key, term, what in (("wetside_adjusted_M1", "wetside:le500m", "water-side names, $\\leq500$\\,m"),
-                                ("wetside_raw", "wetside:le500m", "water-side names, $\\leq500$\\,m, unadjusted"),
-                                ("wetside_allcells_adjusted_M1", "wetside:all", "water-side names, all cells")):
+        for key, term, what in (("wetside_adjusted_M1", "wetside:le500m", "water-related names, $\\leq500$\\,m"),
+                                ("wetside_raw", "wetside:le500m", "water-related names, $\\leq500$\\,m, unadjusted"),
+                                ("wetside_allcells_adjusted_M1", "wetside:all", "water-related names, all cells")):
             e, c = _orc(src[key]["terms"].get(term))
             rows.append(f"Odds ratio, {what} & {lab} & {e} & {c} & --- \\\\")
     for cls in ("water", "wet", "riverine", "crossing", "low", "high"):
@@ -1490,19 +1508,19 @@ def table_gfm(v41: dict | None, v45: dict | None, v47: dict | None) -> str:
         for cut, what in (("v_ge_0.9", "cells $\\geq90$\\,\\% assessable"), ("v_ge_1.0", "cells fully assessable")):
             for lab in ("gfm", "ems"):
                 e, c = _orc(v45[cut][lab]["wetside_adjusted_M1"]["wetside:le500m"])
-                rows.append(f"Odds ratio, water-side, $\\leq500$\\,m, {what}$^{{a}}$ & {lab.upper()} & {e} & {c} & "
+                rows.append(f"Odds ratio, water-related, $\\leq500$\\,m, {what}$^{{a}}$ & {lab.upper()} & {e} & {c} & "
                             f"{_n(v45[cut][lab]['n_cells'])} cells \\\\")
     for lab in ("gfm", "ems"):
         oc = v41.get(f"odds_{lab}_c2_M1")
         if oc:
             e, c = _orc(oc["wetside_adjusted_M1"]["terms"].get("wetside:le500m"))
-            rows.append(f"Odds ratio, water-side, $\\leq500$\\,m, adjusted for the terrain model refitted on GFM "
+            rows.append(f"Odds ratio, water-related, $\\leq500$\\,m, adjusted for the terrain model refitted on GFM "
                         f"& {lab.upper()} & {e} & {c} & --- \\\\")
     sens = v41.get("sensitivity_independent_sensor")
     if sens:
         for lab in ("gfm", "ems"):
             e, c = _orc(sens[f"odds_{lab}"]["wetside_adjusted_M1"]["terms"].get("wetside:le500m"))
-            rows.append(f"Odds ratio, water-side, $\\leq500$\\,m, EMS image not Sentinel-1 & {lab.upper()} & {e} & {c} & "
+            rows.append(f"Odds ratio, water-related, $\\leq500$\\,m, EMS image not Sentinel-1 & {lab.upper()} & {e} & {c} & "
                         f"{sens['n_aoi']} AOIs \\\\")
     rows.append("\\middlehline")
     for key, what in (("C1_gfm", "$R$, held-out predictions rescored"), ("C1_ems", "$R$, same cells"),
@@ -1527,7 +1545,7 @@ def table_gfm(v41: dict | None, v45: dict | None, v47: dict | None) -> str:
     cap = ("Independent labels from GFM (post hoc, amendment B-3) on the \\GFMNAoi{} AOIs assessable on both label "
            "sets. Odds ratios come from logistic regressions with an intercept for each AOI and the logit of the "
            "held-out terrain prediction of the run with the frozen code, with standard errors clustered by place; "
-           "pct.\\ points are within-AOI contrasts. The EMS odds ratio within 500\\,m of water-side names on these "
+           "pct.\\ points are within-AOI contrasts. The EMS odds ratio within 500\\,m of water-related names on these "
            f"AOIs differs in the second decimal with the terrain prediction it is conditioned on: {ems_here} here, "
            "\\SameEmsOR{} with the prediction of the run with the corrected reading (the paper and the table of the "
            f"pooled odds ratio near settlements) and {ems_c2} with the terrain model refitted on GFM labels. "
@@ -1538,7 +1556,7 @@ def table_gfm(v41: dict | None, v45: dict | None, v47: dict | None) -> str:
 def table_b5(v42: dict | None, v47: dict | None) -> str:
     rows = []
     if v42:
-        for key, what in (("inversion_area_wide", "effect on all ground nearest a water-side name"),
+        for key, what in (("inversion_area_wide", "effect on all ground nearest a water-related name"),
                           ("inversion_local_500m", "effect within 500\\,m of the settlement")):
             inv = v42[key]
             rows.append(f"Largest odds ratio consistent with the observed increment, {what} & "
@@ -1641,7 +1659,7 @@ def table_lexfix(v47: dict | None) -> str:
 CLS = ("water", "wet", "riverine", "crossing", "low", "high")
 FEAT_LABEL = {**{f"lex_{c}_n1": f"{g.CLASS_LABELS[c]}, nearest name" for c in CLS},
               **{f"lex_{c}_k": f"{g.CLASS_LABELS[c]}, three nearest (weighted)" for c in CLS},
-              "lex_wetside_n1": "water-side, nearest name", "lex_covered_n1": "lexicon covers the language",
+              "lex_wetside_n1": "water-related, nearest name", "lex_covered_n1": "lexicon covers the language",
               "nlearn": "character-model score"}
 
 
@@ -1689,7 +1707,7 @@ def table_etym(v44: dict | None) -> str:
         rows.append(f"{g.CLASS_LABELS[c]} & {r['same_category']['n']} & "
                     f"{_rate(r['same_category'])} & {_rate(r['any_wetside'])} \\\\")
     rows += ["\\middlehline",
-             "Language of the name & Coded & Water-related, read as water-side & Water-related, others \\\\",
+             "Language of the name & Coded & Water-related, read as water-related & Water-related, others \\\\",
              "\\middlehline"]
     for lang, r in v44["by_language"].items():
         rows.append(f"{LANG_NAMES.get(lang, lang)} & {r['n']} & "
@@ -1698,10 +1716,10 @@ def table_etym(v44: dict | None) -> str:
     cap = ("Recorded etymologies on Wikipedia by lexicon class and by language of the name (post hoc, amendment B-5). "
            "Upper part: among the names in each class of the lexicon whose Wikipedia section states a derivation, "
            "the share whose recorded derivation is in the same class and the share whose derivation is "
-           "water-related in any class (the highland class is not water-side). Lower part, for languages with at "
+           "water-related in any class (the highland class is not water-related). Lower part, for languages with at "
            "least 30 coded sections: the share of water-related derivations among the names that the lexicon read "
-           "as water-side (its precision) and among the other names, with counts. Shares are unweighted; intervals "
-           "are 95\\,\\% (Wilson).")
+           "as water-related (its precision) and among the other names, with counts. Shares are unweighted; intervals "
+           "are 95\\,\\% \\citep{wilson1927}.")
     return _tbl("tab:etym-detail", cap, "lccc",
                 "Lexicon class & Coded & Same class & Water-related, any class", rows)
 
@@ -2127,7 +2145,7 @@ def table_gfm_compact(v41: dict | None, v47: dict | None, v50: dict | None) -> s
             pb, lo = rb["pairs_bootstrap"], rb["leave_one_place_out"]
             extra = (f"pairs {orv(pb['ci95_odds_ratio'][0])}--{orv(pb['ci95_odds_ratio'][1])}; "
                      f"LOO {orv(lo['min_odds_ratio'])}--{orv(lo['max_odds_ratio'])}")
-        rows.append(f"Odds ratio, water-side names, $\\leq$500\\,m: {lab} & {o} & {ci} & {extra} \\\\")
+        rows.append(f"Odds ratio, water-related names, $\\leq$500\\,m: {lab} & {o} & {ci} & {extra} \\\\")
     return _tbl("tab:gfm", "Independent labels from GFM (post hoc; amendments 3 and 6), condensed; the full set of "
                 "quantities is in the Supplement. Odds ratios: logistic regression with an intercept for each AOI and the "
                 "logit of the held-out terrain prediction, standard errors clustered by location group (95\\,\\% "
@@ -2164,7 +2182,7 @@ def b6_supp_tables(v48: dict | None, v50: dict | None, v51: dict | None, v52: di
         d = pd.read_csv(tf)
         rows = [f"{r.lang} & \\emph{{{_tex(r.form)}}} & {r.pos} & {g.CLASS_LABELS.get(r.cat, r.cat)} & {_n(int(r.n_cells))} & "
                 f"{int(r.n_settlements)} \\\\" for r in d.itertuples()]
-        out["b6_forms"] = _tbl("tab:b6-forms", "The 20 water-side forms that matched the nearest name of the most analysed "
+        out["b6_forms"] = _tbl("tab:b6-forms", "The 20 water-related forms that matched the nearest name of the most analysed "
                                "cells (amendment 6): language block, form, position, class, number of cells and of "
                                "settlements.", "llllrr", "Block & Form & Position & Class & Cells & Settlements", rows)
     ex = REPO / "docs" / "verification" / "v51_examples.csv"
@@ -2173,7 +2191,7 @@ def b6_supp_tables(v48: dict | None, v50: dict | None, v51: dict | None, v52: di
         rows = [f"{g.CLASS_LABELS.get(r.lexicon_category, r.lexicon_category)} & {r.kind} & {_tex(r.name)} ({r.country}) & "
                 f"{_tex(str(r.derivation_codes).replace(';', ', '))} & {_tex(str(r.quote)[:150])}"
                 f"{'\\ldots' if len(str(r.quote)) > 150 else ''} \\\\" for r in d.itertuples()]
-        out["b6_examples"] = _tbl("tab:b6-examples", "Examples of names read as water-side by the lexicon, with the "
+        out["b6_examples"] = _tbl("tab:b6-examples", "Examples of names read as water-related by the lexicon, with the "
                                   "derivation recorded on Wikipedia (amendment 6): for each class, the two lowest-numbered "
                                   "coded names whose recorded derivation matches the class and the lowest-numbered one whose "
                                   "derivation does not. Quotations abridged; sources in the code repository.",
@@ -2218,7 +2236,7 @@ def b6_supp_tables(v48: dict | None, v50: dict | None, v51: dict | None, v52: di
         rows.append("\\middlehline")
         nr = v54["nread"]["wetside_by_continent_cells"]
         for k, x in nr.items():
-            rows.append(f"Cells whose nearest name is water-side, {CONT_NAMES.get(k, k)}: language model / lexicon & "
+            rows.append(f"Cells whose nearest name is water-related, {CONT_NAMES.get(k, k)}: language model / lexicon & "
                         f"{_n(x['n_cells'])} cells & {pct(x['llm'])} / {pct(x['lexicon'])} \\\\")
         rl = v54["regional_languages"]
         for k, x in {**rl["regions"], **rl["countries"]}.items():
@@ -2226,7 +2244,7 @@ def b6_supp_tables(v48: dict | None, v50: dict | None, v51: dict | None, v52: di
                 rows.append(f"Cells nearest a settlement in {_tex(k)} & {_n(x['n_cells'])} & {pct(x['share'])} \\\\")
         rows.append(f"Cells whose nearest name has a riverside construction & --- & {pct(v54['riverside']['share_cells'])} \\\\")
         out["b6_readings"] = _tbl("tab:b6-readings", "The readings in more detail (amendment 6). Precision against "
-                                  "derivations recorded on Wikipedia by the position of the matched water-side form and by "
+                                  "derivations recorded on Wikipedia by the position of the matched water-related form and by "
                                   "class (a name can match at more than one position, so the position rows overlap and "
                                   "their counts sum to more than the names); recall by class is unweighted and therefore "
                                   "not comparable with the weighted "
@@ -2242,11 +2260,11 @@ def b6_supp_tables(v48: dict | None, v50: dict | None, v51: dict | None, v52: di
         for k, lab in (("gfm_gfm_cells", "GFM labels"), ("ems_gfm_cells", "EMS labels, same cells"),
                        ("ems_192aoi_all_cells", "EMS labels, all cells of the GFM AOIs"), ("ems_all_aoi", "EMS labels, all AOIs")):
             c = v50["contributing"][k]
-            rows.append(f"Flooded cells within 500\\,m of water-side names, {lab} & {_n(c['n_flooded_group'])} of "
+            rows.append(f"Flooded cells within 500\\,m of water-related names, {lab} & {_n(c['n_flooded_group'])} of "
                         f"{_n(c['n_cells_group'])} cells; {c['n_aoi_with_flooded']} AOIs, {c['n_units_with_flooded']} places \\\\")
         comp = v50.get("components")
         if comp:
-            for k, lab in (("all", "all cells"), ("wetside_le500m", "within 500\\,m of water-side names"),
+            for k, lab in (("all", "all cells"), ("wetside_le500m", "within 500\\,m of water-related names"),
                            ("other_le500m", "within 500\\,m of other names")):
                 x = comp[k]
                 mc = x["mean_components_not_evaluable"]
@@ -2263,7 +2281,7 @@ def b6_supp_tables(v48: dict | None, v50: dict | None, v51: dict | None, v52: di
             for lab, blk in (("V1 labels", v1["odds_v1"]), ("EMS, V1 cells", v1["odds_ems"])):
                 t1 = blk["wetside_allcells_adjusted_M1"]["terms"]["wetside:all"]
                 o, ci = _orc(t1)
-                rows.append(f"Odds ratio, water-side names, all cells, {lab} & {o} ({ci}) \\\\")
+                rows.append(f"Odds ratio, water-related names, all cells, {lab} & {o} ({ci}) \\\\")
             c1 = v1["C1_v1"]
             if c1.get("R") is not None:
                 rows.append(f"$R$, held-out predictions rescored on V1 labels & {rv(c1['R'])} (90\\,\\% {rv(c1['ci90_R'][0])} "
@@ -2273,7 +2291,7 @@ def b6_supp_tables(v48: dict | None, v50: dict | None, v51: dict | None, v52: di
             for lab, blk in (("EMS, all AOIs", r["ems_all"]), ("GFM", r["gfm_cells"]["gfm"]), ("EMS, GFM cells", r["gfm_cells"]["ems"])):
                 o1, c1_ = _orc(blk["all_cells"]["le500m"])
                 o2, c2_ = _orc(blk["not_rounded"]["le500m"])
-                rows.append(f"Odds ratio, water-side, $\\leq$500\\,m, {lab}: all settlements / without rounded coordinates & "
+                rows.append(f"Odds ratio, water-related, $\\leq$500\\,m, {lab}: all settlements / without rounded coordinates & "
                             f"{o1} ({c1_}) / {o2} ({c2_}) \\\\")
         out["b6_gfm"] = _tbl("tab:b6-gfm", "Diagnostics of the GFM labels and of the near-settlement odds ratios "
                              "(amendment 6). CSI: critical success index for flooded cells. Rounded coordinates: settlements "
@@ -2333,7 +2351,7 @@ def b6_supp_tables(v48: dict | None, v50: dict | None, v51: dict | None, v52: di
             for v in ("occ", "seas", "occ_np"):
                 c = v53["all_named"][gname][v]
                 cells.append(f"{c['estimate']:+.2f} ({c['ci95'][0]:+.2f} to {c['ci95'][1]:+.2f})" if c else "---")
-            lab = {"wetside": "water-side (any)", "strict": "strict reading"}.get(gname, g.CLASS_LABELS.get(gname, gname))
+            lab = {"wetside": "water-related (any)", "strict": "strict reading"}.get(gname, g.CLASS_LABELS.get(gname, gname))
             rows.append(f"{lab} & " + " & ".join(cells) + " \\\\")
         out["b6_gsw"] = _tbl("tab:b6-gsw", "Positive control without flood labels (amendment 6): within-AOI difference "
                              "between settlements whose name is in each class and other settlements in the mean occurrence "
@@ -2407,6 +2425,7 @@ SUPP_GROUPS = (
         ("b6_stats", "Interval coverage in the null simulations, the $p$ values of the protocol and the spatial "
                      "correlation of residuals."))),
     ("Exploratory checks of the verdict", (
+        ("thirteen_tost", "The corrected equivalence test on the ratio at four levels of resampling, its operating characteristics, and other measures of the change."),
         ("posthoc_models", "The models of the exploratory analyses."),
         ("checks", "The within-area comparison under exploratory variants of sample, labels and reading."),
         ("posthoc", "The primary comparison in subsets of cells and under other fold assignments."),
@@ -2425,25 +2444,28 @@ SUPP_GROUPS = (
         ("eleven_census", "A census of the exploratory interval estimates."),
         ("twelve_checks", "Operating characteristics of the two decision rules, the reference model, constant forecasts, "
                           "outlying null simulations, inclusion, flood typing, GFM images, built-up land near "
-                          "settlements, where the flooded cells near water-side names lie and a penalty on the names "
+                          "settlements, where the flooded cells near water-related names lie and a penalty on the names "
                           "alone."),
         ("composition", "What the regional composition of names adds."),
-        ("ten_between", "Whether areas with more water-side names flood more, within language regions."),
+        ("ten_between", "Whether areas with more water-related names flood more, within language regions."),
         ("b6_runs", "Exploratory runs and controls of amendment 6."),
         ("b5", "Test inversion and the other analyses of amendment 5."))),
     ("What assignment through settlements can carry", (
+        ("thirteen_bounds", "The injected odds ratio that each interval's upper limit excludes, under every no-effect reference."),
         ("b6_plasmode", "Gains from effects injected into the observed labels, base models fixed."),
         ("seven_refit", "The same gains with every model refitted on the injected labels."),
         ("eight_bounds", "Bounds, detectable effects and margin translations with different no-effect references, with "
                          "Monte Carlo intervals."),
         ("nine_bounds", "Bounds counted three ways, in both directions and for effects that differ between settlements."),
         ("nine_power", "Simulated power of the decision rule with every model refitted."),
-        ("ten_injected", "The estimator of Sect. 5 on labels with a known injected odds ratio."),
+        ("ten_injected", "The estimator of Sect. 6.3 on labels with a known injected odds ratio."),
         ("ten_dilution", "How an effect on the ground a name refers to is diluted on all ground nearest the name."),
-        ("eleven_scale", "The margin and the bounds on the scale of the estimator of Sect. 5."),
+        ("eleven_scale", "The margin and the bounds on the scale of the estimator of Sect. 6.3."),
         ("seven_translations", "Translations of the margin and bounds under the synthetic labels of the protocol."),
         ("b6_gsw", "Recurrent surface water around settlements, by name class (no flood labels)."))),
     ("Flooding near settlements", (
+        ("thirteen_near", "Checks of the odds ratios near settlements: rounding, activations, generations, gazetteer codes, reassignment, sensor, the corrected lexicon and qualifier pairs."),
+        ("thirteen_gfm", "Diagnosis of the GFM labels: flooded shares and baseline gains by AOI, and agreement with EMS by distance and built-up share."),
         ("positive_control", "Where settlements with names of each class stand relative to the drainage, by distance "
                              "(no flood labels)."),
         ("eight_heights", "Heights of settlements above the main rivers, by name class (no flood labels)."),
@@ -2456,21 +2478,22 @@ SUPP_GROUPS = (
                         "terms."),
         ("eight_near", "The pooled odds ratio near settlements under every variant, by river size and by class, and "
                        "the two label sets on the same cells."),
-        ("eight_where", "Where the flooded cells near water-side names lie, by country and by activation."),
+        ("eight_where", "Where the flooded cells near water-related names lie, by country and by activation."),
         ("nine_activations", "The pooled odds ratio near settlements with each activation left out."),
         ("nine_classq", "Adjusted $p$ and $q$ values of the class coefficients."),
-        ("ten_misclass", "The odds ratio near water-side names corrected over a grid of misreading rates."),
-        ("eleven_near", "The odds ratio near water-side names on every evaluable cell, with both label sets."),
+        ("ten_misclass", "The odds ratio near water-related names corrected over a grid of misreading rates."),
+        ("eleven_near", "The odds ratio near water-related names on every evaluable cell, with both label sets."),
         ("ten_floodplain", "The floodplain reading by country, without one activation and without doubtful forms."),
         ("gfm", "Every quantity of the analyses on GFM labels (amendment 3)."),
         ("b6_gfm", "Diagnostics of the GFM labels."),
         ("eight_calib", "Calibration and skill of the held-out predictions, by split."))),
     ("How the names were read", (
+        ("thirteen_lexicon", "Homographs and wrong-language readings, the corrected lexicon, Unicode names, the two coders and the language-model reading by block."),
         ("b6_lexicon", "The lexicon by language block."),
-        ("b6_forms", "The water-side forms that matched the most cells."),
+        ("b6_forms", "The water-related forms that matched the most cells."),
         ("eight_audit", "Forms excluded by the lexicon's own rules or prone to transferred names, and the most frequent "
                         "forms by country."),
-        ("b6_examples", "Examples of names read as water-side, with their recorded derivations."),
+        ("b6_examples", "Examples of names read as water-related, with their recorded derivations."),
         ("b6_example", "The settlements of an example AOI and their readings."),
         ("b6_readings", "Precision and recall of the readings in more detail."),
         ("etym", "Recorded etymologies by lexicon class and language."),
@@ -2563,6 +2586,7 @@ TERMS = (  # 初見の査読 第 7 回（A8）: 用語を本文に揃える（�
     ("five yardsticks", "five measures of the baseline gain"),
     ("yardsticks", "measures of the baseline gain"), ("Yardsticks", "Measures of the baseline gain"),
     ("yardstick", "measure of the baseline gain"), ("Yardstick", "Measure of the baseline gain"),
+    ("water-side", "water-related"), ("Water-side", "Water-related"),  # 改訂 13 の A8
 )
 
 
@@ -2670,6 +2694,8 @@ def supplement() -> dict[str, str]:
         sx = sx.replace("}\\label{tab:si-strata}", " Language strata are labelled by the first language of the country "
                         "in GeoNames (for example ur for Pakistan), whereas the lexicon reads the names of a country with "
                         "its blocks (fa and hi for Pakistan).}\\label{tab:si-strata}")
+        if "\\label{tab:seven-status}" in sx:  # 計画の状態の表は版面の高さを超える（改訂 13 の行を足した後）
+            sx = sx.replace("\\footnotesize", "\\scriptsize", 1)
         # 補足は一段組の article: 表をその場に置き（番号の順に並べる）、横置きの表は自分の頁に
         sx = (re.sub(r"\\begin\{table\*\}(\[[a-zA-Z!]*\])?", lambda _: "\\begin{table}[H]", sx)
               .replace("\\end{table*}", "\\end{table}")
@@ -2679,6 +2705,12 @@ def supplement() -> dict[str, str]:
         sx = re.sub(r"(\d+(?:\.\d)?\\%) of settlement points\)",
                     lambda mm: (f"{mm.group(1)} of the settlement points of this analysis, against "
                                 "\\RoundedSettlementsPct{} of the settlements nearest the analysed cells)"), sx)
+        if name == "registered":  # B-13 の A9: 題の矛盾と、注の記号を出る順に a・b・c に
+            sx = sx.replace("Quantities planned in advance not shown elsewhere (post hoc, amendment 2).",
+                            "Quantities planned in amendment 2 and not shown elsewhere (post hoc).")
+            for a_, b_ in (("^{d,e}", "^{b,c}"), ("^{d,u}", "^{a,c}"), ("^{u}", "^{a}"), ("^{e}", "^{b}"),
+                           ("^{d}", "^{c}")):
+                sx = sx.replace(a_, b_)
         if name == "strata":  # B-12 の A12: 点と区間の端が 3 桁で同じに見える行（fa）は 4 桁で
             sx = _strata_digits(sx)
         if name == "yardsticks":  # 横置きの頁に収まらず空の頁ができていた（B-12 の A10: p. 13 の空白）
@@ -2778,7 +2810,7 @@ def table_hazard() -> None:
          r"(\RecurSetRLoNinety{} to \RecurSetRHiNinety)} \\"),
         (r"Recurrent surface water of the cell itself, 1984--2021 & \multicolumn{2}{l}{\GswCellR{} "
          r"(\GswCellRLoNinety{} to \GswCellRHiNinety)} \\"),
-        (r"\multicolumn{3}{l}{\emph{Direct estimates: odds ratio of flooding, water-side against other names "
+        (r"\multicolumn{3}{l}{\emph{Direct estimates: odds ratio of flooding, water-related against other names "
          r"(95\,\% interval)}} \\"),
         r"EMS labels, all AOIs, unconditional & \ORWetAllRaw{} (\ORWetAllRawLo--\ORWetAllRawHi) & \ORWetNearRaw{} (\ORWetNearRawLo--\ORWetNearRawHi) \\",
         r"EMS labels, all AOIs, given terrain$^{g}$ & \ORWetAllAdj{} (\ORWetAllAdjLo--\ORWetAllAdjHi) & \ORWetNearAdj{} (\PairsWetNearLo--\PairsWetNearHi) \\",
@@ -2788,7 +2820,7 @@ def table_hazard() -> None:
     ]
     tex = ("% generated by figures/make_figures.py — do not edit\n\\begin{table*}[tp]\n"
            "\\caption{What the test shows in hazard terms and what it could have missed, for all ground nearest a "
-           "settlement with a water-side name (\\MatchWetPct{} of the cells) and for the ground within 500\\,m of such a "
+           "settlement with a water-related name (\\MatchWetPct{} of the cells) and for the ground within 500\\,m of such a "
            "settlement. All quantities are exploratory (amendments 2, 3 and 5 to 10, or not planned, footnote a); the "
            "pre-specified result is in Table~\\ref{tab:si-comparisons}. Contributions are on the scale of the pooled $R$, "
            "that is, the change in the Brier "
@@ -3143,8 +3175,10 @@ def c9_macros(v64: dict | None) -> dict[str, str]:
         m["PowerSimText"] = (f"the smallest injected odds ratio detected in at least 80\\,\\% of replicates was "
                              f"{c4['simulated_detectable_or']:.2f}" if c4.get("simulated_detectable_or")
                              else c4["rule"])
+        sd = c4.get("simulated_detectable_or")
+        m["PowerSimOR"] = f"{sd:.2f}" if sd else f"\\ensuremath{{>}}\\,{max(x['odds_ratio'] for x in c4['by_delta']):.2f}"
     else:
-        m |= {"PowerSimList": missing("v64 C4"), "PowerSimText": missing("v64 C4")}
+        m |= {"PowerSimList": missing("v64 C4"), "PowerSimText": missing("v64 C4"), "PowerSimOR": missing("v64 C4")}
     c5 = v.get("C5")
     gp = (c5 or {}).get("record", {}).get("b6", {}).get("gsw_perm") if isinstance(c5, dict) else None
     m["GswPermText"] = (f"with one definition of permanent water for all AOIs ({_n(gp['n_dropped'])} cells removed; "
@@ -3476,7 +3510,7 @@ def table_eight_verdict(v57: dict, v59: dict) -> str:
                 + (f"{rv(mx['achieved_bound_R'])} ({mx['which'].replace('_', '-').replace('/', ', ')})" if mx
                    else missing("B2 max")) + r" \\")
     for key, lab in (("total_M1s_M3s", "total increment"), ("flexible_M1_M3", "flexible models refitted"),
-                     ("near_500m_wetside_not_planned", "within 500\\,m of water-side names (not planned)")):
+                     ("near_500m_wetside_not_planned", "within 500\\,m of water-related names (not planned)")):
         e = b3.get(key)
         if not e:
             rows.append(f"Location groups needed, {lab} & {missing('B3')} \\\\")
@@ -3516,7 +3550,7 @@ def table_eight_verdict(v57: dict, v59: dict) -> str:
            "names among the settlements of each AOI with the regional composition rebuilt. Refitted interval: 500 "
            "bootstrap replicates of location groups in which the second stage of both models is refitted with the "
            "replicate's weights, against the same replicates with the fitted models held fixed. Effect at the margin: "
-           f"an odds ratio of {c3or} for all ground nearest a water-side name injected into the labels, every model "
+           f"an odds ratio of {c3or} for all ground nearest a water-related name injected into the labels, every model "
            "refitted, and each replicate judged by the protocol's decision table without the placebo condition.")
     return _tbl("tab:eight-verdict", cap, "p{11.5cm}l", "Quantity & Value", rows)
 
@@ -3540,7 +3574,7 @@ def table_eight_bounds(v59: dict) -> str:
     cap = ("Superseded in part by Table~\\STabNineBounds{}: rows that use the withdrawn reassignments as reference are "
            "kept for the record. Odds ratios of flooding from effects injected into the observed labels, read with "
            "different no-effect "
-           "references (exploratory, amendment 8). A: all ground nearest a water-side name; B: the part within "
+           "references (exploratory, amendment 8). A: all ground nearest a water-related name; B: the part within "
            "500\\,m of the settlement; CA, CB: the same for a latent indicator of truly water-related names, drawn with "
            "the measured misreading rates. Base models fixed; replicates: "
            + ", ".join(f"{f} {reps.get(f, '?')}" for f in forms)
@@ -3558,7 +3592,7 @@ def table_eight_bounds(v59: dict) -> str:
 def table_eight_near(v57: dict, v41: dict | None, v61: dict | None = None) -> str:
     b5, b6, b7, b12 = (v57.get(k) or {} for k in ("B5", "B6", "B7", "B12"))
     v61 = v61 or {}
-    rows = [r"\multicolumn{6}{l}{\emph{Pooled water-side class, EMS labels (pairs cluster bootstrap)}} \\"]
+    rows = [r"\multicolumn{6}{l}{\emph{Pooled water-related class, EMS labels (pairs cluster bootstrap)}} \\"]
     for key, lab in (("main", "All AOIs"), ("typed_aois", "AOIs with a recorded flood type"),
                      ("without_no_hydro", "Without AOIs lacking a hydrography layer"),
                      ("without_oceania_americas", "Without Oceania and the Americas"),
@@ -3592,7 +3626,7 @@ def table_eight_near(v57: dict, v41: dict | None, v61: dict | None = None) -> st
         rows.append(f"{lab} & {_orci(d, 'bonferroni_ci95', f'B6 class {c}')} & & & "
                     + (f"{d['p_holm']:.2f}" if d else "") + r" \\")
     fr = b6.get("fractional_all_bands") or {}
-    rows.append(r"\multicolumn{6}{l}{\emph{Riverine flood cover as a fractional outcome, water-side class by distance "
+    rows.append(r"\multicolumn{6}{l}{\emph{Riverine flood cover as a fractional outcome, water-related class by distance "
                 r"band}} \\")
     for key, lab in (("le500m", "Within 500\\,m"), ("500m_1km", "500\\,m--1\\,km"), ("gt1km", "Beyond 1\\,km")):
         rows.append(f"{lab} & {_orci(fr.get(key), 'ci95_odds_ratio', f'B6 fractional {key}')} & & & \\\\")
@@ -3627,9 +3661,10 @@ def table_eight_near(v57: dict, v41: dict | None, v61: dict | None = None) -> st
            + ". Uncapped: every evaluable cell of the analysed AOIs, with the predictions of the uncapped sensitivity "
            "run. Misclassification: probabilistic bias analysis with the rates measured against recorded etymologies "
            "by the model that compiled the lexicon. $^{s}$AOIs that enter the model, which needs flooded and dry cells "
-           "in an AOI, of the AOIs whose EMS map was not drawn from Sentinel-1. "
-           "Columns 4--6: flooded cells within 500\\,m of water-side names, location groups with any cell within "
-           "500\\,m of a water-side name (flooded or not), and the AOIs that enter each model (AOIs with flooded and dry "
+           "in an AOI, of the AOIs whose EMS map was not drawn from Sentinel-1 (capped sample; other tables count the "
+           "AOIs of their own samples). "
+           "Columns 4--6: flooded cells within 500\\,m of water-related names, location groups with any cell within "
+           "500\\,m of a water-related name (flooded or not), and the AOIs that enter each model (AOIs with flooded and dry "
            "cells). The uncapped row uses the readings of the frozen code; the corrected readings are in the table of "
            "uncapped estimates of amendment 11.")
     return _tbl("tab:eight-near", cap, "p{6.6cm}llrrr",
@@ -3647,7 +3682,7 @@ def table_eight_heights(v57: dict) -> str:
 
     lg = lambda x: f"\\ensuremath{{{x:.2f}}}"
     rows = []
-    for key, lab in (("wetside", "Water-side (pooled)"), ("floodplain", "Floodplain reading (riverine, wetland)")):
+    for key, lab in (("wetside", "Water-related (pooled)"), ("floodplain", "Floodplain reading (riverine, wetland)")):
         d = h1.get(key) or {}
         rows.append(f"{lab} & {cell(h1.get(key))} & {cell(h2.get(key))} & {cell(lu.get(key), lg)} & "
                     f"{d.get('n_settlements', '')} \\\\")
@@ -3659,7 +3694,7 @@ def table_eight_heights(v57: dict) -> str:
     pc = b12.get("positive_control_hand") or {}
     rows.append(f"Names containing a nearby river or lake name (HAND of the site) & {cell(pc)} & --- & --- & "
                 f"{pc.get('n_settlements', '')} \\\\")
-    cap = ("Where settlements with water-side names stand (exploratory, amendment 8; no flood labels). Within-AOI "
+    cap = ("Where settlements with water-related names stand (exploratory, amendment 8; no flood labels). Within-AOI "
            "difference between settlements whose name is in the class and other settlements of the same AOI in the "
            "height of the settlement's cell above the nearest point of a river draining at least 100 or 1000\\,km$^2$ "
            "(HydroRIVERS; mean elevation of the settlement's cell minus the lowest elevation of the river's cell, m), and "
@@ -3706,7 +3741,8 @@ def table_eight_calib(v57: dict) -> str:
                     f"{hb['n_aoi']} AOIs}} \\\\")
     cap = ("Calibration of the held-out predictions (exploratory, amendment 8): intercept and slope of a logistic "
            "regression of the labels on the logit of the prediction, Brier score with the reliability and resolution "
-           "terms of Murphy's decomposition (ten equal-count bins), and median within-AOI area under the ROC curve. "
+           "terms of the decomposition of \\citet{murphy1973} (ten equal-count bins), and median within-AOI area under "
+           "the ROC curve. "
            "M1: terrain model; M1s: recalibrated; M1c: with the regional composition of names (reference of the primary "
            "comparison); M3n: with the names. Skill: each AOI predicted flooded on as many cells as the labels flood "
            "(CSI: critical success index). The primary, country, time and language-model splits use the confirmatory run "
@@ -3760,7 +3796,7 @@ def table_eight_coder(v57b: dict | None) -> str:
             f"Lexicon, strict: precision; recall (coder 2) & {_pct0(pr['strict']['strict_flag']['precision'])}; "
             f"{_pct0(pr['strict']['strict_flag']['recall'])} \\\\"]
     tr, st = v57b["transferred_among_lexicon_wetside_true"], v57b["at_site_no_among_lexicon_wetside_true"]
-    rows.append(f"Names read as water-side with a water-related derivation in coder 2's codes: transferred or "
+    rows.append(f"Names read as water-related with a water-related derivation in coder 2's codes: transferred or "
                 f"commemorative; feature not at the site & {tr['yes']} of {tr['n']}; {st['no']} of {st['n']} \\\\")
     cap = ("A second coder of the Wikipedia excerpts (exploratory, amendment 8): a language model of another developer "
            "that took no part in the lexicon or the first coding, given the same guide and blind to the readings. "
@@ -3790,7 +3826,7 @@ def table_eight_prompt() -> str:
 def table_eight_where(v60: dict | None, v61: dict | None = None) -> str:
     """水系側の名の集落から 500 m 以内の浸水セル（EMS）の国・事象ごとの数（編集者の求め、記述）。"""
     if not v60:
-        return _tbl("tab:eight-where", "Where the flooded cells near water-side names lie.", "l", "",
+        return _tbl("tab:eight-where", "Where the flooded cells near water-related names lie.", "l", "",
                     [missing("v60") + r" \\"])
     rows = [r"\multicolumn{5}{l}{\emph{By country of the nearest settlement}} \\"]
     for r in v60["by_country"][:15]:
@@ -3813,10 +3849,10 @@ def table_eight_where(v60: dict | None, v61: dict | None = None) -> str:
             rows.append(f"{r['activation']}: {_tex(r['name'])[:48]} ({r['year']}) & {r['flooded_near']} & "
                         f"{_thousands(r['cells_near'])} & {_thousands(r['flooded'])} of {_thousands(r['cells'])} & "
                         f"{r['aois']} \\\\")
-    cap = ("Where the flooded cells within 500\\,m of settlements with water-side names lie (EMS labels; descriptive): "
+    cap = ("Where the flooded cells within 500\\,m of settlements with water-related names lie (EMS labels; descriptive): "
            f"{v60['flooded_near_total']} flooded cells among {_thousands(v60['cells_near_total'])} such cells, in the AOIs "
            "of the odds ratios near settlements (AOIs with both flooded and dry cells). Share: of all flooded cells near "
-           "water-side names. For the AOIs in Pakistan the fourth column gives the flooded cells of all evaluable cells "
+           "water-related names. For the AOIs in Pakistan the fourth column gives the flooded cells of all evaluable cells "
            "(amendment 8, addendum 6). AOIs: the AOIs with such cells whose nearest settlement lies in the country or "
            "activation; an AOI whose cells are nearest settlements in several countries counts in each, so the column "
            f"sums to more than the number of AOIs ({sum(r['aois'] for r in v60.get('by_country') or [])} by country).")
@@ -3886,7 +3922,7 @@ def table_nine_bounds(v64: dict | None) -> str:
                f"weights $w_s$ drawn from an exponential distribution with mean one ({c3['reps']} replicates); "
                "bound and margin are read on the mean." if c3 else "")
     cap = ("Odds ratios of flooding that the data exclude, from effects injected into the observed labels "
-           "(exploratory; amendments 8 and 9). A: all ground nearest a water-side name; B: the part within 500\\,m "
+           "(exploratory; amendments 8 and 9). A: all ground nearest a water-related name; B: the part within 500\\,m "
            "of the settlement; CA, CB: the same targets for truly water-related names, given the measured misreadings. "
            "Upper bound: the odds ratio at which the no-effect reference plus the mean injected gain reaches the upper "
            "90\\,\\% limit of the observed increment, with that limit taken from the bootstrap of the primary analysis "
@@ -3914,11 +3950,12 @@ def table_nine_power(v64: dict | None) -> str:
         rows.append(f"{x['odds_ratio']:.2f} & {x['reps']} & {x['n_positive']} ({lo:.2f}--{hi:.2f}) & "
                     f"{x['n_equivalent']} & {rv(x['R_mean'])} \\\\")
     cap = ("Verdicts of the decision rule when effects of the stated odds ratio are injected on all ground nearest a "
-           "water-side name and every model, including the terrain model, is refitted on the injected labels in each "
+           "water-related name and every model, including the terrain model, is refitted on the injected labels in each "
            "fold (exploratory; amendment 9). Positive: lower 95\\,\\% limit of $R$ above zero (the decision table "
            "without its placebo condition); in parentheses, the Wilson 95\\,\\% interval of the share. Equivalent: "
            "90\\,\\% interval of $R$ within $\\pm 0.05$. Replicates "
-           f"{min(c4['rep_ids'])}--{max(c4['rep_ids'])}. {c4['rule'][:1].upper() + c4['rule'][1:]}"
+           f"{min(c4['rep_ids'])}--{max(c4['rep_ids'])}. "
+           f"{(c4['rule'][:1].upper() + c4['rule'][1:]).replace(' %', '\\,\\%')}"
            + (f": {c4['simulated_detectable_or']:.2f}." if c4.get("simulated_detectable_or") else "."))
     return _tbl("tab:nine-power", cap, "lllll",
                 "Odds ratio & Replicates & Positive & Equivalent & Mean $R$", rows)
@@ -3968,7 +4005,7 @@ def table_nine_runs(v64: dict | None, v57: dict | None, v63: dict | None) -> str
     cap = ("The primary comparison under the robustness runs of amendment 9 (exploratory; corrected code; the "
            "primary row uses the frozen subsampling seed 20261025). Cells: "
            "evaluated cells; terrain gain: $\\mathrm{BS}(\\mathrm{M0})-\\mathrm{BS}(\\mathrm{M1})$ in units of "
-           "$10^{-3}$; odds ratio: flooding within 500\\,m of water-side names relative to other names, given the "
+           "$10^{-3}$; odds ratio: flooding within 500\\,m of water-related names relative to other names, given the "
            "held-out terrain prediction of the run, with a pairs cluster bootstrap 95\\,\\% interval (2,000 "
            "replicates); not computed for the seeds." + gsw_txt
            + " Seeds: the seed that draws cells within location groups under the cap (frozen: 20261025)." + fab_txt
@@ -3985,7 +4022,7 @@ def table_nine_skill(v63: dict | None) -> str:
     if not (isinstance(b3, dict) and isinstance(b4, dict) and isinstance(b5, dict)):
         return _tbl("tab:nine-skill", "Skill (amendment 9).", "l", "", [missing("v63 B3-B5") + r" \\"])
     d = b3["diff_M3n_minus_M1c"]
-    rows = [r"\multicolumn{4}{l}{\emph{Murphy decomposition of the Brier score}} \\",
+    rows = [r"\multicolumn{4}{l}{\emph{Decomposition of the Brier score \citep{murphy1973}}} \\",
             "\\quad Brier score & " + f"{b3['M1c']['brier']:.5f} & {b3['M3n']['brier']:.5f} & {sci(d['brier'])} \\\\",
             "\\quad Reliability (lower is better) & " + f"{sci(b3['M1c']['reliability'])} & {sci(b3['M3n']['reliability'])}"
             f" & {sci(d['reliability'])} ({sci(d['reliability_ci95'][0])} to {sci(d['reliability_ci95'][1])}) \\\\",
@@ -4042,9 +4079,9 @@ def table_nine_activations(v63: dict | None) -> str:
         return (f"{r['activation']} & {r['n_flooded_near']} & {orv(r['odds_ratio'])} & "
                 f"{orv(r['ci95'][0])}--{orv(r['ci95'][1])}")
     rows = [f"{cell(rs[i])} & {cell(rs[i + half] if i + half < len(rs) else None)} \\\\" for i in range(half)]
-    cap = ("The pooled odds ratio of flooding within 500\\,m of water-side names (EMS labels, the main model of "
-           "amendment 8) with each activation that has flooded cells near water-side names left out in turn "
-           f"(exploratory; amendment 9; {b6['n_activations']} activations). Flooded: flooded cells near water-side "
+    cap = ("The pooled odds ratio of flooding within 500\\,m of water-related names (EMS labels, the main model of "
+           "amendment 8) with each activation that has flooded cells near water-related names left out in turn "
+           f"(exploratory; amendment 9; {b6['n_activations']} activations). Flooded: flooded cells near water-related "
            "names in the activation left out. Intervals: 95\\,\\%, cluster-robust over location groups.")
     return _tbl("tab:nine-activations", cap, "llll|llll",
                 "Left out & Flooded & OR & 95\\,\\% & Left out & Flooded & OR & 95\\,\\%", rows)
@@ -4068,23 +4105,23 @@ def table_nine_text() -> str:
     """本文にだけ出ていた量（編集者の指摘 8、第 5 回）: 本文と同じマクロで並べる（値は numbers.tex から）。"""
     rows = [
         r"\multicolumn{2}{l}{\emph{What the pooled test can detect (Sect.~4)}} \\",
-        r"\quad Share of cells within 500\,m of a settlement with a water-side name & \CeilShareFiveHundred \\",
-        r"\quad Largest possible $R$ from perfect prediction near water-side names: within 250\,m; 500\,m; 1\,km & "
+        r"\quad Share of cells within 500\,m of a settlement with a water-related name & \CeilShareFiveHundred \\",
+        r"\quad Largest possible $R$ from perfect prediction near water-related names: within 250\,m; 500\,m; 1\,km & "
         r"\CeilRTwoFifty; \CeilRFiveHundred; \CeilROneKm \\",
         r"\multicolumn{2}{l}{\emph{Evidence near settlements (Sect.~5)}} \\",
         r"\quad Joint Wald test, class coefficients in the three distance bands: $p$ & \WaldClassP \\",
-        r"\quad Joint Wald test, water-side coefficients in the three distance bands: $p$ & \WaldWetP \\",
-        r"\quad Odds ratio near water-side names without partly flooded cells (EMS) & \PartialOR{} "
+        r"\quad Joint Wald test, water-related coefficients in the three distance bands: $p$ & \WaldWetP \\",
+        r"\quad Odds ratio near water-related names without partly flooded cells (EMS) & \PartialOR{} "
         r"(\PartialORLo--\PartialORHi) \\",
         r"\quad Odds ratio adjusted for built-up and tree cover: EMS; GFM & \CciOREms{} (\CciOREmsLo--\CciOREmsHi); "
         r"\CciORGfm{} (\CciORGfmLo--\CciORGfmHi) \\",
         r"\quad Odds ratio by flood size, thirds of AOIs: smallest floods; middle; largest & \SevLowOR{} "
         r"(\SevLowORLo--\SevLowORHi; \SevLowFlooded{} flooded cells); \SevMidOR; \SevHighOR \\",
-        r"\quad EMS-evaluable cells of the GFM AOIs that GFM could not assess: all; within 500\,m of water-side names; "
+        r"\quad EMS-evaluable cells of the GFM AOIs that GFM could not assess: all; within 500\,m of water-related names; "
         r"near other settlements & \MaskShareAll; \MaskShareWet; \MaskShareOther \\",
         r"\multicolumn{2}{l}{\emph{How the names were read (Sect.~6 and Appendix~B)}} \\",
         r"\quad Settlements whose name contains the name of a river, stream or lake within 5\,km: share of the analysed "
-        r"settlements; of them read as water-side by the lexicon & \HydSharePct; \HydOverlapPct \\",
+        r"settlements; of them read as water-related by the lexicon & \HydSharePct; \HydOverlapPct \\",
         r"\quad Water namesakes recorded on Wikidata that this reading recovers & \HydRecallK{} of \WDNHydro \\",
         r"\quad Height above the drainage of such settlements minus that of other settlements of their AOI (m) & "
         r"\HydHand{} (\HydHandLo{} to \HydHandHi) \\",
@@ -4092,7 +4129,7 @@ def table_nine_text() -> str:
         r"\NReadAgreeMin--\NReadAgreeMax \\",
         r"\quad Distinct names read by the language model & \NReadNames \\",
         r"\quad Analysed settlements with an ASCII name containing \emph{ae}, \emph{oe} or \emph{ue} & \DigraphPct \\",
-        r"\quad Water-side matches gained; lost if these digraphs were read as plain vowels & \DigraphGainWet; "
+        r"\quad Water-related matches gained; lost if these digraphs were read as plain vowels & \DigraphGainWet; "
         r"\DigraphLoseWet \\",
     ]
     cap = ("Quantities stated in the paper and not given in another table (exploratory unless pre-specified; "
@@ -4202,67 +4239,76 @@ def supp_tables_b7(v37: dict | None, v43: dict | None, v44: dict | None, v55: di
     # 推定値の区分（B-7 の 11(k)）
     P, PH, CB, NP, CO = ("pre-specified", "post hoc, planned before computed", "post hoc, computed before planned",
                          "not planned", "correction")
-    status = [  # 節の番号は B-11 の構成（初見の査読 第 7 回、A4）
+    status = [  # 節の番号は B-13 の構成（初見の査読 第 9 回、A9: 四部の組み直し）
         ("H2 verdict, $R$, readings, placebo; protocol's two-way bootstrap", P, "protocol", "3.2"),
         ("H1, H3, H4, H5; total and flexible increments; secondary splits; seven sensitivity analyses", P,
          "protocol", "3.3, C"),
         ("$p$ values of H2--H4 (computed after the critiques)", P, "6, add.~1", "3.3, S"),
         ("Rerun with the corrected reading of Norwegian names; corrected sensitivity analysis 6", CO, "4; 1",
-         "2.1, 3.2, C"),
+         "2.2, 3.2, C"),
         (("Positive control on all cells; alternative measures of the baseline gain; two-way bootstrap variant; "
           "distance bands from 500\\,m; within-AOI odds ratios on all cells; fold assignments; events held out whole"),
-         PH, "2", "3.3, 3.4, 4.2"),
+         PH, "2", "3.2, 4.1, 4.3, S"),
         (("Class split of the positive control; overlap of top deciles; bound translations under other fold "
          "assignments; split-specific power ratios; interval coverage; class intervals; real minus permuted by "
          "class; operating characteristics against the real margin; interval combining fold assignments"), CB, "2",
          "S"),
         (("Positive control at settlement points and by distance band; flood contrasts and increments below "
-         "500\\,m; odds ratios by class and band and within 500\\,m of water-side names"), NP, "2", "5, 6.3"),
-        ("GFM labels, designated replication, rescoring, odds ratios", PH, "3", "5.2"),
-        ("Check of GFM masking (planned after the GFM result had been seen)", NP, "3, add.~2", "5.2, S"),
+         "500\\,m; odds ratios by class and band and within 500\\,m of water-related names"), NP, "2", "5.1, 6.2, S"),
+        ("GFM labels, designated replication, rescoring, odds ratios", PH, "3", "4.2, 6.2"),
+        ("Check of GFM masking (planned after the GFM result had been seen)", NP, "3, add.~2", "4.2, S"),
         (("Permutation distribution; coefficients; thirteen fold assignments; test inversion; terrain oracle; "
          "within-area metrics; label variants; element groups (expected directions written after the odds ratios of "
          "three classes near settlements had been computed); settler societies excluded; etymology checks"), PH,
-         "5", "3.4, 5.3, 6.2"),
+         "5", "4.3, 6.1, S"),
         (("Ceiling; plasmode with fixed base models; flood-information controls; GFM diagnostics and V1; strict "
          "reading; sensitivity runs; AOI weighting; rounded coordinates; ladder rung T0$^-$"), PH, "6",
-         "2.1, 4, 5, 6"),
+         "2.1, 5, 6"),
         (("Permutations with recomputed composition; plasmode with refitted models (bound withdrawn in amendment 8); "
           "activation split with the corrected code; recurrence control; floodplain reading (defined after the class "
           "estimates had been seen); partly flooded cells; magnitude terciles; built-up and tree adjustment; GFM "
-          "within-AOI discrimination; pairs bootstrap; descriptions (a)--(k)"), PH, "7", "3.4, 4, 5, A"),
+          "within-AOI discrimination; pairs bootstrap; descriptions (a)--(k)"), PH, "7", "4, 5, A, S"),
         ("Joint tests of the near-settlement coefficients; digraph matching; recall by language", PH, "7, add.~1",
-         "5.3, 6, S"),
-        ("Joint test of the lexicon coefficients on the held-out predictions", PH, "7, add.~3", "3.4"),
+         "6.2, S"),
+        ("Joint test of the lexicon coefficients on the held-out predictions", PH, "7, add.~3", "4.3, S"),
         ("Observed increment within 500\\,m on the pooled scale (re-expression of an amendment-2 quantity)", NP,
-         "--", "4.1"),
+         "--", "5.1"),
         (("Achieved equivalence bound; location groups needed; permutation test; second stage refitted in the "
          "bootstrap; operating characteristics at the margin; within-500\\,m increment on its own scale"), PH, "8",
-         "3.2, 4.1, S"),
+         "5.2, S"),
         (("No-effect reference of the bounds (fixed after bounds under earlier references had been seen) and their "
           "Monte Carlo intervals; more plasmode replicates; recurrent surface water of each cell; cleaned lexicon"),
-         PH, "8", "4"),
+         PH, "8", "5.2, S"),
         (("Estimates near settlements by class and variant (uncapped sample, misclassification, river size, the two "
          "label sets on the same cells); heights above main rivers; calibration and skill; audit of matched forms; "
          "reading by nearby river and lake names; second coder"), PH, "8", "5, 6, S"),
         (("Bounds with refitted intervals and over fold assignments; small and protective injected effects; effects "
           "that differ between settlements; simulated power with every model refitted; flood-mapping skill; one "
           "definition of permanent water; other subsampling seeds; bare-earth elevation model"), PH, "9",
-         "3.2, 4.2, 5, S"),
+         "4.3, 5.2, S"),
         ("Description of H4 as carrying little information (a reading the protocol does not provide)", NP, "9",
-         "3.3, A"),
+         "A"),
         (("Detectable effects and further intervals near settlements; misreading over a grid of rates; the "
           "islands-and-meadows group at settlement sites; the floodplain reading by country and form; sensors; the "
           "activation split in full; distance and continent interactions; tuned penalty; country indicators; "
           "clustered injection; flood hazard maps in the baseline; areas within language regions; languages read; "
-          "classes of the language-model reading"), PH, "10", "3.4, 4.2, 5, 6"),
+          "classes of the language-model reading"), PH, "10", "4.2, 4.3, 5, 6, S"),
         ("Placebo comparison of the GFM within-area evaluation (planned after that evaluation had been seen)", PH,
-         "10, add.~2", "5.2"),
+         "10, add.~2", "4.2"),
         (("Change of the activation split by location group; uncapped odds ratios near settlements on both label "
           "sets (made the main estimates after both versions had been seen); bounds on the estimator's scale; the GFM "
           "domain; the denominator of the labels; Nadeau--Bengio and combined intervals; census of exploratory "
           "estimates; feature codes and rounded coordinates; pilots; audit sample; permutations with rebuilt "
-          "composition on the country split; digraph breakdown"), PH, "11", "2, 3.3, 3.4, 4.2, 5, 6, S"),
+          "composition on the country split; digraph breakdown"), PH, "11", "2, 3.2, 4, 5, 6, S"),
+        (("Operating characteristics of the decision rules; the leak of the primary split and the reference model; "
+          "constant forecasts; specification curve of the odds ratios near settlements; composition of the uncapped "
+          "sample; languages recounted; injection within 1\\,km; built-up land near settlements; flood typing and the "
+          "GFM window; second coder's intervals; revised audit sample; penalty on the name features only"), PH, "12",
+         "2.3, 3.2, 4.1, 4.3, 5.2, 6, S"),
+        (("Corrected equivalence test and its operating characteristics; the bound of every interval; the second "
+          "coder's rates; controls known before each event; corrected lexicon; early stopping on location groups; "
+          "influence; joint test of the name coefficients; AOI-balanced metrics; checks near settlements; qualifier "
+          "pairs; diagnosis of the GFM labels"), PH, "13", "3.2, 3.3, 4, 5, 6, S"),
     ]
     rows = [f"{a} & {b} & {c} & {d} \\\\" for a, b, c, d in status]
     (HERE / "app_table_seven_status.tex").write_text(_tbl(
@@ -4296,7 +4342,7 @@ def supp_tables_b7(v37: dict | None, v43: dict | None, v44: dict | None, v55: di
         (HERE / "app_table_seven_translations.tex").write_text(_tbl(
             "tab:seven-translations", "Odds ratios of flooding that the margin and the observed upper limits correspond "
             "to under the synthetic labels of the protocol's power analysis (amendment 2): an effect on all ground "
-            "nearest a water-side name, and on the ground within 500\\,m of such a settlement. In parentheses the range "
+            "nearest a water-related name, and on the ground within 500\\,m of such a settlement. In parentheses the range "
             "over Monte Carlo resamples of the simulated curve; $>$: beyond the largest simulated effect (odds ratio "
             f"{np.exp(e['homogeneous']['margin']['delta_max']):.2f} for all ground, "
             f"{np.exp(e['local_500m']['margin']['delta_max']):.1f} within 500\\,m). These translations assume the label model of the power "
@@ -4312,11 +4358,11 @@ def supp_tables_b7(v37: dict | None, v43: dict | None, v44: dict | None, v55: di
                 f"\\quad\\quad named after a water feature & {_n(v43['n_hydro'])} \\\\",
                 f"\\quad\\quad named after a person, event or other commemoration & {_n(v43['n_commemorative'])} \\\\",
                 "\\middlehline",
-                f"Water-feature namesakes read as water-side by the lexicon & {kr(v43['recall_lexicon'])} \\\\",
+                f"Water-feature namesakes read as water-related by the lexicon & {kr(v43['recall_lexicon'])} \\\\",
                 f"Same, by the language model & {kr(v43['recall_nread'])} \\\\",
-                f"Lexicon water-side names with a water-feature namesake & {kr(v43['hydro_among_lexicon_wetside'])} \\\\",
-                f"Language-model water-side names with a water-feature namesake & {kr(v43['hydro_among_nread_wetside'])} \\\\",
-                (f"Lexicon water-side names with a commemorative namesake & "
+                f"Lexicon water-related names with a water-feature namesake & {kr(v43['hydro_among_lexicon_wetside'])} \\\\",
+                f"Language-model water-related names with a water-feature namesake & {kr(v43['hydro_among_nread_wetside'])} \\\\",
+                (f"Lexicon water-related names with a commemorative namesake & "
                 f"{kr(v43['commemorative_among_lexicon_wetside'])} \\\\")]
         (HERE / "app_table_seven_wikidata.tex").write_text(_tbl(
             "tab:seven-wikidata", "Settlements whose namesake is recorded on Wikidata (property P138), classed by the "
@@ -4340,7 +4386,7 @@ def supp_tables_b7(v37: dict | None, v43: dict | None, v44: dict | None, v55: di
             rows.append(f"{lang} & {lp[lang]['n']} & {p_['k']} of {p_['n']} ({_pct0(p_['rate'])}; "
                         f"{_pct0(p_['ci95'][0])}--{_pct0(p_['ci95'][1])}) & {sp} & {rec} \\\\")
         (HERE / "app_table_seven_languages.tex").write_text(_tbl(
-            "tab:seven-languages", "Precision and recall of the lexicon's water-side reading by language of the "
+            "tab:seven-languages", "Precision and recall of the lexicon's water-related reading by language of the "
             "article, for languages with at least 30 coded names (amendment 5; recall by language, amendment 7, "
             "addendum 1). Recall is estimated as a domain with the design weights of the whole sample (stratum size over sample size), whereas Table~\\ref{tab:ten-valid} weights the strata by their sizes within each country, with "
             "percentile intervals from 2,000 resamples within strata. The derivations were coded by the language model "
@@ -4379,7 +4425,7 @@ def supp_tables_b7(v37: dict | None, v43: dict | None, v44: dict | None, v55: di
     else:
         rows = [f"\\multicolumn{{7}}{{l}}{{{missing('plasmode refit')}}} \\\\"]
     (HERE / "app_table_seven_refit.tex").write_text(_tbl(
-        "tab:seven-refit", "Effects injected into the observed labels for all ground nearest a water-side name, with the "
+        "tab:seven-refit", "Effects injected into the observed labels for all ground nearest a water-related name, with the "
         "base models fixed and with every model refitted on the injected labels (amendment 7; three repetitions with "
         "the injections of amendment 6): mean gain in $\\Delta$BS over the uninjected run ($\\times10^{-4}$), the same "
         "with fixed base models over the ten repetitions of amendment 6, the ratio of the refitted to the fixed gain, "
@@ -4399,7 +4445,7 @@ def supp_tables_b7(v37: dict | None, v43: dict | None, v44: dict | None, v55: di
                     continue
                 c, band = term.split(":")
                 bl = {"le500m": "$\\leq$500\\,m", "500m_1km": "0.5--1\\,km", "gt1km": "$>$1\\,km"}[band]
-                rows.append(f"{g.CLASS_LABELS.get(c, c) if c != 'wetside' else 'water-side'}, {bl} & {orv(d['odds_ratio'])} "
+                rows.append(f"{g.CLASS_LABELS.get(c, c) if c != 'wetside' else 'water-related'}, {bl} & {orv(d['odds_ratio'])} "
                             f"& {orv(d['sandwich_ci95'][0])}--{orv(d['sandwich_ci95'][1])} & "
                             f"{orv(d['pairs_ci95'][0])}--{orv(d['pairs_ci95'][1])} \\\\")
         if rows:
@@ -4407,7 +4453,7 @@ def supp_tables_b7(v37: dict | None, v43: dict | None, v44: dict | None, v55: di
                 "tab:seven-pairs", "Odds ratios of flooding near settlements by class and distance band on the EMS "
                 "labels, given the terrain model's prediction (AOI fixed effects), with cluster-robust and pairs "
                 "cluster bootstrap 95\\,\\% intervals over location groups (2,000 replicates; amendment 7). The two "
-                "blocks are separate models (water-side names; the six classes).", "lrll",
+                "blocks are separate models (water-related names; the six classes).", "lrll",
                 "Names, distance & Odds ratio & Cluster-robust & Pairs bootstrap", rows), encoding="utf-8")
 
 
@@ -4840,7 +4886,7 @@ def table_ten_robust(v66: dict | None, v67: dict | None) -> str:
     for gk, gd in sorted((b7.get("generation") or {}).items()):
         rows.append(row(f"Product schema generation {gk}", gd.get("R"), f"B7 gen {gk}"))
     rows.append(row("Without the African AOIs", (v66.get("B8") or {}).get("without_africa"), "B8"))
-    rows.append(r"\multicolumn{5}{l}{\emph{Odds ratio within 500\,m of water-side names in the same subsets$^{b}$}} \\")
+    rows.append(r"\multicolumn{5}{l}{\emph{Odds ratio within 500\,m of water-related names in the same subsets$^{b}$}} \\")
     subsets = [(f"EMS map from {lab}", ((b7.get("sensor") or {}).get(s) or {}).get("or_le500m"))
                for s, lab in (("s1", "Sentinel-1"), ("sar", "other radar"), ("optical", "optical images"),
                               ("none", "images not recorded"))]
@@ -4880,9 +4926,9 @@ def table_ten_robust(v66: dict | None, v67: dict | None) -> str:
            "left out; the terrain gain is measured in the same way. The placebo rows were added after the GFM result "
            "had been seen (addendum 2 of amendment 10), because the decision table requires them for an interval "
            "above zero; the last column gives $R$ minus the placebo's $R$ with its 95\\,\\% interval. $^{b}$The "
-           "estimator of Sect.~5 (AOI fixed effects, distance bands and the logit of the terrain model's held-out "
+           "estimator of Sect.~6.3 of the paper (AOI fixed effects, distance bands and the logit of the terrain model's held-out "
            "prediction) on the cells of each subset, with a 95\\,\\% pairs cluster bootstrap over location groups "
-           "(2,000 replicates); not estimated when fewer than five water-side cells within 500\\,m flooded. $^{c}$The "
+           "(2,000 replicates); not estimated when fewer than five water-related cells within 500\\,m flooded. $^{c}$The "
            "pairs bootstrap separated in some replicates (standard deviation of the log odds ratio "
            f"above {PAIRS_UNSTABLE_SD:g}), so the cluster-robust interval is given.")
     return _tbl("tab:ten-robust", cap, "p{7.4cm}llll", r"Comparison & $R$ & 90\,\% interval & 95\,\% interval & "
@@ -4894,7 +4940,7 @@ def table_ten_splits(v66: dict | None) -> str:
     rows = []
     for key, lab in (("main", "Location groups (primary)"), ("country", "Countries"), ("time", "Time (from 2024)"),
                      ("cutoff", "Language-model cut-off"), ("activation_merged", "Activations kept whole"),
-                     ("activation_merged_frozen", "Activations kept whole, frozen code")):
+                     ("activation_merged_frozen", "Activations kept whole")):
         d = (b9.get("brier_by_split") or {}).get(key)
         if not d:
             rows.append(f"{lab} & \\multicolumn{{6}}{{l}}{{{missing('B9')}}} \\\\")
@@ -4936,9 +4982,9 @@ def table_ten_injected(v66: dict | None) -> str:
     if not rows:
         rows = [f"\\multicolumn{{7}}{{l}}{{{missing('B11')}}} \\\\"]
     base = b11.get("base_or") or {}
-    cap = ("The estimator of Sect.~5 of the paper (AOI fixed effects, distance bands, logit of the terrain prediction) "
+    cap = ("The estimator of Sect.~6.3 of the paper (AOI fixed effects, distance bands, logit of the terrain prediction) "
            "applied to labels with a known injected odds ratio (exploratory, amendment 10, item B11; 20 replicates per "
-           "row; form A: all ground nearest a water-side name, form B: the part within 500\\,m). Realised: the mean "
+           "row; form A: all ground nearest a water-related name, form B: the part within 500\\,m). Realised: the mean "
            "estimated odds ratio divided by the estimate on the observed labels"
            + (f" ({orv(base['all'])} for all ground, {orv(base['le500m'])} within 500\\,m)" if base else "")
            + ". SD: standard deviation of the log odds ratio between replicates. Flips: mean number of labels changed.")
@@ -4963,7 +5009,7 @@ def table_ten_dilution(v44: dict | None) -> str:
            "$1+\\varphi(\\mathrm{OR}_n-1)$ on the ground of truly water-related names, observed through names read with "
            + (f"precision $p_1={p1:.2f}$ and a water-related share $p_0={p0:.2f}$ among other names, both measured with "
               "the codes of the model that compiled the lexicon (Table~5 and Sect.~6.1 of the paper; $p_0$ from the "
-              "names not read as water-side in the sample of Wikipedia derivations)." if p1 is not None
+              "names not read as water-related in the sample of Wikipedia derivations)." if p1 is not None
               else "the measured misreadings."))
     head = r"OR$_n$ & " + " & ".join(f"$\\varphi={phi:g}$" for phi in DIL_PHI)
     return _tbl("tab:ten-dilution", cap, "lrrrr", head, rows)
@@ -4980,10 +5026,10 @@ def table_ten_misclass(v66: dict | None) -> str:
         rows.append(f"{p1:.1f} & {p0:.2f} & " + " & ".join(cell) + " \\\\")
     if not rows:
         rows = [f"\\multicolumn{{5}}{{l}}{{{missing('B5')}}} \\\\"]
-    cap = ("Odds ratio near water-side names corrected for misreading over a grid of rates (exploratory, amendment 10, "
+    cap = ("Odds ratio near water-related names corrected for misreading over a grid of rates (exploratory, amendment 10, "
            "item B5): $\\mathrm{OR}=(\\mathrm{OR}^*(1-p_0)-(1-p_1))/(p_1-\\mathrm{OR}^*p_0)$, with OR$^*$ the observed "
            "estimate within 500\\,m and the limits of its pairs-bootstrap 95\\,\\% interval; $p_1$: share of water-related "
-           "names among those read as water-side; $p_0$: share among the others. Undefined: the observed value cannot "
+           "names among those read as water-related; $p_0$: share among the others. Undefined: the observed value cannot "
            "arise from these rates.")
     return _tbl("tab:ten-misclass", cap, "rrrrr", r"$p_1$ & $p_0$ & Observed point & Observed lower & Observed upper",
                 rows)
@@ -5035,7 +5081,7 @@ def table_ten_other_lang(v66: dict | None) -> str:
     cap = ("Analysed cells whose names are read in a language other than their own (exploratory, amendment 10, item "
            "B14). Country level: the first language of the GeoNames country record is not among the lexicon blocks "
            "applied to the country. Regions: Natural Earth first-level units (point in polygon of the cell centre).")
-    return _tbl("tab:ten-other-lang", cap, "p{7.8cm}rrrr", r"Country or region & Cells & Water-side & "
+    return _tbl("tab:ten-other-lang", cap, "p{7.8cm}rrrr", r"Country or region & Cells & Water-related & "
                 r"Flooded, 500\,m & AOIs", rows)
 
 
@@ -5055,14 +5101,14 @@ def table_ten_between(v66: dict | None) -> str:
             continue
         cs = [f"${d['coef'][i]:+.2f}$ (${d['ci95'][i][0]:+.2f}$ to ${d['ci95'][i][1]:+.2f}$)" for i in (0, 1)]
         rows.append(f"{lab} & {d['n_aoi']} & {d['n_activations']} & {cs[0]} & {cs[1]} \\\\")
-    cap = ("Whether areas with more water-side names flood more, within language regions (exploratory; amendment 10, "
+    cap = ("Whether areas with more water-related names flood more, within language regions (exploratory; amendment 10, "
            "item B13). Regression of the empirical logit of each AOI's flooded fraction, "
-           "$\\log\\{(k+0.5)/(n-k+0.5)\\}$, on the share of its analysed cells whose nearest name is water-side and on "
+           "$\\log\\{(k+0.5)/(n-k+0.5)\\}$, on the share of its analysed cells whose nearest name is water-related and on "
            "the AOI mean of the terrain model's held-out logit, with activation fixed effects, for the AOIs of countries "
            "read with the German, English or French lexicon blocks; AOIs that are the only analysed AOI of their "
            "activation drop out with the fixed effects. Standard errors clustered by activation (CR1), 95\\,\\% "
            "intervals from the $t$ distribution with one degree of freedom fewer than the activations.")
-    return _tbl("tab:ten-between", cap, "lrrcc", r"Language & AOIs & Activations & Share water-side & "
+    return _tbl("tab:ten-between", cap, "lrrcc", r"Language & AOIs & Activations & Share water-related & "
                 r"Mean logit of M1", rows)
 
 
@@ -5096,54 +5142,84 @@ def table_ten_valid(v66: dict | None) -> str:
                         f"{pct1(d['precision'])} & & & \\\\")
     if not rows:
         rows = [f"\\multicolumn{{7}}{{l}}{{{missing('B6')}}} \\\\"]
-    cap = ("Precision and recall of the lexicon's water-side reading by country, against etymologies recorded on "
+    cap = ("Precision and recall of the lexicon's water-related reading by country, against etymologies recorded on "
            "Wikipedia (exploratory, amendment 10, item B6): countries with at least ten coded names. Recall weights the two "
            "sampling strata by their sizes within the country, whereas Table~\\ref{tab:seven-languages} uses the design "
            "weights of the whole sample (stratum size over sample size); the two agree on precision and differ on "
-           "recall where the sampling fraction differs between countries. Forms: the only matched forms with at least ten coded names read as water-side. "
+           "recall where the sampling fraction differs between countries. Forms: the only matched forms with at least ten coded names read as water-related. "
            "Both coders are language models; coder 1 compiled the lexicon.")
-    return _tbl("tab:ten-valid", cap, "lrrrrrr", r"Country & Coded & Read as water-side & Precision (1) & Recall (1) & "
+    return _tbl("tab:ten-valid", cap, "lrrrrrr", r"Country & Coded & Read as water-related & Precision (1) & Recall (1) & "
                 r"Precision (2) & Recall (2)", rows)
 
 
 def table_ten_text() -> str:
-    # B-12（A3〜A8 の組み直しと A12）: 新しい本文の節に合わせ、本文が言い、他の表に無い量だけを残す
+    # B-13 の A9: 四部の組み直しに合わせ、本文が言い、他の表に無い量を全て（第 9 回の批評が辿れなかった数を含む）
     rows = [
-        r"\multicolumn{2}{l}{\emph{Data and sample (Sects.~2--3)}} \\",
+        r"\multicolumn{2}{l}{\emph{Design, data and sample (Sects.~2--3)}} \\",
+        r"\quad Median distance from a scored cell to its nearest settlement & \DistMedian\,km \\",
         r"\quad Flooded share of the analysed cells; AOI median [interquartile range] & \BaseRatePct; \AoiRateMed{} "
         r"[\AoiRateQOne, \AoiRateQThree] \\",
-        r"\quad Evaluable cells neither flooded nor dry; cells partly permanent water or outside the image & "
-        r"\NeitherCells; \DenPartialPct \\",
-        r"\quad AOIs without a hydrography layer; analysed AOIs whose products describe no flood type, and those counted "
+        r"\quad AOIs without a hydrography layer; analysed AOIs whose products describe no flood type; counted "
         r"riverine by the inland rule & \NoHydroNExcl{} (\NoHydroPct); \NUntypedAoi; \NUnspecifiedRiverine \\",
         r"\quad Settlements nearest the analysed cells: sections of populated places; historical, abandoned or "
         r"destroyed; coordinates on whole arc-minutes & \FcodeSectionPct; \FcodeHistPct; \RoundedSettlementsPct \\",
         r"\quad Share of the cells and of the label variance $\sum p(1-p)$: Asian AOIs; European AOIs & "
         r"\ShareCellsAsia, \ShareVarAsia; \ShareCellsEurope, \ShareVarEurope \\",
+        r"\quad Improvement from recalibrating the baseline model alone (Brier units) & \RecalGainBS \\",
+        r"\quad Ratio of the upper to the lower 95\,\% limit of the baseline gain & \YardRatioSpan \\",
         r"\quad Effect calibrated to the margin called equivalent against the real margin (synthetic labels) & "
         r"\PowerEquivReal \\",
-        r"\multicolumn{2}{l}{\emph{Uncertainty (Sect.~4)}} \\",
-        r"\quad $R$ over thirteen assignments of location groups to folds: smallest; largest & \FoldRMin; \FoldRMax \\",
-        r"\quad Correlation of AOI-mean residuals, AOIs of one activation within 50\,km (Fisher 95\,\%); between "
-        r"activations & \ResActCorrNear{} (\ResActCorrNearLo{} to \ResActCorrNearHi; \ResActNPairsNear{} pairs); "
-        r"\ResActCorrOther \\",
+        r"\multicolumn{2}{l}{\emph{The test and its uncertainty (Sect.~3)}} \\",
+        r"\quad Increase in Brier score from names (95\,\% interval) & \DeltaNamesAbs{} (\DeltaNamesIncLo{} to "
+        r"\DeltaNamesIncHi) \\",
+        r"\quad Protocol rule declaring equivalence at $R=-0.05$; at $R=+0.05$ (uniform shift) & \OpFixedSizeLo; "
+        r"\OpFixedSizeHi \\",
+        r"\quad H4 total increment over a constant forecast, $R$ (90\,\% interval) & \HFourTotalYThree{} "
+        r"(\HFourTotalYThreeLo{} to \HFourTotalYThreeHi) \\",
+        r"\multicolumn{2}{l}{\emph{Designated checks (Sect.~4)}} \\",
+        r"\quad Correlation of AOI-mean residuals, AOIs of one activation within 50\,km (Fisher 95\,\%) & "
+        r"\ResActCorrNear{} (\ResActCorrNearLo{} to \ResActCorrNearHi; \ResActNPairsNear{} pairs) \\",
+        r"\quad Without the character model's area mean in both models: $R$; names model over the recalibrated "
+        r"baseline model & \RefNoCharR; \RefNoCharVsSimple \\",
+        r"\quad Base models with early stopping on location groups: baseline gain; $R$ (90\,\% interval) & "
+        r"\GresYard; \GresR{} (\GresRLoNinety{} to \GresRHiNinety) \\",
+        r"\quad Ten most influential location groups removed in turn: $R$ (fixed; refitted); effective number of "
+        r"groups & \InflLo{} to \InflHi; \InflRefitLo{} to \InflRefitHi; \InflNeff \\",
+        r"\quad Joint Wald test of the name coefficients on all held-out cells: $\chi^2$ (df), $p$ & \WaldNamesChi{} "
+        r"(\WaldNamesDf), \WaldNamesP \\",
+        r"\quad Within AOIs: median change in the area under the ROC curve; share of AOIs with a higher area & "
+        r"\AoiMedDAuc; \AoiShareAucUp \\",
         r"\multicolumn{2}{l}{\emph{What assignment through settlements can carry (Sect.~5)}} \\",
-        r"\quad Share of cells within 500\,m of a settlement with a water-side name & \CeilShareFiveHundred \\",
-        r"\quad Largest possible $R$ from perfect prediction near water-side names within 1\,km & \CeilROneKm \\",
-        r"\quad Recurrence assigned through settlements on the AOIs with other events, on the pooled scale & "
-        r"\RecurPooledR \\",
+        r"\quad Share of cells within 500\,m of a settlement with a water-related name & \CeilShareFiveHundred \\",
+        r"\quad Largest possible $R$ from perfect prediction near water-related names within 1\,km & \CeilROneKm \\",
+        r"\quad Names scored on the ground within 500\,m of water-related names, $R$ (90\,\% interval) & \NearR{} "
+        r"(\NearRLo{} to \NearRHi) \\",
+        r"\quad Calibration of the baseline model's held-out predictions: intercept; slope & \CalibPrimMOneInt; "
+        r"\CalibPrimMOne \\",
+        r"\quad Dilution with the independent coder's rates: an odds ratio of 3 on a quarter; on a tenth of the "
+        r"ground & \DilObsQuarterTwo; \DilObsTenthTwo \\",
         r"\multicolumn{2}{l}{\emph{Readings and labels near settlements (Sect.~6)}} \\",
+        r"\quad Share of names not read as water-related with a water-related derivation, independent coder "
+        r"(95\,\% interval) & \CodeTwoPZeroPct{} (\CodeTwoPZeroLo{} to \CodeTwoPZeroHi) \\",
+        r"\quad Agreement of the two coders on water-related derivations ($\kappa$) & \CoderKappa \\",
+        r"\quad Corrected lexicon: $R$ (90\,\% interval) & \LexCorrR{} (\LexCorrRLoNinety{} to \LexCorrRHiNinety) \\",
+        r"\quad Cells nearest Australian settlements & \AuPct \\",
         r"\quad Cells whose nearest name is read as riverside by a form such as French \emph{-sur-} & \RiversidePct \\",
         r"\quad Settlements with a namesake in Wikidata; of them named after a river; river namesakes read as "
-        r"water-side by the language model; by the lexicon & \WDNamesakes; \WDRiverNamesakes; \WDNreadHits; "
+        r"water-related by the language model; by the lexicon & \WDNamesakes; \WDRiverNamesakes; \WDNreadHits; "
         r"\WDLexHits \\",
-        r"\quad Language-model reading: cells water-side; in Africa; cells answered ``unknown'' & \NReadWetPct; "
+        r"\quad Language-model reading: cells water-related; in Africa; cells answered ``unknown'' & \NReadWetPct; "
         r"\NReadWetAF; \NReadUnknownPct \\",
-        r"\quad Planned estimate on the GFM labels: flooded cells within 500\,m of water-side names; location groups "
+        r"\quad Planned estimate on the GFM labels: flooded cells within 500\,m of water-related names; location groups "
         r"holding them & \GfmCappedFlooded; \GfmCappedUnits \\",
-        r"\quad Cells within 500\,m that GFM can assess: near highland names; near water-side names & "
-        r"\HighAssessPct; \WsAssessPct \\",
-        r"\quad Joint Wald test, class coefficients in the three distance bands: $p$ & \WaldClassP \\",
+        r"\quad Uncapped EMS estimate: share of its flooded cells within 500\,m in EMSR052 and EMSR130 & "
+        r"\NearTopTwoShare \\",
+        r"\multicolumn{2}{l}{\emph{Appendix C}} \\",
+        r"\quad Null simulations: standard deviation of $R$ between replicates; median bootstrap standard error; "
+        r"robust standard deviation & \NullSdBetween; \NullMedianSe; \NullRobustSd \\",
+        r"\quad Observed and simulated median 90\,\% half-widths of $R$ & \ObsHalfWidth; \SimHalfWidth \\",
+        r"\quad Synthetic effect at $R\approx0.05$: change in Brier score; simulated baseline gain & \SimSesoiDBS; "
+        r"\SimYard \\",
     ]
     cap = ("Quantities stated in the paper and not given in another table of the paper or of this Supplement "
            "(exploratory unless pre-specified). Intervals: 95\\,\\% unless marked. The values are typeset from the "
@@ -5336,14 +5412,16 @@ def table_eleven_near(v68: dict | None) -> str:
         mn["n_units_flooded_near"] = ca["n_units_with_flooded"]
     rows.append(row("EMS labels", mn or None, "v57 main"))
     rows.append(row("EMS labels, flooded fraction over observed non-permanent water", b5.get("or_capped"), "v68 B5"))
-    cap = ("Odds ratio of flooding within 500\\,m of settlements with water-side names against other names of the same "
+    cap = ("Odds ratio of flooding within 500\\,m of settlements with water-related names against other names of the same "
            "AOI, given the held-out prediction of the baseline model (exploratory; amendment 11, items B2 and B5): AOI "
            "fixed effects, distance bands and the logit of the prediction, with a 95\\,\\% pairs cluster bootstrap over "
-           "location groups (2,000 replicates). Flooded: flooded cells within 500\\,m of water-side names and the "
+           "location groups (2,000 replicates). Flooded: flooded cells within 500\\,m of water-related names and the "
            "location groups that hold them. MDE: the smallest odds ratios below and above one detectable with 80\\,\\% "
            "power (two-sided 5\\,\\%). The uncapped sample conditions on the predictions of the uncapped sensitivity run "
            "(the baseline model does not use names). The GFM labels are not independent of EMS where the EMS map was "
-           "drawn from Sentinel-1.")
+           "drawn from Sentinel-1. The number of AOIs not mapped from Sentinel-1 differs between tables and figures "
+           "because each counts the AOIs that enter its own sample: uncapped or capped, cells that GFM can assess, "
+           "and AOIs with both flooded and dry cells.")
     return _tbl("tab:eleven-near", cap, "p{6.6cm}llrrl", r"Sample and labels & Odds ratio & 95\,\% interval & "
                 r"Flooded & Groups & MDE", rows)
 
@@ -5352,7 +5430,7 @@ def table_eleven_scale(v68: dict | None) -> str:
     b3 = (v68 or {}).get("B3") or {}
     rows = []
     mg = (b3.get("margin") or {}).get("A")
-    rows.append("Margin ($R=0.05$), all ground nearest a water-side name & "
+    rows.append("Margin ($R=0.05$), all ground nearest a water-related name & "
                 + (f"{orv(mg['nominal'])} & {mg['text']} \\\\" if mg else f"\\multicolumn{{2}}{{l}}{{{missing('B3')}}} \\\\"))
     for iv, lab in (("fixed", "fitted models held fixed"), ("fold", "with the spread over fold assignments"),
                     ("refit", "with the second stage refitted")):
@@ -5373,8 +5451,8 @@ def table_eleven_scale(v68: dict | None) -> str:
         pairs = ", ".join(f"{a:g} $\\to$ {b:.2f}" for a, b in zip(cur["A"]["nominal"][1:], cur["A"]["estimator"][1:],
                                                                     strict=True))
         note = f" Calibration curve for all ground (nominal $\\to$ estimator): {pairs}."
-    cap = ("The margin and the bounds of Sect.~4 as injected (nominal) odds ratios and on the scale of the estimator of "
-           "Sect.~5 (exploratory; amendment 11, item B3). The estimator was applied to labels with known injected odds "
+    cap = ("The margin and the bounds of Sect.~5 of the paper as injected (nominal) odds ratios and on the scale of the "
+           "estimator of Sect.~6.3 (exploratory; amendment 11, item B3). The estimator was applied to labels with known injected odds "
            "ratios (Table~\\STabTenInjected); its mean odds ratio, relative to the uninjected labels, is interpolated on "
            "the log scale. Beyond the largest injected odds ratio (3) the estimator value is given as a lower limit. "
            "The no-effect reference is the mean increment of reassigned names with rebuilt composition." + note)
@@ -5430,7 +5508,7 @@ def table_eleven_checks(v68: dict | None) -> str:
     rows.append(r"\multicolumn{3}{l}{\emph{Denominator of the flooded fraction (item B5)}} \\")
     cc_ = b5.get("counts_capped") or {}
     if cc_:
-        rows.append(f"Cells partly unobserved or partly permanent water: all; within 500\\,m of water-side; of other "
+        rows.append(f"Cells partly unobserved or partly permanent water: all; within 500\\,m of water-related; of other "
                     f"names & {pct1(cc_['all']['share'])}; {pct1(cc_['le500m_wetside']['share'])}; "
                     f"{pct1(cc_['le500m_other']['share'])} & \\\\")
         rl = b5.get("relabel_capped") or {}
@@ -5518,10 +5596,10 @@ def table_eleven_gazetteer(v68: dict | None) -> str:
     if not rows:
         rows = [f"\\multicolumn{{5}}{{l}}{{{missing('v68 B9')}}} \\\\"]
     cap = ("The nearest settlements of the analysed cells by GeoNames feature code (exploratory; amendment 11, item B9): "
-           "settlements, their share, those read as water-side and the cells nearest them. PPL: populated place; "
+           "settlements, their share, those read as water-related and the cells nearest them. PPL: populated place; "
            "PPLA--PPLA4: seats of administrative divisions; PPLX: section of a populated place; PPLH: historical; PPLQ: "
            "abandoned; PPLW: destroyed; PPLL: locality; PPLF: farm village; PPLR: religious.")
-    return _tbl("tab:eleven-gazetteer", cap, "lrrrr", r"Feature code & Settlements & Share & Water-side & Cells", rows)
+    return _tbl("tab:eleven-gazetteer", cap, "lrrrr", r"Feature code & Settlements & Share & Water-related & Cells", rows)
 
 
 def supp_tables_b11(v68: dict | None, v69: dict | None = None) -> None:
@@ -5590,40 +5668,49 @@ def b11_text_macros(v36: dict | None, v54: dict | None, v57: dict | None, v57b: 
 
 
 def table_ceiling() -> None:
-    """本文の表 3（第 4.1 節）: 集落を通じた割り当てが運べるもの。尺度は全て R（セル全体の Brier の変化 ÷ 基礎の利得）。"""
+    """本文の表 3（第 5.1 節）: 集落を通じた割り当てが運べるもの。B-13 の A9: 見出しを最初の区画の中に、事象の前に分かる
+    対照（C1）の区画を足す、部分集合の尺度の行を注で分ける。"""
     rows = [
-        r"\multicolumn{3}{l}{\emph{What the ground nearest water-side names contributes to $R$}} \\",
-        (r"Observed contribution (90\,\% interval)$^{a}$ & \ObsRAllWet{} (\ObsRAllWetLo{} to \ObsRAllWetHi) & "
+        (r"\multicolumn{3}{l}{\emph{What the ground nearest water-related names contributes to $R$}} \\"),
+        r" & All ground nearest the name & Within 500\,m of the settlement \\",
+        (r"\quad Observed contribution (90\,\% interval)$^{a}$ & \ObsRAllWet{} (\ObsRAllWetLo{} to \ObsRAllWetHi) & "
          r"\ObsRFiveHundred{} (\ObsRFiveHundredLo{} to \ObsRFiveHundredHi) \\"),
-        r"Largest contribution if names predicted this ground perfectly & \CeilRAll & \CeilRFiveHundred \\",
-        (r"\multicolumn{3}{l}{\emph{Other information in place of the names ($R$, 90\,\% interval; all cells)}} "
-         r"\\"),
-        (r"Flooding of the cell itself in other EMS events$^{b}$ & \multicolumn{2}{l}{\RecurCellR{} "
-         r"(\RecurCellRLoNinety{} to \RecurCellRHiNinety)} \\"),
-        (r"\quad the same, averaged around the settlement and assigned through it & \multicolumn{2}{l}{\RecurSetR{} "
-         r"(\RecurSetRLoNinety{} to \RecurSetRHiNinety)} \\"),
-        (r"\quad the same, on the \RecurSubNAoi{} AOIs where the record exists$^{c}$ & \multicolumn{2}{l}{\RecurSubR{} "
-         r"(\RecurSubRLoNinety{} to \RecurSubRHiNinety)} \\"),
-        (r"Recurrent surface water of the cell itself, 1984--2021 & \multicolumn{2}{l}{\GswCellR{} "
-         r"(\GswCellRLoNinety{} to \GswCellRHiNinety)} \\"),
-        (r"\quad the same, around the settlement and assigned through it & \multicolumn{2}{l}{\GswOracleR{} "
-         r"(\GswOracleRLoNinety{} to \GswOracleRHiNinety)} \\"),
-        r"HAND of the settlement's site & \multicolumn{2}{l}{\OracleR{} (\OracleRLoNinety{} to \OracleRHiNinety)} \\",
-        (r"Flooded share around the settlement in the same event$^{d}$ & \multicolumn{2}{l}{\LabOracleR{} "
-         r"(\LabOracleRLoNinety{} to \LabOracleRHiNinety)} \\"),
+        r"\quad Largest contribution if names predicted this ground perfectly & \CeilRAll & \CeilRFiveHundred \\",
+        (r"\multicolumn{3}{l}{\emph{Records known before each event, in place of the names (amendment 13)}} \\"),
+        r" & Given to each cell & Assigned through settlements \\",
+        (r"\quad Recurrent surface water 1984--2021, events from 2022$^{b}$ & \GswTwoTwoCellR{} (\GswTwoTwoCellRLo{} to "
+         r"\GswTwoTwoCellRHi) & \GswTwoTwoSetR{} (\GswTwoTwoSetRLo{} to \GswTwoTwoSetRHi) \\"),
+        (r"\quad Water-related names on the same AOIs$^{b}$ & --- & \GswTwoTwoNamesR{} (\GswTwoTwoNamesRLo{} to "
+         r"\GswTwoTwoNamesRHi) \\"),
+        (r"\quad Flooding in earlier EMS events$^{c}$ & \RecurPriorCellR{} (\RecurPriorCellRLo{} to \RecurPriorCellRHi) & "
+         r"\RecurPriorSetR{} (\RecurPriorSetRLo{} to \RecurPriorSetRHi) \\"),
+        (r"\quad Flooding at a 100-year return period, JRC hazard maps & \JrcCellR{} (\JrcCellRLo{} to \JrcCellRHi) & "
+         r"\JrcSetR{} (\JrcSetRLo{} to \JrcSetRHi) \\"),
+        (r"\multicolumn{3}{l}{\emph{Records that include the mapped event (what the design can pick up)}} \\"),
+        (r"\quad Recurrent surface water 1984--2021, all events & \GswCellR{} (\GswCellRLoNinety{} to \GswCellRHiNinety) & "
+         r"\GswOracleR{} (\GswOracleRLoNinety{} to \GswOracleRHiNinety) \\"),
+        (r"\quad Flooding in other EMS events, earlier or later$^{c}$ & \RecurCellR{} (\RecurCellRLoNinety{} to "
+         r"\RecurCellRHiNinety) & \RecurSetR{} (\RecurSetRLoNinety{} to \RecurSetRHiNinety) \\"),
+        (r"\quad Flooded share around the settlement in the same event$^{d}$ & --- & \LabOracleR{} (\LabOracleRLoNinety{} "
+         r"to \LabOracleRHiNinety) \\"),
+        r"\quad HAND of the settlement's site & --- & \OracleR{} (\OracleRLoNinety{} to \OracleRHiNinety) \\",
     ]
     tex = ("% generated by figures/make_figures.py — do not edit\n\\begin{table*}[tp]\n"
-           "\\caption{What assignment through settlements can register (exploratory; amendments 2 and 5 to 8). All "
-           "quantities are on the scale of the pooled $R$: the change in the Brier score of all cells divided by the "
-           "baseline gain. The first block concerns the ground nearest a settlement with a water-side name "
-           "(\\MatchWetPct{} of the cells) and the ground within 500\\,m of such a settlement; the second replaces the "
-           "name features with other information about each cell or settlement, assigned to every cell. "
+           "\\caption{What assignment through settlements can register (exploratory; amendments 2 and 5 to 8 and 13). "
+           "Values are $R$ with its 90\\,\\% interval: the change in the Brier score of all cells divided by the "
+           "baseline gain, except where footnote b says otherwise. The first block concerns the ground nearest a "
+           "settlement with a water-related name (\\MatchWetPct{} of the cells) and the ground within 500\\,m of such a "
+           "settlement; the other blocks replace the name features with other information about each cell or "
+           "settlement. "
            "$^{a}$~The increments on this ground (amendment 2) re-expressed on the pooled scale (not planned). "
-           "$^{b}$~Known for \\RecurCovPct{} of the cells; zero with an indicator elsewhere. $^{c}$~Against that "
-           "subset's baseline gain. $^{d}$~Leaks the outcome by construction (the cell itself is left out): it shows "
-           "what the design can register, not a possible reading of names.}\\label{tab:ceiling}\n\\scriptsize\n"
+           "$^{b}$~The \\GswTwoTwoNAoi{} AOIs of events from 2022, against their own baseline gain, whose 95\\,\\% "
+           "interval (\\GswTwoTwoYardLo{} to \\GswTwoTwoYardHi) "
+           "\\GswTwoTwoYardWord{} zero; the record ends before these events. $^{c}$~Known for part of the cells (\\RecurPriorCovPct{} with earlier events only, "
+           "\\RecurCovPct{} with earlier or later ones); zero with an indicator elsewhere. $^{d}$~Leaks the outcome "
+           "(the cell itself is left out): it shows what the design can register, not a possible reading of names.}"
+           "\\label{tab:ceiling}\n\\scriptsize\n"
            "\\begin{tabular}{lll}\n\\tophline\n"
-           " & All ground nearest the name & Within 500\\,m of the settlement \\\\\n\\middlehline\n"
+           "Quantity & \\multicolumn{2}{l}{$R$ (90\\,\\% interval)} \\\\\n\\middlehline\n"
            + "\n".join(rows) + "\n\\bottomhline\n\\end{tabular}\n\\end{table*}\n")
     (HERE / "tab_ceiling.tex").write_text(tex, encoding="utf-8")
 
@@ -5631,20 +5718,32 @@ def table_ceiling() -> None:
 def table_bounds() -> None:
     """本文の表 4（第 4.2 節）: 余白と上限をオッズ比で。注入の名目の尺度と第 5 節の推定量の尺度を別の列に。"""
     rows = [
-        (r"\multicolumn{5}{l}{\emph{Injected effects (base models fixed; the baseline model's held-out prediction "
-         r"taken as the true probability)}} \\"),
+        (r"\multicolumn{5}{l}{\emph{Injected effects (the baseline model's held-out prediction taken as the true "
+         r"probability; base models fixed unless the row says refitted)}} \\"),
         (r"Odds ratio at the margin & \PlasMarginA & \MarginEstA & \ensuremath{>}\,20 & --- \\"),
-        (r"Upper bound, fitted models held fixed (Monte Carlo range)$^{a}$ & \BoundNewA{} (\BoundNewALo--\BoundNewAHi) "
+        r"\quad effect that differs between settlements (mean odds ratio) & \MarginHetA & --- & --- & --- \\",
+        (r"\multicolumn{5}{l}{\emph{Odds ratio reached by the upper limit of each interval of $R$ (limit in "
+         r"parentheses)}} \\"),
+        (r"\quad Protocol's interval (\RHiNinety; Monte Carlo range)$^{a}$ & \BoundNewA{} (\BoundNewALo--\BoundNewAHi) "
          r"& \BoundEstA & \BoundNewB{} (\BoundNewBLo--\BoundNewBHi) & \BoundEstBText \\"),
-        r"\quad with the spread over fold assignments & \BoundFoldA & \BoundFoldEstA & \BoundFoldB & \BoundEstBText \\",
-        (r"\quad with the second stage refitted within the bootstrap & \BoundRefA & \BoundRefEstA & \BoundRefB & "
+        (r"\quad Second stage refitted, location groups (\BTwoUpperRefit) & \BoundRefA & \BoundRefEstA & \BoundRefB & "
          r"\BoundEstBText \\"),
+        r"\quad Spread over fold assignments (\BTwoUpperFold) & \BoundFoldA & \BoundFoldEstA & \BoundFoldB & \BoundEstBText \\",
+        (r"\quad Activations $\times$ countries, refitted (\CombTwoWayHi) & \BTwoTwoWayA & \BTwoTwoWayAEst & \BTwoTwoWayB & "
+         r"\BTwoTwoWayBEst \\"),
+        (r"\quad Corrected test, activations within countries (\TostActHi) & \BTwoTostActA & \BTwoTostActAEst & "
+         r"\BTwoTostActB & \BTwoTostActBEst \\"),
+        (r"\quad Corrected test with fold-assignment variance (\TostFoldHi) & \BTwoTostFoldA & \BTwoTostFoldAEst & "
+         r"\BTwoTostFoldB & \BTwoTostFoldBEst \\"),
         r"\quad for truly water-related names$^{b}$ & \BoundNewCA & --- & \BoundNewCB & --- \\",
         r"\quad flips correlated within the ground of each settlement & \BoundACA & \BoundACEstA & --- & --- \\",
+        r"\quad effect that differs between settlements (mean odds ratio) & \BoundHetA & --- & --- & --- \\",
         r"Lower bound for effects that remove flooding & \BoundNegA & --- & \BoundNegB & --- \\",
         (r"Detectable with 80\,\% power, normal approximation (fixed; refitted) & \MdeNewA; \MdeRefA & --- & "
          r"\MdeNewB; \MdeRefB & --- \\"),
-        (r"\multicolumn{5}{l}{\emph{Direct estimates: water-side against other names, given the baseline model "
+        (r"Detected in at least 80\,\% of simulations with every model refitted$^{e}$ & \PowerSimOR & --- & --- & "
+         r"--- \\"),
+        (r"\multicolumn{5}{l}{\emph{Direct estimates: water-related against other names, given the baseline model "
          r"(95\,\% interval)}} \\"),
         (r"EMS labels, capped sample$^{c}$ & --- & \ORWetAllAdj{} (\ORWetAllAdjLo--\ORWetAllAdjHi) & --- & "
          r"\ORWetNearAdj{} (\PairsWetNearLo--\PairsWetNearHi) \\"),
@@ -5653,8 +5752,9 @@ def table_bounds() -> None:
         r"\quad EMS labels on the same cells$^{d}$ & --- & --- & --- & \EmsSameOR{} (\EmsSameORLo--\EmsSameORHi) \\",
     ]
     tex = ("% generated by figures/make_figures.py — do not edit\n\\begin{table*}[tp]\n"
-           "\\caption{Odds ratios of flooding that the margin and the observed increment correspond to, and the direct "
-           "estimates (exploratory; amendments 6 to 12). Each column has one scale. Nominal: the odds ratio injected "
+           "\\caption{Odds ratios of flooding that the margin and the upper limit of each interval of $R$ correspond to, "
+           "and the direct estimates (exploratory; amendments 6 to 13). Each bound belongs to the interval named in its "
+           "row; a bound is not a test inversion. Each column has one scale. Nominal: the odds ratio injected "
            "into the labels. Estimator: the same effect on the scale of the odds ratios of Sect.~\\ref{sec:near}, read "
            "from the estimator's values on labels with known injected effects (interpolated on the log scale; beyond the "
            "largest effect used for this conversion, an injected odds ratio of 3, written as greater than the estimator's "
@@ -5665,8 +5765,11 @@ def table_bounds() -> None:
            "$^{b}$~Effect injected on a latent indicator of truly water-related names, drawn with the misreading rates "
            "measured against recorded etymologies. $^{c}$~Within 500\\,m, pairs cluster bootstrap over location "
            "groups (2,000 replicates); on all ground, cluster-robust interval. $^{d}$~Pairs cluster bootstrap "
-           "(2,000 replicates).}\\label{tab:bounds}\n\\scriptsize\n"
-           "\\begin{tabular}{lllll}\n\\tophline\n"
+           "(2,000 replicates). $^{e}$~Effects on all ground nearest a water-related name, with every model refitted "
+           "on the injected labels and the decision table of the protocol; names were found useful at injected odds "
+           "ratios of \\PowerSimList{} replicates (Table~\\STabNinePower{} of the Supplement).}"
+           "\\label{tab:bounds}\n\\scriptsize\n"
+           "\\begin{tabular}{p{6.2cm}llll}\n\\tophline\n"
            " & \\multicolumn{2}{l}{All ground nearest the name} & \\multicolumn{2}{l}{Within 500\\,m of the settlement}"
            " \\\\\n & Nominal & Estimator & Nominal & Estimator \\\\\n\\middlehline\n"
            + "\n".join(rows) + "\n\\bottomhline\n\\end{tabular}\n\\end{table*}\n")
@@ -5716,6 +5819,12 @@ AMENDMENT_ROWS = (
                       "settlements, the composition of the uncapped sample, languages recounted, an injection within "
                       "1\\,km, built-up land near settlements, flood typing and the GFM window, a second coder's "
                       "intervals and a revised audit sample.")),
+    ("BThirteen", "13", ("After the ninth critiques: the protocol's verdict kept as the record and a corrected "
+                         "equivalence test on the ratio at four levels of resampling; bounds tied to their intervals; the "
+                         "second coder's rates; controls known before each event; a lexicon with the errors that the "
+                         "critiques named corrected; base models with early stopping on location groups; influence, a "
+                         "joint test of the name coefficients and AOI-balanced metrics; checks of the odds ratios near "
+                         "settlements; pairs of relative qualifiers; the restructuring of the paper into four parts.")),
 )
 
 
@@ -5798,7 +5907,7 @@ def fig_near(v68: dict | None, v57: dict | None) -> None:
     ax.set_yticks(ticks)
     ax.set_yticklabels(labels, fontsize=7)
     ax.set_ylim(-0.7, n - 0.3)
-    ax.set_xlabel("odds ratio of flooding within 500 m of water-side names, given the baseline model's prediction",
+    ax.set_xlabel("odds ratio of flooding within 500 m of water-related names, given the baseline model's prediction",
                   fontsize=7.5)
     ax.tick_params(axis="x", labelsize=7)
     for sp in ("top", "right"):
@@ -5858,6 +5967,670 @@ def _latex_accents(t: str) -> str:
 
 
 # %% B-12（初見の査読 第 8 回）: 本文の組み直しで使う量・表・図
+# %% 改訂 13（初見の査読 第 9 回）: B1〜B15（v70・v70b）と C1〜C4（v71）
+def _eqw(e: bool | None) -> str:
+    return "equivalence declared" if e else "equivalence not declared"
+
+
+def _fi(prefix: str, e: dict | None, why: str) -> dict[str, str]:
+    """Fieller の 90% 区間と、L± による判定の言葉を {prefix}Lo・Hi・Verdict に。"""
+    if not isinstance(e, dict) or not e.get("fieller90"):
+        return {f"{prefix}{s}": missing(why) for s in ("Lo", "Hi", "Verdict")}
+    lo, hi = e["fieller90"]
+    return {f"{prefix}Lo": rv(lo), f"{prefix}Hi": rv(hi), f"{prefix}Verdict": _eqw(e.get("equivalent"))}
+
+
+def _bound_range(b2: dict, kind: str) -> str:
+    """B2: ある区間の上限が届く注入の OR を、無効果の 4 つの基準の範囲で（名目と推定量の尺度）。"""
+    bb = ((b2.get("bounds") or {}).get(kind) or {})
+    vals = [((bb.get(ref) or {}).get("A") or {}) for ref in ("b7_recomputed", "zero", "b7_centred", "b5")]
+    if not vals or any(not v for v in vals):
+        return missing(f"v70 B2 {kind}")
+    nom = [v.get("odds_ratio") for v in vals]
+    txt = [v.get("odds_ratio_text") for v in vals]
+    est = [(v.get("estimator_scale") or {}).get("text") for v in vals]
+    if all(x is None for x in nom):
+        return f"no injected odds ratio up to {_gt(txt[0])}"
+
+    def span(xs: list) -> str:
+        xs = [x for x in xs if x]
+        return xs[0] if len(set(xs)) == 1 else f"{min(xs, key=_or_key)} to {max(xs, key=_or_key)}"
+
+    return (f"an injected odds ratio of {_gt(span(txt))} across the no-effect references "
+            f"({_gt(span(est))} on the estimator's scale)")
+
+
+def _or_key(s: str) -> float:
+    s = str(s).replace(">", "").strip()
+    try:
+        return float(s)
+    except ValueError:
+        return float("inf")
+
+
+def _r90(prefix: str, d: dict | None, why: str) -> dict[str, str]:
+    """R と 90% 区間を {prefix}・Lo・Hi に。"""
+    if not isinstance(d, dict) or d.get("R") is None or not d.get("ci90_R"):
+        return {f"{prefix}{s}": missing(why) for s in ("", "Lo", "Hi")}
+    return {prefix: rv(d["R"]), f"{prefix}Lo": rv(d["ci90_R"][0]), f"{prefix}Hi": rv(d["ci90_R"][1])}
+
+
+def b13_macros(v70: dict | None, v70b: dict | None, v71: dict | None, v69: dict | None,  # noqa: C901, PLR0912, PLR0915
+               v66: dict | None, v67: dict | None, v64: dict | None, v57b: dict | None, v36: dict | None,
+               primary: dict) -> dict[str, str]:
+    """B-13 の量を本文のマクロに。まだ無い量は missing（組むと見える印）。"""
+    a, b, c = v70 or {}, v70b or {}, v71 or {}
+    out: dict[str, str] = {}
+    pr = primary.get("primary") or {}
+    if pr.get("delta_bs_M1c_M3n") is not None and pr.get("ci95_delta"):
+        out |= {"DeltaNamesAbs": sci(-pr["delta_bs_M1c_M3n"], 2), "DeltaNamesIncLo": sci(-pr["ci95_delta"][1], 2),
+                "DeltaNamesIncHi": sci(-pr["ci95_delta"][0], 2)}
+    else:
+        out |= {k: missing("primary delta") for k in ("DeltaNamesAbs", "DeltaNamesIncLo", "DeltaNamesIncHi")}
+    lci = pr.get("ci95_delta_M0_M1")
+    out["YardRatioSpan"] = (f"{lci[1] / lci[0]:.0f}" if lci and lci[0] > 0 else missing("yardstick interval"))
+    # B-12 の B1: 規則の動作特性（一様のずらし、R = ∓0.05）
+    op = (((v69 or {}).get("B1") or {}).get("share_equivalent") or {}).get("constant") or {}
+    out |= ({"OpFixedSizeLo": pct1(op["-0.05"]["fixed"]), "OpFixedSizeHi": pct1(op["+0.05"]["fixed"])} if op
+            else {k: missing("v69 B1") for k in ("OpFixedSizeLo", "OpFixedSizeHi")})
+    # B1: 直した検定（動作特性: 余白 ±0.05 で同等と言う割合の大きい方）
+    opl = (a.get("B1op") or {}).get("share_equivalent") or {}
+    if opl:
+        out["OpLSizeConst"] = pct1(max(opl["constant"]["-0.05"]["L"], opl["constant"]["+0.05"]["L"]))
+        out["OpLSizeProp"] = pct1(max(opl["proportional"]["-0.05"]["L"], opl["proportional"]["+0.05"]["L"]))
+    else:
+        out |= {k: missing("v70 B1op") for k in ("OpLSizeConst", "OpLSizeProp")}
+    b1a, b1bc, b1d = a.get("B1a") or {}, a.get("B1bc") or {}, a.get("B1d") or {}
+    out |= _fi("TostFix", b1a.get("confirmatory"), "v70 B1a")
+    out |= _fi("TostGroups", (b1bc.get("b_groups") or {}).get("refit"), "v70 B1b")
+    out |= _fi("TostAct", (b1bc.get("c_nested") or {}).get("refit"), "v70 B1c")
+    out |= _fi("TostFold", b1d if b1d.get("fieller90") else None, "v70 B1d")
+    out |= _fi("TostCountry", b1a.get("country"), "v70 B1a country")
+    eqs = {"fix": (b1a.get("confirmatory") or {}).get("equivalent"),
+           "groups": ((b1bc.get("b_groups") or {}).get("refit") or {}).get("equivalent"),
+           "act": ((b1bc.get("c_nested") or {}).get("refit") or {}).get("equivalent"),
+           "fold": b1d.get("equivalent")}
+    if any(v is None for v in eqs.values()):
+        for k in ("TostConclusionText", "TostConclusionShort", "AbstractTostText", "TostDiscussionText",
+                  "TostUnitLessonText"):
+            out[k] = missing("v70 B1")
+    else:
+        rely = ("We regard the last as the interval that carries most of the uncertainty of this design.")
+        lab = {"fix": "the fitted models held fixed", "groups": "location groups resampled and the second stage "
+               "refitted", "act": "activations resampled within countries", "fold": "the variance of refitting the "
+               "base models added"}
+        yes = [k for k in ("fix", "groups", "act", "fold") if eqs[k]]
+        no = [k for k in ("fix", "groups", "act", "fold") if not eqs[k]]
+        if not no:
+            out["TostConclusionText"] = "Equivalence therefore held at every level of resampling. " + rely
+            out["TostConclusionShort"] = "a corrected test on the ratio declared equivalence at every level of resampling"
+            out["AbstractTostText"] = ("a corrected test with the uncertainty of the gain and of refitting declared "
+                                       "equivalence (90\\,\\% interval \\TostFoldLo{} to \\TostFoldHi)")
+            out["TostDiscussionText"] = ("The protocol's interval placed the change within the margin, and so did a "
+                                         "corrected test that carries the uncertainty of the baseline gain, of refitting "
+                                         "and of resampling activations within countries (90\\,\\% interval "
+                                         "\\TostFoldLo{} to \\TostFoldHi).")
+        else:
+            out["TostConclusionText"] = ("Equivalence therefore held with " + " and with ".join(lab[k] for k in yes)
+                                         + (", but not with " if yes else "It did not hold with ")
+                                         + " or with ".join(lab[k] for k in no) + ". " + rely) if yes else (
+                "Equivalence did not hold at any level of resampling. " + rely)
+            out["TostConclusionShort"] = ("a corrected test on the ratio declared equivalence with "
+                                          + " and with ".join(lab[k] for k in yes) + " but not with "
+                                          + " or with ".join(lab[k] for k in no)) if yes else (
+                "a corrected test on the ratio did not declare equivalence")
+            # 要旨は 200 語まで: どの段で外れたかは本文（TostConclusionText）に書く
+            out["AbstractTostText"] = ("a corrected test with the uncertainty of the gain and of refitting did not "
+                                       "declare equivalence (90\\,\\% interval \\TostFoldLo{} to \\TostFoldHi)")
+            out["TostDiscussionText"] = ("The protocol's interval placed the change within the margin, but a corrected "
+                                         "test that carries the uncertainty of the baseline gain, of refitting and of "
+                                         "resampling activations within countries gave a 90\\,\\% interval of "
+                                         "\\TostFoldLo{} to \\TostFoldHi, which does not exclude an improvement or a "
+                                         "loss of the size of the margin. The data are compatible with no improvement "
+                                         "and cannot rule out a small one.")
+        out["TostUnitLessonText"] = (": location groups and activations gave different answers here"
+                                     if eqs["groups"] != eqs["act"] else
+                                     ", although here location groups and activations gave the same answer")
+    # B7: 分母の代替
+    b7 = a.get("B7") or {}
+    out["RYThree"] = rv(b7["confirmatory"]["R_Y3"]) if b7.get("confirmatory") else missing("v70 B7")
+    y3 = (((((v36 or {}).get("splits") or {}).get("llmcut") or {}).get("cluster") or {}).get("H4_total") or {}).get("Y3")
+    out |= _r90("HFourTotalYThree", y3, "v36 H4 total Y3")
+    # B5: 文字モデルの地域構成
+    b5 = a.get("B5") or {}
+    m1s = ((((v69 or {}).get("B10") or {}).get("brier") or {}).get("M1s"))
+    if b5 and m1s is not None:
+        out["RefNoCharR"] = rv(b5["R_without_char_composition"])
+        out["RefNoCharVsSimple"] = rv((m1s - b5["brier"]["M3n_no_nlearn_comp"]) / b5["yardstick"])
+    else:
+        out |= {k: missing("v70 B5") for k in ("RefNoCharR", "RefNoCharVsSimple")}
+    # B3: 符号化者 2 の p0 と薄まり
+    b3 = a.get("B3") or {}
+    p2 = (b3.get("coder2") or {})
+    if p2.get("p0"):
+        out |= {"CodeTwoPZeroPct": pct1(p2["p0"]["rate"]), "CodeTwoPZeroLo": pct1(p2["p0"]["ci95"][0]),
+                "CodeTwoPZeroHi": pct1(p2["p0"]["ci95"][1]),
+                "DilObsQuarterTwo": orv(dilution(3.0, 0.25, p2["p1"]["rate"], p2["p0"]["rate"])),
+                "DilObsTenthTwo": orv(dilution(3.0, 0.1, p2["p1"]["rate"], p2["p0"]["rate"]))}
+    else:
+        out |= {k: missing("v70 B3") for k in ("CodeTwoPZeroPct", "CodeTwoPZeroLo", "CodeTwoPZeroHi",
+                                                "DilObsQuarterTwo", "DilObsTenthTwo")}
+    out["CoderKappa"] = (f"{v57b['water_related_kappa']:.2f}" if v57b and v57b.get("water_related_kappa") is not None
+                         else missing("v57b kappa"))
+    # B2: 上限の換算
+    b2 = a.get("B2") or {}
+    for key, kind in (("BoundsFixedRange", "fixed"), ("BoundsGroupsRange", "groups_refit_b11_b7"),
+                      ("BoundsTwoWayRange", "two_way_b11_b7"), ("BoundsTostActRange", "b1_c_nested_refit")):
+        out[key] = _bound_range(b2, kind) if b2 else missing("v70 B2")
+    ups = b2.get("upper_R") or {}
+    out["BTwoUpperRefit"] = rv(ups["refit_b8_c2"]) if "refit_b8_c2" in ups else missing("v70 B2 refit")
+    out["BTwoUpperFold"] = rv(ups["fold_assignments_v47"]) if "fold_assignments_v47" in ups else missing("v70 B2 fold")
+    for key, kind in (("TwoWay", "two_way_b11_b7"), ("TostAct", "b1_c_nested_refit"), ("TostFold", "b1_d_with_folds")):
+        for f in ("A", "B"):
+            e = ((((b2.get("bounds") or {}).get(kind) or {}).get("b7_recomputed") or {}).get(f) or {})
+            if e:
+                out[f"BTwo{key}{f}"] = _gt(e.get("odds_ratio_text", "---"))
+                est = (e.get("estimator_scale") or {}).get("text")
+                out[f"BTwo{key}{f}Est"] = _gt(est) if est else "---"
+            else:
+                out[f"BTwo{key}{f}"] = missing(f"v70 B2 {kind}")
+                out[f"BTwo{key}{f}Est"] = missing(f"v70 B2 {kind}")
+    # 解釈の主は直した検定のうち不確かさを最も多く運ぶ区間（(d)、fold の割り当ての分散を足したもの）の上限
+    gr = (((b2.get("bounds") or {}).get("b1_d_with_folds") or {}).get("b7_recomputed") or {}).get("A") or {}
+    if p2.get("p0") and gr.get("odds_ratio") is not None:
+        q = dilution(3.0, 0.25, p2["p1"]["rate"], p2["p0"]["rate"])
+        out["DilutionBoundText"] = (
+            "Both lie inside the bound that the upper limit of the corrected test with the variance of refitting "
+            f"corresponds to ({orv(gr['odds_ratio'])}), so the bounds exclude only effects that are strong across the "
+            "whole ground nearest a name." if q < gr["odds_ratio"] else
+            "The first lies beyond the bound that the upper limit of the corrected test with the variance of "
+            f"refitting corresponds to ({orv(gr['odds_ratio'])}) and the second inside it, so the bounds exclude only "
+            "effects that are strong across a large part of the ground nearest a name.")
+    else:
+        out["DilutionBoundText"] = missing("v70 B2/B3")
+    # B13: AOI で釣り合わせた指標
+    b13 = (a.get("B13") or {}).get("confirmatory") or {}
+    out |= ({"AoiMedDAuc": f"{b13['median_delta_auc']:.3f}", "AoiShareAucUp": pct1(b13["share_aoi_auc_up"])}
+            if b13 else {k: missing("v70 B13") for k in ("AoiMedDAuc", "AoiShareAucUp")})
+    # B6・B8（v70b）
+    b6 = b.get("B6") or {}
+    if b6.get("confirmatory"):
+        lo, hi = b6["confirmatory"]["range_R_without_top10"]
+        out |= {"InflLo": rv(lo), "InflHi": rv(hi), "InflNeff": f"{b6['confirmatory']['n_eff']:.0f}"}
+    else:
+        out |= {k: missing("v70b B6") for k in ("InflLo", "InflHi", "InflNeff")}
+    rf = (b6.get("refit_corrected") or {}).get("range")
+    out |= ({"InflRefitLo": rv(rf[0]), "InflRefitHi": rv(rf[1])} if rf
+            else {k: missing("v70b B6 refit") for k in ("InflRefitLo", "InflRefitHi")})
+    b8 = b.get("B8") or {}
+    if b8.get("p") is not None:
+        out |= {"WaldNamesChi": f"{b8['wald']:.1f}", "WaldNamesDf": _word(b8["df"]),
+                "WaldNamesP": f"{b8['p']:.2f}" if b8["p"] >= 0.01 else f"{b8['p']:.1e}",
+                "WaldNamesText": "distinguishable from zero" if b8["p"] < 0.05 else "indistinguishable from zero"}
+    else:
+        out |= {k: missing("v70b B8") for k in ("WaldNamesChi", "WaldNamesDf", "WaldNamesP", "WaldNamesText")}
+    # B14: GFM
+    b14 = b.get("B14") or {}
+    out |= ({"GfmShareBelowEmsPct": pct1(b14["share_aoi_gfm_below_ems"]),
+             "GfmAoiNegGainPct": pct1(b14["share_aoi_negative_gain"])} if b14.get("share_aoi_negative_gain") is not None
+            else {k: missing("v70b B14") for k in ("GfmShareBelowEmsPct", "GfmAoiNegGainPct")})
+    b10g = (v66 or {}).get("B10") or {}
+    out |= ({"GfmWithinRLo": rv(b10g["ci95_R"][0]), "GfmWithinRHi": rv(b10g["ci95_R"][1])} if b10g.get("ci95_R")
+            else {k: missing("v66 B10 ci95") for k in ("GfmWithinRLo", "GfmWithinRHi")})
+    # 緩めた二段目と基礎の版ごとの判定
+    hz = (v67 or {}).get("C5_hazard") if isinstance((v67 or {}).get("C5_hazard"), dict) else None
+    out |= ({"HazR": rv(hz["R"]), "HazRLo": rv(hz["ci95_R"][0]), "HazRHi": rv(hz["ci95_R"][1]),
+             "HazVerdict": hz["decision"]} if hz and hz.get("ci95_R")
+            else {k: missing("v67 C5") for k in ("HazR", "HazRLo", "HazRHi", "HazVerdict")})
+    for key, src in (("GswPermVerdict", "C5"), ("FabVerdict", "C7")):
+        p = ((v64 or {}).get(src) or {}).get("primary") if isinstance((v64 or {}).get(src), dict) else None
+        out[key] = p["decision"] if isinstance(p, dict) and p.get("decision") else missing(f"v64 {src}")
+    # B10・B9・B15（v70b）
+    b10 = (b.get("B10") or {}).get("counts") or {}
+    out |= ({"AuditAchNotBach": _n(b10["ach_not_bach"]), "AuditItDe": _n(b10["it_read_by_de"])} if b10
+            else {k: missing("v70b B10") for k in ("AuditAchNotBach", "AuditItDe")})
+    acts = ((v69 or {}).get("B2") or {}).get("by_activation") or []
+    two = sum(x["share_of_flooded_near"] for x in acts if x["activation"] in ("EMSR052", "EMSR130"))
+    out["NearTopTwoShare"] = pct1(two) if acts else missing("v69 B2")
+    b9d = b.get("B9d") or {}
+    pv = b9d.get("p_two_sided") or {}
+    out |= ({"PermNearGfmP": f"{pv['gfm_planned']:.2f}", "PermNearEmsP": f"{pv['ems_uncapped']:.2f}"} if pv
+            else {k: missing("v70b B9d") for k in ("PermNearGfmP", "PermNearEmsP")})
+    b9 = b.get("B9") or {}
+    if b9.get("a_unrounded") and b9.get("b_leave_one_activation"):
+        e = b9
+        out["NearChecksText"] = (
+            "the uncapped EMS estimate was "
+            f"{orv(e['a_unrounded']['ems_uncapped']['odds_ratio'])} with settlements whose coordinates are not rounded, "
+            f"{orv(e['b_leave_one_activation']['min'])} to {orv(e['b_leave_one_activation']['max'])} with single "
+            f"activations removed, {orv(e['b_without_emsr052_130']['odds_ratio'])} "
+            f"({orv(e['b_without_emsr052_130']['pairs_ci95'][0])}--{orv(e['b_without_emsr052_130']['pairs_ci95'][1])}) "
+            "without the two largest, "
+            f"{orv(e['c_generation']['ems_uncapped']['odds_ratio'])} without products of the first two schema "
+            f"generations and {orv(e['g_fcodes']['ems_uncapped']['odds_ratio'])} without sections of places and "
+            "historical places")
+    else:
+        out["NearChecksText"] = missing("v70b B9")
+    fs = (b.get("B9ef") or {}).get("f_sensor") or {}
+    out |= ({"SensorRatio": orv(fs["ratio_optical_to_radar"]), "SensorRatioLo": orv(fs["ratio_ci95"][0]),
+             "SensorRatioHi": orv(fs["ratio_ci95"][1])} if fs.get("ratio_ci95")
+            else {k: missing("v70b B9f") for k in ("SensorRatio", "SensorRatioLo", "SensorRatioHi")})
+    b15 = b.get("B15") or {}
+    hd = b15.get("hand_diff") or {}
+    if hd.get("median") is not None:
+        ed = b15.get("ems_diff") or {}
+        out["QualPairsN"] = _n(b15["n_pairs"])
+        # 差は下の側 − 上の側。HAND の差が負 = 下の側が低い。浸水の割合の差が正 = 下の側の近くがよく浸水した。
+        # 差が 0 の対（浸水の割合ではほとんど）を分母に入れて割合を書かない（数で書く）
+        out["QualPairsText"] = (
+            f"the lower member stood lower in HAND in {hd['n_negative']} of the {hd['n']} pairs with HAND at "
+            f"both sites and higher in {hd['n_positive']} (sign test $p={hd['sign_test_p']:.2f}$)"
+            + (f", and the EMS flooded share within 500\\,m differed in only {ed['n_negative'] + ed['n_positive']} "
+               f"of the {_n(ed['n'])} pairs with cells near both (higher near the lower member in "
+               f"{ed['n_positive']})" if ed.get("n") else ""))
+    else:
+        out |= {k: missing("v70b B15") for k in ("QualPairsN", "QualPairsText")}
+    # C1〜C4（v71）
+    c1a, c1b, c1c = c.get("C1a_gsw22"), c.get("C1b_recprior"), c.get("C1c_jrcset")
+    ok = all(isinstance(x, dict) for x in (c1a, c1b, c1c))
+    out["GswTwoTwoNAoi"] = str(c1a["n_aoi"]) if isinstance(c1a, dict) else missing("v71 C1a")
+    out |= _r90("GswTwoTwoCellR", (c1a or {}).get("gsw_cell") if isinstance(c1a, dict) else None, "v71 C1a")
+    out |= _r90("GswTwoTwoSetR", (c1a or {}).get("gsw_set") if isinstance(c1a, dict) else None, "v71 C1a")
+    out |= _r90("RecurPriorCellR", (c1b or {}).get("recur_cell") if isinstance(c1b, dict) else None, "v71 C1b")
+    out |= _r90("RecurPriorSetR", (c1b or {}).get("recur_set") if isinstance(c1b, dict) else None, "v71 C1b")
+    out |= _r90("JrcCellR", (c1c or {}).get("jrc_cell") if isinstance(c1c, dict) else None, "v71 C1c")
+    out |= _r90("JrcSetR", (c1c or {}).get("jrc_set") if isinstance(c1c, dict) else None, "v71 C1c")
+    rec = ((c1b or {}).get("record") or {}).get("recurrence") if isinstance(c1b, dict) else None
+    out["RecurPriorCovPct"] = pct1(rec["share_cells_cell_cov"]) if rec else missing("v71 C1b record")
+    if ok:
+        gc, gs, gn = c1a["gsw_cell"], c1a["gsw_set"], c1a["names"]
+        rc, rs, jc, js = c1b["recur_cell"], c1b["recur_set"], c1c["jrc_cell"], c1c["jrc_set"]
+        ylo, yhi = c1a["ci95_yardstick"]
+        # 2022 年以降の AOI だけの基礎の利得の区間が 0 を含むと、判定表は使えない（分母が定まらない）
+        out["GswTwoTwoCaveat"] = (
+            (f"On these AOIs the baseline gain itself was not distinguishable from zero (95\\,\\% interval "
+             f"{sci(ylo)} to {sci(yhi)}), which widens these intervals and leaves the decision table undefined, and "
+             f"the names gave $R={rv(gn['R'])}$ ({rv(gn['ci90_R'][0])} to {rv(gn['ci90_R'][1])}).")
+            if ylo <= 0 else
+            (f"On these AOIs the names gave $R={rv(gn['R'])}$ ({rv(gn['ci90_R'][0])} to {rv(gn['ci90_R'][1])})."))
+        out["GswTwoTwoYardLo"], out["GswTwoTwoYardHi"] = sci(ylo), sci(yhi)
+        out["GswTwoTwoYardWord"] = "includes" if ylo <= 0 else "excludes"
+        out["GswTwoTwoNamesR"] = rv(gn["R"])
+        out["GswTwoTwoNamesRLo"], out["GswTwoTwoNamesRHi"] = rv(gn["ci90_R"][0]), rv(gn["ci90_R"][1])
+        # 判定表が使える二つ（地表水は 2022 年以降の AOI だけで分母が定まらないことがある）
+        defined = [(x, y) for x, y in ((rc, rs), (jc, js))]
+        if ylo > 0:
+            defined.append((gc, gs))
+        strong = [(x, y) for x, y in defined if x["R"] >= SESOI or x["decision"].startswith("positive")]
+        diluted = strong and all(y["R"] < SESOI and y["R"] < x["R"] / 2 for x, y in strong)
+        if diluted:
+            ratio = sum(y["R"] for _, y in strong) / sum(x["R"] for x, _ in strong)
+            words = ((0.1, "a tenth"), (0.2, "a fifth"), (0.25, "a quarter"), (1 / 3, "a third"), (0.5, "half"))
+            frac = ("almost none" if ratio < 0.07 else
+                    "about " + min(words, key=lambda w: abs(np.log(max(ratio, 1e-9) / w[0])))[1])
+            out["LeakFreeText"] = (
+                f"Given to each cell, the hazard maps were \\emph{{{jc['decision']}}} and the earlier floods "
+                f"\\emph{{{rc['decision']}}}; assigned through settlements, they were \\emph{{{js['decision']}}} and "
+                f"\\emph{{{rs['decision']}}}, so the dilution does not depend on records that contain the event.")
+            out["LeakFreeLessonText"] = (", and records of past floods and modelled hazard known before each event "
+                                         f"keep {frac} of their value when assigned in the same way")
+            out["LeakFreeDiscussionText"] = ("Records known before each event that improved the predictions when given "
+                                             f"to each cell kept {frac} of that improvement when assigned through "
+                                             "settlements in the same way as the names.")
+            out["AbstractDilutionText"] = ("Hazard maps and past floods known beforehand, which improved predictions per "
+                                           f"cell, kept {frac} of that when assigned through settlements.")
+        elif not strong:
+            out["LeakFreeText"] = ("None of these records improved the predictions beyond the margin even when given "
+                                   "to each cell, so they cannot show the dilution without leakage.")
+            out["LeakFreeLessonText"] = ""
+            out["LeakFreeDiscussionText"] = ("Records known before each event added little even when given to each "
+                                             "cell, so the dilution shown by records that include the event cannot be "
+                                             "separated from leakage.")
+            out["AbstractDilutionText"] = ("Surface-water records that include the event were similarly diluted when "
+                                           "assigned through settlements ($R$ from \\GswCellR{} to \\GswOracleR).")
+        else:
+            out["LeakFreeText"] = ("Some records known before the event kept part of their value when assigned through "
+                                   "settlements, so the dilution is not complete for every kind of information.")
+            out["LeakFreeLessonText"] = (", and records known before each event are diluted to differing degrees")
+            out["LeakFreeDiscussionText"] = ("Records known before each event were diluted to differing degrees when "
+                                             "assigned through settlements.")
+            out["AbstractDilutionText"] = ("Records known before each event were diluted to differing degrees when "
+                                           "assigned through settlements.")
+    else:
+        for k in ("LeakFreeText", "LeakFreeLessonText", "LeakFreeDiscussionText", "AbstractDilutionText",
+                  "GswTwoTwoCaveat", "GswTwoTwoNamesR", "GswTwoTwoNamesRLo", "GswTwoTwoNamesRHi", "GswTwoTwoYardLo",
+                  "GswTwoTwoYardHi", "GswTwoTwoYardWord"):
+            out[k] = missing("v71 C1")
+    c2 = c.get("C2_lexcorr")
+    if isinstance(c2, dict) and isinstance(c2.get("names"), dict):
+        n = c2["names"]
+        out |= {"LexCorrR": rv(n["R"]), "LexCorrRLoNinety": rv(n["ci90_R"][0]), "LexCorrRHiNinety": rv(n["ci90_R"][1]),
+                "LexCorrVerdict": n["decision"]}
+    else:
+        out |= {k: missing("v71 C2") for k in ("LexCorrR", "LexCorrRLoNinety", "LexCorrRHiNinety", "LexCorrVerdict")}
+    c2n = c.get("C2_near") if isinstance(c.get("C2_near"), dict) else {}
+    gp, eu = c2n.get("gfm_planned") or {}, c2n.get("ems_uncapped") or {}
+    if gp.get("ci95_odds_ratio") and eu.get("pairs_ci95"):
+        out["LexCorrNearText"] = (
+            f"with the corrected lexicon they were {orv(gp['odds_ratio'])} ({orv(gp['ci95_odds_ratio'][0])}--"
+            f"{orv(gp['ci95_odds_ratio'][1])}) and {orv(eu['odds_ratio'])} ({orv(eu['pairs_ci95'][0])}--"
+            f"{orv(eu['pairs_ci95'][1])})")
+    else:
+        out["LexCorrNearText"] = missing("v71 C2 near")
+    c3 = c.get("C3_grouped_es")
+    if isinstance(c3, dict) and isinstance(c3.get("names"), dict):
+        n = c3["names"]
+        out |= {"GresR": rv(n["R"]), "GresRLoNinety": rv(n["ci90_R"][0]), "GresRHiNinety": rv(n["ci90_R"][1]),
+                "GresVerdict": n["decision"], "GresYard": sci(c3["yardstick"])}
+    else:
+        out |= {k: missing("v71 C3") for k in ("GresR", "GresRLoNinety", "GresRHiNinety", "GresVerdict", "GresYard")}
+    c4 = c.get("C4_bk")
+    if isinstance(c4, dict) and c4.get("text"):
+        fx = [x for x in ((c4.get("bounds") or {}).get("fixed") or {}).values() if x.get("odds_ratio") is not None]
+        rng_txt = ""
+        if fx:
+            lo = min(fx, key=lambda x: x["odds_ratio"])["odds_ratio_text"]
+            hi = max(fx, key=lambda x: x["odds_ratio"])["odds_ratio_text"]
+            rng_txt = f", and the upper limit of the protocol's interval to {lo} to {hi} over the no-effect references"
+        out["MarginOneKmText"] = c4["text"] + rng_txt
+    else:
+        out["MarginOneKmText"] = missing("v71 C4")
+    # 付録 C: 模擬の SESOI の効果の Brier の単位
+    ps = g._json(DATA / "runs" / "power_v3_sesoi" / "power_summary.json")
+    if ps and ps.get("reps"):
+        reps = ps["reps"]
+        yk = "yardstick" if "yardstick" in reps[0] else "delta_bs_M0_M1"
+        out["SimSesoiDBS"] = sci(float(np.median([r["delta_bs"] for r in reps])))
+        out["SimYard"] = sci(float(np.median([r[yk] for r in reps if r.get(yk) is not None])))
+    else:
+        out |= {k: missing("power sesoi") for k in ("SimSesoiDBS", "SimYard")}
+    # 補足の Text S4: 日本の先行の検定（paper_1 の生成した数と、名の被覆の監査 v22）
+    jp = _json("v22_name_coverage.json")
+    if jp:
+        wet = sum(w["wet_cells"] for w in jp["per_window"].values())
+        out |= {"JapanNCells": _n(jp["cells"]), "JapanFloodedPct": pct1(wet / jp["cells"]),
+                "JapanNameCellPct": pct1(jp["coverage_all"])}
+    else:
+        out |= {k: missing("v22") for k in ("JapanNCells", "JapanFloodedPct", "JapanNameCellPct")}
+    sn = REPO / "docs" / "paper" / "paper_1_toponym_flood" / "figures" / "summary_numbers.tex"
+    jm = dict(re.findall(r"\\newcommand\{\\(\w+)\}\{(.*)\}\s*$", sn.read_text(encoding="utf-8"), flags=re.M)) \
+        if sn.is_file() else {}
+    for new, old_ in (("JapanDeltaWshed", "PoolDwatershedloro"), ("JapanPWshed", "WtwoPwatershedloro"),
+                      ("JapanDeltaEvent", "PoolDeventloo"), ("JapanPEvent", "WtwoPeventloo")):
+        out[new] = jm.get(old_) or missing(f"paper_1 {old_}")
+    # 入手の節: sha256 を全桁で（16 桁ごとに改行できるように）、GFM のラベルの作り直しの一致
+    def _brk(h: str) -> str:
+        return "\\allowbreak{}".join(h[i:i + 16] for i in range(0, len(h), 16))
+    shaf = DATA / "global" / "geonames" / "allCountries.zip.sha256"
+    out["GeoNamesShaFull"] = _brk(shaf.read_text(encoding="utf-8").split()[0]) if shaf.is_file() else missing("sha")
+    import hashlib  # noqa: PLC0415
+    lexf = REPO / "docs" / "protocol" / "v2" / "lexicon_hydro_v1.yaml"
+    out["LexShaFull"] = _brk(hashlib.sha256(lexf.read_bytes()).hexdigest())
+    rb = ((_json("v50_gfm_diagnostics.json") or {}).get("v1_reproduces_b3") or {})
+    out |= ({"GfmRebuildSame": str(rb["n_aoi_identical"]), "GfmRebuildNAoi": str(rb["n_aoi"])} if rb
+            else {k: missing("v50 rebuild") for k in ("GfmRebuildSame", "GfmRebuildNAoi")})
+    out |= {"STabFigNearMain": "S7", "STextJapan": "S4"}
+    return out
+
+
+def b13_tables(v70: dict | None, v70b: dict | None, v71: dict | None) -> None:  # noqa: C901, PLR0912, PLR0915
+    """B-13 の補足の表（app_table_thirteen_*.tex）。"""
+    a, b, c = v70 or {}, v70b or {}, v71 or {}
+    # 直した同等性の検定
+    rows = []
+    b1a, b1bc, b1d = a.get("B1a") or {}, a.get("B1bc") or {}, a.get("B1d") or {}
+
+    def trow(lab: str, e: dict | None) -> str:
+        if not isinstance(e, dict) or e.get("R") is None:
+            return f"{lab} & \\multicolumn{{5}}{{l}}{{{missing('v70 B1')}}} \\\\"
+        fi = e.get("fieller90")
+        fis = f"{rv(fi[0])} to {rv(fi[1])}" if fi else "unbounded"
+        return (f"{lab} & {rv(e['R'])} & {sci(e['l_plus_upper'])} & {sci(e['l_minus_lower'])} & {fis} & "
+                f"{'yes' if e.get('equivalent') else 'no'} \\\\")
+
+    for key, lab in (("confirmatory", "(a) Confirmatory run, models fixed"), ("corrected", "(a) Corrected code, "
+                     "models fixed"), ("H4_nested", "(a) H4, nested"), ("H4_total", "(a) H4, total"),
+                     ("country", "(a) Countries held out")):
+        rows.append(trow(lab, b1a.get(key)))
+    rows.append(trow("(b) Location groups, second stage refitted", (b1bc.get("b_groups") or {}).get("refit")))
+    rows.append(trow("(c) Activations within countries, refitted", (b1bc.get("c_nested") or {}).get("refit")))
+    if b1d.get("l_plus_upper") is not None:
+        fi = b1d.get("fieller90")
+        rows.append(f"(d) As (c), with fold-assignment variance & --- & {sci(b1d['l_plus_upper'])} & "
+                    f"{sci(b1d['l_minus_lower'])} & "
+                    f"{(rv(fi[0]) + ' to ' + rv(fi[1])) if fi else 'unbounded'} & "
+                    f"{'yes' if b1d.get('equivalent') else 'no'} \\\\")
+    else:
+        rows.append(f"(d) As (c), with fold-assignment variance & \\multicolumn{{5}}{{l}}{{{missing('v70 B1d')}}} \\\\")
+    op = (a.get("B1op") or {}).get("share_equivalent") or {}
+    if op:
+        rows.append(r"\multicolumn{6}{l}{\emph{Share of samples declared equivalent with the true $R$ set to "
+                    r"$-0.05$ / $0$ / $+0.05$ (models fixed; Sect.~3.2 of the paper)}} \\")
+        for sh, lab in (("constant", "uniform shift"), ("proportional", "shift proportional to the baseline gain")):
+            for rule, rl in (("fixed", "protocol's rule"), ("L", "corrected test (a)")):
+                s = op[sh]
+
+                def pc(x: float) -> str:  # 99.85 % を「100 %」に丸めない（2,000 回のうち 1,997 回）
+                    return f"{100 * x:.1f}\\,\\%" if 0.95 < x < 1 else pct1(x)
+
+                rows.append(f"\\quad {rl}, {lab} & \\multicolumn{{5}}{{l}}{{{pc(s['-0.05'][rule])} / "
+                            f"{pc(s['+0.00'][rule])} / {pc(s['+0.05'][rule])}}} \\\\")
+    b7 = a.get("B7") or {}
+    if b7:
+        rows.append(r"\multicolumn{6}{l}{\emph{Other measures: $R$ over a constant forecast (Y3), the change in Brier "
+                    r"units and the increment in Brier skill}} \\")
+        for key, lab in (("confirmatory", "Primary, confirmatory run"), ("corrected", "Primary, corrected code"),
+                         ("H4_nested", "H4, nested"), ("H4_total", "H4, total")):
+            e = b7.get(key)
+            if e:
+                rows.append(f"\\quad {lab} & {rv(e['R_Y3'])} & \\multicolumn{{2}}{{l}}{{$\\Delta$BS {sci(e['delta_bs'])}}}"
+                            f" & \\multicolumn{{2}}{{l}}{{skill {sci(e['bss_increment'])}}} \\\\")
+    cap = ("Corrected equivalence test on the ratio (exploratory, amendment 13, item B1). $L_\\pm=\\Delta\\mp0.05D$ with "
+           "$\\Delta$ the change in Brier score from names and $D$ the baseline gain, computed on the same resamples; "
+           "equivalence when the one-sided 95\\,\\% upper limit of $L_+$ lies below zero and the lower limit of $L_-$ "
+           "above zero. Fieller: the 90\\,\\% interval of $R$ from the variances and covariance of the resamples (normal "
+           "approximation). (a) 4,000 resamples of location groups with the fitted models held fixed; (b) 500 resamples "
+           "of location groups with the second stage refitted (corrected code); (c) 500 two-stage resamples, countries "
+           "then activations within each drawn country, with the second stage refitted; (d) (c) plus the variance of "
+           "$L_\\pm$ over 13 assignments of location groups to folds, corrected for overlapping training sets "
+           "(Nadeau--Bengio; normal approximation). The lower block repeats the double resampling of the protocol rule's "
+           "operating characteristics for the corrected test (a).")
+    (HERE / "app_table_thirteen_tost.tex").write_text(
+        _tbl("tab:thirteen-tost", cap, "p{6.0cm}rrrlc", r"Resampling & $R$ & $L_+$ upper & $L_-$ lower & "
+             r"Fieller 90\,\% & Equivalent", rows), encoding="utf-8")
+    # 上限の換算
+    b2 = a.get("B2") or {}
+    rows = []
+    labs = {"fixed": "Protocol's interval (models fixed)", "refit_b8_c2": "Location groups, second stage refitted "
+            "(amendment 8)", "groups_refit_b11_b7": "Location groups, refitted, denominator resampled (amendment 11)",
+            "two_way_b11_b7": "Activations $\\times$ countries, refitted (amendment 11)",
+            "fold_assignments_v47": "Spread over fold assignments (amendment 5)", "b1_a_corrected": "Corrected test (a)",
+            "b1_b_groups_refit": "Corrected test (b)", "b1_c_nested_refit": "Corrected test (c)",
+            "b1_d_with_folds": "Corrected test (d)"}
+    for kind, ur in (b2.get("upper_R") or {}).items():
+        cells = []
+        for ref in ("b7_recomputed", "zero", "b7_centred", "b5"):
+            e = (((b2.get("bounds") or {}).get(kind) or {}).get(ref) or {}).get("A") or {}
+            est = (e.get("estimator_scale") or {}).get("text")
+            cells.append(f"{_gt(e.get('odds_ratio_text', '---'))}" + (f" ({_gt(est)})" if est else ""))
+        rows.append(f"{labs.get(kind, kind)} & {rv(ur)} & " + " & ".join(cells) + " \\\\")
+    c4 = c.get("C4_bk") if isinstance(c.get("C4_bk"), dict) else None
+    if c4:
+        rows.append(r"\multicolumn{6}{l}{\emph{Effect within 1\,km of the settlement (shape BK; amendment 12, item C1)}} \\")
+        mo = c4.get("margin_or") or {}
+        rows.append(f"\\quad Margin & 0.050 & \\multicolumn{{4}}{{l}}{{{_gt(mo.get('odds_ratio_text', '---'))}}} \\\\")
+        for kind in ("fixed", "refit"):
+            bb = (c4.get("bounds") or {}).get(kind) or {}
+            rows.append(f"\\quad {'Models fixed' if kind == 'fixed' else 'Second stage refitted'} & & "
+                        + " & ".join(_gt((bb.get(ref) or {}).get("odds_ratio_text", "---"))
+                                     for ref in ("b7_recomputed", "zero", "b7_centred", "b5")) + " \\\\")
+    if not rows:
+        rows = [f"\\multicolumn{{6}}{{l}}{{{missing('v70 B2')}}} \\\\"]
+    cap = ("Injected odds ratio (shape A: all ground nearest a water-related name) whose mean simulated gain reaches each "
+           "interval's upper limit of $R$ minus the gain expected without an effect, under the four no-effect references "
+           "(exploratory, amendment 13, item B2); in parentheses, the value on the scale of the estimator of Sect.~6.2 of "
+           "the paper. A bound is not a test inversion, and the Monte Carlo ranges of the bound tables are not confidence "
+           "intervals. References: recomputed composition (amendment 8), no reassignment, centred reassignments, and the "
+           "reassignments of amendment 5.")
+    (HERE / "app_table_thirteen_bounds.tex").write_text(
+        _tbl("tab:thirteen-bounds", cap, "p{5.6cm}rllll", r"Interval & Upper $R$ & Recomputed & None & Centred & "
+             r"Amendment 5", rows), encoding="utf-8")
+    # 辞書・符号化者・N-read
+    rows = []
+    b10 = b.get("B10") or {}
+    cnt = b10.get("counts") or {}
+    lab10 = {"ach_not_bach": "German \\emph{-ach} not in \\emph{-bach}", "ach_with_bach": "German \\emph{-ach} in "
+             "\\emph{-bach}", "ore_ora_all": "Norwegian \\emph{-ore}, \\emph{-ora}", "ore_ora_store": "\\quad of them "
+             "in \\emph{Store-}, \\emph{Stora-}", "mont_prefix": "French \\emph{mont-} as a prefix",
+             "mont_prefix_monastery": "\\quad of them \\emph{Montreuil}, \\emph{Montier}, \\emph{Moutier}",
+             "ried": "German \\emph{Ried}", "kacha": "Punjabi/Urdu \\emph{kacha}", "taung": "Burmese \\emph{taung}",
+             "be_eau_read_as_au": "Belgian \\emph{-eau} read as German \\emph{-au}",
+             "it_read_by_de": "Italian names matched by the German block", "ir_ab_word": "Iran, \\emph{ab} as a word",
+             "ir_ab_suffix": "Iran, \\emph{-ab} as an ending", "fi_ala": "Finnish \\emph{Ala}",
+             "fi_yli_or_yla": "Finnish \\emph{Yli}, \\emph{Yl\\\"a}"}
+    if cnt:
+        rows.append(r"\multicolumn{2}{l}{\emph{Analysed settlements matched by homographs and wrong-language readings}} \\")
+        rows += [f"{lab10.get(k, k)} & {_n(v)} \\\\" for k, v in cnt.items()]
+    rec = json.loads((VER / "v70_lexicon_corrected_record.json").read_text(encoding="utf-8")) \
+        if (VER / "v70_lexicon_corrected_record.json").is_file() else {}
+    if rec:
+        rows.append(r"\multicolumn{2}{l}{\emph{Corrected lexicon (amendment 13, item C2): entries removed or added "
+                    r"(form $\times$ position)}} \\")
+        names = {"a_v57_clean": "Two-letter affixes and English transfer endings", "b_homograph": "Homographs",
+                 "c_riverine_named": "Riverine entries named as ordinary meadows, islands or sand",
+                 "d_qualifier": "Relative qualifiers", "e_spring_well": "Springs and wells",
+                 "f_rapids": "Rapids and waterfalls"}
+        rows += [f"\\quad {names.get(k, k)} & {_n(v)} \\\\" for k, v in rec.get("dropped_by_rule", {}).items()]
+        add = rec.get("added", 0)
+        rows.append(f"\\quad Added (named omissions) & {_n(len(add) if isinstance(add, list) else add)} \\\\")
+        rows.append(f"\\quad Entries before / after & {_n(rec.get('entries_src', 0))} / {_n(rec.get('entries_dst', 0))} \\\\")
+    uni = b10.get("unicode_vs_ascii_wetside") or {}
+    if uni:
+        rows.append(r"\multicolumn{2}{l}{\emph{Water-related readings gained / lost when the Unicode name is read}} \\")
+        rows += [f"\\quad {lang} & {_n(v['gained'])} / {_n(v['lost'])} \\\\" for lang, v in sorted(uni.items())]
+    b12 = b.get("B12") or {}
+    if b12:
+        rows.append(f"Agreement of the two coders on water-related derivations ($\\kappa$) & "
+                    f"{b12['water_related_kappa']:.2f} \\\\")
+        rows.append(f"Codes deposited (names in an audit sample left out) & {_n(b12['n_published'])} of "
+                    f"{_n(b12['n_items'])} \\\\")
+    b11 = (b.get("B11") or {}).get("by_block") or {}
+    if b11:
+        big = sorted(b11.items(), key=lambda kv: -kv[1]["n"])[:8]
+        rows.append(r"\multicolumn{2}{l}{\emph{Language-model reading by lexicon block: settlements, water-related, "
+                    r"unknown}} \\")
+        rows += [f"\\quad {blk} & {_n(v['n'])}, {pct1(v['water_related'])}, {pct1(v['unknown'])} \\\\" for blk, v in big]
+    if not rows:
+        rows = [f"\\multicolumn{{2}}{{l}}{{{missing('v70b B10-B12')}}} \\\\"]
+    cap = ("Checks of the lexicon and of the readings (exploratory, amendment 13, items B10 to B12 and C2). Counts are of "
+           "the settlements nearest to at least one evaluable cell of the uncapped table, read with the frozen lexicon. "
+           "Forms are matched in the ASCII field of GeoNames; Unicode names are read with umlauts, \\aa, \\o\\ folded to "
+           "one letter, \\ae\\ to ae and \\ss\\ to ss. Both coders' codes are in \\texttt{docs/verification/v70\\_two\\_"
+           "coders.csv} of the code repository.")
+    (HERE / "app_table_thirteen_lexicon.tex").write_text(
+        _tbl("tab:thirteen-lexicon", cap, "p{11.2cm}r", r"Quantity & Value", rows), encoding="utf-8")
+    # 集落の近くの点検
+    rows = []
+    b9 = b.get("B9") or {}
+
+    def orr(d: dict | None, key: str = "pairs_ci95") -> str:
+        if not isinstance(d, dict) or d.get("odds_ratio") is None:
+            return "---"
+        ci = d.get(key) or d.get("ci95_odds_ratio") or d.get("ci95")
+        return f"{orv(d['odds_ratio'])} ({orv(ci[0])}--{orv(ci[1])})" if ci else orv(d["odds_ratio"])
+
+    if b9:
+        rows += [f"Coordinates not on whole arc-minutes & {orr(b9['a_unrounded']['ems_uncapped'])} & "
+                 f"{orr(b9['a_unrounded']['gfm_planned'], 'ci95_odds_ratio')} \\\\",
+                 f"Single activations removed (range of points) & {orv(b9['b_leave_one_activation']['min'])}--"
+                 f"{orv(b9['b_leave_one_activation']['max'])} & --- \\\\",
+                 f"Without EMSR052 and EMSR130 & {orr(b9['b_without_emsr052_130'])} & --- \\\\",
+                 f"Without schema generations 0 and 1 & {orr(b9['c_generation']['ems_uncapped'])} & "
+                 f"{orr(b9['c_generation']['gfm_planned'], 'ci95_odds_ratio')} \\\\",
+                 f"Without PPLX, PPLH, PPLQ, PPLW & {orr(b9['g_fcodes']['ems_uncapped'])} & "
+                 f"{orr(b9['g_fcodes']['gfm_planned'], 'ci95_odds_ratio')} \\\\"]
+    b9d = b.get("B9d") or {}
+    if b9d:
+        rows.append(f"Reassignment within AOIs: two-sided $p$ & {b9d['p_two_sided']['ems_uncapped']:.2f} & "
+                    f"{b9d['p_two_sided']['gfm_planned']:.2f} \\\\")
+    c2n = c.get("C2_near") if isinstance(c.get("C2_near"), dict) else None
+    if c2n:
+        rows.append(f"Corrected lexicon (amendment 13, C2) & {orr(c2n.get('ems_uncapped'))} & "
+                    f"{orr(c2n.get('gfm_planned'), 'ci95_odds_ratio')} \\\\")
+        rows.append(f"\\quad capped EMS & {orr(c2n.get('ems_capped'), 'ci95')} & \\\\")
+    b9ef = b.get("B9ef") or {}
+    fs = b9ef.get("f_sensor") or {}
+    if fs:
+        pf = "$p<0.001$" if fs["p"] < 0.001 else f"$p={fs['p']:.3f}$"
+        rows.append(f"Optical against radar maps (ratio of odds ratios, capped EMS) & {orv(fs['ratio_optical_to_radar'])} "
+                    f"({orv(fs['ratio_ci95'][0])}--{orv(fs['ratio_ci95'][1])}), {pf} & --- \\\\")
+    b15 = b.get("B15") or {}
+    if b15.get("n_pairs"):
+        rows.append(f"\\multicolumn{{3}}{{l}}{{\\emph{{{_n(b15['n_pairs'])} pairs that differ by a lower or an upper "
+                    "qualifier (lower minus upper member)}} \\\\")
+        hd = b15.get("hand_diff") or {}
+        if hd.get("median") is not None:
+            lo, hi = hd["median_ci90"]
+            rows.append(f"\\quad HAND at the site & \\multicolumn{{2}}{{l}}{{median ${hd['median']:.2f}$\\,m (90\\,\\% "
+                        f"interval ${lo:.2f}$ to ${hi:.2f}$), {hd['n']} pairs; lower member lower in {hd['n_negative']}, "
+                        f"higher in {hd['n_positive']}; sign test $p={hd['sign_test_p']:.2f}$}} \\\\")
+        for col, lab in (("ems_diff", "EMS"), ("gfm_diff", "GFM")):
+            e = b15.get(col) or {}
+            if e.get("n"):
+                k = e["n_negative"] + e["n_positive"]
+                txt = (f"{_n(e['n'])} pairs; the share differs in {k} (higher near the lower member in "
+                       f"{e['n_positive']})" if k else f"{_n(e['n'])} pairs; the share differs in none")
+                rows.append(f"\\quad Flooded share within 500\\,m, {lab} & \\multicolumn{{2}}{{l}}{{{txt}}} \\\\")
+    if not rows:
+        rows = [f"\\multicolumn{{3}}{{l}}{{{missing('v70b B9')}}} \\\\"]
+    cap = ("Checks of the odds ratios of flooding within 500\\,m of settlements with water-related names (exploratory, "
+           "amendment 13, items B9, B15 and C2). EMS: uncapped sample with 95\\,\\% pairs cluster-bootstrap intervals; "
+           "GFM: the estimate planned in amendment 3, with cluster-robust intervals. Qualifier pairs: settlements of the "
+           "same country that share a base name and differ by a lower or an upper qualifier, within 10\\,km, both with "
+           "coordinates not on whole arc-minutes; 90\\,\\% intervals resample location groups.")
+    (HERE / "app_table_thirteen_near.tex").write_text(
+        _tbl("tab:thirteen-near", cap, "p{6.6cm}ll", r"Check & EMS & GFM", rows), encoding="utf-8")
+    # GFM の崩れの診断
+    rows = []
+    b14 = b.get("B14") or {}
+    if b14:
+        rows += [f"AOIs on both label sets & {_n(b14['n_aoi'])} \\\\",
+                 f"Median flooded share, EMS / GFM & {pct1(b14['median_ems_share'])} / {pct1(b14['median_gfm_share'])} \\\\",
+                 f"AOIs where GFM mapped less flooding than EMS & {pct1(b14['share_aoi_gfm_below_ems'])} \\\\",
+                 f"Correlation of the AOIs' flooded shares & {b14['corr_ems_gfm_share']:.2f} \\\\"]
+        if b14.get("yardstick_gfm") is not None:
+            rows += [f"Baseline gain on GFM labels (pooled) & {sci(b14['yardstick_gfm'])} \\\\",
+                     f"Baseline gain on EMS labels (primary) & {sci(b14['yardstick_ems_primary'])} \\\\",
+                     f"AOIs with a negative baseline gain on GFM & {pct1(b14['share_aoi_negative_gain'])} \\\\"]
+    ee = b9ef.get("e_two_by_two") or {}
+    # 三分位の切れ目が両方 0 のとき（セルの 3 分の 2 以上で市街地の割合が 0）は「なし」と「あり」の二つ
+    built_two = list(b9ef.get("built_cuts") or []) == [0.0, 0.0]
+    labels = {"band": (("le500m", "within 500\\,m of the settlement"), ("500m_1km", "500\\,m to 1\\,km"),
+                       ("gt1km", "beyond 1\\,km")),
+              "built_tercile": ((("low", "cells without built-up land"), ("high", "cells with built-up land")) if built_two
+                                else (("low", "lowest tercile of built-up share"), ("middle", "middle tercile"),
+                                      ("high", "highest tercile")))}
+    for grp in ("band", "built_tercile"):
+        for k, lab in labels[grp]:
+            v = (ee.get(grp) or {}).get(k)
+            if not v:
+                continue
+            n = max(1, v["n"])
+            det = v["ems1_gfm1"] / max(1, v["ems1_gfm1"] + v["ems1_gfm0"])
+            rows.append(f"EMS and GFM, {lab} & both {pct1(v['ems1_gfm1'] / n)}, EMS only "
+                        f"{pct1(v['ems1_gfm0'] / n)}, GFM only {pct1(v['ems0_gfm1'] / n)}; GFM mapped "
+                        f"{pct1(det)} of the EMS flooding ({_n(v['n'])} cells) \\\\")
+    if not rows:
+        rows = [f"\\multicolumn{{2}}{{l}}{{{missing('v70b B14')}}} \\\\"]
+    cap = ("Diagnosis of the GFM labels (exploratory, amendment 13, items B9(e) and B14): flooded shares by AOI on the "
+           "cells that GFM can assess, the baseline gain when every model is trained and scored on GFM labels, and the "
+           "agreement of the two label sets by distance from the nearest settlement and by built-up land (ESA "
+           "WorldCover, 10\\,m" + ("; more than two-thirds of these cells contain none, so the cells are split into "
+                                   "those with and without it)." if built_two else ")."))
+    (HERE / "app_table_thirteen_gfm.tex").write_text(
+        _tbl("tab:thirteen-gfm", cap, "p{7.6cm}l", r"Quantity & Value", rows), encoding="utf-8")
+
+
 def b12_text_macros(v69: dict | None, v68: dict | None, v57: dict | None, v41: dict | None, v50: dict | None,
                     v54: dict | None, v44: dict | None, v43: dict | None, v36: dict | None) -> dict[str, str]:
     """B-12 の B（v69）と既存の成果物から、本文が引く量。"""
@@ -5976,8 +6749,7 @@ def b12_text_macros(v69: dict | None, v68: dict | None, v57: dict | None, v41: d
     # 第 5 節: 再起の記録の全体の尺度、1 km の注入
     b7r = v.get("B7r") or {}
     out["RecurPooledR"] = rv(b7r["pooled_scale_R"]) if b7r else missing("v69 B7r")
-    c1k = (v.get("C1") or {}) if isinstance(v.get("C1"), dict) else {}
-    out["MarginOneKmText"] = (c1k["text"] if c1k.get("text") else missing("B-12 C1"))
+    # 1 km の注入（B-12 の C1）は v71 の C4 で集計する（b13_macros が MarginOneKmText を書く）
     # 第 6 節: 読み
     out |= ({"WDNamesakes": str(v43["n_with_p138"]), "WDRiverNamesakes": str(v43["n_hydro"]),
              "WDNreadHits": str(v43["recall_nread"]["k"]), "WDLexHits": str(v43["recall_lexicon"]["k"])} if v43
@@ -6039,7 +6811,7 @@ def b12_text_macros(v69: dict | None, v68: dict | None, v57: dict | None, v41: d
         tlab = f"one {tcn.get(tc[0], tc[0])} activation" if len(tc) == 1 else "one activation"
         out["NearCompositionText"] = (
             f"In the sample of every evaluable cell, Cambodia and Myanmar hold {pct1(kh_mm)} of the flooded cells within "
-            f"500\\,m of water-side names ({tlab} alone {pct1(ta.get('share_of_flooded_near', 0))}) and "
+            f"500\\,m of water-related names ({tlab} alone {pct1(ta.get('share_of_flooded_near', 0))}) and "
             f"Pakistan and Bangladesh {pct1(pkbd)}"
             + (f"; without Pakistan and Bangladesh the estimate was {orv(nb['odds_ratio'])} "
                f"({orv(nb['pairs_ci95'][0])}--{orv(nb['pairs_ci95'][1])})" if nb.get("pairs_ci95") else "")
@@ -6079,8 +6851,8 @@ def table_reading(v54: dict | None, v44: dict | None, v57b: dict | None, v69: di
         n_all = sum(x["n_cells"] for x in nr.values())
         lex_all = sum(x["lexicon"] * x["n_cells"] for x in nr.values()) / n_all
         llm_all = sum(x["llm"] * x["n_cells"] for x in nr.values()) / n_all
-        rows.append("Nearest name water-side, lexicon & " + " & ".join(lex) + f" & {pct1(lex_all)} \\\\")
-        rows.append("Nearest name water-side, language model & " + " & ".join(llm) + f" & {_pct0(llm_all)} \\\\")
+        rows.append("Nearest name water-related, lexicon & " + " & ".join(lex) + f" & {pct1(lex_all)} \\\\")
+        rows.append("Nearest name water-related, language model & " + " & ".join(llm) + f" & {_pct0(llm_all)} \\\\")
     h5 = (met or {}).get("H5_strata") or {}
     if h5.get("nearest_name_in_lexicon"):
         rows.append(f"Nearest name matches any lexicon element & \\multicolumn{{5}}{{l}}{{}} & "
@@ -6092,7 +6864,7 @@ def table_reading(v54: dict | None, v44: dict | None, v57b: dict | None, v69: di
         d = pd.read_csv(tf).head(8)
         forms = ", ".join(f"\\emph{{{('-' if r.pos == 'suffix' else '') + str(r.form) + ('-' if r.pos == 'prefix' else '')}}}"
                           f" ({r.lang}, {_pct0(r.n_cells / n_ws)})" for r in d.itertuples())
-        rows.append(f"Forms supplying most water-side cells (block, share) & \\multicolumn{{6}}{{p{{11.2cm}}}}{{{forms}}} \\\\")
+        rows.append(f"Forms supplying most water-related cells (block, share) & \\multicolumn{{6}}{{p{{11.2cm}}}}{{{forms}}} \\\\")
     rows.append("\\middlehline")
     c2 = (v.get("B9") or {})
     w44 = v44 or {}
@@ -6108,7 +6880,7 @@ def table_reading(v54: dict | None, v44: dict | None, v57b: dict | None, v69: di
                 f"{pci(lw1.get('recall'))}}} \\\\")
     p0 = w44.get("truth_rate_in_not") or {}
     if p0:
-        rows.append(f"Names not read as water-side with a water-related derivation, coder 1 & \\multicolumn{{6}}{{l}}{{"
+        rows.append(f"Names not read as water-related with a water-related derivation, coder 1 & \\multicolumn{{6}}{{l}}{{"
                     f"{_pct0(p0['rate'])} ({_pct0(p0['ci95'][0])}--{_pct0(p0['ci95'][1])}), {p0['k']} of {p0['n']}}} \\\\")
     rows.append(f"Language model: precision; recall, coder 2 & \\multicolumn{{6}}{{l}}{{{pci(nw2.get('precision'))}; "
                 f"{pci(nw2.get('recall'))}}} \\\\")
@@ -6117,12 +6889,12 @@ def table_reading(v54: dict | None, v44: dict | None, v57b: dict | None, v69: di
     if b3:
         rows.append("Cells whose country's first language no block covers; in regions of another language & "
                     f"\\multicolumn{{6}}{{l}}{{{pct1(b3['country_level_share'])}; {pct1(b3['regional_share_v66'])}}} \\\\")
-    cap = ("The lexicon reading (exploratory). Upper part: share of analysed cells whose nearest name is water-side, by "
+    cap = ("The lexicon reading (exploratory). Upper part: share of analysed cells whose nearest name is water-related, by "
            "the continent of the nearest settlement (Americas: North and South together). Middle: the forms that supply "
-           "the most water-side cells, with the language block and the share of water-side cells (a name can match "
+           "the most water-related cells, with the language block and the share of water-related cells (a name can match "
            "several forms). Lower part: agreement with derivations recorded on Wikipedia, with 95\\,\\% bootstrap "
-           "intervals. Precision: share of names read as water-side whose recorded derivation is water-related; recall: "
-           "share of water-related derivations read as water-side, the two strata of the sample weighted by their size. "
+           "intervals. Precision: share of names read as water-related whose recorded derivation is water-related; recall: "
+           "share of water-related derivations read as water-related, the two strata of the sample weighted by their size. "
            "Coder 2 is a language model of another developer; coder 1 is the model that compiled the lexicon and is "
            "therefore not an independent validator. The sample is restricted to articles that explain the name and "
            "almost excludes Pakistan, Bangladesh and Cambodia.")
@@ -6175,8 +6947,16 @@ def table_twelve_checks(v69: dict | None) -> str:
     b4 = v.get("B4") or {}
     if b4:
         rows.append(r"\multicolumn{3}{l}{\emph{Inclusion criteria applied in order (item B4)}} \\")
-        for s_ in b4["steps"]:
-            rows.append(f"{s_['criterion']} & {s_['excluded']} excluded & {s_['remaining']} remaining \\\\")
+        crit = {"evaluable cells >= 400": "Evaluable cells $\\geq400$",
+                "flooded cells >= 20": "Flooded cells $\\geq20$",
+                "flooded share <= 80 %": "Flooded share $\\leq80$\\,\\%",
+                "riverine (or untyped inland) share >= 0.5": "Riverine (or untyped inland) share of the flooding "
+                                                              "$\\geq0.5$",
+                "a settlement inside the grid": "A settlement inside the grid"}
+        for s_ in b4["steps"]:  # B-13 の A9: % が LaTeX の注釈になり行が崩れていた
+            c_ = crit.get(s_["criterion"], s_["criterion"].replace("%", "\\%").replace(">=", "$\\geq$")
+                          .replace("<=", "$\\leq$"))
+            rows.append(f"{c_} & {s_['excluded']} excluded & {s_['remaining']} remaining \\\\")
     b13 = v.get("B13") or {}
     if b13:
         rows.append(r"\multicolumn{3}{l}{\emph{Flood typing (item B13) and the GFM window (item B12)}} \\")
@@ -6200,26 +6980,28 @@ def table_twelve_checks(v69: dict | None) -> str:
         rows.append(r"\multicolumn{3}{l}{\emph{Labels near settlements and built-up land at 10\,m (item B18)}} \\")
         for k, lab in (("band_500m_1km", "ground 0.5--1\\,km against within 500\\,m"),
                        ("band_gt1km", "ground beyond 1\\,km against within 500\\,m"),
-                       ("wetside:le500m", "water-side names within 500\\,m (cluster-robust)")):
+                       ("wetside:le500m", "water-related names within 500\\,m (cluster-robust)")):
             a_, b_ = b18["without"][k], b18["with_built10"][k]
             rows.append(f"Odds ratio, {lab}: without; with the built-up share & {orv(a_['odds_ratio'])} "
                         f"({orv(a_['ci95'][0])}--{orv(a_['ci95'][1])}); {orv(b_['odds_ratio'])} "
                         f"({orv(b_['ci95'][0])}--{orv(b_['ci95'][1])}) & \\\\")
         pp_ = b18.get("pairs") or {}
         if pp_.get("with"):
-            rows.append(f"\\quad water-side, pairs bootstrap 95\\,\\%: without; with & "
+            rows.append(f"\\quad water-related, pairs bootstrap 95\\,\\%: without; with & "
                         f"{orv(pp_['without']['pairs_ci95'][0])}--{orv(pp_['without']['pairs_ci95'][1])}; "
                         f"{orv(pp_['with']['pairs_ci95'][0])}--{orv(pp_['with']['pairs_ci95'][1])} & \\\\")
     b2 = v.get("B2") or {}
     if b2.get("by_country"):
-        rows.append(r"\multicolumn{3}{l}{\emph{Every evaluable cell: where the flooded cells within 500\,m of water-side "
+        rows.append(r"\multicolumn{3}{l}{\emph{Every evaluable cell: where the flooded cells within 500\,m of water-related "
                     r"names are (item B2)}} \\")
         for r in b2["by_country"][:6]:
             rows.append(f"{_CC_NAMES.get(r['cc'], r['cc'])[:1].upper() + _CC_NAMES.get(r['cc'], r['cc'])[1:]} & "
                         f"{_thousands(r['flooded_near'])} ({pct1(r['share_of_flooded_near'])}) & {r['aois']} AOIs \\\\")
-        for r in (b2.get("by_activation") or [])[:2]:
-            rows.append(f"\\quad activation {r['activation']} & {_thousands(r['flooded_near'])} "
-                        f"({pct1(r['share_of_flooded_near'])}) & {r['aois']} AOIs \\\\")
+        cc_of = _activation_country_names()
+        for r in (b2.get("by_activation") or [])[:2]:  # B-13 の A9: 国の下に字下げせず、国を書く
+            cn = cc_of.get(r["activation"])
+            rows.append(f"Activation {r['activation']}" + (f" ({cn})" if cn else "")
+                        + f" & {_thousands(r['flooded_near'])} ({pct1(r['share_of_flooded_near'])}) & {r['aois']} AOIs \\\\")
         nb = b2.get("without_pk_bd") or {}
         if nb.get("pairs_ci95"):
             rows.append(f"Odds ratio without Pakistan and Bangladesh (pairs 95\\,\\%) & {orv(nb['odds_ratio'])} "
@@ -6239,10 +7021,53 @@ def table_twelve_checks(v69: dict | None) -> str:
            "and of the best constant forecast (the test cells' flooded share). B5: the thirteen outlying null "
            "replicates of the protocol's simulations. B4, B12, B13: inclusion, GFM images and flood typing. B18: the "
            "model of Sect.~6.2 with and without the share of built-up land at 10\\,m (ESA WorldCover 2021). B2: countries "
-           "of the flooded cells within 500\\,m of water-side names in the sample of every evaluable cell. B11: the second "
+           "of the flooded cells within 500\\,m of water-related names in the sample of every evaluable cell. B11: the second "
            "stage with the penalty chosen by grouped inner cross-validation for the name features and the composition "
            "only, on a grid widened until the optimum is interior.")
     return _tbl("tab:twelve-checks", cap, "p{9.4cm}p{3.6cm}l", r"Quantity & Value & Note", rows)
+
+
+_SPEC_WORDS = (  # B-13 の A9: 図 S6 の行の名を平易に（ファイルと鍵の代わりに）
+    ("without_partial", "partly flooded cells removed"), ("fractional_riverine", "share of riverine flooding as outcome"),
+    ("without_pakistan_bangladesh", "without Pakistan and Bangladesh"), ("without_pakistan", "without Pakistan"),
+    ("without_no_hydro", "without AOIs lacking hydrography"), ("without_oceania_americas", "without Oceania, Americas"),
+    ("without_australia", "without Australia"), ("typed_aois", "typed flooding only"),
+    ("cleaned_reading", "cleaned lexicon"), ("clean", "cleaned lexicon"), ("uncapped", "every evaluable cell"),
+    ("ems_all", "every evaluable cell"), ("B2/gfm", "every assessable cell"),
+    ("same_cells", "cells GFM can assess"), ("not_s1", "AOIs not mapped from Sentinel-1"),
+    ("independent_sensor", "AOIs not mapped from Sentinel-1"), ("v_ge_0.9", "GFM pixels 90 % valid"),
+    ("v_ge_1.0", "GFM pixels all valid"), ("v1/", "first GFM version"), ("c2_M1", "baseline trained on GFM"),
+    ("h_main", "given heights above main rivers"), ("adjusted_cci", "given land cover"),
+    ("pairs_bootstrap", "pairs bootstrap"), ("C5_near", "one permanent-water mask"), ("C7_near", "bare-earth terrain"),
+    ("raw", "without the baseline model"), ("unadjusted", "without the baseline model"))
+
+
+def _spec_label(r: dict) -> str:
+    """図 S6 の行: 改訂の番号と、版の違いを平易な言葉で（既定の版は「given the baseline model」）。"""
+    path = f"{r['file']} {r['path']}"
+    words = []
+    for key, txt in _SPEC_WORDS:
+        if key in path and txt not in words and not (key == "clean" and "cleaned lexicon" in words):
+            words.append(txt)
+    if not any(w.startswith("without the baseline") for w in words):
+        words.insert(0, "given the baseline model")
+    return f"am. {r['amendment']}: " + "; ".join(words)
+
+
+def _activation_country_names() -> dict[str, str]:
+    """activation → 国の名（ラベルの記録の meta.json、最初の国）。"""
+    out: dict[str, str] = {}
+    for f in sorted((DATA / "global" / "labels").glob("EMSR*_AOI*/meta.json")):
+        act = f.parent.name.split("_")[0]
+        if act in out:
+            continue
+        try:
+            cs = (json.loads(f.read_text(encoding="utf-8")).get("activation") or {}).get("countries") or []
+        except (OSError, ValueError):
+            continue
+        if cs:
+            out[act] = str(cs[0])
+    return out
 
 
 def fig_spec(v69: dict | None) -> None:
@@ -6272,10 +7097,9 @@ def fig_spec(v69: dict | None) -> None:
     ax.xaxis.set_major_formatter(FixedFormatter(["0.25", "0.5", "1", "2"]))
     ax.xaxis.set_minor_locator(NullLocator())
     ax.set_yticks(range(len(d)))
-    ax.set_yticklabels([f"am. {r['amendment']}: {r['file'].split('_')[0]} {r['path'][:52]}" for _, r in d.iterrows()],
-                       fontsize=5.2)
+    ax.set_yticklabels([_spec_label(r) for _, r in d.iterrows()], fontsize=5.2)
     ax.set_ylim(-0.7, len(d) - 0.3)
-    ax.set_xlabel("odds ratio of flooding within 500 m of water-side names (95 % interval)", fontsize=7)
+    ax.set_xlabel("odds ratio of flooding within 500 m of water-related names (95 % interval)", fontsize=7)
     ax.tick_params(axis="x", labelsize=7)
     hs = [plt.Line2D([], [], color=c, marker="o", lw=1.0, ms=3.5, label=lab) for _, c, lab in grp.values()]
     hs += [plt.Line2D([], [], color="0.3", marker="D", lw=0, ms=4.5, label="planned (amendment 3)"),
@@ -6285,6 +7109,18 @@ def fig_spec(v69: dict | None) -> None:
     fig.tight_layout()
     fig.savefig(HERE / "fig_spec.pdf")
     plt.close(fig)
+
+
+def _thin_space_percent() -> None:
+    """生成した数と表で「6.1\\%」と「7.0\\,\\%」が混ざらないよう、数の後の % の前に細い空きを入れる。"""
+    pat = re.compile(r"(\d)\\%")
+    for f in [HERE / "numbers.tex", *sorted(HERE.glob("*_table_*.tex")), *sorted(HERE.glob("tab_*.tex")),
+              *sorted(HERE.glob("*_contents.tex"))]:
+        if f.is_file():
+            t = f.read_text(encoding="utf-8")
+            u = pat.sub(r"\1\\,\\%", t)
+            if u != t:
+                f.write_text(u, encoding="utf-8")
 
 
 def main() -> None:
@@ -6381,6 +7217,9 @@ def main() -> None:
     v69 = _json("v69_b12_local.json")
     supp_tables_b11(v68, v69)
     m |= b12_text_macros(v69, v68, v57, v41, v50, v54, v44, v43, post["v36"])
+    v70, v70b, v71 = _json("v70_b13_local.json"), _json("v70_b13_local2.json"), _json("v71_b13_cluster.json")
+    m |= b13_macros(v70, v70b, v71, v69, v66, v67, _json("v64_b9_aggregate.json"), v57b, post["v36"], primary)
+    b13_tables(v70, v70b, v71)
     table_reading(v54, v44, v57b, v69, g._json(DATA / "runs" / "world_v2" / "metrics_primary.json"))
     (HERE / "app_table_twelve_checks.tex").write_text(table_twelve_checks(v69), encoding="utf-8")
     fig_spec(v69)
@@ -6401,6 +7240,7 @@ def main() -> None:
     tables = copernicus_tables()
     m |= supplement()
     write_numbers(m)
+    _thin_space_percent()
     print(f"macros: {len(m)}; tables: {len(tables)}; missing: {len(g.MISSING)}")
     for w in sorted(set(g.MISSING)):
         print("  missing:", w)

@@ -1,0 +1,2007 @@
+{
+ "rule": "amendment B-13 (post hoc), local computations, part 2",
+ "seed": 20261102,
+ "B12": {
+  "n_items": 462,
+  "n_published": 360,
+  "n_excluded_audit_overlap": 102,
+  "water_related_kappa": 0.912255569085309,
+  "status_kappa": 0.7600164035267581,
+  "category_kappa": {
+   "water": 0.9371332774518022,
+   "wet": 0.9662487945998067,
+   "riverine": 0.7926048826736202,
+   "crossing": 0.9728471683475559,
+   "low": 0.887459807073955,
+   "high": 0.9043342444357672,
+   "other": 0.692999830230321
+  },
+  "file": "docs/verification/v70_two_coders.csv",
+  "rule": "B-13 B12: both coders' codes with GeoNames ID, country and stratum (names in any audit sample left out); agreement from v57b"
+ },
+ "B10": {
+  "n_settlements": 122128,
+  "counts": {
+   "ach_not_bach": 57,
+   "ach_with_bach": 427,
+   "ore_ora_all": 2,
+   "ore_ora_store": 0,
+   "mont_prefix": 228,
+   "mont_prefix_monastery": 12,
+   "ried": 75,
+   "kacha": 1,
+   "taung": 139,
+   "be_eau_read_as_au": 9,
+   "it_read_by_de": 5,
+   "ir_ab_word": 45,
+   "ir_ab_suffix": 48,
+   "fi_ala": 1,
+   "fi_yli_or_yla": 1
+  },
+  "positions_by_language": {
+   "fa": {
+    "word": 289,
+    "prefix": 22,
+    "suffix": 92
+   },
+   "ar": {
+    "word": 3
+   },
+   "el": {
+    "word": 100,
+    "prefix": 14
+   },
+   "sq": {
+    "word": 36
+   },
+   "lv": {
+    "suffix": 4,
+    "word": 2
+   },
+   "sv": {
+    "suffix": 555,
+    "word": 54
+   },
+   "fi": {
+    "suffix": 16,
+    "word": 1
+   },
+   "ro": {
+    "word": 59
+   },
+   "hu": {
+    "prefix": 142,
+    "suffix": 94,
+    "word": 11
+   },
+   "uk": {
+    "word": 2
+   },
+   "tr": {
+    "suffix": 13,
+    "prefix": 3
+   },
+   "no": {
+    "word": 13,
+    "suffix": 50
+   },
+   "sh": {
+    "word": 599
+   },
+   "bg": {
+    "word": 11
+   },
+   "en": {
+    "word": 1039,
+    "suffix": 506,
+    "prefix": 4
+   },
+   "pt": {
+    "word": 548
+   },
+   "bantu": {
+    "word": 1
+   },
+   "mg": {
+    "prefix": 80,
+    "word": 1
+   },
+   "fr": {
+    "word": 691,
+    "prefix": 251,
+    "suffix": 9
+   },
+   "hi": {
+    "word": 198,
+    "suffix": 19
+   },
+   "my": {
+    "word": 2651
+   },
+   "vi": {
+    "word": 131
+   },
+   "th": {
+    "word": 102
+   },
+   "tl": {
+    "word": 68
+   },
+   "km": {
+    "word": 1215
+   },
+   "ng": {
+    "word": 1,
+    "prefix": 1
+   },
+   "es": {
+    "word": 732
+   },
+   "it": {
+    "word": 454,
+    "prefix": 77
+   },
+   "de": {
+    "suffix": 2076,
+    "prefix": 673,
+    "word": 129
+   },
+   "nl": {
+    "suffix": 191,
+    "word": 61,
+    "prefix": 10
+   },
+   "cs": {
+    "word": 87
+   },
+   "pl": {
+    "word": 89
+   },
+   "sl": {
+    "word": 203
+   },
+   "nah": {
+    "suffix": 207
+   },
+   "qu": {
+    "word": 24,
+    "suffix": 13
+   }
+  },
+  "unicode_vs_ascii_wetside": {
+   "fi": {
+    "gained": 4,
+    "lost": 0
+   },
+   "tr": {
+    "gained": 0,
+    "lost": 3
+   },
+   "bg": {
+    "gained": 0,
+    "lost": 1
+   },
+   "km": {
+    "gained": 0,
+    "lost": 57
+   },
+   "sv": {
+    "gained": 17,
+    "lost": 0
+   },
+   "de": {
+    "gained": 4,
+    "lost": 0
+   },
+   "pl": {
+    "gained": 0,
+    "lost": 2
+   }
+  },
+  "blocks_by_country": {
+   "AD": [
+    "es"
+   ],
+   "AE": [
+    "ar"
+   ],
+   "AF": [
+    "fa"
+   ],
+   "AL": [
+    "sq"
+   ],
+   "AO": [
+    "pt",
+    "bantu"
+   ],
+   "AR": [
+    "es"
+   ],
+   "AT": [
+    "de"
+   ],
+   "AU": [
+    "en"
+   ],
+   "BA": [
+    "sh"
+   ],
+   "BD": [
+    "hi"
+   ],
+   "BE": [
+    "nl",
+    "fr",
+    "de"
+   ],
+   "BF": [
+    "fr"
+   ],
+   "BG": [
+    "bg"
+   ],
+   "BI": [
+    "fr",
+    "sw"
+   ],
+   "BJ": [
+    "fr"
+   ],
+   "BO": [
+    "es",
+    "qu"
+   ],
+   "BR": [
+    "pt",
+    "tupi"
+   ],
+   "BW": [
+    "en",
+    "bantu"
+   ],
+   "BY": [
+    "uk"
+   ],
+   "CA": [
+    "en",
+    "fr"
+   ],
+   "CD": [
+    "fr",
+    "sw",
+    "bantu"
+   ],
+   "CF": [
+    "fr"
+   ],
+   "CG": [
+    "fr"
+   ],
+   "CH": [
+    "de",
+    "fr",
+    "it"
+   ],
+   "CI": [
+    "fr"
+   ],
+   "CL": [
+    "es"
+   ],
+   "CM": [
+    "fr",
+    "en"
+   ],
+   "CN": [
+    "zh"
+   ],
+   "CO": [
+    "es"
+   ],
+   "CR": [
+    "es"
+   ],
+   "CU": [
+    "es"
+   ],
+   "CV": [
+    "pt"
+   ],
+   "CY": [
+    "el",
+    "tr"
+   ],
+   "CZ": [
+    "cs"
+   ],
+   "DE": [
+    "de"
+   ],
+   "DJ": [
+    "so",
+    "fr",
+    "ar"
+   ],
+   "DK": [
+    "da"
+   ],
+   "DO": [
+    "es"
+   ],
+   "DZ": [
+    "ar",
+    "fr"
+   ],
+   "EC": [
+    "es",
+    "qu"
+   ],
+   "EE": [
+    "et"
+   ],
+   "EG": [
+    "ar"
+   ],
+   "ER": [
+    "am",
+    "ar"
+   ],
+   "ES": [
+    "es"
+   ],
+   "ET": [
+    "am",
+    "en"
+   ],
+   "FI": [
+    "fi",
+    "sv"
+   ],
+   "FJ": [
+    "en"
+   ],
+   "FR": [
+    "fr"
+   ],
+   "GB": [
+    "en"
+   ],
+   "GE": [
+    "ka",
+    "uk"
+   ],
+   "GH": [
+    "en"
+   ],
+   "GN": [
+    "fr"
+   ],
+   "GR": [
+    "el"
+   ],
+   "GT": [
+    "es"
+   ],
+   "GW": [
+    "pt"
+   ],
+   "GY": [
+    "en"
+   ],
+   "HN": [
+    "es"
+   ],
+   "HR": [
+    "sh"
+   ],
+   "HT": [
+    "fr"
+   ],
+   "HU": [
+    "hu"
+   ],
+   "ID": [
+    "id"
+   ],
+   "IE": [
+    "en"
+   ],
+   "IL": [
+    "ar"
+   ],
+   "IM": [
+    "en"
+   ],
+   "IN": [
+    "hi"
+   ],
+   "IQ": [
+    "ar"
+   ],
+   "IR": [
+    "fa"
+   ],
+   "IS": [
+    "no"
+   ],
+   "IT": [
+    "it",
+    "de"
+   ],
+   "JO": [
+    "ar"
+   ],
+   "KE": [
+    "sw",
+    "en"
+   ],
+   "KG": [
+    "kk",
+    "uk"
+   ],
+   "KH": [
+    "km"
+   ],
+   "KZ": [
+    "kk",
+    "uk"
+   ],
+   "LA": [
+    "th"
+   ],
+   "LB": [
+    "ar"
+   ],
+   "LI": [
+    "de"
+   ],
+   "LK": [
+    "en"
+   ],
+   "LR": [
+    "en"
+   ],
+   "LS": [
+    "en",
+    "bantu"
+   ],
+   "LT": [
+    "lt"
+   ],
+   "LU": [
+    "de",
+    "fr"
+   ],
+   "LV": [
+    "lv"
+   ],
+   "LY": [
+    "ar"
+   ],
+   "MA": [
+    "ar",
+    "fr"
+   ],
+   "MC": [
+    "fr"
+   ],
+   "MD": [
+    "ro",
+    "uk"
+   ],
+   "ME": [
+    "sh"
+   ],
+   "MG": [
+    "mg",
+    "fr"
+   ],
+   "MK": [
+    "bg",
+    "sq"
+   ],
+   "ML": [
+    "fr"
+   ],
+   "MM": [
+    "my"
+   ],
+   "MN": [
+    "kk"
+   ],
+   "MT": [
+    "en"
+   ],
+   "MW": [
+    "en",
+    "bantu"
+   ],
+   "MX": [
+    "es",
+    "nah"
+   ],
+   "MY": [
+    "id"
+   ],
+   "MZ": [
+    "pt",
+    "bantu"
+   ],
+   "NA": [
+    "en",
+    "af"
+   ],
+   "NE": [
+    "fr",
+    "ng"
+   ],
+   "NG": [
+    "en",
+    "ng"
+   ],
+   "NI": [
+    "es"
+   ],
+   "NL": [
+    "nl"
+   ],
+   "NO": [
+    "no"
+   ],
+   "NP": [
+    "hi"
+   ],
+   "NZ": [
+    "en"
+   ],
+   "OM": [
+    "ar"
+   ],
+   "PA": [
+    "es"
+   ],
+   "PE": [
+    "es",
+    "qu"
+   ],
+   "PG": [
+    "en"
+   ],
+   "PH": [
+    "tl",
+    "en"
+   ],
+   "PK": [
+    "fa",
+    "hi"
+   ],
+   "PL": [
+    "pl"
+   ],
+   "PR": [
+    "es"
+   ],
+   "PS": [
+    "ar"
+   ],
+   "PT": [
+    "pt"
+   ],
+   "PY": [
+    "es"
+   ],
+   "RO": [
+    "ro"
+   ],
+   "RS": [
+    "sh"
+   ],
+   "RU": [
+    "uk"
+   ],
+   "RW": [
+    "fr",
+    "sw"
+   ],
+   "SA": [
+    "ar"
+   ],
+   "SD": [
+    "ar"
+   ],
+   "SE": [
+    "sv"
+   ],
+   "SG": [
+    "id",
+    "en"
+   ],
+   "SI": [
+    "sl"
+   ],
+   "SK": [
+    "cs"
+   ],
+   "SL": [
+    "en"
+   ],
+   "SM": [
+    "it"
+   ],
+   "SN": [
+    "fr"
+   ],
+   "SO": [
+    "so",
+    "ar"
+   ],
+   "SR": [
+    "nl"
+   ],
+   "SS": [
+    "en"
+   ],
+   "SV": [
+    "es"
+   ],
+   "SY": [
+    "ar"
+   ],
+   "SZ": [
+    "en",
+    "bantu"
+   ],
+   "TD": [
+    "fr",
+    "ar"
+   ],
+   "TG": [
+    "fr"
+   ],
+   "TH": [
+    "th"
+   ],
+   "TJ": [
+    "fa",
+    "uk"
+   ],
+   "TL": [
+    "id",
+    "pt"
+   ],
+   "TM": [
+    "kk",
+    "uk"
+   ],
+   "TN": [
+    "ar",
+    "fr"
+   ],
+   "TR": [
+    "tr"
+   ],
+   "TW": [
+    "zh"
+   ],
+   "TZ": [
+    "sw",
+    "en"
+   ],
+   "UA": [
+    "uk"
+   ],
+   "UG": [
+    "en",
+    "sw"
+   ],
+   "US": [
+    "en"
+   ],
+   "UY": [
+    "es"
+   ],
+   "UZ": [
+    "kk",
+    "uk"
+   ],
+   "VA": [
+    "it"
+   ],
+   "VE": [
+    "es"
+   ],
+   "VN": [
+    "vi"
+   ],
+   "XK": [
+    "sq",
+    "sh"
+   ],
+   "YE": [
+    "ar"
+   ],
+   "ZA": [
+    "en",
+    "af",
+    "bantu"
+   ],
+   "ZM": [
+    "en",
+    "bantu"
+   ],
+   "ZW": [
+    "en",
+    "bantu",
+    "af"
+   ]
+  },
+  "rule": "B-13 B10: settlements nearest to at least one evaluable cell (uncapped table), frozen lexicon read with the corrected loader; positions counted per matched entry; Unicode names folded (a/o/u umlauts, a-ring, o-slash, ae, ss, combining marks removed)"
+ },
+ "B11": {
+  "by_block": {
+   "ar": {
+    "n": 35,
+    "unknown": 0.02857142857142857,
+    "non_environmental": 0.42857142857142855,
+    "water_related": 0.4
+   },
+   "bg": {
+    "n": 29,
+    "unknown": 0.034482758620689655,
+    "non_environmental": 0.6896551724137931,
+    "water_related": 0.06896551724137931
+   },
+   "bg+sq": {
+    "n": 85,
+    "unknown": 0.0,
+    "non_environmental": 0.5411764705882353,
+    "water_related": 0.18823529411764706
+   },
+   "cs": {
+    "n": 1328,
+    "unknown": 0.0037650602409638554,
+    "non_environmental": 0.5180722891566265,
+    "water_related": 0.16265060240963855
+   },
+   "de": {
+    "n": 9463,
+    "unknown": 0.005812110324421431,
+    "non_environmental": 0.4196343654232273,
+    "water_related": 0.21304026207333826
+   },
+   "de+fr": {
+    "n": 1,
+    "unknown": 0.0,
+    "non_environmental": 0.0,
+    "water_related": 0.0
+   },
+   "el": {
+    "n": 1737,
+    "unknown": 0.03914795624640184,
+    "non_environmental": 0.3880253310305124,
+    "water_related": 0.11226252158894647
+   },
+   "en": {
+    "n": 8963,
+    "unknown": 0.024099073970768718,
+    "non_environmental": 0.3902711145821712,
+    "water_related": 0.20138346535758117
+   },
+   "en+af+bantu": {
+    "n": 2,
+    "unknown": 0.0,
+    "non_environmental": 1.0,
+    "water_related": 0.0
+   },
+   "en+bantu": {
+    "n": 535,
+    "unknown": 0.06355140186915888,
+    "non_environmental": 0.15327102803738318,
+    "water_related": 0.4224299065420561
+   },
+   "en+ng": {
+    "n": 192,
+    "unknown": 0.4322916666666667,
+    "non_environmental": 0.3958333333333333,
+    "water_related": 0.109375
+   },
+   "en+sw": {
+    "n": 849,
+    "unknown": 0.12838633686690223,
+    "non_environmental": 0.18021201413427562,
+    "water_related": 0.26855123674911663
+   },
+   "es": {
+    "n": 3226,
+    "unknown": 0.0365778053316801,
+    "non_environmental": 0.37042777433353996,
+    "water_related": 0.22070675759454433
+   },
+   "es+nah": {
+    "n": 5569,
+    "unknown": 0.008080445322319985,
+    "non_environmental": 0.4907523792422338,
+    "water_related": 0.13054408331836953
+   },
+   "es+qu": {
+    "n": 1193,
+    "unknown": 0.026823134953897737,
+    "non_environmental": 0.3520536462699078,
+    "water_related": 0.2355406538139145
+   },
+   "fa": {
+    "n": 3694,
+    "unknown": 0.023280996210070383,
+    "non_environmental": 0.5619924201407688,
+    "water_related": 0.17108825121819166
+   },
+   "fa+hi": {
+    "n": 5332,
+    "unknown": 0.04107276819204801,
+    "non_environmental": 0.7903225806451613,
+    "water_related": 0.09864966241560391
+   },
+   "fi+sv": {
+    "n": 103,
+    "unknown": 0.0,
+    "non_environmental": 0.17475728155339806,
+    "water_related": 0.39805825242718446
+   },
+   "fr": {
+    "n": 13745,
+    "unknown": 0.019570753001091307,
+    "non_environmental": 0.45260094579847215,
+    "water_related": 0.1533648599490724
+   },
+   "fr+ar": {
+    "n": 92,
+    "unknown": 0.7065217391304348,
+    "non_environmental": 0.043478260869565216,
+    "water_related": 0.18478260869565216
+   },
+   "fr+en": {
+    "n": 1339,
+    "unknown": 0.7938760268857357,
+    "non_environmental": 0.05899925317401045,
+    "water_related": 0.12471994025392083
+   },
+   "fr+ng": {
+    "n": 1334,
+    "unknown": 0.20389805097451275,
+    "non_environmental": 0.14392803598200898,
+    "water_related": 0.6071964017991004
+   },
+   "fr+sw+bantu": {
+    "n": 6,
+    "unknown": 0.3333333333333333,
+    "non_environmental": 0.16666666666666666,
+    "water_related": 0.3333333333333333
+   },
+   "hi": {
+    "n": 2237,
+    "unknown": 0.03844434510505141,
+    "non_environmental": 0.4564148413053196,
+    "water_related": 0.30710773357174787
+   },
+   "hu": {
+    "n": 2183,
+    "unknown": 0.00961978928080623,
+    "non_environmental": 0.5904718277599633,
+    "water_related": 0.11131470453504352
+   },
+   "id+pt": {
+    "n": 84,
+    "unknown": 0.3333333333333333,
+    "non_environmental": 0.03571428571428571,
+    "water_related": 0.5119047619047619
+   },
+   "it+de": {
+    "n": 6552,
+    "unknown": 0.013125763125763126,
+    "non_environmental": 0.5053418803418803,
+    "water_related": 0.15857753357753357
+   },
+   "km": {
+    "n": 10702,
+    "unknown": 0.01074565501775369,
+    "non_environmental": 0.21594094561764157,
+    "water_related": 0.39245000934404783
+   },
+   "lt": {
+    "n": 148,
+    "unknown": 0.0,
+    "non_environmental": 0.38513513513513514,
+    "water_related": 0.30405405405405406
+   },
+   "lv": {
+    "n": 446,
+    "unknown": 0.006726457399103139,
+    "non_environmental": 0.26681614349775784,
+    "water_related": 0.3452914798206278
+   },
+   "mg+fr": {
+    "n": 872,
+    "unknown": 0.017201834862385322,
+    "non_environmental": 0.05733944954128441,
+    "water_related": 0.34174311926605505
+   },
+   "my": {
+    "n": 9547,
+    "unknown": 0.01843511050591809,
+    "non_environmental": 0.10631612024719807,
+    "water_related": 0.6878600607520687
+   },
+   "nl": {
+    "n": 226,
+    "unknown": 0.0,
+    "non_environmental": 0.17256637168141592,
+    "water_related": 0.36283185840707965
+   },
+   "nl+fr+de": {
+    "n": 2163,
+    "unknown": 0.005547850208044383,
+    "non_environmental": 0.18955154877484975,
+    "water_related": 0.24503005085529359
+   },
+   "no": {
+    "n": 371,
+    "unknown": 0.01078167115902965,
+    "non_environmental": 0.1940700808625337,
+    "water_related": 0.39892183288409705
+   },
+   "none": {
+    "n": 1,
+    "unknown": 0.0,
+    "non_environmental": 0.0,
+    "water_related": 1.0
+   },
+   "pl": {
+    "n": 2267,
+    "unknown": 0.003970004411116012,
+    "non_environmental": 0.5513895015438907,
+    "water_related": 0.1173356859285399
+   },
+   "pt": {
+    "n": 2943,
+    "unknown": 0.01834862385321101,
+    "non_environmental": 0.30988786952089703,
+    "water_related": 0.17363234794427454
+   },
+   "pt+bantu": {
+    "n": 2855,
+    "unknown": 0.25954465849387043,
+    "non_environmental": 0.2609457092819615,
+    "water_related": 0.3884413309982487
+   },
+   "ro": {
+    "n": 679,
+    "unknown": 0.022091310751104567,
+    "non_environmental": 0.5213549337260678,
+    "water_related": 0.18851251840942562
+   },
+   "ro+uk": {
+    "n": 20,
+    "unknown": 0.0,
+    "non_environmental": 0.7,
+    "water_related": 0.15000000000000002
+   },
+   "sh": {
+    "n": 5026,
+    "unknown": 0.006565857540787903,
+    "non_environmental": 0.45901313171508157,
+    "water_related": 0.14544369279745326
+   },
+   "sl": {
+    "n": 1749,
+    "unknown": 0.0017152658662092624,
+    "non_environmental": 0.29273870783304745,
+    "water_related": 0.18181818181818182
+   },
+   "so+ar": {
+    "n": 8,
+    "unknown": 0.0,
+    "non_environmental": 0.0,
+    "water_related": 0.625
+   },
+   "sq": {
+    "n": 682,
+    "unknown": 0.11436950146627566,
+    "non_environmental": 0.2961876832844575,
+    "water_related": 0.156891495601173
+   },
+   "sv": {
+    "n": 3996,
+    "unknown": 0.005005005005005005,
+    "non_environmental": 0.34934934934934936,
+    "water_related": 0.24824824824824826
+   },
+   "sw+en": {
+    "n": 16,
+    "unknown": 0.125,
+    "non_environmental": 0.0625,
+    "water_related": 0.5625
+   },
+   "th": {
+    "n": 629,
+    "unknown": 0.0,
+    "non_environmental": 0.2384737678855326,
+    "water_related": 0.37837837837837834
+   },
+   "tl+en": {
+    "n": 2657,
+    "unknown": 0.05946556266465939,
+    "non_environmental": 0.42642077531050054,
+    "water_related": 0.16974030861874295
+   },
+   "tr": {
+    "n": 174,
+    "unknown": 0.011494252873563218,
+    "non_environmental": 0.6494252873563219,
+    "water_related": 0.13793103448275862
+   },
+   "uk": {
+    "n": 225,
+    "unknown": 0.008888888888888889,
+    "non_environmental": 0.4311111111111111,
+    "water_related": 0.2177777777777778
+   },
+   "vi": {
+    "n": 3818,
+    "unknown": 0.017024620220010476,
+    "non_environmental": 0.5557883708748036,
+    "water_related": 0.19041382922996333
+   }
+  },
+  "by_cc": {
+   "AL": {
+    "n": 682,
+    "unknown": 0.11436950146627566,
+    "non_environmental": 0.2961876832844575,
+    "water_related": 0.156891495601173
+   },
+   "AT": {
+    "n": 408,
+    "unknown": 0.004901960784313725,
+    "non_environmental": 0.42401960784313725,
+    "water_related": 0.1838235294117647
+   },
+   "AU": {
+    "n": 1021,
+    "unknown": 0.07345739471106758,
+    "non_environmental": 0.24681684622918706,
+    "water_related": 0.31635651322233105
+   },
+   "BA": {
+    "n": 3045,
+    "unknown": 0.006568144499178982,
+    "non_environmental": 0.5172413793103449,
+    "water_related": 0.1369458128078818
+   },
+   "BD": {
+    "n": 2209,
+    "unknown": 0.038931643277501135,
+    "non_environmental": 0.454051607062019,
+    "water_related": 0.30783159800814847
+   },
+   "BE": {
+    "n": 2163,
+    "unknown": 0.005547850208044383,
+    "non_environmental": 0.18955154877484975,
+    "water_related": 0.24503005085529359
+   },
+   "BF": {
+    "n": 23,
+    "unknown": 0.2608695652173913,
+    "non_environmental": 0.0,
+    "water_related": 0.7391304347826086
+   },
+   "BG": {
+    "n": 29,
+    "unknown": 0.034482758620689655,
+    "non_environmental": 0.6896551724137931,
+    "water_related": 0.06896551724137931
+   },
+   "BO": {
+    "n": 742,
+    "unknown": 0.02021563342318059,
+    "non_environmental": 0.29380053908355797,
+    "water_related": 0.2641509433962264
+   },
+   "CD": {
+    "n": 6,
+    "unknown": 0.3333333333333333,
+    "non_environmental": 0.16666666666666666,
+    "water_related": 0.3333333333333333
+   },
+   "CM": {
+    "n": 1339,
+    "unknown": 0.7938760268857357,
+    "non_environmental": 0.05899925317401045,
+    "water_related": 0.12471994025392083
+   },
+   "CO": {
+    "n": 578,
+    "unknown": 0.04325259515570934,
+    "non_environmental": 0.4826989619377163,
+    "water_related": 0.09688581314878893
+   },
+   "CZ": {
+    "n": 873,
+    "unknown": 0.0,
+    "non_environmental": 0.5349369988545246,
+    "water_related": 0.14776632302405499
+   },
+   "DE": {
+    "n": 9055,
+    "unknown": 0.005853119823302043,
+    "non_environmental": 0.419436775262286,
+    "water_related": 0.21435670900055218
+   },
+   "EC": {
+    "n": 55,
+    "unknown": 0.03636363636363636,
+    "non_environmental": 0.4727272727272727,
+    "water_related": 0.12727272727272726
+   },
+   "ES": {
+    "n": 2644,
+    "unknown": 0.03517397881996974,
+    "non_environmental": 0.3464447806354009,
+    "water_related": 0.24659606656580937
+   },
+   "FI": {
+    "n": 103,
+    "unknown": 0.0,
+    "non_environmental": 0.17475728155339806,
+    "water_related": 0.39805825242718446
+   },
+   "FR": {
+    "n": 13722,
+    "unknown": 0.019166302288296168,
+    "non_environmental": 0.45335956857600934,
+    "water_related": 0.15238303454306953
+   },
+   "GB": {
+    "n": 3011,
+    "unknown": 0.009299236134174693,
+    "non_environmental": 0.362670209232813,
+    "water_related": 0.21288608435735637
+   },
+   "GI": {
+    "n": 1,
+    "unknown": 0.0,
+    "non_environmental": 0.0,
+    "water_related": 1.0
+   },
+   "GR": {
+    "n": 1737,
+    "unknown": 0.03914795624640184,
+    "non_environmental": 0.3880253310305124,
+    "water_related": 0.11226252158894647
+   },
+   "GY": {
+    "n": 113,
+    "unknown": 0.12389380530973451,
+    "non_environmental": 0.5486725663716814,
+    "water_related": 0.16814159292035397
+   },
+   "HR": {
+    "n": 1213,
+    "unknown": 0.005770816158285243,
+    "non_environmental": 0.3396537510305029,
+    "water_related": 0.15746084089035448
+   },
+   "HU": {
+    "n": 2183,
+    "unknown": 0.00961978928080623,
+    "non_environmental": 0.5904718277599633,
+    "water_related": 0.11131470453504352
+   },
+   "IE": {
+    "n": 1579,
+    "unknown": 0.008866371120962635,
+    "non_environmental": 0.23559214692843572,
+    "water_related": 0.2115262824572514
+   },
+   "IN": {
+    "n": 28,
+    "unknown": 0.0,
+    "non_environmental": 0.6428571428571429,
+    "water_related": 0.25
+   },
+   "IQ": {
+    "n": 35,
+    "unknown": 0.02857142857142857,
+    "non_environmental": 0.42857142857142855,
+    "water_related": 0.4
+   },
+   "IR": {
+    "n": 3694,
+    "unknown": 0.023280996210070383,
+    "non_environmental": 0.5619924201407688,
+    "water_related": 0.17108825121819166
+   },
+   "IT": {
+    "n": 6552,
+    "unknown": 0.013125763125763126,
+    "non_environmental": 0.5053418803418803,
+    "water_related": 0.15857753357753357
+   },
+   "KE": {
+    "n": 16,
+    "unknown": 0.125,
+    "non_environmental": 0.0625,
+    "water_related": 0.5625
+   },
+   "KH": {
+    "n": 10702,
+    "unknown": 0.01074565501775369,
+    "non_environmental": 0.21594094561764157,
+    "water_related": 0.39245000934404783
+   },
+   "LA": {
+    "n": 384,
+    "unknown": 0.0,
+    "non_environmental": 0.23177083333333334,
+    "water_related": 0.453125
+   },
+   "LK": {
+    "n": 312,
+    "unknown": 0.00641025641025641,
+    "non_environmental": 0.15384615384615385,
+    "water_related": 0.29166666666666663
+   },
+   "LT": {
+    "n": 148,
+    "unknown": 0.0,
+    "non_environmental": 0.38513513513513514,
+    "water_related": 0.30405405405405406
+   },
+   "LU": {
+    "n": 1,
+    "unknown": 0.0,
+    "non_environmental": 0.0,
+    "water_related": 0.0
+   },
+   "LV": {
+    "n": 446,
+    "unknown": 0.006726457399103139,
+    "non_environmental": 0.26681614349775784,
+    "water_related": 0.3452914798206278
+   },
+   "MD": {
+    "n": 20,
+    "unknown": 0.0,
+    "non_environmental": 0.7,
+    "water_related": 0.15000000000000002
+   },
+   "ME": {
+    "n": 105,
+    "unknown": 0.02857142857142857,
+    "non_environmental": 0.49523809523809526,
+    "water_related": 0.11428571428571428
+   },
+   "MG": {
+    "n": 872,
+    "unknown": 0.017201834862385322,
+    "non_environmental": 0.05733944954128441,
+    "water_related": 0.34174311926605505
+   },
+   "MK": {
+    "n": 85,
+    "unknown": 0.0,
+    "non_environmental": 0.5411764705882353,
+    "water_related": 0.18823529411764706
+   },
+   "MM": {
+    "n": 9547,
+    "unknown": 0.01843511050591809,
+    "non_environmental": 0.10631612024719807,
+    "water_related": 0.6878600607520687
+   },
+   "MW": {
+    "n": 521,
+    "unknown": 0.06525911708253358,
+    "non_environmental": 0.15163147792706333,
+    "water_related": 0.42610364683301344
+   },
+   "MX": {
+    "n": 5569,
+    "unknown": 0.008080445322319985,
+    "non_environmental": 0.4907523792422338,
+    "water_related": 0.13054408331836953
+   },
+   "MZ": {
+    "n": 2855,
+    "unknown": 0.25954465849387043,
+    "non_environmental": 0.2609457092819615,
+    "water_related": 0.3884413309982487
+   },
+   "NE": {
+    "n": 1334,
+    "unknown": 0.20389805097451275,
+    "non_environmental": 0.14392803598200898,
+    "water_related": 0.6071964017991004
+   },
+   "NG": {
+    "n": 192,
+    "unknown": 0.4322916666666667,
+    "non_environmental": 0.3958333333333333,
+    "water_related": 0.109375
+   },
+   "NI": {
+    "n": 4,
+    "unknown": 0.0,
+    "non_environmental": 0.0,
+    "water_related": 1.0
+   },
+   "NL": {
+    "n": 226,
+    "unknown": 0.0,
+    "non_environmental": 0.17256637168141592,
+    "water_related": 0.36283185840707965
+   },
+   "NO": {
+    "n": 371,
+    "unknown": 0.01078167115902965,
+    "non_environmental": 0.1940700808625337,
+    "water_related": 0.39892183288409705
+   },
+   "PE": {
+    "n": 396,
+    "unknown": 0.03787878787878788,
+    "non_environmental": 0.4444444444444444,
+    "water_related": 0.19696969696969696
+   },
+   "PH": {
+    "n": 2657,
+    "unknown": 0.05946556266465939,
+    "non_environmental": 0.42642077531050054,
+    "water_related": 0.16974030861874295
+   },
+   "PK": {
+    "n": 5332,
+    "unknown": 0.04107276819204801,
+    "non_environmental": 0.7903225806451613,
+    "water_related": 0.09864966241560391
+   },
+   "PL": {
+    "n": 2267,
+    "unknown": 0.003970004411116012,
+    "non_environmental": 0.5513895015438907,
+    "water_related": 0.1173356859285399
+   },
+   "PT": {
+    "n": 2943,
+    "unknown": 0.01834862385321101,
+    "non_environmental": 0.30988786952089703,
+    "water_related": 0.17363234794427454
+   },
+   "RO": {
+    "n": 679,
+    "unknown": 0.022091310751104567,
+    "non_environmental": 0.5213549337260678,
+    "water_related": 0.18851251840942562
+   },
+   "RS": {
+    "n": 663,
+    "unknown": 0.004524886877828055,
+    "non_environmental": 0.4042232277526395,
+    "water_related": 0.16742081447963802
+   },
+   "RU": {
+    "n": 11,
+    "unknown": 0.0,
+    "non_environmental": 0.09090909090909091,
+    "water_related": 0.5454545454545454
+   },
+   "SE": {
+    "n": 3996,
+    "unknown": 0.005005005005005005,
+    "non_environmental": 0.34934934934934936,
+    "water_related": 0.24824824824824826
+   },
+   "SI": {
+    "n": 1749,
+    "unknown": 0.0017152658662092624,
+    "non_environmental": 0.29273870783304745,
+    "water_related": 0.18181818181818182
+   },
+   "SK": {
+    "n": 455,
+    "unknown": 0.01098901098901099,
+    "non_environmental": 0.4857142857142857,
+    "water_related": 0.1912087912087912
+   },
+   "SO": {
+    "n": 8,
+    "unknown": 0.0,
+    "non_environmental": 0.0,
+    "water_related": 0.625
+   },
+   "SZ": {
+    "n": 14,
+    "unknown": 0.0,
+    "non_environmental": 0.21428571428571427,
+    "water_related": 0.2857142857142857
+   },
+   "TD": {
+    "n": 92,
+    "unknown": 0.7065217391304348,
+    "non_environmental": 0.043478260869565216,
+    "water_related": 0.18478260869565216
+   },
+   "TH": {
+    "n": 245,
+    "unknown": 0.0,
+    "non_environmental": 0.24897959183673468,
+    "water_related": 0.2612244897959184
+   },
+   "TL": {
+    "n": 84,
+    "unknown": 0.3333333333333333,
+    "non_environmental": 0.03571428571428571,
+    "water_related": 0.5119047619047619
+   },
+   "TR": {
+    "n": 174,
+    "unknown": 0.011494252873563218,
+    "non_environmental": 0.6494252873563219,
+    "water_related": 0.13793103448275862
+   },
+   "UA": {
+    "n": 214,
+    "unknown": 0.009345794392523364,
+    "non_environmental": 0.4485981308411215,
+    "water_related": 0.20093457943925233
+   },
+   "UG": {
+    "n": 849,
+    "unknown": 0.12838633686690223,
+    "non_environmental": 0.18021201413427562,
+    "water_related": 0.26855123674911663
+   },
+   "US": {
+    "n": 2927,
+    "unknown": 0.0283566791937137,
+    "non_environmental": 0.571233344721558,
+    "water_related": 0.13563375469764263
+   },
+   "VN": {
+    "n": 3818,
+    "unknown": 0.017024620220010476,
+    "non_environmental": 0.5557883708748036,
+    "water_related": 0.19041382922996333
+   },
+   "ZA": {
+    "n": 2,
+    "unknown": 0.0,
+    "non_environmental": 1.0,
+    "water_related": 0.0
+   }
+  },
+  "overall": {
+   "non_environmental": 0.38797818682038515,
+   "water": 0.13668446220358968,
+   "other_environmental": 0.12270732346390673,
+   "riverine": 0.09328737062753832,
+   "highland": 0.09184625966199397,
+   "wetland": 0.07663271321891786,
+   "unknown": 0.03660913140311804,
+   "lowland": 0.03475861391327132,
+   "crossing": 0.019495938687278922
+  },
+  "rule": "B-13 B11: N-read categories of the settlements nearest to at least one evaluable cell, by the lexicon blocks of the country and by country (shares of settlements)"
+ },
+ "B14": {
+  "n_aoi": 192,
+  "median_ems_share": 0.052915635271679584,
+  "median_gfm_share": 0.04672212418076489,
+  "share_aoi_gfm_below_ems": 0.5260416666666666,
+  "corr_ems_gfm_share": 0.8061275190828715,
+  "gfm_run_n_aoi": 192,
+  "yardstick_gfm": -0.0006563038912285738,
+  "median_gain_per_aoi": 0.004362391406342968,
+  "share_aoi_negative_gain": 0.28125,
+  "share_of_gain_top10_aoi": -6.5449885296897055,
+  "yardstick_ems_primary": 0.0075536340456881165,
+  "rule": "B-13 B14: flooded shares of EMS and GFM by AOI on the planned GFM table; terrain gain (Brier of M0 minus M1) by AOI in the run trained and scored on GFM labels (world_v2_gfm)"
+ },
+ "B15": {
+  "n_pairs": 345,
+  "by_country": {
+   "DE": 101,
+   "BA": 67,
+   "HR": 32,
+   "SI": 20,
+   "HU": 16,
+   "PT": 16,
+   "RS": 14,
+   "GB": 13,
+   "PL": 12,
+   "IT": 11,
+   "GR": 8,
+   "BO": 7,
+   "CZ": 7,
+   "FR": 6,
+   "ME": 4,
+   "MX": 3,
+   "AL": 2,
+   "AT": 1,
+   "CO": 1,
+   "ES": 1,
+   "MK": 1,
+   "PH": 1,
+   "RO": 1
+  },
+  "hand_diff": {
+   "n": 28,
+   "median": -0.00998630332742323,
+   "share_lower_member_lower": 0.5555555555555556,
+   "n_negative": 15,
+   "n_positive": 12,
+   "n_units": 21,
+   "sign_test_p": 0.7011080384254456,
+   "median_ci90": [
+    -0.17964692413806915,
+    0.01130140040038441
+   ],
+   "share_ci90": [
+    0.3793103448275862,
+    0.6875
+   ]
+  },
+  "ems_diff": {
+   "n": 168,
+   "median": 0.0,
+   "share_lower_member_lower": 0.25,
+   "n_negative": 1,
+   "n_positive": 3,
+   "n_units": 40,
+   "sign_test_p": 0.625,
+   "median_ci90": [
+    0.0,
+    0.0
+   ],
+   "share_ci90": [
+    0.0,
+    0.019328361709113076
+   ]
+  },
+  "gfm_diff": {
+   "n": 8,
+   "median": 0.0,
+   "share_lower_member_lower": 0.0,
+   "n_negative": 0,
+   "n_positive": 0,
+   "n_units": 6,
+   "sign_test_p": null,
+   "median_ci90": [
+    0.0,
+    0.0
+   ],
+   "share_ci90": [
+    0.0,
+    0.0
+   ]
+  },
+  "rule": "B-13 B15: pairs of settlements in the same country with the same base name once one relative qualifier (C2 (d)) is removed, lower and upper member within 10 km (greedy by distance), both with coordinates not on whole arc-minutes; differences lower minus upper in HAND at the site, and in the flooded share of cells within 500 m (EMS, planned GFM table); sign test and location-group bootstrap (2,000)"
+ },
+ "B8": {
+  "n_cells": 1507486,
+  "n_units": 195,
+  "n_name_coefs": 14,
+  "name_cols_kept": [
+   "lex_water_n1",
+   "lex_wet_n1",
+   "lex_riverine_n1",
+   "lex_crossing_n1",
+   "lex_low_n1",
+   "lex_high_n1",
+   "lex_water_k",
+   "lex_wet_k",
+   "lex_riverine_k",
+   "lex_crossing_k",
+   "lex_low_k",
+   "lex_high_k",
+   "lex_wetside_n1",
+   "nlearn"
+  ],
+  "wald": 14.628134967289126,
+  "df": 14,
+  "p": 0.4040373633497051,
+  "v55_heldout_coef_test": {
+   "features": [
+    "lex_water_n1",
+    "lex_wet_n1",
+    "lex_riverine_n1",
+    "lex_crossing_n1",
+    "lex_low_n1",
+    "lex_high_n1",
+    "lex_water_k",
+    "lex_wet_k",
+    "lex_riverine_k",
+    "lex_crossing_k",
+    "lex_low_k",
+    "lex_high_k",
+    "lex_wetside_n1"
+   ],
+   "coef": [
+    -0.34285594114674794,
+    -0.4188655494444253,
+    -0.526996791542401,
+    -0.520631855392227,
+    -0.4595217772486936,
+    0.09509664584647871,
+    -0.49907233060354483,
+    -0.044620495022221374,
+    0.2901182398238571,
+    -0.2224885192309226,
+    -0.2598006381316673,
+    -0.02973342041072093,
+    0.538450039583198
+   ],
+   "se": [
+    0.3981359682731323,
+    0.5138320544155296,
+    0.35761200155274137,
+    0.4003948495570037,
+    0.3770158494217797,
+    0.13155454063562808,
+    0.26735579415274274,
+    0.42977332130214574,
+    0.23969077883868542,
+    0.3149437264275519,
+    0.35350456929559165,
+    0.21011671688327851,
+    0.3745823477651832
+   ],
+   "coef_logit_M1c": 1.324426244496186,
+   "wald": 13.658016621639591,
+   "df": 13,
+   "n_groups": 194,
+   "n_cells": 1489381,
+   "n_aoi": 479,
+   "p_chi2": 0.3983612149643808,
+   "p_F": 0.4049581834937402,
+   "predictions": "world_v2_lexfix p_M1c (held out)",
+   "table": "rebuilt with the corrected code"
+  },
+  "v55_wald_tests": {
+   "wetside": {
+    "terms": [
+     "wetside:le500m",
+     "wetside:500m_1km",
+     "wetside:gt1km"
+    ],
+    "wald": 0.6123377749899231,
+    "df": 3,
+    "n_groups": 194,
+    "p_chi2": 0.8936022043191658,
+    "p_F": 0.8934618269757275
+   },
+   "classes": {
+    "terms": [
+     "water:le500m",
+     "water:500m_1km",
+     "water:gt1km",
+     "wet:le500m",
+     "wet:500m_1km",
+     "wet:gt1km",
+     "riverine:le500m",
+     "riverine:500m_1km",
+     "riverine:gt1km",
+     "crossing:le500m",
+     "crossing:500m_1km",
+     "crossing:gt1km",
+     "low:le500m",
+     "low:500m_1km",
+     "low:gt1km",
+     "high:le500m",
+     "high:500m_1km",
+     "high:gt1km"
+    ],
+    "wald": 25.4094670508256,
+    "df": 18,
+    "n_groups": 194,
+    "p_chi2": 0.11404668730642589,
+    "p_F": 0.12934314767759736
+   }
+  },
+  "rule": "B-13 B8: logistic regression of y on standardised [base logit, composition, name features] over the held-out cells of all folds (stage-2 dumps of B-8 C2), cluster-robust by location group (v39.fit with a single intercept); joint Wald test of the name coefficients (constant columns dropped)"
+ },
+ "B9ef": {
+  "e_two_by_two": {
+   "band": {
+    "500m_1km": {
+     "n": 59234,
+     "ems1_gfm1": 4595,
+     "ems1_gfm0": 3056,
+     "ems0_gfm1": 879,
+     "ems0_gfm0": 50704
+    },
+    "gt1km": {
+     "n": 145093,
+     "ems1_gfm1": 9897,
+     "ems1_gfm0": 7173,
+     "ems0_gfm1": 2735,
+     "ems0_gfm0": 125288
+    },
+    "le500m": {
+     "n": 30376,
+     "ems1_gfm1": 1909,
+     "ems1_gfm0": 1695,
+     "ems0_gfm1": 310,
+     "ems0_gfm0": 26462
+    }
+   },
+   "built_tercile": {
+    "high": {
+     "n": 46937,
+     "ems1_gfm1": 1017,
+     "ems1_gfm0": 1930,
+     "ems0_gfm1": 340,
+     "ems0_gfm0": 43650
+    },
+    "low": {
+     "n": 187766,
+     "ems1_gfm1": 15384,
+     "ems1_gfm0": 9994,
+     "ems0_gfm1": 3584,
+     "ems0_gfm0": 158804
+    }
+   }
+  },
+  "built_cuts": [
+   0.0,
+   0.0
+  ],
+  "f_sensor": {
+   "n_aoi": 333,
+   "n_aoi_optical": 55,
+   "or_radar": 1.167615113692112,
+   "or_optical": 0.5791984568762075,
+   "ratio_optical_to_radar": 0.49605255197898734,
+   "ratio_ci95": [
+    0.3579696569519269,
+    0.6873994193253965
+   ],
+   "p": 2.5309290116717526e-05
+  },
+  "rule": "B-13 B9 (e): counts on the planned GFM table by distance band and tercile of the 10 m built-up share; (f): capped EMS table (v41), AOIs with a known sensor (Sentinel-1 and other SAR = radar, optical), term wetside within 500 m x optical, cluster-robust by location group"
+ },
+ "B6": {
+  "confirmatory": {
+   "R": -0.0034976042242454027,
+   "n_units": 195,
+   "n_eff": 2.398975191333997,
+   "top10": [
+    {
+     "unit": "g00175",
+     "unit_index": 175,
+     "country": "PK",
+     "R_without": -0.00010429937675439184,
+     "psi": -0.0033933048474910107,
+     "share_cells": 0.006633560776020474
+    },
+    {
+     "unit": "g00127",
+     "unit_index": 127,
+     "country": "AU",
+     "R_without": -0.004910420956396288,
+     "psi": 0.0014128167321508854,
+     "share_cells": 0.0027794619651525785
+    },
+    {
+     "unit": "g00085",
+     "unit_index": 85,
+     "country": "IR",
+     "R_without": -0.004491403453872228,
+     "psi": 0.000993799229626825,
+     "share_cells": 0.006633560776020474
+    },
+    {
+     "unit": "g00025",
+     "unit_index": 25,
+     "country": "BD",
+     "R_without": -0.0027764861451268913,
+     "psi": -0.0007211180791185114,
+     "share_cells": 0.006633560776020474
+    },
+    {
+     "unit": "g00007",
+     "unit_index": 7,
+     "country": "DE",
+     "R_without": -0.004183348384075759,
+     "psi": 0.0006857441598303563,
+     "share_cells": 0.006633560776020474
+    },
+    {
+     "unit": "g00008",
+     "unit_index": 8,
+     "country": "DE",
+     "R_without": -0.0029657963324454593,
+     "psi": -0.0005318078917999434,
+     "share_cells": 0.003326730729174268
+    },
+    {
+     "unit": "g00132",
+     "unit_index": 132,
+     "country": "PK",
+     "R_without": -0.003995486773647291,
+     "psi": 0.000497882549401888,
+     "share_cells": 0.006633560776020474
+    },
+    {
+     "unit": "g00191",
+     "unit_index": 191,
+     "country": "PT",
+     "R_without": -0.0030127977772843473,
+     "psi": -0.00048480644696105536,
+     "share_cells": 0.006633560776020474
+    },
+    {
+     "unit": "g00102",
+     "unit_index": 102,
+     "country": "NE",
+     "R_without": -0.003922726312228371,
+     "psi": 0.00042512208798296857,
+     "share_cells": 0.0035774793265078413
+    },
+    {
+     "unit": "g00030",
+     "unit_index": 30,
+     "country": "MM",
+     "R_without": -0.0038736598886321043,
+     "psi": 0.0003760556643867016,
+     "share_cells": 0.006633560776020474
+    }
+   ],
+   "range_R_without_top10": [
+    -0.004910420956396288,
+    -0.00010429937675439184
+   ]
+  },
+  "corrected": {
+   "R": -0.00404730489884297,
+   "n_units": 195,
+   "n_eff": 1.8412109733869422,
+   "top10": [
+    {
+     "unit": "g00175",
+     "unit_index": 175,
+     "country": "PK",
+     "R_without": 6.475613323364607e-05,
+     "psi": -0.004112061032076617,
+     "share_cells": 0.006633560776020474
+    },
+    {
+     "unit": "g00085",
+     "unit_index": 85,
+     "country": "IR",
+     "R_without": -0.005170598150457773,
+     "psi": 0.0011232932516148028,
+     "share_cells": 0.006633560776020474
+    },
+    {
+     "unit": "g00132",
+     "unit_index": 132,
+     "country": "PK",
+     "R_without": -0.004943182455842302,
+     "psi": 0.0008958775569993319,
+     "share_cells": 0.006633560776020474
+    },
+    {
+     "unit": "g00166",
+     "unit_index": 166,
+     "country": "DE",
+     "R_without": -0.0047579284174832205,
+     "psi": 0.0007106235186402502,
+     "share_cells": 0.006633560776020474
+    },
+    {
+     "unit": "g00025",
+     "unit_index": 25,
+     "country": "BD",
+     "R_without": -0.0033592259568733275,
+     "psi": -0.0006880789419696429,
+     "share_cells": 0.006633560776020474
+    },
+    {
+     "unit": "g00127",
+     "unit_index": 127,
+     "country": "AU",
+     "R_without": -0.004710753556084372,
+     "psi": 0.0006634486572414016,
+     "share_cells": 0.0027794619651525785
+    },
+    {
+     "unit": "g00007",
+     "unit_index": 7,
+     "country": "DE",
+     "R_without": -0.004606034468631109,
+     "psi": 0.0005587295697881385,
+     "share_cells": 0.006633560776020474
+    },
+    {
+     "unit": "g00008",
+     "unit_index": 8,
+     "country": "DE",
+     "R_without": -0.003516521232876909,
+     "psi": -0.0005307836659660613,
+     "share_cells": 0.003326730729174268
+    },
+    {
+     "unit": "g00024",
+     "unit_index": 24,
+     "country": "BD",
+     "R_without": -0.0035475289177860033,
+     "psi": -0.000499775981056967,
+     "share_cells": 0.006633560776020474
+    },
+    {
+     "unit": "g00102",
+     "unit_index": 102,
+     "country": "NE",
+     "R_without": -0.004515931472038196,
+     "psi": 0.0004686265731952254,
+     "share_cells": 0.0035774793265078413
+    }
+   ],
+   "range_R_without_top10": [
+    -0.005170598150457773,
+    6.475613323364607e-05
+   ]
+  },
+  "refit_corrected": {
+   "R_without": [
+    {
+     "unit": "g00175",
+     "R_without": -0.0015786654311705022
+    },
+    {
+     "unit": "g00085",
+     "R_without": -0.0007706713873015423
+    },
+    {
+     "unit": "g00132",
+     "R_without": -0.0028399692388088034
+    },
+    {
+     "unit": "g00166",
+     "R_without": -0.002898251357943626
+    },
+    {
+     "unit": "g00025",
+     "R_without": -0.006442681968772568
+    },
+    {
+     "unit": "g00127",
+     "R_without": -0.0044367175207244225
+    },
+    {
+     "unit": "g00007",
+     "R_without": -0.003729890937754312
+    },
+    {
+     "unit": "g00008",
+     "R_without": -0.005414867330161476
+    },
+    {
+     "unit": "g00024",
+     "R_without": -0.0028246427099335577
+    },
+    {
+     "unit": "g00102",
+     "R_without": -0.004059183028001103
+    }
+   ],
+   "range": [
+    -0.006442681968772568,
+    -0.0007706713873015423
+   ]
+  },
+  "rule": "B-13 B6: jackknife over location groups (fixed models); n_eff = (sum psi^2)^2 / sum psi^4; the 10 most influential groups of the corrected run removed one at a time with the second stage refitted on the design of B-8 C2"
+ }
+}

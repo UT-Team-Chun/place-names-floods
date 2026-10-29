@@ -1,0 +1,361 @@
+gid,name,cc,stratum,status_coder1,codes_coder1,status_coder2,codes_coder2
+257695,Margariti,GR,not,coded,other,coded,other
+259022,Kourenta,GR,not,unclear,,coded,other;water
+259146,Kastraki,GR,not,coded,other,coded,other
+260521,Kato Mousiotitsa,GR,wet,coded,other,coded,other
+261439,Kalarrytes,GR,not,coded,other,coded,other
+262639,Episkopiko,GR,not,coded,other,coded,other
+262751,Eleftheres,GR,not,no-derivation,,no-derivation,
+592828,Zemaiciu Naumiestis,LT,not,coded,other,coded,other
+687965,Zabolotiv,UA,not,coded,wet,coded,wet
+735789,Chelidona,GR,not,no-derivation,,no-derivation,
+786107,Sanac,RS,not,coded,other,coded,other
+787311,Ostrvo,RS,wet,coded,riverine,coded,riverine
+788975,Krusevac,RS,not,coded,other,coded,other;water
+1325211,Hinthada,MM,not,coded,other,coded,other
+1694861,Paombong,PH,not,coded,other,coded,other
+1699296,Rodriguez,PH,not,coded,other,coded,high;other
+1822029,Stung Treng,KH,wet,coded,water;wet,coded,water;wet
+2145912,Tullibigeal,AU,not,coded,other,coded,other
+2160546,Largs,AU,not,coded,other,coded,other
+2272378,A dos Francos,PT,not,coded,other,coded,other
+2517563,Fuente Carreteros,ES,wet,coded,water;other,coded,other;water
+2633851,Windermere,GB,wet,coded,water;other,coded,other;water
+2634869,Wallingford,GB,wet,coded,crossing;other,coded,crossing;other
+2636715,Stratfield Saye,GB,not,coded,other,coded,other
+2636917,Stillingfleet,GB,not,coded,water;other,coded,other;water
+2637522,Sonning,GB,not,coded,other,coded,other
+2637659,Sleaford,GB,wet,coded,crossing;water,coded,crossing;water;wet
+2637960,Shiplake,GB,wet,unclear,,coded,other;water
+2640594,Partick,GB,not,coded,other,coded,other
+2643548,Low Ackworth,GB,wet,coded,other,coded,other
+2645826,Kendal,GB,not,coded,water;low,coded,low;other;water
+2648063,Great Malvern,GB,not,coded,high;other,coded,high;other
+2648873,Gargrave,GB,not,coded,other,coded,other
+2649001,Fulbeck,GB,wet,coded,water;other,coded,other;water
+2649823,Ewelme,GB,not,coded,water,coded,water
+2651466,Dean,GB,wet,coded,low,coded,low
+2653015,Churwell,GB,wet,coded,water;other,coded,other;water
+2654034,Caldbeck,GB,wet,coded,water,coded,water
+2655049,Bowness-on-Windermere,GB,wet,coded,high;other,coded,other
+2655962,Belle Isle,GB,wet,coded,other,coded,other
+2665990,Va,SE,not,coded,other,coded,other
+2670232,Svartra,SE,not,coded,water;other,coded,other;water
+2712364,Genevad,SE,wet,coded,crossing;other,coded,crossing;other
+2714322,Floda,SE,not,no-derivation,,no-derivation,
+2716791,Eggby,SE,not,coded,other,coded,other
+2749692,Ohe en Laak,NL,wet,coded,riverine,coded,riverine
+2749748,Obbicht,NL,not,coded,high;other,coded,high
+2758163,Budel-Schoot,NL,not,coded,other,coded,other
+2789388,Paal,BE,not,coded,wet,coded,other;wet
+2791013,Molenbeersel,BE,not,coded,wet;other,coded,other;wet
+2818899,Unterrath,DE,wet,no-derivation,,no-derivation,
+2830151,Spoerkelnbruch,DE,wet,coded,other;wet,coded,other;wet
+2842647,Saarbruecken,DE,wet,coded,water;high;crossing,coded,crossing;high;water
+2874035,Malstatt-Burbach,DE,wet,coded,other,coded,other
+2886253,Kolmberg bei Waffenbrunn,DE,wet,no-derivation,,no-derivation,
+2909081,Haunersdorf,DE,not,coded,other,coded,other
+2956094,Angermund,DE,not,coded,water,coded,water
+2961617,Patrickswell,IE,wet,coded,water;other,coded,water
+2962153,Oranmore,IE,not,coded,water,coded,water
+2963103,Knockcroghery,IE,not,coded,high;other,coded,high;other
+2965111,Corofin,IE,not,coded,crossing;riverine,coded,crossing;other
+2965353,Cluain Meala,IE,not,unclear,,coded,low;other
+2967350,Wimille,FR,not,no-derivation,,no-derivation,
+2967438,Wasquehal,FR,not,coded,other,coded,other
+2967482,Wambrechies,FR,not,no-derivation,,no-derivation,
+2968394,Villers-en-Vexin,FR,not,coded,other,coded,other
+2968457,Villerest,FR,not,coded,other;high,coded,high;other
+2969980,Verdey,FR,not,coded,other,coded,other
+2970322,Vaux-sous-Coulombs,FR,wet,coded,other,coded,other
+2970596,Vattetot-sous-Beaumont,FR,wet,no-derivation,,no-derivation,
+2970694,Varennes-Changy,FR,wet,no-derivation,,no-derivation,
+2971092,Val-de-la-Haye,FR,wet,coded,low;other,coded,other
+2971328,Urval,FR,not,coded,other;low,coded,low;other
+2971444,Tursac,FR,not,no-derivation,,no-derivation,
+2972058,Trans-en-Provence,FR,not,no-derivation,,no-derivation,
+2972468,Tonneins,FR,not,coded,other,coded,other
+2974385,Soisy-sous-Montmorency,FR,wet,coded,other,coded,other
+2974867,Serquigny,FR,not,coded,other,coded,other
+2975921,Sartrouville,FR,not,coded,other,coded,other
+2977284,Saint-Quentin-de-Chalais,FR,not,coded,other,coded,other
+2977494,Saint-Pierre-de-Salerne,FR,not,unclear,,coded,high;other
+2977777,Saint-Paer,FR,not,coded,other,coded,other
+2978292,Saint-Martin-du-Puy,FR,not,no-derivation,,unclear,
+2978586,Saint-Marcel,FR,not,coded,other,coded,other
+2979161,Saint-Jouan-de-l'Isle,FR,wet,coded,other;riverine,coded,other;riverine
+2979415,Saint-Jacques-de-la-Lande,FR,not,coded,other,coded,other
+2979435,Saint-Inglevert,FR,not,coded,other,coded,other
+2980169,Saint-Fargeau-Ponthierry,FR,wet,coded,crossing;other,coded,crossing;other
+2980937,Saint-Cyr-sous-Dourdan,FR,wet,no-derivation,,unclear,
+2981583,Saint-Aubin-d'Ecrosville,FR,not,coded,other,coded,other
+2982154,Ruminghem,FR,not,coded,other,coded,other
+2982182,Ruisseauville,FR,not,coded,other,coded,other
+2982421,Rouville,FR,not,no-derivation,,no-derivation,
+2984531,Raix,FR,not,coded,other,coded,other
+2985360,Preures,FR,not,coded,other,coded,other
+2985923,Port-Villez,FR,wet,coded,crossing,coded,crossing
+2986094,Pont-sur-Seine,FR,wet,coded,crossing,coded,crossing
+2986220,Pont-du-Casse,FR,wet,coded,crossing;other,coded,crossing;other
+2986279,Pontcarre,FR,wet,unclear,,coded,crossing;other
+2986289,Pont-Authou,FR,wet,coded,crossing,unclear,
+2986369,Pomport,FR,not,no-derivation,,no-derivation,
+2986762,Pleumeleuc,FR,not,coded,other,coded,other
+2989726,Offekerque,FR,not,coded,other,coded,other
+2989918,Noyal-Pontivy,FR,wet,coded,other,coded,other
+2990066,Notre-Dame-de-Bliquetuit,FR,not,coded,other,coded,other
+2990088,Nortbecourt,FR,not,coded,other,coded,other
+2990524,Neuville-sous-Montreuil,FR,wet,coded,other,coded,other
+2990957,Nanteuil-les-Meaux,FR,not,coded,low;other,coded,low;other
+2990961,Nanteuil-en-Vallee,FR,wet,coded,low;other,coded,low;other
+2992229,Montmorency,FR,not,coded,high;other,coded,high;other
+2992465,Montier-en-l'Isle,FR,wet,coded,riverine;other,coded,riverine
+2992694,Montemboeuf,FR,not,coded,high;other,coded,high;other
+2992901,Montbouy,FR,not,no-derivation,,no-derivation,
+2994651,Melun,FR,not,coded,high;other,coded,high;other
+2995135,Mauchamps,FR,not,coded,other,coded,other
+2995385,Martillac,FR,not,coded,other,coded,other
+2996146,Mantes-la-Ville,FR,not,coded,water;other,coded,other;water
+2997034,Lussas-et-Nontronneau,FR,not,coded,other,coded,other
+2997147,Luisetaines,FR,not,coded,other,coded,other
+2997670,Longuenesse,FR,not,coded,high,coded,high
+2997690,Longre,FR,not,unclear,,coded,crossing;other
+2998209,Linselles,FR,not,no-derivation,,no-derivation,
+2998329,L'Ile-Saint-Denis,FR,wet,coded,riverine;other,coded,other;riverine
+2998965,Le Val-Saint-Germain,FR,wet,coded,low;other,coded,other
+2999027,Leulinghen-Bernes,FR,not,coded,other;wet,coded,other;wet
+2999126,Le Trait,FR,not,coded,crossing,coded,crossing
+3000586,Les Istres-et-Bury,FR,not,coded,other;low,coded,low;other
+3003067,Leognan,FR,not,coded,other,coded,other
+3005696,Laventie,FR,not,no-derivation,,no-derivation,
+3008081,Lamonzie-Montastruc,FR,not,coded,other;high,coded,high;other
+3009481,La Ferte-sous-Jouarre,FR,wet,coded,other,coded,other
+3010425,La Chapelle-Caro,FR,not,coded,other,coded,other
+3010683,Labuissiere,FR,not,coded,other,coded,other
+3011173,L'Abbaye-sous-Plancy,FR,wet,coded,other,unclear,
+3012041,Jurignac,FR,not,coded,other,coded,other
+3012155,Jouy-sur-Morin,FR,not,coded,other,coded,other
+3012319,Joigny,FR,not,no-derivation,,no-derivation,
+3013512,Henouville,FR,not,coded,other,coded,other
+3013525,Henin-Beaumont,FR,not,coded,other,coded,other
+3013672,Hautot-sur-Seine,FR,not,unclear,,coded,high;other
+3013763,Haute-Isle,FR,wet,coded,other,coded,other
+3014313,Guibeville,FR,not,coded,other,coded,other
+3014393,Guer,FR,not,unclear,,coded,other;wet
+3014881,Granges-sur-Aube,FR,not,coded,other;water,coded,other;water
+3015636,Gosnay,FR,not,no-derivation,,no-derivation,
+3016218,Germigny-sous-Coulombs,FR,wet,coded,other,coded,other
+3017080,Frevent,FR,not,no-derivation,,no-derivation,
+3017910,Fontenay-sous-Bois,FR,wet,coded,water;other,coded,other;water
+3017992,Fontaine-sur-Coole,FR,wet,no-derivation,,no-derivation,
+3018061,Fontaine-Fourches,FR,wet,coded,water;other,coded,other;water
+3018117,Fongalop,FR,not,coded,water;other,coded,other;water
+3018693,Fere-en-Tardenois,FR,not,coded,other,coded,other
+3018993,Faubourg de Fives,FR,not,unclear,,coded,other;water
+3019153,Faches-Thumesnil,FR,not,coded,other,coded,other
+3019157,Fabrezan,FR,not,coded,other,coded,other
+3020065,Eperlecques,FR,not,coded,other,coded,other
+3020886,Douvrin,FR,not,unclear,,coded,other;water
+3023175,Coupvray,FR,not,coded,other,coded,other
+3024238,Colombiers,FR,not,coded,other,coded,other
+3024354,Colembert,FR,not,coded,high;other,coded,high;other
+3024596,Clichy-sous-Bois,FR,wet,coded,other,coded,other
+3025020,Chouilly,FR,not,no-derivation,,no-derivation,
+3025314,Chevilly-Larue,FR,not,coded,other,coded,low;other
+3026210,Chateau-Renard,FR,not,coded,other,coded,other
+3026553,Charmont-sous-Barbuise,FR,wet,no-derivation,,unclear,
+3028360,Castelmoron-d'Albret,FR,not,coded,other,coded,other
+3030044,Briis-sous-Forges,FR,wet,coded,wet;low,coded,low;other;wet
+3030093,Brienne-le-Chateau,FR,not,no-derivation,,no-derivation,
+3030188,Breuvery-sur-Coole,FR,not,coded,other;water,coded,other
+3030946,Bourgtheroulde-Infreville,FR,not,coded,other,coded,other
+3031277,Bougival,FR,not,coded,low;other,coded,low;other
+3033135,Berville-sur-Seine,FR,not,coded,water,no-derivation,
+3033551,Belval-sous-Chatillon,FR,wet,coded,low,coded,low;other
+3033738,Bellebrune,FR,not,coded,water;other,coded,other;water
+3035936,Authou,FR,not,coded,high,coded,high
+3036148,Aulnay-aux-Planches,FR,wet,coded,other;crossing,coded,crossing;other
+3036229,Audruicq,FR,not,no-derivation,,coded,other
+3036230,Audrix,FR,not,coded,other,coded,other
+3036289,Auby,FR,not,coded,other,coded,other
+3036372,Aubeville,FR,not,coded,other,coded,other
+3038334,Ajaccio,FR,not,unclear,,coded,crossing;other
+3043317,Urom,HU,not,coded,other,coded,other
+3044475,Szigetszentmiklos,HU,wet,coded,riverine;other,coded,other
+3045542,Sarisap,HU,wet,coded,water;wet;other,coded,other;water;wet
+3047896,Mosonmagyarovar,HU,not,coded,wet;other,coded,other;wet
+3051473,Hidas,HU,wet,coded,crossing,coded,crossing
+3052381,Gardony,HU,not,no-derivation,,no-derivation,
+3053038,Feherto,HU,not,coded,water,coded,other;water
+3054709,Botpuszta,HU,not,coded,other,coded,other
+3057384,Stupava,SK,not,coded,other,coded,other
+3057707,Sekule,SK,not,coded,other,coded,other
+3057932,Bratislava - Raca,SK,not,coded,other,coded,other
+3060915,Bruty,SK,not,coded,other,coded,other
+3061861,Zapy,CZ,not,coded,other,coded,other
+3062241,Vysoka,CZ,not,no-derivation,,unclear,
+3062625,Vojkovice,CZ,not,coded,other,coded,other
+3063316,Velen,CZ,not,coded,other,coded,other
+3064139,Travcice,CZ,not,coded,other,coded,other
+3068607,Panenske Brezany,CZ,not,unclear,,coded,high;other;riverine
+3069150,Odolena Voda,CZ,wet,coded,other;water,coded,other;water
+3070811,Bila Voda,CZ,wet,coded,water,coded,other;water
+3071926,Liblice,CZ,not,coded,other,coded,other
+3071937,Libis,CZ,not,coded,other,coded,other
+3071980,Libcice nad Vltavou,CZ,not,coded,other;water,coded,other;water
+3072978,Krabcice,CZ,not,coded,other,coded,other
+3076059,Habrovany,CZ,not,coded,other,coded,other
+3076628,Dolni Zalezly,CZ,wet,coded,low;other,coded,low;other
+3076777,Dolni Lutyne,CZ,wet,coded,other,coded,other
+3076915,Dolni Brezany,CZ,wet,coded,low,coded,high;low;other;riverine
+3077155,Divci Hrad,CZ,not,coded,other,coded,other
+3077170,Devinska Nova Ves,SK,not,no-derivation,,no-derivation,
+3081541,Wolany,PL,not,coded,other,coded,other
+3082411,Wiazow,PL,not,coded,other,coded,other
+3083118,Trzebieszow,PL,not,no-derivation,,coded,other
+3084496,Struga,PL,wet,no-derivation,,no-derivation,
+3085184,Solarnia,PL,not,coded,other,coded,other
+3085994,Sienice,PL,not,coded,other,coded,other
+3086956,Roszkow,PL,not,unclear,,coded,other;water
+3087203,Renska Wies,PL,not,no-derivation,,no-derivation,
+3088109,Prezyna,PL,not,unclear,,coded,other;water
+3088822,Ploczki Dolne,PL,wet,coded,other,coded,other;water
+3088930,Pisarzowice,PL,not,no-derivation,,no-derivation,
+3089057,Pietrowice Wielkie,PL,not,no-derivation,,no-derivation,
+3089899,Osiek Grodkowski,PL,not,no-derivation,,no-derivation,
+3089918,Osiek,PL,not,coded,other,coded,other
+3090755,Nowa Wies,PL,not,coded,other,coded,other
+3091095,Nedza,PL,not,coded,other,coded,other
+3091719,Mionow,PL,not,coded,other,coded,other
+3092007,Miedonia,PL,not,coded,riverine,coded,riverine
+3092139,Mechow,PL,not,no-derivation,,no-derivation,
+3092599,Maciejowice,PL,not,no-derivation,,no-derivation,
+3094384,Krzyzowice,PL,not,coded,other,coded,other
+3094389,Krzyzowa,PL,not,coded,other,coded,other
+3094394,Krzyzkowice,PL,not,no-derivation,,no-derivation,
+3094395,Krzyzkowice,PL,not,coded,other,coded,other
+3095231,Koperniki,PL,not,no-derivation,,no-derivation,
+3096368,Kepa,PL,wet,coded,riverine,coded,other;riverine
+3096806,Kamieniec,PL,not,coded,high,coded,high
+3098338,Grodczanki,PL,not,no-derivation,,no-derivation,
+3098358,Grocholub,PL,not,no-derivation,,no-derivation,
+3098616,Goswinowice,PL,not,no-derivation,,no-derivation,
+3098929,Golostowice,PL,not,coded,other,coded,other
+3100104,Droszkow,PL,not,coded,other,coded,other
+3100217,Domanice,PL,not,no-derivation,,no-derivation,
+3100376,Dobkowice,PL,not,coded,other,coded,other
+3100429,Dlugomilowice,PL,not,coded,other,coded,other
+3101709,Chocim,PL,not,no-derivation,,no-derivation,
+3102906,Borki,PL,not,coded,other,coded,other
+3103051,Bogunow,PL,not,coded,other,coded,other
+3103255,Blazejowice Dolne,PL,wet,coded,other,coded,other
+3105088,Vilar de Barrio,ES,not,no-derivation,,no-derivation,
+3116914,Mendigorria,ES,not,coded,high,coded,high;other
+3117855,Lubiano,ES,not,no-derivation,,no-derivation,
+3129243,Asteguieta,ES,not,no-derivation,,no-derivation,
+3129861,Arangiz,ES,not,no-derivation,,no-derivation,
+3147542,Lierfoss,NO,wet,coded,other,coded,other
+3153158,Hell,NO,not,coded,high,coded,high
+3169529,Redu,IT,not,coded,other,coded,other
+3185012,Lac,AL,not,coded,wet,coded,wet
+3186942,Zadvor,SI,not,coded,other,coded,other
+3187301,Vrbanja,HR,not,coded,other,coded,other
+3187856,Vera,HR,not,coded,other,coded,other
+3188213,Velika Ligojna,SI,not,coded,other,coded,other
+3190184,Spodnji Velovlek,SI,wet,coded,low,coded,low
+3190192,Spodnji Kaselj,SI,wet,coded,other,coded,other
+3190248,Spodnja Hrusica,SI,wet,coded,low;other,coded,low;other
+3190250,Spodnja Draga,SI,wet,coded,low,coded,low
+3190434,Smrje,SI,not,coded,other,coded,other
+3190960,Setnica,SI,not,no-derivation,,no-derivation,
+3191408,Rupe,SI,not,coded,low,coded,low;other
+3192642,Potok pri Muljavi,SI,wet,no-derivation,,no-derivation,
+3192645,Potok,SI,wet,coded,water,coded,water
+3193711,Pako,SI,not,no-derivation,,unclear,
+3194511,Neverke,SI,not,coded,high,coded,high
+3194978,Mlaka pri Kocevski Reki,SI,wet,no-derivation,,coded,other
+3195161,Miklavz pri Ormozu,SI,not,coded,other,coded,other
+3195794,Mala Slevica,SI,not,no-derivation,,no-derivation,
+3195803,Mala Racna,SI,not,coded,other,coded,other
+3195829,Mala Loka pri Visnji Gori,SI,wet,no-derivation,,no-derivation,
+3196281,Log pri Brezovici,SI,wet,no-derivation,,coded,other
+3196529,Liplje,SI,not,coded,other,coded,other
+3196778,Landol,SI,not,coded,other;low,coded,low;other
+3197818,Kompolje,SI,not,coded,high;other,coded,high;other
+3197941,Kocevska Reka,SI,wet,coded,water,coded,other;water
+3198620,Jezero,SI,wet,coded,water,coded,water
+3198636,Jeza,SI,not,coded,high,coded,low;other
+3199268,Hrib-Loski Potok,SI,wet,coded,low;water,coded,low;water
+3199523,Grosuplje,SI,not,unclear,,coded,other;water;wet
+3199625,Grcarevec,SI,not,coded,high;other,coded,high;other
+3200376,Gorenje,SI,not,coded,high,coded,high;other
+3200794,Gabrje,SI,not,coded,other,coded,other
+3200826,Fokovci,SI,not,coded,other,coded,high;other
+3201748,Dol pri Ljubljani,SI,wet,coded,low,coded,low
+3201751,Dol pri Borovnici,SI,wet,no-derivation,,no-derivation,
+3201892,Dobrunje,SI,not,coded,other,coded,other
+3202413,Crni Potok pri Dragi,SI,wet,no-derivation,,no-derivation,
+3202952,Butajnova,SI,not,coded,other,coded,other
+3203466,Breg pri Borovnici,SI,wet,coded,riverine;water,coded,other;riverine;water
+3203655,Kostajnica,BA,not,coded,other,coded,other
+3203900,Blocice,SI,not,coded,riverine,coded,riverine
+3204240,Bezuljak,SI,not,coded,other,coded,other
+3204275,Bericevo,SI,not,coded,other,coded,other
+3204797,Apace,SI,not,coded,other,coded,other
+3218597,Vallonto,IT,not,coded,low,coded,low
+3218699,Studenec na Blokah,SI,wet,no-derivation,,no-derivation,
+3218723,Sekirisce,SI,not,coded,other,coded,other
+3218903,Jerinov Gric,SI,not,coded,other;high,coded,high;other
+3516234,Tatahuicapan,MX,wet,coded,water,coded,other;water
+3530177,Cosamaloapan,MX,wet,coded,water;other,coded,other;riverine;water
+3691175,Trujillo,PE,not,coded,other,coded,other
+4377542,Bloomsdale,US,wet,coded,other,coded,other
+4400129,Neelys Landing,US,wet,coded,crossing;other,coded,crossing;other
+4400511,New Wells,US,wet,coded,other,coded,other
+4405779,River aux Vases,US,wet,coded,water;wet,coded,water;wet
+4408313,Shawneetown,US,not,coded,other,coded,other
+4408719,Silver Lake,US,wet,coded,water,coded,other;water
+4552707,Tahlequah,US,not,coded,other,coded,other
+6324501,Kirkthorpe,GB,not,coded,other,coded,other
+6620097,Pont-Pean,FR,wet,coded,crossing;other,coded,crossing;other
+7534553,Tomice,PL,not,coded,other,coded,other
+7534641,Czernica,PL,not,coded,other,coded,other
+7576331,Chmielow,PL,not,no-derivation,,no-derivation,
+7576453,Ciezkowice,PL,not,coded,other,coded,other
+8650504,Xoteapan,MX,wet,coded,water,coded,other;water
+8858665,Texcaltitan Xoteapan (Texcaltitan),MX,wet,coded,high;water,coded,high;other;water
+8859379,Tonalapan,MX,wet,coded,water,coded,other;water
+8859731,San Benito Encinal,MX,not,coded,other,coded,other
+8859856,Arroyo San Isidro,MX,wet,coded,other,coded,other
+8864619,Villa San Martin,MX,not,coded,other,coded,other
+8956466,Marcorengo,IT,not,no-derivation,,coded,other
+8960974,Rubbiara,IT,not,coded,other,coded,other
+8970310,Chiesa di San Martino di Mugnano,IT,not,coded,other,coded,other
+8987011,Cerovec pod Bocem,SI,not,no-derivation,,no-derivation,
+8987103,Spodnje Negonje,SI,wet,coded,low;other,coded,low;other
+8987181,Gorenje Blato,SI,wet,no-derivation,,no-derivation,
+8987252,Vodole,SI,not,coded,low,coded,low
+8987301,Babna Gora,SI,not,coded,high,coded,high;other
+8988220,Srednja Vas-Loski Potok,SI,wet,no-derivation,,no-derivation,
+8988480,Krizevska Vas,SI,not,coded,other,coded,other
+8988565,Slovenska Vas,SI,not,coded,other,coded,other
+8988571,Trckov Gric,SI,not,coded,other;high,coded,high;other
+8989065,Scit,SI,not,no-derivation,,no-derivation,
+8989146,Podkogelj,SI,not,coded,high;low,coded,high
+8989197,Krkovo pri Karlovici,SI,not,no-derivation,,no-derivation,
+8989900,Log pri Polhovem Gradcu,SI,wet,unclear,,coded,other;wet
+11550922,Gledhow,GB,not,coded,high;other,coded,high;other
+11696156,Sukowice,PL,not,coded,other,coded,other
+11952175,Uszczonow,PL,not,no-derivation,,no-derivation,
+12047616,Mokra,PL,wet,no-derivation,,no-derivation,
+12047630,Pilczyce,PL,not,coded,other,coded,other
+12123372,Gorka,PL,not,coded,other,coded,high;other
+12123373,Kolonia Karola Miarki,PL,not,coded,other,coded,other
+12264245,Allerton Bywater,GB,wet,coded,other;water,coded,other;water
+12266700,Ennerdale Bridge,GB,wet,coded,low;other;water,coded,low;other;water
+12305643,Pontault,FR,wet,coded,crossing;low,coded,crossing;low;other
+12306471,La Cambe,FR,not,no-derivation,,no-derivation,
+12313483,Le Cher,FR,not,coded,other,coded,other;water
+12314669,Chebrac,FR,not,coded,other,coded,other
+13269745,Gipton,GB,not,coded,other,coded,other
+13276507,Raughton Head,GB,not,coded,other;high,coded,high;other

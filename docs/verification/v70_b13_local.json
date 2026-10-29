@@ -1,0 +1,2241 @@
+{
+ "rule": "amendment B-13 (post hoc), local computations; confirmatory verdict unchanged",
+ "seed": 20261102,
+ "B1a": {
+  "replicates": 4000,
+  "seed": 20261102,
+  "confirmatory": {
+   "run": "world_v2",
+   "split": "primary",
+   "arms": [
+    "M0",
+    "M1",
+    "M1c",
+    "M3n"
+   ],
+   "n_units": 195,
+   "R": -0.0034976042242454027,
+   "delta_bs": -2.6419622346602572e-05,
+   "yardstick": 0.007553634045688095,
+   "L_plus": -0.0004041013246310073,
+   "L_minus": 0.0003512620799378022,
+   "l_plus_upper": -0.00023865433029279304,
+   "l_minus_lower": 0.0001816218925839091,
+   "equivalent": true,
+   "reps_ok": 4000,
+   "fieller90": [
+    -0.012664047183573479,
+    0.0034585583485012127
+   ],
+   "fieller_within_margin": true,
+   "ratio_pct90": [
+    -0.012957348302786708,
+    0.003132375796696895
+   ],
+   "sd_delta_bs": 3.150406462341336e-05,
+   "sd_yardstick": 0.0020782171112855726,
+   "corr": 0.0523455871944377,
+   "var": [
+    9.925060877962054e-10,
+    4.318986361640156e-06,
+    3.427185264814844e-09
+   ]
+  },
+  "corrected": {
+   "run": "world_v2_lexfix",
+   "split": "primary",
+   "arms": [
+    "M0",
+    "M1",
+    "M1c",
+    "M3n"
+   ],
+   "n_units": 195,
+   "R": -0.00404730489884297,
+   "delta_bs": -3.057186007718047e-05,
+   "yardstick": 0.007553634045688095,
+   "L_plus": -0.0004082535623615853,
+   "L_minus": 0.0003471098422072243,
+   "l_plus_upper": -0.0002468334324548528,
+   "l_minus_lower": 0.0001735166971644236,
+   "equivalent": true,
+   "reps_ok": 4000,
+   "fieller90": [
+    -0.014720366949444804,
+    0.0038411823166852902
+   ],
+   "fieller_within_margin": true,
+   "ratio_pct90": [
+    -0.01498417037748729,
+    0.002861359915084063
+   ],
+   "sd_delta_bs": 3.59022364118591e-05,
+   "sd_yardstick": 0.002098219459375269,
+   "corr": 0.07187105614120837,
+   "var": [
+    1.2889705793730211e-09,
+    4.402524899701048e-06,
+    5.414102077052606e-09
+   ]
+  },
+  "H4_nested": {
+   "run": "world_v2",
+   "split": "llmcut",
+   "arms": [
+    "M0",
+    "M1",
+    "M1rc",
+    "M3rn"
+   ],
+   "n_units": 38,
+   "R": -0.0034025789734489754,
+   "delta_bs": -3.8189132414787966e-05,
+   "yardstick": 0.01122358443780016,
+   "L_plus": -0.0005993683543047961,
+   "L_minus": 0.0005229900894752201,
+   "l_plus_upper": -0.0001684699237211738,
+   "l_minus_lower": 9.790500528963384e-05,
+   "equivalent": true,
+   "reps_ok": 4000,
+   "fieller90": [
+    -0.028024308314154308,
+    0.010014555701982186
+   ],
+   "fieller_within_margin": true,
+   "ratio_pct90": [
+    -0.02355300126915939,
+    0.00811507704140843
+   ],
+   "sd_delta_bs": 7.287263114499998e-05,
+   "sd_yardstick": 0.00543676716101851,
+   "corr": -0.013452348647630018,
+   "var": [
+    5.31042036999522e-09,
+    2.9558437163129275e-05,
+    -5.32970656516887e-09
+   ]
+  },
+  "H4_total": {
+   "run": "world_v2",
+   "split": "llmcut",
+   "arms": [
+    "M0",
+    "M1",
+    "M1s",
+    "M3rs"
+   ],
+   "n_units": 38,
+   "R": 0.026828886011935497,
+   "delta_bs": 0.00030111626752707366,
+   "yardstick": 0.01122358443780016,
+   "L_plus": -0.0002600629543629344,
+   "L_minus": 0.0008622954894170817,
+   "l_plus_upper": 0.0002482059182904669,
+   "l_minus_lower": 0.0003816765658472679,
+   "equivalent": false,
+   "reps_ok": 4000,
+   "fieller90": [
+    0.003287933507409994,
+    0.1609188323052032
+   ],
+   "fieller_within_margin": false,
+   "ratio_pct90": [
+    0.0037586035707214073,
+    0.11496210123590625
+   ],
+   "sd_delta_bs": 0.0001589796319213605,
+   "sd_yardstick": 0.005566725036060939,
+   "corr": -0.03310770653100069,
+   "var": [
+    2.527452336585127e-08,
+    3.098842762710767e-05,
+    -2.9300184446974495e-08
+   ]
+  },
+  "country": {
+   "run": "world_v2",
+   "split": "country",
+   "arms": [
+    "M0",
+    "M1",
+    "M1c",
+    "M3n"
+   ],
+   "n_units": 53,
+   "R": 0.0013856782314823762,
+   "delta_bs": 9.794070195515272e-06,
+   "yardstick": 0.007068069608799248,
+   "L_plus": -0.0003436094102444471,
+   "L_minus": 0.0003631975506354777,
+   "l_plus_upper": -6.544916690600134e-05,
+   "l_minus_lower": 9.183546633706746e-05,
+   "equivalent": true,
+   "reps_ok": 4000,
+   "fieller90": [
+    -0.007610844239699305,
+    0.02196319429734685
+   ],
+   "fieller_within_margin": true,
+   "ratio_pct90": [
+    -0.005606132178430034,
+    0.015389215587692552
+   ],
+   "sd_delta_bs": 2.8478764766971617e-05,
+   "sd_yardstick": 0.003718209872745897,
+   "corr": -0.07280909629440815,
+   "var": [
+    8.110400426525039e-10,
+    1.3825084657785062e-05,
+    -7.709756977343888e-09
+   ]
+  }
+ },
+ "B4": {
+  "tercile_cuts": [
+   0.012860009517074453,
+   0.04950388703604439
+  ],
+  "strata": {
+   "low": {
+    "odds_ratio": 0.40077725057726704,
+    "ci95": [
+     0.17708162022194748,
+     0.9070529419086824
+    ],
+    "n_cells": 558287,
+    "n_aoi": 146,
+    "n_units": 83,
+    "n_group_cells": 4243,
+    "n_group_flooded": 7.0,
+    "n_group_units": 67,
+    "n_aoi_tercile": 167
+   },
+   "middle": {
+    "odds_ratio": 0.994621650444434,
+    "ci95": [
+     0.6816757964999703,
+     1.4512356645375668
+    ],
+    "n_cells": 472083,
+    "n_aoi": 166,
+    "n_units": 98,
+    "n_group_cells": 3127,
+    "n_group_flooded": 45.0,
+    "n_group_units": 64,
+    "n_aoi_tercile": 166
+   },
+   "high": {
+    "odds_ratio": 1.071578668782413,
+    "ci95": [
+     0.7836279726993937,
+     1.4653392724534333
+    ],
+    "n_cells": 459011,
+    "n_aoi": 167,
+    "n_units": 94,
+    "n_group_cells": 2678,
+    "n_group_flooded": 309.0,
+    "n_group_units": 61,
+    "n_aoi_tercile": 167
+   }
+  },
+  "rule": "B-13 B4: the size terciles of v55 (share of the AOI below the low-HAND threshold), table only"
+ },
+ "B5": {
+  "brier": {
+   "M1c": 0.043046501114585925,
+   "M3n": 0.04307699959980998,
+   "M1c_no_nlearn": 0.043815921034026095,
+   "M3n_no_nlearn_comp": 0.04335236947125102,
+   "M0": 0.05129357724636781,
+   "M1": 0.043739943199636
+  },
+  "yardstick": 0.0075536340467318094,
+  "R_standard": -0.004037591050263794,
+  "R_without_char_composition": 0.06136801967201978,
+  "rule": "B-13 B5: second stage refitted on the dumps of B-8 C2 (corrected code, primary split); the reference and the names model both without the AOI mean of the character model's score"
+ },
+ "B3": {
+  "coder2": {
+   "p1": {
+    "k": 84,
+    "n": 114,
+    "rate": 0.7368421052631579,
+    "ci95": [
+     0.649242398717508,
+     0.8090004006558029
+    ]
+   },
+   "p0": {
+    "k": 58,
+    "n": 264,
+    "rate": 0.2196969696969697,
+    "ci95": [
+     0.17396916042253827,
+     0.27346515158368573
+    ]
+   },
+   "misclassification": {
+    "point_at_rates": 1.001292596487048,
+    "median": 0.9972515191823513,
+    "ci95": [
+     0.5855620214641382,
+     1.7141964129031177
+    ],
+    "share_undefined": 0.0,
+    "draws": 20000
+   },
+   "recall_implied": 0.18456704060213128
+  },
+  "coder1": {
+   "p1": {
+    "k": 82,
+    "n": 108,
+    "rate": 0.7592592592592593,
+    "ci95": [
+     0.670618917901196,
+     0.830089226474421
+    ]
+   },
+   "p0": {
+    "k": 44,
+    "n": 245,
+    "rate": 0.17959183673469387,
+    "ci95": [
+     0.13658964915158467,
+     0.2324869039649361
+    ]
+   },
+   "misclassification": {
+    "point_at_rates": 1.0011530898124945,
+    "median": 0.9976822785115813,
+    "ci95": [
+     0.6229094603695351,
+     1.6069835080826573
+    ],
+    "share_undefined": 0.0,
+    "draws": 20000
+   },
+   "recall_implied": 0.22197838473886958
+  },
+  "stratum_sizes": {
+   "wet": 1021,
+   "not": 15129
+  },
+  "rule": "B-13 B3: p1, p0 from coder 2's codes (coded rows; water-related = any of the five water-side classes), Wilson 95% intervals; probabilistic bias analysis of the main within-500 m odds ratio (cached pairs draws of v57) with Beta(k+1, n-k+1) rates for each coder"
+ },
+ "B13": {
+  "confirmatory": {
+   "n_aoi": 479,
+   "median_delta_auc": 0.0,
+   "median_delta_prauc": 0.0,
+   "share_aoi_auc_up": 0.4822546972860125,
+   "mean_bss_increment_aoi_weighted": 0.0003206173730091513,
+   "median_bss_increment": -9.480312422612183e-05
+  },
+  "corrected": {
+   "n_aoi": 479,
+   "median_delta_auc": 0.0,
+   "median_delta_prauc": -1.1102230246251565e-16,
+   "share_aoi_auc_up": 0.48851774530271397,
+   "mean_bss_increment_aoi_weighted": -0.00024303244808858985,
+   "median_bss_increment": -0.00012535693976345095
+  },
+  "rule": "B-13 B13: per AOI with both classes, AUC and PR-AUC of M3n minus M1c, and the Brier skill increment relative to the AOI's own flooded share (equal weight per AOI)"
+ },
+ "B7": {
+  "confirmatory": {
+   "delta_bs": -2.6419622346602572e-05,
+   "R_Y0": -0.0034976042242454027,
+   "R_Y3": -0.0030873368198634826,
+   "Y3": 0.008557414978703493,
+   "climatology_brier": 0.05229735817938302,
+   "climatology": "training constant",
+   "bss_increment": -0.0005051808211034621
+  },
+  "corrected": {
+   "delta_bs": -3.057186007718047e-05,
+   "R_Y0": -0.00404730489884297,
+   "R_Y3": -0.003572557852256023,
+   "Y3": 0.008557414978703493,
+   "climatology_brier": 0.05229735817938302,
+   "climatology": "training constant",
+   "bss_increment": -0.000584577522488176
+  },
+  "H4_nested": {
+   "delta_bs": -3.8189132414787966e-05,
+   "R_Y0": -0.0034025789734489754,
+   "R_Y3": -0.014744791153686999,
+   "Y3": 0.002590008364088535,
+   "climatology_brier": 0.05248493725001666,
+   "climatology": "test constant",
+   "bss_increment": -0.0007276208073350767
+  },
+  "H4_total": {
+   "delta_bs": 0.00030111626752707366,
+   "R_Y0": 0.026828886011935497,
+   "R_Y3": 0.11626073170348285,
+   "Y3": 0.002590008364088535,
+   "climatology_brier": 0.05248493725001666,
+   "climatology": "test constant",
+   "bss_increment": 0.0057371940084958006
+  },
+  "rule": "B-13 B7: Y3 = Brier of the constant (training-side flooded share per fold; the test share for the single-fold llmcut split) minus Brier of M1; Brier skill increment = delta BS / Brier of that constant"
+ },
+ "B1op": {
+  "n_units": 195,
+  "replicates_outer": 2000,
+  "replicates_inner": 1000,
+  "seed": 20261102,
+  "share_equivalent": {
+   "proportional": {
+    "-0.06": {
+     "fixed": 0.0,
+     "ratio": 0.0005,
+     "L": 0.0005,
+     "undefined": 0.0005
+    },
+    "-0.05": {
+     "fixed": 0.0,
+     "ratio": 0.149,
+     "L": 0.149,
+     "undefined": 0.0005
+    },
+    "-0.04": {
+     "fixed": 0.0495,
+     "ratio": 0.608,
+     "L": 0.608,
+     "undefined": 0.0005
+    },
+    "-0.02": {
+     "fixed": 0.987,
+     "ratio": 0.933,
+     "L": 0.933,
+     "undefined": 0.0005
+    },
+    "+0.00": {
+     "fixed": 0.9985,
+     "ratio": 0.986,
+     "L": 0.986,
+     "undefined": 0.0005
+    },
+    "+0.02": {
+     "fixed": 0.9975,
+     "ratio": 0.99,
+     "L": 0.99,
+     "undefined": 0.0005
+    },
+    "+0.04": {
+     "fixed": 0.01,
+     "ratio": 0.7325,
+     "L": 0.733,
+     "undefined": 0.0005
+    },
+    "+0.05": {
+     "fixed": 0.0,
+     "ratio": 0.027,
+     "L": 0.027,
+     "undefined": 0.0005
+    },
+    "+0.06": {
+     "fixed": 0.0,
+     "ratio": 0.0,
+     "L": 0.0,
+     "undefined": 0.0005
+    }
+   },
+   "constant": {
+    "-0.06": {
+     "fixed": 0.152,
+     "ratio": 0.0,
+     "L": 0.0,
+     "undefined": 0.0005
+    },
+    "-0.05": {
+     "fixed": 0.324,
+     "ratio": 0.0315,
+     "L": 0.0315,
+     "undefined": 0.0005
+    },
+    "-0.04": {
+     "fixed": 0.56,
+     "ratio": 0.1865,
+     "L": 0.1865,
+     "undefined": 0.0005
+    },
+    "-0.02": {
+     "fixed": 0.9345,
+     "ratio": 0.75,
+     "L": 0.75,
+     "undefined": 0.0005
+    },
+    "+0.00": {
+     "fixed": 0.9985,
+     "ratio": 0.986,
+     "L": 0.986,
+     "undefined": 0.0005
+    },
+    "+0.02": {
+     "fixed": 0.9635,
+     "ratio": 0.8405,
+     "L": 0.8405,
+     "undefined": 0.0005
+    },
+    "+0.04": {
+     "fixed": 0.5695,
+     "ratio": 0.129,
+     "L": 0.129,
+     "undefined": 0.0005
+    },
+    "+0.05": {
+     "fixed": 0.3125,
+     "ratio": 0.0265,
+     "L": 0.0265,
+     "undefined": 0.0005
+    },
+    "+0.06": {
+     "fixed": 0.1305,
+     "ratio": 0.002,
+     "L": 0.002,
+     "undefined": 0.0005
+    }
+   }
+  },
+  "seconds": 18,
+  "rule": "B-13 B1: as B-12 B1 (true R set to r0 by proportional or constant shifts), adding the L rule (one-sided 95% upper limit of L+ below 0 and lower limit of L- above 0)"
+ },
+ "B1bc": {
+  "replicates": 500,
+  "seed": 20261102,
+  "nesting": {
+   "n_activations": 188,
+   "n_countries": 70,
+   "n_activations_in_several_countries": 58,
+   "n_countries_with_activations": 55
+  },
+  "rule": "B-13 B1 (b)(c): stage 2 refitted in each replicate on the stage-2 design of the corrected code (world_v2_b8stage2_local, as B-11 B7); (b) location groups, (c) countries then activations within each drawn country (activation assigned to its majority country)",
+  "b_groups": {
+   "refit": {
+    "R": -0.004047304898841384,
+    "delta_bs": -3.057186007716928e-05,
+    "yardstick": 0.00755363404568829,
+    "L_plus": -0.0004082535623615838,
+    "L_minus": 0.00034710984220724526,
+    "l_plus_upper": -0.00020886140913790654,
+    "l_minus_lower": 0.00016544400398066752,
+    "equivalent": true,
+    "reps_ok": 500,
+    "fieller90": [
+     -0.024741837946817596,
+     0.016076221424343024
+    ],
+    "fieller_within_margin": true,
+    "ratio_pct90": [
+     -0.02068101097816327,
+     0.013228677525260777
+    ],
+    "sd_delta_bs": 8.550794496396124e-05,
+    "sd_yardstick": 0.0018908713675810443,
+    "corr": -0.05857393841481449,
+    "var": [
+     7.311608651959825e-09,
+     3.5753945287378086e-06,
+     -9.470499400199619e-09
+    ]
+   },
+   "fixed": {
+    "R": -0.004047304898841384,
+    "delta_bs": -3.057186007716928e-05,
+    "yardstick": 0.00755363404568829,
+    "L_plus": -0.0004082535623615838,
+    "L_minus": 0.00034710984220724526,
+    "l_plus_upper": -0.00025228943978601636,
+    "l_minus_lower": 0.00018557150748854572,
+    "equivalent": true,
+    "reps_ok": 500,
+    "fieller90": [
+     -0.014340320109026354,
+     0.0039910847491337505
+    ],
+    "fieller_within_margin": true,
+    "ratio_pct90": [
+     -0.015468454383700519,
+     0.0034715540343781834
+    ],
+    "sd_delta_bs": 3.6712678938399374e-05,
+    "sd_yardstick": 0.0018908713675810443,
+    "corr": 0.07595440177919559,
+    "var": [
+     1.347820794833993e-09,
+     3.5753945287378086e-06,
+     5.272675080051347e-09
+    ]
+   }
+  },
+  "c_nested": {
+   "refit": {
+    "R": -0.004047304898841384,
+    "delta_bs": -3.057186007716928e-05,
+    "yardstick": 0.00755363404568829,
+    "L_plus": -0.0004082535623615838,
+    "L_minus": 0.00034710984220724526,
+    "l_plus_upper": -0.00018622187279839487,
+    "l_minus_lower": 0.00011128292453612902,
+    "equivalent": true,
+    "reps_ok": 500,
+    "fieller90": [
+     -0.041905389191182335,
+     0.03096170746965374
+    ],
+    "fieller_within_margin": true,
+    "ratio_pct90": [
+     -0.026381727844143738,
+     0.017718074886468902
+    ],
+    "sd_delta_bs": 0.00013920223037780128,
+    "sd_yardstick": 0.002533886750788499,
+    "corr": -0.014431362294174228,
+    "var": [
+     1.9377260942154465e-08,
+     6.420582065821494e-06,
+     -5.090268888856044e-09
+    ]
+   },
+   "fixed": {
+    "R": -0.004047304898841384,
+    "delta_bs": -3.057186007716928e-05,
+    "yardstick": 0.00755363404568829,
+    "L_plus": -0.0004082535623615838,
+    "L_minus": 0.00034710984220724526,
+    "l_plus_upper": -0.00022494749007241348,
+    "l_minus_lower": 0.00014050655208559324,
+    "equivalent": true,
+    "reps_ok": 500,
+    "fieller90": [
+     -0.01757446418594622,
+     0.005540513725398611
+    ],
+    "fieller_within_margin": true,
+    "ratio_pct90": [
+     -0.019209359789089574,
+     0.0028120473043365137
+    ],
+    "sd_delta_bs": 4.211586945712313e-05,
+    "sd_yardstick": 0.002533886750788499,
+    "corr": 0.027231187911841273,
+    "var": [
+     1.7737464601294372e-09,
+     6.420582065821494e-06,
+     2.9060264218479644e-09
+    ]
+   }
+  }
+ },
+ "B1d": {
+  "runs": [
+   "world_v2_lexfix",
+   "world_v2_fs1b",
+   "world_v2_fs2b",
+   "world_v2_fs3",
+   "world_v2_fs4",
+   "world_v2_fs5",
+   "world_v2_fs6",
+   "world_v2_fs7",
+   "world_v2_fs8",
+   "world_v2_fs9",
+   "world_v2_fs10",
+   "world_v2_fs11",
+   "world_v2_fs12"
+  ],
+  "R_by_run": [
+   -0.004047304898841384,
+   -0.001892982010677661,
+   0.002133902231145535,
+   0.0002768783873361619,
+   -0.001823651518209889,
+   -0.004609180276060267,
+   -0.002041185814597072,
+   -0.0035575207602246994,
+   -0.001297194211455235,
+   -0.0018714489435722403,
+   0.0018616385289871615,
+   0.000842239204646635,
+   -0.0003976867564541809
+  ],
+  "nb_var": {
+   "L_plus": 1.7776084345033767e-10,
+   "L_minus": 2.7610666453794303e-10,
+   "delta_bs": 4.8885913889402164e-11,
+   "yardstick": 7.121913604189528e-08
+  },
+  "nb_cov": 4.91729105438027e-10,
+  "L_plus": -0.0004082535623615838,
+  "L_minus": 0.00034710984220724526,
+  "l_plus_upper": -9.566427111333325e-05,
+  "l_minus_lower": 3.8526376737692194e-05,
+  "equivalent": true,
+  "fieller90": [
+   -0.04210744948312534,
+   0.031043001462814326
+  ],
+  "fieller_within_margin": true,
+  "rule": "B-13 B1 (d): variance of (c) (nested, refit) plus the Nadeau-Bengio variance over the 13 fold assignments of v47; normal approximation, one-sided 95%"
+ },
+ "B2": {
+  "yardstick": 0.0075536340456881165,
+  "upper_R": {
+   "fixed": 0.002596119933940239,
+   "refit_b8_c2": 0.013323900752190513,
+   "groups_refit_b11_b7": 0.007936125462820085,
+   "two_way_b11_b7": 0.03603568680813685,
+   "fold_assignments_v47": 0.004340469105676914,
+   "b1_a_corrected": 0.0038411823166852902,
+   "b1_b_groups_refit": 0.016076221424343024,
+   "b1_c_nested_refit": 0.03096170746965374,
+   "b1_d_with_folds": 0.031043001462814326
+  },
+  "references": {
+   "b7_recomputed": -1.6738324456571387e-05,
+   "zero": 0.0,
+   "b7_centred": -2.2186831331203974e-05,
+   "b5": -7.49743852171824e-05
+  },
+  "bounds": {
+   "fixed": {
+    "b7_recomputed": {
+     "A": {
+      "delta": 0.22215846038031123,
+      "odds_ratio": 1.248769242636115,
+      "how": "interpolated",
+      "odds_ratio_text": "1.25",
+      "mc95": [
+       1.234844029030628,
+       1.257822384208306
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.23",
+       "1.26"
+      ],
+      "estimator_scale": {
+       "nominal": 1.248769242636115,
+       "estimator": 1.3633033462931259,
+       "text": "1.36"
+      }
+     },
+     "B": {
+      "delta": 1.83228291492902,
+      "odds_ratio": 6.248134348387338,
+      "how": "interpolated",
+      "odds_ratio_text": "6.25",
+      "mc95": [
+       6.142283384164134,
+       6.3633111907118165
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "6.14",
+       "6.36"
+      ],
+      "estimator_scale": {
+       "nominal": 6.248134348387338,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "zero": {
+     "A": {
+      "delta": 0.15691861516168387,
+      "odds_ratio": 1.1699003978716689,
+      "how": "interpolated",
+      "odds_ratio_text": "1.17",
+      "mc95": [
+       1.1544937645460183,
+       1.1836390669723127
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.15",
+       "1.18"
+      ],
+      "estimator_scale": {
+       "nominal": 1.1699003978716689,
+       "estimator": 1.244708305008083,
+       "text": "1.24"
+      }
+     },
+     "B": {
+      "delta": 1.5290312432254378,
+      "odds_ratio": 4.613705098573101,
+      "how": "interpolated",
+      "odds_ratio_text": "4.61",
+      "mc95": [
+       4.50231350126935,
+       4.718646970995246
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "4.50",
+       "4.72"
+      ],
+      "estimator_scale": {
+       "nominal": 4.613705098573101,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "b7_centred": {
+     "A": {
+      "delta": 0.2445873164146795,
+      "odds_ratio": 1.2770941686401072,
+      "how": "interpolated",
+      "odds_ratio_text": "1.28",
+      "mc95": [
+       1.2688267723103002,
+       1.2855404177500105
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.27",
+       "1.29"
+      ],
+      "estimator_scale": {
+       "nominal": 1.2770941686401072,
+       "estimator": 1.4039122687908652,
+       "text": "1.40"
+      }
+     },
+     "B": {
+      "delta": 1.9309946361833012,
+      "odds_ratio": 6.8963662067831075,
+      "how": "interpolated",
+      "odds_ratio_text": "6.90",
+      "mc95": [
+       6.770817118843675,
+       7.031222875915351
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "6.77",
+       "7.03"
+      ],
+      "estimator_scale": {
+       "nominal": 6.8963662067831075,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "b5": {
+     "A": {
+      "delta": 0.3879144697355809,
+      "odds_ratio": 1.4739037155223542,
+      "how": "interpolated",
+      "odds_ratio_text": "1.47",
+      "mc95": [
+       1.4694222928843137,
+       1.4782044186574634
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.47",
+       "1.48"
+      ],
+      "estimator_scale": {
+       "nominal": 1.4739037155223542,
+       "estimator": 1.69259597415004,
+       "text": "1.69"
+      }
+     },
+     "B": {
+      "delta": 2.621390944478525,
+      "odds_ratio": 13.754842507554471,
+      "how": "interpolated",
+      "odds_ratio_text": "13.75",
+      "mc95": [
+       13.545237202709409,
+       13.96568128145943
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "13.55",
+       "13.97"
+      ],
+      "estimator_scale": {
+       "nominal": 13.754842507554471,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    }
+   },
+   "refit_b8_c2": {
+    "b7_recomputed": {
+     "A": {
+      "delta": 0.44899790900748726,
+      "odds_ratio": 1.566741381151529,
+      "how": "interpolated",
+      "odds_ratio_text": "1.57",
+      "mc95": [
+       1.5618222260144001,
+       1.5715354406304347
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.56",
+       "1.57"
+      ],
+      "estimator_scale": {
+       "nominal": 1.566741381151529,
+       "estimator": 1.8272103455913509,
+       "text": "1.83"
+      }
+     },
+     "B": {
+      "delta": 2.910623992197775,
+      "odds_ratio": 18.368256640602343,
+      "how": "interpolated",
+      "odds_ratio_text": "18.37",
+      "mc95": [
+       17.975898061477054,
+       18.771038674712155
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "17.98",
+       "18.77"
+      ],
+      "estimator_scale": {
+       "nominal": 18.368256640602343,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "zero": {
+     "A": {
+      "delta": 0.40414971002140365,
+      "odds_ratio": 1.4980282000051417,
+      "how": "interpolated",
+      "odds_ratio_text": "1.50",
+      "mc95": [
+       1.4936827199363512,
+       1.502607699775069
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.49",
+       "1.50"
+      ],
+      "estimator_scale": {
+       "nominal": 1.4980282000051417,
+       "estimator": 1.7288314840909544,
+       "text": "1.73"
+      }
+     },
+     "B": {
+      "delta": 2.6982655946995147,
+      "odds_ratio": 14.85394660668606,
+      "how": "interpolated",
+      "odds_ratio_text": "14.85",
+      "mc95": [
+       14.611338742608435,
+       15.115096029871376
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "14.61",
+       "15.12"
+      ],
+      "estimator_scale": {
+       "nominal": 14.85394660668606,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "b7_centred": {
+     "A": {
+      "delta": 0.4635964861305776,
+      "odds_ratio": 1.5897813421748765,
+      "how": "interpolated",
+      "odds_ratio_text": "1.59",
+      "mc95": [
+       1.5846577381802198,
+       1.59508040955124
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.58",
+       "1.60"
+      ],
+      "estimator_scale": {
+       "nominal": 1.5897813421748765,
+       "estimator": 1.8603683786130796,
+       "text": "1.86"
+      }
+     },
+     "B": {
+      "delta": 2.979748962959169,
+      "odds_ratio": 19.682874893838694,
+      "how": "interpolated",
+      "odds_ratio_text": "19.68",
+      "mc95": [
+       19.254757425148,
+       NaN
+      ],
+      "share_above_grid": 0.04,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "19.25",
+       "> 20"
+      ],
+      "estimator_scale": {
+       "nominal": 19.682874893838694,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "b5": {
+     "A": {
+      "delta": 0.5639927372972278,
+      "odds_ratio": 1.7576764488418428,
+      "how": "interpolated",
+      "odds_ratio_text": "1.76",
+      "mc95": [
+       1.7539790182110035,
+       1.7611303385438222
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.75",
+       "1.76"
+      ],
+      "estimator_scale": {
+       "nominal": 1.7576764488418428,
+       "estimator": 2.1052907211817535,
+       "text": "2.11"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    }
+   },
+   "groups_refit_b11_b7": {
+    "b7_recomputed": {
+     "A": {
+      "delta": 0.33995474614682486,
+      "odds_ratio": 1.404884012710194,
+      "how": "interpolated",
+      "odds_ratio_text": "1.40",
+      "mc95": [
+       1.3999910176528372,
+       1.4099167683002911
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.40",
+       "1.41"
+      ],
+      "estimator_scale": {
+       "nominal": 1.404884012710194,
+       "estimator": 1.589929725792036,
+       "text": "1.59"
+      }
+     },
+     "B": {
+      "delta": 2.3942993270664625,
+      "odds_ratio": 10.960515631319643,
+      "how": "interpolated",
+      "odds_ratio_text": "10.96",
+      "mc95": [
+       10.813694125852027,
+       11.104538111038561
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "10.81",
+       "11.10"
+      ],
+      "estimator_scale": {
+       "nominal": 10.960515631319643,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "zero": {
+     "A": {
+      "delta": 0.29510654716074125,
+      "odds_ratio": 1.3432694726103673,
+      "how": "interpolated",
+      "odds_ratio_text": "1.34",
+      "mc95": [
+       1.3374460830734138,
+       1.348424245872002
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.34",
+       "1.35"
+      ],
+      "estimator_scale": {
+       "nominal": 1.3432694726103673,
+       "estimator": 1.4995661726738811,
+       "text": "1.50"
+      }
+     },
+     "B": {
+      "delta": 2.1819409295682024,
+      "odds_ratio": 8.863492989829604,
+      "how": "interpolated",
+      "odds_ratio_text": "8.86",
+      "mc95": [
+       8.750499116359356,
+       8.982261791849824
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "8.75",
+       "8.98"
+      ],
+      "estimator_scale": {
+       "nominal": 8.863492989829604,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "b7_centred": {
+     "A": {
+      "delta": 0.3545533232699152,
+      "odds_ratio": 1.4255437548249883,
+      "how": "interpolated",
+      "odds_ratio_text": "1.43",
+      "mc95": [
+       1.4209450578606853,
+       1.4301771429556895
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.42",
+       "1.43"
+      ],
+      "estimator_scale": {
+       "nominal": 1.4255437548249883,
+       "estimator": 1.6205032544527298,
+       "text": "1.62"
+      }
+     },
+     "B": {
+      "delta": 2.463424297827857,
+      "odds_ratio": 11.744961003340679,
+      "how": "interpolated",
+      "odds_ratio_text": "11.74",
+      "mc95": [
+       11.589528677480626,
+       11.90467974116733
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "11.59",
+       "11.90"
+      ],
+      "estimator_scale": {
+       "nominal": 11.744961003340679,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "b5": {
+     "A": {
+      "delta": 0.49599082060182587,
+      "odds_ratio": 1.6421244840350309,
+      "how": "interpolated",
+      "odds_ratio_text": "1.64",
+      "mc95": [
+       1.6357861047477893,
+       1.648160878503148
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.64",
+       "1.65"
+      ],
+      "estimator_scale": {
+       "nominal": 1.6421244840350309,
+       "estimator": 1.9361111387992906,
+       "text": "1.94"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    }
+   },
+   "two_way_b11_b7": {
+    "b7_recomputed": {
+     "A": {
+      "delta": 0.7489801608224655,
+      "odds_ratio": 2.1148421175989007,
+      "how": "interpolated",
+      "odds_ratio_text": "2.11",
+      "mc95": [
+       2.105729914434728,
+       2.1216083864292057
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "2.11",
+       "2.12"
+      ],
+      "estimator_scale": {
+       "nominal": 2.1148421175989007,
+       "estimator": 2.6321321281194283,
+       "text": "2.63"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    },
+    "zero": {
+     "A": {
+      "delta": 0.7216560613133269,
+      "odds_ratio": 2.057838296742312,
+      "how": "interpolated",
+      "odds_ratio_text": "2.06",
+      "mc95": [
+       2.050030869432438,
+       2.065901957772525
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "2.05",
+       "2.07"
+      ],
+      "estimator_scale": {
+       "nominal": 2.057838296742312,
+       "estimator": 2.550676653806908,
+       "text": "2.55"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    },
+    "b7_centred": {
+     "A": {
+      "delta": 0.7552786388965349,
+      "odds_ratio": 2.128204441283583,
+      "how": "interpolated",
+      "odds_ratio_text": "2.13",
+      "mc95": [
+       2.121568649948477,
+       2.1342076449776246
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "2.12",
+       "2.13"
+      ],
+      "estimator_scale": {
+       "nominal": 2.128204441283583,
+       "estimator": 2.651274367450495,
+       "text": "2.65"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    },
+    "b5": {
+     "A": {
+      "delta": 0.8130439326928309,
+      "odds_ratio": 2.254760891887384,
+      "how": "interpolated",
+      "odds_ratio_text": "2.25",
+      "mc95": [
+       2.249053444996123,
+       2.2605864560021005
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "2.25",
+       "2.26"
+      ],
+      "estimator_scale": {
+       "nominal": 2.254760891887384,
+       "estimator": 2.83345724718389,
+       "text": "2.83"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    }
+   },
+   "fold_assignments_v47": {
+    "b7_recomputed": {
+     "A": {
+      "delta": 0.26718227129686606,
+      "odds_ratio": 1.306278521713062,
+      "how": "interpolated",
+      "odds_ratio_text": "1.31",
+      "mc95": [
+       1.3002265555757335,
+       1.3121885798657982
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.30",
+       "1.31"
+      ],
+      "estimator_scale": {
+       "nominal": 1.306278521713062,
+       "estimator": 1.445915548999528,
+       "text": "1.45"
+      }
+     },
+     "B": {
+      "delta": 2.049718128924815,
+      "odds_ratio": 7.7657118682259485,
+      "how": "interpolated",
+      "odds_ratio_text": "7.77",
+      "mc95": [
+       7.64808635960502,
+       7.8777486786240125
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "7.65",
+       "7.88"
+      ],
+      "estimator_scale": {
+       "nominal": 7.7657118682259485,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "zero": {
+     "A": {
+      "delta": 0.2074948226825994,
+      "odds_ratio": 1.2305913456616127,
+      "how": "interpolated",
+      "odds_ratio_text": "1.23",
+      "mc95": [
+       1.2155027996242784,
+       1.2435092911521426
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.22",
+       "1.24"
+      ],
+      "estimator_scale": {
+       "nominal": 1.2305913456616127,
+       "estimator": 1.3356992471468094,
+       "text": "1.34"
+      }
+     },
+     "B": {
+      "delta": 1.7677467248187309,
+      "odds_ratio": 5.857639605914944,
+      "how": "interpolated",
+      "odds_ratio_text": "5.86",
+      "mc95": [
+       5.765259624762161,
+       5.955663544840674
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "5.77",
+       "5.96"
+      ],
+      "estimator_scale": {
+       "nominal": 5.857639605914944,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "b7_centred": {
+     "A": {
+      "delta": 0.28178084841995643,
+      "odds_ratio": 1.3254882053200556,
+      "how": "interpolated",
+      "odds_ratio_text": "1.33",
+      "mc95": [
+       1.3197860454682715,
+       1.331183747042163
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.32",
+       "1.33"
+      ],
+      "estimator_scale": {
+       "nominal": 1.3254882053200556,
+       "estimator": 1.4737197593121931,
+       "text": "1.47"
+      }
+     },
+     "B": {
+      "delta": 2.1188430996862095,
+      "odds_ratio": 8.321504765238151,
+      "how": "interpolated",
+      "odds_ratio_text": "8.32",
+      "mc95": [
+       8.213838828904967,
+       8.443426483387462
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "8.21",
+       "8.44"
+      ],
+      "estimator_scale": {
+       "nominal": 8.321504765238151,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "b5": {
+     "A": {
+      "delta": 0.4232183457518671,
+      "odds_ratio": 1.5268676446363691,
+      "how": "interpolated",
+      "odds_ratio_text": "1.53",
+      "mc95": [
+       1.5222782983620946,
+       1.5316954777419882
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.52",
+       "1.53"
+      ],
+      "estimator_scale": {
+       "nominal": 1.5268676446363691,
+       "estimator": 1.770093422436647,
+       "text": "1.77"
+      }
+     },
+     "B": {
+      "delta": 2.78855650978076,
+      "odds_ratio": 16.25753526287423,
+      "how": "interpolated",
+      "odds_ratio_text": "16.26",
+      "mc95": [
+       15.947803084043098,
+       16.554630475774253
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "15.95",
+       "16.55"
+      ],
+      "estimator_scale": {
+       "nominal": 16.25753526287423,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    }
+   },
+   "b1_a_corrected": {
+    "b7_recomputed": {
+     "A": {
+      "delta": 0.25707720794101246,
+      "odds_ratio": 1.2931449639652899,
+      "how": "interpolated",
+      "odds_ratio_text": "1.29",
+      "mc95": [
+       1.28694965620317,
+       1.2989430752675084
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.29",
+       "1.30"
+      ],
+      "estimator_scale": {
+       "nominal": 1.2931449639652899,
+       "estimator": 1.4269774336664747,
+       "text": "1.43"
+      }
+     },
+     "B": {
+      "delta": 2.001870163802886,
+      "odds_ratio": 7.402887773901926,
+      "how": "interpolated",
+      "odds_ratio_text": "7.40",
+      "mc95": [
+       7.258105237737442,
+       7.528945196639982
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "7.26",
+       "7.53"
+      ],
+      "estimator_scale": {
+       "nominal": 7.402887773901926,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "zero": {
+     "A": {
+      "delta": 0.19259906530165627,
+      "odds_ratio": 1.2123966041937717,
+      "how": "interpolated",
+      "odds_ratio_text": "1.21",
+      "mc95": [
+       1.2002173287216018,
+       1.2287017198928576
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.20",
+       "1.23"
+      ],
+      "estimator_scale": {
+       "nominal": 1.2123966041937717,
+       "estimator": 1.3082303922484717,
+       "text": "1.31"
+      }
+     },
+     "B": {
+      "delta": 1.6994189563773692,
+      "odds_ratio": 5.470767713359996,
+      "how": "interpolated",
+      "odds_ratio_text": "5.47",
+      "mc95": [
+       5.379732800763801,
+       5.561552051371344
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "5.38",
+       "5.56"
+      ],
+      "estimator_scale": {
+       "nominal": 5.470767713359996,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "b7_centred": {
+     "A": {
+      "delta": 0.2716757850641028,
+      "odds_ratio": 1.3121615099796682,
+      "how": "interpolated",
+      "odds_ratio_text": "1.31",
+      "mc95": [
+       1.3063978016795157,
+       1.317974805191545
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.31",
+       "1.32"
+      ],
+      "estimator_scale": {
+       "nominal": 1.3121615099796682,
+       "estimator": 1.4544174737881421,
+       "text": "1.45"
+      }
+     },
+     "B": {
+      "delta": 2.0709951345642805,
+      "odds_ratio": 7.932713308499453,
+      "how": "interpolated",
+      "odds_ratio_text": "7.93",
+      "mc95": [
+       7.813066841919321,
+       8.049190814389679
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "7.81",
+       "8.05"
+      ],
+      "estimator_scale": {
+       "nominal": 7.932713308499453,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "b5": {
+     "A": {
+      "delta": 0.4131132823960134,
+      "odds_ratio": 1.5115162444175714,
+      "how": "interpolated",
+      "odds_ratio_text": "1.51",
+      "mc95": [
+       1.5071599255297352,
+       1.516105195877501
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.51",
+       "1.52"
+      ],
+      "estimator_scale": {
+       "nominal": 1.5115162444175714,
+       "estimator": 1.748194966031891,
+       "text": "1.75"
+      }
+     },
+     "B": {
+      "delta": 2.7407085446588306,
+      "odds_ratio": 15.49796220533807,
+      "how": "interpolated",
+      "odds_ratio_text": "15.50",
+      "mc95": [
+       15.2171149672369,
+       15.773113435533473
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "15.22",
+       "15.77"
+      ],
+      "estimator_scale": {
+       "nominal": 15.49796220533807,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    }
+   },
+   "b1_b_groups_refit": {
+    "b7_recomputed": {
+     "A": {
+      "delta": 0.5028647993729737,
+      "odds_ratio": 1.6534512984178842,
+      "how": "interpolated",
+      "odds_ratio_text": "1.65",
+      "mc95": [
+       1.6495268513309622,
+       1.657112789819614
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.65",
+       "1.66"
+      ],
+      "estimator_scale": {
+       "nominal": 1.6534512984178842,
+       "estimator": 1.9525759678951744,
+       "text": "1.95"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    },
+    "zero": {
+     "A": {
+      "delta": 0.45985391726449454,
+      "odds_ratio": 1.5838425960348883,
+      "how": "interpolated",
+      "odds_ratio_text": "1.58",
+      "mc95": [
+       1.578660384377698,
+       1.589001415616946
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.58",
+       "1.59"
+      ],
+      "estimator_scale": {
+       "nominal": 1.5838425960348883,
+       "estimator": 1.8518108845382177,
+       "text": "1.85"
+      }
+     },
+     "B": {
+      "delta": 2.9620277178501984,
+      "odds_ratio": 19.337142297286142,
+      "how": "interpolated",
+      "odds_ratio_text": "19.34",
+      "mc95": [
+       18.90669613526119,
+       19.744824874121257
+      ],
+      "share_above_grid": 0.001,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "18.91",
+       "19.74"
+      ],
+      "estimator_scale": {
+       "nominal": 19.337142297286142,
+       "estimator": null,
+       "text": "> 4.73"
+      }
+     }
+    },
+    "b7_centred": {
+     "A": {
+      "delta": 0.5117590912959767,
+      "odds_ratio": 1.668223172243995,
+      "how": "interpolated",
+      "odds_ratio_text": "1.67",
+      "mc95": [
+       1.6643184030284819,
+       1.6719044680625477
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.66",
+       "1.67"
+      ],
+      "estimator_scale": {
+       "nominal": 1.668223172243995,
+       "estimator": 1.9740878988979726,
+       "text": "1.97"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    },
+    "b5": {
+     "A": {
+      "delta": 0.5979309407524032,
+      "odds_ratio": 1.8183526261986953,
+      "how": "interpolated",
+      "odds_ratio_text": "1.82",
+      "mc95": [
+       1.814352384088732,
+       1.822485424187186
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.81",
+       "1.82"
+      ],
+      "estimator_scale": {
+       "nominal": 1.8183526261986953,
+       "estimator": 2.1951762644452137,
+       "text": "2.20"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    }
+   },
+   "b1_c_nested_refit": {
+    "b7_recomputed": {
+     "A": {
+      "delta": 0.6864141434033828,
+      "odds_ratio": 1.986579157902563,
+      "how": "interpolated",
+      "odds_ratio_text": "1.99",
+      "mc95": [
+       1.9801084707346623,
+       1.993403597300162
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.98",
+       "1.99"
+      ],
+      "estimator_scale": {
+       "nominal": 1.986579157902563,
+       "estimator": 2.447985889424862,
+       "text": "2.45"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    },
+    "zero": {
+     "A": {
+      "delta": 0.6590900438942442,
+      "odds_ratio": 1.9330325590845479,
+      "how": "interpolated",
+      "odds_ratio_text": "1.93",
+      "mc95": [
+       1.9274505541465106,
+       1.9387663459907805
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.93",
+       "1.94"
+      ],
+      "estimator_scale": {
+       "nominal": 1.9330325590845479,
+       "estimator": 2.3669561295467556,
+       "text": "2.37"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    },
+    "b7_centred": {
+     "A": {
+      "delta": 0.6953084353263858,
+      "odds_ratio": 2.004327183921955,
+      "how": "interpolated",
+      "odds_ratio_text": "2.00",
+      "mc95": [
+       1.997912844770104,
+       2.011357633213469
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "2.00",
+       "2.01"
+      ],
+      "estimator_scale": {
+       "nominal": 2.004327183921955,
+       "estimator": 2.474520269301353,
+       "text": "2.47"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    },
+    "b5": {
+     "A": {
+      "delta": 0.7711028068997142,
+      "odds_ratio": 2.1621493727298406,
+      "how": "interpolated",
+      "odds_ratio_text": "2.16",
+      "mc95": [
+       2.1562752415536592,
+       2.1679887228350943
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "2.16",
+       "2.17"
+      ],
+      "estimator_scale": {
+       "nominal": 2.1621493727298406,
+       "estimator": 2.6999834285725197,
+       "text": "2.70"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    }
+   },
+   "b1_d_with_folds": {
+    "b7_recomputed": {
+     "A": {
+      "delta": 0.6874165600576202,
+      "odds_ratio": 1.9885715363652465,
+      "how": "interpolated",
+      "odds_ratio_text": "1.99",
+      "mc95": [
+       1.9819684451431516,
+       1.9956189366175625
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.98",
+       "2.00"
+      ],
+      "estimator_scale": {
+       "nominal": 1.9885715363652465,
+       "estimator": 2.4510107404792305,
+       "text": "2.45"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    },
+    "zero": {
+     "A": {
+      "delta": 0.6600924605484817,
+      "odds_ratio": 1.9349712346329477,
+      "how": "interpolated",
+      "odds_ratio_text": "1.93",
+      "mc95": [
+       1.9291012393557296,
+       1.9407714888289327
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "1.93",
+       "1.94"
+      ],
+      "estimator_scale": {
+       "nominal": 1.9349712346329477,
+       "estimator": 2.369880856268031,
+       "text": "2.37"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    },
+    "b7_centred": {
+     "A": {
+      "delta": 0.6963108519806233,
+      "odds_ratio": 2.0063373622214367,
+      "how": "interpolated",
+      "odds_ratio_text": "2.01",
+      "mc95": [
+       1.999089572075325,
+       2.0137395760610515
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "2.00",
+       "2.01"
+      ],
+      "estimator_scale": {
+       "nominal": 2.0063373622214367,
+       "estimator": 2.477375654659114,
+       "text": "2.48"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    },
+    "b5": {
+     "A": {
+      "delta": 0.7717747768400554,
+      "odds_ratio": 2.163602760376559,
+      "how": "interpolated",
+      "odds_ratio_text": "2.16",
+      "mc95": [
+       2.157586498909644,
+       2.169949368274606
+      ],
+      "share_above_grid": 0.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "2.16",
+       "2.17"
+      ],
+      "estimator_scale": {
+       "nominal": 2.163602760376559,
+       "estimator": 2.702071540710302,
+       "text": "2.70"
+      }
+     },
+     "B": {
+      "delta": null,
+      "odds_ratio": null,
+      "how": "above grid",
+      "odds_ratio_text": "> 20",
+      "mc95": [
+       NaN,
+       NaN
+      ],
+      "share_above_grid": 1.0,
+      "share_undefined": 0.0,
+      "mc95_text": [
+       "> 20",
+       "> 20"
+      ],
+      "estimator_scale": null
+     }
+    }
+   }
+  },
+  "rule": "B-13 B2: injected odds ratio whose mean gain reaches each interval's upper limit (in Brier units, upper R times the corrected run's yardstick) minus each no-effect reference, from the curves of v64; Monte Carlo ranges as in v59; estimator scale by the B-10 B11 curves (v68 B3 rule)"
+ }
+}

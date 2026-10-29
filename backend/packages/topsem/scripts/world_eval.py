@@ -73,6 +73,7 @@ from topsem.world.b10 import (
     interactions,
 )
 from topsem.world.b12 import PLASMODE_1KM_M, plasmode_target
+from topsem.world.b13 import event_before, fit_grouped
 from topsem.world.channels import (
     INNER_FOLDS,
     NREAD_FEATURES,
@@ -239,6 +240,15 @@ B10_STACK: dict[str, tuple[str, list[str]]] = {
     "M1hc": ("M1h", COMP), "M3hn": ("M1h", [*COMP, *NAMES]),
 }
 STACK |= B10_STACK
+# 事後 B-13（初見の査読 第 9 回）: C1(c) JRC の 100 年の浸水を集落の 500 m 以内で要約して集落を通じて（J）、比べる相手と
+# してセルに直接（Jc）。C1(a)(b) は既存の G・W・E・Ec の腕（--min-event-year・--recurrence-prior で漏れを除く）
+ORACLE_J = ["o_jrc_set_f100", "o_jrc_set_any", "o_jrc_set_cov"]
+ORACLE_JC = ["o_jrc_cell_f100", "o_jrc_cell_cov"]
+B13_STACK: dict[str, tuple[str, list[str]]] = {
+    **{f"M1c{k}": ("M1", [f"c_{f}" for f in feats]) for k, feats in (("J", ORACLE_J), ("Jc", ORACLE_JC))},
+    **{f"M3o{k}": ("M1", [*(f"c_{f}" for f in feats), *feats]) for k, feats in (("J", ORACLE_J), ("Jc", ORACLE_JC))},
+}
+STACK |= B13_STACK
 TUNED_STACK = ("M1ct", "M3nt")  # C2: 二段目の C を入れ子の交差検証で選ぶ
 B10_DYNAMIC = ("bd_", "ct_", "__", "@country")  # fold の中で作る列（表の列の有無で落とさない）
 IN_FOLD = ("nlearn", "nlearn_p")  # fold の中で作る特徴（表には無い）
@@ -437,11 +447,20 @@ def folds_for(split: str, df: pd.DataFrame, infos: dict, cont: dict[str, str],  
     return df["aoi"].map(f)
 
 
+GROUPED_ES: dict = {"on": False, "log": []}  # B-13 の C3: 反復の回数を場所グループを分けた内側の検証で選ぶ
+
+
 def fit_arm(tr: pd.DataFrame, te: pd.DataFrame, feats: list[str], seeds: list[int]) -> np.ndarray:
     xtr = tr[feats].to_numpy(dtype=np.float32)
     xte = te[feats].to_numpy(dtype=np.float32)
     acc = np.zeros(len(te), dtype=np.float64)
     for s in seeds:
+        if GROUPED_ES["on"]:
+            groups = (tr["unit"] if "unit" in tr else tr["aoi"]).to_numpy(dtype=str)
+            p, info = fit_grouped(xtr, tr["y"].to_numpy(), groups, xte, seed=s)
+            GROUPED_ES["log"].append({"seed": s, "n_train": len(tr), "n_feats": len(feats), **info})
+            acc += p
+            continue
         m = HistGradientBoostingClassifier(random_state=s, max_iter=200, learning_rate=0.1)
         m.fit(xtr, tr["y"].to_numpy())
         acc += m.predict_proba(xte)[:, 1]
@@ -495,7 +514,7 @@ def add_composition(tr: pd.DataFrame, te: pd.DataFrame) -> None:
     あわせて名前特徴（と placebo）の AOI 内で中心化した d_* を作る（事後、B-2 追記 2）。
     """
     feats = [f for f in (*NAMES, *NREAD_FEATURES, *ORACLE, *NAMES_S, *ORACLE_L, *ORACLE_G, *ORACLE_GN,
-                         *NAMES_F, *ORACLE_E, *ORACLE_EC, *ORACLE_W)
+                         *NAMES_F, *ORACLE_E, *ORACLE_EC, *ORACLE_W, *ORACLE_J, *ORACLE_JC)
              if f in tr.columns]
     for frame in (tr, te):
         means = frame.groupby("aoi")[feats].transform("mean")
@@ -763,8 +782,11 @@ def _event_meta(m: dict) -> tuple[str, str]:
     return str(a.get("code", "")), str(a.get("event_time") or a.get("activation_time") or "")
 
 
-def _other_events(name: str, metas: dict, box: dict) -> list[str]:
-    """4: 対象の AOI と範囲が重なり、activation が違い、日付が 30 日を超えて離れたラベル付きの AOI。"""
+def _other_events(name: str, metas: dict, box: dict, *, prior_only: bool = False) -> list[str]:
+    """4: 対象の AOI と範囲が重なり、activation が違い、日付が 30 日を超えて離れたラベル付きの AOI。
+
+    B-13 の C1(b): prior_only なら、その事象より 30 日を超えて前の事象だけ（後の事象の記録を使わない）。
+    """
     code0, t0 = _event_meta(metas[name])
     b0 = box[name]
     out = []
@@ -773,6 +795,8 @@ def _other_events(name: str, metas: dict, box: dict) -> list[str]:
         code, t = _event_meta(mq)
         if (q == name or bq is None or code == code0 or days_apart(t, t0) <= RECUR_MIN_DAYS
                 or bq[1] < b0[0] or bq[0] > b0[1] or bq[3] < b0[2] or bq[2] > b0[3]):
+            continue
+        if prior_only and not event_before(t, t0, RECUR_MIN_DAYS):
             continue
         out.append(q)
     return out
@@ -791,8 +815,8 @@ def _settlement_recurrence(full: pd.DataFrame, rate: np.ndarray, n: np.ndarray, 
     return dict(zip(tab["gid"].tolist(), (tab["sum"] / tab["n"]).tolist(), strict=True))
 
 
-def attach_recurrence(df: pd.DataFrame, dirs: list[Path], infos: dict, gn: pd.DataFrame, *,
-                      radius_m: float = PLASMODE_LOCAL_M) -> dict:
+def attach_recurrence(df: pd.DataFrame, dirs: list[Path], infos: dict, gn: pd.DataFrame, *,  # noqa: PLR0913
+                      radius_m: float = PLASMODE_LOCAL_M, prior_only: bool = False) -> dict:
     """4: 別の EMS の事象（日付の差 30 日超）で同じ場所が浸水していた割合（繰り返し）。
 
     (a) セルに直接: o_recur_cell と、別の事象があるかの o_recur_cell_cov。(b) 集落を通じて: 集落の点から radius_m
@@ -809,7 +833,8 @@ def attach_recurrence(df: pd.DataFrame, dirs: list[Path], infos: dict, gn: pd.Da
     for d in dirs:
         m = (df["aoi"] == d.name).to_numpy()
         others = [(metas[q]["crs_proj4"], metas[q]["grid"], lab[q]["ix"].to_numpy(), lab[q]["iy"].to_numpy(),
-                   lab[q]["lab"].to_numpy()) for q in _other_events(d.name, metas, box)] if m.any() else []
+                   lab[q]["lab"].to_numpy()) for q in _other_events(d.name, metas, box, prior_only=prior_only)] \
+            if m.any() else []
         if not others:
             continue
         full = lab[d.name]
@@ -831,7 +856,7 @@ def attach_recurrence(df: pd.DataFrame, dirs: list[Path], infos: dict, gn: pd.Da
     return {"n_aoi_with_other_events": len(aois_cov), "aois_with_other_events": aois_cov,
             "share_cells_cell_cov": float(cols["o_recur_cell_cov"].mean()),
             "share_cells_set_cov": float(cols["o_recur_set_cov"].mean()), "min_days_apart": RECUR_MIN_DAYS,
-            "radius_m": radius_m}
+            "radius_m": radius_m, "prior_only": prior_only}
 
 
 def run_perms_recomp(df: pd.DataFrame, fold: int, seeds: list[int], perm_ids: list[int], gn: pd.DataFrame) -> dict:
@@ -999,6 +1024,64 @@ def attach_hazard(df: pd.DataFrame) -> dict:
         msg = f"B-10 C5: hazard map covers {cover.mean():.3f} of analysed cells (< 0.95); not run"
         raise SystemExit(msg)
     return info
+
+
+def attach_jrc_settlement(df: pd.DataFrame, dirs: list[Path], infos: dict, gn: pd.DataFrame, *,
+                          radius_m: float = PLASMODE_LOCAL_M) -> dict:
+    """B-13 の C1(c): JRC の 100 年の浸水を集落を通じて（比べる相手としてセルに直接も）。
+
+    浸水の割合（hz_f100）を、集落の点から radius_m 以内の全てのセル（タイルの画素が半分以上あるもの）で平均し
+    （o_jrc_set_f100）、その中に浸水するセルがあるか（o_jrc_set_any）と共に最寄りの集落から割り当てる。値の無い
+    集落は 0 と o_jrc_set_cov = 0。セルに直接は o_jrc_cell_f100・o_jrc_cell_cov。
+    """
+    cols = {k: np.zeros(len(df)) for k in (*ORACLE_J, *ORACLE_JC)}
+    n_set = 0
+    for d in dirs:
+        m = (df["aoi"] == d.name).to_numpy()
+        f = d / "features_jrc.parquet"
+        if not m.any() or not f.is_file():
+            continue
+        cells = pq.read_table(d / "cells.parquet", columns=["ix", "iy", "x", "y"]).to_pandas()
+        hz = pq.read_table(f, columns=["hz_f100", "hz_cover"]).to_pandas()
+        ok = (np.nan_to_num(hz["hz_cover"].to_numpy(np.float64)) >= 0.5) & np.isfinite(  # noqa: PLR2004
+            hz["hz_f100"].to_numpy(np.float64))
+        v = np.nan_to_num(hz["hz_f100"].to_numpy(np.float64))
+        meta = json.loads((d / "meta.json").read_text(encoding="utf-8"))
+        pts, sxy = _settlements(gn, infos[d.name].bounds, meta)
+        part = df.loc[m]
+        pos = {(int(a), int(b)): i for i, (a, b) in enumerate(zip(cells["ix"], cells["iy"], strict=True))}
+        idx = np.array([pos.get((int(a), int(b)), -1) for a, b in zip(part["ix"], part["iy"], strict=True)])
+        has = (idx >= 0) & ok[np.maximum(idx, 0)]
+        cols["o_jrc_cell_f100"][m] = np.where(has, v[np.maximum(idx, 0)], 0.0)
+        cols["o_jrc_cell_cov"][m] = has.astype(float)
+        if not len(pts) or not ok.any():
+            continue
+        xy = cells.loc[ok, ["x", "y"]].to_numpy(np.float64)
+        tab = label_share_by_settlement(xy, v[ok], sxy, settle_gid=pts["gid"].to_numpy(np.int64), radius_m=radius_m)
+        anyt = label_share_by_settlement(xy, (v[ok] > 0).astype(np.float64), sxy,
+                                         settle_gid=pts["gid"].to_numpy(np.int64), radius_m=radius_m)
+        tab = tab.assign(any=anyt["sum"].to_numpy() > 0)
+        tab = tab[tab["n"] > 0].drop_duplicates("gid").set_index("gid")
+        n_set += len(tab)
+        g = part["P_gid1"].to_numpy(np.int64)
+        mean = (tab["sum"] / tab["n"]).reindex(g).to_numpy(np.float64)
+        cols["o_jrc_set_f100"][m] = np.nan_to_num(mean, nan=0.0)
+        cols["o_jrc_set_any"][m] = np.nan_to_num(tab["any"].astype(float).reindex(g).to_numpy(np.float64), nan=0.0)
+        cols["o_jrc_set_cov"][m] = np.isfinite(mean).astype(float)
+    for k, v in cols.items():
+        df[k] = v.astype(np.float32)
+    return {"radius_m": radius_m, "n_settlements_with_value": n_set,
+            "share_cells_set_cov": float(cols["o_jrc_set_cov"].mean()),
+            "share_cells_cell_cov": float(cols["o_jrc_cell_cov"].mean()),
+            "rule": "amendment B-13 item C1(c): JRC RP100 flooded share within 500 m of settlements, via settlements"}
+
+
+def filter_event_year(df: pd.DataFrame, infos: dict, year: int) -> tuple[pd.DataFrame, dict]:
+    """B-13 の C1(a): 主の表と同じセルのまま、事象の年が year 以降の AOI の行だけを残す（場所グループと fold は後で作る）。"""
+    keep = {a for a in df["aoi"].unique() if int(str(infos[a].event_time)[:4]) >= year}
+    out = df.loc[df["aoi"].isin(keep)].reset_index(drop=True)
+    return out, {"year": year, "n_aoi": len(keep), "n_cells": len(out), "n_cells_before": len(df),
+                 "rule": "amendment B-13 item C1(a): rows of AOIs with events from this year, cells as in the main table"}
 
 
 def run_plasmode(df: pd.DataFrame, fold: int, seeds: list[int], reps: int,  # noqa: PLR0913
@@ -1204,7 +1287,17 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     ap.add_argument("--plasmode-rho", type=float, default=0.5, help="B-10 の C4: 形 AC の集落の中の相関（正規の尺度）")
     ap.add_argument("--hazard", default="none", choices=["none", "jrc"],
                     help="B-10 の C5: JRC の洪水ハザード図の特徴（hz_*）を読み、M1h・M1hc・M3hn を回せるようにする")
+    # 事後 B-13（初見の査読 第 9 回）
+    ap.add_argument("--recurrence-prior", action="store_true",
+                    help="B-13 の C1(b): 再起の記録をその事象より前の事象だけから（--recurrence と一緒に）")
+    ap.add_argument("--jrc-set", action="store_true",
+                    help="B-13 の C1(c): JRC の 100 年の浸水を集落の 500 m 以内で要約して集落を通じて（M1cJ → M3oJ）")
+    ap.add_argument("--post-min-event-year", type=int, default=0,
+                    help="B-13 の C1(a): 主の表を作った後で、事象がこの年より前の AOI の行を除く（セルは主の表と同じ）")
+    ap.add_argument("--grouped-es", action="store_true",
+                    help="B-13 の C3: 基礎のモデルの反復の回数を場所グループを分けた内側の検証で選ぶ")
     args = ap.parse_args()
+    GROUPED_ES["on"] = args.grouped_es
     if args.lexicon:
         lp = Path(args.lexicon)
         LEXICON = lp if lp.is_absolute() else REPO_ROOT / lp
@@ -1232,7 +1325,7 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
         print(f"B-6: excluded {len(drop)} AOIs → {len(dirs)}", flush=True)
     need_xy = (args.labels == "gfm" or args.plasmode or args.oracle_label or args.gn_filter or args.recurrence
                or args.plasmode_refit or bool(args.gsw_cell) or args.terrain == "fabdem"
-               or args.exclude_gsw_perm > 0 or args.hazard == "jrc")
+               or args.exclude_gsw_perm > 0 or args.hazard == "jrc" or args.jrc_set)
     df = build_table(dirs, seed=args.table_seed, infos=infos, sens=sens, extra_cols=("ix", "iy") if need_xy else ())
     if args.table_seed != TABLE_SEED:  # B-9 の C6
         b6["table_seed"] = args.table_seed
@@ -1274,14 +1367,21 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
         attach_label_oracle(df, dirs, infos, gn, sens=sens)
     if args.floodplain:  # B-7 の 5
         floodplain_features(df)
-    if args.recurrence:  # B-7 の 4
-        b6["recurrence"] = attach_recurrence(df, dirs, infos, gn)
+    if args.recurrence:  # B-7 の 4（B-13 の C1(b): 前の事象だけ）
+        b6["recurrence"] = attach_recurrence(df, dirs, infos, gn, prior_only=args.recurrence_prior)
         print(f"B-7 recurrence: {b6['recurrence']}", flush=True)
+    if args.jrc_set:  # B-13 の C1(c)
+        b6["jrc_set"] = attach_jrc_settlement(df, dirs, infos, gn)
+        print(f"B-13 JRC via settlements: {b6['jrc_set']}", flush=True)
     if args.gsw:
         b6["gsw"] = attach_gsw(df, Path(args.gsw))
     if args.gsw_cell:  # B-8 の C4
         b6["gsw_cell"] = attach_gsw_cell(df, Path(args.gsw_cell))
         print(f"B-8 GSW cell: {b6['gsw_cell']}", flush=True)
+    if args.post_min_event_year:  # B-13 の C1(a)
+        df, b6["post_min_event_year"] = filter_event_year(df, infos, args.post_min_event_year)
+        dirs = [d for d in dirs if d.name in set(df["aoi"].unique())]
+        print(f"B-13 C1(a): {b6['post_min_event_year']}", flush=True)
     cont = continent_map(ROOT / "geonames" / "countryInfo.txt")
     df.attrs["split"] = args.split
     df["fold"] = folds_for(args.split, df, infos, cont, buffer_km=sens.buffer_km,
@@ -1344,7 +1444,8 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
             and (x != "M1h" or args.hazard == "jrc")]  # B-10 の C5: ハザード図の特徴を読んだ実行だけ
     stacks = [x for x in args.stacks.split(",")
               if x and (nread is not None or x not in NREAD_STACK) and (args.oracle or x not in ORACLE_STACK)
-              and ((x not in B6_STACK and x not in B7_STACK and x not in B8_STACK and x not in B10_STACK)
+              and ((x not in B6_STACK and x not in B7_STACK and x not in B8_STACK and x not in B10_STACK
+                    and x not in B13_STACK)
                    or b6_stack_available(x, df.columns))]
     dropped = [x for x in args.stacks.split(",") if x and x not in stacks]
     if dropped:
@@ -1465,8 +1566,10 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
                     "stacks": {s: {"base": STACK[s][0], "extra": STACK[s][1]} for s in stacks},
                     **({"stage2_coefs": r["coefs"]} if args.save_coefs else {}),
                     **({"b10_tuned": r["tuned"]} if "tuned" in r else {}),
+                    **({"b13_grouped_es": GROUPED_ES["log"]} if GROUPED_ES["on"] else {}),
                     **({"b10_countries_in_train": r["countries_in_train"]} if "countries_in_train" in r else {})})
         print(f"fold {k}: test {len(te):,} ({time.time() - t0:.0f}s)", flush=True)
+        GROUPED_ES["log"].clear()
     # 配分 0 件の AOI（巨大な場所グループ内の小さな AOI）は表に行が無いので、行のある AOI だけ書く
     fold_of = df.groupby("aoi")["fold"].first()
     n_of = df.groupby("aoi").size()

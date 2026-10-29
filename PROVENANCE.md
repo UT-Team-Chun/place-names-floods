@@ -21,7 +21,7 @@ decision for the authors (see the paper, Appendix A).
   composition fixed (see the paper's Sect. 2 and Appendix A).
 - The freeze was recorded in version control and in the job records of the computing cluster, which ran
   the confirmatory analysis from a container image built after the freeze. **The protocol was not deposited
-  with a third-party registry before the analysis**; the paper therefore describes it as pre-specified.
+  with a third-party registry before the analysis**; the paper therefore describes the test as protocol-based.
 
 ## Verifying the frozen content
 
@@ -175,10 +175,29 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   corrected the label flags and the versions taken by the specification curve. Tables that neither the paper nor the
   Supplement cites are in `docs/paper/paper_2_nhess/supplement_archive.pdf`. Script: `v69`; cluster run
   `world_v2_b12plas1k`.
+- Amendment B-13 followed the ninth round of critiques. It restructured the paper into four parts (the protocol-based
+  test with all of its uncertainty; designated checks; what assignment through settlements can carry; the validity of
+  the readings and of the labels near settlements), kept the protocol's verdict as the record, and fixed, before they
+  were computed: an equivalence test on the ratio that carries the uncertainty of the baseline gain (the Fieller-type
+  limits of the change in Brier score minus the margin times the baseline gain, from the same resamples), with the
+  models fixed, with the second stage refitted, with activations resampled within countries and with the spread over
+  fold assignments, and its operating characteristics; the odds ratios that each interval's upper limit corresponds to;
+  the second coder's rates in the dilution examples; size strata near settlements; the reference model without the
+  character model's area mean; influence; other denominators; a joint test of the name coefficients; further checks of
+  the odds ratios near settlements; an audit of homographs, language blocks and Unicode names; the language-model
+  reading by block and country; both coders' codes (`docs/verification/v70_two_coders.csv`, leaving out the names of
+  every audit sample); AOI-balanced metrics; a diagnosis of the GFM labels; pairs of settlements that differ by a lower
+  or upper qualifier; and, on the cluster, records known before each event in place of the names (surface water on the
+  AOIs of events from 2022, flooding in earlier events only, the JRC hazard maps through settlements), a lexicon with
+  the errors named in the critiques corrected (`docs/verification/v70_lexicon_corrected.yaml`, derived mechanically from
+  the frozen lexicon, which is unchanged), and early stopping on held-out location groups. Addenda 1 to 5 record the
+  implementation before the results, including one correction (the run on events from 2022 keeps the cells of the main
+  table). Scripts: `v70`, `v70b`, `v70_lexicon_corrected`, `v71`; cluster runs `world_v2_b13gsw22`,
+  `world_v2_b13recprior`, `world_v2_b13jrcset`, `world_v2_b13lexfix`, `world_v2_b13gres`.
 
-English translations of the protocol and of amendments B-1 to B-12 are in `docs/protocol/en/`; they were drafted with a
+English translations of the protocol and of amendments B-1 to B-13 are in `docs/protocol/en/`; they were drafted with a
 language model after the analysis and have not yet been checked by the authors, and the Japanese files are the record
-and govern where the two differ. Amendments B-2, B-3 and B-5 to B-12 followed critiques by language-model agents; the
+and govern where the two differ. Amendments B-2, B-3 and B-5 to B-13 followed critiques by language-model agents; the
 paper lists the rounds and their times. Dates written
 inside the repository files are local (Japan Standard Time, UTC+9) unless marked; the paper gives UTC. An interpretation
 plan, written after the freeze and before any confirmatory result, is in

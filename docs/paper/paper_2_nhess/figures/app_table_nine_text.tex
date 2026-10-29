@@ -7,23 +7,23 @@
 Quantity & Value \\
 \middlehline
 \multicolumn{2}{l}{\emph{What the pooled test can detect (Sect.~4)}} \\
-\quad Share of cells within 500\,m of a settlement with a water-side name & \CeilShareFiveHundred \\
-\quad Largest possible $R$ from perfect prediction near water-side names: within 250\,m; 500\,m; 1\,km & \CeilRTwoFifty; \CeilRFiveHundred; \CeilROneKm \\
+\quad Share of cells within 500\,m of a settlement with a water-related name & \CeilShareFiveHundred \\
+\quad Largest possible $R$ from perfect prediction near water-related names: within 250\,m; 500\,m; 1\,km & \CeilRTwoFifty; \CeilRFiveHundred; \CeilROneKm \\
 \multicolumn{2}{l}{\emph{Evidence near settlements (Sect.~5)}} \\
 \quad Joint Wald test, class coefficients in the three distance bands: $p$ & \WaldClassP \\
-\quad Joint Wald test, water-side coefficients in the three distance bands: $p$ & \WaldWetP \\
-\quad Odds ratio near water-side names without partly flooded cells (EMS) & \PartialOR{} (\PartialORLo--\PartialORHi) \\
+\quad Joint Wald test, water-related coefficients in the three distance bands: $p$ & \WaldWetP \\
+\quad Odds ratio near water-related names without partly flooded cells (EMS) & \PartialOR{} (\PartialORLo--\PartialORHi) \\
 \quad Odds ratio adjusted for built-up and tree cover: EMS; GFM & \CciOREms{} (\CciOREmsLo--\CciOREmsHi); \CciORGfm{} (\CciORGfmLo--\CciORGfmHi) \\
 \quad Odds ratio by flood size, thirds of AOIs: smallest floods; middle; largest & \SevLowOR{} (\SevLowORLo--\SevLowORHi; \SevLowFlooded{} flooded cells); \SevMidOR; \SevHighOR \\
-\quad EMS-evaluable cells of the GFM AOIs that GFM could not assess: all; within 500\,m of water-side names; near other settlements & \MaskShareAll; \MaskShareWet; \MaskShareOther \\
+\quad EMS-evaluable cells of the GFM AOIs that GFM could not assess: all; within 500\,m of water-related names; near other settlements & \MaskShareAll; \MaskShareWet; \MaskShareOther \\
 \multicolumn{2}{l}{\emph{How the names were read (Sect.~6 and Appendix~B)}} \\
-\quad Settlements whose name contains the name of a river, stream or lake within 5\,km: share of the analysed settlements; of them read as water-side by the lexicon & \HydSharePct; \HydOverlapPct \\
+\quad Settlements whose name contains the name of a river, stream or lake within 5\,km: share of the analysed settlements; of them read as water-related by the lexicon & \HydSharePct; \HydOverlapPct \\
 \quad Water namesakes recorded on Wikidata that this reading recovers & \HydRecallK{} of \WDNHydro \\
 \quad Height above the drainage of such settlements minus that of other settlements of their AOI (m) & \HydHand{} (\HydHandLo{} to \HydHandHi) \\
 \quad Names of each lexicon class put in that class by the language model (range over classes) & \NReadAgreeMin--\NReadAgreeMax \\
 \quad Distinct names read by the language model & \NReadNames \\
 \quad Analysed settlements with an ASCII name containing \emph{ae}, \emph{oe} or \emph{ue} & \DigraphPct \\
-\quad Water-side matches gained; lost if these digraphs were read as plain vowels & \DigraphGainWet; \DigraphLoseWet \\
+\quad Water-related matches gained; lost if these digraphs were read as plain vowels & \DigraphGainWet; \DigraphLoseWet \\
 \bottomhline
 \end{tabular}
 \end{table*}

@@ -1,0 +1,2938 @@
+{
+ "rule": "amendment B-13 item C2 (a)-(h)",
+ "src_sha256": "6c9999921956ba13f929b18ef921afcd0e05334293ef0989d9357c6a8d59c58d",
+ "dst_sha256": "c1ed4f18300a3d1960be8f753e05d55fd0e3a1a0243e0705e35ec57040fa7075",
+ "entries_src": 2538,
+ "entries_dst": 2148,
+ "dropped_by_rule": {
+  "a_v57_clean": 15,
+  "e_spring_well": 145,
+  "f_rapids": 10,
+  "b_homograph": 15,
+  "d_qualifier": 181,
+  "c_riverine_named": 37
+ },
+ "added": [
+  {
+   "lang": "fr",
+   "form": "sur",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "g_addition"
+  },
+  {
+   "lang": "cs",
+   "form": "nad",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "g_addition"
+  },
+  {
+   "lang": "pl",
+   "form": "nad",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "g_addition"
+  },
+  {
+   "lang": "de",
+   "form": "hamm",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "g_addition"
+  },
+  {
+   "lang": "de",
+   "form": "damm",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "g_addition"
+  },
+  {
+   "lang": "de",
+   "form": "deich",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "g_addition"
+  },
+  {
+   "lang": "de",
+   "form": "hamm",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "g_addition"
+  },
+  {
+   "lang": "de",
+   "form": "damm",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "g_addition"
+  },
+  {
+   "lang": "de",
+   "form": "deich",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "g_addition"
+  },
+  {
+   "lang": "es",
+   "form": "rambla",
+   "pos": "word",
+   "cat": "water",
+   "rule": "g_addition"
+  },
+  {
+   "lang": "hu",
+   "form": "fok",
+   "pos": "word",
+   "cat": "water",
+   "rule": "g_addition"
+  },
+  {
+   "lang": "hu",
+   "form": "fok",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "g_addition"
+  },
+  {
+   "lang": "km",
+   "form": "trapeang",
+   "pos": "word",
+   "cat": "water",
+   "rule": "g_addition"
+  }
+ ],
+ "countries": {
+  "BE": {
+   "before": [
+    "nl",
+    "fr",
+    "de"
+   ],
+   "after": [
+    "nl",
+    "fr"
+   ]
+  },
+  "IT": {
+   "before": [
+    "it",
+    "de"
+   ],
+   "after": [
+    "it"
+   ]
+  }
+ },
+ "dropped": [
+  {
+   "lang": "en",
+   "form": "bourne",
+   "pos": "suffix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "en",
+   "form": "borne",
+   "pos": "suffix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "en",
+   "form": "burn",
+   "pos": "suffix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "en",
+   "form": "pool",
+   "pos": "suffix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "en",
+   "form": "well",
+   "pos": "suffix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "en",
+   "form": "wells",
+   "pos": "suffix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "de",
+   "form": "au",
+   "pos": "suffix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "sv",
+   "form": "as",
+   "pos": "suffix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "no",
+   "form": "oy",
+   "pos": "suffix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "no",
+   "form": "as",
+   "pos": "suffix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "da",
+   "form": "aa",
+   "pos": "suffix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "tr",
+   "form": "su",
+   "pos": "suffix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "fa",
+   "form": "ab",
+   "pos": "suffix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "id",
+   "form": "ci",
+   "pos": "prefix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "kk",
+   "form": "su",
+   "pos": "suffix",
+   "rule": "a_v57_clean"
+  },
+  {
+   "lang": "en",
+   "form": "well",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "en",
+   "form": "wells",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "en",
+   "form": "spring",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "en",
+   "form": "springs",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "en",
+   "form": "falls",
+   "pos": "word",
+   "cat": "water",
+   "rule": "f_rapids"
+  },
+  {
+   "lang": "en",
+   "form": "soak",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "en",
+   "form": "bank",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "en",
+   "form": "banks",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "en",
+   "form": "low",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "en",
+   "form": "lower",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "en",
+   "form": "nether",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "en",
+   "form": "nether",
+   "pos": "prefix",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "en",
+   "form": "upper",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "en",
+   "form": "high",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "de",
+   "form": "born",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "de",
+   "form": "brunn",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "de",
+   "form": "brunnen",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "de",
+   "form": "quell",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "de",
+   "form": "ach",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "de",
+   "form": "brunnen",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "de",
+   "form": "quelle",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "de",
+   "form": "ried",
+   "pos": "word",
+   "cat": "wet",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "de",
+   "form": "ried",
+   "pos": "suffix",
+   "cat": "wet",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "de",
+   "form": "ried",
+   "pos": "prefix",
+   "cat": "wet",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "de",
+   "form": "unter",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "de",
+   "form": "nieder",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "de",
+   "form": "unter",
+   "pos": "prefix",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "de",
+   "form": "nieder",
+   "pos": "prefix",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "de",
+   "form": "ober",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "de",
+   "form": "ober",
+   "pos": "prefix",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "nl",
+   "form": "laag",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "nl",
+   "form": "neder",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "nl",
+   "form": "beneden",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "nl",
+   "form": "laag",
+   "pos": "prefix",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "nl",
+   "form": "neder",
+   "pos": "prefix",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "nl",
+   "form": "beneden",
+   "pos": "prefix",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "nl",
+   "form": "hoog",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "nl",
+   "form": "boven",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "nl",
+   "form": "hoog",
+   "pos": "suffix",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "nl",
+   "form": "boven",
+   "pos": "suffix",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "nl",
+   "form": "hoog",
+   "pos": "prefix",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "nl",
+   "form": "boven",
+   "pos": "prefix",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fr",
+   "form": "fontaine",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "fr",
+   "form": "fontaines",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "fr",
+   "form": "source",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "fr",
+   "form": "sources",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "fr",
+   "form": "puits",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "fr",
+   "form": "fontaine",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "fr",
+   "form": "fontaines",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "fr",
+   "form": "ile",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "fr",
+   "form": "iles",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "fr",
+   "form": "isle",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "fr",
+   "form": "ilot",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "fr",
+   "form": "bas",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fr",
+   "form": "basse",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fr",
+   "form": "sous",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fr",
+   "form": "haut",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fr",
+   "form": "haute",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fr",
+   "form": "hauts",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fr",
+   "form": "mont",
+   "pos": "prefix",
+   "cat": "high",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "it",
+   "form": "fonte",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "it",
+   "form": "fontana",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "it",
+   "form": "fontane",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "it",
+   "form": "sorgente",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "it",
+   "form": "pozzo",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "it",
+   "form": "pozzi",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "it",
+   "form": "basso",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "it",
+   "form": "bassa",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "it",
+   "form": "bassi",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "it",
+   "form": "sotto",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "it",
+   "form": "inferiore",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "it",
+   "form": "alto",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "it",
+   "form": "alta",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "it",
+   "form": "alti",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "it",
+   "form": "sopra",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "it",
+   "form": "superiore",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "es",
+   "form": "fuente",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "es",
+   "form": "fuentes",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "es",
+   "form": "pozo",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "es",
+   "form": "pozos",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "es",
+   "form": "manantial",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "es",
+   "form": "ojo",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "es",
+   "form": "bajo",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "es",
+   "form": "baja",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "es",
+   "form": "bajos",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "es",
+   "form": "bajas",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "es",
+   "form": "abajo",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "es",
+   "form": "monte",
+   "pos": "word",
+   "cat": "high",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "es",
+   "form": "alto",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "es",
+   "form": "alta",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "es",
+   "form": "altos",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "es",
+   "form": "altas",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "es",
+   "form": "arriba",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "pt",
+   "form": "fonte",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "pt",
+   "form": "fontes",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "pt",
+   "form": "poco",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "pt",
+   "form": "nascente",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "pt",
+   "form": "cacimba",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "pt",
+   "form": "baixa",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "pt",
+   "form": "baixo",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "pt",
+   "form": "monte",
+   "pos": "word",
+   "cat": "high",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "pt",
+   "form": "alto",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "pt",
+   "form": "cima",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "el",
+   "form": "pigi",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "el",
+   "form": "pigadi",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "el",
+   "form": "pigadia",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "el",
+   "form": "vrysi",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "el",
+   "form": "vrisi",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "el",
+   "form": "vryses",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "el",
+   "form": "vrises",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "el",
+   "form": "krini",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "el",
+   "form": "kefalovryso",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "el",
+   "form": "vrys",
+   "pos": "prefix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "el",
+   "form": "vris",
+   "pos": "prefix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "el",
+   "form": "kato",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "el",
+   "form": "ano",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "el",
+   "form": "epano",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sh",
+   "form": "vrelo",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sh",
+   "form": "vrela",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sh",
+   "form": "izvor",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sh",
+   "form": "izvori",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sh",
+   "form": "bunar",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sh",
+   "form": "studenac",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sh",
+   "form": "vrutak",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sh",
+   "form": "donji",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sh",
+   "form": "donja",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sh",
+   "form": "donje",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sh",
+   "form": "gornji",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sh",
+   "form": "gornja",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sh",
+   "form": "gornje",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sl",
+   "form": "studenec",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sl",
+   "form": "izvir",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sl",
+   "form": "studenci",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sl",
+   "form": "spodnji",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sl",
+   "form": "spodnja",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sl",
+   "form": "spodnje",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sl",
+   "form": "gorenji",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sl",
+   "form": "gorenja",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sl",
+   "form": "gorenje",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sl",
+   "form": "zgornji",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sl",
+   "form": "zgornja",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sl",
+   "form": "zgornje",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sl",
+   "form": "gornji",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "bg",
+   "form": "izvor",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "bg",
+   "form": "izvori",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "bg",
+   "form": "kladenets",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "bg",
+   "form": "kladenci",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "bg",
+   "form": "bunar",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "bg",
+   "form": "cheshma",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "bg",
+   "form": "dolna",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "bg",
+   "form": "dolni",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "bg",
+   "form": "dolno",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "bg",
+   "form": "dolen",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "bg",
+   "form": "gorna",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "bg",
+   "form": "gorni",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "bg",
+   "form": "gorno",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "bg",
+   "form": "goren",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sq",
+   "form": "burim",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sq",
+   "form": "burimi",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sq",
+   "form": "pus",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sq",
+   "form": "puse",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sq",
+   "form": "poshte",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sq",
+   "form": "poshtme",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sq",
+   "form": "siper",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sq",
+   "form": "siperme",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ro",
+   "form": "izvor",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ro",
+   "form": "izvorul",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ro",
+   "form": "izvoare",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ro",
+   "form": "fantana",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ro",
+   "form": "fantanele",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ro",
+   "form": "jos",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ro",
+   "form": "sus",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "hu",
+   "form": "kut",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "hu",
+   "form": "forras",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "hu",
+   "form": "also",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "hu",
+   "form": "also",
+   "pos": "prefix",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "hu",
+   "form": "felso",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "hu",
+   "form": "felso",
+   "pos": "prefix",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "cs",
+   "form": "studnice",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "cs",
+   "form": "studna",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "cs",
+   "form": "studnicka",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "cs",
+   "form": "pramen",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "cs",
+   "form": "prameny",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "cs",
+   "form": "dolni",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "cs",
+   "form": "dolny",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "cs",
+   "form": "dolne",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "cs",
+   "form": "dolna",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "cs",
+   "form": "horni",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "cs",
+   "form": "horny",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "cs",
+   "form": "horne",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "cs",
+   "form": "horna",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "pl",
+   "form": "zrodlo",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "pl",
+   "form": "zrodla",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "pl",
+   "form": "studnia",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "pl",
+   "form": "studzianka",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "pl",
+   "form": "dolny",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "pl",
+   "form": "dolna",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "pl",
+   "form": "dolne",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "pl",
+   "form": "gorny",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "pl",
+   "form": "gorna",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "pl",
+   "form": "gorne",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "krynytsia",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "uk",
+   "form": "krinitsa",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "uk",
+   "form": "kolodez",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "uk",
+   "form": "kolodiazi",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "uk",
+   "form": "dzherelo",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "uk",
+   "form": "istok",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "uk",
+   "form": "nyzhnii",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "nyzhnia",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "nyzhnie",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "nizhniy",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "nizhnyaya",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "nizhneye",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "nizhne",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "nizhni",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "verkhnii",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "verkhnia",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "verkhnie",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "verkhniy",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "verkhnyaya",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "verkhneye",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "uk",
+   "form": "verkhne",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "lt",
+   "form": "saltinis",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "lt",
+   "form": "saltiniai",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "lt",
+   "form": "zemutinis",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "lt",
+   "form": "zemutine",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "lt",
+   "form": "zemieji",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "lt",
+   "form": "aukstoji",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "lt",
+   "form": "aukstutinis",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "lv",
+   "form": "avots",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "lv",
+   "form": "avoti",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "et",
+   "form": "allikas",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "et",
+   "form": "alam",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "et",
+   "form": "ulem",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fi",
+   "form": "lahde",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "fi",
+   "form": "koski",
+   "pos": "word",
+   "cat": "water",
+   "rule": "f_rapids"
+  },
+  {
+   "lang": "fi",
+   "form": "lahde",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "fi",
+   "form": "koski",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "f_rapids"
+  },
+  {
+   "lang": "fi",
+   "form": "ala",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fi",
+   "form": "yla",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sv",
+   "form": "kalla",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sv",
+   "form": "kallan",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sv",
+   "form": "fors",
+   "pos": "word",
+   "cat": "water",
+   "rule": "f_rapids"
+  },
+  {
+   "lang": "sv",
+   "form": "forsen",
+   "pos": "word",
+   "cat": "water",
+   "rule": "f_rapids"
+  },
+  {
+   "lang": "sv",
+   "form": "kalla",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sv",
+   "form": "kallan",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sv",
+   "form": "fors",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "f_rapids"
+  },
+  {
+   "lang": "sv",
+   "form": "forsen",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "f_rapids"
+  },
+  {
+   "lang": "sv",
+   "form": "ang",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "sv",
+   "form": "angen",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "sv",
+   "form": "angar",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "sv",
+   "form": "sand",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "sv",
+   "form": "sanden",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "sv",
+   "form": "vall",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "sv",
+   "form": "ang",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "sv",
+   "form": "angen",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "sv",
+   "form": "angar",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "sv",
+   "form": "sand",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "sv",
+   "form": "sanden",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "sv",
+   "form": "vall",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "sv",
+   "form": "nedre",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sv",
+   "form": "nedre",
+   "pos": "suffix",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sv",
+   "form": "ovre",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sv",
+   "form": "ovre",
+   "pos": "suffix",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "no",
+   "form": "kilde",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "no",
+   "form": "foss",
+   "pos": "word",
+   "cat": "water",
+   "rule": "f_rapids"
+  },
+  {
+   "lang": "no",
+   "form": "fossen",
+   "pos": "word",
+   "cat": "water",
+   "rule": "f_rapids"
+  },
+  {
+   "lang": "no",
+   "form": "foss",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "f_rapids"
+  },
+  {
+   "lang": "no",
+   "form": "oy",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "oya",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "ora",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "no",
+   "form": "ore",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "no",
+   "form": "eng",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "enga",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "engene",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "sand",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "sanden",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "voll",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "vollen",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "oya",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "ora",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "no",
+   "form": "ore",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "no",
+   "form": "eng",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "enga",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "engene",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "sand",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "sanden",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "voll",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "vollen",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "no",
+   "form": "nedre",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "no",
+   "form": "nedre",
+   "pos": "suffix",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "no",
+   "form": "ovre",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "no",
+   "form": "ovre",
+   "pos": "suffix",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "da",
+   "form": "kilde",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "da",
+   "form": "kilde",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "da",
+   "form": "eng",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "da",
+   "form": "enge",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "da",
+   "form": "eng",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "da",
+   "form": "enge",
+   "pos": "suffix",
+   "cat": "riverine",
+   "rule": "c_riverine_named"
+  },
+  {
+   "lang": "da",
+   "form": "nedre",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "da",
+   "form": "nedre",
+   "pos": "suffix",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "da",
+   "form": "ovre",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "da",
+   "form": "ovre",
+   "pos": "suffix",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "tr",
+   "form": "pinar",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "tr",
+   "form": "kuyu",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "tr",
+   "form": "bulak",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "tr",
+   "form": "kaynak",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "tr",
+   "form": "pinar",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "tr",
+   "form": "bulak",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "tr",
+   "form": "pinar",
+   "pos": "prefix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "tr",
+   "form": "asagi",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "tr",
+   "form": "yukari",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ar",
+   "form": "ain",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ar",
+   "form": "ayn",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ar",
+   "form": "aioun",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ar",
+   "form": "ayoun",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ar",
+   "form": "bir",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ar",
+   "form": "biar",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ar",
+   "form": "abar",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ar",
+   "form": "hassi",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ar",
+   "form": "tahta",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ar",
+   "form": "tahtani",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ar",
+   "form": "tahtaniya",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ar",
+   "form": "sufla",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ar",
+   "form": "sufli",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ar",
+   "form": "fawqani",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ar",
+   "form": "foqani",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ar",
+   "form": "fouqani",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ar",
+   "form": "fawqa",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ar",
+   "form": "oulia",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ar",
+   "form": "ulya",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ar",
+   "form": "ulia",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fa",
+   "form": "chashma",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "fa",
+   "form": "chashmeh",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "fa",
+   "form": "chah",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "fa",
+   "form": "chahi",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "fa",
+   "form": "kacha",
+   "pos": "word",
+   "cat": "riverine",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "fa",
+   "form": "nichla",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fa",
+   "form": "nichli",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fa",
+   "form": "nichle",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fa",
+   "form": "payan",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fa",
+   "form": "payin",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fa",
+   "form": "paeen",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fa",
+   "form": "pain",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fa",
+   "form": "payeen",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "fa",
+   "form": "bala",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "hi",
+   "form": "nichla",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "hi",
+   "form": "upar",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "vi",
+   "form": "gieng",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "id",
+   "form": "sumur",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "id",
+   "form": "bawah",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "id",
+   "form": "hilir",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "id",
+   "form": "ilir",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "id",
+   "form": "atas",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "id",
+   "form": "hulu",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "id",
+   "form": "ulu",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "tl",
+   "form": "bukal",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "tl",
+   "form": "ibaba",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "tl",
+   "form": "baba",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "tl",
+   "form": "itaas",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sw",
+   "form": "chemchemi",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sw",
+   "form": "kisima",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "sw",
+   "form": "chini",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "sw",
+   "form": "juu",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "bantu",
+   "form": "chitsime",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "af",
+   "form": "fontein",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "af",
+   "form": "put",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "af",
+   "form": "fontein",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "af",
+   "form": "put",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "mg",
+   "form": "loharano",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "mg",
+   "form": "ambany",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "mg",
+   "form": "ambony",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "qu",
+   "form": "puquio",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "qu",
+   "form": "pukyu",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "nah",
+   "form": "ameyal",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "nah",
+   "form": "ameyal",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "my",
+   "form": "taung",
+   "pos": "word",
+   "cat": "high",
+   "rule": "b_homograph"
+  },
+  {
+   "lang": "ka",
+   "form": "tskaro",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ka",
+   "form": "tskarosi",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "ka",
+   "form": "kvemo",
+   "pos": "word",
+   "cat": "low",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "ka",
+   "form": "zemo",
+   "pos": "word",
+   "cat": "high",
+   "rule": "d_qualifier"
+  },
+  {
+   "lang": "kk",
+   "form": "bulak",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "kk",
+   "form": "bulaq",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "kk",
+   "form": "bulak",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "kk",
+   "form": "bulaq",
+   "pos": "suffix",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "so",
+   "form": "ceel",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "am",
+   "form": "minch",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  },
+  {
+   "lang": "am",
+   "form": "minchi",
+   "pos": "word",
+   "cat": "water",
+   "rule": "e_spring_well"
+  }
+ ]
+}
