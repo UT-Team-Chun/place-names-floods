@@ -1,9 +1,12 @@
 # Provenance of the frozen protocol
 
 This repository is a curated copy of the project's development repository, prepared for publication.
-Its history starts at the copy; the development repository is not public. The freeze is documented by
-the commit identifiers below, by the content checksums that let anyone verify that the files here are
-the frozen files, and by the job records of the computing cluster described in the paper.
+Its history starts at the copy; the development repository is not public. This repository was created on GitHub at
+2026-10-26T02:28Z, about four hours after the confirmatory analysis was aggregated (2026-10-25T22:40Z), so its own
+history cannot show when the protocol was frozen. The freeze is documented by the commit identifiers below, by the
+content checksums that let anyone verify that the files here are the frozen files, and by the job records of the
+computing cluster described in the paper; an independently time-stamped archive of the development history is a
+decision for the authors (see the paper, Appendix A).
 
 ## Freeze
 
@@ -121,9 +124,29 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   values had been seen, the withdrawal of the odds ratios read from the B-7 simulation with every model refitted,
   whose grid has no effect small enough to read them without bias (a straight line from zero across a convex gain
   curve understated them). Scripts: `v57`, `v57b`, `v58`, `v59`, `v60`, `v61`, `v62`.
+- Amendment B-9 followed the fifth round of critiques. It corrected the reporting and fixed, before they were computed,
+  bounds read with refitted intervals and over fold assignments, a finer grid of small injected effects, effects that
+  remove flooding, effects that differ between settlements, simulated power with every model refitted, the Murphy
+  decomposition, an evaluation within AOIs, the skill of flood maps, one definition of permanent water for all AOIs,
+  other subsampling seeds and a bare-earth terrain model (FABDEM). Addendum 1 records the implementation before any
+  cluster result. Scripts: `v63`, `v64`, `v65`; FABDEM tiles: `backend/packages/topsem/scripts/world_fabdem.py`.
+- Amendment B-10 followed the sixth round of critiques. It reframed the paper (what the pooled test bounds and cannot
+  detect), corrected the reported numbers, reported planned quantities that had been left out, and fixed, before they
+  were computed: the islands-and-meadows group at settlement sites, the floodplain reading by country and form,
+  detectable effects and jackknife and wild-bootstrap intervals near settlements, misreading over a grid of rates,
+  validation by country, sensors and product generations, the activation-merged split in full, the within-AOI
+  evaluation on GFM labels, the near-settlement estimator on injected labels, one definition of the HAND-only map,
+  the between-area relation within language areas, cells read in another language, the class distribution of the
+  language-model reading, distance and continent interactions, a penalty tuned by grouped cross-validation, country
+  indicators, spatially clustered injection, and JRC flood hazard maps in the baseline. Addendum 1 records the
+  implementation before any cluster result. Addendum 2, written after the within-AOI evaluation on GFM labels had
+  returned an interval above zero, added the placebo comparison that the decision table requires for such an interval
+  (and the same comparison on the EMS labels); the paper reports it as added after the result. Scripts: `v66`, `v67`;
+  hazard tiles: `backend/packages/topsem/scripts/world_jrc.py`.
 
-English translations of the protocol and of amendments B-1 to B-8 are in `docs/protocol/en/`; they were drafted with a
-language model after the analysis, and the Japanese files are the record and govern where the two differ. Dates written
+English translations of the protocol and of amendments B-1 to B-10 are in `docs/protocol/en/`; they were drafted with a
+language model after the analysis and have not yet been checked by the authors, and the Japanese files are the record
+and govern where the two differ. Dates written
 inside the repository files are local (Japan Standard Time, UTC+9) unless marked; the paper gives UTC. An interpretation
 plan, written after the freeze and before any confirmatory result, is in
 `docs/research/2026-10-26_v2_interpretation_plan.md`.

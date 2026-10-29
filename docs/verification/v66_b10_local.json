@@ -1,0 +1,3927 @@
+{
+ "rule": "amendment B-10 items B1-B15 (local; post hoc; confirmatory verdict unchanged)",
+ "seed": 20261030,
+ "B6": {
+  "min_coded": 10,
+  "weights": "stratum weights (population / sample) for recall",
+  "coder1": {
+   "n_coded": 353,
+   "by_form": {
+    "sous": {
+     "n_flagged": 12,
+     "precision": 0.25
+    }
+   },
+   "by_country": {
+    "CZ": {
+     "n_coded": 20,
+     "n_flagged": 6,
+     "precision": 0.8333333333333334,
+     "recall_weighted": 0.33143311679703036,
+     "n_truth": 6
+    },
+    "FR": {
+     "n_coded": 120,
+     "n_flagged": 33,
+     "precision": 0.6666666666666666,
+     "recall_weighted": 0.11997207922519848,
+     "n_truth": 38
+    },
+    "GB": {
+     "n_coded": 33,
+     "n_flagged": 16,
+     "precision": 0.8125,
+     "recall_weighted": 0.2049503389563298,
+     "n_truth": 18
+    },
+    "MX": {
+     "n_coded": 10,
+     "n_flagged": 8,
+     "precision": 0.875,
+     "recall_weighted": 1.0,
+     "n_truth": 7
+    },
+    "PL": {
+     "n_coded": 35,
+     "n_flagged": 5,
+     "precision": 0.4,
+     "recall_weighted": 0.16548072149594573,
+     "n_truth": 3
+    },
+    "SI": {
+     "n_coded": 54,
+     "n_flagged": 17,
+     "precision": 0.9411764705882353,
+     "recall_weighted": 0.20910659208531548,
+     "n_truth": 22
+    }
+   }
+  },
+  "coder2": {
+   "n_coded": 378,
+   "by_form": {
+    "sous": {
+     "n_flagged": 11,
+     "precision": 0.2727272727272727
+    }
+   },
+   "by_country": {
+    "CZ": {
+     "n_coded": 21,
+     "n_flagged": 6,
+     "precision": 0.8333333333333334,
+     "recall_weighted": 0.19863340219291276,
+     "n_truth": 7
+    },
+    "FR": {
+     "n_coded": 129,
+     "n_flagged": 33,
+     "precision": 0.6060606060606061,
+     "recall_weighted": 0.07937200866742335,
+     "n_truth": 43
+    },
+    "GB": {
+     "n_coded": 35,
+     "n_flagged": 18,
+     "precision": 0.8333333333333334,
+     "recall_weighted": 0.22925263640531865,
+     "n_truth": 20
+    },
+    "MX": {
+     "n_coded": 10,
+     "n_flagged": 8,
+     "precision": 0.875,
+     "recall_weighted": 1.0,
+     "n_truth": 7
+    },
+    "PL": {
+     "n_coded": 39,
+     "n_flagged": 5,
+     "precision": 0.8,
+     "recall_weighted": 0.11676104851421565,
+     "n_truth": 7
+    },
+    "SI": {
+     "n_coded": 58,
+     "n_flagged": 20,
+     "precision": 0.85,
+     "recall_weighted": 0.19405949635853062,
+     "n_truth": 24
+    }
+   }
+  }
+ },
+ "B12": {
+  "HAND_min": {
+   "csi_median": 0.043478260869565216,
+   "csi_q25_q75": [
+    0.0,
+    0.09150717703349281
+   ],
+   "hit_median": 0.08333333333333333,
+   "far_median": 0.9166666666666666,
+   "csi_pooled": 0.1915997370451882,
+   "hit_pooled": 0.3215840539211571,
+   "far_pooled": 0.6784159460788429,
+   "n_aoi": 479
+  },
+  "HAND_mean": {
+   "csi_median": 0.08411214953271028,
+   "csi_q25_q75": [
+    0.0,
+    0.21073848238482384
+   ],
+   "hit_median": 0.15517241379310345,
+   "far_median": 0.8448275862068966,
+   "csi_pooled": 0.24740625490885426,
+   "hit_pooled": 0.3966731029850925,
+   "far_pooled": 0.6033268970149075,
+   "n_aoi": 479
+  },
+  "M1": {
+   "csi_median": 0.12941176470588237,
+   "csi_q25_q75": [
+    0.033634821933295644,
+    0.2655055574670516
+   ],
+   "hit_median": 0.22916666666666666,
+   "far_median": 0.7708333333333334,
+   "csi_pooled": 0.30471384422798575,
+   "hit_pooled": 0.46709682061860613,
+   "far_pooled": 0.5329031793813939,
+   "n_aoi": 479
+  },
+  "M1c": {
+   "csi_median": 0.12941176470588237,
+   "csi_q25_q75": [
+    0.033634821933295644,
+    0.2655055574670516
+   ],
+   "hit_median": 0.22916666666666666,
+   "far_median": 0.7708333333333334,
+   "csi_pooled": 0.30471384422798575,
+   "hit_pooled": 0.46709682061860613,
+   "far_pooled": 0.5329031793813939,
+   "n_aoi": 479
+  },
+  "M3n": {
+   "csi_median": 0.13170731707317074,
+   "csi_q25_q75": [
+    0.03225806451612903,
+    0.2718776550552251
+   ],
+   "hit_median": 0.23275862068965517,
+   "far_median": 0.7672413793103449,
+   "csi_pooled": 0.30336780072998976,
+   "hit_pooled": 0.465513726148643,
+   "far_pooled": 0.534486273851357,
+   "n_aoi": 479
+  },
+  "ties_at_cut_hand_min": {
+   "median_share_cells_tied": 0.02188183807439825,
+   "q75": 0.04048973316305955
+  },
+  "rule": "maps of k = observed flooded cells per AOI; HAND_min: minimum HAND, ties by mean HAND then random; HAND_mean: mean HAND, ties random; models by predicted probability"
+ },
+ "B13": {
+  "model": "empirical logit of AOI flood rate ~ share water-side + mean logit M1 | activation FE",
+  "coef_names": [
+   "share_water_side",
+   "mean_logit_M1"
+  ],
+  "de": {
+   "coef": [
+    -3.5825072916508125,
+    0.4708863770008168
+   ],
+   "se": [
+    8.178758363869829,
+    0.17464273308658362
+   ],
+   "ci95": [
+    [
+     -21.015118089564375,
+     13.850103506262748
+    ],
+    [
+     0.09864420292810089,
+     0.8431285510735327
+    ]
+   ],
+   "n_aoi": 54,
+   "n_activations": 16
+  },
+  "en": {
+   "coef": [
+    -2.2683905141616743,
+    0.5673872144981762
+   ],
+   "se": [
+    2.017239148718225,
+    0.19499585451035203
+   ],
+   "ci95": [
+    [
+     -6.394107816390729,
+     1.8573267880673807
+    ],
+    [
+     0.16857591276060813,
+     0.9661985162357443
+    ]
+   ],
+   "n_aoi": 111,
+   "n_activations": 30
+  },
+  "fr": {
+   "coef": [
+    -3.6160371818137484,
+    0.7920248733524283
+   ],
+   "se": [
+    3.9533565597920846,
+    0.39472259769860507
+   ],
+   "ci95": [
+    [
+     -12.156744781410136,
+     4.9246704177826395
+    ],
+    [
+     -0.06072145471321,
+     1.6447712014180667
+    ]
+   ],
+   "n_aoi": 58,
+   "n_activations": 14
+  },
+  "pooled": {
+   "coef": [
+    -2.3795462952107136,
+    0.5627231236274468
+   ],
+   "se": [
+    1.8242990727891348,
+    0.13789631708069888
+   ],
+   "ci95": [
+    [
+     -6.035523335193004,
+     1.2764307447715773
+    ],
+    [
+     0.2863727287470863,
+     0.8390735185078073
+    ]
+   ],
+   "n_aoi": 212,
+   "n_activations": 56
+  }
+ },
+ "B15": {
+  "by_names": {
+   "non_environmental": {
+    "n": 38219,
+    "share": 0.4043311751512843
+   },
+   "water": {
+    "n": 12072,
+    "share": 0.12771359654690873
+   },
+   "other_environmental": {
+    "n": 10937,
+    "share": 0.11570606406838475
+   },
+   "highland": {
+    "n": 8832,
+    "share": 0.09343658753332487
+   },
+   "riverine": {
+    "n": 7716,
+    "share": 0.08163006220642377
+   },
+   "wetland": {
+    "n": 7602,
+    "share": 0.08042401929668655
+   },
+   "unknown": {
+    "n": 3891,
+    "share": 0.041164148787609496
+   },
+   "lowland": {
+    "n": 3472,
+    "share": 0.03673141212813677
+   },
+   "crossing": {
+    "n": 1783,
+    "share": 0.018862934281240744
+   }
+  },
+  "by_cells": {
+   "non_environmental": {
+    "n": 550235,
+    "share": 0.36500173135936254
+   },
+   "water": {
+    "n": 234593,
+    "share": 0.1556186923128971
+   },
+   "highland": {
+    "n": 161156,
+    "share": 0.10690381204203554
+   },
+   "other_environmental": {
+    "n": 148830,
+    "share": 0.09872728502951271
+   },
+   "wetland": {
+    "n": 125945,
+    "share": 0.08354638119358986
+   },
+   "riverine": {
+    "n": 105543,
+    "share": 0.07001259049835289
+   },
+   "unknown": {
+    "n": 89780,
+    "share": 0.05955610864711181
+   },
+   "lowland": {
+    "n": 61728,
+    "share": 0.04094764395821918
+   },
+   "crossing": {
+    "n": 29676,
+    "share": 0.019685754958918358
+   }
+  }
+ },
+ "B1": {
+  "n_cells": {
+   "island": 6138,
+   "island_noau": 3331,
+   "au_only": 2807
+  },
+  "n_settlements": {
+   "island": 486,
+   "island_noau": 298
+  },
+  "island": {
+   "site_hand_mean": {
+    "estimate": -3.176821191626859,
+    "ci95": [
+     -5.555413473776644,
+     -1.573153287228079
+    ],
+    "mean_group": 5.631609284734151,
+    "mean_other": 8.808430456253419,
+    "n_aoi": 22,
+    "n_settlements": 2221
+   },
+   "site_hand_pct": {
+    "estimate": -0.09340734410025518,
+    "ci95": [
+     -0.14551272450360722,
+     -0.04270795405317946
+    ],
+    "mean_group": 0.47343175236649937,
+    "mean_other": 0.5668390964667546,
+    "n_aoi": 22,
+    "n_settlements": 2221
+   },
+   "all_hand_mean": {
+    "estimate": -2.66680815828057,
+    "ci95": [
+     -4.8760443592380245,
+     -1.3969430788430695
+    ],
+    "mean_group": 5.619154062608901,
+    "mean_other": 8.285962220889472,
+    "n_aoi": 54,
+    "n_units": 36
+   },
+   "le500m_hand_mean": {
+    "estimate": -1.6391584993157582,
+    "ci95": [
+     -3.211743172167603,
+     -0.8572522395011306
+    ],
+    "mean_group": 5.508638274459928,
+    "mean_other": 7.147796773775688,
+    "n_aoi": 10,
+    "n_units": 7
+   },
+   "or_le500m": {
+    "coef": 0.45787683634903303,
+    "se": 0.3695775872619528,
+    "odds_ratio": 1.5807143045268934,
+    "ci95_odds_ratio": [
+     0.7660596542335213,
+     3.2617012248686628
+    ],
+    "n_cells_le500m": 882,
+    "n_flooded_le500m": 47,
+    "n_units_flooded_le500m": 8,
+    "n_aoi_flooded_le500m": 10,
+    "flooded_le500m_by_country": {
+     "DE": 21,
+     "AU": 14,
+     "SI": 8,
+     "KH": 2,
+     "MM": 1,
+     "GB": 1
+    }
+   }
+  },
+  "island_noau": {
+   "site_hand_mean": {
+    "estimate": -5.841634958021102,
+    "ci95": [
+     -9.036027568167652,
+     -3.4381435000676706
+    ],
+    "mean_group": 4.745071557260329,
+    "mean_other": 10.586706515281431,
+    "n_aoi": 12,
+    "n_settlements": 1444
+   },
+   "site_hand_pct": {
+    "estimate": -0.12477027364653254,
+    "ci95": [
+     -0.21102257958768988,
+     -0.043432503611849346
+    ],
+    "mean_group": 0.4651237665863134,
+    "mean_other": 0.589894040232846,
+    "n_aoi": 12,
+    "n_settlements": 1444
+   },
+   "all_hand_mean": {
+    "estimate": -4.4910661489188035,
+    "ci95": [
+     -7.911344829685814,
+     -2.365710833657199
+    ],
+    "mean_group": 6.452372224096627,
+    "mean_other": 10.94343837301543,
+    "n_aoi": 41,
+    "n_units": 33
+   },
+   "le500m_hand_mean": null,
+   "or_le500m": {
+    "coef": 1.013450142649737,
+    "se": 0.4815270250011623,
+    "odds_ratio": 2.7550900900965543,
+    "ci95_odds_ratio": [
+     1.072140560205059,
+     7.07978196729771
+    ],
+    "n_cells_le500m": 396,
+    "n_flooded_le500m": 28,
+    "n_units_flooded_le500m": 7,
+    "n_aoi_flooded_le500m": 9,
+    "flooded_le500m_by_country": {
+     "AU": 14,
+     "SI": 8,
+     "DE": 2,
+     "KH": 2,
+     "MM": 1,
+     "GB": 1
+    }
+   }
+  },
+  "rule": "B-5 item 8 estimators; site = cells within 177 m of the settlement point (v37)"
+ },
+ "B2": {
+  "same_code_path_mismatch_share": 0.0004922102095807192,
+  "main": {
+   "odds_ratio": 1.4471506793035442,
+   "ci95": [
+    1.0038463422018504,
+    2.0862207696201427
+   ],
+   "n_cells": 1489381,
+   "n_aoi": 479,
+   "n_units": 194,
+   "n_group_cells": 2263,
+   "n_group_flooded": 163.0,
+   "n_group_units": 85,
+   "pairs_ci95": [
+    0.9265902556338049,
+    2.0788445149884245
+   ],
+   "pairs_log_or_sd": 0.20504201400954694,
+   "pairs_reps_ok": 2000
+  },
+  "reread_all_forms": {
+   "odds_ratio": 1.4210511130294867,
+   "ci95": [
+    0.9855692201448567,
+    2.048954273902282
+   ],
+   "n_cells": 1489381,
+   "n_aoi": 479,
+   "n_units": 194,
+   "n_group_cells": 2346,
+   "n_group_flooded": 163.0,
+   "n_group_units": 91,
+   "pairs_ci95": [
+    0.904126557733611,
+    2.023688823086474
+   ],
+   "pairs_log_or_sd": 0.20523408294262624,
+   "pairs_reps_ok": 2000
+  },
+  "reread_without_forms": {
+   "odds_ratio": 1.5422307730011102,
+   "ci95": [
+    1.041872252767972,
+    2.282886170423137
+   ],
+   "n_cells": 1489381,
+   "n_aoi": 479,
+   "n_units": 194,
+   "n_group_cells": 1763,
+   "n_group_flooded": 142.0,
+   "n_group_units": 85,
+   "pairs_ci95": [
+    0.9438625245237372,
+    2.2848388794218666
+   ],
+   "pairs_log_or_sd": 0.2232476118469281,
+   "pairs_reps_ok": 2000,
+   "share_group_cells_dropped": 0.20619299087854057,
+   "excluded_forms": [
+    "argine",
+    "argini",
+    "au",
+    "aue",
+    "auen",
+    "bank",
+    "banks",
+    "bonifica",
+    "dam",
+    "dambis",
+    "dig",
+    "dige",
+    "digue",
+    "dijk",
+    "hraz",
+    "levee",
+    "nasip",
+    "penger",
+    "polder",
+    "pylimas",
+    "tanggul"
+   ]
+  },
+  "leave_one_country_out": {
+   "AL": {
+    "odds_ratio": 1.4365668444778383,
+    "ci95": [
+     0.993711716222384,
+     2.0767837039280415
+    ],
+    "n_cells": 1460128,
+    "n_aoi": 463,
+    "n_units": 192,
+    "n_group_cells": 2247,
+    "n_group_flooded": 162.0,
+    "n_group_units": 84,
+    "pairs_ci95": [
+     0.903439026418004,
+     2.0516740573792975
+    ],
+    "pairs_log_or_sd": 0.20840180556404178,
+    "pairs_reps_ok": 2000,
+    "n_flooded_near_in_country": 1
+   },
+   "AU": {
+    "odds_ratio": 1.3529246185155943,
+    "ci95": [
+     0.9461554263890484,
+     1.9345711839028494
+    ],
+    "n_cells": 1343537,
+    "n_aoi": 436,
+    "n_units": 172,
+    "n_group_cells": 2146,
+    "n_group_flooded": 147.0,
+    "n_group_units": 77,
+    "pairs_ci95": [
+     0.8272449808369481,
+     1.8393283600769783
+    ],
+    "pairs_log_or_sd": 0.2058962321074812,
+    "pairs_reps_ok": 2000,
+    "n_flooded_near_in_country": 16
+   },
+   "BD": {
+    "odds_ratio": 1.3931632474357096,
+    "ci95": [
+     0.8381922672123443,
+     2.3155830826985087
+    ],
+    "n_cells": 1469661,
+    "n_aoi": 478,
+    "n_units": 193,
+    "n_group_cells": 1858,
+    "n_group_flooded": 82.0,
+    "n_group_units": 83,
+    "pairs_ci95": [
+     0.7501700976547678,
+     2.2283207237467755
+    ],
+    "pairs_log_or_sd": 0.2740568661590208,
+    "pairs_reps_ok": 2000,
+    "n_flooded_near_in_country": 81
+   },
+   "BE": {
+    "odds_ratio": 1.436273814219121,
+    "ci95": [
+     0.9915026366655378,
+     2.080561758614275
+    ],
+    "n_cells": 1483634,
+    "n_aoi": 475,
+    "n_units": 194,
+    "n_group_cells": 2219,
+    "n_group_flooded": 161.0,
+    "n_group_units": 85,
+    "pairs_ci95": [
+     0.9100057809782495,
+     2.065341481506833
+    ],
+    "pairs_log_or_sd": 0.20929994832374182,
+    "pairs_reps_ok": 2000,
+    "n_flooded_near_in_country": 2
+   },
+   "DE": {
+    "odds_ratio": 1.5477066926987952,
+    "ci95": [
+     1.040470000928898,
+     2.3022249603411065
+    ],
+    "n_cells": 1406563,
+    "n_aoi": 451,
+    "n_units": 186,
+    "n_group_cells": 1612,
+    "n_group_flooded": 141.0,
+    "n_group_units": 79,
+    "pairs_ci95": [
+     0.920513892626465,
+     2.3082595035977227
+    ],
+    "pairs_log_or_sd": 0.23081387857572833,
+    "pairs_reps_ok": 2000,
+    "n_flooded_near_in_country": 22
+   },
+   "ES": {
+    "odds_ratio": 1.4019886532365873,
+    "ci95": [
+     0.9620812019652148,
+     2.0430418760798195
+    ],
+    "n_cells": 1422276,
+    "n_aoi": 455,
+    "n_units": 187,
+    "n_group_cells": 2217,
+    "n_group_flooded": 157.0,
+    "n_group_units": 80,
+    "pairs_ci95": [
+     0.8630381033176153,
+     2.031775113674329
+    ],
+    "pairs_log_or_sd": 0.21823148530387762,
+    "pairs_reps_ok": 2000,
+    "n_flooded_near_in_country": 6
+   },
+   "GB": {
+    "odds_ratio": 1.4616473441604727,
+    "ci95": [
+     1.0067464493274298,
+     2.122096343243745
+    ],
+    "n_cells": 1399515,
+    "n_aoi": 463,
+    "n_units": 184,
+    "n_group_cells": 2013,
+    "n_group_flooded": 160.0,
+    "n_group_units": 77,
+    "pairs_ci95": [
+     0.9030621001588423,
+     2.0966708258152615
+    ],
+    "pairs_log_or_sd": 0.2095876268003511,
+    "pairs_reps_ok": 2000,
+    "n_flooded_near_in_country": 3
+   },
+   "KH": {
+    "odds_ratio": 1.446709055277872,
+    "ci95": [
+     0.9991729235051197,
+     2.094699567399025
+    ],
+    "n_cells": 1480569,
+    "n_aoi": 477,
+    "n_units": 194,
+    "n_group_cells": 2250,
+    "n_group_flooded": 161.0,
+    "n_group_units": 85,
+    "pairs_ci95": [
+     0.9197481979573792,
+     2.0788445149884245
+    ],
+    "pairs_log_or_sd": 0.2088959380488737,
+    "pairs_reps_ok": 2000,
+    "n_flooded_near_in_country": 2
+   },
+   "MM": {
+    "odds_ratio": 1.446369421538272,
+    "ci95": [
+     0.9995080352794123,
+     2.093014192703455
+    ],
+    "n_cells": 1479381,
+    "n_aoi": 468,
+    "n_units": 193,
+    "n_group_cells": 2249,
+    "n_group_flooded": 162.0,
+    "n_group_units": 84,
+    "pairs_ci95": [
+     0.9266688819866346,
+     2.049879919153507
+    ],
+    "pairs_log_or_sd": 0.2069685734072943,
+    "pairs_reps_ok": 2000,
+    "n_flooded_near_in_country": 1
+   },
+   "MX": {
+    "odds_ratio": 1.3791671709209372,
+    "ci95": [
+     0.9463088786665238,
+     2.010022444285188
+    ],
+    "n_cells": 1475238,
+    "n_aoi": 476,
+    "n_units": 192,
+    "n_group_cells": 2201,
+    "n_group_flooded": 154.0,
+    "n_group_units": 83,
+    "pairs_ci95": [
+     0.8575774776164125,
+     2.004683053983345
+    ],
+    "pairs_log_or_sd": 0.21380960408928606,
+    "pairs_reps_ok": 2000,
+    "n_flooded_near_in_country": 9
+   },
+   "PK": {
+    "odds_ratio": 1.5472944049347437,
+    "ci95": [
+     1.0607397849744022,
+     2.2570285469212763
+    ],
+    "n_cells": 1428162,
+    "n_aoi": 469,
+    "n_units": 187,
+    "n_group_cells": 2215,
+    "n_group_flooded": 155.0,
+    "n_group_units": 80,
+    "pairs_ci95": [
+     0.9838871246533925,
+     2.252771148341332
+    ],
+    "pairs_log_or_sd": 0.20775134570949186,
+    "pairs_reps_ok": 2000,
+    "n_flooded_near_in_country": 8
+   },
+   "RO": {
+    "odds_ratio": 1.436189297950411,
+    "ci95": [
+     0.9890688861381607,
+     2.0854358361235206
+    ],
+    "n_cells": 1434646,
+    "n_aoi": 468,
+    "n_units": 188,
+    "n_group_cells": 2184,
+    "n_group_flooded": 160.0,
+    "n_group_units": 82,
+    "pairs_ci95": [
+     0.8820963967232156,
+     2.10410451199082
+    ],
+    "pairs_log_or_sd": 0.21442306101645314,
+    "pairs_reps_ok": 2000,
+    "n_flooded_near_in_country": 3
+   },
+   "SI": {
+    "odds_ratio": 1.3992140039204257,
+    "ci95": [
+     0.957655715154274,
+     2.044367091206297
+    ],
+    "n_cells": 1469537,
+    "n_aoi": 475,
+    "n_units": 193,
+    "n_group_cells": 2197,
+    "n_group_flooded": 155.0,
+    "n_group_units": 83,
+    "pairs_ci95": [
+     0.8684664592544581,
+     1.9949699851090525
+    ],
+    "pairs_log_or_sd": 0.21382322130429482,
+    "pairs_reps_ok": 2000,
+    "n_flooded_near_in_country": 8
+   },
+   "VN": {
+    "odds_ratio": 1.4830969744059057,
+    "ci95": [
+     1.0230704108411368,
+     2.1499758102509565
+    ],
+    "n_cells": 1440825,
+    "n_aoi": 465,
+    "n_units": 188,
+    "n_group_cells": 2204,
+    "n_group_flooded": 162.0,
+    "n_group_units": 79,
+    "pairs_ci95": [
+     0.9346169219339037,
+     2.1231978179111977
+    ],
+    "pairs_log_or_sd": 0.20998588961423223,
+    "pairs_reps_ok": 2000,
+    "n_flooded_near_in_country": 1
+   }
+  },
+  "without_EMSR097": {
+   "odds_ratio": 1.3931803099333857,
+   "ci95": [
+    0.8381938149475407,
+    2.3156355265011843
+   ],
+   "n_cells": 1469381,
+   "n_aoi": 477,
+   "n_units": 192,
+   "n_group_cells": 1858,
+   "n_group_flooded": 82.0,
+   "n_group_units": 83,
+   "pairs_ci95": [
+    0.7499630123048805,
+    2.27900047605009
+   ],
+   "pairs_log_or_sd": 0.27187859131910186,
+   "pairs_reps_ok": 2000,
+   "n_flooded_near_in_EMSR097": 81
+  },
+  "composition_by_form": [
+   {
+    "category": "riverine",
+    "form": "char",
+    "n_cells_le500m": 340,
+    "n_flooded_le500m": 71,
+    "n_settlements": 132,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "au",
+    "n_cells_le500m": 459,
+    "n_flooded_le500m": 19,
+    "n_settlements": 126,
+    "excluded_in_reread": true
+   },
+   {
+    "category": "riverine",
+    "form": "island",
+    "n_cells_le500m": 27,
+    "n_flooded_le500m": 14,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "bil",
+    "n_cells_le500m": 59,
+    "n_flooded_le500m": 9,
+    "n_settlements": 18,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "estero",
+    "n_cells_le500m": 18,
+    "n_flooded_le500m": 9,
+    "n_settlements": 5,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "otok",
+    "n_cells_le500m": 34,
+    "n_flooded_le500m": 8,
+    "n_settlements": 8,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "arenal",
+    "n_cells_le500m": 19,
+    "n_flooded_le500m": 6,
+    "n_settlements": 5,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "kallar",
+    "n_cells_le500m": 7,
+    "n_flooded_le500m": 5,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "lunca",
+    "n_cells_le500m": 74,
+    "n_flooded_le500m": 3,
+    "n_settlements": 6,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "bela",
+    "n_cells_le500m": 23,
+    "n_flooded_le500m": 3,
+    "n_settlements": 8,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "kaoh",
+    "n_cells_le500m": 10,
+    "n_flooded_le500m": 2,
+    "n_settlements": 10,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "flat",
+    "n_cells_le500m": 49,
+    "n_flooded_le500m": 2,
+    "n_settlements": 7,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "broek",
+    "n_cells_le500m": 32,
+    "n_flooded_le500m": 2,
+    "n_settlements": 24,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "werder",
+    "n_cells_le500m": 41,
+    "n_flooded_le500m": 2,
+    "n_settlements": 9,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "bank",
+    "n_cells_le500m": 64,
+    "n_flooded_le500m": 2,
+    "n_settlements": 14,
+    "excluded_in_reread": true
+   },
+   {
+    "category": "riverine",
+    "form": "diara",
+    "n_cells_le500m": 6,
+    "n_flooded_le500m": 1,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "kyun",
+    "n_cells_le500m": 14,
+    "n_flooded_le500m": 1,
+    "n_settlements": 13,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "bai",
+    "n_cells_le500m": 44,
+    "n_flooded_le500m": 1,
+    "n_settlements": 8,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "isle",
+    "n_cells_le500m": 28,
+    "n_flooded_le500m": 1,
+    "n_settlements": 7,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "bruch",
+    "n_cells_le500m": 24,
+    "n_flooded_le500m": 1,
+    "n_settlements": 14,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "breg",
+    "n_cells_le500m": 17,
+    "n_flooded_le500m": 1,
+    "n_settlements": 5,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "nisos",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "kalamia",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "luncii",
+    "n_cells_le500m": 5,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "trostianets",
+    "n_cells_le500m": 5,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "ada",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "trstenik",
+    "n_cells_le500m": 7,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "vir",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "ostrvo",
+    "n_cells_le500m": 13,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "pantano",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "dhand",
+    "n_cells_le500m": 12,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "bau",
+    "n_cells_le500m": 7,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "dam",
+    "n_cells_le500m": 8,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "nong",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "wawa",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "putik",
+    "n_cells_le500m": 3,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "pulo",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "pampang",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "baybay",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "chrouy",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "meadow",
+    "n_cells_le500m": 28,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "holme",
+    "n_cells_le500m": 83,
+    "n_flooded_le500m": 0,
+    "n_settlements": 18,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "varzeas",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "varzea",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "brejo",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "paul",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "areias",
+    "n_cells_le500m": 3,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "lameiro",
+    "n_cells_le500m": 5,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "ilha",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "areia",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "vega",
+    "n_cells_le500m": 8,
+    "n_flooded_le500m": 0,
+    "n_settlements": 5,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "ribera",
+    "n_cells_le500m": 7,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "soto",
+    "n_cells_le500m": 16,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "rivera",
+    "n_cells_le500m": 21,
+    "n_flooded_le500m": 0,
+    "n_settlements": 4,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "islas",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "ried",
+    "n_cells_le500m": 42,
+    "n_flooded_le500m": 0,
+    "n_settlements": 31,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "marsh",
+    "n_cells_le500m": 27,
+    "n_flooded_le500m": 0,
+    "n_settlements": 5,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "angen",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "karr",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "ang",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 4,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "holm",
+    "n_cells_le500m": 11,
+    "n_flooded_le500m": 0,
+    "n_settlements": 10,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "myren",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "myr",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "sand",
+    "n_cells_le500m": 6,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "holmen",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "mossen",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "lamas",
+    "n_cells_le500m": 7,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "alagoa",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "weerd",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "dijk",
+    "n_cells_le500m": 7,
+    "n_flooded_le500m": 0,
+    "n_settlements": 5,
+    "excluded_in_reread": true
+   },
+   {
+    "category": "wet",
+    "form": "moos",
+    "n_cells_le500m": 25,
+    "n_flooded_le500m": 0,
+    "n_settlements": 17,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "ven",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "riet",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 4,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "moor",
+    "n_cells_le500m": 30,
+    "n_flooded_le500m": 0,
+    "n_settlements": 18,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "fange",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "worth",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "aue",
+    "n_cells_le500m": 19,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": true
+   },
+   {
+    "category": "riverine",
+    "form": "werth",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "rohr",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "woerth",
+    "n_cells_le500m": 5,
+    "n_flooded_le500m": 0,
+    "n_settlements": 4,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "auen",
+    "n_cells_le500m": 8,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": true
+   },
+   {
+    "category": "wet",
+    "form": "pfuhl",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "varennes",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "marais",
+    "n_cells_le500m": 12,
+    "n_flooded_le500m": 0,
+    "n_settlements": 9,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "levee",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": true
+   },
+   {
+    "category": "wet",
+    "form": "aulnay",
+    "n_cells_le500m": 3,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "ile",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "rive",
+    "n_cells_le500m": 3,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "greve",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "sziget",
+    "n_cells_le500m": 10,
+    "n_flooded_le500m": 0,
+    "n_settlements": 8,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "sar",
+    "n_cells_le500m": 10,
+    "n_flooded_le500m": 0,
+    "n_settlements": 7,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "ostrov",
+    "n_cells_le500m": 3,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "blata",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "olszyna",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "argine",
+    "n_cells_le500m": 3,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": true
+   },
+   {
+    "category": "riverine",
+    "form": "isola",
+    "n_cells_le500m": 43,
+    "n_flooded_le500m": 0,
+    "n_settlements": 9,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "canneto",
+    "n_cells_le500m": 7,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "ishull",
+    "n_cells_le500m": 7,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "loka",
+    "n_cells_le500m": 13,
+    "n_flooded_le500m": 0,
+    "n_settlements": 4,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "mlaka",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "log",
+    "n_cells_le500m": 12,
+    "n_flooded_le500m": 0,
+    "n_settlements": 5,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "luzani",
+    "n_cells_le500m": 32,
+    "n_flooded_le500m": 0,
+    "n_settlements": 8,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "bara",
+    "n_cells_le500m": 12,
+    "n_flooded_le500m": 0,
+    "n_settlements": 5,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "bare",
+    "n_cells_le500m": 14,
+    "n_flooded_le500m": 0,
+    "n_settlements": 5,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "barice",
+    "n_cells_le500m": 3,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "lug",
+    "n_cells_le500m": 9,
+    "n_flooded_le500m": 0,
+    "n_settlements": 4,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "isla",
+    "n_cells_le500m": 14,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "carrizal",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "playon",
+    "n_cells_le500m": 3,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "cienaga",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "tular",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "reeds",
+    "n_cells_le500m": 7,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "meadows",
+    "n_cells_le500m": 6,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "carr",
+    "n_cells_le500m": 26,
+    "n_flooded_le500m": 0,
+    "n_settlements": 5,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "banks",
+    "n_cells_le500m": 18,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": true
+   },
+   {
+    "category": "wet",
+    "form": "lagunilla",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "sabbioni",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "padule",
+    "n_cells_le500m": 14,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "pozza",
+    "n_cells_le500m": 4,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "lame",
+    "n_cells_le500m": 6,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "lama",
+    "n_cells_le500m": 12,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "bonifica",
+    "n_cells_le500m": 3,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": true
+   },
+   {
+    "category": "wet",
+    "form": "blato",
+    "n_cells_le500m": 10,
+    "n_flooded_le500m": 0,
+    "n_settlements": 2,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "lay",
+    "n_cells_le500m": 9,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "vegas",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "swamp",
+    "n_cells_le500m": 5,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "kacha",
+    "n_cells_le500m": 6,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "isolotto",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "mokra",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "ings",
+    "n_cells_le500m": 13,
+    "n_flooded_le500m": 0,
+    "n_settlements": 3,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "sablons",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "riverine",
+    "form": "digue",
+    "n_cells_le500m": 3,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": true
+   },
+   {
+    "category": "riverine",
+    "form": "mead",
+    "n_cells_le500m": 2,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "slough",
+    "n_cells_le500m": 5,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   },
+   {
+    "category": "wet",
+    "form": "moss",
+    "n_cells_le500m": 1,
+    "n_flooded_le500m": 0,
+    "n_settlements": 1,
+    "excluded_in_reread": false
+   }
+  ]
+ },
+ "B3": {
+  "pairs": {
+   "se_log_or": 0.1342038745393804,
+   "mde_or_up": 1.4561134252682788,
+   "mde_or_down": 0.6867596868806816
+  },
+  "sandwich": {
+   "se_log_or": 0.13660610206516002,
+   "mde_or_up": 1.465940602281508,
+   "mde_or_down": 0.682155878924191
+  },
+  "point_log_or": 0.009123513365990345,
+  "rule": "MDE = exp(\u00b12.80 \u00d7 SE): two-sided 5 %, 80 % power"
+ },
+ "B4": {
+  "odds_ratio": 1.0091652594745366,
+  "jackknife_cv3": {
+   "se_log_or": 0.14762566391217627,
+   "t_quantile": 1.9723316757957499,
+   "n_groups": 194,
+   "n_failed": 0,
+   "ci95": [
+    0.7542410555641429,
+    1.3502507101904904
+   ]
+  },
+  "wild_score_bootstrap": {
+   "ci95": [
+    0.7557837414557255,
+    1.2969300866657718
+   ],
+   "p_at_zero": 0.953,
+   "grid_step_log_or": 0.02,
+   "grid": [
+    -0.8,
+    0.8
+   ],
+   "accepted_contiguous": true,
+   "draws": 2000,
+   "weights": "Rademacher",
+   "at_grid_edge": 0.0
+  }
+ },
+ "B5": {
+  "rows": [
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.6,
+    "p0": 0.05,
+    "or_corrected": 1.0166780043389103
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.6,
+    "p0": 0.1,
+    "or_corrected": 1.0183641814466726
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.6,
+    "p0": 0.2,
+    "or_corrected": 1.0230186345656131
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.6,
+    "p0": 0.3,
+    "or_corrected": 1.0308334615911026
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.7,
+    "p0": 0.05,
+    "or_corrected": 1.0141103472680553
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.7,
+    "p0": 0.1,
+    "or_corrected": 1.0152988020392846
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.7,
+    "p0": 0.2,
+    "or_corrected": 1.018397967808581
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.7,
+    "p0": 0.3,
+    "or_corrected": 1.0230717425667066
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.8,
+    "p0": 0.05,
+    "or_corrected": 1.0122278173739847
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.8,
+    "p0": 0.1,
+    "or_corrected": 1.013110393557734
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.8,
+    "p0": 0.2,
+    "or_corrected": 1.0153222432358906
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.8,
+    "p0": 0.3,
+    "or_corrected": 1.0184318787197146
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.9,
+    "p0": 0.05,
+    "or_corrected": 1.0107884746270601
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.9,
+    "p0": 0.1,
+    "or_corrected": 1.0114697147070946
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.9,
+    "p0": 0.2,
+    "or_corrected": 1.0131276043637016
+   },
+   {
+    "or_obs": "point",
+    "or_obs_value": 1.0091652594745366,
+    "p1": 0.9,
+    "p0": 0.3,
+    "or_corrected": 1.0153457563770754
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.6,
+    "p0": 0.05,
+    "or_corrected": 0.5978523318451425
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.6,
+    "p0": 0.1,
+    "or_corrected": 0.5680597899254841
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.6,
+    "p0": 0.2,
+    "or_corrected": 0.49292842763065947
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.6,
+    "p0": 0.3,
+    "or_corrected": 0.38615703378728117
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.7,
+    "p0": 0.05,
+    "or_corrected": 0.6586653042384988
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.7,
+    "p0": 0.1,
+    "or_corrected": 0.6374397524463535
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.7,
+    "p0": 0.2,
+    "or_corrected": 0.5859445113983928
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.7,
+    "p0": 0.3,
+    "or_corrected": 0.517399716108533
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.8,
+    "p0": 0.05,
+    "or_corrected": 0.7035018964068067
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.8,
+    "p0": 0.1,
+    "or_corrected": 0.6876161023358907
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.8,
+    "p0": 0.2,
+    "or_corrected": 0.6501248350867364
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.8,
+    "p0": 0.3,
+    "or_corrected": 0.6024070650912131
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.9,
+    "p0": 0.05,
+    "or_corrected": 0.7379269429211426
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.9,
+    "p0": 0.1,
+    "or_corrected": 0.7255925838162114
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.9,
+    "p0": 0.2,
+    "or_corrected": 0.6970788706432192
+   },
+   {
+    "or_obs": "pairs_lo",
+    "or_obs_value": 0.7742801468855162,
+    "p1": 0.9,
+    "p0": 0.3,
+    "or_corrected": 0.6619522850871062
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.6,
+    "p0": 0.05,
+    "or_corrected": 1.5663098847564796
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.6,
+    "p0": 0.1,
+    "or_corrected": 1.6448520382397605
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.6,
+    "p0": 0.2,
+    "or_corrected": 1.8923833290987802
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.6,
+    "p0": 0.3,
+    "or_corrected": 2.448339188059287
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.7,
+    "p0": 0.05,
+    "or_corrected": 1.477106899767607
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.7,
+    "p0": 0.1,
+    "or_corrected": 1.5316626362886891
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.7,
+    "p0": 0.2,
+    "or_corrected": 1.6893018056749438
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.7,
+    "p0": 0.3,
+    "or_corrected": 1.979820914015781
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.8,
+    "p0": 0.05,
+    "or_corrected": 1.4121816151815227
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.8,
+    "p0": 0.1,
+    "or_corrected": 1.4522757154020192
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.8,
+    "p0": 0.2,
+    "or_corrected": 1.561516363291361
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.8,
+    "p0": 0.3,
+    "or_corrected": 1.740333099933449
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.9,
+    "p0": 0.05,
+    "or_corrected": 1.3628099921685435
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.9,
+    "p0": 0.1,
+    "or_corrected": 1.3935165263706815
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.9,
+    "p0": 0.2,
+    "or_corrected": 1.4737000168004566
+   },
+   {
+    "or_obs": "pairs_hi",
+    "or_obs_value": 1.302893847619132,
+    "p1": 0.9,
+    "p0": 0.3,
+    "or_corrected": 1.5949222193991863
+   }
+  ],
+  "formula": "OR = (OR*(1 - p0) - (1 - p1)) / (p1 - OR* p0); undefined when not positive"
+ },
+ "B7": {
+  "sensor": {
+   "s1": {
+    "R": {
+     "R": -0.01773990289181924,
+     "ci95": [
+      -0.28933536348779726,
+      0.014541444874796458
+     ],
+     "ci90": [
+      -0.1557417304298295,
+      0.010431397557960818
+     ],
+     "share_boot_yardstick_nonpositive": 0.01975,
+     "yardstick": 0.00453756976507433,
+     "delta_bs": -8.049604699727365e-05,
+     "n_cells": 461048,
+     "n_aoi": 160,
+     "n_units": 77,
+     "replicates": 4000
+    },
+    "or_le500m": {
+     "odds_ratio": 0.8984640359999659,
+     "ci95": [
+      0.6195397891199476,
+      1.302963325619528
+     ],
+     "n_cells": 455698,
+     "n_aoi": 152,
+     "n_units": 77,
+     "n_group_cells": 3278,
+     "n_group_flooded": 45.0,
+     "n_group_units": 56,
+     "pairs_ci95": [
+      0.6063111918104829,
+      1.295526254761467
+     ],
+     "pairs_log_or_sd": 0.19173499710204367,
+     "pairs_reps_ok": 2000,
+     "n_flooded_near": 45
+    }
+   },
+   "sar": {
+    "R": {
+     "R": -0.0006324323055751841,
+     "ci95": [
+      -0.011253008355228541,
+      0.03227711471283132
+     ],
+     "ci90": [
+      -0.008472314538043013,
+      0.018580788314835693
+     ],
+     "share_boot_yardstick_nonpositive": 0.01075,
+     "yardstick": 0.006474084577366026,
+     "delta_bs": -4.094420235752338e-06,
+     "n_cells": 378210,
+     "n_aoi": 132,
+     "n_units": 70,
+     "replicates": 4000
+    },
+    "or_le500m": {
+     "odds_ratio": 1.437277972682949,
+     "ci95": [
+      0.845858797521222,
+      2.442213732142189
+     ],
+     "n_cells": 376841,
+     "n_aoi": 126,
+     "n_units": 69,
+     "n_group_cells": 1913,
+     "n_group_flooded": 86.0,
+     "n_group_units": 43,
+     "pairs_ci95": [
+      0.8692464166894787,
+      2.4230036975864206
+     ],
+     "pairs_log_or_sd": 0.269012618819661,
+     "pairs_reps_ok": 2000,
+     "n_flooded_near": 86
+    }
+   },
+   "optical": {
+    "R": {
+     "R": 0.0032646391470144815,
+     "ci95": [
+      -0.0031973443427575016,
+      0.04005413427730867
+     ],
+     "ci90": [
+      -0.001612298947961865,
+      0.025795540638077055
+     ],
+     "share_boot_yardstick_nonpositive": 0.004,
+     "yardstick": 0.02193548712583584,
+     "delta_bs": 7.161144997983585e-05,
+     "n_cells": 174932,
+     "n_aoi": 56,
+     "n_units": 37,
+     "replicates": 4000
+    },
+    "or_le500m": {
+     "odds_ratio": 0.56969867142223,
+     "ci95": [
+      0.45975609865869466,
+      0.7059320739129386
+     ],
+     "n_cells": 174594,
+     "n_aoi": 55,
+     "n_units": 36,
+     "n_group_cells": 632,
+     "n_group_flooded": 43.0,
+     "n_group_units": 18,
+     "pairs_ci95": [
+      0.4359038819982535,
+      0.9073312462879036
+     ],
+     "pairs_log_or_sd": 1.5560430872986486,
+     "pairs_reps_ok": 2000,
+     "n_flooded_near": 43
+    }
+   },
+   "none": {
+    "R": {
+     "R": -0.006630612556846463,
+     "ci95": [
+      -0.017808697674694642,
+      0.002689894445266053
+     ],
+     "ci90": [
+      -0.015886059300633772,
+      0.001276165711253198
+     ],
+     "share_boot_yardstick_nonpositive": 0.0,
+     "yardstick": 0.006100146658492882,
+     "delta_bs": -4.0447709032407894e-05,
+     "n_cells": 493296,
+     "n_aoi": 152,
+     "n_units": 65,
+     "replicates": 4000
+    },
+    "or_le500m": {
+     "odds_ratio": 1.0228318993669165,
+     "ci95": [
+      0.6453645034812678,
+      1.6210762890105255
+     ],
+     "n_cells": 482248,
+     "n_aoi": 146,
+     "n_units": 64,
+     "n_group_cells": 4225,
+     "n_group_flooded": 187.0,
+     "n_group_units": 53,
+     "pairs_ci95": [
+      0.6235350978490586,
+      1.5982077833017643
+     ],
+     "pairs_log_or_sd": 0.24931053354187238,
+     "pairs_reps_ok": 2000,
+     "n_flooded_near": 187
+    }
+   }
+  },
+  "generation": {
+   "0": {
+    "R": {
+     "R": -0.0017291502724925667,
+     "ci95": [
+      -0.10675182575019095,
+      0.024853381420945668
+     ],
+     "ci90": [
+      -0.05387384050524747,
+      0.019034278814959577
+     ],
+     "share_boot_yardstick_nonpositive": 0.0565,
+     "yardstick": 0.010616454792919798,
+     "delta_bs": -1.8357445698082286e-05,
+     "n_cells": 72631,
+     "n_aoi": 31,
+     "n_units": 12,
+     "replicates": 4000
+    },
+    "or_le500m": {
+     "odds_ratio": 0.9328598246737494,
+     "ci95": [
+      0.2753115307847039,
+      3.160882691727373
+     ],
+     "n_cells": 72607,
+     "n_aoi": 30,
+     "n_units": 12,
+     "n_group_cells": 597,
+     "n_group_flooded": 25.0,
+     "n_group_units": 10,
+     "pairs_ci95": [
+      3.7493369534479224e-22,
+      1.9461825811078421
+     ],
+     "pairs_log_or_sd": 15.618325561059436,
+     "pairs_reps_ok": 2000,
+     "n_flooded_near": 25
+    }
+   },
+   "1": {
+    "R": {
+     "R": -0.010606957480185471,
+     "ci95": [
+      -0.022633055070020364,
+      0.0013594290566402666
+     ],
+     "ci90": [
+      -0.020388112959163585,
+      -0.0007216064056245836
+     ],
+     "share_boot_yardstick_nonpositive": 0.0,
+     "yardstick": 0.00463601593812112,
+     "delta_bs": -4.917402393311288e-05,
+     "n_cells": 400665,
+     "n_aoi": 119,
+     "n_units": 56,
+     "replicates": 4000
+    },
+    "or_le500m": {
+     "odds_ratio": 1.1371178048816186,
+     "ci95": [
+      0.6143135690579775,
+      2.1048483499422055
+     ],
+     "n_cells": 389641,
+     "n_aoi": 114,
+     "n_units": 54,
+     "n_group_cells": 3549,
+     "n_group_flooded": 122.0,
+     "n_group_units": 44,
+     "pairs_ci95": [
+      0.5527844438535597,
+      1.86772589049033
+     ],
+     "pairs_log_or_sd": 0.33573974902563214,
+     "pairs_reps_ok": 2000,
+     "n_flooded_near": 122
+    }
+   },
+   "2": {
+    "R": {
+     "R": 0.0011756533665031384,
+     "ci95": [
+      -0.005507162587966838,
+      0.009349375725712882
+     ],
+     "ci90": [
+      -0.0032641786926046836,
+      0.006697949244762524
+     ],
+     "share_boot_yardstick_nonpositive": 0.00375,
+     "yardstick": 0.00817557169048247,
+     "delta_bs": 9.611638381003468e-06,
+     "n_cells": 191752,
+     "n_aoi": 61,
+     "n_units": 28,
+     "replicates": 4000
+    },
+    "or_le500m": {
+     "n_flooded_near": 4,
+     "note": "too few flooded water-side cells within 500 m"
+    }
+   },
+   "3": {
+    "R": {
+     "R": -0.0037400967657207785,
+     "ci95": [
+      -0.03700950748617887,
+      0.009950806713943152
+     ],
+     "ci90": [
+      -0.025441503196776016,
+      0.007169479265043318
+     ],
+     "share_boot_yardstick_nonpositive": 0.00025,
+     "yardstick": 0.008535633834528775,
+     "delta_bs": -3.192409649789792e-05,
+     "n_cells": 842438,
+     "n_aoi": 289,
+     "n_units": 132,
+     "replicates": 4000
+    },
+    "or_le500m": {
+     "odds_ratio": 1.0191080085063888,
+     "ci95": [
+      0.7768747368484071,
+      1.336870776896582
+     ],
+     "n_cells": 839599,
+     "n_aoi": 278,
+     "n_units": 132,
+     "n_group_cells": 5304,
+     "n_group_flooded": 210.0,
+     "n_group_units": 82,
+     "pairs_ci95": [
+      0.7970908822958097,
+      1.3609689985325428
+     ],
+     "pairs_log_or_sd": 0.13945371625758285,
+     "pairs_reps_ok": 2000,
+     "n_flooded_near": 210
+    }
+   }
+  },
+  "rule": "sensor from the EMS source table (gfm_summary sensor: s1, sar, optical, none); generation from meta"
+ },
+ "B8": {
+  "n_aoi_africa": 40,
+  "without_africa": {
+   "R": -0.004755486017438295,
+   "ci95": [
+    -0.025438979793549088,
+    0.005434556433142872
+   ],
+   "ci90": [
+    -0.020013647997282297,
+    0.003791055886467202
+   ],
+   "share_boot_yardstick_nonpositive": 0.0,
+   "yardstick": 0.006584660843694702,
+   "delta_bs": -3.1313262571763604e-05,
+   "n_cells": 1363221,
+   "n_aoi": 460,
+   "n_units": 177,
+   "replicates": 4000
+  },
+  "all": {
+   "R": -0.0040473048988435845,
+   "ci95": [
+    -0.020194429839248,
+    0.0037429396100650543
+   ],
+   "ci90": [
+    -0.015468239139666082,
+    0.002748802709227551
+   ],
+   "share_boot_yardstick_nonpositive": 0.0,
+   "yardstick": 0.0075536340456880974,
+   "delta_bs": -3.057186007718512e-05,
+   "n_cells": 1507486,
+   "n_aoi": 500,
+   "n_units": 195,
+   "replicates": 4000
+  },
+  "rule": "AOI continent from the majority country of its cells' nearest settlements"
+ },
+ "B9": {
+  "actfix_yardsticks": {
+   "n_cells": 1507486,
+   "n_units": 106,
+   "recal": {
+    "available": true,
+    "own": true
+   },
+   "two_way_axes": {
+    "n_activations": 188,
+    "n_countries": 57
+   },
+   "brier": {
+    "M0": 0.058336451617217115,
+    "M0c": 0.052266627369684376,
+    "M0s": 0.05278739551244861,
+    "M1": 0.04880810647807985,
+    "M1c": 0.05187345644245546,
+    "M1s": 0.04767158077887959,
+    "M3n": 0.05183751035321842,
+    "M3np": 0.05159376870426227,
+    "M3ps": 0.048278872515344046,
+    "M3s": 0.04797817104382038,
+    "const": 0.052418532763553134
+   },
+   "cluster": {
+    "yardsticks": {
+     "Y0": 0.009528345139137265,
+     "Y1": 0.003943894719625737,
+     "Y2": 0.005115814733569021,
+     "Y3": 0.004746951984673543,
+     "Y4": 0.0003931709272289169
+    },
+    "primary": {
+     "delta_bs": 3.5946089237036405e-05,
+     "ci90_delta": [
+      -3.335480098067798e-05,
+      0.00013033868701192887
+     ],
+     "ci95_delta": [
+      -4.2506785756544e-05,
+      0.00015219686387210173
+     ],
+     "smallest_yardstick_for_equivalence": 0.002606773740238577,
+     "ci95_R_ratio_bootstrap": [
+      -0.004562044828691793,
+      0.01348714996284404
+     ],
+     "Y0": {
+      "margin": 0.00047641725695686326,
+      "R": 0.0037725427356099226,
+      "ci90_R": [
+       -0.003500586984792835,
+       0.013679047631951153
+      ],
+      "equivalent": true
+     },
+     "Y1": {
+      "margin": 0.00019719473598128688,
+      "R": 0.009114363286159822,
+      "ci90_R": [
+       -0.008457325398342085,
+       0.033048216617784766
+      ],
+      "equivalent": true
+     },
+     "Y3": {
+      "margin": 0.00023734759923367717,
+      "R": 0.0075724568845641025,
+      "ci90_R": [
+       -0.007026572227477851,
+       0.027457342613271134
+      ],
+      "equivalent": true
+     },
+     "Y4": {
+      "margin": 1.9658546361445846e-05,
+      "R": 0.09142611202304748,
+      "ci90_R": [
+       -0.08483536973540705,
+       0.33150642121623974
+      ],
+      "equivalent": false
+     },
+     "Y2": {
+      "margin": 0.0002557907366784511,
+      "R": 0.00702646423084184,
+      "ci90_R": [
+       -0.006519939192052833,
+       0.025477601086034397
+      ],
+      "equivalent": true
+     },
+     "p_TOST_Y0": 0.0,
+     "p_superiority": 0.27425,
+     "decision_Y0": "equivalent-null",
+     "R_minus_Rp_Y0": -0.025580690602294953,
+     "ci95_R_minus_Rp_Y0": [
+      -0.10035695056101826,
+      0.017831619741665115
+     ]
+    },
+    "total": {
+     "delta_bs": -0.000306590264940787,
+     "ci90_delta": [
+      -0.0012925055888913667,
+      0.000583203118093827
+     ],
+     "ci95_delta": [
+      -0.0015199692422710935,
+      0.0007312739185933914
+     ],
+     "smallest_yardstick_for_equivalence": 0.025850111777827332,
+     "ci95_R_ratio_bootstrap": [
+      -0.1452033253537859,
+      0.09251433300234789
+     ],
+     "Y0": {
+      "margin": 0.00047641725695686326,
+      "R": -0.03217665402163916,
+      "ci90_R": [
+       -0.13564848565176926,
+       0.06120717811725201
+      ],
+      "equivalent": false
+     },
+     "Y1": {
+      "margin": 0.00019719473598128688,
+      "R": -0.07773794351434447,
+      "ci90_R": [
+       -0.32772314698451716,
+       0.14787492049208936
+      ],
+      "equivalent": false
+     },
+     "Y3": {
+      "margin": 0.00023734759923367717,
+      "R": -0.06458676344961424,
+      "ci90_R": [
+       -0.2722811591658125,
+       0.12285844052706063
+      ],
+      "equivalent": false
+     },
+     "Y4": {
+      "margin": 1.9658546361445846e-05,
+      "R": -0.7797887476107311,
+      "ci90_R": [
+       -3.287388510643433,
+       1.4833322550175922
+      ],
+      "equivalent": false
+     },
+     "Y2": {
+      "margin": 0.0002557907366784511,
+      "R": -0.059929899909978934,
+      "ci90_R": [
+       -0.2526490219456514,
+       0.11400004661368149
+      ],
+      "equivalent": false
+     },
+     "p_TOST_Y0": 0.3595,
+     "p_superiority": 0.69125
+    },
+    "placebo": {
+     "delta_bs": 0.0002796877381931878,
+     "ci90_delta": [
+      -0.00016646742044645023,
+      0.0009617737667455226
+     ],
+     "ci95_delta": [
+      -0.00019774198597289765,
+      0.0011010907352167248
+     ],
+     "smallest_yardstick_for_equivalence": 0.019235475334910452,
+     "ci95_R_ratio_bootstrap": [
+      -0.02186521773982159,
+      0.09400997754648786
+     ],
+     "Y0": {
+      "margin": 0.00047641725695686326,
+      "R": 0.029353233337904874,
+      "ci90_R": [
+       -0.01747075887949236,
+       0.10093817475136145
+      ],
+      "equivalent": false
+     },
+     "Y1": {
+      "margin": 0.00019719473598128688,
+      "R": 0.07091663395612377,
+      "ci90_R": [
+       -0.0422088905208523,
+       0.2438639555867231
+      ],
+      "equivalent": false
+     },
+     "Y3": {
+      "margin": 0.00023734759923367717,
+      "R": 0.05891943695580112,
+      "ci90_R": [
+       -0.03506827559746183,
+       0.2026086991928286
+      ],
+      "equivalent": false
+     },
+     "Y4": {
+      "margin": 1.9658546361445846e-05,
+      "R": 0.7113642409026457,
+      "ci90_R": [
+       -0.4233970747016284,
+       2.4461975699071634
+      ],
+      "equivalent": false
+     },
+     "Y2": {
+      "margin": 0.0002557907366784511,
+      "R": 0.05467120151125276,
+      "ci90_R": [
+       -0.03253976719565744,
+       0.1880001166646131
+      ],
+      "equivalent": false
+     },
+     "p_TOST_Y0": 0.25,
+     "p_superiority": 0.28675
+    },
+    "composition": {
+     "M0->M0c": {
+      "delta_bs": 0.006069824247532739,
+      "ci95_delta": [
+       0.0004902398571589282,
+       0.01383524297680751
+      ],
+      "relative_to_Y0": 0.6370281679450505,
+      "relative_to_Y2": 1.1864824204253694
+     },
+     "M0s->M0c": {
+      "delta_bs": 0.0005207681427642358,
+      "ci95_delta": [
+       -0.006002017355630779,
+       0.007310186989949763
+      ],
+      "relative_to_Y0": 0.05465462629236668,
+      "relative_to_Y2": 0.10179573926847907
+     },
+     "M1s->M1c": {
+      "delta_bs": -0.004201875663575869,
+      "ci95_delta": [
+       -0.01140306631222664,
+       0.0012116631748234818
+      ],
+      "relative_to_Y0": -0.44098692923253235,
+      "relative_to_Y2": -0.8213502408529271
+     }
+    }
+   },
+   "two_way": {
+    "yardsticks": {
+     "Y0": 0.009528345139137265,
+     "Y1": 0.0017207775708133184,
+     "Y2": 0.005115814733569021,
+     "Y3": 0.004746951984673543,
+     "Y4": 0.0003931709272289169
+    },
+    "primary": {
+     "delta_bs": 3.5946089237036405e-05,
+     "ci90_delta": [
+      -6.210798300054151e-05,
+      0.0001999252410930126
+     ],
+     "ci95_delta": [
+      -8.246603918329736e-05,
+      0.000258836692463136
+     ],
+     "smallest_yardstick_for_equivalence": 0.003998504821860252,
+     "ci95_R_ratio_bootstrap": [
+      -0.007065481480571284,
+      0.020429315237301324
+     ],
+     "Y0": {
+      "margin": 0.00047641725695686326,
+      "R": 0.0037725427356099226,
+      "ci90_R": [
+       -0.006518233973855089,
+       0.02098215778014047
+      ],
+      "equivalent": true
+     },
+     "Y1": {
+      "margin": 8.603887854066592e-05,
+      "R": 0.02088944547321513,
+      "ci90_R": [
+       -0.036092975672147115,
+       0.11618308169749025
+      ],
+      "equivalent": false
+     },
+     "Y3": {
+      "margin": 0.00023734759923367717,
+      "R": 0.0075724568845641025,
+      "ci90_R": [
+       -0.013083760526980091,
+       0.04211655010173056
+      ],
+      "equivalent": true
+     },
+     "Y4": {
+      "margin": 1.9658546361445846e-05,
+      "R": 0.09142611202304748,
+      "ci90_R": [
+       -0.15796687572573298,
+       0.5084944670301363
+      ],
+      "equivalent": false
+     },
+     "Y2": {
+      "margin": 0.0002557907366784511,
+      "R": 0.00702646423084184,
+      "ci90_R": [
+       -0.012140389407184846,
+       0.039079843877289085
+      ],
+      "equivalent": true
+     },
+     "decision_Y0": "equivalent-null",
+     "R_minus_Rp_Y0": -0.025580690602294953,
+     "ci95_R_minus_Rp_Y0": [
+      -0.17237533503538208,
+      0.0324335607050426
+     ]
+    },
+    "total": {
+     "delta_bs": -0.000306590264940787,
+     "ci90_delta": [
+      -0.0016615646541058647,
+      0.0008038475959131447
+     ],
+     "ci95_delta": [
+      -0.002193023819541713,
+      0.0011048797395293072
+     ],
+     "smallest_yardstick_for_equivalence": 0.033231293082117294,
+     "ci95_R_ratio_bootstrap": [
+      -0.30269730077087187,
+      0.15487615724880838
+     ],
+     "Y0": {
+      "margin": 0.00047641725695686326,
+      "R": -0.03217665402163916,
+      "ci90_R": [
+       -0.17438124142680977,
+       0.08436382017810999
+      ],
+      "equivalent": false
+     },
+     "Y1": {
+      "margin": 8.603887854066592e-05,
+      "R": -0.17816960782204894,
+      "ci90_R": [
+       -0.965589441824566,
+       0.467142069694231
+      ],
+      "equivalent": false
+     },
+     "Y3": {
+      "margin": 0.00023734759923367717,
+      "R": -0.06458676344961424,
+      "ci90_R": [
+       -0.3500276934484589,
+       0.16933973600502444
+      ],
+      "equivalent": false
+     },
+     "Y4": {
+      "margin": 1.9658546361445846e-05,
+      "R": -0.7797887476107311,
+      "ci90_R": [
+       -4.22606184495032,
+       2.0445245063735817
+      ],
+      "equivalent": false
+     },
+     "Y2": {
+      "margin": 0.0002557907366784511,
+      "R": -0.059929899909978934,
+      "ci90_R": [
+       -0.32478984103997893,
+       0.15712992705510753
+      ],
+      "equivalent": false
+     }
+    },
+    "placebo": {
+     "delta_bs": 0.0002796877381931878,
+     "ci90_delta": [
+      -0.0002882102624256859,
+      0.0014620612365589072
+     ],
+     "ci95_delta": [
+      -0.00036912150483920655,
+      0.001916433745902705
+     ],
+     "smallest_yardstick_for_equivalence": 0.029241224731178142,
+     "ci95_R_ratio_bootstrap": [
+      -0.03261942466443877,
+      0.13161923312517856
+     ],
+     "Y0": {
+      "margin": 0.00047641725695686326,
+      "R": 0.029353233337904874,
+      "ci90_R": [
+       -0.030247672415000454,
+       0.15344335403569231
+      ],
+      "equivalent": false
+     },
+     "Y1": {
+      "margin": 8.603887854066592e-05,
+      "R": 0.1625356716272136,
+      "ci90_R": [
+       -0.16748838857160633,
+       0.8496514955549251
+      ],
+      "equivalent": false
+     },
+     "Y3": {
+      "margin": 0.00023734759923367717,
+      "R": 0.05891943695580112,
+      "ci90_R": [
+       -0.06071480464858897,
+       0.30800000532540794
+      ],
+      "equivalent": false
+     },
+     "Y4": {
+      "margin": 1.9658546361445846e-05,
+      "R": 0.7113642409026457,
+      "ci90_R": [
+       -0.7330406255035243,
+       3.7186402536514294
+      ],
+      "equivalent": false
+     },
+     "Y2": {
+      "margin": 0.0002557907366784511,
+      "R": 0.05467120151125276,
+      "ci90_R": [
+       -0.05633711880426474,
+       0.28579245197546627
+      ],
+      "equivalent": false
+     }
+    },
+    "composition": {
+     "M0->M0c": {
+      "delta_bs": 0.006069824247532739,
+      "ci95_delta": [
+       -0.00046412769843251034,
+       0.020916355459928555
+      ],
+      "relative_to_Y0": 0.6370281679450505,
+      "relative_to_Y2": 1.1864824204253694
+     },
+     "M0s->M0c": {
+      "delta_bs": 0.0005207681427642358,
+      "ci95_delta": [
+       -0.00952411475309947,
+       0.009920831485401497
+      ],
+      "relative_to_Y0": 0.05465462629236668,
+      "relative_to_Y2": 0.10179573926847907
+     },
+     "M1s->M1c": {
+      "delta_bs": -0.004201875663575869,
+      "ci95_delta": [
+       -0.016415788747207644,
+       0.0022861165143444346
+      ],
+      "relative_to_Y0": -0.44098692923253235,
+      "relative_to_Y2": -0.8213502408529271
+     }
+    }
+   },
+   "strata": {
+    "built_up_gt_10pct": {
+     "n_cells": 100180,
+     "n_units": 103,
+     "wet_rate": 0.012916749850269514,
+     "delta_bs_names": -1.4434377415845773e-05,
+     "ci90_delta": [
+      -3.963631448571803e-05,
+      7.559349283806428e-06
+     ],
+     "yardstick_Y0": 0.0036755739473685357,
+     "R": -0.0039271084251154345,
+     "ci90_R": [
+      -0.010783707538817161,
+      0.002056644592667878
+     ]
+    },
+    "not_built_up_gt_10pct": {
+     "n_cells": 1407306,
+     "n_units": 106,
+     "wet_rate": 0.058329176454871935,
+     "delta_bs_names": 3.9532455776584985e-05,
+     "ci90_delta": [
+      -3.474214961905718e-05,
+      0.00014141791160384405
+     ],
+     "yardstick_Y0": 0.009944978492503566,
+     "R": 0.0039751172721373094,
+     "ci90_R": [
+      -0.0034934363754778853,
+      0.014220031919671177
+     ]
+    },
+    "continent_AF": {
+     "n_cells": 144265,
+     "n_units": 10,
+     "wet_rate": 0.07521574879561917,
+     "delta_bs_names": -3.1544234259092696e-05,
+     "ci90_delta": [
+      -0.00010032462741308562,
+      3.429842823938898e-05
+     ],
+     "yardstick_Y0": 0.00826740467815193,
+     "R": -0.0038154941589413037,
+     "ci90_R": [
+      -0.012134960283027041,
+      0.004148633044421862
+     ]
+    },
+    "continent_AS": {
+     "n_cells": 196090,
+     "n_units": 13,
+     "wet_rate": 0.1565097659238105,
+     "delta_bs_names": 0.0002911503624673517,
+     "ci90_delta": [
+      -0.0001995097002712845,
+      0.0010867979033892833
+     ],
+     "yardstick_Y0": 0.04424850420760354,
+     "R": 0.006579891629812907,
+     "ci90_R": [
+      -0.004508846204952648,
+      0.024561234845143783
+     ]
+    },
+    "continent_EU": {
+     "n_cells": 824854,
+     "n_units": 67,
+     "wet_rate": 0.022810097302068004,
+     "delta_bs_names": -9.087137149366153e-06,
+     "ci90_delta": [
+      -2.428249107584504e-05,
+      6.521819207445585e-06
+     ],
+     "yardstick_Y0": 0.002587521317484444,
+     "R": -0.0035119081292055037,
+     "ci90_R": [
+      -0.009384460298650671,
+      0.0025204890732208603
+     ]
+    },
+    "continent_NA": {
+     "n_cells": 85031,
+     "n_units": 5,
+     "wet_rate": 0.04530112547188672,
+     "delta_bs_names": -1.1191563925205816e-05,
+     "ci90_delta": [
+      -0.00010836632858779449,
+      2.0185077942012908e-05
+     ],
+     "yardstick_Y0": 0.0021830539988654182,
+     "R": -0.0051265630309751025,
+     "ci90_R": [
+      -0.04963978382766294,
+      0.009246256827592695
+     ]
+    },
+    "continent_OC": {
+     "n_cells": 150806,
+     "n_units": 6,
+     "wet_rate": 0.08756282906515656,
+     "delta_bs_names": 9.274575402901108e-05,
+     "ci90_delta": [
+      -7.522894899480992e-05,
+      0.00015359961482304396
+     ],
+     "yardstick_Y0": 0.009863312859953705,
+     "R": 0.009403103738660724,
+     "ci90_R": [
+      -0.0076271482069933064,
+      0.015572821931531523
+     ]
+    },
+    "continent_SA": {
+     "n_cells": 106440,
+     "n_units": 6,
+     "wet_rate": 0.05606914693724164,
+     "delta_bs_names": -3.656655604127729e-05,
+     "ci90_delta": [
+      -5.329040268522989e-05,
+      -1.2684025446921265e-05
+     ],
+     "yardstick_Y0": 0.006454897049106519,
+     "R": -0.005664932494367017,
+     "ci90_R": [
+      -0.00825580985720079,
+      -0.0019650236634954506
+     ]
+    },
+    "language_??": {
+     "n_cells": 1507486,
+     "n_units": 106,
+     "wet_rate": 0.05531129310653631,
+     "delta_bs_names": 3.5946089237036405e-05,
+     "ci90_delta": [
+      -3.335480098067798e-05,
+      0.00013033868701192887
+     ],
+     "yardstick_Y0": 0.009528345139137265,
+     "R": 0.0037725427356099226,
+     "ci90_R": [
+      -0.003500586984792835,
+      0.013679047631951153
+     ]
+    },
+    "split": "primary"
+   }
+  },
+  "brier_by_split": {
+   "main": {
+    "run": "world_v2_lexfix",
+    "split": "primary",
+    "code": "corrected",
+    "n_cells": 1507486,
+    "brier": {
+     "M0": 0.051293577246367815,
+     "M1": 0.043739943200679525,
+     "M1s": 0.0433721481713074,
+     "M1c": 0.04304689511310843,
+     "M3n": 0.043077466973185596
+    }
+   },
+   "country": {
+    "run": "world_v2",
+    "split": "country",
+    "code": "frozen",
+    "n_cells": 1507486,
+    "brier": {
+     "M0": 0.056511596130988585,
+     "M1": 0.049443526522231954,
+     "M1s": 0.04789036374730194,
+     "M1c": 0.04849176682244954,
+     "M3n": 0.04848197275225355
+    }
+   },
+   "time": {
+    "run": "world_v2",
+    "split": "temporal",
+    "code": "frozen",
+    "n_cells": 356983,
+    "brier": {
+     "M0": 0.04953956937677542,
+     "M1": 0.047230219943015087,
+     "M1s": 0.046047939272034565,
+     "M1c": 0.04676630874357509,
+     "M3n": 0.04676906003651999
+    }
+   },
+   "cutoff": {
+    "run": "world_v2_lexfix",
+    "split": "llmcut",
+    "code": "corrected",
+    "n_cells": 268762,
+    "brier": {
+     "M0": 0.06111851332372824,
+     "M1": 0.04989492888592813,
+     "M1s": 0.04940540233568582,
+     "M1c": 0.049876940214544446,
+     "M3n": 0.04991426659608762
+    }
+   },
+   "activation_merged": {
+    "run": "world_v2_b7actfix",
+    "split": "primary",
+    "code": "corrected",
+    "n_cells": 1507486,
+    "brier": {
+     "M0": 0.05833645161721622,
+     "M1": 0.04880810647807932,
+     "M1s": 0.04767158077887897,
+     "M1c": 0.05187345644245475,
+     "M3n": 0.05183751035321759
+    }
+   },
+   "activation_merged_frozen": {
+    "run": "world_v2_actgrp",
+    "split": "primary",
+    "code": "frozen",
+    "n_cells": 1507486,
+    "brier": {
+     "M0": 0.05833645161721622,
+     "M1": 0.04880810647807932,
+     "M1s": 0.04767158077887897,
+     "M1c": 0.05176487372663546,
+     "M3n": 0.05159028266369102
+    }
+   }
+  }
+ },
+ "B10": {
+  "R_within": 0.011160575039183433,
+  "ci90_R": [
+   0.003858000769236262,
+   0.019011195916754063
+  ],
+  "ci95_R": [
+   0.0026429259148268015,
+   0.02111602481609376
+  ],
+  "yardstick_within": 0.00852074255228996,
+  "delta_bs_within": 9.509638664440329e-05,
+  "ci95_delta_bs": [
+   1.933203727239317e-05,
+   0.00017585578506007992
+  ],
+  "n_aoi_inner": 182,
+  "replicates": 4000,
+  "run": "world_v2_gfm (labels: GFM, refitted)",
+  "placebo": {
+   "run": "world_v2_gfm",
+   "seed": 20261030,
+   "replicates": 4000,
+   "R": 0.011160575039184353,
+   "ci90_R": [
+    0.0038580007692363113,
+    0.019011195916754063
+   ],
+   "ci95_R": [
+    0.0026429259148276164,
+    0.02111602481609489
+   ],
+   "R_placebo": -0.016591452342636114,
+   "ci95_R_placebo": [
+    -0.03300950466684066,
+    -0.005011811546858362
+   ],
+   "R_minus_placebo": 0.027752027381820466,
+   "ci95_R_minus_placebo": [
+    0.015897500408326652,
+    0.04414196796098154
+   ],
+   "ci95_yardstick_within": [
+    0.00548783557498668,
+    0.011953520050535422
+   ],
+   "decision": "positive-negligible",
+   "n_aoi_inner": 182
+  },
+  "placebo_ems_lexfix": {
+   "run": "world_v2_lexfix",
+   "seed": 20261029,
+   "replicates": 4000,
+   "R": -0.004165744266692028,
+   "ci90_R": [
+    -0.007186727907739999,
+    -0.0014987217000086513
+   ],
+   "ci95_R": [
+    -0.007754875535139612,
+    -0.0009363776890184464
+   ],
+   "R_placebo": -0.00551543299490538,
+   "ci95_R_placebo": [
+    -0.010330177008928014,
+    -0.001260475767181403
+   ],
+   "R_minus_placebo": 0.0013496887282133524,
+   "ci95_R_minus_placebo": [
+    -0.004219688724851633,
+    0.0069893616857062205
+   ],
+   "ci95_yardstick_within": [
+    0.005452452562393373,
+    0.009832234105819506
+   ],
+   "decision": "negative",
+   "n_aoi_inner": 479
+  }
+ },
+ "B11": {
+  "base_log_or": {
+   "le500m": 0.00912351336599045,
+   "all": 0.016634430396524867
+  },
+  "base_or": {
+   "le500m": 1.0091652594745366,
+   "all": 1.016773552871028
+  },
+  "rows": [
+   {
+    "form": "A",
+    "nominal_or": 1.25,
+    "reps": 20,
+    "mean_flips": 952.45,
+    "mean_or_le500m": 1.418409721952278,
+    "mean_or_ratio_to_base_le500m": 1.4055276959205187,
+    "sd_log_or_le500m": 0.026225403134968437,
+    "mean_or_all": 1.3880769727031554,
+    "mean_or_ratio_to_base_all": 1.3651780859009275,
+    "sd_log_or_all": 0.009215569739813316
+   },
+   {
+    "form": "A",
+    "nominal_or": 1.5,
+    "reps": 20,
+    "mean_flips": 1798.1,
+    "mean_or_le500m": 1.872384645702534,
+    "mean_or_ratio_to_base_le500m": 1.8553796101517286,
+    "sd_log_or_le500m": 0.04337868549169926,
+    "mean_or_all": 1.7608495355281766,
+    "mean_or_ratio_to_base_all": 1.731801078574602,
+    "sd_log_or_all": 0.009172921062038375
+   },
+   {
+    "form": "A",
+    "nominal_or": 2.0,
+    "reps": 20,
+    "mean_flips": 3283.25,
+    "mean_or_le500m": 2.7189687117802115,
+    "mean_or_ratio_to_base_le500m": 2.69427498247012,
+    "sd_log_or_le500m": 0.045446610858601084,
+    "mean_or_all": 2.5097785446742145,
+    "mean_or_ratio_to_base_all": 2.4683751240258367,
+    "sd_log_or_all": 0.012877645995705235
+   },
+   {
+    "form": "A",
+    "nominal_or": 3.0000000000000004,
+    "reps": 20,
+    "mean_flips": 5658.7,
+    "mean_or_le500m": 4.48124058360622,
+    "mean_or_ratio_to_base_le500m": 4.440541865204081,
+    "sd_log_or_le500m": 0.03724073745575072,
+    "mean_or_all": 4.001501364816825,
+    "mean_or_ratio_to_base_all": 3.935489228174675,
+    "sd_log_or_all": 0.010956875201251673
+   },
+   {
+    "form": "B",
+    "nominal_or": 1.25,
+    "reps": 20,
+    "mean_flips": 94.1,
+    "mean_or_le500m": 1.4362562593695685,
+    "mean_or_ratio_to_base_le500m": 1.4232121507208981,
+    "sd_log_or_le500m": 0.03612754604989193,
+    "mean_or_all": 1.0533649420509956,
+    "mean_or_ratio_to_base_all": 1.0359877468062046,
+    "sd_log_or_all": 0.0038148466522391683
+   },
+   {
+    "form": "B",
+    "nominal_or": 1.5,
+    "reps": 20,
+    "mean_flips": 175.85,
+    "mean_or_le500m": 1.865031955026412,
+    "mean_or_ratio_to_base_le500m": 1.8480936967623294,
+    "sd_log_or_le500m": 0.04714630441313158,
+    "mean_or_all": 1.0854562886177246,
+    "mean_or_ratio_to_base_all": 1.067549687492126,
+    "sd_log_or_all": 0.0058424075140542445
+   },
+   {
+    "form": "B",
+    "nominal_or": 2.0,
+    "reps": 20,
+    "mean_flips": 327.5,
+    "mean_or_le500m": 2.810976761108805,
+    "mean_or_ratio_to_base_le500m": 2.7854474128176547,
+    "sd_log_or_le500m": 0.03693370543534548,
+    "mean_or_all": 1.145808739312521,
+    "mean_or_ratio_to_base_all": 1.1269065133304665,
+    "sd_log_or_all": 0.005214305093158328
+   },
+   {
+    "form": "B",
+    "nominal_or": 3.0000000000000004,
+    "reps": 20,
+    "mean_flips": 572.4,
+    "mean_or_le500m": 4.778069348234734,
+    "mean_or_ratio_to_base_le500m": 4.734674824936633,
+    "sd_log_or_le500m": 0.031193790513968322,
+    "mean_or_all": 1.2466905811014812,
+    "mean_or_ratio_to_base_all": 1.2261241232929834,
+    "sd_log_or_all": 0.0056464210461599365
+   }
+  ],
+  "max_abs_diff_p_M1_frozen_vs_corrected": 0.0,
+  "rule": "injection on held-out cells with p = corrected M1 held-out prediction, same salts as B-6 forms A/B"
+ },
+ "B14": {
+  "country_level": {
+   "BD": {
+    "first_language": "bn",
+    "lexicon_languages": [
+     "hi"
+    ],
+    "n_cells": 19720,
+    "n_water_side": 2652,
+    "n_flooded_le500m": 643
+   },
+   "IN": {
+    "first_language": "en",
+    "lexicon_languages": [
+     "hi"
+    ],
+    "n_cells": 323,
+    "n_water_side": 0,
+    "n_flooded_le500m": 0
+   },
+   "LA": {
+    "first_language": "lo",
+    "lexicon_languages": [
+     "th"
+    ],
+    "n_cells": 333,
+    "n_water_side": 9,
+    "n_flooded_le500m": 0
+   },
+   "LK": {
+    "first_language": "si",
+    "lexicon_languages": [
+     "en"
+    ],
+    "n_cells": 9032,
+    "n_water_side": 0,
+    "n_flooded_le500m": 147
+   },
+   "LU": {
+    "first_language": "lb",
+    "lexicon_languages": [
+     "de",
+     "fr"
+    ],
+    "n_cells": 6,
+    "n_water_side": 0,
+    "n_flooded_le500m": 0
+   },
+   "MK": {
+    "first_language": "mk",
+    "lexicon_languages": [
+     "bg",
+     "sq"
+    ],
+    "n_cells": 5132,
+    "n_water_side": 256,
+    "n_flooded_le500m": 0
+   },
+   "PK": {
+    "first_language": "ur",
+    "lexicon_languages": [
+     "fa",
+     "hi"
+    ],
+    "n_cells": 61219,
+    "n_water_side": 2249,
+    "n_flooded_le500m": 4534
+   },
+   "RU": {
+    "first_language": "ru",
+    "lexicon_languages": [
+     "uk"
+    ],
+    "n_cells": 2070,
+    "n_water_side": 0,
+    "n_flooded_le500m": 0
+   },
+   "SK": {
+    "first_language": "sk",
+    "lexicon_languages": [
+     "cs"
+    ],
+    "n_cells": 1926,
+    "n_water_side": 52,
+    "n_flooded_le500m": 0
+   },
+   "TL": {
+    "first_language": "tet",
+    "lexicon_languages": [
+     "id",
+     "pt"
+    ],
+    "n_cells": 4962,
+    "n_water_side": 0,
+    "n_flooded_le500m": 33
+   }
+  },
+  "regional": {
+   "Wales": {
+    "matched_units": [
+     "Anglesey",
+     "Blaenau Gwent",
+     "Bridgend",
+     "Caerphilly",
+     "Cardiff",
+     "Carmarthenshire",
+     "Ceredigion",
+     "Conwy",
+     "Denbighshire",
+     "Flintshire",
+     "Gwynedd",
+     "Merthyr Tydfil",
+     "Monmouthshire",
+     "Neath Port Talbot",
+     "Newport",
+     "Pembrokeshire",
+     "Powys",
+     "Rhondda, Cynon, Taff",
+     "Swansea",
+     "Torfaen",
+     "Vale of Glamorgan",
+     "Wrexham"
+    ],
+    "n_units": 22,
+    "n_cells": 0,
+    "n_water_side": 0,
+    "n_flooded_le500m": 0,
+    "n_aoi": 0
+   },
+   "Highland and Eilean Siar": {
+    "matched_units": [
+     "Eilean Siar",
+     "Highland"
+    ],
+    "n_units": 2,
+    "n_cells": 3997,
+    "n_water_side": 348,
+    "n_flooded_le500m": 0,
+    "n_aoi": 2
+   },
+   "Northern Ireland": {
+    "matched_units": [
+     "Antrim",
+     "Ards",
+     "Armagh",
+     "Ballymena",
+     "Ballymoney",
+     "Banbridge",
+     "Belfast",
+     "Carrickfergus",
+     "Castlereagh",
+     "Coleraine",
+     "Craigavon",
+     "Derry",
+     "Down",
+     "Dungannon",
+     "Fermanagh",
+     "Larne",
+     "Limavady",
+     "Lisburn",
+     "Magherafelt",
+     "Mid Ulster",
+     "Moyle",
+     "Newry and Mourne",
+     "Newtownabbey",
+     "North Down",
+     "Omagh",
+     "Strabane"
+    ],
+    "n_units": 26,
+    "n_cells": 3316,
+    "n_water_side": 0,
+    "n_flooded_le500m": 0,
+    "n_aoi": 2
+   },
+   "Ireland": {
+    "matched_units": [
+     "Carlow",
+     "Cavan",
+     "Clare",
+     "Cork",
+     "Donegal",
+     "Dublin",
+     "D\u00fan Laoghaire\u2013Rathdown",
+     "Fingal",
+     "Galway",
+     "Kerry",
+     "Kildare",
+     "Kilkenny",
+     "Laoighis",
+     "Leitrim",
+     "Limerick",
+     "Longford",
+     "Louth",
+     "Mayo",
+     "Meath",
+     "Monaghan",
+     "North Tipperary",
+     "Offaly",
+     "Roscommon",
+     "Sligo",
+     "South Dublin",
+     "South Tipperary",
+     "Waterford",
+     "Westmeath",
+     "Wexford",
+     "Wicklow"
+    ],
+    "n_units": 34,
+    "n_cells": 18290,
+    "n_water_side": 2220,
+    "n_flooded_le500m": 21,
+    "n_aoi": 19
+   },
+   "Catalan-speaking Spain": {
+    "matched_units": [
+     "Alicante",
+     "Baleares",
+     "Barcelona",
+     "Castell\u00f3n",
+     "Gerona",
+     "L\u00e9rida",
+     "Tarragona",
+     "Valencia"
+    ],
+    "n_units": 8,
+    "n_cells": 30255,
+    "n_water_side": 93,
+    "n_flooded_le500m": 58,
+    "n_aoi": 5
+   },
+   "Basque Country and Navarre": {
+    "matched_units": [
+     "Bizkaia",
+     "Gipuzkoa",
+     "Navarra",
+     "\u00c1lava"
+    ],
+    "n_units": 4,
+    "n_cells": 1230,
+    "n_water_side": 3,
+    "n_flooded_le500m": 1,
+    "n_aoi": 4
+   },
+   "Galicia": {
+    "matched_units": [
+     "La Coru\u00f1a",
+     "Lugo",
+     "Orense",
+     "Pontevedra"
+    ],
+    "n_units": 4,
+    "n_cells": 1528,
+    "n_water_side": 0,
+    "n_flooded_le500m": 0,
+    "n_aoi": 1
+   },
+   "Brittany": {
+    "matched_units": [
+     "C\u00f4tes-d'Armor",
+     "Finist\u00e8re",
+     "Ille-et-Vilaine",
+     "Morbihan"
+    ],
+    "n_units": 4,
+    "n_cells": 7943,
+    "n_water_side": 244,
+    "n_flooded_le500m": 6,
+    "n_aoi": 7
+   },
+   "Alsace": {
+    "matched_units": [
+     "Bas-Rhin"
+    ],
+    "n_units": 1,
+    "n_cells": 0,
+    "n_water_side": 0,
+    "n_flooded_le500m": 0,
+    "n_aoi": 0
+   },
+   "Friesland": {
+    "matched_units": [
+     "Friesland"
+    ],
+    "n_units": 1,
+    "n_cells": 0,
+    "n_water_side": 0,
+    "n_flooded_le500m": 0,
+    "n_aoi": 0
+   },
+   "Finnmark and Troms": {
+    "matched_units": [
+     "Finnmark",
+     "Troms"
+    ],
+    "n_units": 2,
+    "n_cells": 3818,
+    "n_water_side": 0,
+    "n_flooded_le500m": 2,
+    "n_aoi": 2
+   },
+   "Norrbotten": {
+    "matched_units": [
+     "Norrbotten"
+    ],
+    "n_units": 1,
+    "n_cells": 2621,
+    "n_water_side": 0,
+    "n_flooded_le500m": 11,
+    "n_aoi": 4
+   },
+   "Lapland (Finland)": {
+    "matched_units": [
+     "Lapland"
+    ],
+    "n_units": 1,
+    "n_cells": 11124,
+    "n_water_side": 1124,
+    "n_flooded_le500m": 11,
+    "n_aoi": 5
+   }
+  },
+  "n_cells_total": 1507486,
+  "rule": "cells assigned by their nearest settlement's country; regions by point-in-polygon of the cell"
+ }
+}

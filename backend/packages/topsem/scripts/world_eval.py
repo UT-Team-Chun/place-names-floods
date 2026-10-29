@@ -63,6 +63,15 @@ from topsem.world.b7 import (
     unit_sse,
 )
 from topsem.world.b9 import gsw_perm_mask, settlement_weights
+from topsem.world.b10 import (
+    BAND_NAMES,
+    band_indicators,
+    choose_c,
+    correlated_uniform,
+    fill_hazard,
+    indicators,
+    interactions,
+)
 from topsem.world.channels import (
     INNER_FOLDS,
     NREAD_FEATURES,
@@ -211,13 +220,36 @@ B8_STACK: dict[str, tuple[str, list[str]]] = {
     "M1cW": ("M1", [f"c_{f}" for f in ORACLE_W]), "M3oW": ("M1", [*(f"c_{f}" for f in ORACLE_W), *ORACLE_W]),
 }
 STACK |= B8_STACK
+# 事後 B-10（初見の査読 第 6 回）: C1 名前 × 距離帯・名前 × 大陸、C2 二段目の罰則の入れ子の交差検証、C3 国の指標、
+# C5 モデル化した洪水ハザード図（JRC v2.1.2）を地形のモデルに足した基礎 M1h。距離帯・大陸・国の列と名前との交互作用は
+# fold の中で（N-learn を作った後に）作る（add_b10）。"@country" は国の指標の列に展開する
+CONTINENTS = ("AF", "AS", "EU", "NA", "OC", "SA")
+BAND_COLS = [f"bd_{b}" for b in BAND_NAMES]
+NAMES_BAND = [f"{f}__{b}" for f in NAMES for b in BAND_NAMES]
+CONT_COLS = [f"ct_{c}" for c in CONTINENTS]
+NAMES_CONT = [f"{f}__{c}" for f in NAMES for c in CONTINENTS]
+HAZ = ["hz_f10", "hz_f100", "hz_f500", "hz_d100"]
+ARMS["M1h"] = [*T0, *TER_4, *HAZ]
+B10_STACK: dict[str, tuple[str, list[str]]] = {
+    "M1cd": ("M1", [*COMP, *BAND_COLS]), "M3nd": ("M1", [*COMP, *BAND_COLS, *NAMES_BAND]),
+    "M1cr": ("M1", [*COMP, *CONT_COLS]), "M3nr": ("M1", [*COMP, *CONT_COLS, *NAMES_CONT]),
+    "M1ct": ("M1", COMP), "M3nt": ("M1", [*COMP, *NAMES]),
+    "M1k": ("M1", ["@country"]), "M1kc": ("M1", ["@country", *COMP]), "M3kn": ("M1", ["@country", *COMP, *NAMES]),
+    "M1hc": ("M1h", COMP), "M3hn": ("M1h", [*COMP, *NAMES]),
+}
+STACK |= B10_STACK
+TUNED_STACK = ("M1ct", "M3nt")  # C2: 二段目の C を入れ子の交差検証で選ぶ
+B10_DYNAMIC = ("bd_", "ct_", "__", "@country")  # fold の中で作る列（表の列の有無で落とさない）
 IN_FOLD = ("nlearn", "nlearn_p")  # fold の中で作る特徴（表には無い）
 
 
 def b6_stack_available(x: str, columns: Iterable[str]) -> bool:
     """B-6 の腕は、表から読む特徴（地域構成の元を含む）が全てあるときだけ回す（fold の中で作る N-learn は除く）。"""
     cols = set(columns)
-    return all(f.removeprefix("c_") in cols or f.removeprefix("c_") in IN_FOLD for f in STACK[x][1])
+    if x in B10_STACK and STACK[x][0] == "M1h" and not all(h in cols for h in HAZ):
+        return False
+    return all(f.removeprefix("c_") in cols or f.removeprefix("c_") in IN_FOLD
+               or any(k in f for k in B10_DYNAMIC) for f in STACK[x][1])
 PLASMODE_DELTAS = (0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0)
 PLASMODE_FORMS = ("A", "B", "CA", "CB")
 PLASMODE_LOCAL_M = 500.0
@@ -432,18 +464,24 @@ def crossfit_base(tr: pd.DataFrame, te: pd.DataFrame, feats: list[str], seeds: l
 
 
 def stage2(z_tr: np.ndarray, z_te: np.ndarray, x_tr: np.ndarray, x_te: np.ndarray,  # noqa: PLR0913
-           y_tr: np.ndarray, *, coefs: list | None = None) -> np.ndarray:
+           y_tr: np.ndarray, *, coefs: list | None = None, c: float = 1.0,
+           tune: np.ndarray | None = None, tuned: dict | None = None) -> np.ndarray:
     """二段目のロジスティック回帰（L2、C = 1）。
 
     入力は [基礎予測のロジット, 名前特徴] を学習側の平均・標準偏差で標準化したもの。
     名前特徴が空なら基礎予測の再較正だけになる（入れ子の比較基準）。
+    事後 B-10 の C2: tune（学習側の内側の fold の番号）を与えると、C を入れ子の交差検証（Brier）で選び、tuned に記録する。
     """
     a = np.column_stack([z_tr, x_tr]).astype(np.float64)
     b = np.column_stack([z_te, x_te]).astype(np.float64)
     mu = a.mean(axis=0)
     sd = a.std(axis=0)
     sd[sd == 0] = 1.0
-    m = LogisticRegression(C=1.0, max_iter=1000)
+    if tune is not None:
+        c, curve = choose_c((a - mu) / sd, y_tr, tune)
+        if tuned is not None:
+            tuned |= {"C": c, "inner_brier": curve}
+    m = LogisticRegression(C=c, max_iter=1000)
     m.fit((a - mu) / sd, y_tr)
     if coefs is not None:  # 事後 B-5 の 2: 標準化した尺度の係数（[基礎予測のロジット, 名前特徴...]）
         coefs.extend([float(m.intercept_[0]), *(float(c) for c in m.coef_[0])])
@@ -470,7 +508,27 @@ def add_composition(tr: pd.DataFrame, te: pd.DataFrame) -> None:
                                - means[f].to_numpy(dtype=np.float64)).astype(np.float32)
 
 
-def run_fold(df: pd.DataFrame, fold: int, arms: list[str], seeds: list[int],  # noqa: PLR0913
+def add_b10(tr: pd.DataFrame, te: pd.DataFrame, countries: list[str]) -> list[str]:
+    """事後 B-10 の C1・C3: 距離帯・大陸・国の指標と、名前の特徴（N-learn を含む）との交互作用を作る。
+
+    大陸と国はセルの最寄りの集落の国から。国の列の名を返す（"@country" の展開に使う）。
+    """
+    cont = continent_map(ROOT / "geonames" / "countryInfo.txt")
+    cc_cols = [f"cc_{c}" for c in countries]
+    for frame in (tr, te):
+        bd = band_indicators(frame["P_d1"].to_numpy())
+        ct = indicators(frame["cc"].map(lambda c: cont.get(str(c), "")), list(CONTINENTS))
+        x = frame[NAMES].to_numpy(dtype=np.float32)
+        new = {**dict(zip(BAND_COLS, bd.T, strict=True)), **dict(zip(CONT_COLS, ct.T, strict=True)),
+               **dict(zip(NAMES_BAND, interactions(x, bd).T, strict=True)),
+               **dict(zip(NAMES_CONT, interactions(x, ct).T, strict=True)),
+               **dict(zip(cc_cols, indicators(frame["cc"], countries).T, strict=True))}
+        for k, v in new.items():
+            frame[k] = v
+    return cc_cols
+
+
+def run_fold(df: pd.DataFrame, fold: int, arms: list[str], seeds: list[int],  # noqa: C901, PLR0912, PLR0913
              stacks: tuple[str, ...] | list[str] = (), *, save_coefs: bool = False,
              keep_state: bool = False) -> dict:
     tr = df[(df["fold"] != fold) & (df["fold"] >= 0)].copy()
@@ -485,6 +543,9 @@ def run_fold(df: pd.DataFrame, fold: int, arms: list[str], seeds: list[int],  # 
         tr[col] = oof
         te[col] = sc
     add_composition(tr, te)
+    cc_cols: list[str] = []
+    if any(s in B10_STACK for s in stacks):  # B-10: 国の水準は表全体の国（ラベルは使わない）
+        cc_cols = add_b10(tr, te, sorted(c for c in df["cc"].unique() if c))
     fold_tr = inner_folds(groups_tr)
     preds: dict[str, np.ndarray] = {}
     z: dict[str, tuple[np.ndarray, np.ndarray]] = {}
@@ -497,15 +558,24 @@ def run_fold(df: pd.DataFrame, fold: int, arms: list[str], seeds: list[int],  # 
             preds[a] = fit_arm(tr, te, ARMS[a], seeds)
     y_tr = tr["y"].to_numpy()
     coefs: dict[str, dict] = {}
+    tuned: dict[str, dict] = {}
     for s in stacks:
         b, extra = STACK[s]
+        extra = [c for e in extra for c in (cc_cols if e == "@country" else [e])]
         x_tr = tr[extra].to_numpy(dtype=np.float64) if extra else np.empty((len(tr), 0))
         x_te = te[extra].to_numpy(dtype=np.float64) if extra else np.empty((len(te), 0))
         cf: list | None = [] if save_coefs else None
-        preds[s] = stage2(z[b][0], z[b][1], x_tr, x_te, y_tr, coefs=cf)
+        if s in TUNED_STACK:
+            tuned[s] = {}
+        preds[s] = stage2(z[b][0], z[b][1], x_tr, x_te, y_tr, coefs=cf,
+                          tune=fold_tr if s in TUNED_STACK else None, tuned=tuned.get(s))
         if cf is not None:
             coefs[s] = {"names": ["intercept", f"logit_{b}", *extra], "coef": cf}
     out = {"te": te, "preds": preds, "n_train": len(tr)}
+    if tuned:
+        out["tuned"] = tuned
+    if cc_cols:
+        out["countries_in_train"] = sorted(c.removeprefix("cc_") for c in cc_cols if tr[c].to_numpy().any())
     if save_coefs:
         out["coefs"] = coefs
     if keep_state:  # 置換の分布（B-5 の 1）で基礎予測と学習側の表を使い回す
@@ -901,10 +971,39 @@ def swap_fabdem_terrain(df: pd.DataFrame) -> dict:
             "replaced": [*FABDEM_TERRAIN, "hand_mean <- h_above_100", "hand_min <- h_above_1000"]}
 
 
+def attach_hazard(df: pd.DataFrame) -> dict:
+    """B-10 の C5: features_jrc.parquet（cells.parquet と同じ行の順）の hz_* をセル（aoi, ix, iy）で結ぶ。
+
+    タイルの無いセル・全て恒久水域のセルの欠けは 0 にして割合を記録する。実行の条件（解析するセルの 95 % 以上で
+    100 年のタイルのある画素が半分以上）を満たさなければ止める。
+    """
+    cols = [*HAZ, "hz_cover"]
+    parts = []
+    for a in df["aoi"].unique():
+        d = ROOT / "labels" / a
+        cells = pq.read_table(d / "cells.parquet", columns=["ix", "iy"]).to_pandas()
+        f = d / "features_jrc.parquet"
+        fe = pq.read_table(f, columns=cols).to_pandas() if f.is_file() else \
+            pd.DataFrame({c: np.full(len(cells), np.nan, dtype=np.float32) for c in cols})
+        fe["ix"], fe["iy"], fe["aoi"] = cells["ix"].to_numpy(), cells["iy"].to_numpy(), a
+        parts.append(fe)
+    m = df[["aoi", "ix", "iy"]].merge(pd.concat(parts, ignore_index=True), on=["aoi", "ix", "iy"], how="left",
+                                      validate="many_to_one")
+    cover = np.nan_to_num(m["hz_cover"].to_numpy(np.float64)) >= 0.5  # noqa: PLR2004
+    for c in HAZ:
+        df[c] = m[c].to_numpy(np.float32)
+    info = {"share_covered": float(cover.mean()), "condition_met": bool(cover.mean() >= 0.95),  # noqa: PLR2004
+            **fill_hazard(df, HAZ)}
+    if not info["condition_met"]:
+        msg = f"B-10 C5: hazard map covers {cover.mean():.3f} of analysed cells (< 0.95); not run"
+        raise SystemExit(msg)
+    return info
+
+
 def run_plasmode(df: pd.DataFrame, fold: int, seeds: list[int], reps: int,  # noqa: PLR0913
                  pi: tuple[float, float], *, rep_first: int = 0,
                  forms: tuple[str, ...] = PLASMODE_FORMS,
-                 deltas: tuple[float, ...] = PLASMODE_DELTAS) -> dict:
+                 deltas: tuple[float, ...] = PLASMODE_DELTAS, rho: float = 0.5) -> dict:
     """2: 実データのラベルに名前の効果を注入し、二段目（M1c・M3n）だけを当て直す。
 
     基礎モデルは 1 回だけ当て（cross-fit の M1 の logit を固定）、注入は訓練側と評価側の両方に。N-learn は注入後の
@@ -913,6 +1012,7 @@ def run_plasmode(df: pd.DataFrame, fold: int, seeds: list[int], reps: int,  # no
     B-8 の C1: 回を rep_first から数える（回の塩は回の番号で決まるので、範囲に分けて回しても同じ値）。
     B-9: δ の列を変えられる（C1 の低い δ、C2 の δ < 0 は浸水を減らす向き）。形 AH（C3）は形 A の対象に、集落ごとの
     重み w_s（指数分布、平均 1、回ごとに固定）を掛けた δ_s = δ w_s を注入する。
+    B-10 の C4: 形 AC は形 A の対象に、反転の一様乱数を集落の中で相関 rho（正規の尺度）で相関させて注入する。
     """
     r = run_fold(df, fold, [], seeds, ["M1c", "M3n"], keep_state=True)
     tr, te, z = r["tr"], r["te"], r["z"]["M1"]
@@ -937,8 +1037,12 @@ def run_plasmode(df: pd.DataFrame, fold: int, seeds: list[int], reps: int,  # no
                     t = latent_names(gid[side], wet[side], pi[0], pi[1], salt) if form.startswith("C") else wet[side]
                     tgt[side] = t & near[side] if form.endswith("B") else t
                     dl[side] = delta * settlement_weights(gid[side], rep) if form == "AH" else delta
-                y_tr = inject_labels(y_tr0, p_tr, tgt["tr"], dl["tr"], hashed_uniform(k_tr, salt))
-                y_te = inject_labels(y_te0, p_te, tgt["te"], dl["te"], hashed_uniform(k_te, salt))
+                u_tr, u_te = hashed_uniform(k_tr, salt), hashed_uniform(k_te, salt)
+                if form == "AC":  # B-10 の C4: 反転を集落の地面の中で相関させる（周辺は一様のまま）
+                    u_tr = correlated_uniform(u_tr, gid["tr"], rep, rho)
+                    u_te = correlated_uniform(u_te, gid["te"], rep, rho)
+                y_tr = inject_labels(y_tr0, p_tr, tgt["tr"], dl["tr"], u_tr)
+                y_te = inject_labels(y_te0, p_te, tgt["te"], dl["te"], u_te)
                 oof, sc = nlearn_scores(tr["name_real"].to_numpy(), y_tr, groups_tr, te["name_real"].to_numpy())
                 c_tr = pd.Series(oof, index=tr.index).groupby(tr["aoi"]).transform("mean").to_numpy()
                 c_te = pd.Series(sc, index=te.index).groupby(te["aoi"]).transform("mean").to_numpy()
@@ -1095,6 +1199,10 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     ap.add_argument("--plasref-deltas", default="", help="B-8 の C3: 当て直す plasmode の δ（カンマ区切り）")
     ap.add_argument("--plasref-reps", default="", help="B-8 の C3: 当て直す plasmode の回 a:b")
     ap.add_argument("--gsw-cell", default="", help="B-8 の C4: セルごとの JRC GSW の parquet（aoi・ix・iy）")
+    # 事後 B-10（初見の査読 第 6 回）
+    ap.add_argument("--plasmode-rho", type=float, default=0.5, help="B-10 の C4: 形 AC の集落の中の相関（正規の尺度）")
+    ap.add_argument("--hazard", default="none", choices=["none", "jrc"],
+                    help="B-10 の C5: JRC の洪水ハザード図の特徴（hz_*）を読み、M1h・M1hc・M3hn を回せるようにする")
     args = ap.parse_args()
     if args.lexicon:
         lp = Path(args.lexicon)
@@ -1123,7 +1231,7 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
         print(f"B-6: excluded {len(drop)} AOIs → {len(dirs)}", flush=True)
     need_xy = (args.labels == "gfm" or args.plasmode or args.oracle_label or args.gn_filter or args.recurrence
                or args.plasmode_refit or bool(args.gsw_cell) or args.terrain == "fabdem"
-               or args.exclude_gsw_perm > 0)
+               or args.exclude_gsw_perm > 0 or args.hazard == "jrc")
     df = build_table(dirs, seed=args.table_seed, infos=infos, sens=sens, extra_cols=("ix", "iy") if need_xy else ())
     if args.table_seed != TABLE_SEED:  # B-9 の C6
         b6["table_seed"] = args.table_seed
@@ -1140,6 +1248,9 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     if args.terrain == "fabdem":  # B-9 の C7
         b6["fabdem"] = swap_fabdem_terrain(df)
         print(f"B-9 C7: FABDEM terrain {b6['fabdem']}", flush=True)
+    if args.hazard == "jrc":  # B-10 の C5
+        b6["jrc_hazard"] = attach_hazard(df)
+        print(f"B-10 C5: JRC hazard {b6['jrc_hazard']}", flush=True)
     if args.exclude_partial:  # B-7 の 6(b): y = 0 で浸水被覆が 0.05 を超えるセルを除く（場所グループの割当は変わらない）
         pm = partial_mask(df["y"].to_numpy(), df["f_flood_any"].to_numpy())
         b6["partial"] = {"n_dropped": int(pm.sum()), "share_dropped": float(pm.mean())}
@@ -1228,10 +1339,11 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
                     "local_m": args.local_m if args.synthetic == "sesoi_local" else None, "reps": out})
         return
 
-    arms = [x for x in args.arms.split(",") if x and (nread is not None or x not in NREAD_ARMS)]
+    arms = [x for x in args.arms.split(",") if x and (nread is not None or x not in NREAD_ARMS)
+            and (x != "M1h" or args.hazard == "jrc")]  # B-10 の C5: ハザード図の特徴を読んだ実行だけ
     stacks = [x for x in args.stacks.split(",")
               if x and (nread is not None or x not in NREAD_STACK) and (args.oracle or x not in ORACLE_STACK)
-              and ((x not in B6_STACK and x not in B7_STACK and x not in B8_STACK)
+              and ((x not in B6_STACK and x not in B7_STACK and x not in B8_STACK and x not in B10_STACK)
                    or b6_stack_available(x, df.columns))]
     dropped = [x for x in args.stacks.split(",") if x and x not in stacks]
     if dropped:
@@ -1246,7 +1358,7 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
             deltas = (tuple(float(x) for x in args.plasmode_deltas.split(",") if x) if args.plasmode_deltas
                       else PLASMODE_DELTAS)
             r = run_plasmode(df, k, seeds, args.plasmode_reps, pi, rep_first=args.plasmode_rep_first, forms=forms,
-                             deltas=deltas)
+                             deltas=deltas, rho=args.plasmode_rho)
             te = r["te"]
             stem = f"fold{k}_plasmode" if args.plasmode_rep_first == 0 else \
                 f"fold{k}_plasmode_{args.plasmode_rep_first:03d}"
@@ -1349,7 +1461,9 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
                    {**common, "fold": k, "n_test": len(te), "n_train": r["n_train"],
                     "arms": {a: ARMS[a] for a in arms},
                     "stacks": {s: {"base": STACK[s][0], "extra": STACK[s][1]} for s in stacks},
-                    **({"stage2_coefs": r["coefs"]} if args.save_coefs else {})})
+                    **({"stage2_coefs": r["coefs"]} if args.save_coefs else {}),
+                    **({"b10_tuned": r["tuned"]} if "tuned" in r else {}),
+                    **({"b10_countries_in_train": r["countries_in_train"]} if "countries_in_train" in r else {})})
         print(f"fold {k}: test {len(te):,} ({time.time() - t0:.0f}s)", flush=True)
     # 配分 0 件の AOI（巨大な場所グループ内の小さな AOI）は表に行が無いので、行のある AOI だけ書く
     fold_of = df.groupby("aoi")["fold"].first()

@@ -11,6 +11,7 @@ import pandas as pd
 import pytest
 
 from topsem.world.b8 import stage2_weighted
+from topsem.world.b10 import C_GRID
 from topsem.world.channels import (
     NREAD_FEATURES,
     nlearn_scores,
@@ -498,9 +499,17 @@ def test_run_fold_all_arms_on_random_table(monkeypatch: pytest.MonkeyPatch) -> N
     names = np.array(["riverside", "hilltop", "fordham", "marshby"], dtype=object)
     df["name_real"] = names[rng.integers(0, 4, n)]
     df["name_plac"] = names[rng.integers(0, 4, n)]
+    # B-10 の C1・C3: 最寄りの集落の国と距離（距離帯・大陸・国の指標を fold の中で作る）
+    df["cc"] = np.array(["DE", "FR", "KE", ""], dtype=object)[rng.integers(0, 4, n)]
+    df["P_d1"] = rng.uniform(0, 3000, n).astype(np.float32)
     arms = [a for a in ev.ARMS if a not in ("M3r", "M3rp")] + ["M3r", "M3rp"]
     r = ev.run_fold(df, 0, arms, [42], list(ev.STACK))
     assert set(r["preds"]) >= set(arms) | set(ev.STACK)
+    assert set(r["tuned"]) == set(ev.TUNED_STACK)
+    for t in r["tuned"].values():
+        assert t["C"] in C_GRID
+        assert len(t["inner_brier"]) == len(C_GRID)
+    assert set(r["countries_in_train"]) <= {"DE", "FR", "KE"}
     for v in r["preds"].values():
         assert v.shape == (int((df["fold"] == 0).sum()),)
         assert np.all((v > 0) & (v < 1))
