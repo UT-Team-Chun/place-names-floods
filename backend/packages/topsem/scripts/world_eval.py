@@ -72,6 +72,7 @@ from topsem.world.b10 import (
     indicators,
     interactions,
 )
+from topsem.world.b12 import PLASMODE_1KM_M, plasmode_target
 from topsem.world.channels import (
     INNER_FOLDS,
     NREAD_FEATURES,
@@ -1008,7 +1009,7 @@ def run_plasmode(df: pd.DataFrame, fold: int, seeds: list[int], reps: int,  # no
 
     基礎モデルは 1 回だけ当て（cross-fit の M1 の logit を固定）、注入は訓練側と評価側の両方に。N-learn は注入後の
     訓練側のラベルで当て直し、その AOI 平均（地域構成の c_nlearn）も作り直す。形 A: 水系側の名の最寄りの全セル、
-    B: そのうち 500 m 以内、CA・CB: 読み違いを入れた潜在の印 L の集落について同じ。
+    B: そのうち 500 m 以内、CA・CB: 読み違いを入れた潜在の印 L の集落について同じ。B-12 の C1: 形 BK は 1,000 m 以内。
     B-8 の C1: 回を rep_first から数える（回の塩は回の番号で決まるので、範囲に分けて回しても同じ値）。
     B-9: δ の列を変えられる（C1 の低い δ、C2 の δ < 0 は浸水を減らす向き）。形 AH（C3）は形 A の対象に、集落ごとの
     重み w_s（指数分布、平均 1、回ごとに固定）を掛けた δ_s = δ w_s を注入する。
@@ -1022,7 +1023,7 @@ def run_plasmode(df: pd.DataFrame, fold: int, seeds: list[int], reps: int,  # no
     k_tr, k_te = cell_keys(tr["aoi"], tr["ix"].to_numpy(), tr["iy"].to_numpy()), \
         cell_keys(te["aoi"], te["ix"].to_numpy(), te["iy"].to_numpy())
     wet = {"tr": tr["lex_wetside_n1"].to_numpy() > 0, "te": te["lex_wetside_n1"].to_numpy() > 0}
-    near = {"tr": tr["P_d1"].to_numpy() <= PLASMODE_LOCAL_M, "te": te["P_d1"].to_numpy() <= PLASMODE_LOCAL_M}
+    d1 = {"tr": tr["P_d1"].to_numpy(), "te": te["P_d1"].to_numpy()}
     gid = {"tr": tr["P_gid1"].to_numpy(np.int64), "te": te["P_gid1"].to_numpy(np.int64)}
     comp_other = [c for c in COMP if c != "c_nlearn"]
     lexf = [f for f in NAMES if f != "nlearn"]
@@ -1035,7 +1036,7 @@ def run_plasmode(df: pd.DataFrame, fold: int, seeds: list[int], reps: int,  # no
                 tgt, dl = {}, {}
                 for side in ("tr", "te"):
                     t = latent_names(gid[side], wet[side], pi[0], pi[1], salt) if form.startswith("C") else wet[side]
-                    tgt[side] = t & near[side] if form.endswith("B") else t
+                    tgt[side] = plasmode_target(form, t, d1[side])  # B・CB は 500 m、BK（B-12 の C1）は 1 km 以内
                     dl[side] = delta * settlement_weights(gid[side], rep) if form == "AH" else delta
                 u_tr, u_te = hashed_uniform(k_tr, salt), hashed_uniform(k_te, salt)
                 if form == "AC":  # B-10 の C4: 反転を集落の地面の中で相関させる（周辺は一様のまま）
@@ -1371,7 +1372,8 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
                        {**common, "fold": k, "n_test": len(te), "reps": args.plasmode_reps,
                         "rep_first": args.plasmode_rep_first, "pi": pi,
                         "deltas": list(deltas), "forms": list(forms),
-                        "local_m": PLASMODE_LOCAL_M, "rule": "amendment B-6 item 2"})
+                        "local_m": PLASMODE_LOCAL_M, "local_1km_m": PLASMODE_1KM_M,
+                        "rule": "amendment B-6 item 2" + ("; B-12 item C1 (shape BK)" if "BK" in forms else "")})
             print(f"fold {k}: plasmode ({time.time() - t0:.0f}s)", flush=True)
         return
     if args.dump_stage2:  # B-8 の C2

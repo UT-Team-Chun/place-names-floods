@@ -158,10 +158,27 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   until the check is done); and, on the cluster, reassignments with rebuilt composition on the country split. The
   uncapped near-settlement estimates were made the main ones after the capped and an uncapped estimate had both been
   seen. Script: `v68`; cluster run `world_v2_b11ctryperm`.
+- Amendment B-12 followed the eighth round of critiques. It restructured the paper (the pre-specified test alone in
+  Sect. 3; the uncertainty that the protocol's interval leaves out; what assignment through settlements can carry; the
+  limits of the readings and of the labels near settlements), removed the odds ratios near settlements from the abstract,
+  and fixed, before they were computed: the operating characteristics of the protocol's decision rule and of a rule on
+  the interval of the ratio; the composition of the uncapped sample near settlements and an estimate without Pakistan and
+  Bangladesh; a recount of the cells whose country's first language no lexicon block covers; the inclusion criteria in
+  order; the outlying null simulations; highland names and GFM's domain; the recurrence control on the pooled scale;
+  flexible single-reading comparisons; a second coder's intervals; the leak of the primary split and the reference model;
+  a penalty on the names alone; the GFM time window; flood typing; one HAND-only map; constant forecasts; built-up land
+  near settlements; a specification curve of every version of the odds ratio near settlements; and a revised audit
+  sample of 300 names that mixes names read and not read as water-side (`docs/verification/v69_audit_sample.csv`,
+  `v69_audit_guide.md`; whether the study read each name as water-side is withheld until the check is done), and, on the
+  cluster, an injection within 1 km of settlements. Addendum 1 corrected the near-settlement flags of the census of B-11
+  (an implementation error; `docs/verification/v69_estimates.csv`) and added Benjamini–Yekutieli values; addenda 2 and 3
+  corrected the label flags and the versions taken by the specification curve. Tables that neither the paper nor the
+  Supplement cites are in `docs/paper/paper_2_nhess/supplement_archive.pdf`. Script: `v69`; cluster run
+  `world_v2_b12plas1k`.
 
-English translations of the protocol and of amendments B-1 to B-11 are in `docs/protocol/en/`; they were drafted with a
+English translations of the protocol and of amendments B-1 to B-12 are in `docs/protocol/en/`; they were drafted with a
 language model after the analysis and have not yet been checked by the authors, and the Japanese files are the record
-and govern where the two differ. Amendments B-2, B-3 and B-5 to B-11 followed critiques by language-model agents; the
+and govern where the two differ. Amendments B-2, B-3 and B-5 to B-12 followed critiques by language-model agents; the
 paper lists the rounds and their times. Dates written
 inside the repository files are local (Japan Standard Time, UTC+9) unless marked; the paper gives UTC. An interpretation
 plan, written after the freeze and before any confirmatory result, is in

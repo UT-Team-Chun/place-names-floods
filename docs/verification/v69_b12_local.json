@@ -1,0 +1,2001 @@
+{
+ "rule": "amendment B-12 items B1-B21 (local; post hoc; confirmatory verdict unchanged)",
+ "seed": 20261101,
+ "B3": {
+  "n_cells": 1507486,
+  "country_level": {
+   "IN": {
+    "first_language": "en",
+    "lexicon_blocks": [
+     "hi"
+    ],
+    "n_cells": 323
+   },
+   "LK": {
+    "first_language": "si",
+    "lexicon_blocks": [
+     "en"
+    ],
+    "n_cells": 9032
+   },
+   "LU": {
+    "first_language": "lb",
+    "lexicon_blocks": [
+     "de",
+     "fr"
+    ],
+    "n_cells": 6
+   },
+   "TL": {
+    "first_language": "tet",
+    "lexicon_blocks": [
+     "id",
+     "pt"
+    ],
+    "n_cells": 4962
+   }
+  },
+  "country_level_share": 0.009501249099494125,
+  "country_level_share_v66": 0.06946863851471921,
+  "removed_by_fix": [
+   "BD",
+   "LA",
+   "MK",
+   "PK",
+   "RU",
+   "SK"
+  ],
+  "regional_share_v66": 0.05580283996003943,
+  "regional": {
+   "Wales": 0,
+   "Highland and Eilean Siar": 3997,
+   "Northern Ireland": 3316,
+   "Ireland": 18290,
+   "Catalan-speaking Spain": 30255,
+   "Basque Country and Navarre": 1230,
+   "Galicia": 1528,
+   "Brittany": 7943,
+   "Alsace": 0,
+   "Friesland": 0,
+   "Finnmark and Troms": 3818,
+   "Norrbotten": 2621,
+   "Lapland (Finland)": 11124
+  },
+  "rule": "B-12 B3: a country is flagged when the first GeoNames language of the nearest settlement's country is not among the languages of the blocks applied to it (block languages from the block names); regional flags of v66 B14 unchanged and counted separately"
+ },
+ "B4": {
+  "n_labelled": 999,
+  "steps": [
+   {
+    "criterion": "evaluable cells >= 400",
+    "excluded": 47,
+    "remaining": 952
+   },
+   {
+    "criterion": "flooded cells >= 20",
+    "excluded": 452,
+    "remaining": 500
+   },
+   {
+    "criterion": "flooded share <= 80 %",
+    "excluded": 0,
+    "remaining": 500
+   },
+   {
+    "criterion": "riverine (or untyped inland) share >= 0.5",
+    "excluded": 0,
+    "remaining": 500
+   },
+   {
+    "criterion": "a settlement inside the grid",
+    "excluded": 0,
+    "remaining": 500
+   }
+  ],
+  "n_included_recorded": 500,
+  "matches_recorded": true,
+  "rule": "B-12 B4: the five inclusion criteria applied in the order of the protocol"
+ },
+ "B7r": {
+  "subset_R": 0.0813197649496056,
+  "subset_yardstick": 0.0036729457859937323,
+  "subset_cells": 463483,
+  "all_cells": 1507486,
+  "pooled_yardstick": 0.0075536340456881165,
+  "pooled_scale_R": 0.01215724626120732,
+  "pooled_scale_ci90": [
+   0.0007925928287194423,
+   0.025758065816619567
+  ],
+  "rule": "B-12 B7': the subset's \u0394BS times the subset's share of cells, divided by the baseline gain of all cells of the same run"
+ },
+ "B8": {
+  "yardstick": 0.0075536340456880974,
+  "M3x": {
+   "delta_bs": -5.951497992509963e-05,
+   "R": -0.007878986401131393,
+   "ci95_R_fixed": [
+    -0.035945645587865685,
+    0.02196946716713627
+   ],
+   "ci95_delta_bs": [
+    -0.00027152025230674036,
+    0.00016594931515930738
+   ]
+  },
+  "M3l": {
+   "delta_bs": 0.00033212059448668637,
+   "R": 0.0439683194178931,
+   "ci95_R_fixed": [
+    -0.044251349767711896,
+    0.13645631212017856
+   ],
+   "ci95_delta_bs": [
+    -0.00033425850217304066,
+    0.001030741044980022
+   ]
+  },
+  "rule": "B-12 B8: location-group bootstrap (4,000) of \u0394BS(M1\u2192arm), divided by the point baseline gain"
+ },
+ "B12": {
+  "n_aoi": 317,
+  "aoi_with_several_ems_days": 3,
+  "acquisition_days_by_offset": {
+   "-1": 221,
+   "0": 242,
+   "1": 231
+  },
+  "aoi_with_an_image_on_an_ems_day": 240,
+  "aoi_with_images_only_on_adjacent_days": 77,
+  "frames_per_aoi_median": 8.0,
+  "rule": "B-12 B12: AOIs with GFM labels; window = from 00:00 of the day before the earliest EMS image date to 24:00 of the day after the latest; distinct acquisition days of the GFM frames found in the window, offset from the nearest EMS image day"
+ },
+ "B13": {
+  "n_aoi": 500,
+  "riverine_by_inland_rule": 154,
+  "aoi_with_typed_other": 6,
+  "typed_other_aois": [
+   {
+    "aoi": "EMSR268_AOI02",
+    "descriptions": [
+     "Ice jam flood"
+    ],
+    "inland_rule": true,
+    "riverine_share": 0.0,
+    "unspecified_share": 1.0
+   },
+   {
+    "aoi": "EMSR280_AOI01",
+    "descriptions": [
+     "Ice jam flood"
+    ],
+    "inland_rule": true,
+    "riverine_share": 0.0,
+    "unspecified_share": 1.0
+   },
+   {
+    "aoi": "EMSR280_AOI02",
+    "descriptions": [
+     "Ice jam flood"
+    ],
+    "inland_rule": true,
+    "riverine_share": 0.0,
+    "unspecified_share": 1.0
+   },
+   {
+    "aoi": "EMSR284_AOI01",
+    "descriptions": [
+     "Ice jam flood"
+    ],
+    "inland_rule": true,
+    "riverine_share": 0.0,
+    "unspecified_share": 1.0
+   },
+   {
+    "aoi": "EMSR446_AOI03",
+    "descriptions": [
+     "Landslide"
+    ],
+    "inland_rule": false,
+    "riverine_share": 1.0,
+    "unspecified_share": 0.0
+   },
+   {
+    "aoi": "EMSR555_AOI01",
+    "descriptions": [
+     "None"
+    ],
+    "inland_rule": false,
+    "riverine_share": 1.0,
+    "unspecified_share": 0.0
+   }
+  ],
+  "aoi_with_flash": 0,
+  "aoi_with_coastal": 1,
+  "aoi_with_untyped": 150,
+  "other_descriptions_top": [
+   [
+    "Ice jam flood",
+    12449
+   ],
+   [
+    "Landslide",
+    268
+   ],
+   [
+    "None",
+    2
+   ]
+  ],
+  "trace_share_by_sensor": {
+   "none": 0.0,
+   "sar": 0.0,
+   "s1": 5.0980087960695805e-05,
+   "optical": 0.1401180651278747
+  },
+  "coast_km": {
+   "min": 1.3770473357853175,
+   "q10": 13.80065575208262,
+   "median": 78.7992039385403,
+   "n_le_20km": 81
+  },
+  "rule": "B-12 B13: polygon descriptions classed by topsem.world.ems.flood_class; trace share = area of flood-trace polygons over all flood polygons in evaluable cells, by the sensor of the EMS map"
+ },
+ "B14": {
+  "n_evaluable": 19265845,
+  "n_neither": 2,
+  "share": 1.03810655592838e-07,
+  "rule": "B-12 B14: evaluable cells of the 500 analysed AOIs (before the cap) that are neither flooded nor dry under the riverine rule (flood cover >= 0.5 but riverine cover < 0.5)"
+ },
+ "B15": {
+  "HAND_mean": {
+   "csi_median": 0.08411214953271028,
+   "csi_q25_q75": [
+    0.0,
+    0.21073848238482384
+   ],
+   "hit_median": 0.15517241379310345,
+   "far_median": 0.8448275862068966,
+   "csi_pooled": 0.24740625490885426,
+   "hit_pooled": 0.3966731029850925,
+   "far_pooled": 0.6033268970149075,
+   "n_aoi": 479
+  },
+  "HAND_min_ties_by_mean": {
+   "csi_median": 0.043478260869565216,
+   "csi_q25_q75": [
+    0.0,
+    0.09150717703349281
+   ],
+   "hit_median": 0.08333333333333333,
+   "far_median": 0.9166666666666666,
+   "csi_pooled": 0.1915997370451882,
+   "hit_pooled": 0.3215840539211571,
+   "far_pooled": 0.6784159460788429,
+   "n_aoi": 479
+  },
+  "M1": {
+   "csi_median": 0.12941176470588237,
+   "csi_q25_q75": [
+    0.033634821933295644,
+    0.2655055574670516
+   ],
+   "hit_median": 0.22916666666666666,
+   "far_median": 0.7708333333333334,
+   "csi_pooled": 0.30471384422798575,
+   "hit_pooled": 0.46709682061860613,
+   "far_pooled": 0.5329031793813939,
+   "n_aoi": 479
+  },
+  "M1c": {
+   "csi_median": 0.12941176470588237,
+   "csi_q25_q75": [
+    0.033634821933295644,
+    0.2655055574670516
+   ],
+   "hit_median": 0.22916666666666666,
+   "far_median": 0.7708333333333334,
+   "csi_pooled": 0.30471384422798575,
+   "hit_pooled": 0.46709682061860613,
+   "far_pooled": 0.5329031793813939,
+   "n_aoi": 479
+  },
+  "M3n": {
+   "csi_median": 0.13170731707317074,
+   "csi_q25_q75": [
+    0.03225806451612903,
+    0.2718776550552251
+   ],
+   "hit_median": 0.23275862068965517,
+   "far_median": 0.7672413793103449,
+   "csi_pooled": 0.30336780072998976,
+   "hit_pooled": 0.465513726148643,
+   "far_pooled": 0.534486273851357,
+   "n_aoi": 479
+  },
+  "rule": "B-12 B15: one definition for the HAND-only map: mean HAND of the cell, lowest first, ties in a random order (v66 B12, corrected run); the other tables take this value. The minimum-HAND map (ties by mean HAND) is a different map and is labelled as such where shown"
+ },
+ "B16": {
+  "note": "JRC hazard features are not available locally (computed on the cluster); not computed"
+ },
+ "B5": {
+  "outlying": [
+   {
+    "rep": "rep0041",
+    "R": -0.01679160095755626,
+    "top_unit": "g00175",
+    "top_unit_R": -0.014099905583362765,
+    "top_unit_share_of_R": 0.8396998963352434,
+    "top_unit_country": "PK",
+    "top_unit_flooded_share": 0.0123,
+    "top_unit_cells": 10000
+   },
+   {
+    "rep": "rep0036",
+    "R": -0.016156951532927743,
+    "top_unit": "g00175",
+    "top_unit_R": -0.021236200057575393,
+    "top_unit_share_of_R": 1.3143692369378084,
+    "top_unit_country": "PK",
+    "top_unit_flooded_share": 0.0128,
+    "top_unit_cells": 10000
+   },
+   {
+    "rep": "rep0032",
+    "R": 0.011168426088645222,
+    "top_unit": "g00175",
+    "top_unit_R": 0.010995306245354315,
+    "top_unit_share_of_R": 0.9844991727646463,
+    "top_unit_country": "PK",
+    "top_unit_flooded_share": 0.011,
+    "top_unit_cells": 10000
+   },
+   {
+    "rep": "rep0016",
+    "R": -0.011384758738202059,
+    "top_unit": "g00175",
+    "top_unit_R": -0.01455863702424883,
+    "top_unit_share_of_R": 1.2787830958065614,
+    "top_unit_country": "PK",
+    "top_unit_flooded_share": 0.0136,
+    "top_unit_cells": 10000
+   },
+   {
+    "rep": "rep0021",
+    "R": 0.00963110305538657,
+    "top_unit": "g00024",
+    "top_unit_R": 0.01060526690261468,
+    "top_unit_share_of_R": 1.1011476921829084,
+    "top_unit_country": "BD",
+    "top_unit_flooded_share": 0.2416,
+    "top_unit_cells": 10000
+   },
+   {
+    "rep": "rep0029",
+    "R": 0.009472922563006973,
+    "top_unit": "g00024",
+    "top_unit_R": 0.008102891196666814,
+    "top_unit_share_of_R": 0.8553739506231884,
+    "top_unit_country": "BD",
+    "top_unit_flooded_share": 0.2601,
+    "top_unit_cells": 10000
+   },
+   {
+    "rep": "rep0065",
+    "R": 0.008771524786586838,
+    "top_unit": "g00175",
+    "top_unit_R": 0.006650820445337707,
+    "top_unit_share_of_R": 0.7582285414627055,
+    "top_unit_country": "PK",
+    "top_unit_flooded_share": 0.0149,
+    "top_unit_cells": 10000
+   },
+   {
+    "rep": "rep0077",
+    "R": 0.007983065528541002,
+    "top_unit": "g00024",
+    "top_unit_R": 0.007083236602992831,
+    "top_unit_share_of_R": 0.88728278349575,
+    "top_unit_country": "BD",
+    "top_unit_flooded_share": 0.2319,
+    "top_unit_cells": 10000
+   },
+   {
+    "rep": "rep0066",
+    "R": -0.009235584540424403,
+    "top_unit": "g00175",
+    "top_unit_R": -0.010724180575256306,
+    "top_unit_share_of_R": 1.1611804892604554,
+    "top_unit_country": "PK",
+    "top_unit_flooded_share": 0.0149,
+    "top_unit_cells": 10000
+   },
+   {
+    "rep": "rep0069",
+    "R": 0.007179321084949332,
+    "top_unit": "g00175",
+    "top_unit_R": 0.009434863181945308,
+    "top_unit_share_of_R": 1.3141720603253801,
+    "top_unit_country": "PK",
+    "top_unit_flooded_share": 0.0121,
+    "top_unit_cells": 10000
+   },
+   {
+    "rep": "rep0027",
+    "R": 0.006783350586063011,
+    "top_unit": "g00024",
+    "top_unit_R": 0.005941769648598044,
+    "top_unit_share_of_R": 0.8759343296815486,
+    "top_unit_country": "BD",
+    "top_unit_flooded_share": 0.2507,
+    "top_unit_cells": 10000
+   },
+   {
+    "rep": "rep0003",
+    "R": -0.008226969449922761,
+    "top_unit": "g00024",
+    "top_unit_R": -0.006892869468993562,
+    "top_unit_share_of_R": 0.8378382235342172,
+    "top_unit_country": "BD",
+    "top_unit_flooded_share": 0.2281,
+    "top_unit_cells": 10000
+   },
+   {
+    "rep": "rep0060",
+    "R": 0.006324221766703227,
+    "top_unit": "g00175",
+    "top_unit_R": 0.006700803878809476,
+    "top_unit_share_of_R": 1.0595460004405504,
+    "top_unit_country": "PK",
+    "top_unit_flooded_share": 0.0128,
+    "top_unit_cells": 10000
+   }
+  ],
+  "n": 13,
+  "rule": "B-12 B5: the location group with the largest absolute contribution to R in each outlying null replicate (v55), with its country (majority of cells) and flooded share"
+ },
+ "B10": {
+  "brier": {
+   "M1s": 0.04337196804611198,
+   "M1c": 0.043046501114585925,
+   "M1c_no_nlearn": 0.043815921034026095,
+   "M0": 0.05129357724636781,
+   "M1": 0.043739943199636
+  },
+  "yardstick": 0.0075536340467318094,
+  "gain_M1c_over_M1s_share_of_yardstick": 0.043087463532453255,
+  "gain_M1c_no_nlearn_over_M1s_share_of_yardstick": -0.058773430797352276,
+  "residual_corr": {
+   "r": -0.7390122413635254,
+   "n_pairs": 12,
+   "ci95_fisher": [
+    -0.9219139741724753,
+    -0.2866992619122299
+   ]
+  },
+  "rule": "B-12 B10: second stage refitted on the dumps of B-8 C2 (corrected code, primary split): M1s (no composition), M1c, and M1c without the AOI mean of the character model's score"
+ },
+ "B17": {
+  "primary": {
+   "n_cells": 1507486,
+   "brier_M0": 0.051293577246367815,
+   "brier_M1": 0.043739943200679525,
+   "brier_best_constant": 0.05225195396141914,
+   "brier_training_constant": 0.05229735817938302,
+   "M0_worse_than_best_constant": false
+  },
+  "country": {
+   "n_cells": 1507486,
+   "brier_M0": 0.056511596130988585,
+   "brier_M1": 0.049443526522231954,
+   "brier_best_constant": 0.05225195396141914,
+   "brier_training_constant": 0.05242556152872926,
+   "M0_worse_than_best_constant": true
+  },
+  "time": {
+   "n_cells": 356983,
+   "brier_M0": 0.04953956937677542,
+   "brier_M1": 0.047230219943015087,
+   "brier_best_constant": 0.04726256619800571,
+   "M0_worse_than_best_constant": true
+  },
+  "llmcut": {
+   "n_cells": 268762,
+   "brier_M0": 0.06111851332372824,
+   "brier_M1": 0.04989492888592813,
+   "brier_best_constant": 0.05248493725001666,
+   "M0_worse_than_best_constant": true
+  },
+  "activation_frozen": {
+   "n_cells": 1507486,
+   "brier_M0": 0.05833645161721622,
+   "brier_M1": 0.04880810647807932,
+   "brier_best_constant": 0.05225195396141914,
+   "brier_training_constant": 0.05241853276355839,
+   "M0_worse_than_best_constant": true
+  },
+  "activation_corrected": {
+   "n_cells": 1507486,
+   "brier_M0": 0.05833645161721622,
+   "brier_M1": 0.04880810647807932,
+   "brier_best_constant": 0.05225195396141914,
+   "brier_training_constant": 0.05241853276355839,
+   "M0_worse_than_best_constant": true
+  },
+  "rule": "B-12 B17: held-out Brier of M0 and M1 against the best constant (the test cells' flooded share) and, for k-fold splits, the training-side constant of each fold"
+ },
+ "B20": {
+  "p1": {
+   "k": 82,
+   "n": 108,
+   "rate": 0.7592592592592593,
+   "ci95": [
+    0.670618917901196,
+    0.830089226474421
+   ]
+  },
+  "p0": {
+   "k": 44,
+   "n": 245,
+   "rate": 0.17959183673469387,
+   "ci95": [
+    0.13658964915158467,
+    0.2324869039649361
+   ]
+  },
+  "rule": "B-12 B20: water-related derivations among names read as water-side (p1) and among the others (p0)"
+ },
+ "B1": {
+  "n_units": 195,
+  "replicates_outer": 2000,
+  "replicates_inner": 1000,
+  "seed": 20261101,
+  "delta_bs_hat": -2.6419622346602572e-05,
+  "yardstick_hat": 0.007553634045688095,
+  "R_hat": -0.0034976042242454027,
+  "se_delta_bs": 3.128492043058619e-05,
+  "se_yardstick": 0.00211220912325894,
+  "corr_delta_yardstick": 0.03891065773973765,
+  "share_equivalent": {
+   "proportional": {
+    "-0.06": {
+     "fixed": 0.0,
+     "ratio": 0.0,
+     "undefined": 0.0
+    },
+    "-0.05": {
+     "fixed": 0.0,
+     "ratio": 0.1515,
+     "undefined": 0.0
+    },
+    "-0.04": {
+     "fixed": 0.049,
+     "ratio": 0.613,
+     "undefined": 0.0
+    },
+    "-0.02": {
+     "fixed": 0.9835,
+     "ratio": 0.944,
+     "undefined": 0.0
+    },
+    "+0.00": {
+     "fixed": 0.999,
+     "ratio": 0.982,
+     "undefined": 0.0
+    },
+    "+0.02": {
+     "fixed": 0.997,
+     "ratio": 0.9875,
+     "undefined": 0.0
+    },
+    "+0.04": {
+     "fixed": 0.011,
+     "ratio": 0.728,
+     "undefined": 0.0
+    },
+    "+0.05": {
+     "fixed": 0.0,
+     "ratio": 0.0295,
+     "undefined": 0.0
+    },
+    "+0.06": {
+     "fixed": 0.0,
+     "ratio": 0.0,
+     "undefined": 0.0
+    }
+   },
+   "constant": {
+    "-0.06": {
+     "fixed": 0.153,
+     "ratio": 0.0055,
+     "undefined": 0.0
+    },
+    "-0.05": {
+     "fixed": 0.3205,
+     "ratio": 0.032,
+     "undefined": 0.0
+    },
+    "-0.04": {
+     "fixed": 0.5735,
+     "ratio": 0.162,
+     "undefined": 0.0
+    },
+    "-0.02": {
+     "fixed": 0.9405,
+     "ratio": 0.761,
+     "undefined": 0.0
+    },
+    "+0.00": {
+     "fixed": 0.999,
+     "ratio": 0.982,
+     "undefined": 0.0
+    },
+    "+0.02": {
+     "fixed": 0.9635,
+     "ratio": 0.838,
+     "undefined": 0.0
+    },
+    "+0.04": {
+     "fixed": 0.5895,
+     "ratio": 0.1285,
+     "undefined": 0.0
+    },
+    "+0.05": {
+     "fixed": 0.3345,
+     "ratio": 0.0295,
+     "undefined": 0.0
+    },
+    "+0.06": {
+     "fixed": 0.1345,
+     "ratio": 0.0055,
+     "undefined": 0.0
+    }
+   }
+  },
+  "seconds": 14,
+  "rule": "B-12 B1: share of outer replicates (new samples) in which each rule declares equivalence (90% interval inside \u00b10.05; denominator's 95% interval above zero) with the true R set to r0"
+ },
+ "B9": {
+  "lex_wetside": {
+   "precision": {
+    "est": 0.736842105263158,
+    "ci95": [
+     0.6578947368421053,
+     0.8157894736842105
+    ]
+   },
+   "recall": {
+    "est": 0.1845670406021313,
+    "ci95": [
+     0.151096461724741,
+     0.22939628880371832
+    ]
+   }
+  },
+  "nread_wetside": {
+   "precision": {
+    "est": 0.4575295542709487,
+    "ci95": [
+     0.36866764651264156,
+     0.5529626508915169
+    ]
+   },
+   "recall": {
+    "est": 0.5962324047991533,
+    "ci95": [
+     0.492360011222265,
+     0.7046172837152044
+    ]
+   }
+  },
+  "rule": "B-12 B9: the stratified bootstrap of v44 (same seed and replicates) on coder 2's codes"
+ },
+ "B6": {
+  "gfm_not_s1": {
+   "coef": 0.89494588764679,
+   "se": 0.24791965787280068,
+   "odds_ratio": 2.4472033619466624,
+   "ci95_odds_ratio": [
+    1.5053468822926825,
+    3.978354999215824
+   ]
+  },
+  "ems_not_s1": {
+   "coef": 0.6717866116625896,
+   "se": 0.23178954764504975,
+   "odds_ratio": 1.9577319046271588,
+   "ci95_odds_ratio": [
+    1.2429394496617436,
+    3.083588835673473
+   ]
+  },
+  "n_aoi_not_s1": 68,
+  "n_gfm_aoi": 192,
+  "share_assessable_le500m": {
+   "highland": 0.31446188340807174,
+   "water_side": 0.5383171723490773,
+   "other": 0.5209792801808815,
+   "n_cells": {
+    "highland": 1784,
+    "water_side": 3197,
+    "other": 53958
+   }
+  },
+  "median_hand_min_le500m": {
+   "highland": 0.07918217778205872,
+   "water_side": 0.00019609597802627832,
+   "other": 0.00028161822410766035,
+   "highland_assessable": 5.5053278629202396e-05,
+   "highland_not_assessable": 0.3588563799858093
+  },
+  "rule": "B-12 B6: the estimate surviving BH (v41) and GFM assessability within 500 m by class"
+ },
+ "B21": {
+  "n_names": 250,
+  "n_read_water_side": 150,
+  "n_not_read": 100,
+  "not_read_by_country": {
+   "KH": 35,
+   "MM": 24,
+   "BD": 10,
+   "PK": 7,
+   "PT": 2,
+   "DE": 2,
+   "AU": 2,
+   "FR": 2,
+   "VN": 2,
+   "IE": 2,
+   "SI": 1,
+   "MX": 1,
+   "HR": 1,
+   "IR": 1,
+   "US": 1,
+   "BE": 1,
+   "GB": 1,
+   "ES": 1,
+   "MG": 1,
+   "IT": 1,
+   "PH": 1,
+   "GR": 1
+  },
+  "n_carrying_aoi": 161,
+  "rule": "B-12 B21: names not read as water-side, nearest to cells within 500 m in the AOIs that hold flooded cells near water-side names, allocated to countries in proportion to those flooded cells; mixed with the B-11 sample in a random order; the key (read or not) is kept private"
+ },
+ "B19": {
+  "rows": [
+   {
+    "file": "v39_within_aoi_odds.json",
+    "path": "wetside_raw/terms/wetside:le500m",
+    "estimate": 1.0461236279478248,
+    "ci95": [
+     0.8018129209539674,
+     1.3648752924169303
+    ],
+    "amendment": "2",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v39_within_aoi_odds.json",
+    "path": "wetside_adjusted_M1/terms/wetside:le500m",
+    "estimate": 1.0091652594745366,
+    "ci95": [
+     0.7721129381770176,
+     1.3189968339797762
+    ],
+    "amendment": "2",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v39_within_aoi_odds.json",
+    "path": "wetside_clean_raw/terms/wetside:le500m",
+    "estimate": 1.0342882296466407,
+    "ci95": [
+     0.7858099747185671,
+     1.3613369343761603
+    ],
+    "amendment": "2",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v39_within_aoi_odds.json",
+    "path": "wetside_clean_adjusted_M1/terms/wetside:le500m",
+    "estimate": 1.030059069019934,
+    "ci95": [
+     0.7739222551663094,
+     1.3709667587246326
+    ],
+    "amendment": "2",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v41_gfm_independent_labels.json",
+    "path": "odds_gfm/wetside_adjusted_M1/terms/wetside:le500m",
+    "estimate": 0.5493354376611337,
+    "ci95": [
+     0.3669453524820029,
+     0.8223824638442583
+    ],
+    "amendment": "3",
+    "labels": "GFM",
+    "domain": "gfm_cells",
+    "gfm": true,
+    "uncapped": false
+   },
+   {
+    "file": "v41_gfm_independent_labels.json",
+    "path": "odds_gfm/wetside_raw/terms/wetside:le500m",
+    "estimate": 0.5231032430081665,
+    "ci95": [
+     0.334981796460184,
+     0.8168712620722522
+    ],
+    "amendment": "3",
+    "labels": "GFM",
+    "domain": "gfm_cells",
+    "gfm": true,
+    "uncapped": false
+   },
+   {
+    "file": "v41_gfm_independent_labels.json",
+    "path": "odds_ems/wetside_adjusted_M1/terms/wetside:le500m",
+    "estimate": 0.787362083156554,
+    "ci95": [
+     0.5812209829002304,
+     1.0666150538805375
+    ],
+    "amendment": "3",
+    "labels": "EMS",
+    "domain": "gfm_cells",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v41_gfm_independent_labels.json",
+    "path": "odds_ems/wetside_raw/terms/wetside:le500m",
+    "estimate": 0.7882292759650139,
+    "ci95": [
+     0.5942233645285845,
+     1.0455755000162785
+    ],
+    "amendment": "3",
+    "labels": "EMS",
+    "domain": "gfm_cells",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v41_gfm_independent_labels.json",
+    "path": "odds_gfm_c2_M1/wetside_adjusted_M1/terms/wetside:le500m",
+    "estimate": 0.5469896355339242,
+    "ci95": [
+     0.3429911560034264,
+     0.8723188809525642
+    ],
+    "amendment": "3",
+    "labels": "GFM",
+    "domain": "gfm_cells",
+    "gfm": true,
+    "uncapped": false
+   },
+   {
+    "file": "v41_gfm_independent_labels.json",
+    "path": "odds_ems_c2_M1/wetside_adjusted_M1/terms/wetside:le500m",
+    "estimate": 0.8037380754602182,
+    "ci95": [
+     0.6058122138047469,
+     1.066328606825843
+    ],
+    "amendment": "3",
+    "labels": "EMS",
+    "domain": "gfm_cells",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v41_gfm_independent_labels.json",
+    "path": "sensitivity_independent_sensor/odds_gfm/wetside_adjusted_M1/terms/wetside:le500m",
+    "estimate": 0.47998396203007637,
+    "ci95": [
+     0.23597724133767597,
+     0.9763000978404385
+    ],
+    "amendment": "3",
+    "labels": "GFM",
+    "domain": "gfm_cells",
+    "gfm": true,
+    "uncapped": false
+   },
+   {
+    "file": "v41_gfm_independent_labels.json",
+    "path": "sensitivity_independent_sensor/odds_gfm/wetside_raw/terms/wetside:le500m",
+    "estimate": 0.43970876029193423,
+    "ci95": [
+     0.2029434465830237,
+     0.9526978926041504
+    ],
+    "amendment": "3",
+    "labels": "GFM",
+    "domain": "gfm_cells",
+    "gfm": true,
+    "uncapped": false
+   },
+   {
+    "file": "v41_gfm_independent_labels.json",
+    "path": "sensitivity_independent_sensor/odds_ems/wetside_adjusted_M1/terms/wetside:le500m",
+    "estimate": 0.7693977653393561,
+    "ci95": [
+     0.4618232988037191,
+     1.2818169261763275
+    ],
+    "amendment": "3",
+    "labels": "EMS",
+    "domain": "gfm_cells",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v41_gfm_independent_labels.json",
+    "path": "sensitivity_independent_sensor/odds_ems/wetside_raw/terms/wetside:le500m",
+    "estimate": 0.7405301187756387,
+    "ci95": [
+     0.5028804575130944,
+     1.0904875077584066
+    ],
+    "amendment": "3",
+    "labels": "EMS",
+    "domain": "gfm_cells",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v45_gfm_masking_check.json",
+    "path": "v_ge_0.9/gfm/wetside_adjusted_M1/wetside:le500m",
+    "estimate": 0.5974686024506737,
+    "ci95": [
+     0.41580737016536734,
+     0.8584954393001598
+    ],
+    "amendment": "3, add. 2",
+    "labels": "GFM",
+    "domain": "gfm_cells",
+    "gfm": true,
+    "uncapped": false
+   },
+   {
+    "file": "v45_gfm_masking_check.json",
+    "path": "v_ge_0.9/gfm/wetside_raw/wetside:le500m",
+    "estimate": 0.5710614498197591,
+    "ci95": [
+     0.36926845193379537,
+     0.883127648090318
+    ],
+    "amendment": "3, add. 2",
+    "labels": "GFM",
+    "domain": "gfm_cells",
+    "gfm": true,
+    "uncapped": false
+   },
+   {
+    "file": "v45_gfm_masking_check.json",
+    "path": "v_ge_0.9/ems/wetside_adjusted_M1/wetside:le500m",
+    "estimate": 0.7938254631821221,
+    "ci95": [
+     0.5065983227141281,
+     1.2439023931626938
+    ],
+    "amendment": "3, add. 2",
+    "labels": "EMS",
+    "domain": "gfm_cells",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v45_gfm_masking_check.json",
+    "path": "v_ge_0.9/ems/wetside_raw/wetside:le500m",
+    "estimate": 0.7984647465741209,
+    "ci95": [
+     0.4983001313958696,
+     1.2794416684895131
+    ],
+    "amendment": "3, add. 2",
+    "labels": "EMS",
+    "domain": "gfm_cells",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v45_gfm_masking_check.json",
+    "path": "v_ge_1.0/gfm/wetside_adjusted_M1/wetside:le500m",
+    "estimate": 0.6679943760347069,
+    "ci95": [
+     0.46832541844806863,
+     0.9527915181129061
+    ],
+    "amendment": "3, add. 2",
+    "labels": "GFM",
+    "domain": "gfm_cells",
+    "gfm": true,
+    "uncapped": false
+   },
+   {
+    "file": "v45_gfm_masking_check.json",
+    "path": "v_ge_1.0/gfm/wetside_raw/wetside:le500m",
+    "estimate": 0.6508582883694132,
+    "ci95": [
+     0.4246577907088394,
+     0.997547956984519
+    ],
+    "amendment": "3, add. 2",
+    "labels": "GFM",
+    "domain": "gfm_cells",
+    "gfm": true,
+    "uncapped": false
+   },
+   {
+    "file": "v45_gfm_masking_check.json",
+    "path": "v_ge_1.0/ems/wetside_adjusted_M1/wetside:le500m",
+    "estimate": 0.668822568246623,
+    "ci95": [
+     0.4021288044054703,
+     1.1123889233882585
+    ],
+    "amendment": "3, add. 2",
+    "labels": "EMS",
+    "domain": "gfm_cells",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v45_gfm_masking_check.json",
+    "path": "v_ge_1.0/ems/wetside_raw/wetside:le500m",
+    "estimate": 0.6874716803453819,
+    "ci95": [
+     0.38694207650592893,
+     1.2214161756318096
+    ],
+    "amendment": "3, add. 2",
+    "labels": "EMS",
+    "domain": "gfm_cells",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v50_gfm_diagnostics.json",
+    "path": "v1/odds_v1/wetside_adjusted_M1/terms/wetside:le500m",
+    "estimate": 0.5286758457943198,
+    "ci95": [
+     0.3572564580346476,
+     0.7823459692343279
+    ],
+    "amendment": "6",
+    "labels": "GFM",
+    "domain": "gfm_cells",
+    "gfm": true,
+    "uncapped": false
+   },
+   {
+    "file": "v50_gfm_diagnostics.json",
+    "path": "v1/odds_v1/wetside_raw/terms/wetside:le500m",
+    "estimate": 0.506208650381844,
+    "ci95": [
+     0.3282136656689638,
+     0.7807328716771315
+    ],
+    "amendment": "6",
+    "labels": "GFM",
+    "domain": "gfm_cells",
+    "gfm": true,
+    "uncapped": false
+   },
+   {
+    "file": "v50_gfm_diagnostics.json",
+    "path": "v1/odds_ems/wetside_adjusted_M1/terms/wetside:le500m",
+    "estimate": 0.7586691402486387,
+    "ci95": [
+     0.5655770661335598,
+     1.0176842358556437
+    ],
+    "amendment": "6",
+    "labels": "EMS",
+    "domain": "gfm_cells",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v50_gfm_diagnostics.json",
+    "path": "v1/odds_ems/wetside_raw/terms/wetside:le500m",
+    "estimate": 0.7699844363821614,
+    "ci95": [
+     0.584056962610681,
+     1.0150996738753928
+    ],
+    "amendment": "6",
+    "labels": "EMS",
+    "domain": "gfm_cells",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v55_b7_local.json",
+    "path": "odds_ems/wetside_adjusted_cci",
+    "estimate": 1.0107331125415813,
+    "ci95": [
+     0.7733683318243808,
+     1.32095068125957
+    ],
+    "amendment": "7",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v55_b7_local.json",
+    "path": "odds_gfm/wetside_adjusted_cci",
+    "estimate": 0.550116794774447,
+    "ci95": [
+     0.3662971033317977,
+     0.8261831315078277
+    ],
+    "amendment": "7",
+    "labels": "GFM",
+    "domain": "gfm_cells",
+    "gfm": true,
+    "uncapped": false
+   },
+   {
+    "file": "v55_b7_local.json",
+    "path": "partial/odds_without_partial",
+    "estimate": 1.0076006304747618,
+    "ci95": [
+     0.7281051998227531,
+     1.394385084435996
+    ],
+    "amendment": "7",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v55_b7_local.json",
+    "path": "partial/odds_fractional_riverine_cover",
+    "estimate": 0.9813824929086807,
+    "ci95": [
+     0.7966450846449632,
+     1.2089594424810663
+    ],
+    "amendment": "7",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v55_b7_local.json",
+    "path": "pairs_bootstrap/wetside/wetside:le500m",
+    "estimate": 1.0091652594745368,
+    "ci95": [
+     0.7730151556392948,
+     1.314934994410272
+    ],
+    "amendment": "7",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v57_b8_local.json",
+    "path": "B7/odds_adjusted_h_main",
+    "estimate": 1.0012936078966401,
+    "ci95": [
+     0.7510918704743609,
+     1.33484188636135
+    ],
+    "amendment": "8",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v57_b8_local.json",
+    "path": "B7/odds_same_cells_unadjusted",
+    "estimate": 0.99810370936885,
+    "ci95": [
+     0.7497929855191439,
+     1.3286480853993294
+    ],
+    "amendment": "8",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v57_b8_local.json",
+    "path": "B6/typed_aois",
+    "estimate": 0.9961000769795715,
+    "ci95": [
+     0.7727806531162279,
+     1.2985814903413158
+    ],
+    "amendment": "8",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v57_b8_local.json",
+    "path": "B6/without_no_hydro",
+    "estimate": 0.853001328558005,
+    "ci95": [
+     0.6222242820464625,
+     1.1928275510008806
+    ],
+    "amendment": "8",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v57_b8_local.json",
+    "path": "B6/without_oceania_americas",
+    "estimate": 0.9641550282663568,
+    "ci95": [
+     0.713980593135799,
+     1.2937116072564374
+    ],
+    "amendment": "8",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v57_b8_local.json",
+    "path": "B6/without_australia",
+    "estimate": 0.9961849984673299,
+    "ci95": [
+     0.7350330002245713,
+     1.3025572013835633
+    ],
+    "amendment": "8",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v57_b8_local.json",
+    "path": "B6/cleaned_reading",
+    "estimate": 1.0434152693515604,
+    "ci95": [
+     0.7622897508602353,
+     1.3781527642254923
+    ],
+    "amendment": "8",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v57_b8_local.json",
+    "path": "B6/uncapped",
+    "estimate": 0.9113007324714353,
+    "ci95": [
+     0.763488120877704,
+     1.1509667872663727
+    ],
+    "amendment": "8",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": true
+   },
+   {
+    "file": "v61_leaveout.json",
+    "path": "without_pakistan",
+    "estimate": 1.0910157755205223,
+    "ci95": [
+     0.7668399623982791,
+     1.4484316468222278
+    ],
+    "amendment": "8",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v61_leaveout.json",
+    "path": "without_pakistan_bangladesh",
+    "estimate": 0.9732252221657002,
+    "ci95": [
+     0.7220527943348196,
+     1.2399874348048532
+    ],
+    "amendment": "8",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v64_b9_aggregate.json",
+    "path": "C5_near",
+    "estimate": 1.043211323327384,
+    "ci95": [
+     0.7802768635412289,
+     1.3846331822698672
+    ],
+    "amendment": "9",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v64_b9_aggregate.json",
+    "path": "C7_near",
+    "estimate": 1.020472674276794,
+    "ci95": [
+     0.7766475141317137,
+     1.3305543833608395
+    ],
+    "amendment": "9",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": false
+   },
+   {
+    "file": "v68_b11_local.json",
+    "path": "B2/ems_all",
+    "estimate": 0.9113480934974443,
+    "ci95": [
+     0.7625182712491937,
+     1.163541372928371
+    ],
+    "amendment": "11",
+    "labels": "EMS",
+    "domain": "all",
+    "gfm": false,
+    "uncapped": true
+   },
+   {
+    "file": "v68_b11_local.json",
+    "path": "B2/gfm",
+    "estimate": 0.8215970937125705,
+    "ci95": [
+     0.6001336871796628,
+     1.0693761700714586
+    ],
+    "amendment": "11",
+    "labels": "GFM",
+    "domain": "gfm_cells",
+    "gfm": true,
+    "uncapped": true
+   },
+   {
+    "file": "v68_b11_local.json",
+    "path": "B2/ems_same_cells",
+    "estimate": 0.8923951234132238,
+    "ci95": [
+     0.6748288041675774,
+     1.1628055920903593
+    ],
+    "amendment": "11",
+    "labels": "EMS",
+    "domain": "gfm_cells",
+    "gfm": false,
+    "uncapped": true
+   },
+   {
+    "file": "v68_b11_local.json",
+    "path": "B2/gfm_not_s1",
+    "estimate": 0.8530222233549719,
+    "ci95": [
+     0.4327208177826584,
+     1.4554694586910808
+    ],
+    "amendment": "11",
+    "labels": "GFM",
+    "domain": "gfm_cells",
+    "gfm": true,
+    "uncapped": true
+   },
+   {
+    "file": "v68_b11_local.json",
+    "path": "B2/ems_not_s1",
+    "estimate": 1.0007558498371443,
+    "ci95": [
+     0.7108690061141489,
+     1.578255767277818
+    ],
+    "amendment": "11",
+    "labels": "EMS",
+    "domain": "gfm_cells",
+    "gfm": false,
+    "uncapped": true
+   }
+  ],
+  "n": 48,
+  "ranges": {
+   "GFM_gfm_cells": {
+    "n": 14,
+    "min": 0.43970876029193423,
+    "max": 0.8530222233549719
+   },
+   "EMS_gfm_cells": {
+    "n": 13,
+    "min": 0.668822568246623,
+    "max": 1.0007558498371443
+   },
+   "EMS_all": {
+    "n": 21,
+    "min": 0.853001328558005,
+    "max": 1.0910157755205223
+   }
+  },
+  "rule": "B-12 B19 (addenda 2 and 3): every version of the water-side odds ratio within 500 m in the corrected census (v69_estimates.csv), including the Sect. 5 estimator versions flagged by keys, without strata, single-activation leave-outs or other classes, with the uncapped estimates of B-11 B2 (pairs intervals); equal values counted once; labels from the path, and for EMS the domain (cells GFM can assess, or all cells)"
+ },
+ "B8c": {
+  "n_rows": 1149,
+  "n_unique": 989,
+  "flood": {
+   "n": 641,
+   "n_excluding_null": 79,
+   "share_excluding_null": 0.12324492979719189,
+   "by_kind": {
+    "R": {
+     "n": 74,
+     "excl": 8
+    },
+    "difference": {
+     "n": 78,
+     "excl": 12
+    },
+    "odds_ratio": {
+     "n": 489,
+     "excl": 59
+    }
+   }
+  },
+  "site": {
+   "n": 190,
+   "n_excluding_null": 98,
+   "share_excluding_null": 0.5157894736842106,
+   "by_kind": {
+    "difference": {
+     "n": 190,
+     "excl": 98
+    }
+   }
+  },
+  "nuisance": {
+   "n": 144,
+   "n_excluding_null": 125,
+   "share_excluding_null": 0.8680555555555556,
+   "by_kind": {
+    "difference": {
+     "n": 3,
+     "excl": 3
+    },
+    "odds_ratio": {
+     "n": 141,
+     "excl": 122
+    }
+   }
+  },
+  "near_settlement_or": {
+   "n": 198,
+   "n_excluding_one": 24,
+   "n_bh_q_below_0_05": 0,
+   "n_bh_q_below_0_10": 9,
+   "n_by_q_below_0_05": 0,
+   "n_by_q_below_0_10": 0,
+   "smallest_q": [
+    {
+     "file": "v41_gfm_independent_labels.json",
+     "path": "sensitivity_independent_sensor/odds_gfm/categories_adjusted_M1/terms/high:le500m",
+     "estimate": 2.4472033619466624,
+     "ci95": [
+      1.5053468822926825,
+      3.978354999215824
+     ],
+     "p": 0.000306406946813964,
+     "q_bh": 0.06066857546916487,
+     "q_by": 0.3560035540954339
+    },
+    {
+     "file": "v50_gfm_diagnostics.json",
+     "path": "v1/odds_v1/wetside_raw/terms/wetside:le500m",
+     "estimate": 0.506208650381844,
+     "ci95": [
+      0.3282136656689638,
+      0.7807328716771315
+     ],
+     "p": 0.0020721670395663604,
+     "q_bh": 0.09633084364770568,
+     "q_by": 0.565269951410429
+    },
+    {
+     "file": "v48_b6_local.json",
+     "path": "rounded/gfm_cells/gfm/not_rounded/le500m",
+     "estimate": 0.5293645373151108,
+     "ci95": [
+      0.3459131851898836,
+      0.8101073487933544
+     ],
+     "p": 0.0033888843922817917,
+     "q_bh": 0.09633084364770568,
+     "q_by": 0.565269951410429
+    },
+    {
+     "file": "v41_gfm_independent_labels.json",
+     "path": "odds_gfm/wetside_raw/terms/wetside:le500m",
+     "estimate": 0.5231032430081665,
+     "ci95": [
+      0.334981796460184,
+      0.8168712620722522
+     ],
+     "p": 0.004378674711259349,
+     "q_bh": 0.09633084364770568,
+     "q_by": 0.565269951410429
+    },
+    {
+     "file": "v41_gfm_independent_labels.json",
+     "path": "sensitivity_independent_sensor/odds_ems/categories_adjusted_M1/terms/high:le500m",
+     "estimate": 1.9577319046271588,
+     "ci95": [
+      1.2429394496617436,
+      3.083588835673473
+     ],
+     "p": 0.0037523815046273472,
+     "q_bh": 0.09633084364770568,
+     "q_by": 0.565269951410429
+    },
+    {
+     "file": "v41_gfm_independent_labels.json",
+     "path": "odds_gfm/wetside_adjusted_M1/terms/wetside:le500m",
+     "estimate": 0.5493354376611337,
+     "ci95": [
+      0.3669453524820029,
+      0.8223824638442583
+     ],
+     "p": 0.0036155509767657502,
+     "q_bh": 0.09633084364770568,
+     "q_by": 0.565269951410429
+    },
+    {
+     "file": "v55_b7_local.json",
+     "path": "odds_gfm/wetside_adjusted_cci",
+     "estimate": 0.550116794774447,
+     "ci95": [
+      0.3662971033317977,
+      0.8261831315078277
+     ],
+     "p": 0.003973988833944256,
+     "q_bh": 0.09633084364770568,
+     "q_by": 0.565269951410429
+    },
+    {
+     "file": "v66_b10_local.json",
+     "path": "B7/sensor/optical/or_le500m",
+     "estimate": 0.56969867142223,
+     "ci95": [
+      0.4359038819982535,
+      0.9073312462879036
+     ],
+     "p": 0.0026243441210076456,
+     "q_bh": 0.09633084364770568,
+     "q_by": 0.565269951410429
+    },
+    {
+     "file": "v50_gfm_diagnostics.json",
+     "path": "v1/odds_v1/wetside_adjusted_M1/terms/wetside:le500m",
+     "estimate": 0.5286758457943198,
+     "ci95": [
+      0.3572564580346476,
+      0.7823459692343279
+     ],
+     "p": 0.0014349026486934892,
+     "q_bh": 0.09633084364770568,
+     "q_by": 0.565269951410429
+    },
+    {
+     "file": "v45_gfm_masking_check.json",
+     "path": "v_ge_0.9/gfm/wetside_adjusted_M1/wetside:le500m",
+     "estimate": 0.5974686024506737,
+     "ci95": [
+      0.41580737016536734,
+      0.8584954393001598
+     ],
+     "p": 0.005352810202806172,
+     "q_bh": 0.10598564201556222,
+     "q_by": 0.62192436444801
+    }
+   ],
+   "n_flagged_by_keys_only": 93
+  },
+  "rule": "B-12 addendum 1: the census of B-11 B8 with odds ratios flagged near settlements also when the node carries n_group_flooded, n_group_cells, n_flooded_near; BH and BY q within the near-settlement family"
+ },
+ "B21b": {
+  "n_added": 50,
+  "n_names": 300,
+  "added_by_country": {
+   "KH": 23,
+   "MM": 9,
+   "IR": 6,
+   "US": 6,
+   "MX": 3,
+   "FR": 3
+  },
+  "added_strata": [
+   "ab|IR",
+   "apan|MX",
+   "boeng|KH",
+   "chrouy|KH",
+   "creek|US",
+   "ford|US",
+   "inn|MM",
+   "kampong|KH",
+   "kan|MM",
+   "kaoh|KH",
+   "kyun|MM",
+   "nahr|IR",
+   "port|FR",
+   "preaek|KH",
+   "prek|KH",
+   "spean|KH",
+   "srah|KH"
+  ],
+  "share_uncapped_weight_of_added_strata": 0.3984238926647821,
+  "rule": "B-12 addendum 1 item 3: strata (form x country) of the uncapped sample absent from the B-11 sample, heaviest first, up to three names each, 50 names; mixed into the B21 sample in a random order",
+  "note": "share recomputed over unique strata (the first value summed per name); weights sum to 2 over all strata"
+ },
+ "B18": {
+  "share_missing_lc_built": 0.0,
+  "without": {
+   "band_500m_1km": {
+    "coef": 0.11689165526193158,
+    "odds_ratio": 1.1239976438629153,
+    "ci95": [
+     1.049534368251888,
+     1.2037440046043126
+    ]
+   },
+   "band_gt1km": {
+    "coef": 0.25344872075639757,
+    "odds_ratio": 1.2884613064700121,
+    "ci95": [
+     1.1224497719233897,
+     1.4790261264213782
+    ]
+   },
+   "wetside:le500m": {
+    "coef": 0.00912351336599045,
+    "odds_ratio": 1.0091652594745366,
+    "ci95": [
+     0.7721129381770176,
+     1.3189968339797762
+    ]
+   }
+  },
+  "with_built10": {
+   "band_500m_1km": {
+    "coef": 0.0496932156167365,
+    "odds_ratio": 1.050948632287082,
+    "ci95": [
+     0.9775032551621564,
+     1.1299123781668283
+    ]
+   },
+   "band_gt1km": {
+    "coef": 0.156649349069432,
+    "odds_ratio": 1.1695854257707665,
+    "ci95": [
+     1.0176778826808304,
+     1.3441680235517142
+    ]
+   },
+   "wetside:le500m": {
+    "coef": -0.018071349177278366,
+    "odds_ratio": 0.9820909584765737,
+    "ci95": [
+     0.7491959091493646,
+     1.2873837656381886
+    ]
+   },
+   "lc_built10": {
+    "coef": -3.1772492275783017,
+    "odds_ratio": 0.041700205272886856,
+    "ci95": [
+     0.007320717542119686,
+     0.23753233338072577
+    ]
+   }
+  },
+  "pairs": {
+   "without": {
+    "pairs_ci95": [
+     0.7770850554535913,
+     1.3124534999842479
+    ],
+    "reps_ok": 2000
+   },
+   "with": {
+    "pairs_ci95": [
+     0.7477170593816302,
+     1.2787973716177545
+    ],
+    "reps_ok": 2000
+   }
+  },
+  "rule": "B-12 B18: the Sect. 5 model (AOI fixed effects, distance bands, logit of M1, water-side \u00d7 band) on the capped table, with and without the ESA WorldCover built-up share of the cell (10 m)"
+ },
+ "B2": {
+  "flooded_near_total": 3753,
+  "cells_near_total": 105443,
+  "n_countries_with_flooded_near": 37,
+  "n_activations_with_flooded_near": 89,
+  "share_top5_countries": 0.7841726618705036,
+  "share_pk_bd": 0.17266187050359713,
+  "by_country": [
+   {
+    "cc": "KH",
+    "flooded_near": 1299,
+    "cells_near": 14607,
+    "share_of_flooded_near": 0.34612310151878495,
+    "aois": 4
+   },
+   {
+    "cc": "MM",
+    "flooded_near": 909,
+    "cells_near": 23460,
+    "share_of_flooded_near": 0.2422062350119904,
+    "aois": 11
+   },
+   {
+    "cc": "BD",
+    "flooded_near": 384,
+    "cells_near": 2002,
+    "share_of_flooded_near": 0.10231814548361311,
+    "aois": 2
+   },
+   {
+    "cc": "PK",
+    "flooded_near": 264,
+    "cells_near": 1528,
+    "share_of_flooded_near": 0.07034372501998401,
+    "aois": 12
+   },
+   {
+    "cc": "PT",
+    "flooded_near": 87,
+    "cells_near": 4561,
+    "share_of_flooded_near": 0.023181454836131096,
+    "aois": 9
+   },
+   {
+    "cc": "DE",
+    "flooded_near": 84,
+    "cells_near": 13103,
+    "share_of_flooded_near": 0.02238209432454037,
+    "aois": 31
+   },
+   {
+    "cc": "AU",
+    "flooded_near": 79,
+    "cells_near": 1809,
+    "share_of_flooded_near": 0.02104982680522249,
+    "aois": 43
+   },
+   {
+    "cc": "FR",
+    "flooded_near": 73,
+    "cells_near": 5994,
+    "share_of_flooded_near": 0.019451105782041032,
+    "aois": 54
+   },
+   {
+    "cc": "VN",
+    "flooded_near": 71,
+    "cells_near": 1279,
+    "share_of_flooded_near": 0.01891819877431388,
+    "aois": 16
+   },
+   {
+    "cc": "IE",
+    "flooded_near": 62,
+    "cells_near": 1849,
+    "share_of_flooded_near": 0.0165201172395417,
+    "aois": 19
+   },
+   {
+    "cc": "SI",
+    "flooded_near": 46,
+    "cells_near": 1255,
+    "share_of_flooded_near": 0.012256861177724487,
+    "aois": 6
+   },
+   {
+    "cc": "MX",
+    "flooded_near": 45,
+    "cells_near": 4490,
+    "share_of_flooded_near": 0.011990407673860911,
+    "aois": 3
+   },
+   {
+    "cc": "HR",
+    "flooded_near": 43,
+    "cells_near": 1240,
+    "share_of_flooded_near": 0.01145750066613376,
+    "aois": 27
+   },
+   {
+    "cc": "IR",
+    "flooded_near": 38,
+    "cells_near": 1871,
+    "share_of_flooded_near": 0.010125233146815881,
+    "aois": 3
+   },
+   {
+    "cc": "US",
+    "flooded_near": 33,
+    "cells_near": 2879,
+    "share_of_flooded_near": 0.008792965627498001,
+    "aois": 12
+   }
+  ],
+  "by_activation": [
+   {
+    "activation": "EMSR052",
+    "flooded_near": 1124,
+    "cells_near": 12695,
+    "share_of_flooded_near": 0.2994937383426592,
+    "aois": 3
+   },
+   {
+    "activation": "EMSR130",
+    "flooded_near": 909,
+    "cells_near": 23460,
+    "share_of_flooded_near": 0.2422062350119904,
+    "aois": 11
+   },
+   {
+    "activation": "EMSR097",
+    "flooded_near": 384,
+    "cells_near": 2002,
+    "share_of_flooded_near": 0.10231814548361311,
+    "aois": 2
+   },
+   {
+    "activation": "EMSR055",
+    "flooded_near": 231,
+    "cells_near": 3544,
+    "share_of_flooded_near": 0.06155075939248601,
+    "aois": 1
+   },
+   {
+    "activation": "EMSR629",
+    "flooded_near": 158,
+    "cells_near": 303,
+    "share_of_flooded_near": 0.04209965361044498,
+    "aois": 3
+   },
+   {
+    "activation": "EMSR838",
+    "flooded_near": 106,
+    "cells_near": 1216,
+    "share_of_flooded_near": 0.028244071409539037,
+    "aois": 7
+   },
+   {
+    "activation": "EMSR864",
+    "flooded_near": 79,
+    "cells_near": 1100,
+    "share_of_flooded_near": 0.02104982680522249,
+    "aois": 5
+   },
+   {
+    "activation": "EMSR429",
+    "flooded_near": 43,
+    "cells_near": 1347,
+    "share_of_flooded_near": 0.01145750066613376,
+    "aois": 4
+   },
+   {
+    "activation": "EMSR774",
+    "flooded_near": 36,
+    "cells_near": 4402,
+    "share_of_flooded_near": 0.009592326139088728,
+    "aois": 2
+   },
+   {
+    "activation": "EMSR567",
+    "flooded_near": 35,
+    "cells_near": 347,
+    "share_of_flooded_near": 0.009325872635225153,
+    "aois": 8
+   },
+   {
+    "activation": "EMSR203",
+    "flooded_near": 31,
+    "cells_near": 2792,
+    "share_of_flooded_near": 0.00826005861977085,
+    "aois": 7
+   },
+   {
+    "activation": "EMSR047",
+    "flooded_near": 28,
+    "cells_near": 217,
+    "share_of_flooded_near": 0.007460698108180123,
+    "aois": 2
+   },
+   {
+    "activation": "EMSR866",
+    "flooded_near": 27,
+    "cells_near": 1202,
+    "share_of_flooded_near": 0.007194244604316547,
+    "aois": 5
+   },
+   {
+    "activation": "EMSR352",
+    "flooded_near": 26,
+    "cells_near": 1467,
+    "share_of_flooded_near": 0.006927791100452971,
+    "aois": 1
+   },
+   {
+    "activation": "EMSR861",
+    "flooded_near": 24,
+    "cells_near": 3360,
+    "share_of_flooded_near": 0.006394884092725819,
+    "aois": 14
+   }
+  ],
+  "n_aoi_pk_bd": 14,
+  "without_pk_bd": {
+   "odds_ratio": 0.8686173022537697,
+   "ci95": [
+    0.7017289177713595,
+    1.0751958465255238
+   ],
+   "n_cells": 18952151,
+   "n_aoi": 486,
+   "n_units": 185,
+   "n_group_cells": 101913,
+   "n_group_flooded": 3105.0,
+   "n_group_units": 137,
+   "pairs_ci95": [
+    0.7264418625329887,
+    1.072098727484989
+   ],
+   "pairs_log_or_sd": 0.10388013506285912,
+   "pairs_reps_ok": 2000,
+   "mde80_up": 1.3375831661794673,
+   "mde80_down": 0.7476170643327513,
+   "n_flooded_near": 3105,
+   "n_units_flooded_near": 68
+  },
+  "rule": "B-12 B2: uncapped sample of B-11 B2 (corrected readings); countries of the nearest settlement; Pakistan and Bangladesh removed by the activation's countries"
+ }
+}

@@ -1,0 +1,301 @@
+item,gid,name,asciiname,cc,lat,lon
+1,1185663,Uttar Bil Dāuli,Uttar Bil Dauli,BD,23.90592,89.95528
+2,1829397,Phum Bœ̆ng Preăh,Phum Boeng Preah,KH,11.33772,105.46
+3,1357442,Goth Gulab Bhutto,Goth Gulab Bhutto,PK,27.54317,68.23128
+4,2637021,Stapleford,Stapleford,GB,53.1,-0.68333
+5,13058139,Kwin Chaung,Kwin Chaung,MM,15.9956,94.9315
+6,7926515,Kālia Khāmār,Kalia Khamar,BD,25.5052,89.62993
+7,2903458,Hitzenau,Hitzenau,DE,48.25962,12.98094
+8,2858852,Obersüßbach,Obersussbach,DE,48.61667,11.95
+9,4412820,Valley Park,Valley Park,US,38.54922,-90.49262
+10,1209351,Bhādra Bhikan,Bhadra Bhikan,BD,23.99571,89.84687
+11,2272352,Água Boa,Agua Boa,PT,39.65505,-8.45236
+12,1321946,Inn Pet Let,Inn Pet Let,MM,18.23232,95.20995
+13,2263833,Rio de Couros,Rio de Couros,PT,39.72677,-8.49831
+14,1824724,Phumĭ Srăh Sâmbuŏr,Phumi Srah Sambuor,KH,12.23333,105.08333
+15,7890383,Sarbāndra,Sarbandra,BD,25.51298,89.47776
+16,1417012,Longwala,Longwala,PK,30.26041,73.64655
+17,12263181,Tattershall Bridge,Tattershall Bridge,GB,53.08969,-0.21537
+18,12264185,Carr Bank,Carr Bank,GB,54.20272,-2.80874
+19,2264409,Porto Muge,Porto Muge,PT,39.10897,-8.73845
+20,2895486,Jacobsthal,Jacobsthal,DE,51.38041,13.28067
+21,7409456,Chah Nalewala,Chah Nalewala,PK,30.8567,72.11336
+22,12404320,Yae Pyan,Yae Pyan,MM,17.36886,95.64911
+23,13133538,Ta Nyi,Ta Nyi,MM,16.2905,95.53603
+24,4554334,Valley Park,Valley Park,US,36.29287,-95.73748
+25,143138,‘Arab Rāshed,`Arab Rashed,IR,31.29904,49.2286
+26,2170294,Corndale,Corndale,AU,-28.70911,153.36245
+27,3169396,Rignano,Rignano,IT,44.21667,11.86667
+28,13488203,Moke Seik,Moke Seik,MM,16.5959,95.45662
+29,11545081,Gunj Bakhsh Bodla,Gunj Bakhsh Bodla,PK,30.35451,73.75269
+30,12404236,Mi Chaung Gaung,Mi Chaung Gaung,MM,16.8247,96.73222
+31,2929197,Esbeck,Esbeck,DE,52.08167,9.68041
+32,1829776,Preaek Chrey,Preaek Chrey,KH,11.45491,105.28387
+33,11423712,Kbal Spean,Kbal Spean,KH,13.5655,102.98331
+34,1827853,Phum Kbal Kaôh Tiĕv,Phum Kbal Kaoh Tiev,KH,11.03538,105.06101
+35,1480735,Inn Dawei,Inn Dawei,MM,17.15259,96.27601
+36,674461,Lunca,Lunca,RO,47.61667,26.98333
+37,1209528,Beri,Beri,BD,23.8,89.91667
+38,2646465,Hubberts Bridge,Hubberts Bridge,GB,52.97387,-0.11295
+39,8537411,Medarer Char,Medarer Char,BD,25.20168,89.79304
+40,4384638,Dry Valley,Dry Valley,US,37.02506,-94.0416
+41,13287577,Ngar Tan Ta Yar,Ngar Tan Ta Yar,MM,16.46582,95.00831
+42,1821346,Vôtt Tépkhânaram,Vott Tepkhanaram,KH,11.51667,104.55
+43,8899695,La Boca del Estero,La Boca del Estero,MX,18.7275,-95.72111
+44,1825221,Phumĭ Sai,Phumi Sai,KH,12.33512,103.90922
+45,1209603,Belta,Belta,BD,23.84837,89.80399
+46,13291356,Sar Hpyu Kone,Sar Hpyu Kone,MM,18.1723,95.27809
+47,1309013,Mithwechaung,Mithwechaung,MM,16.87799,95.61563
+48,7926569,Uttar Tāpur Char,Uttar Tapur Char,BD,25.62891,89.83323
+49,1823815,Phumĭ Thmei,Phumi Thmei,KH,11.93907,105.31583
+50,2267413,Ilha de Baixo,Ilha de Baixo,PT,39.92578,-8.7572
+51,1329218,Ah Mauk Wea,Ah Mauk Wea,MM,17.19661,95.9264
+52,11504318,Phum Prêk Ta Lai,Phum Prek Ta Lai,KH,11.2367,105.02625
+53,11478198,Preaek Changkran,Preaek Changkran,KH,11.85032,105.36696
+54,1827358,Kouk Prech,Kouk Prech,KH,14.14932,103.15215
+55,11689664,Chah Alluke,Chah Alluke,PK,30.06695,72.99549
+56,1827455,Phum Kon Tnaôt,Phum Kon Tnaot,KH,13.07338,104.40994
+57,12402812,Kyaik Htaw North,Kyaik Htaw North,MM,16.51757,95.85997
+58,13121123,Kyee Pin Su,Kyee Pin Su,MM,16.25393,95.32102
+59,1071451,Anosimbary,Anosimbary,MG,-15.78333,46.95
+60,1827131,Phum Krâpeu Ha,Phum Krapeu Ha,KH,13.01266,103.16187
+61,13439130,Bela,Bela,PK,32.34615,73.88451
+62,13488290,Tan Hlar Gyi,Tan Hlar Gyi,MM,17.08747,94.77583
+63,3195645,Mali Otok,Mali Otok,SI,45.78139,14.17778
+64,1824037,Ta Saeng,Ta Saeng,KH,13.62722,103.56995
+65,2261884,Vale Vazão,Vale Vazao,PT,39.56915,-8.90536
+66,7352346,Goth Kallar,Goth Kallar,PK,27.88799,68.63815
+67,11559292,Phum Spéan Thmei,Phum Spean Thmei,KH,13.35529,103.86182
+68,2160794,Lagoon Pocket,Lagoon Pocket,AU,-26.27703,152.68149
+69,12402968,Thi Dar Aye,Thi Dar Aye,MM,16.90734,95.97276
+70,1208523,Bil Palli,Bil Palli,BD,23.97644,90.00208
+71,2682241,Roasjö,Roasjo,SE,57.54356,12.96569
+72,11545014,Bhaini Dara Kharal,Bhaini Dara Kharal,PK,30.49498,73.95771
+73,1829483,Phumĭ Bœ̆ng,Phumi Boeng,KH,11.01114,104.74315
+74,1826480,Baset,Baset,KH,11.66285,104.74392
+75,2690422,Närsjö,Narsjo,SE,60.41667,14.5
+76,13488482,Ka Nyut Kwin,Ka Nyut Kwin,MM,16.5967,94.87418
+77,2160731,Lake Haven,Lake Haven,AU,-33.24303,151.50434
+78,8348527,Bishops Bridge,Bishops Bridge,AU,-32.7455,151.46887
+79,1075124,Andranomanilia,Andranomanilia,MG,-16.01667,46.73333
+80,145258,Āb Bīd,Ab Bid,IR,32.49421,48.8762
+81,7926590,Goatapāra,Goatapara,BD,25.58273,89.79345
+82,2986014,Port de Penerf,Port de Penerf,FR,47.51235,-2.62191
+83,3305665,Elliss Bridge,Elliss Bridge,IE,52.76944,-8.52306
+84,1579498,Khê Cầu,Khe Cau,VN,21.18333,106.3
+85,1829667,Bang Bat Kaeut,Bang Bat Kaeut,KH,13.52582,102.99138
+86,2655522,Blackburn,Blackburn,GB,57.20376,-2.28842
+87,11376331,Srah Chik,Srah Chik,KH,13.73704,103.33687
+88,2718147,Dalsjö,Dalsjo,SE,56.3,13.71667
+89,7326459,Qila Sardar Jawahar Singh,Qila Sardar Jawahar Singh,PK,32.18228,73.41327
+90,13058115,Dar Mya Chaung,Dar Mya Chaung,MM,16.01409,94.60659
+91,2966832,Attymon,Attymon,IE,53.31861,-8.60639
+92,1829154,Phumĭ Chăn Krâsna,Phumi Chan Krasna,KH,11.34188,105.62257
+93,13272310,Firepool,Firepool,GB,51.02091,-3.0967
+94,1828706,Phumĭ Chumtéav Méas,Phumi Chumteav Meas,KH,12.47676,103.83511
+95,2166328,Forest Vale,Forest Vale,AU,-33.38666,146.83811
+96,1828573,Anlong Sar,Anlong Sar,KH,13.4944,103.40228
+97,10103846,Elermore Vale,Elermore Vale,AU,-32.91621,151.67665
+98,1824297,Phumĭ Ta Dét,Phumi Ta Det,KH,12.01777,104.87038
+99,1565646,Thôn Đồng Cau,Thon GJong Cau,VN,12.16667,109.08333
+100,11749121,Wylies Flat,Wylies Flat,AU,-32.5871,151.12767
+101,13488475,Kan Thar Yar,Kan Thar Yar,MM,17.03879,95.15464
+102,13057601,Maung Nge Su,Maung Nge Su,MM,15.95466,94.85056
+103,2160768,Lake Charm,Lake Charm,AU,-35.65,143.78333
+104,1829337,Kouk Kraol,Kouk Kraol,KH,13.66959,103.7404
+105,1827261,Krahung,Krahung,KH,10.86913,104.44994
+106,1825895,Phumĭ Prey Ânchăn,Phumi Prey Anchan,KH,11.08702,105.36931
+107,2648396,Glusburn,Glusburn,GB,53.9,-2.0
+108,4411801,Tipton Ford,Tipton Ford,US,36.97673,-94.42605
+109,13269456,Speybridge,Speybridge,GB,57.31672,-3.60241
+110,1162345,Basti Nawab,Basti Nawab,PK,30.89917,72.06361
+111,11745998,Lower Tenthill,Lower Tenthill,AU,-27.60978,152.24154
+112,1827248,Kalaom Phluk,Kalaom Phluk,KH,12.71283,103.54812
+113,13435965,Kouk Krasang,Kouk Krasang,KH,13.49794,103.10172
+114,3188025,Veliki Otok,Veliki Otok,SI,45.78297,14.19914
+115,12403004,Byu Kyin West,Byu Kyin West,MM,17.04019,95.9836
+116,11746359,Cedar Brush Creek,Cedar Brush Creek,AU,-33.16946,151.24517
+117,11350230,Goth Qutab Jatoi,Goth Qutab Jatoi,PK,27.95331,68.75573
+118,9538868,Thornton In Lonsdale,Thornton In Lonsdale,GB,54.15655,-2.4839
+119,11542614,Kund Kabul,Kund Kabul,PK,30.11848,73.17314
+120,13120057,Kha Yaing Baw,Kha Yaing Baw,MM,16.22964,95.67559
+121,1593678,Ấp Cả Quản,Ap Ca Quan,VN,10.71667,105.98333
+122,674392,Lunca Mărcușului,Lunca Marcusului,RO,45.74771,25.84134
+123,2173766,Brucedale,Brucedale,AU,-35.03176,147.41486
+124,1825995,Phumĭ Prêk Lŏng,Phumi Prek Long,KH,11.47107,104.92833
+125,1827397,Khvav Lech,Khvav Lech,KH,13.85692,102.86747
+126,13278366,Green Bank,Green Bank,GB,54.21484,-2.9525
+127,2267367,Jardim de Cima,Jardim de Cima,PT,39.25858,-8.68631
+128,11748907,Scotts Flat,Scotts Flat,AU,-32.59546,151.24719
+129,11542612,Kund Shamsdin,Kund Shamsdin,PK,30.12375,73.1714
+130,1298069,Sandwin,Sandwin,MM,17.66813,95.82979
+131,2160767,Lake Clarendon,Lake Clarendon,AU,-27.51667,152.36667
+132,2892759,Karnap,Karnap,DE,51.15582,6.93393
+133,11566293,Goth Saifal Kharosh,Goth Saifal Kharosh,PK,27.8218,68.67111
+134,3199060,Ivanje Selo,Ivanje Selo,SI,45.83472,14.29833
+135,1480750,Yemuntaung,Yemuntaung,MM,17.13917,96.28873
+136,1586426,Cẩm Cầu,Cam Cau,VN,20.88333,106.26667
+137,2805943,Wulfenau,Wulfenau,DE,52.69405,8.04707
+138,2846756,Rimbach,Rimbach,DE,49.23333,12.88333
+139,6269349,Lower Bodachra,Lower Bodachra,GB,57.20738,-2.14894
+140,1827761,Phumĭ Khăn Mak Hvœăn,Phumi Khan Mak Hvoean,KH,14.22137,106.35035
+141,2264421,Porto do Rei,Porto do Rei,PT,38.29042,-8.40532
+142,4408703,Silver Creek,Silver Creek,US,37.04062,-94.47272
+143,2263829,Rio de Moinhos,Rio de Moinhos,PT,39.46667,-8.25
+144,11506670,Phum Chŏng Kaôh,Phum Chong Kaoh,KH,11.44184,105.0408
+145,11746658,Morton Vale,Morton Vale,AU,-27.48787,152.38561
+146,11072129,Comerong Island,Comerong Island,AU,-34.86544,150.7365
+147,8613825,Murrin Bridge Aboriginal Station,Murrin Bridge Aboriginal Station,AU,-33.21541,146.37269
+148,1825928,Phum Prêk Ta Tĕn,Phum Prek Ta Ten,KH,11.4124,105.04144
+149,3522186,Pajapan,Pajapan,MX,18.26267,-94.69172
+150,1688094,Santa Lucia,Santa Lucia,PH,15.09403,120.7915
+151,1420255,Dāra,Dara,PK,30.42222,73.93056
+152,13438078,Goth Kallar,Goth Kallar,PK,27.94623,68.60692
+153,4386435,Fiddlers Ford,Fiddlers Ford,US,37.38394,-93.7991
+154,1074994,Andranomena,Andranomena,MG,-16.05,46.71667
+155,2709599,Gutdalen,Gutdalen,SE,61.03306,14.38306
+156,12320169,La Boissière,La Boissiere,FR,47.82103,-2.06942
+157,1823359,Phumĭ Trâpeăng Phnum,Phumi Trapeang Phnum,KH,10.66368,104.75997
+158,1825742,Phumĭ Prey Phdau Knŏng,Phumi Prey Phdau Knong,KH,10.94444,104.90541
+159,1829002,Phumĭ Chheutéal Khtuŏy,Phumi Chheuteal Khtuoy,KH,12.39938,105.53554
+160,3916349,Romero Pampa,Romero Pampa,BO,-17.20592,-68.75132
+161,2157388,Mitchells Flat,Mitchells Flat,AU,-32.5485,151.2846
+162,1828214,Phumĭ Kâmpóng Siĕm,Phumi Kampong Siem,KH,12.01667,105.15
+163,7905224,Shobhaganj,Shobhaganj,BD,25.49777,89.54862
+164,2844918,Rosenthal,Rosenthal,DE,51.38634,7.17575
+165,13488422,Sar Hpyu Su,Sar Hpyu Su,MM,17.07047,95.27003
+166,2928957,Esebeck,Esebeck,DE,51.56401,9.84558
+167,3232826,La Tuilière,La Tuiliere,FR,45.02738,-0.52397
+168,2783321,Zavel,Zavel,BE,50.89665,5.4103
+169,674411,Lunca Dochiei,Lunca Dochiei,RO,46.11721,27.07229
+170,2863179,Niederlauch,Niederlauch,DE,50.16667,6.43333
+171,4397672,McCullough Ford,McCullough Ford,US,36.62924,-94.25299
+172,1198087,Kāuār Bil,Kauar Bil,BD,23.82675,89.86173
+173,11257173,Lagoon Grass,Lagoon Grass,AU,-28.7944,153.31781
+174,7416640,Nahr-e Gabīn-e ‘Olyā,Nahr-e Gabin-e `Olya,IR,30.61484,48.71301
+175,1192029,Pechighāt,Pechighat,BD,25.33333,89.68333
+176,2270895,Bezelga de Baixo,Bezelga de Baixo,PT,39.58711,-8.48535
+177,2262378,Vale Covo,Vale Covo,PT,39.25367,-9.17558
+178,145259,Āb Bīd-e ‘Alī Bāz,Ab Bid-e `Ali Baz,IR,32.27967,48.72974
+179,11746651,Calico Creek,Calico Creek,AU,-26.304,152.64726
+180,7479528,Char Dulai,Char Dulai,BD,23.92725,89.52197
+181,6269419,Fairburn,Fairburn,GB,53.74447,-1.28411
+182,2975247,Seine-Port,Seine-Port,FR,48.55743,2.55316
+183,13678234,Bungalowsiedlung Hanauer Werder,Bungalowsiedlung Hanauer Werder,DE,52.74387,12.09638
+184,2635203,Uldale,Uldale,GB,54.72174,-3.16685
+185,3301012,Ballyveera,Ballyveera,IE,52.28917,-7.85278
+186,2985958,Port-Mort,Port-Mort,FR,49.16487,1.41511
+187,2819225,Unterköllnbach,Unterkoellnbach,DE,48.65847,12.30663
+188,4131974,Spring Creek,Spring Creek,US,36.22647,-94.19132
+189,9100801,Estero de Chucumites,Estero de Chucumites,MX,18.73098,-95.73202
+190,1828752,Phum Chroŭy Bântéay,Phum Chrouy Banteay,KH,12.37239,105.74752
+191,2263262,São Miguel de Rio Torto,Sao Miguel de Rio Torto,PT,39.43333,-8.21667
+192,11509612,Phum Trâpeăng Pring,Phum Trapeang Pring,KH,11.09692,106.02142
+193,1828113,Phum Kândal Leu,Phum Kandal Leu,KH,11.4673,105.1457
+194,13294280,Kyun Tauk,Kyun Tauk,MM,17.34231,94.94968
+195,1826656,Phum O Tuk,Phum O Tuk,KH,13.28552,103.68483
+196,1190870,Pukuria,Pukuria,BD,23.85251,89.92387
+197,9100991,El Estero,El Estero,MX,18.68782,-95.64189
+198,8871322,Poblado Cinco de Mayo Dos,Poblado Cinco de Mayo Dos,MX,17.90194,-94.51306
+199,11347887,Goth Bhagat,Goth Bhagat,PK,27.63382,68.15758
+200,13271709,Lower Altofts,Lower Altofts,GB,53.71105,-1.42527
+201,8349126,Mount Riverview,Mount Riverview,AU,-33.73074,150.63532
+202,11746537,Island Plantation,Island Plantation,AU,-25.49266,152.72786
+203,7480129,Feghat,Feghat,BD,23.94969,89.6503
+204,2929583,Erlach,Erlach,DE,48.2728,13.04094
+205,1212027,Bāg Bāniājuri,Bag Baniajuri,BD,23.85,89.93333
+206,2718221,Dalen,Dalen,SE,59.11667,13.18333
+207,7926390,Patrannbis,Patrannbis,BD,25.71475,89.65859
+208,13279724,Lower Woodend,Lower Woodend,GB,51.57861,-0.82202
+209,12265026,Wichenford,Wichenford,GB,52.24363,-2.31189
+210,1830742,Preaek Lieb,Preaek Lieb,KH,11.63102,104.92359
+211,2843676,Rotthof,Rotthof,DE,48.49027,13.41499
+212,2159455,Lower Numba,Lower Numba,AU,-34.88333,150.71667
+213,1481715,Kyaukyedwin,Kyaukyedwin,MM,16.88483,96.15156
+214,12023405,Arenal,Arenal,ES,37.3861,-5.9975
+215,2741165,Casal de São João,Casal de Sao Joao,PT,40.16007,-8.53655
+216,2958741,Albeck,Albeck,DE,48.4843,10.05858
+217,12498048,Pampa,Pampa,BO,-16.6771,-68.90071
+218,12266126,Bathpool,Bathpool,GB,51.02681,-3.06408
+219,2718222,Dalen,Dalen,SE,59.01667,12.61667
+220,2863532,Niederdonk,Niederdonk,DE,51.24312,6.69238
+221,13436038,Tuek Chour,Tuek Chour,KH,13.64954,103.35751
+222,3206658,Daxenthal,Daxenthal,DE,48.23085,12.86
+223,7416585,Nahr-e Jarrāḩ-e Soflá,Nahr-e Jarrah-e Sofla,IR,30.63751,48.77687
+224,2873465,Marienwerder,Marienwerder,DE,52.40598,9.62445
+225,2819337,Unterholsbach,Unterholsbach,DE,48.68992,12.47147
+226,13275414,Bank,Bank,GB,53.79733,-1.52381
+227,2144271,Wedderburn,Wedderburn,AU,-34.13333,150.81667
+228,11747450,Loxford,Loxford,AU,-32.79016,151.48104
+229,2159461,Lower Mangrove,Lower Mangrove,AU,-33.4,151.15
+230,9972622,Cambridge Park,Cambridge Park,AU,-33.74784,150.72208
+231,1824537,Phumĭ Srê,Phumi Sre,KH,10.58777,104.17923
+232,4123960,Noland,Noland,US,36.1934,-91.05068
+233,13057653,Yae Hpyu Kan,Yae Hpyu Kan,MM,15.98183,95.22421
+234,1593663,Ấp Cây Cám,Ap Cay Cam,VN,10.85,105.98333
+235,3193779,Otok,Otok,SI,45.75351,14.37195
+236,13043756,Khat Tar Kyun,Khat Tar Kyun,MM,15.69237,95.27522
+237,2264173,Quinta de Vale de Fornos,Quinta de Vale de Fornos,PT,39.09564,-8.86757
+238,2818927,Unterplörnbach,Unterploernbach,DE,48.46936,11.81609
+239,11747476,Central Macdonald,Central Macdonald,AU,-33.33505,150.97594
+240,1173333,Kot Bela,Kot Bela,PK,31.96504,73.23985
+241,7052322,Chāh-e Dāzū,Chah-e Dazu,IR,27.69612,58.90349
+242,13227145,Ba yin gyi su,Ba yin gyi su,MM,16.71196,95.75014
+243,1382550,Qaim Dara,Qaim Dara,PK,30.78908,72.00039
+244,122899,Nahr-e Abtar,Nahr-e Abtar,IR,29.97188,48.58847
+245,263976,Ágios Dimítrios,Agios Dimitrios,GR,39.52096,20.67706
+246,8347843,Metford,Metford,AU,-32.76497,151.6094
+247,49092,Chāh-e Gū’ī,Chah-e Gu'i,IR,27.36667,59.76667
+248,3313843,Millbrook Bridge,Millbrook Bridge,IE,53.2175,-7.79722
+249,2565077,Chozas de la Poleosa,Chozas de la Poleosa,ES,37.05444,-6.61528
+250,13456757,Kan Su,Kan Su,MM,16.28671,95.44607
+251,1828333,Phumĭ Kâmpóng Âmpĭl,Phumi Kampong Ampil,KH,10.86607,104.94362
+252,11450656,Chrak Preal,Chrak Preal,KH,11.15347,104.4007
+253,6262515,Thea Kone,Thea Kone,MM,16.56819,96.36989
+254,2735914,Porto Liceia,Porto Liceia,PT,40.20144,-8.77423
+255,2518724,El Arenal,El Arenal,ES,38.06768,-1.00227
+256,11504403,Phum Kaôh Thmei,Phum Kaoh Thmei,KH,11.062,105.20274
+257,11424681,Kouk Spean,Kouk Spean,KH,14.02621,103.46922
+258,11459998,Kandaol,Kandaol,KH,11.09564,104.65662
+259,1386561,Rukh Kalan,Rukh Kalan,PK,32.3432,73.81876
+260,11476817,Sambuor,Sambuor,KH,12.71594,104.96387
+261,7324616,Joke Bela,Joke Bela,PK,32.345,73.87945
+262,1829452,Phumĭ Bœ̆ng Chroŭy,Phumi Boeng Chrouy,KH,12.00445,105.06999
+263,1824350,Phumĭ Svay Trâlâk,Phumi Svay Tralak,KH,11.80864,105.48298
+264,13269928,Wheldale,Wheldale,GB,53.73211,-1.32612
+265,7052339,Chāh Ḩalam,Chah Halam,IR,27.7367,58.59408
+266,1463223,Kyaik Inn,Kyaik Inn,MM,16.71672,96.2903
+267,11637026,Chah Bohrwala,Chah Bohrwala,PK,30.98654,72.05193
+268,13278370,Pool Bank,Pool Bank,GB,54.28278,-2.87703
+269,1827467,Phumĭ Kóng Yéam,Phumi Kong Yeam,KH,12.7876,105.02582
+270,4374981,Apple Creek,Apple Creek,US,37.61283,-89.75094
+271,12518635,Kala  Suntura Iro Pampa,Kala Suntura Iro Pampa,BO,-18.01681,-67.76413
+272,13546407,Taung Thu Kone,Taung Thu Kone,MM,16.89815,96.11018
+273,1828390,Kak,Kak,KH,11.15468,105.92016
+274,13270294,Tolladine,Tolladine,GB,52.19827,-2.19996
+275,1828320,Phumĭ Kâmpóng Cham,Phumi Kampong Cham,KH,12.41207,105.01192
+276,2272333,Água Formosa,Agua Formosa,PT,39.84404,-8.91532
+277,12510085,Novo Selo Lasinjsko,Novo Selo Lasinjsko,HR,45.53234,15.82761
+278,2876683,Löbtau,Loebtau,DE,51.04358,13.69444
+279,1380050,Chak Bahmanowala,Chak Bahmanowala,PK,32.00433,73.32464
+280,2920560,Gieselwerder,Gieselwerder,DE,51.59818,9.55071
+281,12703,Ḩoseynī,Hoseyni,IR,30.79857,48.79507
+282,8859382,San Isidro Xoteapan (San Isidro Texcaltitán),San Isidro Xoteapan (San Isidro Texcaltitan),MX,18.46778,-95.23806
+283,1320076,Katwe,Katwe,MM,16.94942,95.86556
+284,13488479,Kyun Kyar East,Kyun Kyar East,MM,17.03296,95.18843
+285,11704390,Pie Creek,Pie Creek,AU,-26.22991,152.60774
+286,2272332,Água Formosa,Agua Formosa,PT,39.91537,-8.79287
+287,2143111,Woodburn,Woodburn,AU,-29.07163,153.34608
+288,2961149,Tooreenbrien Bridge,Tooreenbrien Bridge,IE,52.6925,-8.27361
+289,11507505,Chrouy Snaeng Krabei Kraom,Chrouy Snaeng Krabei Kraom,KH,12.27476,105.99141
+290,11618093,Playa Tenejapan,Playa Tenejapan,MX,18.29551,-95.58516
+291,1291516,Thinbawgyin,Thinbawgyin,MM,16.73333,94.71667
+292,7925149,Matherghat,Matherghat,BD,25.3538,89.80804
+293,1075463,Andranobe,Andranobe,MG,-17.45,48.38333
+294,1829350,Boeng Tuk,Boeng Tuk,KH,10.57837,104.14938
+295,10103814,Ravensdale,Ravensdale,AU,-33.17438,151.30071
+296,1420248,Kund Dulleke Mahar,Kund Dulleke Mahar,PK,30.49861,73.90417
+297,2862785,Niederviehbach,Niederviehbach,DE,48.61667,12.38333
+298,11746025,Lower Belford,Lower Belford,AU,-32.63128,151.29011
+299,6691628,Wilsford,Wilsford,GB,52.97568,-0.50649
+300,1825375,Phumĭ Rôkar Chuŏr,Phumi Rokar Chuor,KH,12.98333,105.21246

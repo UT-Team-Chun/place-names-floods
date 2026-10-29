@@ -2,10 +2,13 @@
 \providecommand{\missing}[1]{\textbf{[??\,#1]}}
 \newcommand{\AchievedBoundBS}{\ensuremath{8.3\times10^{-5}}}
 \newcommand{\AchievedBoundLexfix}{\ensuremath{0.013}}
+\newcommand{\AchievedBoundMax}{\ensuremath{0.046}}
 \newcommand{\AchievedBoundR}{\ensuremath{0.011}}
 \newcommand{\AchievedBoundRefit}{\ensuremath{0.017}}
+\newcommand{\ActBSConst}{0.0523}
 \newcommand{\ActBSMOnec}{0.0519}
 \newcommand{\ActBSMOnes}{0.0477}
+\newcommand{\ActBSMZero}{0.0583}
 \newcommand{\ActChangeNorway}{\ensuremath{-0.00003}}
 \newcommand{\ActChangeR}{\ensuremath{-0.015}}
 \newcommand{\ActChangeTop}{\ensuremath{-0.010}}
@@ -44,6 +47,7 @@
 \newcommand{\AmendTimeBSix}{2026-10-26T21:08Z}
 \newcommand{\AmendTimeBTen}{2026-10-29T00:36Z}
 \newcommand{\AmendTimeBThree}{2026-10-26T11:09Z}
+\newcommand{\AmendTimeBTwelve}{2026-10-29T09:42Z}
 \newcommand{\AmendTimeBTwo}{2026-10-26T03:22Z}
 \newcommand{\AoiRateMed}{2.2\,\%}
 \newcommand{\AoiRateQOne}{0.7\,\%}
@@ -65,8 +69,11 @@
 \newcommand{\AuditEnN}{89}
 \newcommand{\AuditFloodCoverPct}{89\,\%}
 \newcommand{\AuditN}{100}
+\newcommand{\AuditNAdded}{50}
 \newcommand{\AuditNCountries}{18}
 \newcommand{\AuditNNew}{150}
+\newcommand{\AuditNNot}{100}
+\newcommand{\AuditNTotal}{300}
 \newcommand{\AuditShortN}{416}
 \newcommand{\AuditStrata}{52}
 \newcommand{\AuditSvN}{158}
@@ -179,6 +186,7 @@
 \newcommand{\BrierAfMOnes}{0.0477}
 \newcommand{\BrierNoCapMOne}{0.04537}
 \newcommand{\BrierNoCapMOnec}{0.04808}
+\newcommand{\BuiltUpBandText}{with the share of built-up land in each cell at 10\,m (ESA WorldCover) added, these ratios fell to 1.05 (0.98--1.13) and 1.17 (1.02--1.34)}
 \newcommand{\CFourPrimRFive}{\ensuremath{-0.00404}}
 \newcommand{\CThreeHi}{8.8\,\%}
 \newcommand{\CThreeK}{0}
@@ -253,9 +261,12 @@
 \newcommand{\CensusExclPct}{12\,\%}
 \newcommand{\CensusN}{641}
 \newcommand{\CensusNearBHFive}{one}
+\newcommand{\CensusNearBHMin}{0.06}
 \newcommand{\CensusNearBHTen}{nine}
-\newcommand{\CensusNearExcl}{20}
-\newcommand{\CensusNearN}{105}
+\newcommand{\CensusNearBYMin}{0.36}
+\newcommand{\CensusNearExcl}{24}
+\newcommand{\CensusNearN}{198}
+\newcommand{\CensusNearNOld}{105}
 \newcommand{\CensusSiteExcl}{98}
 \newcommand{\CensusSiteN}{190}
 \newcommand{\ClassMinBH}{0.34}
@@ -296,9 +307,13 @@
 \newcommand{\CoderTwoDate}{2026-10-27}
 \newcommand{\CoderTwoModel}{gpt-6-astra}
 \newcommand{\CoderTwoSessions}{25}
-\newcommand{\CombHiNinety}{\missing{v68 B7}}
-\newcommand{\CombLoNinety}{\missing{v68 B7}}
-\newcommand{\CombWithin}{\missing{v68 B7}}
+\newcommand{\CombGroupsHi}{\ensuremath{0.008}}
+\newcommand{\CombGroupsLo}{\ensuremath{-0.020}}
+\newcommand{\CombHiNinety}{\ensuremath{0.036}}
+\newcommand{\CombLoNinety}{\ensuremath{-0.055}}
+\newcommand{\CombTwoWayHi}{\ensuremath{0.036}}
+\newcommand{\CombTwoWayLo}{\ensuremath{-0.055}}
+\newcommand{\CombWithin}{does not lie within}
 \newcommand{\CompAfterCountry}{\ensuremath{-0.029}}
 \newcommand{\CompAfterCountryHi}{\ensuremath{0.170}}
 \newcommand{\CompAfterCountryLo}{\ensuremath{-0.233}}
@@ -349,6 +364,8 @@
 \newcommand{\ContrastUncappedResidHi}{\ensuremath{{+}3.1}}
 \newcommand{\ContrastUncappedResidLo}{\ensuremath{{-}1.0}}
 \newcommand{\ContrastWetRate}{4.4\%}
+\newcommand{\CountryBSConst}{0.0523}
+\newcommand{\CountryBSMZero}{0.0565}
 \newcommand{\CovNinety}{92\,\%}
 \newcommand{\CovNinetyFive}{97\,\%}
 \newcommand{\CovNinetyFiveZero}{92\,\%}
@@ -573,6 +590,8 @@
 \newcommand{\FabYardLo}{\ensuremath{2.8\times10^{-3}}}
 \newcommand{\FcodeHistPct}{0.8\,\%}
 \newcommand{\FcodeSectionPct}{4.1\,\%}
+\newcommand{\FoldRMax}{\ensuremath{0.002}}
+\newcommand{\FoldRMin}{\ensuremath{-0.005}}
 \newcommand{\FoldRangeOverSe}{2.5}
 \newcommand{\FpEmsFlooded}{163}
 \newcommand{\FpEmsrNineSevenPct}{50\,\%}
@@ -693,6 +712,9 @@
 \newcommand{\GFMORWetNearIndepHi}{0.98}
 \newcommand{\GFMORWetNearIndepLo}{0.24}
 \newcommand{\GFMORWetNearLo}{0.37}
+\newcommand{\GFMORWetNearPlanned}{0.55}
+\newcommand{\GFMORWetNearPlannedHi}{0.82}
+\newcommand{\GFMORWetNearPlannedLo}{0.37}
 \newcommand{\GFMORWetNearRaw}{0.52}
 \newcommand{\GFMORWetNearRawHi}{0.82}
 \newcommand{\GFMORWetNearRawLo}{0.33}
@@ -715,8 +737,12 @@
 \newcommand{\GfmAucDiffMed}{0.0000}
 \newcommand{\GfmAucDiffQOne}{\ensuremath{-0.0017}}
 \newcommand{\GfmAucDiffQThree}{\ensuremath{0.0013}}
+\newcommand{\GfmCappedFlooded}{43}
+\newcommand{\GfmCappedUnits}{16}
 \newcommand{\GfmDomNCells}{234{,}703}
 \newcommand{\GfmDomR}{\ensuremath{-0.006}}
+\newcommand{\GfmDomRFixHi}{\ensuremath{0.009}}
+\newcommand{\GfmDomRFixLo}{\ensuremath{-0.025}}
 \newcommand{\GfmDomRHiNinety}{\ensuremath{0.013}}
 \newcommand{\GfmDomRLoNinety}{\ensuremath{-0.052}}
 \newcommand{\GfmDomYard}{\ensuremath{1.57\times10^{-2}}}
@@ -733,6 +759,9 @@
 \newcommand{\GfmUncapORHi}{1.07}
 \newcommand{\GfmUncapORLo}{0.60}
 \newcommand{\GfmUncapUnits}{29}
+\newcommand{\GfmWinAdjOnly}{77}
+\newcommand{\GfmWinAoi}{317}
+\newcommand{\GfmWinSameDay}{240}
 \newcommand{\GfmWithinMinusP}{\ensuremath{0.028}}
 \newcommand{\GfmWithinMinusPHi}{\ensuremath{0.044}}
 \newcommand{\GfmWithinMinusPLo}{\ensuremath{0.016}}
@@ -827,7 +856,7 @@
 \newcommand{\HFiveRMin}{\ensuremath{-0.007}}
 \newcommand{\HFiveRMinAll}{\ensuremath{-0.010}}
 \newcommand{\HFourImproveP}{0.66}
-\newcommand{\HFourTostP}{< 0.00025}
+\newcommand{\HFourTostP}{< 1/B = 0.00025}
 \newcommand{\HGBItersMOneMax}{99}
 \newcommand{\HGBItersMOneMin}{78}
 \newcommand{\HGBItersMZero}{all 200}
@@ -839,7 +868,7 @@
 \newcommand{\HThreeSlopeLo}{\ensuremath{-0.001}}
 \newcommand{\HThreeSpearman}{\ensuremath{-0.2}}
 \newcommand{\HThreeSpearmanP}{0.39}
-\newcommand{\HTwoTostP}{< 0.00025}
+\newcommand{\HTwoTostP}{< 1/B = 0.00025}
 \newcommand{\HandMeanCsiMed}{0.08}
 \newcommand{\HandMeanCsiPooled}{0.25}
 \newcommand{\HandMinCsiMed}{0.04}
@@ -847,6 +876,14 @@
 \newcommand{\HazText}{the baseline gain rose from \ensuremath{7.55\times10^{-3}} to \ensuremath{8.11\times10^{-3}} (95\,\% interval \ensuremath{4.14\times10^{-3}} to \ensuremath{1.31\times10^{-2}}), and the names gave $R=\ensuremath{-0.004}$ (90\,\% interval \ensuremath{-0.007} to \ensuremath{-0.001}), which the decision table calls \emph{negative}}
 \newcommand{\HeldoutNFeat}{13}
 \newcommand{\HeldoutWaldP}{0.40}
+\newcommand{\HighAssessPct}{31\,\%}
+\newcommand{\HighEmsOR}{1.96}
+\newcommand{\HighEmsORHi}{3.08}
+\newcommand{\HighEmsORLo}{1.24}
+\newcommand{\HighGfmOR}{2.45}
+\newcommand{\HighGfmORHi}{3.98}
+\newcommand{\HighGfmORLo}{1.51}
+\newcommand{\HighNAoi}{68}
 \newcommand{\HolmHFour}{1.00}
 \newcommand{\HolmHThree}{1.00}
 \newcommand{\HydHand}{\ensuremath{-2.4}}
@@ -905,6 +942,7 @@
 \newcommand{\LangRecallMax}{29\,\%}
 \newcommand{\LangRecallMin}{17\,\%}
 \newcommand{\LargestShareNoCap}{22\%}
+\newcommand{\LexAnyPct}{9.6\,\%}
 \newcommand{\LexCleanR}{\ensuremath{-0.004}}
 \newcommand{\LexCleanRHi}{\ensuremath{0.002}}
 \newcommand{\LexCleanRHiNinety}{\ensuremath{0.001}}
@@ -965,6 +1003,7 @@
 \newcommand{\MarginDBSPrimary}{\ensuremath{3.78\times10^{-4}}}
 \newcommand{\MarginEstA}{2.94}
 \newcommand{\MarginHetA}{\missing{v64 C3}}
+\newcommand{\MarginOneKmText}{\missing{B-12 C1}}
 \newcommand{\MarginPctBS}{0.9\,\%}
 \newcommand{\MarginYardHi}{2.89}
 \newcommand{\MarginYardLo}{1.83}
@@ -1018,6 +1057,8 @@
 \newcommand{\NActFlood}{350}
 \newcommand{\NActLabelled}{253}
 \newcommand{\NActivations}{188}
+\newcommand{\NAmend}{twelve}
+\newcommand{\NAmendCrit}{ten}
 \newcommand{\NAoi}{500}
 \newcommand{\NAoiAfrica}{40}
 \newcommand{\NAoiAmericas}{32}
@@ -1042,7 +1083,7 @@
 \newcommand{\NBLoNinety}{\ensuremath{-0.003}}
 \newcommand{\NBMean}{\ensuremath{-0.001}}
 \newcommand{\NBetweenAoi}{500}
-\newcommand{\NBlindRounds}{seven}
+\newcommand{\NBlindRounds}{eight}
 \newcommand{\NCellCountriesPreTwoWay}{70}
 \newcommand{\NCells}{1{,}507{,}486}
 \newcommand{\NCellsClassCrossing}{13{,}918}
@@ -1085,16 +1126,18 @@
 \newcommand{\NCountriesNearest}{70}
 \newcommand{\NCountryActSpan}{8}
 \newcommand{\NCountryCrossCells}{35{,}187}
-\newcommand{\NCritiqueRounds}{twelve}
+\newcommand{\NCritiqueRounds}{13}
 \newcommand{\NExclEval}{47}
 \newcommand{\NExclOtherType}{220}
 \newcommand{\NExclWet}{452}
 \newcommand{\NExclWetOther}{203}
 \newcommand{\NGroups}{195}
+\newcommand{\NIceJamAoi}{4}
 \newcommand{\NLexEntries}{2{,}538}
 \newcommand{\NLexForms}{1{,}866}
 \newcommand{\NLexLangs}{47}
 \newcommand{\NNameFeat}{15}
+\newcommand{\NNameFeatEff}{14}
 \newcommand{\NNoEventProducts}{58}
 \newcommand{\NOddsAoi}{479}
 \newcommand{\NOddsComparisons}{18}
@@ -1118,7 +1161,7 @@
 \newcommand{\NReadPrimVerdict}{equivalent-null}
 \newcommand{\NReadPromptSha}{e9f55e3a6571}
 \newcommand{\NReadRevision}{842da37}
-\newcommand{\NReadUnknownPct}{5.9\%}
+\newcommand{\NReadUnknownPct}{6.0\,\%}
 \newcommand{\NReadWetAF}{44\%}
 \newcommand{\NReadWetAfrica}{45\%}
 \newcommand{\NReadWetEU}{37\%}
@@ -1146,6 +1189,7 @@
 \newcommand{\NUnitsTemporal}{54}
 \newcommand{\NUnitsWetNear}{134}
 \newcommand{\NUnspecifiedRiverine}{154}
+\newcommand{\NUntypedAoi}{150}
 \newcommand{\NYardDefActGrp}{10}
 \newcommand{\NYardDefActGrpWord}{ten}
 \newcommand{\NYardDefCountry}{9}
@@ -1182,6 +1226,7 @@
 \newcommand{\NYardEqPrimaryWord}{ten}
 \newcommand{\NYardTotal}{10}
 \newcommand{\NYardTotalWord}{ten}
+\newcommand{\NearCompositionText}{In the sample of every evaluable cell, Cambodia and Myanmar hold 59\,\% of the flooded cells within 500\,m of water-side names (one Cambodian activation alone 30\,\%) and Pakistan and Bangladesh 17\,\%; without Pakistan and Bangladesh the estimate was 0.87 (0.73--1.07) (Table~\STabTwelveChecks{} of the Supplement).}
 \newcommand{\NearR}{\ensuremath{0.060}}
 \newcommand{\NearRHi}{\ensuremath{0.162}}
 \newcommand{\NearRLo}{\ensuremath{-0.036}}
@@ -1198,6 +1243,7 @@
 \newcommand{\NeedEquivTotalX}{20}
 \newcommand{\NeedPosNearX}{3.8}
 \newcommand{\NeedPosTotalX}{11}
+\newcommand{\NeitherCells}{2}
 \newcommand{\NoCapLossShare}{76\%}
 \newcommand{\NoHydroNAoi}{285}
 \newcommand{\NoHydroNCells}{1{,}039{,}573}
@@ -1248,6 +1294,8 @@
 \newcommand{\NullNNotMeaning}{1}
 \newcommand{\NullNOut}{13}
 \newcommand{\NullNReps}{100}
+\newcommand{\NullOutBd}{five}
+\newcommand{\NullOutPk}{eight}
 \newcommand{\NullRobustSd}{0.0021}
 \newcommand{\NullSdBetween}{0.0045}
 \newcommand{\NullSdNoOut}{0.0026}
@@ -1385,13 +1433,22 @@
 \newcommand{\ObsRFiveHundred}{\ensuremath{0.0003}}
 \newcommand{\ObsRFiveHundredHi}{\ensuremath{0.001}}
 \newcommand{\ObsRFiveHundredLo}{\ensuremath{-0.0002}}
+\newcommand{\OpCorr}{0.04}
+\newcommand{\OpFixedSize}{33\,\%}
+\newcommand{\OpFixedSizeProp}{0\,\%}
+\newcommand{\OpPowerMin}{98\,\%}
+\newcommand{\OpRatioSize}{3\,\%}
+\newcommand{\OpRatioSizeProp}{15\,\%}
 \newcommand{\OracleR}{\ensuremath{0.001}}
 \newcommand{\OracleRHi}{\ensuremath{0.002}}
 \newcommand{\OracleRHiNinety}{\ensuremath{0.002}}
 \newcommand{\OracleRLo}{\ensuremath{-0.001}}
 \newcommand{\OracleRLoNinety}{\ensuremath{-0.001}}
 \newcommand{\OracleVerdict}{equivalent-null}
+\newcommand{\OtherLangCountryPct}{1.0\,\%}
+\newcommand{\OtherLangOldPct}{13\,\%}
 \newcommand{\OtherLangPct}{13\,\%}
+\newcommand{\OtherLangRegionPct}{5.6\,\%}
 \newcommand{\OtherLangText}{most of them in Pakistan, Catalan-speaking Spain, Bangladesh and Ireland}
 \newcommand{\PCCrossHalfCells}{\ensuremath{{+}9.4}}
 \newcommand{\PCCrossHalfCellsHi}{\ensuremath{{+}14.5}}
@@ -1460,6 +1517,7 @@
 \newcommand{\PCWetRiverCloser}{20\%}
 \newcommand{\PCWetRiverCloserHi}{28\%}
 \newcommand{\PCWetRiverCloserLo}{10\%}
+\newcommand{\PZeroPct}{18\,\%}
 \newcommand{\PairsWetNearHi}{1.31}
 \newcommand{\PairsWetNearLo}{0.77}
 \newcommand{\PartialOR}{1.01}
@@ -1775,7 +1833,9 @@
 \newcommand{\RHFour}{\ensuremath{-0.003}}
 \newcommand{\RHFourComp}{\ensuremath{0.050}}
 \newcommand{\RHFourHi}{\ensuremath{0.007}}
+\newcommand{\RHFourHiNinety}{\ensuremath{0.006}}
 \newcommand{\RHFourLo}{\ensuremath{-0.018}}
+\newcommand{\RHFourLoNinety}{\ensuremath{-0.016}}
 \newcommand{\RHFourTotal}{\ensuremath{0.027}}
 \newcommand{\RHFourTotalHi}{\ensuremath{0.056}}
 \newcommand{\RHFourTotalLo}{\ensuremath{0.0003}}
@@ -1907,6 +1967,8 @@
 \newcommand{\RWetNearHiNinety}{\ensuremath{0.162}}
 \newcommand{\RWetNearLoNinety}{\ensuremath{-0.036}}
 \newcommand{\RWetside}{\ensuremath{-0.004}}
+\newcommand{\RatioGroupsHi}{\ensuremath{0.002}}
+\newcommand{\RatioGroupsLo}{\ensuremath{-0.016}}
 \newcommand{\RbEmsAllLooMax}{1.05}
 \newcommand{\RbEmsAllLooMin}{0.90}
 \newcommand{\RbEmsAllPairsHi}{1.34}
@@ -1953,6 +2015,7 @@
 \newcommand{\RecurCovPct}{13\%}
 \newcommand{\RecurKeptPct}{14\,\%}
 \newcommand{\RecurNAoi}{227}
+\newcommand{\RecurPooledR}{\ensuremath{0.012}}
 \newcommand{\RecurSetR}{\ensuremath{0.012}}
 \newcommand{\RecurSetRHi}{\ensuremath{0.030}}
 \newcommand{\RecurSetRHiNinety}{\ensuremath{0.027}}
@@ -1983,6 +2046,8 @@
 \newcommand{\RefCSIHand}{0.25}
 \newcommand{\RefCSIMOne}{0.30}
 \newcommand{\RefCSIMThreen}{0.30}
+\newcommand{\RefGainShare}{4.3\,\%}
+\newcommand{\RefNoNlearnShare}{5.9\,\%}
 \newcommand{\RefitDiscussText}{and the verdict holds when the variability of refitting is carried into the interval, which widens that margin to \AchievedBoundRefit}
 \newcommand{\RefitFixedHiNinety}{\ensuremath{0.003}}
 \newcommand{\RefitFixedLoNinety}{\ensuremath{-0.013}}
@@ -1993,6 +2058,8 @@
 \newcommand{\RegLangPct}{3.4\%}
 \newcommand{\ResActCorrAll}{\ensuremath{-0.10}}
 \newcommand{\ResActCorrNear}{\ensuremath{-0.74}}
+\newcommand{\ResActCorrNearHi}{\ensuremath{-0.29}}
+\newcommand{\ResActCorrNearLo}{\ensuremath{-0.92}}
 \newcommand{\ResActCorrOther}{\ensuremath{-0.003}}
 \newcommand{\ResActNPairs}{359}
 \newcommand{\ResActNPairsNear}{12}
@@ -2014,7 +2081,7 @@
 \newcommand{\RiverMidOR}{1.61}
 \newcommand{\RiverMidORHi}{2.64}
 \newcommand{\RiverMidORLo}{0.98}
-\newcommand{\RiversidePct}{0.3\%}
+\newcommand{\RiversidePct}{0.3\,\%}
 \newcommand{\RobustBNineText}{left the verdict unchanged}
 \newcommand{\RobustTenText}{did not let the names improve the predictions (with the hazard maps they made them slightly worse, \emph{negative})}
 \newcommand{\RoundEms}{1.09}
@@ -2029,87 +2096,89 @@
 \newcommand{\RoundedSettlementsPct}{14\,\%}
 \newcommand{\RoundedSharePct}{19\%}
 \newcommand{\STabAmendments}{S4}
-\newcommand{\STabBfive}{S16}
-\newcommand{\STabBsixExample}{S29}
-\newcommand{\STabBsixExamples}{S69}
+\newcommand{\STabBfive}{S19}
+\newcommand{\STabBsixExample}{S33}
+\newcommand{\STabBsixExamples}{A33}
 \newcommand{\STabBsixFlow}{S1}
-\newcommand{\STabBsixForms}{S68}
-\newcommand{\STabBsixGfm}{S65}
-\newcommand{\STabBsixGsw}{S52}
-\newcommand{\STabBsixLexicon}{S67}
-\newcommand{\STabBsixPlasmode}{S17}
-\newcommand{\STabBsixReadings}{S70}
-\newcommand{\STabBsixRuns}{S48}
-\newcommand{\STabBsixStats}{S41}
-\newcommand{\STabCoefs}{S40}
-\newcommand{\STabEightAudit}{S28}
-\newcommand{\STabEightBounds}{S18}
-\newcommand{\STabEightCalib}{S66}
-\newcommand{\STabEightCoder}{S72}
-\newcommand{\STabEightHeights}{S55}
-\newcommand{\STabEightNear}{S25}
-\newcommand{\STabEightPrompt}{S30}
-\newcommand{\STabEightVerdict}{S45}
-\newcommand{\STabEightWhere}{S26}
-\newcommand{\STabElevenCensus}{S14}
-\newcommand{\STabElevenChecks}{S13}
-\newcommand{\STabElevenGazetteer}{S73}
-\newcommand{\STabElevenHeadings}{S33}
-\newcommand{\STabElevenNear}{S63}
-\newcommand{\STabElevenScale}{S22}
-\newcommand{\STabEtymDetail}{S71}
+\newcommand{\STabBsixForms}{A32}
+\newcommand{\STabBsixGfm}{A29}
+\newcommand{\STabBsixGsw}{A16}
+\newcommand{\STabBsixLexicon}{A31}
+\newcommand{\STabBsixPlasmode}{S20}
+\newcommand{\STabBsixReadings}{A34}
+\newcommand{\STabBsixRuns}{A13}
+\newcommand{\STabBsixStats}{A7}
+\newcommand{\STabCoefs}{A6}
+\newcommand{\STabEightAudit}{S32}
+\newcommand{\STabEightBounds}{S21}
+\newcommand{\STabEightCalib}{A30}
+\newcommand{\STabEightCoder}{A36}
+\newcommand{\STabEightHeights}{A19}
+\newcommand{\STabEightNear}{S29}
+\newcommand{\STabEightPrompt}{S34}
+\newcommand{\STabEightVerdict}{S10}
+\newcommand{\STabEightWhere}{A24}
+\newcommand{\STabElevenCensus}{S16}
+\newcommand{\STabElevenChecks}{S15}
+\newcommand{\STabElevenGazetteer}{A38}
+\newcommand{\STabElevenHeadings}{S35}
+\newcommand{\STabElevenNear}{S30}
+\newcommand{\STabElevenScale}{S26}
+\newcommand{\STabEtymDetail}{A35}
 \newcommand{\STabFigChecks}{S1}
 \newcommand{\STabFigLadder}{S2}
 \newcommand{\STabFigNames}{S4}
 \newcommand{\STabFigNearMore}{S3}
 \newcommand{\STabFigPlasmode}{S5}
-\newcommand{\STabGfm}{S64}
-\newcommand{\STabGroups}{S23}
-\newcommand{\STabLexfix}{S39}
-\newcommand{\STabNineActivations}{S60}
-\newcommand{\STabNineBounds}{S19}
-\newcommand{\STabNineClassq}{S61}
-\newcommand{\STabNinePower}{S20}
-\newcommand{\STabNineRuns}{S9}
-\newcommand{\STabNineSkill}{S46}
-\newcommand{\STabPosthocModels}{S42}
+\newcommand{\STabFigSpec}{S6}
+\newcommand{\STabGfm}{S31}
+\newcommand{\STabGroups}{S27}
+\newcommand{\STabLexfix}{A5}
+\newcommand{\STabNineActivations}{A25}
+\newcommand{\STabNineBounds}{S22}
+\newcommand{\STabNineClassq}{A26}
+\newcommand{\STabNinePower}{S23}
+\newcommand{\STabNineRuns}{S11}
+\newcommand{\STabNineSkill}{A11}
+\newcommand{\STabPosthocModels}{A8}
 \newcommand{\STabSevenExcluded}{S2}
-\newcommand{\STabSevenLanguages}{S75}
-\newcommand{\STabSevenPairs}{S57}
-\newcommand{\STabSevenRefit}{S49}
+\newcommand{\STabSevenLanguages}{A40}
+\newcommand{\STabSevenPairs}{A21}
+\newcommand{\STabSevenRefit}{A14}
 \newcommand{\STabSevenStatus}{S5}
-\newcommand{\STabSevenTranslations}{S51}
-\newcommand{\STabSevenWikidata}{S74}
-\newcommand{\STabSiBandContrast}{S59}
-\newcommand{\STabSiChecks}{S43}
-\newcommand{\STabSiClass}{S58}
-\newcommand{\STabSiComposition}{S47}
-\newcommand{\STabSiMetrics}{S38}
-\newcommand{\STabSiOdds}{S56}
-\newcommand{\STabSiPositiveControl}{S53}
-\newcommand{\STabSiPositiveControlB}{S54}
-\newcommand{\STabSiPosthoc}{S44}
-\newcommand{\STabSiPowerSplits}{S37}
-\newcommand{\STabSiRatio}{S36}
-\newcommand{\STabSiRegistered}{S35}
-\newcommand{\STabSiSplitsSecondary}{S34}
-\newcommand{\STabSiStrata}{S8}
-\newcommand{\STabSiYardsticks}{S6}
-\newcommand{\STabSiYardsticksB}{S7}
-\newcommand{\STabTenBetween}{S15}
-\newcommand{\STabTenDilution}{S21}
-\newcommand{\STabTenFloodplain}{S27}
-\newcommand{\STabTenHand}{S10}
-\newcommand{\STabTenInjected}{S50}
-\newcommand{\STabTenIslands}{S24}
-\newcommand{\STabTenMisclass}{S62}
-\newcommand{\STabTenNread}{S31}
-\newcommand{\STabTenOtherLang}{S32}
-\newcommand{\STabTenRobust}{S11}
-\newcommand{\STabTenSplits}{S12}
-\newcommand{\STabTenText}{S77}
-\newcommand{\STabTenValid}{S76}
+\newcommand{\STabSevenTranslations}{A15}
+\newcommand{\STabSevenWikidata}{A39}
+\newcommand{\STabSiBandContrast}{A23}
+\newcommand{\STabSiChecks}{A9}
+\newcommand{\STabSiClass}{A22}
+\newcommand{\STabSiComposition}{A12}
+\newcommand{\STabSiMetrics}{A4}
+\newcommand{\STabSiOdds}{A20}
+\newcommand{\STabSiPositiveControl}{A17}
+\newcommand{\STabSiPositiveControlB}{A18}
+\newcommand{\STabSiPosthoc}{A10}
+\newcommand{\STabSiPowerSplits}{A3}
+\newcommand{\STabSiRatio}{A2}
+\newcommand{\STabSiRegistered}{S6}
+\newcommand{\STabSiSplitsSecondary}{A1}
+\newcommand{\STabSiStrata}{S9}
+\newcommand{\STabSiYardsticks}{S7}
+\newcommand{\STabSiYardsticksB}{S8}
+\newcommand{\STabTenBetween}{S18}
+\newcommand{\STabTenDilution}{S25}
+\newcommand{\STabTenFloodplain}{A28}
+\newcommand{\STabTenHand}{S12}
+\newcommand{\STabTenInjected}{S24}
+\newcommand{\STabTenIslands}{S28}
+\newcommand{\STabTenMisclass}{A27}
+\newcommand{\STabTenNread}{A37}
+\newcommand{\STabTenOtherLang}{A42}
+\newcommand{\STabTenRobust}{S13}
+\newcommand{\STabTenSplits}{S14}
+\newcommand{\STabTenText}{S36}
+\newcommand{\STabTenValid}{A41}
 \newcommand{\STabTimeline}{S3}
+\newcommand{\STabTwelveChecks}{S17}
 \newcommand{\SameEmsOR}{0.78}
 \newcommand{\SameEmsORHi}{1.07}
 \newcommand{\SameEmsORLo}{0.60}
@@ -2137,11 +2206,15 @@
 \newcommand{\SevLowORHi}{0.91}
 \newcommand{\SevLowORLo}{0.18}
 \newcommand{\SevMidOR}{0.99}
+\newcommand{\ShareCellsAsia}{13\,\%}
+\newcommand{\ShareCellsEurope}{55\,\%}
 \newcommand{\ShareCellsRounded}{19\%}
 \newcommand{\ShareCleanKept}{72\%}
 \newcommand{\ShareCountryCross}{2.3\%}
 \newcommand{\ShareNearRemoved}{30\%}
 \newcommand{\ShareSettlementsRounded}{11\%}
+\newcommand{\ShareVarAsia}{34\,\%}
+\newcommand{\ShareVarEurope}{24\,\%}
 \newcommand{\ShareWetside}{5.9\%}
 \newcommand{\ShareWetsideWithinFiveHundred}{11\%}
 \newcommand{\ShareWithinKm}{31\%}
@@ -2149,6 +2222,13 @@
 \newcommand{\SimYZero}{\ensuremath{4.53\times10^{-3}}}
 \newcommand{\SkillHandAuc}{0.75}
 \newcommand{\SkillMOneAuc}{0.90}
+\newcommand{\SpecEmsGfmMax}{1.00}
+\newcommand{\SpecEmsGfmMin}{0.67}
+\newcommand{\SpecEmsMax}{1.09}
+\newcommand{\SpecEmsMin}{0.85}
+\newcommand{\SpecGfmMax}{0.85}
+\newcommand{\SpecGfmMin}{0.44}
+\newcommand{\SpecN}{48}
 \newcommand{\StrictNSpringOnly}{9}
 \newcommand{\StrictPrec}{83\,\%}
 \newcommand{\StrictPrecCell}{83\,\% (72--93)}
@@ -2190,7 +2270,9 @@
 \newcommand{\TopDecileOverlap}{98\%}
 \newcommand{\TopDecileWithin}{98\%}
 \newcommand{\TostSensPost}{held}
+\newcommand{\TraceOpticalPct}{14\,\%}
 \newcommand{\TunedEdgeN}{eight}
+\newcommand{\TunedNamesText}{\missing{v69 B11}}
 \newcommand{\TypedNAoi}{346}
 \newcommand{\TypedNCells}{1{,}109{,}978}
 \newcommand{\TypedNExcl}{154}
@@ -2268,10 +2350,13 @@
 \newcommand{\VerdictTemporal}{undefined-denominator}
 \newcommand{\VerdictTotal}{inconclusive}
 \newcommand{\VerdictTuned}{equivalent-null}
+\newcommand{\WDLexHits}{9}
 \newcommand{\WDNHydro}{139}
 \newcommand{\WDNHydroFR}{122}
 \newcommand{\WDNItems}{26{,}509}
 \newcommand{\WDNPOneThreeEight}{299}
+\newcommand{\WDNamesakes}{299}
+\newcommand{\WDNreadHits}{66}
 \newcommand{\WDPrecLex}{69\,\% (42--87)}
 \newcommand{\WDPrecNread}{72\,\% (62--80)}
 \newcommand{\WDRecallLex}{6\,\% (3--12)}
@@ -2279,6 +2364,7 @@
 \newcommand{\WDRecallLexPct}{6.5\,\%}
 \newcommand{\WDRecallNread}{47\,\% (39--56)}
 \newcommand{\WDRecallNreadPct}{47\,\%}
+\newcommand{\WDRiverNamesakes}{139}
 \newcommand{\WPNCoded}{353}
 \newcommand{\WPNDisputed}{20}
 \newcommand{\WPNNoDeriv}{89}
@@ -2324,6 +2410,7 @@
 \newcommand{\WithinRLo}{\ensuremath{-0.008}}
 \newcommand{\WithinRLoNinety}{\ensuremath{-0.007}}
 \newcommand{\WithinYard}{\ensuremath{7.5\times10^{-3}}}
+\newcommand{\WsAssessPct}{54\,\%}
 \newcommand{\YFourPrimary}{\ensuremath{5.06\times10^{-3}}}
 \newcommand{\YOnePrimary}{\ensuremath{4.02\times10^{-3}}}
 \newcommand{\YOneTwoWayCountry}{\ensuremath{-1.11\times10^{-3}}}

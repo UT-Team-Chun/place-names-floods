@@ -1392,5 +1392,48 @@
   "percentile": 0.69,
   "p_one_sided": 0.31,
   "rule": "B-11 C1: country split, reassignments 1-100 within AOIs with the regional composition recomputed (reference M1 + c(q), names M1 + c(q) + q); percentile of the real increment and share of reassignments at least as large"
+ },
+ "B7": {
+  "n_activations": 188,
+  "n_countries": 70,
+  "n_units": 195,
+  "replicates": 500,
+  "seed": 20261031,
+  "two_way": {
+   "ci90_R_refit_ratio": [
+    -0.05450149478105647,
+    0.03603568680813685
+   ],
+   "ci95_R_refit_ratio": [
+    -0.07127547887551092,
+    0.05779787572112862
+   ],
+   "ci90_R_fixed_ratio": [
+    -0.019595908965794117,
+    0.005220895403967716
+   ],
+   "sd_refit": 0.06796990077249809,
+   "sd_fixed": 0.008775611191151311,
+   "reps_ok": 500,
+   "within_margin": false
+  },
+  "groups": {
+   "ci90_R_refit_ratio": [
+    -0.01977242853780838,
+    0.007936125462820085
+   ],
+   "ci95_R_refit_ratio": [
+    -0.024256464661951097,
+    0.015764986125450443
+   ],
+   "ci90_R_fixed_ratio": [
+    -0.016364115264659893,
+    0.002480356209275042
+   ],
+   "sd_refit": 0.027099931646466048,
+   "sd_fixed": 0.005844709553891911,
+   "reps_ok": 500,
+   "within_margin": true
+  }
  }
 }
