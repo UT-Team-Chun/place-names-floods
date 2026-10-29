@@ -192,12 +192,29 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   the errors named in the critiques corrected (`docs/verification/v70_lexicon_corrected.yaml`, derived mechanically from
   the frozen lexicon, which is unchanged), and early stopping on held-out location groups. Addenda 1 to 5 record the
   implementation before the results, including one correction (the run on events from 2022 keeps the cells of the main
-  table). Scripts: `v70`, `v70b`, `v70_lexicon_corrected`, `v71`; cluster runs `world_v2_b13gsw22`,
+  table). Scripts: `v70`, `v70b`, `v70_lexicon_corrected`, `v71`, `v72`; cluster runs `world_v2_b13gsw22`,
   `world_v2_b13recprior`, `world_v2_b13jrcset`, `world_v2_b13lexfix`, `world_v2_b13gres`.
+- Amendment B-14 followed the tenth round of critiques. It kept the protocol's verdict as the record, split Sect. 3 into
+  the protocol-based test and a post hoc reanalysis whose result is the one-sided upper limit (non-superiority), a choice
+  made after every interval had been seen, and fixed, before they were computed: the equivalence test on the ratio in the
+  order its intervals were defined, with percentile and normal limits, TOST p values and Monte Carlo errors; jackknife,
+  studentized, weighted and pigeonhole versions and the effective number of clusters; operating characteristics with
+  activations resampled within countries; the decomposition of the reference model and a comparison without the regional
+  composition; the share of each record's value kept through settlements; the direction of the name coefficients on
+  both label sets; tables of the lexicon's edits (`docs/verification/v73_lexicon_edits.csv`), of the elements it leaves
+  out and of the gazetteer; elevation and river size of qualifier pairs; further checks of the odds ratios near
+  settlements; a check of the positional join of the cell tables; and, on the cluster, labels on observable ground, the
+  relief of settlement sites assigned through settlements as a positive control, and country indicators for the
+  language-model reading. Addenda 1 to 3 record the implementation and the aggregation before the results. Addendum 4,
+  written after the pigeonhole result had been seen, adds descriptions of the overlap of location groups and activations
+  and reports both upper limits. Addendum 5 fixed versions of the odds ratio near settlements without EMSR052 and EMSR130
+  before they were computed; addendum 6 records that its premise was wrong (amendment B-13 had computed these versions,
+  which v75 reproduced) and that the only new fact is that neither GFM table holds an AOI of either activation. Scripts:
+  `v73`, `v74`, `v75`; cluster runs `world_v2_b14obs`, `world_v2_b14oracle`, `world_v2_b14h4k`.
 
-English translations of the protocol and of amendments B-1 to B-13 are in `docs/protocol/en/`; they were drafted with a
+English translations of the protocol and of amendments B-1 to B-14 are in `docs/protocol/en/`; they were drafted with a
 language model after the analysis and have not yet been checked by the authors, and the Japanese files are the record
-and govern where the two differ. Amendments B-2, B-3 and B-5 to B-13 followed critiques by language-model agents; the
+and govern where the two differ. Amendments B-2, B-3 and B-5 to B-14 followed critiques by language-model agents; the
 paper lists the rounds and their times. Dates written
 inside the repository files are local (Japan Standard Time, UTC+9) unless marked; the paper gives UTC. An interpretation
 plan, written after the freeze and before any confirmatory result, is in

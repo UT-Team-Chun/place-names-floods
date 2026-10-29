@@ -177,12 +177,14 @@ STACK: dict[str, tuple[str, list[str]]] = {
     "M3d": ("M1", DEMEANED), "M3dp": ("M1", DEMEANED_P),
     "M3rs": ("M1", NREAD_FEATURES), "M3rps": ("M1", NREAD_P),
 }
-NREAD_STACK = ("M1rc", "M3rn", "M3rnp", "M3rs", "M3rps")
+NREAD_STACK = ("M1rc", "M3rn", "M3rnp", "M3rs", "M3rps", "M3rk")
 # 事後 B-5 の 5（オラクル対照）: 名前の代わりに最寄りの集落の地点の地形（集落の点から 177 m 以内のセルの最小 HAND の
 # 平均）を、名前と同じく最寄りの集落からセルに割り当てる。--oracle のときだけ計算
 ORACLE = ["o_site_hand"]
-STACK |= {"M1co": ("M1", [f"c_{f}" for f in ORACLE]), "M3o": ("M1", [*(f"c_{f}" for f in ORACLE), *ORACLE])}
-ORACLE_STACK = ("M1co", "M3o")
+STACK |= {"M1co": ("M1", [f"c_{f}" for f in ORACLE]), "M3o": ("M1", [*(f"c_{f}" for f in ORACLE), *ORACLE]),
+          # 事後 B-14 の C2: H3 の陽性対照（地点の HAND を集落を通じて、標高の無い T0 に）
+          "T0co": ("T0", [f"c_{f}" for f in ORACLE]), "T0o": ("T0", [*(f"c_{f}" for f in ORACLE), *ORACLE])}
+ORACLE_STACK = ("M1co", "M3o", "T0co", "T0o")
 SITE_RADIUS_M = 177.0
 PERM_STACK = ("M1c", "M3n", "M3np")  # 置換の分布（B-5 の 1）で一緒に出す実の比較
 # 事後 B-6（初見の査読 第 2 回）: 既定の腕には入れず、選択肢を与えたときだけ回す
@@ -249,6 +251,9 @@ B13_STACK: dict[str, tuple[str, list[str]]] = {
     **{f"M3o{k}": ("M1", [*(f"c_{f}" for f in feats), *feats]) for k, feats in (("J", ORACLE_J), ("Jc", ORACLE_JC))},
 }
 STACK |= B13_STACK
+# 事後 B-14 の C3: H4 の全体の増分に国の構成を（基準 M1k = 基礎 + 国の指標、名のモデル M3rk = M1k + N-read の特徴）
+B14_STACK: dict[str, tuple[str, list[str]]] = {"M3rk": ("M1", ["@country", *NREAD_FEATURES])}
+STACK |= B14_STACK
 TUNED_STACK = ("M1ct", "M3nt")  # C2: 二段目の C を入れ子の交差検証で選ぶ
 B10_DYNAMIC = ("bd_", "ct_", "__", "@country")  # fold の中で作る列（表の列の有無で落とさない）
 IN_FOLD = ("nlearn", "nlearn_p")  # fold の中で作る特徴（表には無い）
@@ -564,7 +569,7 @@ def run_fold(df: pd.DataFrame, fold: int, arms: list[str], seeds: list[int],  # 
         te[col] = sc
     add_composition(tr, te)
     cc_cols: list[str] = []
-    if any(s in B10_STACK for s in stacks):  # B-10: 国の水準は表全体の国（ラベルは使わない）
+    if any(s in B10_STACK or s in B14_STACK for s in stacks):  # B-10: 国の水準は表全体の国（ラベルは使わない）
         cc_cols = add_b10(tr, te, sorted(c for c in df["cc"].unique() if c))
     fold_tr = inner_folds(groups_tr)
     preds: dict[str, np.ndarray] = {}
@@ -1247,7 +1252,7 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     ap.add_argument("--nread", default="", help="N-read 推論結果 parquet（与えると M3r/M3rp も回す）")
     ap.add_argument("--labels", default="ems", choices=["ems", "gfm"],
                     help="事後 B-3: 独立のラベル（GFM）で学習・評価（同じ表・同じ fold の後で差し替え）")
-    ap.add_argument("--label-variant", default="none", choices=["none", "notrace", "nonwater"],
+    ap.add_argument("--label-variant", default="none", choices=["none", "notrace", "nonwater", "observable"],
                     help="事後 B-5 の 7: 浸水痕跡を除く / 恒常水域を除いた面積で浸水率を測る")
     ap.add_argument("--save-coefs", action="store_true", help="事後 B-5 の 2: 二段目の係数を fold の記録に")
     ap.add_argument("--oracle", action="store_true",

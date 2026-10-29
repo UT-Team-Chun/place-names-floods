@@ -1,0 +1,119 @@
+{
+ "planned_gfm": {
+  "n_aoi_by_activation": {
+   "EMSR052": 0,
+   "EMSR130": 0
+  },
+  "all": {
+   "odds_ratio": 0.5493354376611337,
+   "ci95": [
+    0.3669453524820029,
+    0.8223824638442583
+   ],
+   "n_cells": 232041,
+   "n_aoi": 182,
+   "n_units": 80,
+   "n_aoi_removed": 0,
+   "n_flooded_near": 43
+  },
+  "without_EMSR052": {
+   "not_applicable": true
+  },
+  "without_EMSR130": {
+   "not_applicable": true
+  },
+  "without_both": {
+   "not_applicable": true
+  }
+ },
+ "ems_all": {
+  "all": {
+   "odds_ratio": 0.9113480934974443,
+   "ci95": [
+    0.7541235786023761,
+    1.10135178250321
+   ],
+   "n_cells": 19265843,
+   "n_aoi": 500,
+   "n_units": 195,
+   "n_group_cells": 105443,
+   "n_group_flooded": 3753.0,
+   "n_group_units": 146,
+   "n_aoi_removed": 0,
+   "n_flooded_near": 3753
+  },
+  "without_EMSR052": {
+   "odds_ratio": 0.9316048457363894,
+   "ci95": [
+    0.7071436647994427,
+    1.2273143800922952
+   ],
+   "n_cells": 16040368,
+   "n_aoi": 497,
+   "n_units": 195,
+   "n_group_cells": 92748,
+   "n_group_flooded": 2629.0,
+   "n_group_units": 146,
+   "n_aoi_removed": 3,
+   "n_flooded_near": 2629
+  },
+  "without_EMSR130": {
+   "odds_ratio": 0.9716924461281422,
+   "ci95": [
+    0.8134258183057994,
+    1.1607526938707706
+   ],
+   "n_cells": 17997721,
+   "n_aoi": 489,
+   "n_units": 194,
+   "n_group_cells": 81983,
+   "n_group_flooded": 2844.0,
+   "n_group_units": 145,
+   "n_aoi_removed": 11,
+   "n_flooded_near": 2844
+  },
+  "without_both": {
+   "odds_ratio": 1.0983328460904747,
+   "ci95": [
+    0.8484210642355499,
+    1.4218588996115304
+   ],
+   "n_cells": 14772246,
+   "n_aoi": 486,
+   "n_units": 194,
+   "n_group_cells": 69288,
+   "n_group_flooded": 1720.0,
+   "n_group_units": 145,
+   "n_aoi_removed": 14,
+   "n_flooded_near": 1720
+  }
+ },
+ "gfm": {
+  "all": {
+   "odds_ratio": 0.8215970937125705,
+   "ci95": [
+    0.6161373327976327,
+    1.0955703354833881
+   ],
+   "n_cells": 2547588,
+   "n_aoi": 239,
+   "n_units": 97,
+   "n_group_cells": 13129,
+   "n_group_flooded": 434.0,
+   "n_group_units": 68,
+   "n_aoi_removed": 0,
+   "n_flooded_near": 434
+  },
+  "without_EMSR052": {
+   "not_applicable": true
+  },
+  "without_EMSR130": {
+   "not_applicable": true
+  },
+  "without_both": {
+   "not_applicable": true
+  }
+ },
+ "rule": "B-14 addendum 5: water-side odds ratio within 500 m of settlements without the AOIs of EMSR052, of EMSR130 or of both; estimator of each version (AOI fixed effects, distance bands, logit of M1); 95% Wald intervals clustered by location group (no pairs bootstrap); 'all' is the version without exclusions with the same interval",
+ "seconds": 139
+}

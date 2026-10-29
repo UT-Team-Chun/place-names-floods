@@ -381,7 +381,13 @@ def fig_map(inc: dict) -> None:
     ax = fig.add_axes([0.0, 0.25, 0.72, 0.74])
     draw(ax, (-180, 180), (-58, 75), 1.0)
     ax.axis("off")
-    ax.legend(loc="lower left", fontsize=7, frameon=False)
+    leg = ax.legend(loc="lower left", fontsize=7, frameon=False)
+    ax.add_artist(leg)
+    # NHESS 版（B-14 の A9）: 印の大きさの凡例（評価できるセルの数、上限の前）
+    hs = [ax.scatter([], [], s=np.sqrt(n) / 8, c="#1f6fb4", alpha=0.6, lw=0) for n in (1_000, 10_000, 100_000)]
+    ax.legend(hs, ["1,000", "10,000", "100,000"], title="evaluable cells", title_fontsize=6, fontsize=6,
+              loc="lower center", bbox_to_anchor=(0.42, 0.0), ncol=3, frameon=False, handletextpad=0.3,
+              columnspacing=1.0)
     ax.add_patch(plt.Rectangle((-12, 35), 45, 36, fill=False, lw=0.6, color="0.3"))
     axe = fig.add_axes([0.72, 0.31, 0.27, 0.62])
     draw(axe, (-12, 33), (35, 71), 0.5)

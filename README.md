@@ -24,9 +24,9 @@ before they were computed, and the paper lists the exceptions and the planning s
 | Path | Contents |
 |---|---|
 | `docs/protocol/preregistration_v2.md` | Frozen analysis protocol (hypotheses, estimand, splits, decision rules, smallest effect size of interest, sensitivity analyses, power analysis); in Japanese, the frozen record |
-| `docs/protocol/en/` | English translations of the protocol and of amendments B-1 to B-13, drafted with a language model after the analysis and not yet checked by the authors (the Japanese files govern where they differ) |
+| `docs/protocol/en/` | English translations of the protocol and of amendments B-1 to B-14, drafted with a language model after the analysis and not yet checked by the authors (the Japanese files govern where they differ) |
 | `docs/protocol/v2/lexicon_hydro_v1.yaml` | Frozen multilingual lexicon of water, wetland, riverine, crossing, lowland and highland word elements |
-| `docs/protocol/amendments/B-*.md` | Post-freeze amendments: corrections of implementation errors with both runs reported (B-1: one sensitivity analysis; B-4: the lexicon was not applied to Norwegian names because the YAML parser read the country code `NO` as false); post hoc analyses fixed before they were run (B-2: after critiques by language-model agents with access to the project records; B-3: independent flood labels from Copernicus Global Flood Monitoring; B-5 to B-13: after nine rounds of critiques by language-model agents given only the manuscript and supplement). These critiques are not peer review; the paper (Appendix A) lists the analyses that were planned or withdrawn after related results had been seen |
+| `docs/protocol/amendments/B-*.md` | Post-freeze amendments: corrections of implementation errors with both runs reported (B-1: one sensitivity analysis; B-4: the lexicon was not applied to Norwegian names because the YAML parser read the country code `NO` as false); post hoc analyses fixed before they were run (B-2: after critiques by language-model agents with access to the project records; B-3: independent flood labels from Copernicus Global Flood Monitoring; B-5 to B-14: after ten rounds of critiques by language-model agents given only the manuscript and supplement). These critiques are not peer review; the paper (Appendix A) lists the analyses that were planned or withdrawn after related results had been seen |
 | `docs/research/2026-10-26_v2_interpretation_plan.md` | Interpretation plan written after the freeze and before any confirmatory result |
 | `docs/data/` | Copernicus EMS product inventory (frozen snapshot) and the point-in-time register of all inputs |
 | `backend/packages/topsem/` | Analysis package (`topsem.world`: EMS parsing, rasterisation, terrain, hydrology, land cover, names, lexicon and language-model channels, GFM labels, the post hoc modules `b6`–`b13`) and scripts (`scripts/world_*.py`, `nread_*.py`) with unit tests |
@@ -67,14 +67,23 @@ characteristics; the odds ratios that each interval's upper limit corresponds to
 near settlements; the reference model without the character model's area mean; influence; other denominators; a joint
 test of the name coefficients; checks of the odds ratios near settlements; an audit of homographs, language blocks and
 Unicode names; the language-model reading by block and country; both coders' codes; AOI-balanced metrics; a diagnosis of
-the GFM labels; pairs of settlements that differ by a lower or upper qualifier), the corrected lexicon
+the GFM labels; pairs of settlements that differ by a lower or upper qualifier), the edited lexicon
 (`v70_lexicon_corrected.py`) and the aggregation of the B-13 runs (v71: records known before each event in place of the
-names, the corrected lexicon, early stopping on location groups, and an injection within 1 km of settlements) |
+names, the edited lexicon, early stopping on location groups, and an injection within 1 km of settlements; v72: resamples
+of the checks near settlements); B-14 analyses (v73: the equivalence test on the ratio in the order its intervals were
+defined, with percentile and normal limits, TOST p values and one-sided upper limits; jackknife, studentized, weighted
+and pigeonhole versions and the effective number of clusters; operating characteristics with activations resampled within
+countries; the decomposition of the reference model; the share of each record's value kept through settlements; the
+direction of the name coefficients; tables of the lexicon's edits, omitted elements and the gazetteer; elevation and river
+size of qualifier pairs; further checks near settlements; a check of the positional join of the cell tables) and the
+aggregation of the B-14 runs (v74: labels on observable ground, the relief of settlement sites as a positive control, and
+country indicators for the language-model reading; v75: the odds ratios near settlements without EMSR052 and EMSR130) |
 | `docs/verification/` | Their outputs, including the coded Wikipedia etymology excerpts with sources and quotations (`v44_etym_codes.csv`) and the lexicon tables (`v51_lexicon_table.csv`, `v51_top_forms.csv`, `v51_examples.csv`) |
 | `docs/verification/v51_audit_sample.csv`, `v51_audit_guide.md` | A stratified sample of 100 settlement names and a coding guide for an independent coding of their recorded etymologies (amendment B-6; superseded by the sample below) |
 | `docs/verification/v68_audit_sample.csv`, `v68_audit_guide.md` | A sample of 150 settlement names read as water-side, stratified by matched form and country (amendment B-11; superseded by the sample below) |
 | `docs/verification/v69_audit_sample.csv`, `v69_audit_guide.md` | A sample of 300 settlement names in random order: 150 read as water-side (stratified by matched form and country), 50 from the forms that supply the uncapped estimates near settlements, and 100 not read as water-side, so that missed names can be counted; the guide asks for element-level codes, the kind of name and whether an element names the site or a nearby feature. Whether the study read each name as water-side is withheld until the check is complete |
 | `docs/verification/v70_lexicon_corrected.yaml` | A lexicon derived mechanically from the frozen one by the rules of amendment B-13 (item C2): homographs, riverside entries without a flood meaning, relative qualifiers, springs and wells, rapids and falls removed; named omissions added; the German block limited to German-speaking countries. The frozen lexicon is unchanged; the derivation is recorded in `v70_lexicon_corrected_record.json` |
+| `docs/verification/v73_lexicon_edits.csv` | Every entry removed from or added to the frozen lexicon in the edited lexicon of amendment B-13, with its class and the rule that removed it (amendment B-14, item B8) |
 | `docs/verification/v70_two_coders.csv` | The codes of both coders of the recorded etymologies with GeoNames ID, country and stratum, leaving out the names of every audit sample |
 | `docs/verification/v69_estimates.csv` | The census of exploratory interval estimates with the corrected near-settlement flags and Benjamini–Hochberg and Benjamini–Yekutieli values (amendment B-12, addendum 1) |
 | `docs/paper/paper_2_nhess/supplement_archive.pdf` | Tables of exploratory analyses that neither the paper nor its Supplement cites, numbered A1, A2, …, including tables whose quantities were later corrected or superseded |
@@ -121,7 +130,8 @@ Inputs are public (see Code and data availability in the paper). The pipeline st
    `--plasmode-forms AC` with `--plasmode-rho`, and `--hazard jrc` (with `world_jrc.py`) those of B-10;
    `--lexicon`, `--dump-stage2`, `--plasref-deltas` and `--gsw-cell` those of B-8 (`--lexicon` again in B-13);
    `--plasmode-forms BK` that of B-12; and `--post-min-event-year`, `--recurrence-prior`, `--jrc-set` and
-   `--grouped-es` those of B-13; the scripts `v36`–`v71` compute the rest
+   `--grouped-es` those of B-13; `--label-variant observable` and the stacks `T0co`, `T0o` and `M3rk` those of B-14;
+   the scripts `v36`–`v75` compute the rest
 9. `docs/paper/paper_2_nhess/figures/make_figures.py` — all numbers, tables and figures
 
 The derived data (cell tables, name readings, held-out predictions, run summaries and the GeoNames snapshot used)

@@ -64,7 +64,8 @@ def evaluable(df: pd.DataFrame) -> np.ndarray:
     )
 
 
-LABEL_VARIANTS = ("none", "notrace", "nonwater")
+LABEL_VARIANTS = ("none", "notrace", "nonwater", "observable")
+OBSERVABLE_MAX = 0.5  # B-14 の C1: 10 m の市街地 + 樹冠の割合がこれ以上のセルは評価から除く
 
 
 def riverine_labels(df: pd.DataFrame, *, unspecified_as_riverine: bool = False,
@@ -76,7 +77,9 @@ def riverine_labels(df: pd.DataFrame, *, unspecified_as_riverine: bool = False,
     all_types（感度 §7-1）では種別を問わず y=1 ⇔ 浸水被覆 ≥ 0.5（除外なし）。
     variant（事後 B-5 の 7）: notrace は浸水痕跡（notation に trace）の被覆を差し引く
     （EMS の多角形は重ならないので差で足りる）、nonwater は浸水の割合を恒常水域を除いた
-    面積で測る。既定 none は凍結時と同じ計算（型も変えない）。
+    面積で測る。observable（事後 B-14 の C1）はラベルを変えず、10 m の市街地と樹冠の割合の和
+    （features の lc_built + lc_tree、欠けは 0）が OBSERVABLE_MAX 以上のセルを除く。既定 none は
+    凍結時と同じ計算（型も変えない）。
     """
     if variant not in LABEL_VARIANTS:
         msg = f"unknown label variant {variant!r}"
@@ -90,14 +93,19 @@ def riverine_labels(df: pd.DataFrame, *, unspecified_as_riverine: bool = False,
     elif variant == "nonwater":
         land = np.clip(1.0 - df["f_perm_water"].to_numpy(), 1e-6, None)
         riv, anyf, oth = riv / land, anyf / land, oth / land
+    obs = np.ones(len(df), dtype=bool)
+    if variant == "observable":
+        cover = np.nan_to_num(df["lc_built"].to_numpy(np.float64)
+                              + df["lc_tree"].to_numpy(np.float64), nan=0.0)
+        obs = cover < OBSERVABLE_MAX
     if all_types:
         y1 = anyf >= WET_TH
-        return y1.astype(np.int8), np.ones(len(df), dtype=bool)
+        return y1.astype(np.int8), obs
     if unspecified_as_riverine:
         riv = riv + oth
     y1 = riv >= WET_TH
     y0 = anyf < WET_TH
-    return y1.astype(np.int8), (y1 | y0)
+    return y1.astype(np.int8), (y1 | y0) & obs
 
 
 def aoi_info(d: Path, coast: "CoastIndex | None" = None, *,  # noqa: UP037
@@ -272,6 +280,10 @@ def load_aoi_table(d: Path, *, cap: int, seed: int,  # noqa: PLR0913
     cells = pq.read_table(d / "cells.parquet").to_pandas()
     feats = pq.read_table(d / "features.parquet").to_pandas()
     lc = pq.read_table(d / "landcover.parquet").to_pandas()  # 洪水前年の CCI（§2.3）
+    if not len(cells) == len(feats) == len(lc):  # B-14 の B14: 行の位置で結ぶので数が違えば止める
+        msg = (f"{d.name}: row counts differ (cells {len(cells)}, features {len(feats)}, "
+               f"landcover {len(lc)})")
+        raise ValueError(msg)
     df = pd.concat([cells.reset_index(drop=True), feats.reset_index(drop=True),
                     lc.reset_index(drop=True)], axis=1)
     y, keep = riverine_labels(df, unspecified_as_riverine=unspecified_as_riverine,

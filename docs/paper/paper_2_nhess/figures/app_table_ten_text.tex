@@ -26,6 +26,8 @@ Quantity & Value \\
 \quad Ten most influential location groups removed in turn: $R$ (fixed; refitted); effective number of groups & \InflLo{} to \InflHi; \InflRefitLo{} to \InflRefitHi; \InflNeff \\
 \quad Joint Wald test of the name coefficients on all held-out cells: $\chi^2$ (df), $p$ & \WaldNamesChi{} (\WaldNamesDf), \WaldNamesP \\
 \quad Within AOIs: median change in the area under the ROC curve; share of AOIs with a higher area & \AoiMedDAuc; \AoiShareAucUp \\
+\quad Activations kept whole: Brier score of the reference model; of the recalibrated baseline model & \ActBSMOnec; \ActBSMOnes \\
+\quad Between AOIs of the German, English and French blocks: coefficient of the share of water-related names (95\,\% interval) & \BetweenCoef{} (\BetweenCoefLo{} to \BetweenCoefHi) \\
 \multicolumn{2}{l}{\emph{What assignment through settlements can carry (Sect.~5)}} \\
 \quad Share of cells within 500\,m of a settlement with a water-related name & \CeilShareFiveHundred \\
 \quad Largest possible $R$ from perfect prediction near water-related names within 1\,km & \CeilROneKm \\
@@ -35,13 +37,14 @@ Quantity & Value \\
 \multicolumn{2}{l}{\emph{Readings and labels near settlements (Sect.~6)}} \\
 \quad Share of names not read as water-related with a water-related derivation, independent coder (95\,\% interval) & \CodeTwoPZeroPct{} (\CodeTwoPZeroLo{} to \CodeTwoPZeroHi) \\
 \quad Agreement of the two coders on water-related derivations ($\kappa$) & \CoderKappa \\
-\quad Corrected lexicon: $R$ (90\,\% interval) & \LexCorrR{} (\LexCorrRLoNinety{} to \LexCorrRHiNinety) \\
+\quad Edited lexicon: $R$ (90\,\% interval) & \LexCorrR{} (\LexCorrRLoNinety{} to \LexCorrRHiNinety) \\
 \quad Cells nearest Australian settlements & \AuPct \\
 \quad Cells whose nearest name is read as riverside by a form such as French \emph{-sur-} & \RiversidePct \\
 \quad Settlements with a namesake in Wikidata; of them named after a river; river namesakes read as water-related by the language model; by the lexicon & \WDNamesakes; \WDRiverNamesakes; \WDNreadHits; \WDLexHits \\
 \quad Language-model reading: cells water-related; in Africa; cells answered ``unknown'' & \NReadWetPct; \NReadWetAF; \NReadUnknownPct \\
 \quad Planned estimate on the GFM labels: flooded cells within 500\,m of water-related names; location groups holding them & \GfmCappedFlooded; \GfmCappedUnits \\
 \quad Uncapped EMS estimate: share of its flooded cells within 500\,m in EMSR052 and EMSR130 & \NearTopTwoShare \\
+\quad GFM labels, given the baseline model: odds of a flood label more than 1\,km from the nearest settlement against within 500\,m (95\,\% interval) & \GFMNearFarGfm{} (\GFMNearFarGfmLo{} to \GFMNearFarGfmHi) \\
 \multicolumn{2}{l}{\emph{Appendix C}} \\
 \quad Null simulations: standard deviation of $R$ between replicates; median bootstrap standard error; robust standard deviation & \NullSdBetween; \NullMedianSe; \NullRobustSd \\
 \quad Observed and simulated median 90\,\% half-widths of $R$ & \ObsHalfWidth; \SimHalfWidth \\

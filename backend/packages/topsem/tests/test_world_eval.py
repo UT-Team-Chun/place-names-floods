@@ -25,6 +25,7 @@ from topsem.world.dataset import (
     assign_folds,
     group_quotas,
     include,
+    load_aoi_table,
     location_groups,
     merge_by_activation,
     riverine_labels,
@@ -543,6 +544,40 @@ def test_label_variants_default_unchanged_and_variants_shift_labels() -> None:
     assert y.tolist() == [1, 1, 1, 0]  # 0.3 / (1 − 0.45) ≈ 0.55 ≥ 0.5
     with pytest.raises(ValueError, match="unknown label variant"):
         riverine_labels(df, variant="x")
+
+
+def test_observable_variant_keeps_labels_and_drops_unobservable_cells() -> None:
+    """B-14 の C1: ラベルは変えず、市街地 + 樹冠が 0.5 以上のセルを除く（欠けは観測できる）。"""
+    df = pd.DataFrame({"f_riverine": np.array([0.6, 0.6, 0.0, 0.0], dtype=np.float32),
+                       "f_flood_any": np.array([0.6, 0.6, 0.0, 0.0], dtype=np.float32),
+                       "f_other": np.zeros(4, dtype=np.float32),
+                       "f_trace": np.zeros(4, dtype=np.float32),
+                       "f_perm_water": np.zeros(4, dtype=np.float32),
+                       "lc_built": np.array([0.4, 0.1, 0.0, np.nan], dtype=np.float32),
+                       "lc_tree": np.array([0.2, 0.1, 0.5, np.nan], dtype=np.float32)})
+    y0, k0 = riverine_labels(df)
+    y, keep = riverine_labels(df, variant="observable")
+    assert y.tolist() == y0.tolist()
+    assert keep.tolist() == [False, True, False, True]
+    assert k0.tolist() == [True, True, True, True]
+
+
+def test_load_aoi_table_rejects_tables_of_different_length(tmp_path: Path) -> None:
+    """B-14 の B14: cells・features・landcover は行の位置で結ぶので、行数が違えば止める。"""
+    pd.DataFrame({"f_aoi": [1.0, 1.0]}).to_parquet(tmp_path / "cells.parquet")
+    pd.DataFrame({"lc_built": [0.0]}).to_parquet(tmp_path / "features.parquet")
+    pd.DataFrame({"cci_water": [0.0, 0.0]}).to_parquet(tmp_path / "landcover.parquet")
+    with pytest.raises(ValueError, match="row counts differ"):
+        load_aoi_table(tmp_path, cap=10, seed=0)
+
+
+def test_b14_arms_are_gated_like_their_families() -> None:
+    """B-14 の C2・C3: T0co・T0o は --oracle のときだけ、M3rk は N-read があるときだけ回す。"""
+    ev = _load("world_eval")
+    assert {"T0co", "T0o"} <= set(ev.ORACLE_STACK)
+    assert ev.STACK["T0o"] == ("T0", ["c_o_site_hand", "o_site_hand"])
+    assert "M3rk" in ev.NREAD_STACK
+    assert ev.STACK["M3rk"][1][0] == "@country"
 
 
 def test_attach_oracle_maps_site_hand_and_fills_missing() -> None:
