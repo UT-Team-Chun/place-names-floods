@@ -211,10 +211,23 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   before they were computed; addendum 6 records that its premise was wrong (amendment B-13 had computed these versions,
   which v75 reproduced) and that the only new fact is that neither GFM table holds an AOI of either activation. Scripts:
   `v73`, `v74`, `v75`; cluster runs `world_v2_b14obs`, `world_v2_b14oracle`, `world_v2_b14h4k`.
+- Amendment B-15 followed the eleventh round of critiques. It halved the paper, described the protocol's rule as a
+  fixed-margin test in Brier units and the test on the ratio as a test of another hypothesis, and replaced the reading of
+  one post hoc upper limit as the result by the range over constructions, with critical values for the few effective
+  clusters. It fixed, before they were computed: a table of every pre-specified comparison on every split; upper limits
+  with normal, t(G − 1) and Satterthwaite t(ν) critical values from the saved resamples; a reanalysis on the split that
+  keeps activations whole, with 500 draws of the 106 super-clusters and the second stage refitted on a design saved
+  locally; names against records assigned through settlements on the same cells and resamples; the observability of the
+  ground near settlements, with a rule for when the odds ratios on the EMS labels may be called bounds; checks of the GFM
+  labels; tables of the lexicon's blocks, class precision, romanisations and recorded namesakes; the census extended to
+  every amendment (`docs/verification/v76_estimates.csv`); a decomposition of how the correction of Norwegian names moved
+  the estimate on that split; and a wild cluster bootstrap and label permutations of the odds ratios near settlements.
+  Addendum 1 records the implementation and addendum 2 two corrections (batched Wikidata queries after truncated
+  answers, and the sources of the consistency checks), both before the quantities were used. Script: `v76` (local only).
 
-English translations of the protocol and of amendments B-1 to B-14 are in `docs/protocol/en/`; they were drafted with a
+English translations of the protocol and of amendments B-1 to B-15 are in `docs/protocol/en/`; they were drafted with a
 language model after the analysis and have not yet been checked by the authors, and the Japanese files are the record
-and govern where the two differ. Amendments B-2, B-3 and B-5 to B-14 followed critiques by language-model agents; the
+and govern where the two differ. Amendments B-2, B-3 and B-5 to B-15 followed critiques by language-model agents; the
 paper lists the rounds and their times. Dates written
 inside the repository files are local (Japan Standard Time, UTC+9) unless marked; the paper gives UTC. An interpretation
 plan, written after the freeze and before any confirmatory result, is in

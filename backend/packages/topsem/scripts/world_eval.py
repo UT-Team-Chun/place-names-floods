@@ -745,11 +745,17 @@ def attach_gsw_cell(df: pd.DataFrame, path: Path) -> dict:
     return {"path": str(path), "sha256": _sha256(str(path)), "n_rows": len(t), "share_cells_with_value": float(ok.mean())}
 
 
+def stage2_ids(tr: pd.DataFrame, te: pd.DataFrame) -> dict:
+    """B-15 の B3・B9: 二段目の設計の保存に足す AOI と最寄りの集落の国（AOI 内の中心化と凍結した読みの再現に使う）。"""
+    return {f"{c}_{side}": frame[c].to_numpy(dtype=str) for c in ("aoi", "cc") for side, frame in (("tr", tr), ("te", te))}
+
+
 def dump_stage2(df: pd.DataFrame, fold: int, seeds: list[int]) -> dict:
     """C2: 主比較の二段目の設計（基礎の logit・地域構成・名前の特徴・場所グループ）を保存する分。"""
     r = run_fold(df, fold, ["M0"], seeds, ["M1c", "M3n"], keep_state=True)
     tr, te, z = r["tr"], r["te"], r["z"]["M1"]
     return {
+        **stage2_ids(tr, te),
         "z_tr": z[0].astype(np.float32), "z_te": z[1].astype(np.float32),
         "xc_tr": tr[COMP].to_numpy(np.float32), "xc_te": te[COMP].to_numpy(np.float32),
         "xn_tr": tr[NAMES].to_numpy(np.float32), "xn_te": te[NAMES].to_numpy(np.float32),

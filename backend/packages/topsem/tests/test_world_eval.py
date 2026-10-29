@@ -707,3 +707,15 @@ def test_b13_filter_event_year_keeps_cells_of_later_aois() -> None:
     assert out["x"].tolist() == [3, 4]
     assert info["n_aoi"] == 2
     assert info["n_cells_before"] == 4
+
+
+def test_stage2_ids_keep_aoi_and_country_per_side() -> None:
+    """B-15 の B3・B9: 二段目の設計の保存は学習側と評価側の AOI と国を行の順に持つ。"""
+    we = _load("world_eval")
+    tr = pd.DataFrame({"aoi": ["A1", "A1", "B2"], "cc": ["NO", "NO", "SE"]})
+    te = pd.DataFrame({"aoi": ["C3"], "cc": ["PK"]})
+    ids = we.stage2_ids(tr, te)
+    assert set(ids) == {"aoi_tr", "aoi_te", "cc_tr", "cc_te"}
+    assert ids["aoi_tr"].tolist() == ["A1", "A1", "B2"]
+    assert ids["cc_te"].tolist() == ["PK"]
+

@@ -7,47 +7,39 @@
 \tophline
 Quantity & Value \\
 \middlehline
-\multicolumn{2}{l}{\emph{Design, data and sample (Sects.~2--3)}} \\
+\multicolumn{2}{l}{\emph{Data, design and sample (Sects.~\ref{P-sec:methods} and~\ref{P-sec:sample} of the paper)}} \\
 \quad Median distance from a scored cell to its nearest settlement & \DistMedian\,km \\
+\quad Share of the evaluable cells kept by the cap per location group & \CapKeptPct \\
+\quad Analysed AOIs by schema generation of the EMS products, 0 to 3 & \NAoiGenZero; \NAoiGenOne; \NAoiGenTwo; \NAoiGenThree \\
+\quad Entries of the lexicon; language blocks & \NLexEntries; \LexNCodes \\
 \quad Flooded share of the analysed cells; AOI median [interquartile range] & \BaseRatePct; \AoiRateMed{} [\AoiRateQOne, \AoiRateQThree] \\
 \quad AOIs without a hydrography layer; analysed AOIs whose products describe no flood type; counted riverine by the inland rule & \NoHydroNExcl{} (\NoHydroPct); \NUntypedAoi; \NUnspecifiedRiverine \\
 \quad Settlements nearest the analysed cells: sections of populated places; historical, abandoned or destroyed; coordinates on whole arc-minutes & \FcodeSectionPct; \FcodeHistPct; \RoundedSettlementsPct \\
 \quad Share of the cells and of the label variance $\sum p(1-p)$: Asian AOIs; European AOIs & \ShareCellsAsia, \ShareVarAsia; \ShareCellsEurope, \ShareVarEurope \\
-\quad Improvement from recalibrating the baseline model alone (Brier units) & \RecalGainBS \\
-\quad Ratio of the upper to the lower 95\,\% limit of the baseline gain & \YardRatioSpan \\
-\quad Effect calibrated to the margin called equivalent against the real margin (synthetic labels) & \PowerEquivReal \\
-\multicolumn{2}{l}{\emph{The test and its uncertainty (Sect.~3)}} \\
+\quad Baseline gain over position, 95\,\% interval (Brier units) & \DeltaTerrain{} (\DeltaTerrainLo{} to \DeltaTerrainHi) \\
+\multicolumn{2}{l}{\emph{The protocol-based test and the reanalysis (Sects.~\ref{P-sec:primary} and~\ref{P-sec:reanalysis} of the paper)}} \\
 \quad Increase in Brier score from names (95\,\% interval) & \DeltaNamesAbs{} (\DeltaNamesIncLo{} to \DeltaNamesIncHi) \\
 \quad Protocol rule declaring equivalence at $R=-0.05$; at $R=+0.05$ (uniform shift) & \OpFixedSizeLo; \OpFixedSizeHi \\
-\quad H4 total increment over a constant forecast, $R$ (90\,\% interval) & \HFourTotalYThree{} (\HFourTotalYThreeLo{} to \HFourTotalYThreeHi) \\
-\multicolumn{2}{l}{\emph{Designated checks (Sect.~4)}} \\
-\quad Correlation of AOI-mean residuals, AOIs of one activation within 50\,km (Fisher 95\,\%) & \ResActCorrNear{} (\ResActCorrNearLo{} to \ResActCorrNearHi; \ResActNPairsNear{} pairs) \\
-\quad Without the character model's area mean in both models: $R$; names model over the recalibrated baseline model & \RefNoCharR; \RefNoCharVsSimple \\
-\quad Base models with early stopping on location groups: baseline gain; $R$ (90\,\% interval) & \GresYard; \GresR{} (\GresRLoNinety{} to \GresRHiNinety) \\
-\quad Ten most influential location groups removed in turn: $R$ (fixed; refitted); effective number of groups & \InflLo{} to \InflHi; \InflRefitLo{} to \InflRefitHi; \InflNeff \\
+\quad Margin set at the lower 95\,\% limit of the baseline gain (Brier units); 90\,\% interval of $R$ & \YOneMarginBS; \YOneLo{} to \YOneHi \\
+\quad Range of the refitted upper limits of Table~\ref{P-tab:upper} of the paper: in Brier units; in Brier skill over a climatological forecast & \UpBrierRange; \UpBssRange \\
+\multicolumn{2}{l}{\emph{Checks of the test (Sects.~\ref{P-sec:primary} and~\ref{P-sec:reanalysis} of the paper)}} \\
 \quad Joint Wald test of the name coefficients on all held-out cells: $\chi^2$ (df), $p$ & \WaldNamesChi{} (\WaldNamesDf), \WaldNamesP \\
 \quad Within AOIs: median change in the area under the ROC curve; share of AOIs with a higher area & \AoiMedDAuc; \AoiShareAucUp \\
-\quad Activations kept whole: Brier score of the reference model; of the recalibrated baseline model & \ActBSMOnec; \ActBSMOnes \\
-\quad Between AOIs of the German, English and French blocks: coefficient of the share of water-related names (95\,\% interval) & \BetweenCoef{} (\BetweenCoefLo{} to \BetweenCoefHi) \\
-\multicolumn{2}{l}{\emph{What assignment through settlements can carry (Sect.~5)}} \\
+\multicolumn{2}{l}{\emph{What assignment through settlements can carry (Sects.~\ref{P-sec:design} and~\ref{P-sec:ceiling} of the paper)}} \\
 \quad Share of cells within 500\,m of a settlement with a water-related name & \CeilShareFiveHundred \\
 \quad Largest possible $R$ from perfect prediction near water-related names within 1\,km & \CeilROneKm \\
 \quad Names scored on the ground within 500\,m of water-related names, $R$ (90\,\% interval) & \NearR{} (\NearRLo{} to \NearRHi) \\
-\quad Calibration of the baseline model's held-out predictions: intercept; slope & \CalibPrimMOneInt; \CalibPrimMOne \\
-\quad Dilution with the independent coder's rates: an odds ratio of 3 on a quarter; on a tenth of the ground & \DilObsQuarterTwo; \DilObsTenthTwo \\
-\multicolumn{2}{l}{\emph{Readings and labels near settlements (Sect.~6)}} \\
-\quad Share of names not read as water-related with a water-related derivation, independent coder (95\,\% interval) & \CodeTwoPZeroPct{} (\CodeTwoPZeroLo{} to \CodeTwoPZeroHi) \\
-\quad Agreement of the two coders on water-related derivations ($\kappa$) & \CoderKappa \\
+\multicolumn{2}{l}{\emph{Readings and labels near settlements (Sects.~\ref{P-sec:readings} and~\ref{P-sec:near} of the paper)}} \\
+\quad Sample of recorded etymologies: analysed settlements with an article; read as water-related (all sampled); others; others sampled & \WPNPopulation; \WPNStratumWet; \WPNStratumNot; \WPNSampledNot \\
 \quad Edited lexicon: $R$ (90\,\% interval) & \LexCorrR{} (\LexCorrRLoNinety{} to \LexCorrRHiNinety) \\
-\quad Cells nearest Australian settlements & \AuPct \\
-\quad Cells whose nearest name is read as riverside by a form such as French \emph{-sur-} & \RiversidePct \\
-\quad Settlements with a namesake in Wikidata; of them named after a river; river namesakes read as water-related by the language model; by the lexicon & \WDNamesakes; \WDRiverNamesakes; \WDNreadHits; \WDLexHits \\
+\quad Settlements nearest the scored cells with a namesake in Wikidata; of them named after a water body, wetland, island or crossing; of these read as water-related by the language model; by the lexicon & \WDNamesakes; \WDRiverNamesakes; \WDNreadHits; \WDLexHits \\
 \quad Language-model reading: cells water-related; in Africa; cells answered ``unknown'' & \NReadWetPct; \NReadWetAF; \NReadUnknownPct \\
 \quad Planned estimate on the GFM labels: flooded cells within 500\,m of water-related names; location groups holding them & \GfmCappedFlooded; \GfmCappedUnits \\
+\quad GFM and EMS labels on the cells both can assess: agreement; $\kappa$ & \GFMAgreePct; \GFMKappa \\
+\quad Refitted on the GFM labels: reduction in Brier score from names (95\,\% interval) & \GFMCTwoNames{} (\GFMCTwoNamesLo{} to \GFMCTwoNamesHi) \\
 \quad Uncapped EMS estimate: share of its flooded cells within 500\,m in EMSR052 and EMSR130 & \NearTopTwoShare \\
 \quad GFM labels, given the baseline model: odds of a flood label more than 1\,km from the nearest settlement against within 500\,m (95\,\% interval) & \GFMNearFarGfm{} (\GFMNearFarGfmLo{} to \GFMNearFarGfmHi) \\
-\multicolumn{2}{l}{\emph{Appendix C}} \\
-\quad Null simulations: standard deviation of $R$ between replicates; median bootstrap standard error; robust standard deviation & \NullSdBetween; \NullMedianSe; \NullRobustSd \\
+\multicolumn{2}{l}{\emph{Appendix~\ref{P-app:results} of the paper}} \\
 \quad Observed and simulated median 90\,\% half-widths of $R$ & \ObsHalfWidth; \SimHalfWidth \\
 \quad Synthetic effect at $R\approx0.05$: change in Brier score; simulated baseline gain & \SimSesoiDBS; \SimYard \\
 \bottomhline

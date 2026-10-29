@@ -1,7 +1,7 @@
 {
-  "title": "place-names-floods: analysis code, frozen protocol and lexicon for a pre-specified test of whether the names of nearby settlements improve terrain-based predictions of river flood extent",
+  "title": "place-names-floods: analysis code, frozen protocol and lexicon for a protocol-based test of whether settlement names flagged as water-related improve within-area predictions of mapped river flooding",
   "upload_type": "software",
-  "description": "Analysis code, frozen protocol (docs/protocol/preregistration_v2.md) with an English translation and its amendments, frozen multilingual lexicon, coded etymology excerpts and figure generator for the study 'Do the names of nearby settlements improve terrain-based predictions of mapped river flood extent? A pooled test at 250 m in 500 flood areas' (R. Okauchi and P.-J. Chun). PROVENANCE.md gives the freeze record and the checksums that verify the frozen files. The derived data (cell tables, language-model name readings, held-out predictions and run summaries) are archived in a separate Zenodo record.",
+  "description": "Analysis code, frozen protocol (docs/protocol/preregistration_v2.md; the protocol was time-stamped in the development repository but not registered with a third party, and the file name is kept because the checksums verify it) with an English translation and its amendments, frozen multilingual lexicon, coded etymology excerpts and figure generator for the study 'Settlement names flagged as water-related by a lexicon, assigned to the nearest grid cells, did not improve within-area predictions of mapped river flooding' (R. Okauchi and P.-J. Chun). PROVENANCE.md gives the freeze record and the checksums that verify the frozen files. The derived data (cell tables, language-model name readings, held-out predictions and run summaries) are archived in a separate Zenodo record.",
   "creators": [
     {
       "name": "Okauchi, Ryota",
