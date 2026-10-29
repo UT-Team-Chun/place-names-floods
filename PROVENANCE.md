@@ -55,8 +55,9 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   translation, power for the secondary splits). Most were planned, with their computations and reporting rules,
   before they were run; the paper marks those that were not, and those that the agents had computed first. All are labelled post hoc and change no pre-specified
   verdict. Scripts: `backend/verification/r_okauchi/v36`–`v40`; outputs: `docs/verification/`.
-- `docs/protocol/amendments/B-3_gfm_independent_labels.md` and its two addenda: independent flood labels from
-  Copernicus Global Flood Monitoring (Sentinel-1), with the rules for making them, the comparisons (agreement of the
+- `docs/protocol/amendments/B-3_gfm_independent_labels.md` and its two addenda, written in response to the fifth of
+  those critiques and the authors' decision: independent flood labels from Copernicus Global Flood Monitoring
+  (Sentinel-1), with the rules for making them, the comparisons (agreement of the
   label sets near settlements, flooding near water-side names, rescoring and refitting the primary comparison) and
   their interpretation fixed before the labels were made. Addendum 1 records that images with an unreadable layer
   were left out; addendum 2 is a check added after one result was seen and is reported as such. Scripts: `v41`,
@@ -143,10 +144,25 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   returned an interval above zero, added the placebo comparison that the decision table requires for such an interval
   (and the same comparison on the EMS labels); the paper reports it as added after the result. Scripts: `v66`, `v67`;
   hazard tiles: `backend/packages/topsem/scripts/world_jrc.py`.
+- Amendment B-11 followed the seventh round of critiques. It refocused the paper on the scheme that was tested (name
+  readings assigned to the nearest 250 m cells) and the within-area estimand, moved the ceiling of local effects into
+  the design, recorded that the interpretation plan was abandoned after the result, corrected the reporting, and fixed,
+  before they were computed: the change of the activation-merged split between the frozen and the corrected code, by
+  location group; odds ratios near settlements on every evaluable cell (no cap) on the EMS and GFM labels and on the
+  AOIs whose EMS maps were not drawn from Sentinel-1; the bounds on the scale of the near-settlement estimator; a test
+  of the GFM domain with the EMS-trained predictions; the denominator of the flooded fraction; a corrected
+  repeated-cross-validation interval and an interval that combines refitting, two-way resampling and the denominator; a
+  census of the exploratory interval estimates (`docs/verification/v68_estimates.csv`); the gazetteer's feature codes
+  and rounded coordinates; the pilots; a new sample and guide for a toponymic check
+  (`docs/verification/v68_audit_sample.csv`, `v68_audit_guide.md`; the study's readings of that sample are withheld
+  until the check is done); and, on the cluster, reassignments with rebuilt composition on the country split. The
+  uncapped near-settlement estimates were made the main ones after the capped and an uncapped estimate had both been
+  seen. Script: `v68`; cluster run `world_v2_b11ctryperm`.
 
-English translations of the protocol and of amendments B-1 to B-10 are in `docs/protocol/en/`; they were drafted with a
+English translations of the protocol and of amendments B-1 to B-11 are in `docs/protocol/en/`; they were drafted with a
 language model after the analysis and have not yet been checked by the authors, and the Japanese files are the record
-and govern where the two differ. Dates written
+and govern where the two differ. Amendments B-2, B-3 and B-5 to B-11 followed critiques by language-model agents; the
+paper lists the rounds and their times. Dates written
 inside the repository files are local (Japan Standard Time, UTC+9) unless marked; the paper gives UTC. An interpretation
 plan, written after the freeze and before any confirmatory result, is in
 `docs/research/2026-10-26_v2_interpretation_plan.md`.

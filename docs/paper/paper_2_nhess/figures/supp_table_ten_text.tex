@@ -16,14 +16,14 @@ Quantity & Value \\
 \multicolumn{2}{l}{\emph{What the pooled test can detect (Sect.~4)}} \\
 \quad Share of cells within 500\,m of a settlement with a water-side name & \CeilShareFiveHundred \\
 \quad Largest possible $R$ from perfect prediction near water-side names: within 250\,m; 500\,m; 1\,km & \CeilRTwoFifty; \CeilRFiveHundred; \CeilROneKm \\
-\quad Recurrence assigned through settlements, AOIs with other events: AOIs; $R$ (90\,\% interval); terrain gain & \RecurSubNAoi; \RecurSubR{} (\RecurSubRLoNinety{} to \RecurSubRHiNinety); \RecurSubYard \\
+\quad Recurrence assigned through settlements, AOIs with other events: AOIs; $R$ (90\,\% interval); baseline gain & \RecurSubNAoi; \RecurSubR{} (\RecurSubRLoNinety{} to \RecurSubRHiNinety); \RecurSubYard \\
 \multicolumn{2}{l}{\emph{Evidence near settlements (Sect.~5)}} \\
 \quad Main estimate within 500\,m: jackknife and wild cluster score bootstrap 95\,\% intervals & \JkNearLo--\JkNearHi; \WildNearLo--\WildNearHi \\
 \quad Smallest odds ratio detectable with 80\,\% power, upward; downward & \MdeNearUp; \MdeNearDown \\
 \quad Islands and water meadows, HAND at the settlement sites minus other settlements (m): all; without \emph{au}, \emph{aue}, \emph{auen} & \IslandSiteHand{} (\IslandSiteHandLo{} to \IslandSiteHandHi); \IslandNoAuSiteHand{} (\IslandNoAuSiteHandLo{} to \IslandNoAuSiteHandHi) \\
 \quad Joint Wald test, class coefficients in the three distance bands: $p$ & \WaldClassP \\
 \quad EMS-evaluable cells of the GFM AOIs that GFM could not assess: all; within 500\,m of water-side names; near other settlements & \MaskShareAll; \MaskShareWet; \MaskShareOther \\
-\quad GFM refit: median within-AOI area under the curve, GFM-trained and EMS-trained terrain model & \GfmRefitAuc; \GfmEmsAuc \\
+\quad GFM refit: median within-AOI area under the curve, GFM-trained and EMS-trained baseline model & \GfmRefitAuc; \GfmEmsAuc \\
 \quad GFM refit: calibration slopes of M1c, M1 and M1s & \CalibGfmMOnec; \CalibGfmMOne; \CalibGfmMOnes \\
 \multicolumn{2}{l}{\emph{How the names were read (Sect.~6)}} \\
 \quad Language-model reading: names read as non-environmental; as wetland & \NReadNonEnvNamesPct; \NReadWetlandNamesPct \\

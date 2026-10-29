@@ -2017,8 +2017,26 @@ def _cmp_row(name: str, blk: dict | None, r: str = "R", c95: str = "ci95_R",
             f"{blk.get('decision', '---')} & {_tost(blk)} \\\\")
 
 
+# NHESS 版（初見の査読 第 7 回、査読者 2 の M2）: 表 2・C1 に Brier の単位の変化（×10⁻⁵）の列を足す。旧版では偽
+DBS_COLUMN = False
+_D01: list[float] = []  # si_comparisons が物差し（主分割の点推定）を置く
+
+
+def _dbs(r: float | None, c95: list | None, d01: float | None) -> str:
+    if r is None or not d01:
+        return "---"
+    pt = f"{r * d01 * 1e5:.1f}".replace("-", "${-}$")
+    if not c95:
+        return pt
+    lo, hi = (f"{x * d01 * 1e5:.1f}".replace("-", "${-}$") for x in c95)
+    return f"{pt} [{lo}, {hi}]"
+
+
 def _row7(name: str, r: float | None, c95: list | None, c90: list | None, ratio: list | None,
           verdict: str = "---", tost: str = "---") -> str:
+    if DBS_COLUMN:
+        return (f"{name} & {_r(r)} & {_dbs(r, c95, _D01[0] if _D01 else None)} & {_ci(c95)} & {_ci(c90)} & "
+                f"{_ci(ratio)} & {verdict} & {tost} \\\\")
     return (f"{name} & {_r(r)} & {_ci(c95)} & {_ci(c90)} & {_ci(ratio)} & {verdict} & {tost} \\\\")
 
 
@@ -2026,6 +2044,7 @@ def si_comparisons(m: dict, v36: dict | None = None) -> str:
     """補足表 1: 主分割の全比較（副次・チャネル・梯子を含む）。区間は固定マージン（物差し = 登録どおりの
     点推定）と比の bootstrap（物差しの揺らぎも含む、記述）の両方。チャネル・H1 の固定マージンは v36。"""
     d01 = m["primary"]["delta_bs_M0_M1"]
+    _D01[:] = [d01]
     chf = m.get("channels_flexible", {})
     pl, tpl, fpl = m.get("placebo", {}), m.get("total_placebo", {}), m.get("flexible_placebo", {})
 
@@ -2073,8 +2092,12 @@ def si_comparisons(m: dict, v36: dict | None = None) -> str:
             name = f"{label}, T{k}" if k < 4 else f"{label}, T4 = M1"
             arrow = rung.replace("->", "$" + TO + "$")
             rows.append(_row7(f"{name} ({arrow})", dlt / d01, [x / d01 for x in c], None, None))
-    return _table("p{5.4cm}rcccll", "Comparison & $R$ & 95\\% (fixed margin) & 90\\% (fixed margin) & "
-                  "95\\% (ratio bootstrap) & Verdict & TOST",
+    cols, head = ("p{5.4cm}rcccll", "Comparison & $R$ & 95\\% (fixed margin) & 90\\% (fixed margin) & "
+                  "95\\% (ratio bootstrap) & Verdict & TOST")
+    if DBS_COLUMN:
+        cols, head = ("p{4.6cm}rccccll", "Comparison & $R$ & $\\Delta$BS, $10^{-5}$ (95\\%) & 95\\% (fixed margin) & "
+                      "90\\% (fixed margin) & 95\\% (ratio bootstrap) & Verdict & TOST")
+    return _table(cols, head,
                   rows, "All pre-specified comparisons on the primary split (location groups held "
                   "out). $R$ is the change in held-out Brier score as a fraction of the terrain "
                   "increment $\\Delta\\mathrm{BS}(\\mathrm{M0}\\to\\mathrm{M1})$. Fixed-margin intervals "
@@ -2101,11 +2124,15 @@ def si_splits(primary: dict, extra: dict[str, dict]) -> str:
         if not blk:
             rows.append(f"{name} & \\missing{{pending}} & & & & & & \\\\")
             continue
+        dbs = (f" & {_dbs(blk['R'], blk['ci95_R'], blk['delta_bs_M0_M1'])}" if DBS_COLUMN else "")
         rows.append(f"{name} & {_n(met['n_cells'])} & {met['n_units']} & "
-                    f"{sci(blk['delta_bs_M0_M1'], 2)} & {_r(blk['R'])} & {_ci(blk['ci95_R'])} & "
+                    f"{sci(blk['delta_bs_M0_M1'], 2)}{dbs} & {_r(blk['R'])} & {_ci(blk['ci95_R'])} & "
                     f"{blk['decision']} & {_tost(blk)} \\\\")
-    return _table("p{4.0cm}rrcrclc", "Split & Cells & Units & Terrain $\\Delta$BS & $R$ & 95\\% "
-                  "interval & Verdict & TOST", rows,
+    cols, head = "p{4.0cm}rrcrclc", "Split & Cells & Units & Terrain $\\Delta$BS & $R$ & 95\\% interval & Verdict & TOST"
+    if DBS_COLUMN:
+        cols, head = ("p{3.6cm}rrccrclc", "Split & Cells & Units & Baseline $\\Delta$BS & Names $\\Delta$BS, "
+                      "$10^{-5}$ (95\\%) & $R$ & 95\\% interval & Verdict & TOST")
+    return _table(cols, head, rows,
                   "The primary comparison under each pre-specified split. Units are the clusters "
                   "of the bootstrap (location groups; countries for the country hold-out). The "
                   "time hold-out evaluates floods from the latest years on models trained on earlier "

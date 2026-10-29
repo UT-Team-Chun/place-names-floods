@@ -312,7 +312,115 @@
    "R_lexfix": -0.004047304898844232
   }
  },
- "C4_ac": "missing",
+ "C4_ac": {
+  "deltas": [
+   0.0953102,
+   0.2231436,
+   0.4054651,
+   0.6931472
+  ],
+  "ranges": [
+   0,
+   10
+  ],
+  "reps": 20,
+  "gain_mean": [
+   1.99029496584048e-06,
+   3.2257600308974676e-05,
+   8.657645442063807e-05,
+   0.0002452514873065156
+  ],
+  "gain_mc_se": [
+   2.1975009706086885e-06,
+   4.037489873217892e-06,
+   4.779619988514362e-06,
+   8.594307760064814e-06
+  ],
+  "bound": {
+   "b7_recomputed": {
+    "delta": 0.2368746052880072,
+    "odds_ratio": 1.2672821973254527,
+    "how": "interpolated",
+    "odds_ratio_text": "1.27",
+    "mc95": [
+     1.2354764087475931,
+     1.2958382255237262
+    ],
+    "share_above_grid": 0.0,
+    "share_undefined": 0.0,
+    "mc95_text": [
+     "1.24",
+     "1.30"
+    ]
+   },
+   "zero": {
+    "delta": 0.16972728676704885,
+    "odds_ratio": 1.1849816470753696,
+    "how": "interpolated",
+    "odds_ratio_text": "1.18",
+    "mc95": [
+     1.164869332596392,
+     1.215860079667522
+    ],
+    "share_above_grid": 0.0,
+    "share_undefined": 0.0,
+    "mc95_text": [
+     "1.16",
+     "1.22"
+    ]
+   },
+   "b7_centred": {
+    "delta": 0.25516254531158045,
+    "odds_ratio": 1.2906713964076904,
+    "how": "interpolated",
+    "odds_ratio_text": "1.29",
+    "mc95": [
+     1.2582304171921364,
+     1.3167161641988647
+    ],
+    "share_above_grid": 0.0,
+    "share_undefined": 0.0,
+    "mc95_text": [
+     "1.26",
+     "1.32"
+    ]
+   },
+   "b5": {
+    "delta": 0.41998394747523426,
+    "odds_ratio": 1.5219371244891609,
+    "how": "interpolated",
+    "odds_ratio_text": "1.52",
+    "mc95": [
+     1.4963506932011075,
+     1.545500339302571
+    ],
+    "share_above_grid": 0.0,
+    "share_undefined": 0.0,
+    "mc95_text": [
+     "1.50",
+     "1.55"
+    ]
+   }
+  },
+  "bound_text": "1.27",
+  "margin_or": {
+   "delta": null,
+   "odds_ratio": null,
+   "how": "above grid",
+   "odds_ratio_text": "> 2",
+   "mc95": [
+    NaN,
+    NaN
+   ],
+   "share_above_grid": 1.0,
+   "share_undefined": 0.0,
+   "mc95_text": [
+    "> 2",
+    "> 2"
+   ]
+  },
+  "rho": 0.5
+ },
  "C5_hazard": {
   "comparison": "M1hc->M3hn",
   "delta_bs_M1hc_M3hn": -3.124132708185595e-05,
