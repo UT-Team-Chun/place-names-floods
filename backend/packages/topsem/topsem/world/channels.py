@@ -61,6 +61,47 @@ def placebo_lookups(df: pd.DataFrame, lookup: dict[int, tuple[str, str]], seed: 
             for aoi, m in placebo_perms(df, seed).items()}
 
 
+def site_strata(gids: np.ndarray, value: dict[int, float]) -> np.ndarray:
+    """事後 B-16 の C3: AOI の gid を、値（集落の地点の HAND）の AOI 内の三分位で層 0・1・2 に。
+
+    分位点は 1/3・2/3、同じ値は低い層へ。値の無い gid は層 −1。
+    """
+    v = np.array([value.get(int(g), np.nan) for g in gids], dtype=np.float64)
+    lab = np.full(len(gids), -1, dtype=np.int64)
+    ok = np.isfinite(v)
+    if ok.any():
+        q1, q2 = np.quantile(v[ok], [1 / 3, 2 / 3])
+        lab[ok] = np.where(v[ok] <= q1, 0, np.where(v[ok] <= q2, 1, 2))
+    return lab
+
+
+def placebo_perms_strata(df: pd.DataFrame, seed: int,
+                         value: dict[int, float]) -> dict[str, dict[int, int]]:
+    """事後 B-16 の C3: placebo_perms と同じ置換を、AOI の中の層（site_strata）の中に限ったもの。
+
+    乱数は placebo_perms と同じ作り方に層の番号（−1〜2 に 1 を足したもの）を足す。
+    """
+    out: dict[str, dict[int, int]] = {}
+    for aoi, sub in df.groupby("aoi", sort=True):
+        gids = np.unique(sub[GID_COLS].to_numpy().ravel())
+        gids = gids[gids >= 0]
+        lab = site_strata(gids, value)
+        m: dict[int, int] = {}
+        for s in np.unique(lab):
+            g = gids[lab == s]
+            rng = np.random.default_rng([seed, zlib.crc32(str(aoi).encode("utf-8")), int(s) + 1])
+            m |= {int(a): int(b) for a, b in zip(g, g[rng.permutation(len(g))], strict=True)}
+        out[str(aoi)] = m
+    return out
+
+
+def placebo_lookups_strata(df: pd.DataFrame, lookup: dict[int, tuple[str, str]], seed: int,
+                           value: dict[int, float]) -> dict[str, dict[int, tuple[str, str]]]:
+    """placebo_lookups の層別の版（B-16 の C3）。"""
+    return {aoi: {g: lookup.get(p, ("", "")) for g, p in m.items()}
+            for aoi, m in placebo_perms_strata(df, seed, value).items()}
+
+
 def lexicon_block(df: pd.DataFrame, lookup: dict[int, tuple[str, str]], lex: Lexicon,
                   *, per_aoi: dict[str, dict[int, tuple[str, str]]] | None = None,
                   prefix: str = "") -> pd.DataFrame:

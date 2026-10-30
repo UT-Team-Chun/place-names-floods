@@ -719,3 +719,36 @@ def test_stage2_ids_keep_aoi_and_country_per_side() -> None:
     assert ids["aoi_tr"].tolist() == ["A1", "A1", "B2"]
     assert ids["cc_te"].tolist() == ["PK"]
 
+
+
+def test_b16_frozen_norway_reproduces_the_frozen_reading(monkeypatch: pytest.MonkeyPatch) -> None:
+    """B-16 追記 3: 凍結した時の読み（YAML 1.1 で NO が false）。
+
+    ノルウェーの名に辞書が当たらず、他の国は直した読みと同じ。
+    """
+    we = _load("world_eval")
+    fixed = we.load_lexicon()
+    assert fixed.entries_for("NO")  # 直した読み（B-4）ではノルウェーを読む
+    monkeypatch.setitem(we.FROZEN_NORWAY, "on", value=True)
+    frozen = we.load_lexicon()
+    assert frozen.entries_for("NO") == ()
+    assert frozen.country_langs["FALSE"] == fixed.country_langs["NO"]  # 凍結した時のキー
+    assert {k: v for k, v in frozen.country_langs.items() if k != "FALSE"} == {
+        k: v for k, v in fixed.country_langs.items() if k != "NO"}
+    assert frozen.match("Sandvika", "NO") == dict.fromkeys(frozen.match("Sandvika", "NO"), 0)
+    assert frozen.match("Sandvika", "SE") == fixed.match("Sandvika", "SE")
+
+
+def test_b16_centred_stacks_over_the_strong_baseline_are_available() -> None:
+    """B-16 追記 4: fold の中で作る中心化した名（d_*）は欠けた列として扱わない。
+
+    基の名の列が無ければ回さない。
+    """
+    we = _load("world_eval")
+    names = [f for f in (*we.NAMES, *we.NAMES_P) if f not in we.IN_FOLD]
+    cols = {*we.STRONG, *names}
+    assert we.b6_stack_available("M3pd", cols)
+    assert we.b6_stack_available("M3pdp", cols)
+    assert we.b6_stack_available("M3pn", cols)
+    assert not we.b6_stack_available("M3pd", cols - {"lex_water_n1"})  # 基の列が無ければ回さない
+    assert not we.b6_stack_available("M3pd", cols - {"lupl"})  # 強い基準の特徴が無ければ回さない

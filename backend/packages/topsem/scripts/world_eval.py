@@ -85,6 +85,7 @@ from topsem.world.channels import (
     nread_block,
     nread_lookup,
     placebo_lookups,
+    placebo_lookups_strata,
     placebo_perms,
 )
 from topsem.world.dataset import (
@@ -111,6 +112,8 @@ TEMPORAL_CUT = "2024-01-01"
 LLM_CUT = "2025-02-01"  # Gemma-4 の事前学習データ打切り（2025-01、モデルカード）の翌月初
 CUTS = {"temporal": TEMPORAL_CUT, "llmcut": LLM_CUT}
 PLACEBO_SEED = 20261025
+# B-16 追記 3: 凍結した時の辞書の読み（YAML 1.1 で国コード NO が false になり、ノルウェーに言語が無い。B-4）を再現する
+FROZEN_NORWAY: dict = {"on": False}
 
 POS = ["lon", "lat"]
 HYDRO = ["ldr_all", "ldr_major"]
@@ -254,9 +257,20 @@ STACK |= B13_STACK
 # 事後 B-14 の C3: H4 の全体の増分に国の構成を（基準 M1k = 基礎 + 国の指標、名のモデル M3rk = M1k + N-read の特徴）
 B14_STACK: dict[str, tuple[str, list[str]]] = {"M3rk": ("M1", ["@country", *NREAD_FEATURES])}
 STACK |= B14_STACK
+# 事後 B-16 の C1: 強い基準 M1p = M1 + FABDEM の標高の統計（fb_*）・集水 100・1,000 km² 以上の河道からの高さ・最寄りの
+# 河道の上流の面積（log10）・JRC のハザード図・セルの GSW・WorldCover 2021 の建物と樹木（attach_strong で足す）
+FB = [f"fb_{c}" for c in ("elev_1km", "elev_mean", "depress", "elev_min", "elev_std", "slope_mean")]
+STRONG = [*FB, "h_above_100", "h_above_1000", "lupl", *HAZ, *ORACLE_W, "lc_built", "lc_tree"]
+ARMS["M1p"] = [*T0, *TER_4, *STRONG]
+B16_STACK: dict[str, tuple[str, list[str]]] = {
+    "M1pc": ("M1p", COMP), "M3pn": ("M1p", [*COMP, *NAMES]), "M3pnp": ("M1p", [*COMP, *NAMES_P]),
+    "M1ps": ("M1p", []), "M3pd": ("M1p", DEMEANED), "M3pdp": ("M1p", DEMEANED_P),
+}
+STACK |= B16_STACK
 TUNED_STACK = ("M1ct", "M3nt")  # C2: 二段目の C を入れ子の交差検証で選ぶ
 B10_DYNAMIC = ("bd_", "ct_", "__", "@country")  # fold の中で作る列（表の列の有無で落とさない）
 IN_FOLD = ("nlearn", "nlearn_p")  # fold の中で作る特徴（表には無い）
+PERM_STRATA: dict[str, dict[int, float]] = {}  # B-16 の C3: 置換の層の値（集落 gid → 地点の HAND）
 
 
 def b6_stack_available(x: str, columns: Iterable[str]) -> bool:
@@ -264,7 +278,10 @@ def b6_stack_available(x: str, columns: Iterable[str]) -> bool:
     cols = set(columns)
     if x in B10_STACK and STACK[x][0] == "M1h" and not all(h in cols for h in HAZ):
         return False
+    if x in B16_STACK and not all(f in cols for f in STRONG):
+        return False
     return all(f.removeprefix("c_") in cols or f.removeprefix("c_") in IN_FOLD
+               or (f.startswith("d_") and (f[2:] in cols or f[2:] in IN_FOLD))  # B-16 追記 4: fold の中で中心化した名
                or any(k in f for k in B10_DYNAMIC) for f in STACK[x][1])
 PLASMODE_DELTAS = (0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0)
 PLASMODE_FORMS = ("A", "B", "CA", "CB")
@@ -378,9 +395,17 @@ def apply_gfm_labels(df: pd.DataFrame, summary: dict, tables: dict[str, pd.DataF
     return out, info
 
 
+def load_lexicon() -> Lexicon:
+    """辞書を読む。--frozen-norway のときは国→言語の対応のキー NO を FALSE に置き換える（凍結した時の読み方）。"""
+    lex = Lexicon(LEXICON)
+    if FROZEN_NORWAY["on"] and "NO" in lex.country_langs:
+        lex.country_langs["FALSE"] = lex.country_langs.pop("NO")
+    return lex
+
+
 def add_channels(df: pd.DataFrame, gn: pd.DataFrame, nread: pd.DataFrame | None = None,
                  ) -> tuple[pd.DataFrame, dict, dict]:
-    lex = Lexicon(LEXICON)
+    lex = load_lexicon()
     look = gid_lookup(gn)
     per_aoi = placebo_lookups(df, look, PLACEBO_SEED)
     real = lexicon_block(df, look, lex)
@@ -637,7 +662,7 @@ def run_perms(df: pd.DataFrame, fold: int, seeds: list[int], n_perms: int,
     """
     r = run_fold(df, fold, [], seeds, list(PERM_STACK), keep_state=True)
     tr, te, z = r["tr"], r["te"], r["z"]["M1"]
-    look, lex = gid_lookup(gn), Lexicon(LEXICON)
+    look, lex = gid_lookup(gn), load_lexicon()
     groups_tr = tr["unit"].to_numpy() if "unit" in tr else tr["aoi"].to_numpy()
     y_tr = tr["y"].to_numpy()
     comp = [f"c_{f}" for f in NAMES]
@@ -746,8 +771,16 @@ def attach_gsw_cell(df: pd.DataFrame, path: Path) -> dict:
 
 
 def stage2_ids(tr: pd.DataFrame, te: pd.DataFrame) -> dict:
-    """B-15 の B3・B9: 二段目の設計の保存に足す AOI と最寄りの集落の国（AOI 内の中心化と凍結した読みの再現に使う）。"""
-    return {f"{c}_{side}": frame[c].to_numpy(dtype=str) for c in ("aoi", "cc") for side, frame in (("tr", tr), ("te", te))}
+    """B-15 の B3・B9: 二段目の設計の保存に足す AOI と最寄りの集落の国（AOI 内の中心化と凍結した読みの再現に使う）。
+
+    B-16 の B1: 最寄りの集落までの距離（d1）・その gid・格子の位置（ix, iy）も、表にあれば足す。
+    """
+    out = {f"{c}_{side}": frame[c].to_numpy(dtype=str) for c in ("aoi", "cc") for side, frame in (("tr", tr), ("te", te))}
+    for col, key, dtype in (("P_d1", "d1", np.float32), ("P_gid1", "gid", np.int64), ("ix", "ix", np.int32),
+                            ("iy", "iy", np.int32)):
+        if col in tr.columns:
+            out |= {f"{key}_{side}": frame[col].to_numpy(dtype=dtype) for side, frame in (("tr", tr), ("te", te))}
+    return out
 
 
 def dump_stage2(df: pd.DataFrame, fold: int, seeds: list[int]) -> dict:
@@ -878,7 +911,7 @@ def run_perms_recomp(df: pd.DataFrame, fold: int, seeds: list[int], perm_ids: li
     """
     r = run_fold(df, fold, [], seeds, ["M1c", "M3n", "M3np", "M1s", "M3d"], keep_state=True)
     tr, te, z = r["tr"], r["te"], r["z"]["M1"]
-    look, lex = gid_lookup(gn), Lexicon(LEXICON)
+    look, lex = gid_lookup(gn), load_lexicon()
     groups_tr = tr["unit"].to_numpy() if "unit" in tr else tr["aoi"].to_numpy()
     y_tr, y_te = tr["y"].to_numpy(), te["y"].to_numpy(np.float64)
     units, ucode = np.unique((te["unit"] if "unit" in te else te["aoi"]).to_numpy(dtype=str), return_inverse=True)
@@ -888,7 +921,8 @@ def run_perms_recomp(df: pd.DataFrame, fold: int, seeds: list[int], perm_ids: li
     sse = {k: np.zeros((len(perm_ids), nu)) for k in ("ref", "names", "cent")}
     qcols = [f"q_{c}" for c in LEX]
     for i, j in enumerate(perm_ids):
-        per_aoi = placebo_lookups(df, look, j)
+        strata = PERM_STRATA.get("site_hand")  # B-16 の C3: 地点の HAND の三分位の中で置換
+        per_aoi = placebo_lookups(df, look, j) if strata is None else placebo_lookups_strata(df, look, j, strata)
         q_tr = lexicon_block(tr, look, lex, per_aoi=per_aoi, prefix="q_")[qcols].to_numpy(dtype=np.float64)
         q_te = lexicon_block(te, look, lex, per_aoi=per_aoi, prefix="q_")[qcols].to_numpy(dtype=np.float64)
         nl_tr, nl_te = nlearn_scores(nearest_names(tr, look, per_aoi), y_tr, groups_tr,
@@ -1034,6 +1068,44 @@ def attach_hazard(df: pd.DataFrame) -> dict:
     if not info["condition_met"]:
         msg = f"B-10 C5: hazard map covers {cover.mean():.3f} of analysed cells (< 0.95); not run"
         raise SystemExit(msg)
+    return info
+
+
+def attach_strong(df: pd.DataFrame) -> dict:
+    """B-16 の C1: 強い基準の特徴をセル（aoi, ix, iy）で結ぶ（hz_* は attach_hazard が先に足す）。
+
+    features_fabdem.parquet（B-9 の C7）の標高の統計を fb_* に、河道からの高さ h_above_100・h_above_1000 をそのまま、
+    features_upland.parquet（world_upland.py）の lupl、features.parquet の lc_built・lc_tree、セルの GSW（o_gswc_*）。
+    GLO-30 の地形の特徴（HAND を含む）は置き換えない。欠けは NaN のまま（勾配ブースティングが扱う）。
+    """
+    src = {"features_fabdem.parquet": {c.removeprefix("fb_"): c for c in FB} | {"h_above_100": "h_above_100",
+                                                                                "h_above_1000": "h_above_1000"},
+           "features_upland.parquet": {"lupl": "lupl"},
+           "features.parquet": {"lc_built": "lc_built", "lc_tree": "lc_tree"}}
+    parts = []
+    for a in df["aoi"].unique():
+        d = ROOT / "labels" / a
+        cells = pq.read_table(d / "cells.parquet", columns=["ix", "iy"]).to_pandas()
+        cols = {}
+        for fname, ren in src.items():
+            t = pq.read_table(d / fname, columns=list(ren)).to_pandas()
+            if len(t) != len(cells):
+                msg = f"B-16 C1: {a}/{fname} has {len(t)} rows, cells.parquet {len(cells)}"
+                raise SystemExit(msg)
+            cols |= {ren[c]: t[c].to_numpy(np.float32) for c in ren}
+        parts.append(pd.DataFrame(cols).assign(aoi=a, ix=cells["ix"].to_numpy(), iy=cells["iy"].to_numpy()))
+    m = df[["aoi", "ix", "iy"]].merge(pd.concat(parts, ignore_index=True), on=["aoi", "ix", "iy"], how="left",
+                                      validate="many_to_one")
+    for c in STRONG:
+        if c in m.columns:
+            df[c] = m[c].to_numpy(np.float32)
+    g = pd.read_parquet(GSW_CELL_TABLE).rename(columns=dict(zip(("occ", "seas", "maxext"), ORACLE_W, strict=True)))
+    mg = df[["aoi", "ix", "iy"]].merge(g[["aoi", "ix", "iy", *ORACLE_W]], on=["aoi", "ix", "iy"], how="left",
+                                       validate="many_to_one")
+    for c in ORACLE_W:  # B-8 の C4 と違い、欠けは 0 にしない
+        df[c] = mg[c].to_numpy(np.float32)
+    info: dict = {"gsw_cell": {"path": str(GSW_CELL_TABLE), "sha256": _sha256(str(GSW_CELL_TABLE))}}
+    info["share_valid"] = {c: float(np.isfinite(df[c].to_numpy(np.float64)).mean()) for c in STRONG}
     return info
 
 
@@ -1229,6 +1301,7 @@ def synth_labels(df: pd.DataFrame, delta: float, rep: int, local_m: float | None
 
 def main() -> None:  # noqa: C901, PLR0912, PLR0915
     global LEXICON  # noqa: PLW0603 — B-8 の C5: 派生の辞書で読む実行だけ差し替える
+    global PLACEBO_SEED  # noqa: PLW0603 — B-16 の C4: placebo の置換を引き直す実行だけ差し替える
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--tag", required=True)
     ap.add_argument("--split", default="primary",
@@ -1307,8 +1380,19 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
                     help="B-13 の C1(a): 主の表を作った後で、事象がこの年より前の AOI の行を除く（セルは主の表と同じ）")
     ap.add_argument("--grouped-es", action="store_true",
                     help="B-13 の C3: 基礎のモデルの反復の回数を場所グループを分けた内側の検証で選ぶ")
+    # 事後 B-16（初見の査読 第 12 回）
+    ap.add_argument("--placebo-seed", type=int, default=PLACEBO_SEED,
+                    help="B-16 の C4: プロトコルの placebo の置換の種（既定はプロトコルの 20261025）")
+    ap.add_argument("--perm-strata", default="none", choices=["none", "site_hand"],
+                    help="B-16 の C3: --perms-recomp の置換を、AOI の中の集落の地点の HAND の三分位の中に限る")
+    ap.add_argument("--strong-baseline", action="store_true",
+                    help="B-16 の C1: 強い基準 M1p（FABDEM・河道からの高さ・上流の面積・JRC・GSW・WorldCover）を足す")
+    ap.add_argument("--frozen-norway", action="store_true",
+                    help="B-16 追記 3: 凍結した時の辞書の読み（ノルウェーに言語が無い）で回す（C4 の引き直し）")
     args = ap.parse_args()
     GROUPED_ES["on"] = args.grouped_es
+    PLACEBO_SEED = args.placebo_seed
+    FROZEN_NORWAY["on"] = args.frozen_norway
     if args.lexicon:
         lp = Path(args.lexicon)
         LEXICON = lp if lp.is_absolute() else REPO_ROOT / lp
@@ -1328,6 +1412,8 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     dirs, reasons, infos = select_aois(gn, sens)
     print(f"AOIs included {len(dirs)} / reasons {reasons}", flush=True)
     b6: dict = {}
+    if args.frozen_norway:
+        b6["frozen_norway"] = True
     if args.exclude_untyped or args.exclude_no_hydro:  # B-6 の 6(c)(d): AOI を除いて分割から作り直す
         drop = [d.name for d in dirs if (args.exclude_untyped and infos[d.name].unspecified_as_riverine)
                 or (args.exclude_no_hydro and no_hydro(d))]
@@ -1336,7 +1422,8 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
         print(f"B-6: excluded {len(drop)} AOIs → {len(dirs)}", flush=True)
     need_xy = (args.labels == "gfm" or args.plasmode or args.oracle_label or args.gn_filter or args.recurrence
                or args.plasmode_refit or bool(args.gsw_cell) or args.terrain == "fabdem"
-               or args.exclude_gsw_perm > 0 or args.hazard == "jrc" or args.jrc_set)
+               or args.exclude_gsw_perm > 0 or args.hazard == "jrc" or args.jrc_set or args.dump_stage2
+               or args.strong_baseline)
     df = build_table(dirs, seed=args.table_seed, infos=infos, sens=sens, extra_cols=("ix", "iy") if need_xy else ())
     if args.table_seed != TABLE_SEED:  # B-9 の C6
         b6["table_seed"] = args.table_seed
@@ -1353,9 +1440,12 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     if args.terrain == "fabdem":  # B-9 の C7
         b6["fabdem"] = swap_fabdem_terrain(df)
         print(f"B-9 C7: FABDEM terrain {b6['fabdem']}", flush=True)
-    if args.hazard == "jrc":  # B-10 の C5
+    if args.hazard == "jrc" or args.strong_baseline:  # B-10 の C5（B-16 の C1 も使う）
         b6["jrc_hazard"] = attach_hazard(df)
         print(f"B-10 C5: JRC hazard {b6['jrc_hazard']}", flush=True)
+    if args.strong_baseline:  # B-16 の C1
+        b6["strong_baseline"] = attach_strong(df)
+        print(f"B-16 C1: strong baseline {b6['strong_baseline']}", flush=True)
     if args.exclude_partial:  # B-7 の 6(b): y = 0 で浸水被覆が 0.05 を超えるセルを除く（場所グループの割当は変わらない）
         pm = partial_mask(df["y"].to_numpy(), df["f_flood_any"].to_numpy())
         b6["partial"] = {"n_dropped": int(pm.sum()), "share_dropped": float(pm.mean())}
@@ -1369,8 +1459,11 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     df, lexinfo, _ = add_channels(df, gn, nread)
     if args.oracle:
         attach_oracle(df, oracle_site_hand(dirs))
+    if args.perm_strata == "site_hand":  # B-16 の C3: 置換の層（集落 gid → 地点の HAND）
+        PERM_STRATA["site_hand"] = oracle_site_hand(dirs)
+        b6["perm_strata"] = {"by": "site_hand", "n_settlements_with_value": len(PERM_STRATA["site_hand"])}
     if args.strict_names:
-        look, ls = gid_lookup(gn), strict_lexicon(Lexicon(LEXICON))
+        look, ls = gid_lookup(gn), strict_lexicon(load_lexicon())
         per = placebo_lookups(df, look, PLACEBO_SEED)
         df = pd.concat([df, strict_block(df, look, ls), strict_block(df, look, ls, per_aoi=per, prefix="p")], axis=1)
         b6["strict_lexicon"] = ls.sha256
@@ -1420,7 +1513,7 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
               "sensitivity": dataclasses.asdict(sens),
               "aoi_inclusion": reasons, "n_aoi": len(dirs), "split": args.split,
               "nread": {"path": args.nread, "sha256": _sha256(args.nread)} if args.nread else None,
-              "labels": args.labels, "gfm": gfm_info, "b6": b6 or None,
+              "labels": args.labels, "gfm": gfm_info, "b6": b6 or None, "placebo_seed": PLACEBO_SEED,
               "n_aoi_by_fold": {int(k): int(v) for k, v in
                                 df.groupby("fold")["aoi"].nunique().items()}}
 
@@ -1452,11 +1545,12 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
         return
 
     arms = [x for x in args.arms.split(",") if x and (nread is not None or x not in NREAD_ARMS)
-            and (x != "M1h" or args.hazard == "jrc")]  # B-10 の C5: ハザード図の特徴を読んだ実行だけ
+            and (x != "M1h" or args.hazard == "jrc" or args.strong_baseline)  # B-10 の C5: ハザード図を読んだ実行だけ
+            and (x != "M1p" or args.strong_baseline)]  # B-16 の C1: 強い基準の特徴を読んだ実行だけ
     stacks = [x for x in args.stacks.split(",")
               if x and (nread is not None or x not in NREAD_STACK) and (args.oracle or x not in ORACLE_STACK)
               and ((x not in B6_STACK and x not in B7_STACK and x not in B8_STACK and x not in B10_STACK
-                    and x not in B13_STACK)
+                    and x not in B13_STACK and x not in B16_STACK)
                    or b6_stack_available(x, df.columns))]
     dropped = [x for x in args.stacks.split(",") if x and x not in stacks]
     if dropped:

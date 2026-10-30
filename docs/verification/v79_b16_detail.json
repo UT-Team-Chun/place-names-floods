@@ -1,0 +1,826 @@
+{
+ "fetch": {
+  "n_aoi": 70,
+  "n_products": 98,
+  "errors": {}
+ },
+ "fetch_seconds": 143,
+ "build": {
+  "EMSR017_AOI01": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 12398,
+   "n_both_evaluable": 12279
+  },
+  "EMSR017_AOI02": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 1657,
+   "n_both_evaluable": 1640
+  },
+  "EMSR017_AOI03": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 241024,
+   "n_both_evaluable": 240946
+  },
+  "EMSR018_AOI01": {
+   "n_products": 2,
+   "generations": [
+    0,
+    0
+   ],
+   "n_cells_in_detail": 344612,
+   "n_both_evaluable": 335061
+  },
+  "EMSR019_AOI02": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 13780,
+   "n_both_evaluable": 12954
+  },
+  "EMSR020_AOI03": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 2760,
+   "n_both_evaluable": 2719
+  },
+  "EMSR026_AOI01": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 714883,
+   "n_both_evaluable": 702286
+  },
+  "EMSR028_AOI01": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 2210,
+   "n_both_evaluable": 2208
+  },
+  "EMSR033_AOI01": {
+   "n_products": 2,
+   "generations": [
+    0,
+    0
+   ],
+   "n_cells_in_detail": 19196,
+   "n_both_evaluable": 19133
+  },
+  "EMSR035_AOI01": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 13761,
+   "n_both_evaluable": 13712
+  },
+  "EMSR044_AOI07": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 546,
+   "n_both_evaluable": 535
+  },
+  "EMSR044_AOI08": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 1242,
+   "n_both_evaluable": 1214
+  },
+  "EMSR045_AOI01": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 4303,
+   "n_both_evaluable": 4161
+  },
+  "EMSR045_AOI02": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 3990,
+   "n_both_evaluable": 3966
+  },
+  "EMSR045_AOI03": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 3523,
+   "n_both_evaluable": 3516
+  },
+  "EMSR045_AOI04": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 5924,
+   "n_both_evaluable": 5874
+  },
+  "EMSR045_AOI05": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 5097,
+   "n_both_evaluable": 5066
+  },
+  "EMSR045_AOI06": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 4162,
+   "n_both_evaluable": 4104
+  },
+  "EMSR046_AOI01": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 3441,
+   "n_both_evaluable": 3298
+  },
+  "EMSR046_AOI02": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 44537,
+   "n_both_evaluable": 43708
+  },
+  "EMSR046_AOI03": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 54999,
+   "n_both_evaluable": 53903
+  },
+  "EMSR046_AOI04": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 54996,
+   "n_both_evaluable": 53583
+  },
+  "EMSR046_AOI06": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 13755,
+   "n_both_evaluable": 13291
+  },
+  "EMSR046_AOI07": {
+   "n_products": 2,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 825,
+   "n_both_evaluable": 774
+  },
+  "EMSR046_AOI08": {
+   "n_products": 2,
+   "generations": [
+    0,
+    0
+   ],
+   "n_cells_in_detail": 1256,
+   "n_both_evaluable": 1160
+  },
+  "EMSR046_AOI09": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 13757,
+   "n_both_evaluable": 13442
+  },
+  "EMSR047_AOI01": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 11646,
+   "n_both_evaluable": 11394
+  },
+  "EMSR047_AOI02": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 5118,
+   "n_both_evaluable": 5015
+  },
+  "EMSR048_AOI01": {
+   "n_products": 1,
+   "generations": [
+    0
+   ],
+   "n_cells_in_detail": 8178,
+   "n_both_evaluable": 8159
+  },
+  "EMSR052_AOI01": {
+   "n_products": 3,
+   "generations": [
+    1,
+    1,
+    1
+   ],
+   "n_cells_in_detail": 10309,
+   "n_both_evaluable": 10309
+  },
+  "EMSR052_AOI02": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 3445,
+   "n_both_evaluable": 3445
+  },
+  "EMSR052_AOI03": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 3448,
+   "n_both_evaluable": 3448
+  },
+  "EMSR055_AOI01": {
+   "n_products": 2,
+   "generations": [
+    1,
+    1
+   ],
+   "n_cells_in_detail": 8775,
+   "n_both_evaluable": 8775
+  },
+  "EMSR062_AOI03": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 775,
+   "n_both_evaluable": 775
+  },
+  "EMSR062_AOI04": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 667,
+   "n_both_evaluable": 667
+  },
+  "EMSR065_AOI01": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 1649,
+   "n_both_evaluable": 1649
+  },
+  "EMSR065_AOI02": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 1961,
+   "n_both_evaluable": 1961
+  },
+  "EMSR067_AOI01": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 546,
+   "n_both_evaluable": 546
+  },
+  "EMSR068_AOI01": {
+   "n_products": 3,
+   "generations": [
+    1,
+    1,
+    1
+   ],
+   "n_cells_in_detail": 59606,
+   "n_both_evaluable": 59606
+  },
+  "EMSR069_AOI01": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 556,
+   "n_both_evaluable": 556
+  },
+  "EMSR069_AOI02": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 19966,
+   "n_both_evaluable": 19966
+  },
+  "EMSR069_AOI04": {
+   "n_products": 2,
+   "generations": [
+    1,
+    1
+   ],
+   "n_cells_in_detail": 1409,
+   "n_both_evaluable": 1386
+  },
+  "EMSR070_AOI01": {
+   "n_products": 4,
+   "generations": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "n_cells_in_detail": 10185,
+   "n_both_evaluable": 10185
+  },
+  "EMSR072_AOI02": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 3456,
+   "n_both_evaluable": 3456
+  },
+  "EMSR073_AOI02": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 1241,
+   "n_both_evaluable": 1241
+  },
+  "EMSR078_AOI01": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 512,
+   "n_both_evaluable": 512
+  },
+  "EMSR078_AOI02": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 663,
+   "n_both_evaluable": 663
+  },
+  "EMSR086_AOI02": {
+   "n_products": 2,
+   "generations": [
+    1,
+    1
+   ],
+   "n_cells_in_detail": 4906,
+   "n_both_evaluable": 4906
+  },
+  "EMSR086_AOI03": {
+   "n_products": 2,
+   "generations": [
+    1,
+    1
+   ],
+   "n_cells_in_detail": 4961,
+   "n_both_evaluable": 4961
+  },
+  "EMSR086_AOI04": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 1309,
+   "n_both_evaluable": 1309
+  },
+  "EMSR086_AOI05": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 1318,
+   "n_both_evaluable": 1318
+  },
+  "EMSR087_AOI01": {
+   "n_products": 3,
+   "generations": [
+    1,
+    1,
+    1
+   ],
+   "n_cells_in_detail": 10283,
+   "n_both_evaluable": 10283
+  },
+  "EMSR087_AOI04": {
+   "n_products": 2,
+   "generations": [
+    1,
+    1
+   ],
+   "n_cells_in_detail": 1726,
+   "n_both_evaluable": 1726
+  },
+  "EMSR087_AOI05": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 1317,
+   "n_both_evaluable": 1317
+  },
+  "EMSR087_AOI06": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 2504,
+   "n_both_evaluable": 2504
+  },
+  "EMSR087_AOI07": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 2420,
+   "n_both_evaluable": 2420
+  },
+  "EMSR088_AOI01": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 36717,
+   "n_both_evaluable": 36717
+  },
+  "EMSR089_AOI01": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 2307,
+   "n_both_evaluable": 2307
+  },
+  "EMSR092_AOI02": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 179,
+   "n_both_evaluable": 179
+  },
+  "EMSR097_AOI01": {
+   "n_products": 2,
+   "generations": [
+    1,
+    1
+   ],
+   "n_cells_in_detail": 14154,
+   "n_both_evaluable": 14154
+  },
+  "EMSR097_AOI02": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 2143,
+   "n_both_evaluable": 2143
+  },
+  "EMSR101_AOI01": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 734,
+   "n_both_evaluable": 734
+  },
+  "EMSR101_AOI02": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 1632,
+   "n_both_evaluable": 1632
+  },
+  "EMSR107_AOI01": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 3186,
+   "n_both_evaluable": 3186
+  },
+  "EMSR107_AOI02": {
+   "n_products": 3,
+   "generations": [
+    1,
+    1,
+    1
+   ],
+   "n_cells_in_detail": 8466,
+   "n_both_evaluable": 8466
+  },
+  "EMSR116_AOI01": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 37993,
+   "n_both_evaluable": 37877
+  },
+  "EMSR116_AOI02": {
+   "n_products": 1,
+   "generations": [
+    1
+   ],
+   "n_cells_in_detail": 16788,
+   "n_both_evaluable": 16788
+  },
+  "EMSR117_AOI01": {
+   "n_products": 4,
+   "generations": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "n_cells_in_detail": 20096,
+   "n_both_evaluable": 20096
+  },
+  "EMSR118_AOI01": {
+   "n_products": 3,
+   "generations": [
+    1,
+    1,
+    1
+   ],
+   "n_cells_in_detail": 20949,
+   "n_both_evaluable": 20949
+  },
+  "EMSR120_AOI01": {
+   "n_products": 3,
+   "generations": [
+    1,
+    1,
+    1
+   ],
+   "n_cells_in_detail": 29366,
+   "n_both_evaluable": 29366
+  }
+ },
+ "build_seconds": 70,
+ "score": {
+  "removed_whole_aoi_layer": [
+   "EMSR017_AOI01",
+   "EMSR017_AOI03",
+   "EMSR018_AOI01",
+   "EMSR019_AOI02",
+   "EMSR020_AOI03",
+   "EMSR026_AOI01",
+   "EMSR028_AOI01",
+   "EMSR033_AOI01",
+   "EMSR035_AOI01",
+   "EMSR045_AOI01",
+   "EMSR045_AOI02",
+   "EMSR045_AOI03",
+   "EMSR045_AOI05",
+   "EMSR045_AOI06",
+   "EMSR046_AOI02",
+   "EMSR046_AOI03",
+   "EMSR046_AOI04",
+   "EMSR046_AOI06",
+   "EMSR047_AOI01",
+   "EMSR047_AOI02",
+   "EMSR048_AOI01",
+   "EMSR069_AOI02",
+   "EMSR072_AOI02",
+   "EMSR088_AOI01"
+  ],
+  "n_aoi": 46,
+  "n_cells": 25506,
+  "overview_labels_match_analysis": true,
+  "agreement": {
+   "all": {
+    "n": 25506,
+    "both_flooded": 2104,
+    "gfm_only": 69,
+    "ems_only": 59,
+    "neither": 23274,
+    "agreement": 0.9949815729632243,
+    "kappa": 0.9677374120569538,
+    "hit_rate": 0.9727230698104484,
+    "miss_rate": 0.02727693018955155,
+    "false_alarm_ratio": 0.031753336401288544,
+    "csi": 0.942652329749104
+   },
+   "b500_wet": {
+    "n": 345,
+    "both_flooded": 44,
+    "gfm_only": 1,
+    "ems_only": 0,
+    "neither": 300,
+    "agreement": 0.9971014492753624,
+    "kappa": 0.9871003925967473,
+    "hit_rate": 1.0,
+    "miss_rate": 0.0,
+    "false_alarm_ratio": 0.022222222222222223,
+    "csi": 0.9777777777777777
+   },
+   "b500_other": {
+    "n": 3623,
+    "both_flooded": 179,
+    "gfm_only": 9,
+    "ems_only": 5,
+    "neither": 3430,
+    "agreement": 0.9961357990615513,
+    "kappa": 0.9603291797411493,
+    "hit_rate": 0.9728260869565217,
+    "miss_rate": 0.02717391304347826,
+    "false_alarm_ratio": 0.047872340425531915,
+    "csi": 0.927461139896373
+   },
+   "b1k_wet": {
+    "n": 682,
+    "both_flooded": 110,
+    "gfm_only": 1,
+    "ems_only": 0,
+    "neither": 571,
+    "agreement": 0.998533724340176,
+    "kappa": 0.9946002438599547,
+    "hit_rate": 1.0,
+    "miss_rate": 0.0,
+    "false_alarm_ratio": 0.009009009009009009,
+    "csi": 0.990990990990991
+   },
+   "b1k_other": {
+    "n": 6876,
+    "both_flooded": 472,
+    "gfm_only": 29,
+    "ems_only": 14,
+    "neither": 6361,
+    "agreement": 0.9937463641652123,
+    "kappa": 0.9530658894793989,
+    "hit_rate": 0.9711934156378601,
+    "miss_rate": 0.02880658436213992,
+    "false_alarm_ratio": 0.05788423153692615,
+    "csi": 0.916504854368932
+   },
+   "bfar_wet": {
+    "n": 1354,
+    "both_flooded": 318,
+    "gfm_only": 3,
+    "ems_only": 1,
+    "neither": 1032,
+    "agreement": 0.9970457902511078,
+    "kappa": 0.9918157887578919,
+    "hit_rate": 0.9968652037617555,
+    "miss_rate": 0.003134796238244514,
+    "false_alarm_ratio": 0.009345794392523364,
+    "csi": 0.9875776397515528
+   },
+   "bfar_other": {
+    "n": 12626,
+    "both_flooded": 981,
+    "gfm_only": 26,
+    "ems_only": 39,
+    "neither": 11580,
+    "agreement": 0.9948518929193727,
+    "kappa": 0.9651343226464147,
+    "hit_rate": 0.961764705882353,
+    "miss_rate": 0.03823529411764706,
+    "false_alarm_ratio": 0.025819265143992055,
+    "csi": 0.9378585086042065
+   }
+  },
+  "scoring": {
+   "detail_labels": {
+    "n_cells": 25506,
+    "n_units": 26,
+    "flooded_share": 0.0848035756292637,
+    "subset_yardstick": {
+     "R": -0.04913721834562222,
+     "delta_bs": -0.00019802164909911885,
+     "yardstick": 0.004029972712461473,
+     "L_plus": -0.00039952028472219254,
+     "L_minus": 3.4769865239548173e-06,
+     "reps": 4000,
+     "percentile": {
+      "l_plus_upper": -0.00021224529352353985,
+      "l_minus_lower": -0.00034605105208165106,
+      "equivalent": false,
+      "mc_sd_l_plus_upper": 2.5119460930818397e-06,
+      "mc_sd_l_minus_lower": 7.5507628604726666e-06
+     },
+     "normal": {
+      "l_plus_upper": -0.0001805474430761504,
+      "l_minus_lower": -0.00035074789118891053,
+      "equivalent": false,
+      "se_l_plus": 0.0001331260350818453,
+      "se_l_minus": 0.0002153534344386475
+     },
+     "tost_p": 0.49355916159919966,
+     "fieller90": [
+      -0.23820412485770862,
+      0.013242395277425392
+     ],
+     "upper_R": 0.013242395277425392,
+     "upper_brier": 5.336649161565301e-05,
+     "var": [
+      2.6783086054336876e-08,
+      2.1066941664919626e-06,
+      1.432728025395407e-07
+     ]
+    }
+   },
+   "overview_labels": {
+    "n_cells": 25506,
+    "n_units": 26,
+    "flooded_share": 0.0851956402415118,
+    "subset_yardstick": {
+     "R": -0.053385903777107446,
+     "delta_bs": -0.00019578720743376401,
+     "yardstick": 0.0036673952032581316,
+     "L_plus": -0.0003791569675966706,
+     "L_minus": -1.2417447270857422e-05,
+     "reps": 4000,
+     "percentile": {
+      "l_plus_upper": -0.00019168390497515889,
+      "l_minus_lower": -0.0003692215710798841,
+      "equivalent": false,
+      "mc_sd_l_plus_upper": 3.0824788115865123e-06,
+      "mc_sd_l_minus_lower": 7.803990611523403e-06
+     },
+     "normal": {
+      "l_plus_upper": -0.0001630604039125621,
+      "l_minus_lower": -0.00035938941722663947,
+      "equivalent": false,
+      "se_l_plus": 0.00013137738224441048,
+      "se_l_minus": 0.0002109439796165028
+     },
+     "tost_p": 0.5234706162383986,
+     "fieller90": [
+      -0.2915278636651557,
+      0.013657809891585217
+     ],
+     "upper_R": 0.013657809891585217,
+     "upper_brier": 5.008858648341109e-05,
+     "var": [
+      2.567671205297934e-08,
+      2.080790999176565e-06,
+      1.3618672985526806e-07
+     ]
+    }
+   }
+  },
+  "eq2": {
+   "detail_labels": {
+    "odds_ratio": 1.2192770050738644,
+    "ci95": [
+     0.8100096060203877,
+     1.8353318331689936
+    ],
+    "n_cells": 24346,
+    "n_aoi": 37,
+    "n_flooded_near": 44
+   },
+   "overview_labels": {
+    "odds_ratio": 1.2804733454045054,
+    "ci95": [
+     0.8241310101058841,
+     1.9895040572259854
+    ],
+    "n_cells": 23501,
+    "n_aoi": 34,
+    "n_flooded_near": 45
+   }
+  },
+  "rule": "B-16 C5 (addendum 1, item 15): DETAIL products of the old distribution with the AOI's number (latest version of each DETAIL number), layers taken together and rasterized onto the AOI's grid with the same rules; cells of the analysed (capped) table evaluable on both; detail labels as the reference; confirmatory predictions (models fixed), 4,000 draws of location groups; Eq. (2) on the v37 table"
+ },
+ "score_seconds": 2
+}
