@@ -752,3 +752,65 @@ def test_b16_centred_stacks_over_the_strong_baseline_are_available() -> None:
     assert we.b6_stack_available("M3pn", cols)
     assert not we.b6_stack_available("M3pd", cols - {"lex_water_n1"})  # 基の列が無ければ回さない
     assert not we.b6_stack_available("M3pd", cols - {"lupl"})  # 強い基準の特徴が無ければ回さない
+
+
+def test_b17_label_variants_thresholds_and_observed_land() -> None:
+    """B-17 の C5: 閾値 0.10・0.25 と、観測された陸の面積で測る版。"""
+    from topsem.world.dataset import riverine_labels  # noqa: PLC0415
+
+    df = pd.DataFrame({"f_riverine": [0.30, 0.15, 0.05, 0.30, 0.20],
+                       "f_other": [0.0, 0.0, 0.10, 0.0, 0.0],
+                       "f_flood_any": [0.30, 0.15, 0.15, 0.30, 0.20],
+                       "f_observed": [1.0, 1.0, 1.0, 0.5, 0.2],
+                       "f_perm_water": [0.0, 0.0, 0.0, 0.1, 0.2]})
+    y, keep = riverine_labels(df)  # 凍結時の 0.5: どれも乾き
+    assert y.tolist() == [0, 0, 0, 0, 0]
+    assert keep.all()
+    y, keep = riverine_labels(df, variant="t010")
+    assert y.tolist() == [1, 1, 0, 1, 1]
+    assert keep.tolist() == [True, True, False, True, True]  # 河川 0.05・全種別 0.15 は除く
+    y, keep = riverine_labels(df, variant="t025")
+    assert y.tolist() == [1, 0, 0, 1, 0]
+    assert keep.tolist() == [True, True, True, True, True]
+    y, keep = riverine_labels(df, variant="landobs")
+    # 観測された陸 = f_observed − f_perm_water（0.4 で割ると 0.30 → 0.75）。陸が 0 のセルは除く
+    assert y.tolist()[:4] == [0, 0, 0, 1]
+    assert keep.tolist() == [True, True, True, True, False]
+
+
+def test_b17_bare_earth_baseline_has_no_post_event_inputs() -> None:
+    """B-17 の C4: M1b は M1p から JRC の図・GSW・WorldCover を除いた裸地の基準。
+
+    積み重ねは強い基準の列を要する。
+    """
+    we = _load("world_eval")
+    post_event = {*we.HAZ, *we.ORACLE_W, "lc_built", "lc_tree"}
+    assert set(we.ARMS["M1b"]) <= set(we.ARMS["M1p"])
+    assert not set(we.ARMS["M1b"]) & post_event
+    assert set(we.ARMS["M1p"]) - set(we.ARMS["M1b"]) == post_event
+    names = [f for f in (*we.NAMES, *we.NAMES_P) if f not in we.IN_FOLD]
+    cols = {*we.STRONG_PRE, *names}
+    for s in ("M1bc", "M3bn", "M3bnp", "M1bs", "M3bd", "M3bdp"):
+        assert we.b6_stack_available(s, cols)
+    assert not we.b6_stack_available("M3bd", cols - {"h_above_100"})
+
+
+def test_b17_stage2_dump_keeps_the_placebo_names(monkeypatch: pytest.MonkeyPatch) -> None:
+    """B-17 の追記 3: 二段目の保存は placebo の名の特徴（xnp、M3np と同じ列）も持つ。"""
+    we = _load("world_eval")
+    assert we.STACK["M3np"][1] == [*we.COMP, *we.NAMES_P]
+    rng = np.random.default_rng(0)
+    cols = [*we.COMP, *we.NAMES, *we.NAMES_P]
+
+    def frame(n: int) -> pd.DataFrame:
+        d = pd.DataFrame(rng.random((n, len(cols))), columns=cols)
+        return d.assign(y=rng.integers(0, 2, n), unit=["g1"] * n, aoi=["A1"] * n, cc=["PK"] * n)
+
+    tr, te = frame(6), frame(3)
+    fake = {"tr": tr, "te": te, "z": {"M1": (np.zeros(6), np.zeros(3))},
+            "preds": {a: np.full(3, 0.1) for a in ("M0", "M1", "M1c", "M3n")}}
+    monkeypatch.setattr(we, "run_fold", lambda *_a, **_k: fake)
+    out = we.dump_stage2(pd.DataFrame(), 0, [0])
+    assert out["xnp_tr"].shape == (6, len(we.NAMES_P))
+    assert np.allclose(out["xnp_te"], te[we.NAMES_P].to_numpy(np.float32))
+    assert not np.allclose(out["xnp_te"], out["xn_te"])

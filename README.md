@@ -1,15 +1,15 @@
 # place-names-floods
 
 Analysis code, frozen protocol and lexicon for the study
-**"Settlement names flagged as water-related by a lexicon, assigned to the nearest grid cells, did not improve
-within-area predictions of mapped river flooding"** (R. Okauchi and P.-J. Chun, The University
-of Tokyo).
+**"Machine-read settlement names did not detectably improve gridded predictions of Copernicus-mapped river flooding,
+in a test insensitive to settlement-scale effects"** (R. Okauchi and P.-J. Chun, The University of Tokyo).
 
-The pre-specified test assigns each name reading to all ground nearest its settlement and scores how well the names place
-flooding within mapped areas, adjusting for which names occur in each area. An effect confined to the ground near
-settlements could not have exceeded its margin, which the authors found only after the confirmatory result; records known
-before each event (modelled flood hazard, earlier floods) are diluted in the same way when assigned through settlements.
-The claim that names record the flooding of settlements is not tested here.
+The pre-specified test gives each settlement's name, classified by a lexicon that a language model compiled and by a
+character model, to every 250 m cell nearest the settlement (Voronoi allocation), and scores how well the names place
+flooding within mapped areas, adjusting for which names occur in each area. The paper reports the test as a record and
+measures what the design could detect: an effect confined to the ground near settlements could not have exceeded the
+margin, and records known to predict flooding (a 100-year hazard map, earlier floods) lose most of their value when
+allocated in the same way. Whether names record the flooding of the places they name is not answered here.
 
 The study tests whether settlement names improve the prediction of satellite-observed river flooding
 (Copernicus Emergency Management Service delineations; 500 areas of interest, 188 activations, 58
@@ -25,15 +25,15 @@ before they were computed, and the paper lists the exceptions and the planning s
 | Path | Contents |
 |---|---|
 | `docs/protocol/preregistration_v2.md` | Frozen analysis protocol (hypotheses, estimand, splits, decision rules, smallest effect size of interest, sensitivity analyses, power analysis); in Japanese, the frozen record |
-| `docs/protocol/en/` | English translations of the protocol and of amendments B-1 to B-15, drafted with a language model after the analysis and not yet checked by the authors (the Japanese files govern where they differ) |
+| `docs/protocol/en/` | English translations of the protocol and of amendments B-1 to B-17, drafted with a language model after the analysis and not yet checked by the authors (the Japanese files govern where they differ) |
 | `docs/protocol/v2/lexicon_hydro_v1.yaml` | Frozen multilingual lexicon of water, wetland, riverine, crossing, lowland and highland word elements |
-| `docs/protocol/amendments/B-*.md` | Post-freeze amendments: corrections of implementation errors with both runs reported (B-1: one sensitivity analysis; B-4: the lexicon was not applied to Norwegian names because the YAML parser read the country code `NO` as false); post hoc analyses fixed before they were run (B-2: after critiques by language-model agents with access to the project records; B-3: independent flood labels from Copernicus Global Flood Monitoring; B-5 to B-15: after eleven rounds of critiques by language-model agents given only the manuscript and supplement). These critiques are not peer review; the paper (Appendix A) lists the analyses that were planned or withdrawn after related results had been seen |
+| `docs/protocol/amendments/B-*.md` | Post-freeze amendments: corrections of implementation errors with both runs reported (B-1: one sensitivity analysis; B-4: the lexicon was not applied to Norwegian names because the YAML parser read the country code `NO` as false); post hoc analyses fixed before they were run (B-2: after critiques by language-model agents with access to the project records; B-3: independent flood labels from Copernicus Global Flood Monitoring; B-5 to B-17: after thirteen rounds of critiques by language-model agents given only the manuscript and supplement). These critiques are not peer review; the paper (Table 2, Sect. 2.4) lists the departures from the protocol, and the Supplement the analyses that were planned or withdrawn after related results had been seen |
 | `docs/research/2026-10-26_v2_interpretation_plan.md` | Interpretation plan written after the freeze and before any confirmatory result |
 | `docs/data/` | Copernicus EMS product inventory (frozen snapshot) and the point-in-time register of all inputs |
 | `backend/packages/topsem/` | Analysis package (`topsem.world`: EMS parsing, rasterisation, terrain, hydrology, land cover, names, lexicon and language-model channels, GFM labels, the post hoc modules `b6`–`b13`) and scripts (`scripts/world_*.py`, `nread_*.py`) with unit tests |
 | `backend/packages/gateways/` | An unused template package of the original project scaffold, kept only because the locked workspace lists it; the analysis does not import it |
 | `CLAUDE.md` | The analysis rules (pre-specification, leakage, run contract, traceability); the scripts also use this file to find the repository root, and the coding assistant used during development reads it |
-| `backend/verification/r_okauchi/v31`–`v76` | One-off verification scripts: label identity, cell cap, freeze record, channel agreement, exploratory contrasts (v31–v35); post hoc analyses of B-2 (v36–v40); GFM labels and their checks (v41, v45; B-3); B-5 analyses from existing artefacts (v42), etymology checks against Wikidata (v43) and Wikipedia (v44), the size of the B-4 defect (v46) and the aggregation of the B-3 to B-5 cluster runs (v47); B-6 analyses from existing predictions (v48: the ceiling of a settlement-scale effect, AOI weights, rounded coordinates, interval coverage), surface water around settlements (v49), diagnostics of the GFM labels and the variant with seasonal water (v50), documentation and strict reading of the lexicon (v51), aggregation of the B-6 cluster runs including the plasmode bounds (v52), the surface-water positive control (v53) and the descriptions of B-6 addendum 1 (v54); B-7 analyses from existing artefacts (v55: floodplain reading, partly flooded cells, event magnitude, built-up and tree adjustment, GFM discrimination, pairs bootstrap, joint tests, digraphs, recall by language and further descriptions) and the aggregation of the B-7 cluster runs (v56: permutations with recomputed composition, plasmode with refitted models, the activation split with the corrected code, the recurrent-flooding control, the floodplain reading and the run without partly flooded cells); B-8 analyses
+| `backend/verification/r_okauchi/v31`–`v82` | One-off verification scripts: label identity, cell cap, freeze record, channel agreement, exploratory contrasts (v31–v35); post hoc analyses of B-2 (v36–v40); GFM labels and their checks (v41, v45; B-3); B-5 analyses from existing artefacts (v42), etymology checks against Wikidata (v43) and Wikipedia (v44), the size of the B-4 defect (v46) and the aggregation of the B-3 to B-5 cluster runs (v47); B-6 analyses from existing predictions (v48: the ceiling of a settlement-scale effect, AOI weights, rounded coordinates, interval coverage), surface water around settlements (v49), diagnostics of the GFM labels and the variant with seasonal water (v50), documentation and strict reading of the lexicon (v51), aggregation of the B-6 cluster runs including the plasmode bounds (v52), the surface-water positive control (v53) and the descriptions of B-6 addendum 1 (v54); B-7 analyses from existing artefacts (v55: floodplain reading, partly flooded cells, event magnitude, built-up and tree adjustment, GFM discrimination, pairs bootstrap, joint tests, digraphs, recall by language and further descriptions) and the aggregation of the B-7 cluster runs (v56: permutations with recomputed composition, plasmode with refitted models, the activation split with the corrected code, the recurrent-flooding control, the floodplain reading and the run without partly flooded cells); B-8 analyses
 from existing artefacts (v57: achieved bound, groups needed, permutation test, the two label sets on the same cells,
 estimates near settlements by class and variant, heights above the main rivers, calibration and skill, audit of
 matched forms, a reading by river and lake names), a second coder of the etymology excerpts (v57b), the cleaned lexicon
@@ -85,7 +85,17 @@ over super-clusters; names against records assigned through settlements on the s
 observability of the ground near settlements; checks of the GFM labels; tables of the lexicon's blocks, classes,
 romanisations and recorded namesakes; a census of the exploratory estimates of every amendment; how the correction of
 Norwegian names reached a location group in Pakistan; a wild cluster bootstrap and label permutations of the odds ratios
-near settlements) |
+near settlements); B-16 analyses (v77: the designated super-cluster construction with the second stage refitted and the
+rule for few clusters, leave-outs of the groups that carry the variance, names by distance band and centred within AOIs,
+label attributes and targets, detail maps, restricted bootstrap and misclassification bounds near settlements; v78: the
+aggregation of the B-16 runs (a strong baseline, permutations within strata of site HAND and placebo redraws); v79:
+details of the designated construction); B-17 analyses (v80: coverage of the intervals in the protocol's simulations,
+operating characteristics with the margin held fixed, labels refitted, EMS labels on the cells GFM can assess, the
+character model's n-grams, coefficients by language area, the dilution decomposed, injected-effect verdicts, feature
+correlations, read names only and the census of amendments 16 and 17; v81: aggregation of the B-17 runs (randomization
+inference over 200 reassignments, the placebo redrawn 200 times, a bare-earth baseline, both stages refitted on other
+labels, a lexicon without wells); v82: leakage through the regional composition, GFM acquisitions, matches of *ab*,
+hedged derivations and language coverage) |
 | `docs/verification/` | Their outputs, including the coded Wikipedia etymology excerpts with sources and quotations (`v44_etym_codes.csv`) and the lexicon tables (`v51_lexicon_table.csv`, `v51_top_forms.csv`, `v51_examples.csv`) |
 | `docs/verification/v51_audit_sample.csv`, `v51_audit_guide.md` | A stratified sample of 100 settlement names and a coding guide for an independent coding of their recorded etymologies (amendment B-6; superseded by the sample below) |
 | `docs/verification/v68_audit_sample.csv`, `v68_audit_guide.md` | A sample of 150 settlement names read as water-side, stratified by matched form and country (amendment B-11; superseded by the sample below) |
@@ -93,7 +103,9 @@ near settlements) |
 | `docs/verification/v70_lexicon_corrected.yaml` | A lexicon derived mechanically from the frozen one by the rules of amendment B-13 (item C2): homographs, riverside entries without a flood meaning, relative qualifiers, springs and wells, rapids and falls removed; named omissions added; the German block limited to German-speaking countries. The frozen lexicon is unchanged; the derivation is recorded in `v70_lexicon_corrected_record.json` |
 | `docs/verification/v73_lexicon_edits.csv` | Every entry removed from or added to the frozen lexicon in the edited lexicon of amendment B-13, with its class and the rule that removed it (amendment B-14, item B8) |
 | `docs/verification/v70_two_coders.csv` | The codes of both coders of the recorded etymologies with GeoNames ID, country and stratum, leaving out the names of every audit sample |
-| `docs/verification/v76_estimates.csv` | The census of exploratory interval estimates extended to amendments B-2 to B-15 (amendment B-15, item B8), with the families, Benjamini–Hochberg and Benjamini–Yekutieli values and the direction of the estimates that exclude the no-effect value |
+| `docs/verification/v80_estimates.csv` | The census of exploratory interval estimates extended to amendments B-2 to B-17 (amendment B-17, item B14), with the families, Benjamini–Hochberg and Benjamini–Yekutieli values and the direction of the estimates that exclude the no-effect value |
+| `docs/verification/v80_lexicon_no_chah_ab.yaml` | A lexicon derived mechanically from the frozen one without the wells (*chah*, *chahi*) and *ab*, *aab* of block fa (amendment B-17, item C6) |
+| `docs/verification/v76_estimates.csv` | The census of exploratory interval estimates extended to amendments B-2 to B-15 (amendment B-15, item B8; superseded by `v80_estimates.csv`) |
 | `docs/verification/v69_estimates.csv` | The census of exploratory interval estimates with the corrected near-settlement flags and Benjamini–Hochberg and Benjamini–Yekutieli values (amendment B-12, addendum 1) |
 | `docs/paper/paper_2_nhess/supplement_archive.pdf` | Tables of exploratory analyses that neither the paper nor its Supplement cites, numbered A1, A2, …, including tables whose quantities were later corrected or superseded |
 | `docs/verification/v68_estimates.csv` | Machine-readable census of the exploratory interval estimates (amendment B-11, item B8): source file, JSON path, kind, estimate, 95 % interval, whether it excludes the no-effect value, approximate two-sided p, amendment, family (name effect on flooding, site description or nuisance coefficient) and the rules applied; the planning status of each group of estimates is in the Supplement |
@@ -111,8 +123,9 @@ uv run pytest packages/topsem/tests -q
 The confirmatory runs used a Linux amd64 container built from this code. Results on other platforms can
 differ: on an arm64 machine the evaluations reproduced the primary comparison to the fifth decimal of R, but the
 simulations that refit the character model and the second stage on injected labels differed from the cluster's by
-up to 1.4 Monte Carlo standard errors, whereas a rerun on the cluster reproduced them (paper, Appendix A). Run the
-simulations in the amd64 container.
+up to 1.4 Monte Carlo standard errors, whereas a rerun on the cluster reproduced them (Supplement, Text S1). Run the
+simulations in the amd64 container. Some exploratory runs of amendment B-17 (permutations, placebo redraws and label
+variants) ran on the Miyabi-C system (x86_64 Linux) from the same commit; the runs record their platform.
 
 ## Reproducing the analysis
 
@@ -140,7 +153,8 @@ Inputs are public (see Code and data availability in the paper). The pipeline st
    `--lexicon`, `--dump-stage2`, `--plasref-deltas` and `--gsw-cell` those of B-8 (`--lexicon` again in B-13);
    `--plasmode-forms BK` that of B-12; and `--post-min-event-year`, `--recurrence-prior`, `--jrc-set` and
    `--grouped-es` those of B-13; `--label-variant observable` and the stacks `T0co`, `T0o` and `M3rk` those of B-14;
-   `--dump-stage2` with `--group-by-activation` the saved design of B-15; the scripts `v36`–`v76` compute the rest
+   `--dump-stage2` with `--group-by-activation` the saved design of B-15; `--frozen-norway` and `--strong-baseline`
+   those of B-16 and B-17, `--label-variant {t010,t025,landobs}` those of B-17; the scripts `v36`–`v82` compute the rest
 9. `docs/paper/paper_2_nhess/figures/make_figures.py` — all numbers, tables and figures
 
 The derived data (cell tables, name readings, held-out predictions, run summaries and the GeoNames snapshot used)

@@ -224,10 +224,34 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   the estimate on that split; and a wild cluster bootstrap and label permutations of the odds ratios near settlements.
   Addendum 1 records the implementation and addendum 2 two corrections (batched Wikidata queries after truncated
   answers, and the sources of the consistency checks), both before the quantities were used. Script: `v76` (local only).
+- Amendment B-16 followed the twelfth round of critiques. It designated one post hoc construction before it was computed
+  (the 106 super-clusters of the primary split, 500 draws with the second stage refitted) and a rule for few clusters
+  (t critical values on ν − 1 degrees of freedom), and fixed checks of the design's sensitivity, of the labels and
+  baselines (a strong baseline, label attributes and targets, EMS detail maps), of the readings and near settlements.
+  Addendum 1 records the implementation before computing; addendum 2 leaves out detail maps whose frame covers the whole
+  AOI, before computing; addendum 3 records that the placebo redraws had run with Norwegian names read and reruns them
+  with the frozen reading (after the counts of the first redraws had been seen); addendum 4 reruns the centred
+  comparisons over the strong baseline that had not run (after the nested ones had been seen). Scripts: `v77`, `v78`,
+  `v79`.
+- Amendment B-17 followed the thirteenth round of critiques. It rewrote the paper as a study of what the design can
+  detect, without claims of an upper limit, and fixed, before computing them: randomization inference over 200
+  reassignments with features, composition and second stage rebuilt (primary split under both readings, the split that
+  keeps activations whole under both readings, and the GFM labels); the placebo redrawn 200 times; the coverage of the
+  intervals in the protocol's null and margin simulations; operating characteristics with the margin held fixed; a
+  bare-earth baseline with pre-event information only; both stages refitted on other label definitions; a lexicon without
+  wells and *-ab*; coefficients by language area; the dilution of records decomposed; the GFM discrepancy; and the census
+  extended to amendments 16 and 17 (`docs/verification/v80_estimates.csv`). Addendum 1 records the implementation before
+  the cluster quantities were computed (including that the 15 name features were used where the text said 14); addendum 2
+  fixes descriptive checks requested by the critiques (leakage through the regional composition, GFM acquisitions, AOIs
+  without flooded cells after the cap, matches of *ab*, hedged derivations), before computing them; addendum 3 adds the
+  reassigned names to the saved second-stage design that the GFM check with settlement attributes needs, and addendum 4
+  moves that rerun and the check from a local machine to the cluster, both before the check was computed. Some runs of
+  this amendment ran on the Miyabi-C system from the same commit as the cluster runs, and its final aggregation ran there
+  from a later commit with the same analysis code. Scripts: `v80`, `v81`, `v82`.
 
-English translations of the protocol and of amendments B-1 to B-15 are in `docs/protocol/en/`; they were drafted with a
+English translations of the protocol and of amendments B-1 to B-17 are in `docs/protocol/en/`; they were drafted with a
 language model after the analysis and have not yet been checked by the authors, and the Japanese files are the record
-and govern where the two differ. Amendments B-2, B-3 and B-5 to B-15 followed critiques by language-model agents; the
+and govern where the two differ. Amendments B-2, B-3 and B-5 to B-17 followed critiques by language-model agents; the
 paper lists the rounds and their times. Dates written
 inside the repository files are local (Japan Standard Time, UTC+9) unless marked; the paper gives UTC. An interpretation
 plan, written after the freeze and before any confirmatory result, is in

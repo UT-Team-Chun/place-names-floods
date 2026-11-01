@@ -64,7 +64,10 @@ def evaluable(df: pd.DataFrame) -> np.ndarray:
     )
 
 
-LABEL_VARIANTS = ("none", "notrace", "nonwater", "observable")
+LABEL_VARIANTS = ("none", "notrace", "nonwater", "observable", "t010", "t025", "landobs")
+# B-17 の C5: 2 値化の閾値を変える版（河川の被覆 ≥ t を浸水、全種別の被覆 < t を乾き、他は除く）
+VARIANT_THRESHOLDS = {"t010": 0.10, "t025": 0.25}
+MIN_LAND = 1e-6  # landobs: 観測された陸の割合がこれ以下のセルは除く
 OBSERVABLE_MAX = 0.5  # B-14 の C1: 10 m の市街地 + 樹冠の割合がこれ以上のセルは評価から除く
 
 
@@ -78,8 +81,10 @@ def riverine_labels(df: pd.DataFrame, *, unspecified_as_riverine: bool = False,
     variant（事後 B-5 の 7）: notrace は浸水痕跡（notation に trace）の被覆を差し引く
     （EMS の多角形は重ならないので差で足りる）、nonwater は浸水の割合を恒常水域を除いた
     面積で測る。observable（事後 B-14 の C1）はラベルを変えず、10 m の市街地と樹冠の割合の和
-    （features の lc_built + lc_tree、欠けは 0）が OBSERVABLE_MAX 以上のセルを除く。既定 none は
-    凍結時と同じ計算（型も変えない）。
+    （features の lc_built + lc_tree、欠けは 0）が OBSERVABLE_MAX 以上のセルを除く。
+    B-17 の C5: t010・t025 は閾値を 0.10・0.25 に、landobs は浸水の割合を観測された陸の面積
+    （f_observed − f_perm_water、0 以下のセルは除く）で測る。
+    既定 none は凍結時と同じ計算（型も変えない）。
     """
     if variant not in LABEL_VARIANTS:
         msg = f"unknown label variant {variant!r}"
@@ -94,17 +99,23 @@ def riverine_labels(df: pd.DataFrame, *, unspecified_as_riverine: bool = False,
         land = np.clip(1.0 - df["f_perm_water"].to_numpy(), 1e-6, None)
         riv, anyf, oth = riv / land, anyf / land, oth / land
     obs = np.ones(len(df), dtype=bool)
+    if variant == "landobs":
+        land_obs = df["f_observed"].to_numpy(np.float64) - df["f_perm_water"].to_numpy(np.float64)
+        obs = land_obs > MIN_LAND
+        land = np.clip(land_obs, MIN_LAND, None)
+        riv, anyf, oth = riv / land, anyf / land, oth / land
+    th = VARIANT_THRESHOLDS.get(variant, WET_TH)
     if variant == "observable":
         cover = np.nan_to_num(df["lc_built"].to_numpy(np.float64)
                               + df["lc_tree"].to_numpy(np.float64), nan=0.0)
         obs = cover < OBSERVABLE_MAX
     if all_types:
-        y1 = anyf >= WET_TH
+        y1 = anyf >= th
         return y1.astype(np.int8), obs
     if unspecified_as_riverine:
         riv = riv + oth
-    y1 = riv >= WET_TH
-    y0 = anyf < WET_TH
+    y1 = riv >= th
+    y0 = anyf < th
     return y1.astype(np.int8), (y1 | y0) & obs
 
 

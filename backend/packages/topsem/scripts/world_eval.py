@@ -267,6 +267,15 @@ B16_STACK: dict[str, tuple[str, list[str]]] = {
     "M1ps": ("M1p", []), "M3pd": ("M1p", DEMEANED), "M3pdp": ("M1p", DEMEANED_P),
 }
 STACK |= B16_STACK
+# 事後 B-17 の C4: 裸地で事象の前の情報だけの基準 M1b = M1 + FABDEM の標高の統計・FABDEM で測った集水 100・1,000 km² 以上の
+# 河道からの高さ・最寄りの河道の上流の面積（JRC の図・GSW・WorldCover は入れない。attach_strong で足す列から選ぶ）
+STRONG_PRE = [*FB, "h_above_100", "h_above_1000", "lupl"]
+ARMS["M1b"] = [*T0, *TER_4, *STRONG_PRE]
+B17_STACK: dict[str, tuple[str, list[str]]] = {
+    "M1bc": ("M1b", COMP), "M3bn": ("M1b", [*COMP, *NAMES]), "M3bnp": ("M1b", [*COMP, *NAMES_P]),
+    "M1bs": ("M1b", []), "M3bd": ("M1b", DEMEANED), "M3bdp": ("M1b", DEMEANED_P),
+}
+STACK |= B17_STACK
 TUNED_STACK = ("M1ct", "M3nt")  # C2: 二段目の C を入れ子の交差検証で選ぶ
 B10_DYNAMIC = ("bd_", "ct_", "__", "@country")  # fold の中で作る列（表の列の有無で落とさない）
 IN_FOLD = ("nlearn", "nlearn_p")  # fold の中で作る特徴（表には無い）
@@ -279,6 +288,8 @@ def b6_stack_available(x: str, columns: Iterable[str]) -> bool:
     if x in B10_STACK and STACK[x][0] == "M1h" and not all(h in cols for h in HAZ):
         return False
     if x in B16_STACK and not all(f in cols for f in STRONG):
+        return False
+    if x in B17_STACK and not all(f in cols for f in STRONG_PRE):
         return False
     return all(f.removeprefix("c_") in cols or f.removeprefix("c_") in IN_FOLD
                or (f.startswith("d_") and (f[2:] in cols or f[2:] in IN_FOLD))  # B-16 追記 4: fold の中で中心化した名
@@ -792,6 +803,8 @@ def dump_stage2(df: pd.DataFrame, fold: int, seeds: list[int]) -> dict:
         "z_tr": z[0].astype(np.float32), "z_te": z[1].astype(np.float32),
         "xc_tr": tr[COMP].to_numpy(np.float32), "xc_te": te[COMP].to_numpy(np.float32),
         "xn_tr": tr[NAMES].to_numpy(np.float32), "xn_te": te[NAMES].to_numpy(np.float32),
+        # B-17 の追記 3: B6 の「置き換えた名との差」に要る placebo の名の特徴（M3np と同じ列）
+        "xnp_tr": tr[NAMES_P].to_numpy(np.float32), "xnp_te": te[NAMES_P].to_numpy(np.float32),
         "y_tr": tr["y"].to_numpy(np.int8), "y_te": te["y"].to_numpy(np.int8),
         "unit_tr": tr["unit"].to_numpy(dtype=str), "unit_te": te["unit"].to_numpy(dtype=str),
         "p_M0_te": r["preds"]["M0"], "p_M1_te": r["preds"]["M1"],
@@ -1331,7 +1344,8 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
     ap.add_argument("--nread", default="", help="N-read 推論結果 parquet（与えると M3r/M3rp も回す）")
     ap.add_argument("--labels", default="ems", choices=["ems", "gfm"],
                     help="事後 B-3: 独立のラベル（GFM）で学習・評価（同じ表・同じ fold の後で差し替え）")
-    ap.add_argument("--label-variant", default="none", choices=["none", "notrace", "nonwater", "observable"],
+    ap.add_argument("--label-variant", default="none",
+                    choices=["none", "notrace", "nonwater", "observable", "t010", "t025", "landobs"],
                     help="事後 B-5 の 7: 浸水痕跡を除く / 恒常水域を除いた面積で浸水率を測る")
     ap.add_argument("--save-coefs", action="store_true", help="事後 B-5 の 2: 二段目の係数を fold の記録に")
     ap.add_argument("--oracle", action="store_true",
@@ -1546,11 +1560,11 @@ def main() -> None:  # noqa: C901, PLR0912, PLR0915
 
     arms = [x for x in args.arms.split(",") if x and (nread is not None or x not in NREAD_ARMS)
             and (x != "M1h" or args.hazard == "jrc" or args.strong_baseline)  # B-10 の C5: ハザード図を読んだ実行だけ
-            and (x != "M1p" or args.strong_baseline)]  # B-16 の C1: 強い基準の特徴を読んだ実行だけ
+            and (x not in ("M1p", "M1b") or args.strong_baseline)]  # B-16 の C1・B-17 の C4: 強い基準の特徴を読んだ実行だけ
     stacks = [x for x in args.stacks.split(",")
               if x and (nread is not None or x not in NREAD_STACK) and (args.oracle or x not in ORACLE_STACK)
               and ((x not in B6_STACK and x not in B7_STACK and x not in B8_STACK and x not in B10_STACK
-                    and x not in B13_STACK and x not in B16_STACK)
+                    and x not in B13_STACK and x not in B16_STACK and x not in B17_STACK)
                    or b6_stack_available(x, df.columns))]
     dropped = [x for x in args.stacks.split(",") if x and x not in stacks]
     if dropped:

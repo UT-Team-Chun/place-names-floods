@@ -9,41 +9,27 @@ Quantity & Value \\
 \multicolumn{2}{l}{\emph{Data, design and sample (Sects.~\ref{sec:methods} and~\ref{sec:sample})}} \\
 \quad Median distance from a scored cell to its nearest settlement & \DistMedian\,km \\
 \quad Share of the evaluable cells kept by the cap per location group & \CapKeptPct \\
-\quad Analysed AOIs by schema generation of the EMS products, 0 to 3 & \NAoiGenZero; \NAoiGenOne; \NAoiGenTwo; \NAoiGenThree \\
 \quad Entries of the lexicon; language blocks & \NLexEntries; \LexNCodes \\
 \quad Flooded share of the analysed cells; AOI median [interquartile range] & \BaseRatePct; \AoiRateMed{} [\AoiRateQOne, \AoiRateQThree] \\
 \quad AOIs without a hydrography layer; analysed AOIs whose products describe no flood type; counted riverine by the inland rule & \NoHydroNExcl{} (\NoHydroPct); \NUntypedAoi; \NUnspecifiedRiverine \\
 \quad Settlements nearest the analysed cells: sections of populated places; historical, abandoned or destroyed; coordinates on whole arc-minutes & \FcodeSectionPct; \FcodeHistPct; \RoundedSettlementsPct \\
 \quad Share of the cells and of the label variance $\sum p(1-p)$: Asian AOIs; European AOIs & \ShareCellsAsia, \ShareVarAsia; \ShareCellsEurope, \ShareVarEurope \\
 \quad Baseline gain over position, 95\,\% interval (Brier units) & \DeltaTerrain{} (\DeltaTerrainLo{} to \DeltaTerrainHi) \\
-\quad Null simulations of the protocol: mean $R$ & \NullMeanR \\
-\multicolumn{2}{l}{\emph{The protocol-based test and the reanalysis (Sects.~\ref{sec:primary} and~\ref{sec:reanalysis})}} \\
-\quad Increase in Brier score from names (95\,\% interval) & \DeltaNamesAbs{} (\DeltaNamesIncLo{} to \DeltaNamesIncHi) \\
-\quad Protocol rule declaring equivalence at $R=-0.05$; at $R=+0.05$ (uniform shift) & \OpFixedSizeLo; \OpFixedSizeHi \\
-\quad Margin set at the lower 95\,\% limit of the baseline gain (Brier units); 90\,\% interval of $R$ & \YOneMarginBS; \YOneLo{} to \YOneHi \\
 \multicolumn{2}{l}{\emph{Checks of the test (Sects.~\ref{sec:primary} and~\ref{sec:reanalysis})}} \\
-\quad Joint Wald test of the name coefficients on all held-out cells: $\chi^2$ (df), $p$ & \WaldNamesChi{} (\WaldNamesDf), \WaldNamesP \\
 \quad Within AOIs: median change in the area under the ROC curve; share of AOIs with a higher area & \AoiMedDAuc; \AoiShareAucUp \\
 \multicolumn{2}{l}{\emph{What assignment through settlements can carry (Sects.~\ref{sec:design} and~\ref{sec:ceiling})}} \\
 \quad Share of cells within 500\,m of a settlement with a water-related name & \CeilShareFiveHundred \\
 \quad Largest possible $R$ from perfect prediction near water-related names within 1\,km & \CeilROneKm \\
-\quad Names scored on the ground within 500\,m of water-related names, $R$ (90\,\% interval) & \NearR{} (\NearRLo{} to \NearRHi) \\
 \multicolumn{2}{l}{\emph{Readings and labels near settlements (Sects.~\ref{sec:readings} and~\ref{sec:near})}} \\
-\quad Sample of recorded etymologies: analysed settlements with an article; read as water-related (all sampled); others; others sampled & \WPNPopulation; \WPNStratumWet; \WPNStratumNot; \WPNSampledNot \\
-\quad Edited lexicon: $R$ (90\,\% interval) & \LexCorrR{} (\LexCorrRLoNinety{} to \LexCorrRHiNinety) \\
-\quad Settlements nearest the scored cells with a namesake in Wikidata; of them named after a water body, wetland, island or crossing; of these read as water-related by the language model; by the lexicon & \WDNamesakes; \WDRiverNamesakes; \WDNreadHits; \WDLexHits \\
 \quad Language-model reading: cells water-related; in Africa; cells answered ``unknown'' & \NReadWetPct; \NReadWetAF; \NReadUnknownPct \\
 \quad Planned estimate on the GFM labels: flooded cells within 500\,m of water-related names; location groups holding them & \GfmCappedFlooded; \GfmCappedUnits \\
 \quad GFM and EMS labels on the cells both can assess: agreement; $\kappa$ & \GFMAgreePct; \GFMKappa \\
-\quad Refitted on the GFM labels: reduction in Brier score from names (95\,\% interval) & \GFMCTwoNames{} (\GFMCTwoNamesLo{} to \GFMCTwoNamesHi) \\
 \quad GFM labels, each model's predictions shifted within each AOI to its flooded share: $R$ (95\,\% interval); real minus reassigned names (95\,\% interval) & \GfmWithinR{} (\GfmWithinRLo{} to \GfmWithinRHi); \GfmWithinMinusP{} (\GfmWithinMinusPLo{} to \GfmWithinMinusPHi) \\
 \quad Uncapped EMS estimate: share of its flooded cells within 500\,m in EMSR052 and EMSR130 & \NearTopTwoShare \\
 \quad GFM labels, given the baseline model: odds of a flood label more than 1\,km from the nearest settlement against within 500\,m (95\,\% interval) & \GFMNearFarGfm{} (\GFMNearFarGfmLo{} to \GFMNearFarGfmHi) \\
-\multicolumn{2}{l}{\emph{Checks after the twelfth critiques (Sects.~\ref{sec:secondary}, \ref{sec:reanalysis} and~\ref{sec:readings}, Appendix~\ref{app:data})}} \\
-\quad After the language model's cut-off, flexible refit with Norwegian names read: $R$ (95\,\% interval); verdict with the protocol's draw of reassigned names & \LmFlexFixR{} (\LmFlexFixRLo{} to \LmFlexFixRHi); \LmFlexFixVerdict \\
+\multicolumn{2}{l}{\emph{Checks after the twelfth critiques (Sects.~\ref{sec:secondary}, \ref{sec:reanalysis} and~\ref{sec:readings}, Text~S2)}} \\
 \quad Cells whose nearest name contains \emph{\TopGroupForm} in the location group that carries most of the variance of $\Delta$ & \TopGroupFormCells \\
 \quad Height above nearest drainage of settlements with water-related names minus that of other settlements of their AOI, coordinates not on whole arc-minutes (m) & \PCWetHandMeanNR{} (\PCWetHandMeanNRLo{} to \PCWetHandMeanNRHi) \\
-\quad Processing versions of the GFM image tiles & \GfmVersionText \\
 \multicolumn{2}{l}{\emph{Appendix~\ref{app:results}}} \\
 \quad Observed and simulated median 90\,\% half-widths of $R$ & \ObsHalfWidth; \SimHalfWidth \\
 \quad Synthetic effect at $R\approx0.05$: change in Brier score; simulated baseline gain & \SimSesoiDBS; \SimYard \\

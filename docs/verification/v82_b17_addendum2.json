@@ -1,0 +1,522 @@
+{
+ "K": {
+  "n_aoi": 500,
+  "n_no_flooded_after_cap": 21,
+  "n_no_dry_after_cap": 0,
+  "n_both_classes": 479,
+  "aois_no_flooded": [
+   "EMSR028_AOI01",
+   "EMSR120_AOI01",
+   "EMSR139_AOI01",
+   "EMSR154_AOI03",
+   "EMSR156_AOI01",
+   "EMSR235_AOI02",
+   "EMSR265_AOI04",
+   "EMSR265_AOI14",
+   "EMSR265_AOI20",
+   "EMSR277_AOI01",
+   "EMSR437_AOI02",
+   "EMSR437_AOI03",
+   "EMSR437_AOI06",
+   "EMSR437_AOI07",
+   "EMSR437_AOI08",
+   "EMSR498_AOI01",
+   "EMSR650_AOI02",
+   "EMSR706_AOI02",
+   "EMSR712_AOI04",
+   "EMSR861_AOI30",
+   "EMSR866_AOI03"
+  ],
+  "rule": "B-17 addendum 2, item 3: capped analysed table (v41_table.parquet, EMS labels)",
+  "seconds": 0
+ },
+ "C": {
+  "first_language_outside_block_groups": 0.009501249099494125,
+  "first_language_outside_block_groups_countries": {
+   "IN": 323,
+   "LK": 9032,
+   "LU": 6,
+   "TL": 4962
+  },
+  "block_reads_first_language": 0.8682156915553445,
+  "first_language_without_own_block": 0.1317843084446555,
+  "regions_of_another_language_share": 0.05580283996003943,
+  "regions": {
+   "Wales": {
+    "n_cells": 0,
+    "n_aoi": 0
+   },
+   "Highland and Eilean Siar": {
+    "n_cells": 3997,
+    "n_aoi": 2
+   },
+   "Northern Ireland": {
+    "n_cells": 3316,
+    "n_aoi": 2
+   },
+   "Ireland": {
+    "n_cells": 18290,
+    "n_aoi": 19
+   },
+   "Catalan-speaking Spain": {
+    "n_cells": 30255,
+    "n_aoi": 5
+   },
+   "Basque Country and Navarre": {
+    "n_cells": 1230,
+    "n_aoi": 4
+   },
+   "Galicia": {
+    "n_cells": 1528,
+    "n_aoi": 1
+   },
+   "Brittany": {
+    "n_cells": 7943,
+    "n_aoi": 7
+   },
+   "Alsace": {
+    "n_cells": 0,
+    "n_aoi": 0
+   },
+   "Friesland": {
+    "n_cells": 0,
+    "n_aoi": 0
+   },
+   "Finnmark and Troms": {
+    "n_cells": 3818,
+    "n_aoi": 2
+   },
+   "Norrbotten": {
+    "n_cells": 2621,
+    "n_aoi": 4
+   },
+   "Lapland (Finland)": {
+    "n_cells": 11124,
+    "n_aoi": 5
+   }
+  },
+  "region_definitions": {
+   "Wales": [
+    "GB",
+    "geonunit",
+    [
+     "Wales"
+    ]
+   ],
+   "Highland and Eilean Siar": [
+    "GB",
+    "name",
+    [
+     "Eilean Siar",
+     "Highland"
+    ]
+   ],
+   "Northern Ireland": [
+    "GB",
+    "geonunit",
+    [
+     "Northern Ireland"
+    ]
+   ],
+   "Ireland": [
+    "IE",
+    null,
+    null
+   ],
+   "Catalan-speaking Spain": [
+    "ES",
+    "region",
+    [
+     "Cataluña",
+     "Islas Baleares",
+     "Valenciana"
+    ]
+   ],
+   "Basque Country and Navarre": [
+    "ES",
+    "region",
+    [
+     "Foral de Navarra",
+     "País Vasco"
+    ]
+   ],
+   "Galicia": [
+    "ES",
+    "region",
+    [
+     "Galicia"
+    ]
+   ],
+   "Brittany": [
+    "FR",
+    "region",
+    [
+     "Bretagne"
+    ]
+   ],
+   "Alsace": [
+    "FR",
+    "name",
+    [
+     "Bas-Rhin",
+     "Haut-Rhin"
+    ]
+   ],
+   "Friesland": [
+    "NL",
+    "name",
+    [
+     "Friesland",
+     "Fryslân"
+    ]
+   ],
+   "Finnmark and Troms": [
+    "NO",
+    "name",
+    [
+     "Finnmark",
+     "Troms",
+     "Troms og Finnmark"
+    ]
+   ],
+   "Norrbotten": [
+    "SE",
+    "name",
+    [
+     "Norrbotten"
+    ]
+   ],
+   "Lapland (Finland)": [
+    "FI",
+    "name",
+    [
+     "Lapland",
+     "Lappi"
+    ]
+   ]
+  },
+  "source": "Natural Earth 1:10m admin-1 states and provinces (iso_a2 and name, region or geonunit)",
+  "rule": "B-17 addendum 2, item 6: B3 of v69 (block language groups of LANG_COVER), B9 (c) of v77 (first GeoNames language among the country's block names, Norway excluded in the frozen reading), B14 of v66 (13 regions)",
+  "seconds": 1
+ },
+ "G": {
+  "run": "world_v2_b13gres",
+  "yardstick": 0.0064186856599806955,
+  "ci95_yardstick": [
+   0.003422611894036293,
+   0.01012309467687645
+  ],
+  "R": -0.007000897235751115,
+  "ci90_R": [
+   -0.017020986120551473,
+   0.0002959210624124753
+  ],
+  "ci95_R": [
+   -0.01961995389525952,
+   0.001060639643247458
+  ],
+  "decision": "equivalent-null",
+  "R_minus_Rp": 0.004700738107006862,
+  "ci95_R_minus_Rp": [
+   -0.009092445857613391,
+   0.020658118249028187
+  ],
+  "brier": {
+   "M0": 0.05000559881411148,
+   "M1": 0.04358691315413078,
+   "M1c": 0.04360681234664988,
+   "M3n": 0.04365174890534399,
+   "M3np": 0.04368192146562276
+  },
+  "brier_training_constant": 0.05229735817938301,
+  "iterations": {
+   "n_fits": 350,
+   "median": 38.0,
+   "min": 1,
+   "max": 102,
+   "share_at_cap": 0.0
+  },
+  "rule": "B-17 addendum 2, item 7: C3 of B-13 (v71), copied",
+  "seconds": 0
+ },
+ "E": {
+  "terms": [
+   "perhaps",
+   "probably",
+   "possibly",
+   "may",
+   "might",
+   "likely",
+   "uncertain",
+   "unclear",
+   "disputed",
+   "believed",
+   "said to",
+   "supposedly",
+   "legend",
+   "legendary",
+   "folk etymology",
+   "tradition",
+   "traditionally",
+   "according to"
+  ],
+  "n_quotes": 462,
+  "n_hedged_all": 18,
+  "n_hedged_coded_coder1": 14,
+  "n_coded_coder1": 353,
+  "coder1": {
+   "all": {
+    "n": 353,
+    "n_hedged": 14,
+    "precision": {
+     "est": 0.7592592592592593,
+     "ci95": [
+      0.6759259259259258,
+      0.8333333333333333
+     ]
+    },
+    "recall": {
+     "est": 0.22197838473886958,
+     "ci95": [
+      0.17970471387947273,
+      0.28423734670788703
+     ]
+    }
+   },
+   "without_hedged": {
+    "n": 339,
+    "n_hedged": 0,
+    "precision": {
+     "est": 0.7596153846153846,
+     "ci95": [
+      0.673076923076923,
+      0.8365384615384616
+     ]
+    },
+    "recall": {
+     "est": 0.2149439096726117,
+     "ci95": [
+      0.1719839420384854,
+      0.2736504117191906
+     ]
+    }
+   }
+  },
+  "coder2": {
+   "all": {
+    "n": 378,
+    "n_hedged": 17,
+    "precision": {
+     "est": 0.736842105263158,
+     "ci95": [
+      0.6578947368421053,
+      0.8157894736842105
+     ]
+    },
+    "recall": {
+     "est": 0.1845670406021313,
+     "ci95": [
+      0.1512983629072371,
+      0.23175289334353072
+     ]
+    }
+   },
+   "without_hedged": {
+    "n": 361,
+    "n_hedged": 0,
+    "precision": {
+     "est": 0.7363636363636363,
+     "ci95": [
+      0.6454545454545454,
+      0.8181818181818181
+     ]
+    },
+    "recall": {
+     "est": 0.18764383322923767,
+     "ci95": [
+      0.15141217153673447,
+      0.23336617402014573
+     ]
+    }
+   }
+  },
+  "rule": "B-17 addendum 2, item 5: hedged = coder 1's quote (v44_etym_codes.csv) matches any term at word boundaries, case-insensitive; precision and recall of the lexicon's water-related flag with the stratum weights of v44, 2,000 stratified bootstrap resamples (seed 20261106)",
+  "seconds": 7
+ },
+ "H": {
+  "n_settlements_matched": 134,
+  "by_position": {
+   "suffix": 89,
+   "word": 45
+  },
+  "by_country": {
+   "IR": 93,
+   "PK": 41
+  },
+  "by_country_position": {
+   "IR|suffix": 48,
+   "IR|word": 45,
+   "PK|suffix": 41
+  },
+  "pk_words_top30": [
+   [
+    "gulab",
+    10
+   ],
+   [
+    "qutab",
+    5
+   ],
+   [
+    "nawab",
+    3
+   ],
+   [
+    "mehrab",
+    3
+   ],
+   [
+    "jalab",
+    2
+   ],
+   [
+    "chhab",
+    2
+   ],
+   [
+    "arab",
+    2
+   ],
+   [
+    "sohrab",
+    2
+   ],
+   [
+    "rajab",
+    2
+   ],
+   [
+    "mahrab",
+    1
+   ],
+   [
+    "tayyab",
+    1
+   ],
+   [
+    "bhab",
+    1
+   ],
+   [
+    "sultab",
+    1
+   ],
+   [
+    "dhab",
+    1
+   ],
+   [
+    "mahtab",
+    1
+   ],
+   [
+    "mehtab",
+    1
+   ],
+   [
+    "shahab",
+    1
+   ],
+   [
+    "wahab",
+    1
+   ],
+   [
+    "arbab",
+    1
+   ]
+  ],
+  "n_settlements_examined": 122128,
+  "rule": "B-17 addendum 2, item 4: nearest settlements of the analysed cells; entries ab and aab of block fa of the frozen lexicon (YAML 1.2 reading, as v73); a settlement counts once per position class",
+  "seconds": 5
+ },
+ "L": {
+  "n_aoi": 500,
+  "n_with_training_side_siblings": 229,
+  "n_without": 271,
+  "score_vs_own_share_with_siblings": {
+   "rho": 0.5364510729787912,
+   "n_aoi": 229,
+   "n_activations": 54,
+   "ci95": [
+    0.35935358318886657,
+    0.6492330872982862
+   ]
+  },
+  "score_vs_own_share_without_siblings": {
+   "rho": 0.238933917340461,
+   "n_aoi": 271,
+   "n_activations": 134,
+   "ci95": [
+    0.05392660037190741,
+    0.40581557308320415
+   ]
+  },
+  "score_vs_sibling_share": {
+   "rho": 0.6107529261770616,
+   "n_aoi": 229,
+   "n_activations": 54,
+   "ci95": [
+    0.397497147169017,
+    0.7622686925328904
+   ]
+  },
+  "own_vs_sibling_share": {
+   "rho": 0.5797420076410266,
+   "n_aoi": 229,
+   "n_activations": 54,
+   "ci95": [
+    0.3959541706176977,
+    0.6989909934312377
+   ]
+  },
+  "constant_score_within_aoi": true,
+  "rule": "B-17 addendum 2, item 1: held-out AOIs of the B1 dump of B-16 (primary split, frozen reading); score = AOI mean of the N-learn column of M1c's regional composition; training-side siblings = other analysed AOIs of the same activation on the training side of the fold (cell-weighted flooded share); Spearman across AOIs, 95% interval from 1,000 resamples of activations (seed 20261106)",
+  "seconds": 5
+ },
+ "S": {
+  "n_aoi": 192,
+  "n_scenes_quantiles_0_25_50_75_100": [
+   1.0,
+   6.0,
+   11.0,
+   15.0,
+   33.0
+  ],
+  "share_one_scene": 0.005208333333333333,
+  "n_cells_joined": 234703,
+  "n_cells_gfm": 234703,
+  "scenes_vs_gfm_flooded_share": {
+   "rho": -0.17982210100552018,
+   "n_aoi": 192,
+   "n_activations": 85,
+   "ci95": [
+    -0.340468692976615,
+    0.021677649835180633
+   ]
+  },
+  "n_aoi_with_ems_flooded_on_gfm_cells": 182,
+  "scenes_vs_hit_rate": {
+   "rho": 0.13143959129544405,
+   "n_aoi": 182,
+   "n_activations": 83,
+   "ci95": [
+    -0.012629681785960307,
+    0.2739432549999505
+   ]
+  },
+  "hit_rate_pooled": 0.5790291262135923,
+  "rule": "B-17 addendum 2, item 2: n_scenes and wet_frac of gfm_summary.json (192 AOIs); hit rate = share of cells mapped flooded by EMS that GFM labels flooded (capped cells assessable on both); Spearman across AOIs, 95% interval from 1,000 resamples of activations",
+  "seconds": 2
+ }
+}
