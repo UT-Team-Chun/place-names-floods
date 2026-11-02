@@ -15,6 +15,7 @@ Quantity & Value \\
 \quad Settlements nearest the analysed cells: sections of populated places; historical, abandoned or destroyed; coordinates on whole arc-minutes & \FcodeSectionPct; \FcodeHistPct; \RoundedSettlementsPct \\
 \quad Share of the cells and of the label variance $\sum p(1-p)$: Asian AOIs; European AOIs & \ShareCellsAsia, \ShareVarAsia; \ShareCellsEurope, \ShareVarEurope \\
 \quad Baseline gain over position, 95\,\% interval (Brier units) & \DeltaTerrain{} (\DeltaTerrainLo{} to \DeltaTerrainHi) \\
+\quad Brier score of a climatological forecast (the training-side flooded share); of the baseline model; the baseline model's Brier skill & \BSClim; \BSMOne; \BssMOne \\
 \multicolumn{2}{l}{\emph{The protocol-based test and the reanalysis (Sects.~\ref{sec:primary} and~\ref{sec:reanalysis})}} \\
 \quad Without the cap: share of the evaluable cells in the largest AOI & \LargestShareNoCap \\
 \quad Second stage with its penalty chosen by grouped inner cross-validation (base logit unpenalised): chosen $C$; $R$ & \TunedCLo{} to \TunedCHi; \TunedR \\

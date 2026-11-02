@@ -5501,6 +5501,8 @@ def table_ten_text() -> str:
         r"\quad Improvement from recalibrating the baseline model alone (Brier units) & \RecalGainBS \\",
         r"\quad Baseline gain over position, 95\,\% interval (Brier units) & \DeltaTerrain{} (\DeltaTerrainLo{} to "
         r"\DeltaTerrainHi) \\",
+        r"\quad Brier score of a climatological forecast (the training-side flooded share); of the baseline model; the "
+        r"baseline model's Brier skill & \BSClim; \BSMOne; \BssMOne \\",
         r"\quad Ratio of the upper to the lower 95\,\% limit of the baseline gain & \YardRatioSpan \\",
         r"\quad Null simulations of the protocol: mean $R$ & \NullMeanR \\",
         r"\quad Effect calibrated to the margin called equivalent against the real margin (synthetic labels) & "
@@ -7755,6 +7757,10 @@ def b14_macros(v73: dict | None, v74: dict | None, v70: dict | None) -> dict[str
         ud = (b12.get("upper") or {}).get("d_refit_nested_folds") or {}
         out |= {"MarginBss": _pc2(b12["margin_bss"]), "YardBss": pct1(b12["yardstick_bss"]),
                 "UpBssD": _pc2(ud["upper_bss"]) if ud else missing("v73 B12 d")}
+        # B-18 の A10（査読者 1 の細かい 8）: 気候値の予測の Brier と基礎の模型の Brier skill
+        brm = ((g._json(DATA / "runs" / "world_v2" / "metrics_primary.json") or {}).get("brier") or {}).get("M1")
+        out |= {"BSClim": f"{b12['climatology_brier']:.4f}",
+                "BssMOne": pct1(1 - brm / b12["climatology_brier"]) if brm else missing("brier M1")}
     else:
         out |= {k: missing("v73 B12") for k in ("MarginBss", "YardBss", "UpBssD")}
     # B2: 重い裾
