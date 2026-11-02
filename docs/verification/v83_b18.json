@@ -1,0 +1,228 @@
+{
+ "B1": {
+  "gsw_from_2022": {
+   "runs": [
+    "world_v2_b13gsw22",
+    "world_v2_b13gsw22"
+   ],
+   "arms_settlement": [
+    "M1cG",
+    "M3oG"
+   ],
+   "arms_cell": [
+    "M1cW",
+    "M3oW"
+   ],
+   "share_kept": -0.019699961379741886,
+   "fieller90": null,
+   "n_cells": 581512,
+   "n_units": 98
+  },
+  "ems_earlier_events": {
+   "runs": [
+    "world_v2_b13recprior",
+    "world_v2_b13recprior"
+   ],
+   "arms_settlement": [
+    "M1cE",
+    "M3oE"
+   ],
+   "arms_cell": [
+    "M1cEc",
+    "M3oEc"
+   ],
+   "share_kept": 0.21178169795584265,
+   "fieller90": [
+    0.06787747998137389,
+    0.5068571095260899
+   ],
+   "n_cells": 1507486,
+   "n_units": 195
+  },
+  "jrc_100yr": {
+   "runs": [
+    "world_v2_b13jrcset",
+    "world_v2_b13jrcset"
+   ],
+   "arms_settlement": [
+    "M1cJ",
+    "M3oJ"
+   ],
+   "arms_cell": [
+    "M1cJc",
+    "M3oJc"
+   ],
+   "share_kept": 0.21726409522324722,
+   "fieller90": [
+    -0.0499705800175104,
+    0.4344264509046766
+   ],
+   "n_cells": 1507486,
+   "n_units": 195
+  },
+  "ems_events_before_after": {
+   "runs": [
+    "world_v2_b7recur",
+    "world_v2_b7recur"
+   ],
+   "arms_settlement": [
+    "M1cE",
+    "M3oE"
+   ],
+   "arms_cell": [
+    "M1cEc",
+    "M3oEc"
+   ],
+   "share_kept": 0.13836138060445882,
+   "fieller90": [
+    -0.0295839037525338,
+    0.30349101557616515
+   ],
+   "n_cells": 1507486,
+   "n_units": 195
+  },
+  "gsw_all_events": {
+   "runs": [
+    "world_v2_b6gsw",
+    "world_v2_b8gswcell_local"
+   ],
+   "arms_settlement": [
+    "M1cG",
+    "M3oG"
+   ],
+   "arms_cell": [
+    "M1cW",
+    "M3oW"
+   ],
+   "share_kept": 0.022437469819361993,
+   "fieller90": [
+    -0.04894564968791884,
+    0.09563039609896919
+   ],
+   "n_cells": 1507486,
+   "n_units": 195
+  },
+  "rule": "B-18 B1: share of the per-cell gain kept through settlements on all ground (gain over the record run's own reference, models fixed); 90% Fieller interval from the covariance of 4,000 draws of location groups (seed 20261107; None when unbounded), as in B9 of B-17",
+  "seconds": 7
+ },
+ "B2": {
+  "planned_gfm": {
+   "odds_ratio": 0.5493354376611337,
+   "cr_ci95": [
+    0.3669453524820033,
+    0.8223824638442573
+   ],
+   "G": 80,
+   "G_with_flooded_near": 16,
+   "effective_groups": 5.153834388583643,
+   "top3": [
+    {
+     "unit": "g00126",
+     "variance_share": 0.38548567294690256,
+     "flooded_near": 1
+    },
+    {
+     "unit": "g00083",
+     "variance_share": 0.13702985656653857,
+     "flooded_near": 5
+    },
+    {
+     "unit": "g00168",
+     "variance_share": 0.09138163552145483,
+     "flooded_near": 3
+    }
+   ],
+   "n_cells": 232041,
+   "seconds": 0
+  },
+  "ems_same_cells": {
+   "odds_ratio": 0.7873620831565539,
+   "cr_ci95": [
+    0.5812209829002307,
+    1.0666150538805366
+   ],
+   "G": 80,
+   "G_with_flooded_near": 21,
+   "effective_groups": 3.738109551410521,
+   "top3": [
+    {
+     "unit": "g00132",
+     "variance_share": 0.4688371089421571,
+     "flooded_near": 33
+    },
+    {
+     "unit": "g00174",
+     "variance_share": 0.18893785476176517,
+     "flooded_near": 8
+    },
+    {
+     "unit": "g00083",
+     "variance_share": 0.0853937289693093,
+     "flooded_near": 5
+    }
+   ],
+   "n_cells": 232435,
+   "seconds": 0
+  },
+  "ems_capped_all": {
+   "odds_ratio": 1.0091652594745366,
+   "cr_ci95": [
+    0.772112938177028,
+    1.3189968339797584
+   ],
+   "G": 194,
+   "G_with_flooded_near": 52,
+   "effective_groups": 3.3711117440186325,
+   "top3": [
+    {
+     "unit": "g00024",
+     "variance_share": 0.5283859227420318,
+     "flooded_near": 60
+    },
+    {
+     "unit": "g00132",
+     "variance_share": 0.07993624646407424,
+     "flooded_near": 33
+    },
+    {
+     "unit": "g00125",
+     "variance_share": 0.06447434885897411,
+     "flooded_near": 12
+    }
+   ],
+   "n_cells": 1489381,
+   "seconds": 1
+  },
+  "ems_uncapped": {
+   "odds_ratio": 0.9113480934974416,
+   "cr_ci95": [
+    0.7541235786062179,
+    1.1013517824975925
+   ],
+   "G": 195,
+   "G_with_flooded_near": 75,
+   "effective_groups": 4.5729503402156855,
+   "top3": [
+    {
+     "unit": "g00030",
+     "variance_share": 0.2683533499622346,
+     "flooded_near": 909
+    },
+    {
+     "unit": "g00024",
+     "variance_share": 0.26053891752381464,
+     "flooded_near": 283
+    },
+    {
+     "unit": "g00009",
+     "variance_share": 0.2575063187024981,
+     "flooded_near": 1355
+    }
+   ],
+   "n_cells": 19265843,
+   "seconds": 17
+  },
+  "rule": "B-18 B2: Eq. (2) estimator (AOI intercepts, distance bands, water-related x band, logit of M1; AOIs with both classes) on the v41 table (frozen reading; GFM-assessable cells for the planned GFM and the EMS same-cell estimates; all analysed cells for the capped EMS estimate) and on the uncapped table (corrected reading, as v68 B2); influence of delta per location group psi_g = (S^-1 u_g)_j from the AOI-profiled score; effective number = 1 / sum of squared variance shares; CR interval with G/(G-1)",
+  "seconds": 34
+ }
+}

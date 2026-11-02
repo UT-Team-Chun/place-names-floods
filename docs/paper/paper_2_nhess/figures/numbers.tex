@@ -53,6 +53,7 @@
 \newcommand{\AgreeKappa}{0.64}
 \newcommand{\AgreeKappaNear}{0.62}
 \newcommand{\AmendTimeBEight}{2026-10-27T09:36Z}
+\newcommand{\AmendTimeBEighteen}{2026-11-02T01:10Z}
 \newcommand{\AmendTimeBEleven}{2026-10-29T04:54Z}
 \newcommand{\AmendTimeBFifteen}{2026-10-29T21:03Z}
 \newcommand{\AmendTimeBFive}{2026-10-26T12:41Z}
@@ -410,6 +411,12 @@
 \newcommand{\BrierNoCapMOne}{0.04537}
 \newcommand{\BrierNoCapMOnec}{0.04808}
 \newcommand{\BuiltUpBandText}{with the share of built-up land in each cell at 10\,m (ESA WorldCover) added, these ratios fell to 1.05 (0.98--1.13) and 1.17 (1.02--1.34)}
+\newcommand{\BuiltUpFarHi}{1.34}
+\newcommand{\BuiltUpFarLo}{1.02}
+\newcommand{\BuiltUpFarOR}{1.17}
+\newcommand{\BuiltUpMidHi}{1.13}
+\newcommand{\BuiltUpMidLo}{0.98}
+\newcommand{\BuiltUpMidOR}{1.05}
 \newcommand{\CFourPrimRFive}{\ensuremath{-0.00404}}
 \newcommand{\CThreeHi}{8.8\,\%}
 \newcommand{\CThreeK}{0}
@@ -1315,8 +1322,8 @@
 \newcommand{\HazRLo}{\ensuremath{-0.007}}
 \newcommand{\HazText}{the baseline gain rose from \ensuremath{7.55\times10^{-3}} to \ensuremath{8.11\times10^{-3}} (95\,\% interval \ensuremath{4.14\times10^{-3}} to \ensuremath{1.31\times10^{-2}}), and the names gave $R=\ensuremath{-0.004}$ (90\,\% interval \ensuremath{-0.007} to \ensuremath{-0.001}), which the decision table calls \emph{negative}}
 \newcommand{\HazVerdict}{negative}
-\newcommand{\HedgedCodedN}{353}
-\newcommand{\HedgedN}{14}
+\newcommand{\HedgedCodedN}{378}
+\newcommand{\HedgedN}{17}
 \newcommand{\HedgedPrecTwo}{74\,\%}
 \newcommand{\HedgedRecTwo}{19\,\%}
 \newcommand{\HeldoutNFeat}{13}
@@ -1358,6 +1365,7 @@
 \newcommand{\InjRealisedNear}{2.69}
 \newcommand{\InjReps}{40}
 \newcommand{\InjTwoEquiv}{0}
+\newcommand{\InjTwoMeanR}{\ensuremath{0.025}}
 \newcommand{\InjTwoNeg}{35}
 \newcommand{\InjTwoSmall}{5}
 \newcommand{\InvRetrievedUTC}{2026-10-25}
@@ -1403,17 +1411,21 @@
 \newcommand{\KeepAllJrc}{22\,\%}
 \newcommand{\KeepAllPrior}{21\,\%}
 \newcommand{\KeepBefAft}{\ensuremath{14}\,\%}
+\newcommand{\KeepBefAftCI}{(\ensuremath{-3.0}\,\% to \ensuremath{30}\,\%)}
 \newcommand{\KeepBefAftHi}{\ensuremath{27}\,\%}
 \newcommand{\KeepBefAftLo}{\ensuremath{0.8}\,\%}
 \newcommand{\KeepGswAll}{\ensuremath{2.2}\,\%}
+\newcommand{\KeepGswAllCI}{(\ensuremath{-4.9}\,\% to \ensuremath{9.6}\,\%)}
 \newcommand{\KeepGswAllHi}{\ensuremath{9.1}\,\%}
 \newcommand{\KeepGswAllLo}{\ensuremath{-4.1}\,\%}
 \newcommand{\KeepGswTT}{\ensuremath{-2.0}\,\%}
+\newcommand{\KeepGswTTCI}{(unbounded)}
 \newcommand{\KeepGswTTHi}{\ensuremath{2.4}\,\%}
 \newcommand{\KeepGswTTLo}{\ensuremath{-16}\,\%}
 \newcommand{\KeepIntervalHi}{\ensuremath{46}\,\%}
 \newcommand{\KeepIntervalLo}{\ensuremath{-16}\,\%}
 \newcommand{\KeepJrc}{\ensuremath{22}\,\%}
+\newcommand{\KeepJrcCI}{(\ensuremath{-5.0}\,\% to \ensuremath{43}\,\%)}
 \newcommand{\KeepJrcHi}{\ensuremath{40}\,\%}
 \newcommand{\KeepJrcLo}{\ensuremath{-1.0}\,\%}
 \newcommand{\KeepNearJrc}{80\,\%}
@@ -1421,6 +1433,7 @@
 \newcommand{\KeepNoEventHi}{\ensuremath{22}\,\%}
 \newcommand{\KeepNoEventLo}{\ensuremath{-2.0}\,\%}
 \newcommand{\KeepPrior}{\ensuremath{21}\,\%}
+\newcommand{\KeepPriorCI}{(\ensuremath{6.8}\,\% to \ensuremath{51}\,\%)}
 \newcommand{\KeepPriorHi}{\ensuremath{46}\,\%}
 \newcommand{\KeepPriorLo}{\ensuremath{8.5}\,\%}
 \newcommand{\KeepRangeHi}{\ensuremath{22}\,\%}
@@ -1634,8 +1647,8 @@
 \newcommand{\NActFlood}{350}
 \newcommand{\NActLabelled}{253}
 \newcommand{\NActivations}{188}
-\newcommand{\NAmend}{17}
-\newcommand{\NAmendCrit}{15}
+\newcommand{\NAmend}{18}
+\newcommand{\NAmendCrit}{16}
 \newcommand{\NAoi}{500}
 \newcommand{\NAoiAfrica}{40}
 \newcommand{\NAoiAmericas}{32}
@@ -1660,7 +1673,7 @@
 \newcommand{\NBLoNinety}{\ensuremath{-0.003}}
 \newcommand{\NBMean}{\ensuremath{-0.001}}
 \newcommand{\NBetweenAoi}{500}
-\newcommand{\NBlindRounds}{13}
+\newcommand{\NBlindRounds}{14}
 \newcommand{\NCellCountriesPreTwoWay}{70}
 \newcommand{\NCells}{1{,}507{,}486}
 \newcommand{\NCellsClassCrossing}{13{,}918}
@@ -1703,7 +1716,7 @@
 \newcommand{\NCountriesNearest}{70}
 \newcommand{\NCountryActSpan}{8}
 \newcommand{\NCountryCrossCells}{35{,}187}
-\newcommand{\NCritiqueRounds}{18}
+\newcommand{\NCritiqueRounds}{19}
 \newcommand{\NExclEval}{47}
 \newcommand{\NExclOtherType}{220}
 \newcommand{\NExclWet}{452}
@@ -1827,6 +1840,26 @@
 \newcommand{\NcTypedLo}{0.77}
 \newcommand{\NearChecksText}{the uncapped EMS estimate was 0.91 with settlements whose coordinates are not rounded, 0.86 to 0.97 with single activations removed, 1.10 (0.83--1.41) without the two largest, which the GFM labels do not cover, 0.89 without products of the first two schema generations and 0.91 without sections of places and historical places}
 \newcommand{\NearCompositionText}{In the sample of every evaluable cell, Cambodia and Myanmar hold 59\,\% of the flooded cells within 500\,m of water-related names (one Cambodian activation alone 30\,\%) and Pakistan and Bangladesh 17\,\%; without Pakistan and Bangladesh the estimate was 0.87 (0.73--1.07) (Table~\STabTwelveChecks{} of the Supplement).}
+\newcommand{\NearEffEmsCap}{3.4}
+\newcommand{\NearEffEmsCapG}{194}
+\newcommand{\NearEffEmsCapGFlooded}{52}
+\newcommand{\NearEffEmsCapTop}{53\,\%}
+\newcommand{\NearEffEmsCapTopFlooded}{60}
+\newcommand{\NearEffEmsSame}{3.7}
+\newcommand{\NearEffEmsSameG}{80}
+\newcommand{\NearEffEmsSameGFlooded}{21}
+\newcommand{\NearEffEmsSameTop}{47\,\%}
+\newcommand{\NearEffEmsSameTopFlooded}{33}
+\newcommand{\NearEffEmsUncap}{4.6}
+\newcommand{\NearEffEmsUncapG}{195}
+\newcommand{\NearEffEmsUncapGFlooded}{75}
+\newcommand{\NearEffEmsUncapTop}{27\,\%}
+\newcommand{\NearEffEmsUncapTopFlooded}{909}
+\newcommand{\NearEffGfm}{5.2}
+\newcommand{\NearEffGfmG}{80}
+\newcommand{\NearEffGfmGFlooded}{16}
+\newcommand{\NearEffGfmTop}{39\,\%}
+\newcommand{\NearEffGfmTopFlooded}{1}
 \newcommand{\NearNoTopTwoOR}{1.10 (95\,\% interval 0.83 to 1.41)}
 \newcommand{\NearR}{\ensuremath{0.060}}
 \newcommand{\NearRHi}{\ensuremath{0.162}}
@@ -1848,9 +1881,9 @@
 \newcommand{\NeitherCells}{2}
 \newcommand{\NestActsOneGroupPct}{70\,\%}
 \newcommand{\NestGroupsOneActPct}{77\,\%}
-\newcommand{\NgramEmsBottom}{\emph{ban}, \emph{ham}}
-\newcommand{\NgramEmsTop}{\emph{oth}, \emph{goth}, \emph{oth}, \emph{got}}
-\newcommand{\NgramGfmBottom}{\emph{ala}, \emph{hah}, \emph{cha}, \emph{che}}
+\newcommand{\NgramEmsBottom}{\emph{ban\_}, \emph{ham}}
+\newcommand{\NgramEmsTop}{\emph{oth\_}, \emph{goth}, \emph{oth}, \emph{\_got}}
+\newcommand{\NgramGfmBottom}{\emph{ala}, \emph{hah}, \emph{\_cha}, \emph{che}}
 \newcommand{\NgramGfmTop}{\emph{hai}, \emph{oth}, \emph{ran}, \emph{eir}}
 \newcommand{\NoCapLossShare}{76\,\%}
 \newcommand{\NoChahDR}{\ensuremath{-0.004}}
@@ -2938,46 +2971,48 @@
 \newcommand{\RwGfmOR}{0.55}
 \newcommand{\RwGfmP}{0.004}
 \newcommand{\STabAmendments}{S4}
-\newcommand{\STabBfive}{S11}
-\newcommand{\STabBounds}{S25}
-\newcommand{\STabBsixExample}{S22}
-\newcommand{\STabBsixExamples}{A59}
+\newcommand{\STabBfive}{S12}
+\newcommand{\STabBounds}{A65}
+\newcommand{\STabBsixExample}{S25}
+\newcommand{\STabBsixExamples}{A56}
 \newcommand{\STabBsixFlow}{S1}
-\newcommand{\STabBsixForms}{A57}
-\newcommand{\STabBsixGfm}{A52}
+\newcommand{\STabBsixForms}{A54}
+\newcommand{\STabBsixGfm}{S22}
 \newcommand{\STabBsixGsw}{A34}
-\newcommand{\STabBsixLexicon}{A56}
-\newcommand{\STabBsixPlasmode}{S13}
-\newcommand{\STabBsixReadings}{A60}
-\newcommand{\STabBsixRuns}{A29}
+\newcommand{\STabBsixLexicon}{A53}
+\newcommand{\STabBsixPlasmode}{S14}
+\newcommand{\STabBsixReadings}{A57}
+\newcommand{\STabBsixRuns}{A28}
 \newcommand{\STabBsixStats}{A8}
 \newcommand{\STabCoefs}{A7}
-\newcommand{\STabEightAudit}{A58}
-\newcommand{\STabEightBounds}{S14}
-\newcommand{\STabEightCalib}{A53}
-\newcommand{\STabEightCoder}{A62}
+\newcommand{\STabEightAudit}{A55}
+\newcommand{\STabEightBounds}{S15}
+\newcommand{\STabEightCalib}{A51}
+\newcommand{\STabEightCoder}{S26}
 \newcommand{\STabEightHeights}{A39}
 \newcommand{\STabEightNear}{A44}
-\newcommand{\STabEightPrompt}{S23}
+\newcommand{\STabEightPrompt}{S27}
 \newcommand{\STabEightVerdict}{A19}
 \newcommand{\STabEightWhere}{A45}
+\newcommand{\STabEighteenNear}{S48}
+\newcommand{\STabEighteenReadings}{S47}
 \newcommand{\STabElevenCensus}{A25}
 \newcommand{\STabElevenChecks}{A24}
-\newcommand{\STabElevenGazetteer}{A64}
-\newcommand{\STabElevenHeadings}{S24}
+\newcommand{\STabElevenGazetteer}{A60}
+\newcommand{\STabElevenHeadings}{S28}
 \newcommand{\STabElevenNear}{A49}
-\newcommand{\STabElevenScale}{S18}
-\newcommand{\STabEtymDetail}{A61}
-\newcommand{\STabFifteenBlocks}{S30}
-\newcommand{\STabFifteenCensus}{A70}
-\newcommand{\STabFifteenClass}{S29}
-\newcommand{\STabFifteenGfm}{S27}
-\newcommand{\STabFifteenNear}{S28}
-\newcommand{\STabFifteenNorway}{S33}
-\newcommand{\STabFifteenNread}{S32}
-\newcommand{\STabFifteenPaired}{S26}
-\newcommand{\STabFifteenRings}{A69}
-\newcommand{\STabFifteenRoman}{S31}
+\newcommand{\STabElevenScale}{A32}
+\newcommand{\STabEtymDetail}{A58}
+\newcommand{\STabFifteenBlocks}{S32}
+\newcommand{\STabFifteenCensus}{A68}
+\newcommand{\STabFifteenClass}{S31}
+\newcommand{\STabFifteenGfm}{S30}
+\newcommand{\STabFifteenNear}{A67}
+\newcommand{\STabFifteenNorway}{S35}
+\newcommand{\STabFifteenNread}{S34}
+\newcommand{\STabFifteenPaired}{S29}
+\newcommand{\STabFifteenRings}{A66}
+\newcommand{\STabFifteenRoman}{S33}
 \newcommand{\STabFigChecks}{S1}
 \newcommand{\STabFigLadder}{S3}
 \newcommand{\STabFigNames}{S4}
@@ -2990,29 +3025,29 @@
 \newcommand{\STabFourteenCensus}{A15}
 \newcommand{\STabFourteenDecomp}{A12}
 \newcommand{\STabFourteenDir}{S9}
-\newcommand{\STabFourteenKeep}{S12}
+\newcommand{\STabFourteenKeep}{S13}
 \newcommand{\STabFourteenNear}{A35}
-\newcommand{\STabFourteenPairs}{A55}
+\newcommand{\STabFourteenPairs}{S24}
 \newcommand{\STabFourteenRobust}{A11}
-\newcommand{\STabFourteenToponymy}{S21}
+\newcommand{\STabFourteenToponymy}{S23}
 \newcommand{\STabFourteenTost}{A10}
-\newcommand{\STabGfm}{A51}
+\newcommand{\STabGfm}{S21}
 \newcommand{\STabGroups}{S20}
 \newcommand{\STabLexfix}{A6}
 \newcommand{\STabNineActivations}{A46}
-\newcommand{\STabNineBounds}{S15}
+\newcommand{\STabNineBounds}{S16}
 \newcommand{\STabNineClassq}{A47}
-\newcommand{\STabNinePower}{S16}
+\newcommand{\STabNinePower}{S17}
 \newcommand{\STabNineRuns}{A21}
 \newcommand{\STabNineSkill}{A20}
 \newcommand{\STabPosthocModels}{A16}
 \newcommand{\STabSevenExcluded}{S2}
-\newcommand{\STabSevenLanguages}{A66}
+\newcommand{\STabSevenLanguages}{A62}
 \newcommand{\STabSevenPairs}{A41}
-\newcommand{\STabSevenRefit}{A31}
+\newcommand{\STabSevenRefit}{A30}
 \newcommand{\STabSevenStatus}{S5}
 \newcommand{\STabSevenTranslations}{A33}
-\newcommand{\STabSevenWikidata}{A65}
+\newcommand{\STabSevenWikidata}{A61}
 \newcommand{\STabSeventeenCensus}{S46}
 \newcommand{\STabSeventeenCov}{S42}
 \newcommand{\STabSeventeenGfm}{S44}
@@ -3022,7 +3057,7 @@
 \newcommand{\STabSiBandContrast}{A43}
 \newcommand{\STabSiChecks}{A17}
 \newcommand{\STabSiClass}{A42}
-\newcommand{\STabSiComposition}{A27}
+\newcommand{\STabSiComposition}{S11}
 \newcommand{\STabSiMetrics}{A5}
 \newcommand{\STabSiOdds}{A40}
 \newcommand{\STabSiPositiveControl}{A37}
@@ -3036,27 +3071,27 @@
 \newcommand{\STabSiYardsticks}{S7}
 \newcommand{\STabSiYardsticksB}{S8}
 \newcommand{\STabSixteenCluster}{S40}
-\newcommand{\STabSixteenDesignated}{S34}
-\newcommand{\STabSixteenFewcluster}{S35}
-\newcommand{\STabSixteenLabels}{S37}
-\newcommand{\STabSixteenLeaveout}{S36}
-\newcommand{\STabSixteenNear}{S38}
-\newcommand{\STabSixteenReadings}{S39}
-\newcommand{\STabTenBetween}{A28}
-\newcommand{\STabTenDilution}{A32}
+\newcommand{\STabSixteenDesignated}{S36}
+\newcommand{\STabSixteenFewcluster}{A69}
+\newcommand{\STabSixteenLabels}{S38}
+\newcommand{\STabSixteenLeaveout}{S37}
+\newcommand{\STabSixteenNear}{S39}
+\newcommand{\STabSixteenReadings}{A70}
+\newcommand{\STabTenBetween}{A27}
+\newcommand{\STabTenDilution}{A31}
 \newcommand{\STabTenFloodplain}{A50}
 \newcommand{\STabTenHand}{S10}
-\newcommand{\STabTenInjected}{S17}
+\newcommand{\STabTenInjected}{S18}
 \newcommand{\STabTenMisclass}{A48}
-\newcommand{\STabTenNread}{A63}
-\newcommand{\STabTenOtherLang}{A68}
+\newcommand{\STabTenNread}{A59}
+\newcommand{\STabTenOtherLang}{A64}
 \newcommand{\STabTenRobust}{A22}
 \newcommand{\STabTenSplits}{A23}
-\newcommand{\STabTenText}{S47}
-\newcommand{\STabTenValid}{A67}
-\newcommand{\STabThirteenBounds}{A30}
+\newcommand{\STabTenText}{S49}
+\newcommand{\STabTenValid}{A63}
+\newcommand{\STabThirteenBounds}{A29}
 \newcommand{\STabThirteenGfm}{A36}
-\newcommand{\STabThirteenLexicon}{A54}
+\newcommand{\STabThirteenLexicon}{A52}
 \newcommand{\STabThirteenNear}{S19}
 \newcommand{\STabThirteenTost}{A9}
 \newcommand{\STabTimeline}{S3}
@@ -3145,6 +3180,34 @@
 \newcommand{\SpecGfmMax}{0.85}
 \newcommand{\SpecGfmMin}{0.44}
 \newcommand{\SpecN}{48}
+\newcommand{\StratDelayHighHi}{1.22}
+\newcommand{\StratDelayHighLo}{0.47}
+\newcommand{\StratDelayHighNAoi}{102}
+\newcommand{\StratDelayHighOR}{0.76}
+\newcommand{\StratDelayLowHi}{1.36}
+\newcommand{\StratDelayLowLo}{0.62}
+\newcommand{\StratDelayLowNAoi}{161}
+\newcommand{\StratDelayLowOR}{0.92}
+\newcommand{\StratDelayMidHi}{2.83}
+\newcommand{\StratDelayMidLo}{1.11}
+\newcommand{\StratDelayMidNAoi}{81}
+\newcommand{\StratDelayMidOR}{1.77}
+\newcommand{\StratGenThreeHi}{1.34}
+\newcommand{\StratGenThreeLo}{0.78}
+\newcommand{\StratGenThreeNAoi}{289}
+\newcommand{\StratGenThreeOR}{1.02}
+\newcommand{\StratGenTwoHi}{0.92}
+\newcommand{\StratGenTwoLo}{0.16}
+\newcommand{\StratGenTwoNAoi}{61}
+\newcommand{\StratGenTwoOR}{0.39}
+\newcommand{\StratHydroNoHi}{1.73}
+\newcommand{\StratHydroNoLo}{0.81}
+\newcommand{\StratHydroNoNAoi}{215}
+\newcommand{\StratHydroNoOR}{1.19}
+\newcommand{\StratHydroYesHi}{1.14}
+\newcommand{\StratHydroYesLo}{0.64}
+\newcommand{\StratHydroYesNAoi}{285}
+\newcommand{\StratHydroYesOR}{0.85}
 \newcommand{\StratNPerms}{200}
 \newcommand{\StratP}{0.65}
 \newcommand{\StratPCent}{0.86}
@@ -3268,7 +3331,8 @@
 \newcommand{\TunedCHi}{$10^{-4}$}
 \newcommand{\TunedCLo}{$10^{-7}$}
 \newcommand{\TunedEdgeN}{eight}
-\newcommand{\TunedNamesText}{$R$ was \ensuremath{0.004} (the optimum lay at the edge of the widened grid in one of the ten folds)}
+\newcommand{\TunedNamesText}{$R$ was \ensuremath{0.004} (in one of the ten folds the chosen value was the smallest that could be fitted)}
+\newcommand{\TunedR}{\ensuremath{0.004}}
 \newcommand{\TwoWayHi}{\ensuremath{0.036}}
 \newcommand{\TwoWayLo}{\ensuremath{-0.055}}
 \newcommand{\TypedNAoi}{346}

@@ -5,8 +5,9 @@ Its history starts at the copy; the development repository is not public. This r
 2026-10-26T02:28Z, about four hours after the confirmatory analysis was aggregated (2026-10-25T22:40Z), so its own
 history cannot show when the protocol was frozen. The freeze is documented by the commit identifiers below, by the
 content checksums that let anyone verify that the files here are the frozen files, and by the job records of the
-computing cluster described in the paper; an independently time-stamped archive of the development history is a
-decision for the authors (see the paper, Appendix A).
+computing cluster described in the paper; a reader cannot verify the time of the freeze from these, as the paper
+states (Sect. 2.4 and Table 2), and an independently time-stamped archive of the development history is a decision for
+the authors.
 
 ## Freeze
 
@@ -18,7 +19,7 @@ decision for the authors (see the paper, Appendix A).
   and the power analysis were calibrated. Through the latter, the pilots showed that the regional
   composition of names (AOI means of the name features) tracks AOI-level flood rates; this association
   between real flood rates and real names, seen before the freeze, is why the primary estimand holds the
-  composition fixed (see the paper's Sect. 2 and Appendix A).
+  composition fixed (see the paper's Sect. 2.4 and Table 2).
 - The freeze was recorded in version control and in the job records of the computing cluster, which ran
   the confirmatory analysis from a container image built after the freeze. **The protocol was not deposited
   with a third-party registry before the analysis**; the paper therefore describes the test as protocol-based.
@@ -56,8 +57,8 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   before they were run; the paper marks those that were not, and those that the agents had computed first. All are labelled post hoc and change no pre-specified
   verdict. Scripts: `backend/verification/r_okauchi/v36`–`v40`; outputs: `docs/verification/`.
 - `docs/protocol/amendments/B-3_gfm_independent_labels.md` and its two addenda, written in response to the fifth of
-  those critiques and the authors' decision: independent flood labels from Copernicus Global Flood Monitoring
-  (Sentinel-1), with the rules for making them, the comparisons (agreement of the
+  those critiques and the authors' decision: a second flood label set from Copernicus Global Flood Monitoring
+  (Sentinel-1; not independent of the EMS labels, many of which were also drawn from Sentinel-1), with the rules for making them, the comparisons (agreement of the
   label sets near settlements, flooding near water-side names, rescoring and refitting the primary comparison) and
   their interpretation fixed before the labels were made. Addendum 1 records that images with an unreadable layer
   were left out; addendum 2 is a check added after one result was seen and is reported as such. Scripts: `v41`,
@@ -248,10 +249,19 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   moves that rerun and the check from a local machine to the cluster, both before the check was computed. Some runs of
   this amendment ran on the Miyabi-C system from the same commit as the cluster runs, and its final aggregation ran there
   from a later commit with the same analysis code. Scripts: `v80`, `v81`, `v82`.
+- Amendment B-18 followed the fourteenth round of critiques. It reports the protocol's test first and briefly and makes
+  what the design can detect the main result; corrects the statements on the coverage check (it concerned the
+  protocol's own construction, and no construction has checked properties on data like these, so no upper limit is
+  stated); removes exploratory results from the abstract and conclusions; discloses what the frozen code decided that
+  the protocol's text does not (the bootstrap holds the fitted models fixed; the placebo is one draw that keeps the real
+  names' composition); states for every GFM result which labels the models were trained on; and fixed, before computing
+  them: the Fieller intervals of the shares kept by records allocated through settlements, on one set of resamples, and
+  the effective numbers of location groups behind the odds ratios near settlements. A table of the variants of the
+  reading is assembled from existing results. Addendum 1 records the implementation before computing. Script: `v83`.
 
-English translations of the protocol and of amendments B-1 to B-17 are in `docs/protocol/en/`; they were drafted with a
+English translations of the protocol and of amendments B-1 to B-18 are in `docs/protocol/en/`; they were drafted with a
 language model after the analysis and have not yet been checked by the authors, and the Japanese files are the record
-and govern where the two differ. Amendments B-2, B-3 and B-5 to B-17 followed critiques by language-model agents; the
+and govern where the two differ. Amendments B-2, B-3 and B-5 to B-18 followed critiques by language-model agents; the
 paper lists the rounds and their times. Dates written
 inside the repository files are local (Japan Standard Time, UTC+9) unless marked; the paper gives UTC. An interpretation
 plan, written after the freeze and before any confirmatory result, is in
