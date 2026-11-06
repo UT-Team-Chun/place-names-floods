@@ -1,6 +1,6 @@
 # B-15 Restructuring after the eleventh round of first-time critiques, and checks of the uncertainty of the post hoc upper limit
 
-<!-- English translation drafted with a language model; not yet checked by the authors. The Japanese file
+<!-- English translation drafted with a language model and checked by the authors on 2026-11-06. The Japanese file
      (docs/protocol/amendments/B-15_blind_review11_restructure.md) is the record and governs where the two differ. -->
 
 Status: **plan (2026-10-29T21:03Z, commit e47fdf6, fixed before any quantity of part B below was computed)**. The confirmatory verdict (equivalent-null) is

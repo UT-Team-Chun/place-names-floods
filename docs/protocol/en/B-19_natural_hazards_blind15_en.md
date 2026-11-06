@@ -1,7 +1,7 @@
 # B-19 Reformatting for Natural Hazards: in response to the fifteenth round of first-time critiques (editor, referee 1), the title and abstract return to the test and its limits, and the labels near settlements and the contribution of each activation are described
 
 > English translation of `docs/protocol/amendments/B-19_natural_hazards_blind15.md`, drafted by a language model (Claude).
-> The Japanese file governs. The authors have not yet checked this translation.
+> The Japanese file governs. The authors checked this translation on 2026-11-06.
 
 Status: **plan (2026-11-06T03:35Z, fixed before the quantities of B below were computed; the commit that added this file is
 the record of the freeze)**. The confirmatory verdict (equivalent-null) does not change. Everything is post hoc

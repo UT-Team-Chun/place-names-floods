@@ -5,7 +5,8 @@
 > whose content was fixed in commit `e62592444170907104d8375473d40b41cc053097` and marked frozen at
 > 2026-10-25T20:58:37Z (commit `1c1faf6`, tag `prereg-v2-frozen`). This translation was made after the analysis
 > (2026-10-27) to let readers check the paper against the protocol; where the two differ, the Japanese file
-> governs. Code identifiers, file names and numbers are unchanged. Translator's notes are in [square brackets].
+> governs. Code identifiers, file names and numbers are unchanged. Translator's notes are in [square brackets]. The
+> translation was drafted with a language model and checked by the authors on 2026-11-06.
 
 Status: **FROZEN** 2026-10-25T20:58:37Z / commit e62592444170907104d8375473d40b41cc053097
 (sha256 of the frozen inputs, the incidence table, N-read and the power analysis are in §10. All later changes are

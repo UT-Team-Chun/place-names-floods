@@ -4,8 +4,8 @@ Status: **plan (2026-10-29T18:13Z, commit e530f97; fixed before any quantity of 
 The confirmatory verdict (equivalent-null) is unchanged. The protocol's verdict is reported as the record, and the post hoc
 re-analysis is headed by a one-sided upper bound (non-superiority). Everything here is post hoc (exploratory).
 Governing protocol: [`preregistration_v2.md`](../preregistration_v2.md) (FROZEN 2026-10-25T20:58:37Z, commit e625924).
-The Japanese file governs where the two differ; this translation was drafted with a language model and has not been checked
-by the authors.
+The Japanese file governs where the two differ; this translation was drafted with a language model and checked by the
+authors on 2026-11-06.
 
 Values seen when this was written: the confirmatory analysis and the results of B-2 to B-13, except B9 (a) to (c) and (g) of
 B-13 ((a) on the local machine, (b), (c) and (g) on the cluster; the replicates of (c) were saved but B9 was not yet

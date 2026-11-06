@@ -271,8 +271,8 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   the runs that keep activations whole were recomputed over location groups before they were seen. Script: `v84`.
 
 English translations of the protocol and of amendments B-1 to B-19 are in `docs/protocol/en/`; they were drafted with a
-language model after the analysis and have not yet been checked by the authors, and the Japanese files are the record
-and govern where the two differ. Amendments B-2, B-3 and B-5 to B-19 followed critiques by language-model agents; the
+language model after the analysis and checked by the authors on 2026-11-06, and the Japanese files are the record and
+govern where the two differ. Amendments B-2, B-3 and B-5 to B-19 followed critiques by language-model agents; the
 paper lists the rounds and their times. Dates written
 inside the repository files are local (Japan Standard Time, UTC+9) unless marked; the paper gives UTC. An interpretation
 plan, written after the freeze and before any confirmatory result, is in

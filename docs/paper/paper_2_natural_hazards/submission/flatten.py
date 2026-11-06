@@ -64,22 +64,31 @@ def substitute(text: str, m: dict[str, str]) -> str:
 
 
 def main() -> int:
+    import argparse
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--variant", choices=["doi", "nodoi"], default="doi",
+                    help="nodoi: main_nodoi.tex（Zenodo の DOI を待たずに出す版）から submission/no_doi/ に")
+    variant = ap.parse_args().variant
+    stem = "main" if variant == "doi" else "main_nodoi"
+    outdir = HERE / "submission" if variant == "doi" else HERE / "submission" / "no_doi"
+    outdir.mkdir(parents=True, exist_ok=True)
     m = macros()
-    main_tex = "\n".join(strip_comment(line) for line in (HERE / "main.tex").read_text(encoding="utf-8").splitlines())
+    main_tex = "\n".join(strip_comment(line) for line in (HERE / f"{stem}.tex").read_text(encoding="utf-8").splitlines())
     text = expand_inputs(main_tex)
     for _ in range(5):  # マクロの値が別のマクロを含むことがある（例: 規則の文の中の数値）ので、変わらなくなるまで
         new = substitute(text, m)
         if new == text:
             break
         text = new
-    bbl = HERE / "main.bbl"
+    bbl = HERE / f"{stem}.bbl"
     if not bbl.is_file():
-        print("main.bbl missing: run make first")
+        print(f"{stem}.bbl missing: build {stem}.tex first")
         return 1
     text = text.replace("\\bibliography{refs}", bbl.read_text(encoding="utf-8"))
     figs = re.findall(r"\\includegraphics(?:\[[^]]*\])?\{(figures/[^}]+\.pdf)\}", text)
     for k, f in enumerate(dict.fromkeys(figs), start=1):
-        shutil.copyfile(HERE / f, HERE / "submission" / f"Fig{k}.pdf")
+        shutil.copyfile(HERE / f, outdir / f"Fig{k}.pdf")
         text = text.replace("{" + f + "}", "{" + f"Fig{k}.pdf" + "}")
     left = sorted(set(re.findall(r"\\missing\{[^}]*\}", text)))
     unknown = sorted({k for k in re.findall(r"\\([A-Z][A-Za-z]+)", text) if k in m})
@@ -88,8 +97,9 @@ def main() -> int:
         print("notes left:", len(notes)) if notes else None
         print("unresolved:", left[:10], unknown[:10])
         return 1
-    OUT.write_text(text, encoding="utf-8")
-    print(f"wrote {OUT.relative_to(HERE)} ({len(text):,} chars, {len(m)} macros)")
+    out = outdir / "manuscript.tex"
+    out.write_text(text, encoding="utf-8")
+    print(f"wrote {out.relative_to(HERE)} ({len(text):,} chars, {len(m)} macros)")
     return 0
 
 

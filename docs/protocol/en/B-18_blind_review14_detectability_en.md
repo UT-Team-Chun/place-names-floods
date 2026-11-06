@@ -1,6 +1,6 @@
 # B-18 Restructuring after the fourteenth round of first-time critiques: the protocol's test first and briefly, the design's detectability as the subject, and corrections of a wrong statement on upper limits and of inconsistent numbers
 
-> English translation drafted by a language model after the analysis and not yet checked by the authors. The Japanese
+> English translation drafted by a language model after the analysis and checked by the authors on 2026-11-06. The Japanese
 > file (`docs/protocol/amendments/B-18_blind_review14_detectability.md`) is the record and governs where the two differ.
 
 Status: **plan (2026-11-02T01:10Z, commit bba26f7; fixed before the quantities of B were computed)**. The confirmatory verdict (equivalent-null) is unchanged.
