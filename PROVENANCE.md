@@ -174,7 +174,7 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   cluster, an injection within 1 km of settlements. Addendum 1 corrected the near-settlement flags of the census of B-11
   (an implementation error; `docs/verification/v69_estimates.csv`) and added Benjamini–Yekutieli values; addenda 2 and 3
   corrected the label flags and the versions taken by the specification curve. Tables that neither the paper nor the
-  Supplement cites are in `docs/paper/paper_2_nhess/supplement_archive.pdf`. Script: `v69`; cluster run
+  Supplement cites are in `docs/paper/paper_2_natural_hazards/supplement_archive.pdf`. Script: `v69`; cluster run
   `world_v2_b12plas1k`.
 - Amendment B-13 followed the ninth round of critiques. It restructured the paper into four parts (the protocol-based
   test with all of its uncertainty; designated checks; what assignment through settlements can carry; the validity of
@@ -258,10 +258,21 @@ outputs, power-analysis runs) are listed in §10 of the protocol and in
   them: the Fieller intervals of the shares kept by records allocated through settlements, on one set of resamples, and
   the effective numbers of location groups behind the odds ratios near settlements. A table of the variants of the
   reading is assembled from existing results. Addendum 1 records the implementation before computing. Script: `v83`.
+- Amendment B-19 followed the fifteenth round of critiques (an editor and a flood-mapping referee; the other two critiques
+  were stopped at the authors' request) and moves the paper to Natural Hazards. The title and abstract return to the test
+  that was done and its limits (what the margin corresponds to, the operating characteristics of the rule, the few
+  effective clusters, no upper limit), and what the design can detect is reported as exploratory diagnostics. Fixed
+  before computing them: the contribution of each flood event (activation) to the comparison on the primary split and on
+  the split that keeps activations whole, with intervals over each activation's own location groups; the ceiling of a
+  settlement-scale effect by radius (250 m to 2 km) and settlement density; the riverine flooding that the 250 m
+  binarisation leaves in cells labelled dry; the comparison and the distance-band odds ratios on observable ground
+  (WorldCover built-up below 0.10 and trees below 0.50); and the distance-band odds ratios by how the EMS maps were made.
+  Addendum 1 records that the first job stopped for an input missing on the cluster storage, and that the intervals of
+  the runs that keep activations whole were recomputed over location groups before they were seen. Script: `v84`.
 
-English translations of the protocol and of amendments B-1 to B-18 are in `docs/protocol/en/`; they were drafted with a
+English translations of the protocol and of amendments B-1 to B-19 are in `docs/protocol/en/`; they were drafted with a
 language model after the analysis and have not yet been checked by the authors, and the Japanese files are the record
-and govern where the two differ. Amendments B-2, B-3 and B-5 to B-18 followed critiques by language-model agents; the
+and govern where the two differ. Amendments B-2, B-3 and B-5 to B-19 followed critiques by language-model agents; the
 paper lists the rounds and their times. Dates written
 inside the repository files are local (Japan Standard Time, UTC+9) unless marked; the paper gives UTC. An interpretation
 plan, written after the freeze and before any confirmatory result, is in
