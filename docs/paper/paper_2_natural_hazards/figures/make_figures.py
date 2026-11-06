@@ -418,6 +418,86 @@ def fig_design_nhess(n_blocks: str) -> None:
     plt.close(fig)
 
 
+def fig_allocation() -> None:
+    """B-19（編集者 M10: 要約と割り当てを一つの図で）: 最寄りの集落への割り当ての模式図（合成の配置で、資料ではない）。
+    (a) 名前はボロノイ領域の全てのセルに与えられ、500 m 以内はその一部、(b) 既知の記録をセルごとに与えた版、
+    (c) 同じ記録を各集落の 500 m 以内で平均し、名前と同じく割り当てた版。"""
+    from matplotlib.colors import ListedColormap
+    from matplotlib.patches import Circle
+
+    nx, ny, f = 48, 32, 6  # 250 m のセル（12 km × 8 km）、境界は 1/6 セルの細かさで描く
+    sx = np.array([5.5, 15.5, 25.5, 34.5, 42.5, 10.5, 28.5, 44.5, 19.5, 37.5])
+    sy = np.array([5.5, 23.5, 10.5, 26.5, 8.5, 15.5, 19.5, 18.5, 29.5, 2.5])
+    wet = 2  # 水に関わる名の集落（川のそば）
+
+    def nearest(xx: np.ndarray, yy: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        d = np.hypot(xx[..., None] - sx, yy[..., None] - sy)
+        return d.argmin(axis=2), d
+
+    yy, xx = np.mgrid[0:ny, 0:nx] + 0.5
+    reg, d = nearest(xx, yy)
+    fy, fx = (np.mgrid[0:ny * f, 0:nx * f] + 0.5) / f
+    freg, _ = nearest(fx, fy)
+    fedge = (np.diff(freg, axis=0, prepend=freg[:1]) != 0) | (np.diff(freg, axis=1, prepend=freg[:, :1]) != 0)
+    river = lambda x: 13.0 + 4.0 * np.sin(x / 7.0)  # noqa: E731
+    dist_r = np.abs(yy - river(xx))
+    flooded = (dist_r < 1.6 + 0.9 * np.sin(xx / 3.1) ** 2) & (xx > 8) & (xx < 46)
+    record = np.clip(1.0 - dist_r / 4.0, 0.0, 1.0) * ((xx > 6) & (xx < 47))  # 以前の洪水の割合（合成）
+    alloc = np.zeros_like(record)
+    for k in range(len(sx)):
+        ring = d[..., k] <= 2.0  # 500 m = 2 セル
+        alloc[reg == k] = record[ring].mean() if ring.any() else 0.0
+    share = float(((d[..., wet] <= 2.0) & (reg == wet)).sum() / (reg == wet).sum())
+    fig, axes = plt.subplots(1, 3, figsize=(7.2, 2.25))
+    ext = (0, nx, ny, 0)
+    edge_img = np.ma.masked_where(~fedge, fedge)
+    xs_ = np.linspace(0, nx, 300)
+    a = axes[0]
+    a.imshow(np.where(reg == wet, 1, 0), cmap=ListedColormap(["white", "#fbd9b5"]), extent=ext,
+             interpolation="nearest")
+    a.imshow(np.ma.masked_where(~flooded, flooded), cmap=ListedColormap(["#4f8fd0"]), alpha=0.5, extent=ext,
+             interpolation="nearest")
+    a.imshow(edge_img, cmap=ListedColormap(["0.35"]), extent=ext, interpolation="nearest")
+    a.scatter(np.delete(sx, wet), np.delete(sy, wet), s=9, color="k", zorder=3)
+    a.scatter([sx[wet]], [sy[wet]], s=40, marker="*", color="#d95f02", zorder=4)
+    a.add_patch(Circle((sx[wet], sy[wet]), 2.0, fill=False, ec="#d95f02", lw=1.0, ls="--", zorder=4))
+    box = {"fc": "white", "ec": "none", "alpha": 0.85, "pad": 0.6}
+    a.text(1.0, 1.2, "shaded: the Voronoi cell of a water-related\nname; every 250 m cell in it gets the name",
+           fontsize=5.3, ha="left", va="top", color="0.15", bbox=box, zorder=5)
+    a.text(sx[wet] + 2.4, sy[wet] + 3.4, "500 m", fontsize=5.3, color="#d95f02", ha="left", va="center")
+    a.text(1.0, 31.2, f"within 500 m: {100 * share:.0f} % of the shaded cells", fontsize=5.3, ha="left",
+           va="bottom", color="0.15", bbox=box, zorder=5)
+    a.set_title("(a) Names allocated to the grid", fontsize=7.0, loc="left", fontweight="bold")
+    b = axes[1]
+    im = b.imshow(record, cmap="Blues", vmin=0, vmax=1, extent=ext, interpolation="nearest")
+    b.scatter(sx, sy, s=8, color="k", zorder=3)
+    b.set_title("(b) A record given to each cell", fontsize=7.0, loc="left", fontweight="bold")
+    c = axes[2]
+    c.imshow(alloc, cmap="Blues", vmin=0, vmax=1, extent=ext, interpolation="nearest")
+    c.imshow(edge_img, cmap=ListedColormap(["0.45"]), extent=ext, interpolation="nearest")
+    c.scatter(sx, sy, s=8, color="k", zorder=3)
+    for k in range(len(sx)):
+        c.add_patch(Circle((sx[k], sy[k]), 2.0, fill=False, ec="0.15", lw=0.5, ls=":"))
+    c.set_title("(c) Averaged within 500 m and\n      allocated as names are", fontsize=7.0, loc="left",
+                fontweight="bold")
+    for ax in axes:
+        ax.plot(xs_, river(xs_), color="#1f4e8c", lw=1.0)
+        ax.set_xlim(0, nx)
+        ax.set_ylim(ny, 0)
+        ax.set_xticks([])
+        ax.set_yticks([])
+        for sp in ax.spines.values():
+            sp.set_linewidth(0.5)
+            sp.set_color("0.5")
+    b.plot([38, 46], [30.4, 30.4], color="k", lw=1.2)
+    b.text(42, 29.7, "2 km", fontsize=5.3, ha="center", va="bottom")
+    cb = fig.colorbar(im, ax=axes[1:], fraction=0.025, pad=0.02)
+    cb.set_label("record, e.g. share of\nearlier floods (schematic)", fontsize=5.4)
+    cb.ax.tick_params(labelsize=5.2)
+    fig.subplots_adjust(left=0.01, right=0.9, top=0.82, bottom=0.02, wspace=0.05)
+    fig.savefig(HERE / "fig_allocation.pdf")
+    plt.close(fig)
+
 XMAX_FIG4 = 0.08
 
 
@@ -7436,7 +7516,9 @@ def table_reading(v54: dict | None, v44: dict | None, v57b: dict | None, v69: di
                       + _and(some) + ".")
     else:
         sample_txt = missing("v70 two coders")
-    cap = ("The lexicon reading (exploratory). Upper part: share of the cells of the analysed, capped sample whose nearest "
+    cap = ("The lexicon reading (exploratory), with the corrected reading (Norwegian names read; the confirmatory run's "
+           "frozen reading gives \\MatchWetPctFrozen{} of the cells water-related). Upper part: share of the cells of the "
+           "analysed, capped sample whose nearest "
            "name is water-related, by the continent of the nearest settlement (Americas: North and South together; "
            "Table~\\STabFifteenNread{} of the Supplement counts every evaluable cell, without the cap, so its shares "
            "differ). Middle: the eight forms that supply the most water-related cells, in decreasing order, with the "
@@ -10204,7 +10286,8 @@ def table_upper17(v76: dict | None, v77: dict | None) -> str | None:
            "$\\hat D/\\mathrm{SE}$, and ``none'' marks no finite end or $\\nu-1<1$. The coverage check of amendment 17 "
            "concerned the protocol's resampling (third row) in the protocol's simulations, which are less variable than "
            "the data; no construction has checked properties on data like these. Units: the resampled clusters (for (c) "
-           "and (d), countries; for the pigeonhole bootstrap, the smaller of the two factors). Split and reading: the "
+           "and (d), countries; for the pigeonhole bootstrap \\citep{owen2007}, the smaller of the two factors). Split and "
+           "reading: the "
            "primary split or the split that keeps activations whole, with the frozen reading of the protocol or the "
            "corrected reading of Norwegian names.")
     return _tbl("tab:upper", cap, "p{3.6cm}p{2.5cm}rrrrrrrr",
@@ -10350,8 +10433,8 @@ def b17_tables(v80: dict | None, v81: dict | None, v82: dict | None) -> None:  #
         for shape, lab in (("constant", "uniform shift"), ("proportional", "shift proportional to the baseline gain")):
             for r0 in ("-0.05", "+0.00", "+0.05"):
                 e = b2[shape][r0]
-                rows.append(f"$R={r0}$, {lab} & {_pct0(e['outer_margin']['share'])} & "
-                            f"{_pct0(e['realised_margin']['share'])} \\\\")
+                rows.append(f"$R={r0}$, {lab} & {pct1(e['outer_margin']['share'])} & "  # B-19: 本文と同じ桁
+                            f"{pct1(e['realised_margin']['share'])} \\\\")
     b15 = a.get("B15") or {}
     if b15:
         rows.append("\\middlehline")
@@ -10947,6 +11030,9 @@ def b19_macros(v84: dict | None) -> dict[str, str]:  # noqa: C901, PLR0912, PLR0
              ("traces", "True", "StratFarTraces"), ("traces", "False", "StratFarNoTraces"),
              ("delay", "t1", "StratFarDelayOne"), ("delay", "t2", "StratFarDelayTwo"),
              ("delay", "t3", "StratFarDelayThree"))
+    dl = (((v84 or {}).get("B5") or {}).get("strata") or {}).get("delay") or {}
+    out["StratDelayKnownN"] = (str(sum(dl[k]["n_aoi_stratum"] for k in ("t1", "t2", "t3")))
+                               if all(k in dl for k in ("t1", "t2", "t3")) else missing("v84 B5 delay"))
     cuts5 = ((v84 or {}).get("B5") or {}).get("delay_tercile_cuts_days")
     out |= ({"StratDelayCutOne": f"{cuts5[0]:g}", "StratDelayCutTwo": f"{cuts5[1]:g}"} if cuts5
             else _miss(("StratDelayCutOne", "StratDelayCutTwo"), "v84 B5 cuts"))
@@ -11145,6 +11231,7 @@ def _merge(m: dict[str, str], new: dict[str, str], tag: str) -> None:
 def main() -> None:
     m, primary, extra, post = base_macros()
     fig_design_nhess(m.get("NLexLangs", "47"))
+    fig_allocation()  # B-19: 割り当ての模式図
     v41, v42, v43 = _json("v41_gfm_independent_labels.json"), _json("v42_blind_review_analyses.json"), \
         _json("v43_wikidata_etymology.json")
     v44, v45, v46, v47 = (_json("v44_wikipedia_etymology.json"), _json("v45_gfm_masking_check.json"),
