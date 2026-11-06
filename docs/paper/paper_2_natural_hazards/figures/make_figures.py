@@ -403,16 +403,16 @@ def fig_design_nhess(n_blocks: str) -> None:
         box(1 + k * 6.9, 1.0, 6.4, 10.2, r, size=6.5)
     ax.text(36.5, 14.2, "c", fontsize=10, weight="bold")
     ax.text(39.5, 14.2, "Three classifications of names", fontsize=8.4, weight="bold")
-    reads = [((f"lexicon (N-lex):\nwater, wetland, riverine,\ncrossing, lowland,\nhighland elements;\n{n_blocks} "
+    reads = [((f"lexicon:\nwater, wetland, riverine,\ncrossing, lowland,\nhighland elements;\n{n_blocks} "
                "language blocks"), 36.8),
-             ("character model\n(N-learn):\nlearned on training\nareas only", 53.6),
-             ("language model\n(N-read): name\nelements; tested on\nfloods after its\ntraining cut-off", 70.4)]
+             ("character model:\nlearned on training\nareas only", 53.6),
+             ("language model\n(secondary): name\nelements; tested on\nfloods after its\ntraining cut-off", 70.4)]
     for txt, x in reads:
         box(x, 1.0, 15.6, 11.6, txt, size=6.9)
     ax.text(87.5, 14.2, "d", fontsize=10, weight="bold")
     ax.text(90.5, 14.2, "Held out", fontsize=8.4, weight="bold")
         # 分割の名前を一行ずつ点で区切る（初見の査読 第 5 回: 続けて並んでいて区切りが読めない）
-    box(87.5, 1.0, 12.4, 11.6, "• location groups\n  (primary)\n• countries\n• floods from 2024\n• floods after the\n  LM cut-off",
+    box(87.5, 1.0, 12.4, 11.6, "• location groups\n  (primary)\n• countries\n• floods from 2024\n• floods after the\n  model's cut-off",
         size=6.5)
     fig.savefig(HERE / "fig_design.pdf")
     plt.close(fig)
