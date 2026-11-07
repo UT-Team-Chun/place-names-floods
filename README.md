@@ -167,8 +167,8 @@ Inputs are public (see Code and data availability in the paper). The pipeline st
 9. `docs/paper/paper_2_natural_hazards/figures/make_figures.py` — all numbers, tables and figures
 
 The derived data (cell tables, name readings, held-out predictions, run summaries and the GeoNames snapshot used)
-are archived on Zenodo with a manifest that lists every file with its sha256 (DOI: to be added when the deposit is
-published). The figure code and Supplement archive of the earlier NHESS version (amendments up to B-18) remain under
+are archived on Zenodo with a manifest that lists every file with its sha256 (https://doi.org/10.5281/zenodo.24028654).
+This repository at the time of submission is archived as https://doi.org/10.5281/zenodo.24028656. The figure code and Supplement archive of the earlier NHESS version (amendments up to B-18) remain under
 `docs/paper/paper_2_nhess/`.
 
 ## Licence
