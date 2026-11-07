@@ -2,15 +2,18 @@
 
 Analysis code, frozen protocol and lexicon for the study
 **"Machine-read settlement names did not detectably improve 250 m predictions of mapped river flooding, in a test
-insensitive to effects near settlements"** (R. Okauchi and P.-J. Chun, The University of Tokyo; submitted to Natural
+insensitive to effects near settlements"** (R. Okauchi and P.-J. Chun, The University of Tokyo; manuscript for Natural
 Hazards).
 
-The pre-specified test gives each settlement's name, classified by a lexicon that a language model compiled and by a
+The study does not estimate the flood information in names checked by toponymists. It examines how one pipeline, from
+machine reading through point-to-grid allocation to gridded evaluation, performs and what a test built in this way can
+and cannot detect. The pre-specified test gives each settlement's name, classified by a lexicon that a language model compiled and by a
 character model, to every 250 m cell nearest the settlement (Voronoi allocation), and scores how well the names place
 flooding within mapped areas, adjusting for which names occur in each area. The names did not detectably improve the
-predictions, but the verdict excludes only strong effects: the margin is about half of what a 100-year hazard map added
-per cell, the decision rule declares equivalence about a third of the time when the true improvement equals the margin,
-and one flood event carries the estimate. Analyses after the result show why the design was insensitive near
+predictions. Even taken at face value, the verdict would concern only strong effects, since the margin is about half of
+what a 100-year hazard map added per cell, and it carries little evidence: the decision rule declares equivalence about a
+third of the time when the true improvement equals the margin, and one flood event carries the estimate, so no upper
+limit is stated. Analyses after the result show why the design was insensitive near
 settlements (little scored ground there, records of known value losing most of their value when allocated in the same
 way, and flood labels that record less flooding near settlements). Whether names record the flooding of the places they
 name is not answered here.
@@ -116,7 +119,7 @@ density, flooding lost by binarisation, observable ground, and the deficit near 
 | `docs/verification/v69_estimates.csv` | The census of exploratory interval estimates with the corrected near-settlement flags and Benjamini–Hochberg and Benjamini–Yekutieli values (amendment B-12, addendum 1) |
 | `docs/paper/paper_2_natural_hazards/supplement_archive.pdf` | Online Resource 2: tables of exploratory analyses that neither the paper nor Online Resource 1 cites, numbered A1, A2, …, including tables whose quantities were later corrected or superseded |
 | `docs/verification/v68_estimates.csv` | Machine-readable census of the exploratory interval estimates (amendment B-11, item B8): source file, JSON path, kind, estimate, 95 % interval, whether it excludes the no-effect value, approximate two-sided p, amendment, family (name effect on flooding, site description or nuisance coefficient) and the rules applied; the planning status of each group of estimates is in the Supplement |
-| `docs/paper/paper_2_natural_hazards/figures/` | `make_figures.py`, which generates every number, table and figure of the paper from the run artefacts, and its outputs |
+| `docs/paper/paper_2_natural_hazards/figures/` | `make_figures.py`, which generates every number, table and figure of the paper from the run artefacts, and its outputs; `or1_moved.py`, which copies the three tables that the paper moved to Texts S4 and S5 of Online Resource 1 (`or1_*.tex`) |
 
 ## Environment
 
