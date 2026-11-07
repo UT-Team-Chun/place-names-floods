@@ -68,10 +68,10 @@ def main() -> int:
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--variant", choices=["doi", "nodoi"], default="doi",
-                    help="nodoi: main_nodoi.tex（Zenodo の DOI を待たずに出す版）から submission/no_doi/ に")
+                    help="doi: main.tex から submission/with_doi/ に。nodoi: main_nodoi.tex（DOI を待たずに出す版）から submission/no_doi/ に")
     variant = ap.parse_args().variant
     stem = "main" if variant == "doi" else "main_nodoi"
-    outdir = HERE / "submission" if variant == "doi" else HERE / "submission" / "no_doi"
+    outdir = HERE / "submission" / ("with_doi" if variant == "doi" else "no_doi")  # 2026-11-07: DOI 入りの版も専用の場所に
     outdir.mkdir(parents=True, exist_ok=True)
     m = macros()
     main_tex = "\n".join(strip_comment(line) for line in (HERE / f"{stem}.tex").read_text(encoding="utf-8").splitlines())

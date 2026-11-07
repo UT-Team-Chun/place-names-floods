@@ -365,7 +365,7 @@ def fig_design_nhess(n_blocks: str) -> None:
 
     fig = plt.figure(figsize=(7.2, 3.5))
     ax = fig.add_axes([0, 0, 1, 1])
-    ax.set_xlim(0, 100)
+    ax.set_xlim(-0.6, 100.9)  # 2026-11-07: 右端の箱（M3n・placebo・d）の枠が切れないように左右に余白
     ax.set_ylim(0, 48)
     ax.axis("off")
     blue, grey, light = "#1f6fb4", "0.4", "#e8f1f9"
@@ -381,6 +381,8 @@ def fig_design_nhess(n_blocks: str) -> None:
 
     ax.text(0.5, 46, "a", fontsize=10, weight="bold")
     ax.text(3.5, 46, "Nested comparison within areas (primary, H2)", fontsize=8.4, weight="bold")
+    # 2026-11-07: R の定義は見出しの右に（矢印の下に置くと点線の箱と重なり、どの段の注か紛らわしかった）
+    ax.text(54, 46, "R = names increment / baseline gain", fontsize=7.6, color=blue)
     y, h = 31, 10
     xs = [(1, 14, "Position\n(M0)"), (20, 23, "+ terrain, HAND,\nrivers, land cover,\nsettlement layout (M1)"),
           (49, 23, "+ regional composition\nof names: which names\noccur in the area (M1c)"),
@@ -389,12 +391,15 @@ def fig_design_nhess(n_blocks: str) -> None:
         box(x, y, w, h, txt, fc=light if x == 78 else "white", ec=blue if x == 78 else "0.3")
     for (x0, w0, _), (x1, _, _) in _pw(xs):
         arrow(x0 + w0 + 0.8, y + h / 2, x1 - 0.8, y + h / 2)
-    ax.text(17.5, 28.5, "baseline gain\n(denominator of R)", fontsize=7.4, ha="center", va="top",
-            color=grey)
-    ax.text(74.8, 28.5, "names increment\nR = names increment / baseline gain", fontsize=7.4, ha="center", va="top",
-            color=blue)
-    box(78, 17, 21.5, 8, "placebo (M3np): the same\nnames reassigned among\nthe area's settlements", ec=grey, ls="--",
-        size=7.0)
+    # 2026-11-07: 段の注は、その段の矢印の上に（下に置くと placebo の点線の比較の注に読めた）
+    ax.text(17.5, 42.4, "baseline gain (denominator of R)", fontsize=7.4, ha="center", va="bottom", color=grey)
+    ax.text(75, 42.4, "names increment", fontsize=7.4, ha="center", va="bottom", color=blue)
+    # placebo は M1c からの同じ比較で名前だけを入れ替えたもの: M3n の下に置き、M1c から点線の矢印でつなぐ
+    box(78, 17.6, 21.5, 7.0, "placebo (M3np): the same\nnames reassigned among\nthe area's settlements", ec=grey,
+        ls="--", size=7.0)
+    ax.plot([64, 64], [30.7, 21.1], ls="--", lw=0.8, color=grey)
+    ax.add_patch(FancyArrowPatch((64, 21.1), (77.3, 21.1), arrowstyle="-|>", mutation_scale=9, lw=0.8, color=grey,
+                                 ls="--"))
     ax.text(0.5, 14.2, "b", fontsize=10, weight="bold")
     ax.text(3.5, 14.2, "Terrain ladder (H3)", fontsize=8.4, weight="bold")
     # B-14 の A9: 箱の文字がはみ出さないように（T1 は 5 × 5 セル、約 1.25 km の平均）
@@ -403,12 +408,12 @@ def fig_design_nhess(n_blocks: str) -> None:
         box(1 + k * 6.9, 1.0, 6.4, 10.2, r, size=6.5)
     ax.text(36.5, 14.2, "c", fontsize=10, weight="bold")
     ax.text(39.5, 14.2, "Three classifications of names", fontsize=8.4, weight="bold")
-    reads = [((f"lexicon:\nwater, wetland, riverine,\ncrossing, lowland,\nhighland elements;\n{n_blocks} "
-               "language blocks"), 36.8),
+    # 2026-11-07: 箱の幅に収まるように行を分け、三つの箱とも 6.5 pt に
+    reads = [(f"lexicon:\nwater, wetland,\nriverine, crossing,\nlowland, highland\nelements; {n_blocks}\nlanguage blocks", 36.8),
              ("character model:\nlearned on training\nareas only", 53.6),
              ("language model\n(secondary): name\nelements; tested on\nfloods after its\ntraining cut-off", 70.4)]
     for txt, x in reads:
-        box(x, 1.0, 15.6, 11.6, txt, size=6.9)
+        box(x, 1.0, 15.6, 11.6, txt, size=6.5)
     ax.text(87.5, 14.2, "d", fontsize=10, weight="bold")
     ax.text(90.5, 14.2, "Held out", fontsize=8.4, weight="bold")
         # 分割の名前を一行ずつ点で区切る（初見の査読 第 5 回: 続けて並んでいて区切りが読めない）
