@@ -1,8 +1,7 @@
 # place-names-floods
 
 Analysis code, frozen protocol and lexicon for the study
-**"Machine-read settlement names did not detectably improve 250 m predictions of mapped river flooding, in a test
-insensitive to effects near settlements"** (R. Okauchi and P.-J. Chun, The University of Tokyo; manuscript for Natural
+**"Testing machine-read settlement names as predictors of mapped river flooding: limitations of a gridded evaluation"** (R. Okauchi and P.-J. Chun, The University of Tokyo; manuscript for Natural
 Hazards).
 
 The study does not estimate the flood information in names checked by toponymists. It examines how one pipeline, from
